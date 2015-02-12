@@ -2,10 +2,7 @@
 
 # moegliche Basisverzeichnisse der Quellen
 BASEDIRS="
-/home/lroth/workspace/tams/CV-Navi
-/home/lroth/workspace/tams/CV-Navi-devel
-/home/atis/lroth/DEVELOP/tams/CV-Navi-devel
-/localDISK/sdb5/data/lroth/privat/DEVELOP/tams/CV-Navi-1.11-devel
+.
 "
 
 for d in ${BASEDIRS}; do
@@ -22,10 +19,10 @@ if [ -z ${BASEDIR} ] ; then
 	exit 1
 fi
 
-PROG_DIR="${BASEDIR}/KlarText/dist"
-PACKAGE_DIR="${BASEDIR}/KlarText/package"
-OTHER_LIBDIR="${BASEDIR}/KlarText/Zusatz-Dateien"
-BIBS_DIR="${BASEDIR}/KlarText/Zusatz_Bibs"
+PROG_DIR="${BASEDIR}/dist"
+PACKAGE_DIR="${BASEDIR}/package"
+OTHER_LIBDIR="${BASEDIR}/Zusatz-Dateien"
+BIBS_DIR="${BASEDIR}/Zusatz_Bibs"
 
 ## ALT: alle Dateien kopieren
 # cp -pr ${OTHER_LIBDIR}/* ${PROG_DIR}
