@@ -1,2 +1,2 @@
 # CV-Navi
-Programmierumgebung für Geräte der Tams Elektronik GmbH
+Konfigurations- und Programmierumgebung für Geräte der Tams Elektronik GmbH
