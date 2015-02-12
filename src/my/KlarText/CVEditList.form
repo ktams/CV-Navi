@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane1" pref="548" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jGruppe_2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jGruppe_1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jGruppe_an" max="32767" attributes="0"/>
+                          <Component id="jGruppe_aus" alignment="0" pref="138" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jAbbruch" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jOK" min="-2" pref="97" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" alignment="0" pref="431" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="139" pref="139" max="139" attributes="0"/>
+                      <Component id="jGruppe_aus" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="16" pref="16" max="16" attributes="0"/>
+                      <Component id="jGruppe_1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="16" pref="16" max="16" attributes="0"/>
+                      <Component id="jGruppe_2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="16" pref="16" max="16" attributes="0"/>
+                      <Component id="jGruppe_an" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jAbbruch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jOK" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="jAbbruch">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Abbrechen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAbbruchActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="4" rowCount="255">
+                <Column editable="false" title="CV" type="java.lang.Integer">
+                  <Data value="1"/>
+                  <Data value="2"/>
+                  <Data value="3"/>
+                  <Data value="4"/>
+                  <Data value="5"/>
+                  <Data value="6"/>
+                  <Data value="7"/>
+                  <Data value="8"/>
+                  <Data value="9"/>
+                  <Data value="10"/>
+                  <Data value="11"/>
+                  <Data value="12"/>
+                  <Data value="13"/>
+                  <Data value="14"/>
+                  <Data value="15"/>
+                  <Data value="16"/>
+                  <Data value="17"/>
+                  <Data value="18"/>
+                  <Data value="19"/>
+                  <Data value="20"/>
+                  <Data value="21"/>
+                  <Data value="22"/>
+                  <Data value="23"/>
+                  <Data value="24"/>
+                  <Data value="25"/>
+                  <Data value="26"/>
+                  <Data value="27"/>
+                  <Data value="28"/>
+                  <Data value="29"/>
+                  <Data value="30"/>
+                  <Data value="31"/>
+                  <Data value="32"/>
+                  <Data value="33"/>
+                  <Data value="34"/>
+                  <Data value="35"/>
+                  <Data value="36"/>
+                  <Data value="37"/>
+                  <Data value="38"/>
+                  <Data value="39"/>
+                  <Data value="40"/>
+                  <Data value="41"/>
+                  <Data value="42"/>
+                  <Data value="43"/>
+                  <Data value="44"/>
+                  <Data value="45"/>
+                  <Data value="46"/>
+                  <Data value="47"/>
+                  <Data value="48"/>
+                  <Data value="49"/>
+                  <Data value="50"/>
+                  <Data value="51"/>
+                  <Data value="52"/>
+                  <Data value="53"/>
+                  <Data value="54"/>
+                  <Data value="55"/>
+                  <Data value="56"/>
+                  <Data value="57"/>
+                  <Data value="58"/>
+                  <Data value="59"/>
+                  <Data value="60"/>
+                  <Data value="61"/>
+                  <Data value="62"/>
+                  <Data value="63"/>
+                  <Data value="64"/>
+                  <Data value="65"/>
+                  <Data value="66"/>
+                  <Data value="67"/>
+                  <Data value="68"/>
+                  <Data value="69"/>
+                  <Data value="70"/>
+                  <Data value="71"/>
+                  <Data value="72"/>
+                  <Data value="73"/>
+                  <Data value="74"/>
+                  <Data value="75"/>
+                  <Data value="76"/>
+                  <Data value="77"/>
+                  <Data value="78"/>
+                  <Data value="79"/>
+                  <Data value="80"/>
+                  <Data value="81"/>
+                  <Data value="82"/>
+                  <Data value="83"/>
+                  <Data value="84"/>
+                  <Data value="85"/>
+                  <Data value="86"/>
+                  <Data value="87"/>
+                  <Data value="88"/>
+                  <Data value="89"/>
+                  <Data value="90"/>
+                  <Data value="91"/>
+                  <Data value="92"/>
+                  <Data value="93"/>
+                  <Data value="94"/>
+                  <Data value="95"/>
+                  <Data value="96"/>
+                  <Data value="97"/>
+                  <Data value="98"/>
+                  <Data value="99"/>
+                  <Data value="100"/>
+                  <Data value="101"/>
+                  <Data value="102"/>
+                  <Data value="103"/>
+                  <Data value="104"/>
+                  <Data value="105"/>
+                  <Data value="106"/>
+                  <Data value="107"/>
+                  <Data value="108"/>
+                  <Data value="109"/>
+                  <Data value="110"/>
+                  <Data value="111"/>
+                  <Data value="112"/>
+                  <Data value="113"/>
+                  <Data value="114"/>
+                  <Data value="115"/>
+                  <Data value="116"/>
+                  <Data value="117"/>
+                  <Data value="118"/>
+                  <Data value="119"/>
+                  <Data value="120"/>
+                  <Data value="121"/>
+                  <Data value="122"/>
+                  <Data value="123"/>
+                  <Data value="124"/>
+                  <Data value="125"/>
+                  <Data value="126"/>
+                  <Data value="127"/>
+                  <Data value="128"/>
+                  <Data value="129"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Wert" type="java.lang.Integer"/>
+                <Column editable="false" title="Bemerkungen" type="java.lang.String">
+                  <Data value="Adresse"/>
+                  <Data value="Mindestgeschwindigkeit"/>
+                  <Data value="Anfahrverz&#xf6;gerung"/>
+                  <Data value="Bremsverz&#xf6;gerung"/>
+                  <Data value="H&#xf6;chstgeschwindigkeit"/>
+                  <Data value="Mittengeschwindigkeit"/>
+                  <Data value="Version"/>
+                  <Data value="Hersteller-ID"/>
+                  <Data value="PWM-Periode"/>
+                  <Data value="EMK Cutout"/>
+                  <Data value="Packet Time-OutPacket Time-Out"/>
+                  <Data value="Verhalten im Analogmodus"/>
+                  <Data value="Funktionen im Analogmodus (F1 - F8)"/>
+                  <Data value="Funktionen im Analogmodus (F9 - F12)"/>
+                  <Data value="Decoder Lock"/>
+                  <Data value="Decoder Lock"/>
+                  <Data value="lange Adresse MSByte"/>
+                  <Data value="lange Adresse LSByte"/>
+                  <Data value="Consist-Adresse"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Consist Addr Active f&#xfc;r F1-F8"/>
+                  <Data value="Consist Addr Active for F9-F12"/>
+                  <Data value="Anfahrverz. Adjustment"/>
+                  <Data value="Bremsverz. Adjustment"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Bremsverhalten bei Gleichspannung"/>
+                  <Data value="RailCom-Einstellungen"/>
+                  <Data value="Decoder-Einstellungen"/>
+                  <Data value="Fehlerinformation"/>
+                  <Data value="Index H"/>
+                  <Data value="Index L"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu Licht vorw&#xe4;rts"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu Licht r&#xfc;ckw&#xe4;rts"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F1"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F2"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F3"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F4"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F5"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F6"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F7"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F8"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F9"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F10"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F11"/>
+                  <Data value="Zuordnung Ausg&#xe4;nge zu F12"/>
+                  <Data value="Erweiterte Kick-Funktion"/>
+                  <Data value="Motorspannung bei erweiterter Kickfunktion"/>
+                  <Data value="Decoder-Einstellungen (Teil 2)"/>
+                  <Data value="Lastregelparameter Kp (nur LD-G-x)"/>
+                  <Data value="Lastregelparameter Ki (nur LD-G-x)"/>
+                  <Data value="Lastregelparameter Kd (nur LD-G-x)"/>
+                  <Data value="Effekte AUX1"/>
+                  <Data value="Effekte AUX2"/>
+                  <Data value="Effekte AUX3"/>
+                  <Data value="Effekte AUX4"/>
+                  <Data value="Effekte AUX5"/>
+                  <Data value="Effekte AUX6"/>
+                  <Data value="Kickzeit AUX1/AUX2"/>
+                  <Data value="Kickzeit AUX3/AUX4"/>
+                  <Data value="Kickzeit AUX5/AUX6"/>
+                  <Data value="Dimmen AUX1/AUX2"/>
+                  <Data value="Dimmen AUX3/AUX4"/>
+                  <Data value="Dimmen AUX5/AUX6"/>
+                  <Data value="Kick-Start"/>
+                  <Data value="Vorw&#xe4;rts-Trimm"/>
+                  <Data value="Alternative Kennl,inie FS 1"/>
+                  <Data value="Alternative Kennlinie FS 2"/>
+                  <Data value="Alternative Kennlinie FS 3"/>
+                  <Data value="Alternative Kennlinie FS 4"/>
+                  <Data value="Alternative Kennlinie FS 5"/>
+                  <Data value="Alternative Kennlinie FS 6"/>
+                  <Data value="Alternative Kennlinie FS 7"/>
+                  <Data value="Alternative Kennlinie FS 8"/>
+                  <Data value="Alternative Kennlinie FS 9"/>
+                  <Data value="Alternative Kennlinie FS 10"/>
+                  <Data value="Alternative Kennlinie FS 11"/>
+                  <Data value="Alternative Kennlinie FS 12"/>
+                  <Data value="Alternative Kennlinie FS 13"/>
+                  <Data value="Alternative Kennlinie FS 14"/>
+                  <Data value="Alternative Kennlinie FS 15"/>
+                  <Data value="Alternative Kennlinie FS 16"/>
+                  <Data value="Alternative Kennlinie FS 17"/>
+                  <Data value="Alternative Kennlinie FS 18"/>
+                  <Data value="Alternative Kennlinie FS 19"/>
+                  <Data value="Alternative Kennlinie FS 20"/>
+                  <Data value="Alternative Kennlinie FS 21"/>
+                  <Data value="Alternative Kennlinie FS 22"/>
+                  <Data value="Alternative Kennlinie FS 23"/>
+                  <Data value="Alternative Kennlinie FS 24"/>
+                  <Data value="Alternative Kennlinie FS 25"/>
+                  <Data value="Alternative Kennlinie FS 26"/>
+                  <Data value="Alternative Kennlinie FS 27"/>
+                  <Data value="Alternative Kennlinie FS 28"/>
+                  <Data value="R&#xfc;ckw&#xe4;rts-Trimm"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Benutzer"/>
+                  <Data value="Benutzer"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Reserviert"/>
+                  <Data value="Blinkfrequenz"/>
+                  <Data value="Fahrstufe &#xdc;bergang zum altern. Dimmen"/>
+                  <Data value="zweite MM-Adresse"/>
+                  <Data value="Rangierlicht"/>
+                  <Data value="Geschwindigkeitsabh&#xe4;ngiges Dimmen"/>
+                  <Data value="Grenze f&#xfc;r &#xdc;berlastabschaltung"/>
+                  <Data value="Alternatives Dimmen AUX1/AUX2"/>
+                  <Data value="Alternatives Dimmen AUX3/AUX4"/>
+                  <Data value="Alternatives Dimmen AUX5/AUX6"/>
+                  <Data value="FS0: Ausschalten von F0"/>
+                  <Data value="FS0: Einschalten der Ausg&#xe4;nge"/>
+                  <Data value="FS0: Ausschalten der Funktionen F1 bis F4"/>
+                  <Data value="Anpassung Motor &lt;-&gt; Lastregelung"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="prog" type="java.lang.Boolean"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="25" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="25" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="340" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="35" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="intercellSpacing" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[3, 9]"/>
+            </Property>
+            <Property name="rowHeight" type="int" value="22"/>
+            <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseReleased"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="jOK">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="OK"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jOKActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jGruppe_an">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="alles an"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jGruppe_anActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jGruppe_2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Gruppe2"/>
+        <Property name="toolTipText" type="java.lang.String" value="CVs: 33-36, 53-58, 62-64"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jGruppe_2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jGruppe_1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Gruppe1"/>
+        <Property name="toolTipText" type="java.lang.String" value="CVs: 1-5, 17-19, 29, 49-52, 65, 114, 124"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jGruppe_1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jGruppe_aus">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="alles aus"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jGruppe_ausActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

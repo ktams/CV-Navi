@@ -1,0 +1,22 @@
+Dies ist die Version 1.11 von CV-Navi, der Programmiersoftware fuer die neueren Tams-Decoder (ab LD-30er) und andere Geraete.
+Um das Programm zu starten reicht es, KlarText.jar zu starten (Doppel-Klick mit der Maus).
+Bei Linux muss das Startscript CV-Navi.sh gestartet werden.
+Wenn beim Setup angegeben, kann das Programm auch aus dem Start-Menue oder der Schnellstartleiste gestartet werden (Windows).
+Das Programm ist eine Java-Anwendung. Es muss also zwingend Java auf dem PC installiert sein.
+Bei Linux muss noch die rxtx-Bibliothek selbst installiert werden.
+Sollte das nicht der Fall sein, kann das so genannte Java Runtime Environment (JRE) von der Webseite der Firma Sun/Oracle heruntergeladen und installiert werden.
+
+Ich bitte um Meldung von Fehlern und Wuenschen an ktams@tams-online.de
+Viel Spass!
+
+
+This is Version V1.11 of CV-Navi. It is a programming software for produkts of Tams Elektronik.
+This program is written in Java, so You need the JRE (Java Runtime Environment).
+If it is not installed on you PC, you can download it from the web site of Sun / Oracle.
+
+My english is very bad and so the english implementation is. If you have a suggestion to make it better, let me know.
+Also let me know your wishes and the mistakes you have found. My eMail: ktams@tams-online.de
+
+
+Kersten Tams
+Tams Elektronik

@@ -1,0 +1,99 @@
+CV-Navi Version 1.11
+
+English version after german section.
+
+Dies Programm ist Freeware und kann uneingeschraenkt weiter gegeben werden.
+Der Gebrauch geschieht auf eigenes Risiko.
+Wir bitten um Meldung von Fehlern an die Mailadresse: info@tams-online.de. 
+
+Bei Problemen mit dem Zusammenspiel PC <-> Zentrale pruefen Sie zuerst, ob die richtige Zentrale und die passende Schnittstelle im Programm eingestellt sind. 
+Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der TamsMC ist bei Nutzung der USB-Schnittstelle immer 57600 Baud auszuwaehlen.)
+Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
+Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
+
+
+Aenderungen in V1.11
+- detaillierte Anleitungen zu Firmware-Updates integriert (Dank an Peter Mueller)
+- Unterstuetzung Raspbian auf BananaPi
+- Unterstuetzung Mac OS-X
+
+Aenderungen in V1.10
+- Oberflaeche komplett ueberarbeitet
+- FD-LED ergaenzt
+- BiDi-Booster ergaenzt
+- Unterstuetzung fuer m3sid/uid ergaenzt
+- MC: Lesen/Schreiben sowie Sichern/Laden der RailCom-Konfiguration
+- Lesen/Laden von gesicherten Decoder-Konfigurationen repariert
+- ein paar kleine und groessere interne Umstellungen/Verbesserungen 
+- Unterstuetzung B-4 mit allen Funktionen (inkl. FW-Rev 1.6) und B-4 mit Anzeige 
+- Unterstuetzung Raspbian auf RaspberryPi
+
+Danke an die Betatester Claus, Dirk und Thomas ;)
+
+
+Aenderungen in V1.9
+- LD-G33plus, LD-G34plus und LD-G36plus ergaenzt
+
+Aenderungen in V1.8
+- FD-R extended ergaenzt
+- Linux wird nun unterstuetzt
+- viele kleine interne Verbesserungen
+
+Aenderungen in V1.6
+- WIB-30er ergaenzt
+- In Modul "CV-Liste bearbeiten/drucken" sind einige Fehler behoben worden.
+
+Aenderungen in V1.51
+- Das zuletzt bearbeitete Geraet /Decoder wird nach einem Neustart wieder voreingestellt.
+- Fuer manche Module und Dialoge kann Englisch als Sprache eingestellt werden.
+- In Modul "CV-Liste bearbeiten/drucken" sind die CV-Beschreibungen fuer FD-M und FD-R
+  korrigiert worden.
+
+Aenderungen in V1.5
+- LD-G-31 hinzu gefuegt
+- im Dialog "Lesen/Schreiben von CVs" werden die gelesenen CV waehrend des
+    Lesens angezeigt. Abbruch des Lese/Schreibvorgangs ist nun moeglich.
+- Die zu programmiernde CV-Liste kann nun editiert werden. Sowohl die Werte,
+    als auch welche CV ueberhaupt programmiert werden sollen, kann eingestellt
+    werden.
+- Die CV-Liste kann nun ausgedruckt werden.
+
+Aenderungen in V1.41
+- Modul MC: Loknamen mit Leerzeichen und anderen Sonderzeichen werden nun uebertragen.
+- Beim Setup wird das Arbeitsverzeichnis gesetzt
+
+Aenderungen in V1.4
+- Beim LD-G-30 funktionieren "Oeffnen" und "Speichern" wieder.
+- FD-M hinzu gefuegt.
+- Auslesen auf dem Programmiergleis besser abgesichert und beschleunigt.
+
+Aenderungen in V1.3
+- Fehler in der Baud Raten Einstellung behoben.
+- Komponenten LD-W-33, LD-G-33 und LD-G-34 als Version 1.0 freigegeben.
+- Programmdateien werden nun im User-Verzeichnis im Ordner .CV-Navi gespeichert.
+
+Aenderungen in V1.2
+- Diverse Anzeigefehler behoben.
+- Komponenten LD-W-33, LD-G-33 und LD-G-34 als Vorschau hinzugefuegt.
+- In Dialog "Datei oeffnen" wird der zueletzt verwendete Pfad wieder eingestellt.
+    Die letzten 10 verwendeten Dateien koennen aus einer Liste gewaehlt werden.
+
+Aenderungen in V1.1
+- Komponenten WD/SD-34 und MasterControl hinzugefuegt.
+
+Ihr Tams Elektronik Team.
+
+___________________________________________________
+
+This program is freeware.
+You use it on your own risk.
+Please send us a description of mistakes you found: info@tams-online.de.
+
+My english is very bad, so give me a suggestion, what I could make better.
+
+If you have problems with PC <-> control unit, please check first 
+if you have choosen the right contral unit, interface and baud rate.
+
+If you use the IB you must switch the interface settings to "6051 + IB".
+
+Change log only in german, sorry.
