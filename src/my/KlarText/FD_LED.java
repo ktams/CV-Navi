@@ -271,11 +271,6 @@ public class FD_LED extends javax.swing.JFrame {
         jAbbrechen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                formFocusGained(evt);
-            }
-        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -284,12 +279,18 @@ public class FD_LED extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "FD-LED", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("FD_LED.jPanel1.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jSave.setText("Speichern");
-        jSave.setToolTipText("<html>Gespeicherte Dateien können mit einem normalen<br>\nEditor geöffnet werden. Die Werte dürfen geändert werden.<br>\nDie Reihenfolge und Leerzeilen dürfen NICHT verändert werden!");
+        jSave.setText(bundle.getString("FD_LED.jSave.text")); // NOI18N
+        jSave.setToolTipText(bundle.getString("FD_LED.jSave.toolTipText")); // NOI18N
         jSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSaveActionPerformed(evt);
@@ -297,7 +298,7 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jOpen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jOpen.setText("Öffnen");
+        jOpen.setText(bundle.getString("FD_LED.jOpen.text")); // NOI18N
         jOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jOpenActionPerformed(evt);
@@ -305,7 +306,7 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jCV_Anzeige.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCV_Anzeige.setBorder(javax.swing.BorderFactory.createTitledBorder("CV Direkteingabe"));
+        jCV_Anzeige.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("FD_LED.jCV_Anzeige.border.title"))); // NOI18N
         jCV_Anzeige.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCV_AnzeigeActionPerformed(evt);
@@ -315,7 +316,7 @@ public class FD_LED extends javax.swing.JFrame {
         jCV_Inhalt.setEditable(false);
         jCV_Inhalt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCV_Inhalt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jCV_Inhalt.setText("62");
+        jCV_Inhalt.setText(bundle.getString("FD_LED.jCV_Inhalt.text")); // NOI18N
         jCV_Inhalt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jCV_InhaltFocusLost(evt);
@@ -323,8 +324,8 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jDirekteingabe.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDirekteingabe.setText("Direkt ein");
-        jDirekteingabe.setToolTipText("Hier kann die direkte Eingabe von CVs eingeschaltet werden.");
+        jDirekteingabe.setText(bundle.getString("FD_LED.jDirekteingabe.text")); // NOI18N
+        jDirekteingabe.setToolTipText(bundle.getString("FD_LED.jDirekteingabe.toolTipText")); // NOI18N
         jDirekteingabe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDirekteingabeActionPerformed(evt);
@@ -332,8 +333,8 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jCV_LesenSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCV_LesenSchreiben.setText("CVs lesen/schreiben");
-        jCV_LesenSchreiben.setToolTipText("<html>ACHTUNG!<br>\nZum Auslesen muss RailCom ausgeschaltet sein!<br>\nCV29 Bit3 = 0!");
+        jCV_LesenSchreiben.setText(bundle.getString("FD_LED.jCV_LesenSchreiben.text")); // NOI18N
+        jCV_LesenSchreiben.setToolTipText(bundle.getString("FD_LED.jCV_LesenSchreiben.toolTipText")); // NOI18N
         jCV_LesenSchreiben.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCV_LesenSchreibenActionPerformed(evt);
@@ -341,11 +342,11 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Adresse");
+        jLabel1.setText(bundle.getString("FD_LED.jLabel1.text")); // NOI18N
 
         jDecoderAdresse.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDecoderAdresse.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDecoderAdresse.setText("3");
+        jDecoderAdresse.setText(bundle.getString("FD_LED.jDecoderAdresse.text")); // NOI18N
         jDecoderAdresse.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDecoderAdresseFocusGained(evt);
@@ -368,7 +369,7 @@ public class FD_LED extends javax.swing.JFrame {
             }
         });
 
-        jCV29.setToolTipText("<html>Verwendete CVs:<br>\nCV#29, CV#112, CV#114");
+        jCV29.setToolTipText(bundle.getString("FD_LED.jCV29.toolTipText")); // NOI18N
         jCV29.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jCV29ComponentShown(evt);
@@ -377,14 +378,14 @@ public class FD_LED extends javax.swing.JFrame {
         jCV29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jRichtung.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRichtung.setText("---");
+        jRichtung.setText(bundle.getString("FD_LED.jRichtung.text")); // NOI18N
         jRichtung.setEnabled(false);
         jCV29.add(jRichtung, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jFS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFS.setSelected(true);
-        jFS.setText("28 / 128 Fahrstufen");
-        jFS.setToolTipText("14 or 28/128");
+        jFS.setText(bundle.getString("FD_LED.jFS.text")); // NOI18N
+        jFS.setToolTipText(bundle.getString("FD_LED.jFS.toolTipText")); // NOI18N
         jFS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFSActionPerformed(evt);
@@ -393,24 +394,24 @@ public class FD_LED extends javax.swing.JFrame {
         jCV29.add(jFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jAnalog1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnalog1.setText("---");
-        jAnalog1.setToolTipText("");
+        jAnalog1.setText(bundle.getString("FD_LED.jAnalog1.text")); // NOI18N
+        jAnalog1.setToolTipText(bundle.getString("FD_LED.jAnalog1.toolTipText")); // NOI18N
         jAnalog1.setEnabled(false);
         jCV29.add(jAnalog1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jRailCom.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRailCom.setText("---");
+        jRailCom.setText(bundle.getString("FD_LED.jRailCom.text")); // NOI18N
         jRailCom.setEnabled(false);
         jCV29.add(jRailCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jAnalog3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnalog3.setText("---");
+        jAnalog3.setText(bundle.getString("FD_LED.jAnalog3.text")); // NOI18N
         jAnalog3.setEnabled(false);
         jCV29.add(jAnalog3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLongAddr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLongAddr.setText("lange Adresse");
-        jLongAddr.setToolTipText("long address");
+        jLongAddr.setText(bundle.getString("FD_LED.jLongAddr.text")); // NOI18N
+        jLongAddr.setToolTipText(bundle.getString("FD_LED.jLongAddr.toolTipText")); // NOI18N
         jLongAddr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLongAddrActionPerformed(evt);
@@ -419,30 +420,30 @@ public class FD_LED extends javax.swing.JFrame {
         jCV29.add(jLongAddr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         jLongAddr1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLongAddr1.setText("---");
+        jLongAddr1.setText(bundle.getString("FD_LED.jLongAddr1.text")); // NOI18N
         jLongAddr1.setEnabled(false);
         jCV29.add(jLongAddr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jLongAddr2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLongAddr2.setText("---");
+        jLongAddr2.setText(bundle.getString("FD_LED.jLongAddr2.text")); // NOI18N
         jLongAddr2.setEnabled(false);
         jCV29.add(jLongAddr2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
         jCV29.add(jBild, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jManID.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jManID.setText("NMRA Man.-ID: xxx");
+        jManID.setText(bundle.getString("FD_LED.jManID.text")); // NOI18N
         jCV29.add(jManID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         jVersion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jVersion.setText("Decoder-Version: xx");
+        jVersion.setText(bundle.getString("FD_LED.jVersion.text")); // NOI18N
         jCV29.add(jVersion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jBild1.setMaximumSize(new java.awt.Dimension(160, 100));
-        jCV29.add(jBild1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 150, 80));
+        jCV29.add(jBild1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 150, 80));
 
-        jDecodereigenschaften.addTab("Allgemein", jCV29);
+        jDecodereigenschaften.addTab(bundle.getString("FD_LED.jCV29.TabConstraints.tabTitle"), jCV29); // NOI18N
 
-        jFunctionMapping.setToolTipText("Verwendete CVs: CV#33 bis CV#46 und CV#180 bis CV#195");
+        jFunctionMapping.setToolTipText(bundle.getString("FD_LED.jFunctionMapping.toolTipText")); // NOI18N
         jFunctionMapping.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFunctionMapping.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -460,7 +461,7 @@ public class FD_LED extends javax.swing.JFrame {
         jFunctionMapping.add(jFL_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("AUX");
+        jLabel4.setText(bundle.getString("FD_LED.jLabel4.text")); // NOI18N
         jFunctionMapping.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         jF1_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -600,63 +601,63 @@ public class FD_LED extends javax.swing.JFrame {
         jFunctionMapping.add(jF17_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel6.setText("FL");
+        jLabel6.setText(bundle.getString("FD_LED.jLabel6.text")); // NOI18N
         jFunctionMapping.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel7.setText("FR");
+        jLabel7.setText(bundle.getString("FD_LED.jLabel7.text")); // NOI18N
         jFunctionMapping.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel8.setText("F1");
+        jLabel8.setText(bundle.getString("FD_LED.jLabel8.text")); // NOI18N
         jFunctionMapping.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel9.setText("F2");
+        jLabel9.setText(bundle.getString("FD_LED.jLabel9.text")); // NOI18N
         jFunctionMapping.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel10.setText("F3");
+        jLabel10.setText(bundle.getString("FD_LED.jLabel10.text")); // NOI18N
         jFunctionMapping.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel11.setText("F4");
+        jLabel11.setText(bundle.getString("FD_LED.jLabel11.text")); // NOI18N
         jFunctionMapping.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel12.setText("F5");
+        jLabel12.setText(bundle.getString("FD_LED.jLabel12.text")); // NOI18N
         jFunctionMapping.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel13.setText("F6");
+        jLabel13.setText(bundle.getString("FD_LED.jLabel13.text")); // NOI18N
         jFunctionMapping.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel14.setText("F7");
+        jLabel14.setText(bundle.getString("FD_LED.jLabel14.text")); // NOI18N
         jFunctionMapping.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel15.setText("F8");
+        jLabel15.setText(bundle.getString("FD_LED.jLabel15.text")); // NOI18N
         jFunctionMapping.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel16.setText("F9");
+        jLabel16.setText(bundle.getString("FD_LED.jLabel16.text")); // NOI18N
         jFunctionMapping.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel18.setText("F11");
+        jLabel18.setText(bundle.getString("FD_LED.jLabel18.text")); // NOI18N
         jFunctionMapping.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel19.setText("F14");
+        jLabel19.setText(bundle.getString("FD_LED.jLabel19.text")); // NOI18N
         jFunctionMapping.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("= F0 (Licht) hinten");
+        jLabel3.setText(bundle.getString("FD_LED.jLabel3.text")); // NOI18N
         jFunctionMapping.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel33.setText("= F0 (Licht) vorne");
+        jLabel33.setText(bundle.getString("FD_LED.jLabel33.text")); // NOI18N
         jFunctionMapping.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
         jFL_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -796,23 +797,23 @@ public class FD_LED extends javax.swing.JFrame {
         jFunctionMapping.add(jF19_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
 
         jLabel58.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel58.setText("2");
+        jLabel58.setText(bundle.getString("FD_LED.jLabel58.text")); // NOI18N
         jFunctionMapping.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel51.setText("2");
+        jLabel51.setText(bundle.getString("FD_LED.jLabel51.text")); // NOI18N
         jFunctionMapping.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel52.setText("3");
+        jLabel52.setText(bundle.getString("FD_LED.jLabel52.text")); // NOI18N
         jFunctionMapping.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 10, -1));
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel59.setText("1");
+        jLabel59.setText(bundle.getString("FD_LED.jLabel59.text")); // NOI18N
         jFunctionMapping.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel53.setText("1");
+        jLabel53.setText(bundle.getString("FD_LED.jLabel53.text")); // NOI18N
         jFunctionMapping.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 10, -1));
 
         jF20_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -904,7 +905,7 @@ public class FD_LED extends javax.swing.JFrame {
         jFunctionMapping.add(jF21_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
 
         jLabel61.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel61.setText("3");
+        jLabel61.setText(bundle.getString("FD_LED.jLabel61.text")); // NOI18N
         jFunctionMapping.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
         jF14_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1140,71 +1141,71 @@ public class FD_LED extends javax.swing.JFrame {
         jFunctionMapping.add(jF13_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel20.setText("F12");
+        jLabel20.setText(bundle.getString("FD_LED.jLabel20.text")); // NOI18N
         jFunctionMapping.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel35.setText("F13");
+        jLabel35.setText(bundle.getString("FD_LED.jLabel35.text")); // NOI18N
         jFunctionMapping.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         jLabel56.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel56.setText("F10");
+        jLabel56.setText(bundle.getString("FD_LED.jLabel56.text")); // NOI18N
         jFunctionMapping.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jLabel66.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel66.setText("F15");
+        jLabel66.setText(bundle.getString("FD_LED.jLabel66.text")); // NOI18N
         jFunctionMapping.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
 
         jLabel67.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel67.setText("F16");
+        jLabel67.setText(bundle.getString("FD_LED.jLabel67.text")); // NOI18N
         jFunctionMapping.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
 
         jLabel68.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel68.setText("F17");
+        jLabel68.setText(bundle.getString("FD_LED.jLabel68.text")); // NOI18N
         jFunctionMapping.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
 
         jLabel84.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel84.setText("F18");
+        jLabel84.setText(bundle.getString("FD_LED.jLabel84.text")); // NOI18N
         jFunctionMapping.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, -1, -1));
 
         jLabel85.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel85.setText("F19");
+        jLabel85.setText(bundle.getString("FD_LED.jLabel85.text")); // NOI18N
         jFunctionMapping.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
 
         jLabel86.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel86.setText("F20");
+        jLabel86.setText(bundle.getString("FD_LED.jLabel86.text")); // NOI18N
         jFunctionMapping.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
 
         jLabel87.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel87.setText("F21");
+        jLabel87.setText(bundle.getString("FD_LED.jLabel87.text")); // NOI18N
         jFunctionMapping.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, -1, -1));
 
         jLabel88.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel88.setText("F22");
+        jLabel88.setText(bundle.getString("FD_LED.jLabel88.text")); // NOI18N
         jFunctionMapping.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
 
         jLabel89.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel89.setText("F23");
+        jLabel89.setText(bundle.getString("FD_LED.jLabel89.text")); // NOI18N
         jFunctionMapping.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
 
         jLabel90.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel90.setText("F24");
+        jLabel90.setText(bundle.getString("FD_LED.jLabel90.text")); // NOI18N
         jFunctionMapping.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
 
         jLabel91.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel91.setText("F25");
+        jLabel91.setText(bundle.getString("FD_LED.jLabel91.text")); // NOI18N
         jFunctionMapping.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
 
         jLabel92.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel92.setText("F26");
+        jLabel92.setText(bundle.getString("FD_LED.jLabel92.text")); // NOI18N
         jFunctionMapping.add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, -1));
 
         jLabel93.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel93.setText("F27");
+        jLabel93.setText(bundle.getString("FD_LED.jLabel93.text")); // NOI18N
         jFunctionMapping.add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
 
         jLabel94.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel94.setText("F28");
+        jLabel94.setText(bundle.getString("FD_LED.jLabel94.text")); // NOI18N
         jFunctionMapping.add(jLabel94, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, -1));
 
         jF24_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1328,12 +1329,12 @@ public class FD_LED extends javax.swing.JFrame {
         jFunctionMapping.add(jF28_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("AUX");
+        jLabel5.setText(bundle.getString("FD_LED.jLabel5.text")); // NOI18N
         jFunctionMapping.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jDecodereigenschaften.addTab("F-Zuordnung", jFunctionMapping);
+        jDecodereigenschaften.addTab(bundle.getString("FD_LED.jFunctionMapping.TabConstraints.tabTitle"), jFunctionMapping); // NOI18N
 
-        jEffekte.setToolTipText("<html>Verwendete CVs:<br>\nCV#49  bis CV#64");
+        jEffekte.setToolTipText(bundle.getString("FD_LED.jEffekte.toolTipText")); // NOI18N
         jEffekte.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jEffekte.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -1343,14 +1344,14 @@ public class FD_LED extends javax.swing.JFrame {
         jEffekte.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel21.setText("AUX 1");
+        jLabel21.setText(bundle.getString("FD_LED.jLabel21.text")); // NOI18N
         jLabel21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jEffekte.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jDimmen1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen1.setText("63");
-        jDimmen1.setToolTipText("CV5 [1..63]");
+        jDimmen1.setText(bundle.getString("FD_LED.jDimmen1.text")); // NOI18N
+        jDimmen1.setToolTipText(bundle.getString("FD_LED.jDimmen1.toolTipText")); // NOI18N
         jDimmen1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen1FocusGained(evt);
@@ -1367,14 +1368,14 @@ public class FD_LED extends javax.swing.JFrame {
         jEffekte.add(jDimmen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 30, -1));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel22.setText("AUX 2");
+        jLabel22.setText(bundle.getString("FD_LED.jLabel22.text")); // NOI18N
         jLabel22.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jEffekte.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jDimmen2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen2.setText("63");
-        jDimmen2.setToolTipText("CV6 [1..63]");
+        jDimmen2.setText(bundle.getString("FD_LED.jDimmen2.text")); // NOI18N
+        jDimmen2.setToolTipText(bundle.getString("FD_LED.jDimmen2.toolTipText")); // NOI18N
         jDimmen2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen2FocusGained(evt);
@@ -1391,10 +1392,10 @@ public class FD_LED extends javax.swing.JFrame {
         jEffekte.add(jDimmen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 30, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel24.setText("Dimmen");
+        jLabel24.setText(bundle.getString("FD_LED.jLabel24.text")); // NOI18N
         jEffekte.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
-        jDecodereigenschaften.addTab("Effekte", jEffekte);
+        jDecodereigenschaften.addTab(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle"), jEffekte); // NOI18N
 
         jKommentar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jKommentar.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1408,7 +1409,7 @@ public class FD_LED extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jComment);
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel36.setText("Kommentar eingeben:");
+        jLabel36.setText(bundle.getString("FD_LED.jLabel36.text")); // NOI18N
 
         javax.swing.GroupLayout jKommentarLayout = new javax.swing.GroupLayout(jKommentar);
         jKommentar.setLayout(jKommentarLayout);
@@ -1418,7 +1419,7 @@ public class FD_LED extends javax.swing.JFrame {
                 .addGroup(jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jKommentarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
                     .addGroup(jKommentarLayout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel36)))
@@ -1434,14 +1435,14 @@ public class FD_LED extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jDecodereigenschaften.addTab("Kommentar", jKommentar);
+        jDecodereigenschaften.addTab(bundle.getString("FD_LED.jKommentar.TabConstraints.tabTitle"), jKommentar); // NOI18N
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel27.setText("Consist");
+        jLabel27.setText(bundle.getString("FD_LED.jLabel27.text")); // NOI18N
 
         jConsistAdresse.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jConsistAdresse.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jConsistAdresse.setText("0");
+        jConsistAdresse.setText(bundle.getString("FD_LED.jConsistAdresse.text")); // NOI18N
         jConsistAdresse.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jConsistAdresseFocusGained(evt);
@@ -1457,11 +1458,11 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel28.setText("(Mehrfach-Traktions-Adr.)");
+        jLabel28.setText(bundle.getString("FD_LED.jLabel28.text")); // NOI18N
 
         buttonGroup1.add(jKurzeAdr);
         jKurzeAdr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jKurzeAdr.setText("kurz (CV#1)");
+        jKurzeAdr.setText(bundle.getString("FD_LED.jKurzeAdr.text")); // NOI18N
         jKurzeAdr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jKurzeAdrActionPerformed(evt);
@@ -1470,7 +1471,7 @@ public class FD_LED extends javax.swing.JFrame {
 
         buttonGroup1.add(jlangeAdr);
         jlangeAdr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jlangeAdr.setText("lang (CV#17 + 18)");
+        jlangeAdr.setText(bundle.getString("FD_LED.jlangeAdr.text")); // NOI18N
         jlangeAdr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jlangeAdrActionPerformed(evt);
@@ -1478,8 +1479,8 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setText("Test");
-        jButton1.setToolTipText("<html>Das folgende Fenster darf nicht zusammen mit <br>\ndem Fenster zum Programmieren der CVs geöffnet sein!");
+        jButton1.setText(bundle.getString("FD_LED.jButton1.text")); // NOI18N
+        jButton1.setToolTipText(bundle.getString("FD_LED.jButton1.toolTipText")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1487,7 +1488,7 @@ public class FD_LED extends javax.swing.JFrame {
         });
 
         jAbbrechen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAbbrechen.setText("Schließen");
+        jAbbrechen.setText(bundle.getString("FD_LED.jAbbrechen.text")); // NOI18N
         jAbbrechen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAbbrechenActionPerformed(evt);
@@ -1502,11 +1503,7 @@ public class FD_LED extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCV_Anzeige, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCV_Inhalt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -1514,8 +1511,12 @@ public class FD_LED extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jKurzeAdr)
-                                    .addComponent(jlangeAdr))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jlangeAdr)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jCV_Anzeige, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCV_Inhalt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jDirekteingabe)
@@ -1662,13 +1663,13 @@ public class FD_LED extends javax.swing.JFrame {
     private void jDirekteingabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirekteingabeActionPerformed
         // hier wird die Direkteingabe (de)aktiviert
         String str = jDirekteingabe.getText();
-        if(str.equals("Direkt ein")) {
+        if(str.equals(java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("FD_LED.jDirekteingabe.text"))) {
             jCV_Inhalt.setEditable(true);
-            str = "Direkt aus";
+            str = java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("FD_LED.jDirekteingabe_aus.text");
             jDirekteingabe.setText(str);
         } else {
             jCV_Inhalt.setEditable(false);
-            str = "Direkt ein";
+            str = java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("FD_LED.jDirekteingabe.text");
             jDirekteingabe.setText(str);
         }
         jCV_Inhalt.validate();
@@ -1843,19 +1844,10 @@ public class FD_LED extends javax.swing.JFrame {
         try {
             j = Integer.parseInt(s);
         } catch (NumberFormatException numberFormatException) {
-             MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
-            if(KTUI.bSpracheDE)
-            {
-                messageBox.jLabel1.setText("ACHTUNG!");
-                messageBox.jLabel2.setText("Ungültige Eingabe.");
-                messageBox.jLabel3.setText("Bitte einen Wert zwischen 0 und 127 eingeben.");
-            }
-            else
-            {
-                messageBox.jLabel1.setText("Attention!");
-                messageBox.jLabel2.setText("Wrong value.");
-                messageBox.jLabel3.setText("Please choose a value between 0 and 127");
-            }
+            MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
+            messageBox.jLabel1.setText(java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("ACHTUNG"));
+            messageBox.jLabel2.setText(java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("Ungueltige_Eingabe"));
+            messageBox.jLabel3.setText(java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("Wert_zwischen_0_127"));
             messageBox.setVisible(true);
             j = 0;
             jConsistAdresse.setText("0");
@@ -1863,18 +1855,9 @@ public class FD_LED extends javax.swing.JFrame {
        }
         if (j > 127) {
             MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
-            if(KTUI.bSpracheDE)
-            {
-                messageBox.jLabel1.setText("ACHTUNG!");
-                messageBox.jLabel2.setText("Wert zu groß.");
-                messageBox.jLabel3.setText("Bitte einen Wert zwischen 0 (aus) und 127 eingeben.");
-            }
-            else
-            {
-                messageBox.jLabel1.setText("Attention!");
-                messageBox.jLabel2.setText("Value to high.");
-                messageBox.jLabel3.setText("Please choose a value between 0 (off) and 127");
-            }
+            messageBox.jLabel1.setText(java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("ACHTUNG"));
+            messageBox.jLabel2.setText(java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("WertZuGross"));
+            messageBox.jLabel3.setText(java.util.ResourceBundle.getBundle("my.KlarText/Bundle").getString("Wert_zwischen_0_127"));
             messageBox.setVisible(true);
             j = 127;
             jConsistAdresse.setText("127");
