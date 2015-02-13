@@ -90,10 +90,11 @@ public class DecTest extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Decoder Test", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("DecTest.jPanel1.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jButtonExit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonExit.setText("EXIT");
+        jButtonExit.setText(bundle.getString("DecTest.jButtonExit.text")); // NOI18N
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExitActionPerformed(evt);
@@ -101,7 +102,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF0.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF0.setText("F0");
+        jF0.setText(bundle.getString("DecTest.jF0.text")); // NOI18N
         jF0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF0ActionPerformed(evt);
@@ -109,7 +110,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF1.setText("F1");
+        jF1.setText(bundle.getString("DecTest.jF1.text")); // NOI18N
         jF1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF1ActionPerformed(evt);
@@ -117,7 +118,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF2.setText("F2");
+        jF2.setText(bundle.getString("DecTest.jF2.text")); // NOI18N
         jF2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF2ActionPerformed(evt);
@@ -125,7 +126,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF3.setText("F3");
+        jF3.setText(bundle.getString("DecTest.jF3.text")); // NOI18N
         jF3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF3ActionPerformed(evt);
@@ -133,7 +134,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF4.setText("F4");
+        jF4.setText(bundle.getString("DecTest.jF4.text")); // NOI18N
         jF4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF4ActionPerformed(evt);
@@ -141,7 +142,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF5.setText("F5");
+        jF5.setText(bundle.getString("DecTest.jF5.text")); // NOI18N
         jF5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF5ActionPerformed(evt);
@@ -149,7 +150,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF6.setText("F6");
+        jF6.setText(bundle.getString("DecTest.jF6.text")); // NOI18N
         jF6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF6ActionPerformed(evt);
@@ -157,7 +158,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF7.setText("F7");
+        jF7.setText(bundle.getString("DecTest.jF7.text")); // NOI18N
         jF7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF7ActionPerformed(evt);
@@ -165,7 +166,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF8.setText("F8");
+        jF8.setText(bundle.getString("DecTest.jF8.text")); // NOI18N
         jF8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF8ActionPerformed(evt);
@@ -173,7 +174,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF9.setText("F9");
+        jF9.setText(bundle.getString("DecTest.jF9.text")); // NOI18N
         jF9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF9ActionPerformed(evt);
@@ -181,7 +182,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF10.setText("F10");
+        jF10.setText(bundle.getString("DecTest.jF10.text")); // NOI18N
         jF10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF10ActionPerformed(evt);
@@ -189,7 +190,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF11.setText("F11");
+        jF11.setText(bundle.getString("DecTest.jF11.text")); // NOI18N
         jF11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF11ActionPerformed(evt);
@@ -197,7 +198,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jF12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF12.setText("F12");
+        jF12.setText(bundle.getString("DecTest.jF12.text")); // NOI18N
         jF12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF12ActionPerformed(evt);
@@ -205,15 +206,15 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jFunktionen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFunktionen.setText("Funktionen");
+        jFunktionen.setText(bundle.getString("DecTest.jFunktionen.text")); // NOI18N
 
         jRichtung.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRichtung.setText("Richtung");
+        jRichtung.setText(bundle.getString("DecTest.jRichtung.text")); // NOI18N
 
         buttonGroup1.add(jVor);
         jVor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jVor.setSelected(true);
-        jVor.setText("Vorwärts");
+        jVor.setText(bundle.getString("DecTest.jVor.text")); // NOI18N
         jVor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jVorActionPerformed(evt);
@@ -222,7 +223,7 @@ public class DecTest extends javax.swing.JDialog {
 
         buttonGroup1.add(jRueck);
         jRueck.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRueck.setText("Rückwärts");
+        jRueck.setText(bundle.getString("DecTest.jRueck.text")); // NOI18N
         jRueck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRueckActionPerformed(evt);
@@ -230,10 +231,10 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jDecType.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDecType.setText("Decoder: ");
+        jDecType.setText(bundle.getString("DecTest.jDecType.text")); // NOI18N
 
         jGeschwindigkeit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jGeschwindigkeit.setText("Geschwindigkeit");
+        jGeschwindigkeit.setText(bundle.getString("DecTest.jGeschwindigkeit.text")); // NOI18N
 
         jSlider1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jSlider1.setMaximum(126);
@@ -245,7 +246,7 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jCheckBoxZentraleEinAus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBoxZentraleEinAus.setText("Zentrale einschalten");
+        jCheckBoxZentraleEinAus.setText(bundle.getString("DecTest.jCheckBoxZentraleEinAus.text")); // NOI18N
         jCheckBoxZentraleEinAus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxZentraleEinAusActionPerformed(evt);
@@ -253,25 +254,25 @@ public class DecTest extends javax.swing.JDialog {
         });
 
         jRichtung1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRichtung1.setText("POM");
+        jRichtung1.setText(bundle.getString("DecTest.jRichtung1.text")); // NOI18N
 
         jCV.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCV.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jCV.setText("29");
+        jCV.setText(bundle.getString("DecTest.jCV.text")); // NOI18N
 
         jRichtung2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRichtung2.setText("CV");
+        jRichtung2.setText(bundle.getString("DecTest.jRichtung2.text")); // NOI18N
 
         jWertLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jWertLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jWertLabel.setText("Wert");
+        jWertLabel.setText(bundle.getString("DecTest.jWertLabel.text")); // NOI18N
 
         jWert.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jWert.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jWert.setText("6");
+        jWert.setText(bundle.getString("DecTest.jWert.text")); // NOI18N
 
         jButtonProg.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonProg.setText("prog.");
+        jButtonProg.setText(bundle.getString("DecTest.jButtonProg.text")); // NOI18N
         jButtonProg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProgActionPerformed(evt);
@@ -644,16 +645,6 @@ public class DecTest extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonProgActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if(!KTUI.bSpracheDE)
-        {
-            jFunktionen.setText("function keys");
-            jRichtung.setText("direction");
-            jVor.setText("forward");
-            jRueck.setText("backwards");
-            jWertLabel.setText("value");
-            jGeschwindigkeit.setText("velocity");
-            jCheckBoxZentraleEinAus.setText("switch on control unit");
-        }
         Com = KTUI.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
