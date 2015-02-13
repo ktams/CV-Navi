@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -242,6 +243,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     public enum MZ { UNKNOWN, STOP, GO };
     public ModeZentrale gModeZentrale = ModeZentrale.UNKNOWN ;
     public MZ gMZvorAktion = MZ.UNKNOWN ;
+    private ResourceBundle bundle;
 
     public KlarTextUI() {
         mainWindowLocation = new Point();
@@ -253,7 +255,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         fillMenuSelection();
-
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         if( debugLevel >= 3 ) {
             for(decoderList co : decoderList.values()) {
                 System.out.printf("decoderList[%2d] [%2d] (%s) %10s Text %-35s %s\n", co.ordinal(), co.getIdx(), co.isSelectable()?"X":" ", co, co.getMenutextGer(), co.getMenutextEng());
@@ -456,11 +458,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             dbgOptions = "(Xfuncs="+bUseXfuncs+" Xm3sid="+bUseXm3sid+")";
         }
         if( mismatch ) {
-            if( bSpracheDE) {
-                mbGeneric(cont, "Konfiguration passt nicht", "Konfiguriert: "+gsZentrale, "Gefunden: "+verInfo+" "+dbgOptions, 0, true);
-            } else {
-                mbGeneric(cont, "Configration mismatch", "Configured: "+gsZentrale, " Detected: "+verInfo+" "+dbgOptions, 0, true);
-            }
+            mbGeneric(cont, bundle.getString("Configrationmismatch"), bundle.getString("Configured")+gsZentrale, bundle.getString("Detected")+verInfo+" "+dbgOptions, 0, true);
         } else {
             if( debugLevel > 0 ) {
                 mbGeneric(cont, "Information", verInfo, "OK "+dbgOptions, 5, false);
@@ -470,106 +468,59 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbNotAvailable( Container cont, String s3) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Information");
-            messageBox.jLabel2.setText("Diese Funktion ist nicht verfügbar.");
-            messageBox.jLabel3.setText(s3==null?"":s3);
-        } else {
-            messageBox.jLabel1.setText("Information");
-            messageBox.jLabel2.setText("This function is not available.");
-            messageBox.jLabel3.setText(s3==null?"":s3);
-        }
+        messageBox.jLabel1.setText("Information");
+        messageBox.jLabel2.setText(bundle.getString("notavailable"));
+        messageBox.jLabel3.setText(s3==null?"":s3);
         messageBox.setVisible(true);
     }
 
     public void mbDeviceConnectProblem( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("Probleme mit der Schnittstelle " + gsSchnittstelle);
-            messageBox.jLabel3.setText("Verbinden/Öffnen fehlgeschlagen.");
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("Problems with port " + gsSchnittstelle );
-            messageBox.jLabel3.setText("Connect/Open failed.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText(bundle.getString("Problemswithport") + gsSchnittstelle);
+        messageBox.jLabel3.setText(bundle.getString("Openfailed"));
         messageBox.setVisible(true);
     }
     public void mbDeviceConnectProblemOffline( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("Probleme mit der Schnittstelle " + gsSchnittstelle);
-            messageBox.jLabel3.setText("Verbinden/Öffnen fehlgeschlagen -> Offline Modus");
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("Problems with port " + gsSchnittstelle );
-            messageBox.jLabel3.setText("Connect/Open failed -> offline mode");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText(bundle.getString("Problemswithport") + gsSchnittstelle);
+        messageBox.jLabel3.setText(bundle.getString("Openfailed") + "-> Offline Modus");
         messageBox.setCountdown(5);
         messageBox.setVisible(true);
     }
     public void mbDeviceDisconnectProblem( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("Probleme mit der Schnittstelle " + gsSchnittstelle);
-            messageBox.jLabel3.setText("Schließen fehlgeschlagen.");
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("Problems with port " + gsSchnittstelle );
-            messageBox.jLabel3.setText("Close failed.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText(bundle.getString("Problemswithport") + gsSchnittstelle);
+        messageBox.jLabel3.setText(bundle.getString("Closefailed"));
         messageBox.setVisible(true);
     }
     public void mbDeviceReadProblem( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("Probleme mit der Schnittstelle " + gsSchnittstelle);
-            messageBox.jLabel3.setText("Empfangen/Lesen fehlgeschlagen.");
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("Problems with port " + gsSchnittstelle );
-            messageBox.jLabel3.setText("Read failed.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText(bundle.getString("Problemswithport") + gsSchnittstelle);
+        messageBox.jLabel3.setText(bundle.getString("Readfailed"));
         messageBox.setVisible(true);
     }
     public void mbDeviceWriteProblem( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("Probleme mit der Schnittstelle " + gsSchnittstelle);
-            messageBox.jLabel3.setText("Senden/Schreiben fehlgeschlagen.");
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("Problems with port " + gsSchnittstelle );
-            messageBox.jLabel3.setText("Write failed.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText(bundle.getString("Problemswithport") + gsSchnittstelle);
+        messageBox.jLabel3.setText(bundle.getString("Writefailed"));
         messageBox.setVisible(true);
     }
     public void mbDeviceOwned( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if (bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Schnittstelle " + gsSchnittstelle + " ist belegt.");
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Interface " + gsSchnittstelle + " is busy.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText("");
+        messageBox.jLabel3.setText("Interface " + gsSchnittstelle + bundle.getString("busy"));
         messageBox.setVisible(true);
     }
     public void mbDeviceNotSupported( Container cont, int seconds  ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Hinweis!");
-            messageBox.jLabel2.setText("Dieser Decoder/dieses Gerät wird zur Zeit noch nicht unterstützt.");
-        } else {
-            messageBox.jLabel1.setText("Note!");
-            messageBox.jLabel2.setText("This Decoder/Device is not supported.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Hinweis"));
+        messageBox.jLabel2.setText(bundle.getString("notsupported"));
         messageBox.jLabel3.setText("");
         messageBox.setCountdown(seconds);
         messageBox.setVisible(true);
@@ -577,41 +528,23 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbUpdateWriteSuccess( Container cont, int block ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("Hinweis!");
-            messageBox.jLabel2.setText("Download erfolgreich abgeschlossen.");
-            messageBox.jLabel3.setText("" + block + " Blocks übertragen.");
-         } else {
-            messageBox.jLabel1.setText("Information!");
-            messageBox.jLabel2.setText("Download successful.");
-            messageBox.jLabel3.setText("" + block + " blocks transferred.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Hinweis"));
+        messageBox.jLabel2.setText(bundle.getString("successful"));
+        messageBox.jLabel3.setText("" + block + bundle.getString("transferred"));
         messageBox.setVisible(true);
     }
     public void mbUpdateWriteError( Container cont, char c ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont );
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Unerwartetes Zeichen " + c + " empfangen!");
-            messageBox.jLabel3.setText("Bitte Update neu starten.");
-         } else {
-            messageBox.jLabel1.setText("ATTENTION!");
-            messageBox.jLabel2.setText("Unexpected answer " + c + " received!");
-            messageBox.jLabel3.setText("Please restart the update.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Unexpected") + c + bundle.getString("empfangen"));
+        messageBox.jLabel3.setText(bundle.getString("restartupdate"));
         messageBox.setVisible(true);
     }
     public void mbUpdateReadAnswerError( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Keine Antwort empfangen!");
-            messageBox.jLabel3.setText("Update abgebrochen. Bitte Update neu starten.");
-         } else {
-            messageBox.jLabel1.setText("ATTENTION!");
-            messageBox.jLabel2.setText("No answer received!");
-            messageBox.jLabel3.setText("Update cancelled. Please restart the update.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Noanswer"));
+        messageBox.jLabel3.setText(bundle.getString("Updatecancelled"));
         messageBox.setVisible(true);
     }
 
@@ -620,12 +553,8 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbConfigReadSuccess( Container cont, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        messageBox.jLabel1.setText("Information");
-        if( bSpracheDE) {
-            messageBox.jLabel2.setText("Lesen erfolgreich");
-          } else {
-            messageBox.jLabel2.setText("data successfully read");
-        }
+        messageBox.jLabel1.setText("Information:");
+        messageBox.jLabel2.setText(bundle.getString("successfullyread"));
         messageBox.jLabel3.setText("");
         messageBox.setCountdown(seconds);
         messageBox.setVisible(true);
@@ -636,14 +565,9 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbConfigReadAbort(Container cont, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        messageBox.jLabel1.setText("Problem");
-        if( bSpracheDE) {
-            messageBox.jLabel2.setText("Lesen abgebrochen");
-            messageBox.jLabel3.setText("Nicht alle Daten verarbeitet");
-          } else {
-            messageBox.jLabel2.setText("read aborted");
-            messageBox.jLabel3.setText("not all data processed");
-        }
+        messageBox.jLabel1.setText("Problem!");
+        messageBox.jLabel2.setText(bundle.getString("readaborted"));
+        messageBox.jLabel3.setText(bundle.getString("notprocessed"));
         messageBox.setCountdown(seconds);
         messageBox.setVisible(true);
     }
@@ -653,14 +577,9 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbConfigReadCancelled( Container cont, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        messageBox.jLabel1.setText("Information");
-        if( bSpracheDE) {
-            messageBox.jLabel2.setText("Lesen abgebrochen.");
-            messageBox.jLabel3.setText("Daten können unvollständig sein.");
-          } else {
-            messageBox.jLabel2.setText("Read configuration cancelled.");
-            messageBox.jLabel3.setText("Data may be incomplete.");
-        }
+        messageBox.jLabel1.setText("Information:");
+        messageBox.jLabel2.setText(bundle.getString("readaborted"));
+        messageBox.jLabel3.setText(bundle.getString("incomplete"));
         messageBox.setCountdown(seconds);
         messageBox.setVisible(true);
     }
@@ -670,14 +589,9 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbRWCancelled( Container cont, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        messageBox.jLabel1.setText("Information");
-        if( bSpracheDE) {
-            messageBox.jLabel2.setText("Lesen/Schreiben abgebrochen.");
-            messageBox.jLabel3.setText("Daten können unvollständig sein.");
-          } else {
-            messageBox.jLabel2.setText("read/write cancelled.");
-            messageBox.jLabel3.setText("data may be incomplete.");
-        }
+        messageBox.jLabel1.setText("Information:");
+        messageBox.jLabel2.setText(bundle.getString("readwritecancelled"));
+        messageBox.jLabel3.setText(bundle.getString("incomplete"));
         messageBox.setCountdown(seconds);
         messageBox.setVisible(true);
     }
@@ -687,14 +601,9 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbConfigWriteCancelled( Container cont, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        messageBox.jLabel1.setText("Information");
-        if( bSpracheDE) {
-            messageBox.jLabel2.setText("Schreiben abgebrochen.");
-            messageBox.jLabel3.setText("Daten können unvollständig sein.");
-          } else {
-            messageBox.jLabel2.setText("Write configuration cancelled.");
-            messageBox.jLabel3.setText("Data may be incomplete.");
-        }
+        messageBox.jLabel1.setText("Information:");
+        messageBox.jLabel2.setText(bundle.getString("readwritecancelled"));
+        messageBox.jLabel3.setText(bundle.getString("incomplete"));
         messageBox.setCountdown(seconds);
         messageBox.setVisible(true);
     }
@@ -705,11 +614,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     public void mbConfigWriteSuccess( Container cont, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
         messageBox.jLabel1.setText("Information");
-        if( bSpracheDE) {
-            messageBox.jLabel2.setText("Schreiben erfolgreich.");
-          } else {
-            messageBox.jLabel2.setText("Configuration data successfully written.");
-        }
+        messageBox.jLabel2.setText(bundle.getString("successfullywritten"));
         messageBox.jLabel3.setText("");
         messageBox.setCountdown(seconds);
         messageBox.setVisible(true);
@@ -817,13 +722,8 @@ public class KlarTextUI extends javax.swing.JFrame {
     public void mbConfigWriteError( Container cont, String sError, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
         
-        if( bSpracheDE) {
-            messageBox.jLabel1.setText("FEHLER");
-            messageBox.jLabel2.setText("Beim Schreiben ist ein fehler aufgetreten.");
-          } else {
-            messageBox.jLabel1.setText("ERROR");
-            messageBox.jLabel2.setText("Error while writing data.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText(bundle.getString("Errorwriting"));
         if( (sError != null) && (sError.length() > 0 ) ) {
             messageBox.jLabel3.setText(sError);
         } else {
@@ -834,24 +734,16 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
 
     public void mbM3TooMany( Container cont ) {
-        mbGeneric( cont, "Problem", "Zu viele M3 UID<->SID Paare", "Maximale Anzahl ist "+c.MAX_M3_ENTRIES, 0, true);
+        mbGeneric( cont, "Problem", bundle.getString("UIDSIDPaare"), bundle.getString("MaxAnz")+c.MAX_M3_ENTRIES, 0, true);
         return;
     }
     public void mbTableCheckOK( Container cont, boolean repair, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
         messageBox.jLabel1.setText("Information");
-        if( bSpracheDE) {
-            if( repair ) {
-                messageBox.jLabel2.setText("Tabellenreparatur war erfolgreich");
-            } else {
-                messageBox.jLabel2.setText("Tabellenprüfung war ohne Fehler");
-            }
-          } else {
-            if( repair ) {
-                messageBox.jLabel2.setText("Repait table succeded");
-            } else {
-                messageBox.jLabel2.setText("Table checked without errors");
-            }
+        if( repair ) {
+            messageBox.jLabel2.setText(bundle.getString("TabellenreparaturOK"));
+        } else {
+            messageBox.jLabel2.setText(bundle.getString("TablecheckedOK"));
         }
         messageBox.jLabel3.setText("");
         messageBox.setCountdown(seconds);
@@ -979,127 +871,58 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbFileNotFound( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Datei nicht gefunden.");
-        }
-        else
-        {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("File not found.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText("");
+        messageBox.jLabel3.setText(bundle.getString("Filenotfound"));
         messageBox.setVisible(true);
     }
     public void mbFileNotFound( Container cont, String name) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("Fehler!");
+            messageBox.jLabel1.setText(bundle.getString("Fehler"));
             messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Datei "+name+" nicht gefunden.");
-        }
-        else
-        {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("File "+name+" not found.");
-        }
+            messageBox.jLabel3.setText(bundle.getString("Filenotfound") + ": "+name);
         messageBox.setVisible(true);
     }
     public void mbFileOpenError( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Datei öffnen fehlgeschlagen.");
-        }
-        else
-        {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("File not openend.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText("");
+        messageBox.jLabel3.setText(bundle.getString("Filenotopenend"));
         messageBox.setVisible(true);
     }
     public void mbFileOpenError( Container cont, String name) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Datei "+name+" öffnen fehlgeschlagen!");
-        }
-        else
-        {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("File "+name+" not opened.");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText("");
+        messageBox.jLabel3.setText(bundle.getString("Filenotopenend") + ": "+name);
         messageBox.setVisible(true);
     }
     public void mbFileWriteError( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Probleme beim Schreiben in die Datei.");
-        }
-        else
-        {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Problems while writing data to file...");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText("");
+        messageBox.jLabel3.setText(bundle.getString("Problemswriting"));
         messageBox.setVisible(true);
     }
     public void mbFileReadError( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Probleme beim Lesen der Datei.");
-        }
-        else
-        {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Problems while reading data from file...");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText("");
+        messageBox.jLabel3.setText(bundle.getString("Problemsreading"));
         messageBox.setVisible(true);
     }
     public void mbFileHexFormatError( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Dies ist keine HEX-Datei!");
-            messageBox.jLabel3.setText("Bitte eine Datei mit der Endung \"hex\" wählen.");
-        }
-        else
-        {
-            messageBox.jLabel1.setText("ATTENTION!");
-            messageBox.jLabel2.setText("This is no HEX file!");
-            messageBox.jLabel3.setText("Please choose a file with extension \"hex\".");
-        }
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("noHEX"));
+        messageBox.jLabel3.setText(bundle.getString("chooseHEX"));
         messageBox.setVisible(true);
     }
     public void mbFileReadBeginError( Container cont, String begin) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if ( bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("Datei beginnt nicht mit " + begin );
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("");
-            messageBox.jLabel3.setText("File not starting with " + begin );
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText("");
+        messageBox.jLabel3.setText(bundle.getString("notstarting") + begin );
         messageBox.setVisible(true);
     }
 
@@ -1258,35 +1081,18 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbNoTamsMC( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE) {
-            messageBox.jLabel1.setText("Fehler!");
-            messageBox.jLabel2.setText("Falsche Zentrale \"" + gsZentrale + "\" eingestellt.");
-            messageBox.jLabel3.setText("Bitte \"MasterControl\" einstellen.");
-        } else {
-            messageBox.jLabel1.setText("Error!");
-            messageBox.jLabel2.setText("Wrong control unit \"" + gsZentrale + "\" configured." );
-            messageBox.jLabel3.setText("Please select \"MasterControl\".");
-        }
+        messageBox.jLabel1.setText(bundle.getString("Fehler"));
+        messageBox.jLabel2.setText(bundle.getString("Wrongcu") + gsZentrale + "\" "+bundle.getString("configured"));
+        messageBox.jLabel3.setText(bundle.getString("PleaseSelectMC"));
         messageBox.setVisible(true);
     }
 
     public void mbInvalidValue( Container cont, int cv, int value, String validValues ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        if(bSpracheDE)
-        {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("CV# "+cv+" Wert ungültig: "+value);
-            if( validValues.length() > 0) {
-                messageBox.jLabel3.setText("Gültige Werte sind: "+validValues);
-            }
-        }
-        else
-        {
-            messageBox.jLabel1.setText("WARNING!");
-            messageBox.jLabel2.setText("CV# "+cv+" invalid value: "+value);
-            if( validValues.length() > 0) {
-                messageBox.jLabel3.setText("Valid values are: "+validValues);
-            }
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText("CV# "+cv+bundle.getString("invalidvalue")+value);
+        if( validValues.length() > 0) {
+            messageBox.jLabel3.setText(bundle.getString("Validvalues")+validValues);
         }
         messageBox.setVisible(true);
     }
@@ -1296,10 +1102,10 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbValueTooSmall( Container cont, int low, int high, boolean showRange ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Valuetoosmall"));
         if(bSpracheDE)
         {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Wert zu klein.");
             if( showRange ) {
                 messageBox.jLabel3.setText("Bitte einen Wert zwischen "+Integer.toString(low)+" und "+Integer.toString(high)+" eingeben.");
             } else {
@@ -1308,12 +1114,10 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
-            messageBox.jLabel2.setText("Value too small.");
             if( showRange ) {
-                messageBox.jLabel3.setText("Please use a value between "+Integer.toString(low)+" and "+Integer.toString(high)+" .");
+                messageBox.jLabel3.setText("Please enter a value between "+Integer.toString(low)+" and "+Integer.toString(high)+" .");
             } else {
-                messageBox.jLabel3.setText("Please use a higher value.");
+                messageBox.jLabel3.setText("Please enter a higher value.");
             }
         }
         messageBox.setVisible(true);
@@ -1324,10 +1128,10 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbValueTooBig( Container cont, int low, int high, boolean showRange ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Valuetoobig"));
         if(bSpracheDE)
         {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Wert zu groß.");
             if( showRange ) {
                 messageBox.jLabel3.setText("Bitte einen Wert zwischen "+Integer.toString(low)+" und "+Integer.toString(high)+" eingeben.");
             } else {
@@ -1336,12 +1140,10 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
-            messageBox.jLabel2.setText("Value too big.");
             if( showRange ) {
-                messageBox.jLabel3.setText("Please use a value between "+Integer.toString(low)+" and "+Integer.toString(high)+" .");
+                messageBox.jLabel3.setText("Please enter a value between "+Integer.toString(low)+" and "+Integer.toString(high)+" .");
             } else {
-                messageBox.jLabel3.setText("Please use a lower value.");
+                messageBox.jLabel3.setText("Please enter a lower value.");
             }
         }
         messageBox.setVisible(true);
@@ -1352,10 +1154,10 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbValueNaN( Container cont, int low, int high, boolean showRange ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Valueinvalid"));
         if(bSpracheDE)
         {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Wert ungültig.");
             if( showRange ) {
                 messageBox.jLabel3.setText("Bitte einen Wert zwischen "+Integer.toString(low)+" und "+Integer.toString(high)+" eingeben.");
             } else {
@@ -1364,8 +1166,6 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
-            messageBox.jLabel2.setText("Value invalid.");
             if( showRange ) {
                 messageBox.jLabel3.setText("Please use a value between "+Integer.toString(low)+" and "+Integer.toString(high)+" .");
             } else {
@@ -1377,10 +1177,10 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbValueNaNcv( Container cont, int low, int high, int cv, boolean showRange ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Valueinvalid"));
         if(bSpracheDE)
         {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Wert ungültig.");
             if( showRange ) {
                 messageBox.jLabel3.setText("CV#"+cv+" muß einen Wert zwischen "+Integer.toString(low)+" und "+Integer.toString(high)+" haben.");
             } else {
@@ -1389,8 +1189,6 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
-            messageBox.jLabel2.setText("Value invalid.");
             if( showRange ) {
                 messageBox.jLabel3.setText("CV#"+cv+" must have a value between "+Integer.toString(low)+" and "+Integer.toString(high)+" .");
             } else {
@@ -1402,16 +1200,14 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbValueConsist( Container cont, int low, int high ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Valueinvalid"));
         if(bSpracheDE)
         {
-            messageBox.jLabel1.setText("ACHTUNG!");
-            messageBox.jLabel2.setText("Wert ungültig.");
             messageBox.jLabel3.setText("Gültige Werte für Consist-Adresse zwischen "+Integer.toString(low)+" und "+Integer.toString(high)+" .");
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
-            messageBox.jLabel2.setText("Value invalid.");
             messageBox.jLabel3.setText("Valid consist address is between "+Integer.toString(low)+" and "+Integer.toString(high)+" .");
         }
         messageBox.setVisible(true);
@@ -1419,15 +1215,14 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbAdr128MMonly( Container cont ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
         if(bSpracheDE)
         {
-            messageBox.jLabel1.setText("WARNUNG!");
             messageBox.jLabel2.setText("Nur für MM.");
             messageBox.jLabel3.setText("Bei kurzen Adressen zwischen 128 und 255 reagiert der Decoder nur noch auf MM-Befehle!");
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
             messageBox.jLabel2.setText("Only for MM.");
             messageBox.jLabel3.setText("Short addresses between 128 and 255 are for MM protocol only!");
         }
@@ -1436,16 +1231,15 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbBlinkFrequenz( Container cont, int dauer, int pause, String eingabe ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
         if(bSpracheDE)
         {
             // "Wert \""+jBlink_Pausezeit_1.getText()+"\" ungültig.", "Bitte einen Wert zwischen 0 und Blinkfrequenz minus 2xein eingeben."
-            messageBox.jLabel1.setText("ACHTUNG!");
             messageBox.jLabel2.setText("Eingabe \""+eingabe+"\" für Frequenz ist ungültig.");
             messageBox.jLabel3.setText("Bitte einen Wert zwischen "+((dauer*2)+pause)+" und 255 eingeben. ( Minimum = ( Blinkdauer("+dauer+") * 2 ) plus Pause("+pause+") )");
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
             messageBox.jLabel2.setText("Input \""+eingabe+"\" for frequency is invalid.");
             messageBox.jLabel3.setText("Please use a value between "+((dauer*2)+pause)+" and 255. ( min = ( onTime("+dauer+") * 2 ) plus pause("+pause+") ) ");
         }
@@ -1455,16 +1249,15 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbBlinkEinschaltzeit( Container cont, int freq, int pause, String eingabe ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
         if(bSpracheDE)
         {
             // "Wert \""+jBlink_Pausezeit_1.getText()+"\" ungültig.", "Bitte einen Wert zwischen 0 und Blinkfrequenz minus 2xein eingeben."
-            messageBox.jLabel1.setText("ACHTUNG!");
             messageBox.jLabel2.setText("Eingabe \""+eingabe+"\" für Einschaltzeit ist ungültig.");
             messageBox.jLabel3.setText("Bitte einen Wert zwischen 0 und "+((freq-pause)/2)+" eingeben. ( = ( Blinkfrequenz("+freq+") minus Pause("+pause+") geteilt durch 2 ) )");
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
             messageBox.jLabel2.setText("Input \""+eingabe+"\" for onTime is invalid.");
             messageBox.jLabel3.setText("Please use a value between 0 and "+((freq-pause)/2)+" ( = ( flash freqeuncy("+freq+") minus pause("+pause+") ) / 2 )");
         }
@@ -1474,16 +1267,15 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void mbBlinkPausezeit( Container cont, int freq, int dauer, String eingabe ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
         if(bSpracheDE)
         {
             // "Wert \""+jBlink_Pausezeit_1.getText()+"\" ungültig.", "Bitte einen Wert zwischen 0 und Blinkfrequenz minus 2xein eingeben."
-            messageBox.jLabel1.setText("ACHTUNG!");
             messageBox.jLabel2.setText("Eingabe \""+eingabe+"\" für Pause ist ungültig.");
             messageBox.jLabel3.setText("Bitte einen Wert zwischen 0 und "+(freq-(2*dauer))+" eingeben. ( = Blinkfrequenz("+freq+") minus 2 * Einschaltdauer("+dauer+") )");
         }
         else
         {
-            messageBox.jLabel1.setText("WARNING!");
             messageBox.jLabel2.setText("Input \""+eingabe+"\" for pause is invalid.");
             messageBox.jLabel3.setText("Please use a value between 0 and "+(freq-(2*dauer))+" ( = flash freqeuncy("+freq+") minus 2 * OnTime("+dauer+") )");
         }
@@ -1827,11 +1619,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             // was ist das denn ?
         }
         String errCode;
-        if( this.bSpracheDE ) {
-            errCode = "Fehlercode: ";
-        } else {
-            errCode = "Errorcode: ";
-        }
+        errCode = bundle.getString("Errorcode");
         if( debugLevel >= 1 ) {
             System.out.println("checkMCAnswerByte: len="+len+" bArr[0]="+String.format("%02X ", bArr[0]));
         }
@@ -2026,18 +1814,19 @@ public class KlarTextUI extends javax.swing.JFrame {
         jBaudRate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CV-Navi");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        setTitle(bundle.getString("KlarTextUI.title")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        KlarTextMainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CV-Navi - Main", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        KlarTextMainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("KlarTextUI.KlarTextMainPanel.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         KlarTextMainPanel.setName("CV-Navi"); // NOI18N
 
         jButtonEnd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonEnd.setText("Beenden");
+        jButtonEnd.setText(bundle.getString("KlarTextUI.jButtonEnd.text")); // NOI18N
         jButtonEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEndActionPerformed(evt);
@@ -2067,34 +1856,34 @@ public class KlarTextUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jDecoderChooser);
 
         jLabelProgName.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabelProgName.setText("CV-N");
+        jLabelProgName.setText(bundle.getString("KlarTextUI.jLabelProgName.text")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("a");
+        jLabel2.setText(bundle.getString("KlarTextUI.jLabel2.text")); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel3.setText("vi");
+        jLabel3.setText(bundle.getString("KlarTextUI.jLabel3.text")); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setText("t");
+        jLabel4.setText(bundle.getString("KlarTextUI.jLabel4.text")); // NOI18N
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel4.setIconTextGap(0);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("a");
+        jLabel5.setText(bundle.getString("KlarTextUI.jLabel5.text")); // NOI18N
         jLabel5.setIconTextGap(0);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("ms elektronik");
+        jLabel6.setText(bundle.getString("KlarTextUI.jLabel6.text")); // NOI18N
         jLabel6.setIconTextGap(0);
 
         jButtonStart.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonStart.setText("Start");
-        jButtonStart.setToolTipText("<html>\nKonfiguration für das ausgewählte Gerät starten<br>\nstart configuration for selected device</html>");
+        jButtonStart.setText(bundle.getString("KlarTextUI.jButtonStart.text")); // NOI18N
+        jButtonStart.setToolTipText(bundle.getString("KlarTextUI.jButtonStart.toolTipText")); // NOI18N
         jButtonStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonStartActionPerformed(evt);
@@ -2102,7 +1891,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         });
 
         jButtonOptions.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonOptions.setText("Optionen");
+        jButtonOptions.setText(bundle.getString("KlarTextUI.jButtonOptions.text")); // NOI18N
         jButtonOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOptionsActionPerformed(evt);
@@ -2111,11 +1900,11 @@ public class KlarTextUI extends javax.swing.JFrame {
 
         jLabelProgVersion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelProgVersion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelProgVersion.setText("Version x.yz");
+        jLabelProgVersion.setText(bundle.getString("KlarTextUI.jLabelProgVersion.text")); // NOI18N
         jLabelProgVersion.setIconTextGap(0);
 
         jButtonInfo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonInfo.setText("Info");
+        jButtonInfo.setText(bundle.getString("KlarTextUI.jButtonInfo.text")); // NOI18N
         jButtonInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInfoActionPerformed(evt);
@@ -2125,36 +1914,36 @@ public class KlarTextUI extends javax.swing.JFrame {
         jZentraleTitle.setEditable(false);
         jZentraleTitle.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jZentraleTitle.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jZentraleTitle.setText("Zentrale:");
-        jZentraleTitle.setToolTipText("");
+        jZentraleTitle.setText(bundle.getString("KlarTextUI.jZentraleTitle.text")); // NOI18N
+        jZentraleTitle.setToolTipText(bundle.getString("KlarTextUI.jZentraleTitle.toolTipText")); // NOI18N
         jZentraleTitle.setBorder(null);
 
         jZentrale.setEditable(false);
         jZentrale.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jZentrale.setText("-");
+        jZentrale.setText(bundle.getString("KlarTextUI.jZentrale.text")); // NOI18N
 
         jSchnittstelleTitle.setEditable(false);
         jSchnittstelleTitle.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jSchnittstelleTitle.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jSchnittstelleTitle.setText("Schnittstelle:");
-        jSchnittstelleTitle.setToolTipText("");
+        jSchnittstelleTitle.setText(bundle.getString("KlarTextUI.jSchnittstelleTitle.text")); // NOI18N
+        jSchnittstelleTitle.setToolTipText(bundle.getString("KlarTextUI.jSchnittstelleTitle.toolTipText")); // NOI18N
         jSchnittstelleTitle.setBorder(null);
 
         jSchnittstelle.setEditable(false);
         jSchnittstelle.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jSchnittstelle.setText("-");
+        jSchnittstelle.setText(bundle.getString("KlarTextUI.jSchnittstelle.text")); // NOI18N
 
         jBaudrateTitle.setEditable(false);
         jBaudrateTitle.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jBaudrateTitle.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jBaudrateTitle.setText("Baud Rate:");
-        jBaudrateTitle.setToolTipText("Die TamsMC nutzt an der USB Schnittstelle immer 57600 Baud.");
+        jBaudrateTitle.setText(bundle.getString("KlarTextUI.jBaudrateTitle.text")); // NOI18N
+        jBaudrateTitle.setToolTipText(bundle.getString("KlarTextUI.jBaudrateTitle.toolTipText")); // NOI18N
         jBaudrateTitle.setBorder(null);
 
         jBaudRate.setEditable(false);
         jBaudRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBaudRate.setText("0");
-        jBaudRate.setToolTipText("Die TamsMC nutzt an der USB Schnittstelle immer 57600 Baud.");
+        jBaudRate.setText(bundle.getString("KlarTextUI.jBaudRate.text")); // NOI18N
+        jBaudRate.setToolTipText(bundle.getString("KlarTextUI.jBaudRate.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout KlarTextMainPanelLayout = new javax.swing.GroupLayout(KlarTextMainPanel);
         KlarTextMainPanel.setLayout(KlarTextMainPanelLayout);
@@ -2251,7 +2040,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        KlarTextMainPanel.getAccessibleContext().setAccessibleName("null");
+        KlarTextMainPanel.getAccessibleContext().setAccessibleName(bundle.getString("KlarTextUI.KlarTextMainPanel.AccessibleContext.accessibleName")); // NOI18N
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2578,7 +2367,14 @@ public class KlarTextUI extends javax.swing.JFrame {
         gsSchnittstelle = prop.getProperty("Schnittstelle", "COM1");
         gsBaudRate = Integer.parseInt( prop.getProperty("BaudRate","9600"));
         gsDecoderIndex = Integer.parseInt( prop.getProperty("DecoderIndex", Integer.toString(c.MC)));
-        bSpracheDE = !prop.getProperty("Language", "german").equals("english");
+        if(bundle.getString("Sprache").equals("Deutsch"))
+        {
+            bSpracheDE = true;
+        }
+        else
+        {
+            bSpracheDE = false;
+        }
         gsLookAndFeel = prop.getProperty("LookAndFeel","Metal");
         gsSaveOpenDirectory = prop.getProperty("SaveOpenDirectory",System.getProperty("user.home"));
         gsSaveOpenFilename  = prop.getProperty("SaveOpenFilename"," ");
