@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.util.ResourceBundle;
 import static my.KlarText.KlarTextUI.debugLevel;
 
 /**
@@ -30,6 +31,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
     public boolean bPrint = false;
     public ReadWriteCV rwcv = null;
     private KlarTextUI KTUI = null;
+    private ResourceBundle bundle;
 
     public CVEditList(Dialog parent, boolean modal, KlarTextUI ktui, int[][] CV, byte[] CV_To_Edit, boolean bPrint) {
         super(parent, modal);
@@ -49,6 +51,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
             }
             initComponents();
             pack();
+            bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
             setLocationRelativeTo(parent);
             setVisible(true);
         } else {
@@ -105,7 +108,8 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         });
 
         jAbbruch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAbbruch.setText("Abbrechen");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jAbbruch.setText(bundle.getString("CVEditList.jAbbruch.text")); // NOI18N
         jAbbruch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAbbruchActionPerformed(evt);
@@ -412,7 +416,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         }
 
         jOK.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jOK.setText("OK");
+        jOK.setText(bundle.getString("CVEditList.jOK.text")); // NOI18N
         jOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jOKActionPerformed(evt);
@@ -420,7 +424,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         });
 
         jGruppe_an.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jGruppe_an.setText("alles an");
+        jGruppe_an.setText(bundle.getString("CVEditList.jGruppe_an.text")); // NOI18N
         jGruppe_an.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jGruppe_anActionPerformed(evt);
@@ -428,8 +432,8 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         });
 
         jGruppe_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jGruppe_2.setText("Gruppe2");
-        jGruppe_2.setToolTipText("CVs: 33-36, 53-58, 62-64");
+        jGruppe_2.setText(bundle.getString("CVEditList.jGruppe_2.text")); // NOI18N
+        jGruppe_2.setToolTipText(bundle.getString("CVEditList.jGruppe_2.toolTipText")); // NOI18N
         jGruppe_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jGruppe_2ActionPerformed(evt);
@@ -437,8 +441,8 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         });
 
         jGruppe_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jGruppe_1.setText("Gruppe1");
-        jGruppe_1.setToolTipText("CVs: 1-5, 17-19, 29, 49-52, 65, 114, 124");
+        jGruppe_1.setText(bundle.getString("CVEditList.jGruppe_1.text")); // NOI18N
+        jGruppe_1.setToolTipText(bundle.getString("CVEditList.jGruppe_1.toolTipText")); // NOI18N
         jGruppe_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jGruppe_1ActionPerformed(evt);
@@ -446,7 +450,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         });
 
         jGruppe_aus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jGruppe_aus.setText("alles aus");
+        jGruppe_aus.setText(bundle.getString("CVEditList.jGruppe_aus.text")); // NOI18N
         jGruppe_aus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jGruppe_ausActionPerformed(evt);
@@ -520,14 +524,6 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         if (!bPrint) {
             int k = 0;
             for (int i = 0; i < 254; i++) {
-                /*
-                if (CV[0].length > k) {
-                    if ((i + 1) == CV[0][k]) {
-                        Object n = jTable1.getValueAt(i, 1);
-                        CV[1][k++] = (Integer) n;
-                    }
-                }
-                */
                 Object valueAt = jTable1.getValueAt(i, 3);
                 String str = "" + valueAt;
                 if( str.equals("true")) {
@@ -551,9 +547,9 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.print();
             } catch (PrinterException ex) {
                 MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
-                messageBox.jLabel1.setText("FEHLER!");
-                messageBox.jLabel2.setText("Probleme beim Drucken.");
-                messageBox.jLabel3.setText("Ausdruck wird abgebrochen.");
+                messageBox.jLabel1.setText(bundle.getString("Fehler"));
+                messageBox.jLabel2.setText(bundle.getString("DruckProbleme"));
+                messageBox.jLabel3.setText(bundle.getString("AusdruckAbbruch"));
                 messageBox.setVisible(true);
                 return;
             }
@@ -659,22 +655,22 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(" ", 46, 2);
                 jTable1.setValueAt(" ", 47, 2);
 
-                jTable1.setValueAt("Dimmen AUX1", 48, 2);
-                jTable1.setValueAt("Dimmen AUX2", 49, 2);
-                jTable1.setValueAt("Dimmen AUX3", 50, 2);
-                jTable1.setValueAt("Dimmen AUX4", 51, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX1", 48, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX2", 49, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX3", 50, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX4", 51, 2);
 
-                jTable1.setValueAt("Kickzeit AUX1", 56, 2);
-                jTable1.setValueAt("Kickzeit AUX2", 57, 2);
-                jTable1.setValueAt("Kickzeit AUX3", 58, 2);
-                jTable1.setValueAt("Kickzeit AUX4", 59, 2);
+                jTable1.setValueAt(bundle.getString("Kickzeit") + " AUX1", 56, 2);
+                jTable1.setValueAt(bundle.getString("Kickzeit") + " AUX2", 57, 2);
+                jTable1.setValueAt(bundle.getString("Kickzeit") + " AUX3", 58, 2);
+                jTable1.setValueAt(bundle.getString("Kickzeit") + " AUX4", 59, 2);
 
-                jTable1.setValueAt("Blinken AUX1", 60, 2);
-                jTable1.setValueAt("Blinken AUX2", 61, 2);
-                jTable1.setValueAt("Blinken AUX3", 62, 2);
-                jTable1.setValueAt("Blinken AUX4", 63, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " AUX1", 60, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " AUX2", 61, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " AUX3", 62, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " AUX4", 63, 2);
 
-                jTable1.setValueAt("Analoge Umschaltspannung", 112, 2);
+                jTable1.setValueAt(bundle.getString("Umschaltspannung"), 112, 2);
                 for (int i = 114; i < 255; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
@@ -684,8 +680,8 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(" ", 46, 2);
                 jTable1.setValueAt(" ", 47, 2);
 
-                jTable1.setValueAt("Dimmen AUX1", 48, 2);
-                jTable1.setValueAt("Dimmen AUX2", 49, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX1", 48, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX2", 49, 2);
                 jTable1.setValueAt(" ", 50, 2);
                 jTable1.setValueAt(" ", 51, 2);
 
@@ -694,8 +690,8 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(" ", 58, 2);
                 jTable1.setValueAt(" ", 59, 2);
 
-                jTable1.setValueAt("Blinken AUX1", 60, 2);
-                jTable1.setValueAt("Blinken AUX2", 61, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " AUX1", 60, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " AUX2", 61, 2);
                 jTable1.setValueAt(" ", 62, 2);
                 jTable1.setValueAt(" ", 63, 2);
 
@@ -724,8 +720,8 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(" ", 1, 2);
                 jTable1.setValueAt(" ", 2, 2);
                 jTable1.setValueAt(" ", 3, 2);
-                jTable1.setValueAt("Spannungsreduzierung AUX1", 4, 2);
-                jTable1.setValueAt("Spannungsreduzierung AUX2", 5, 2);
+                jTable1.setValueAt(bundle.getString("Spannungsreduzierung") + " AUX1", 4, 2);
+                jTable1.setValueAt(bundle.getString("Spannungsreduzierung") + " AUX2", 5, 2);
                 for (int i = 8; i < 16; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
@@ -737,7 +733,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                     jTable1.setValueAt(" ", i, 2);
                 }
                 for( int i = 34 ; i <= 61 ; i++ ) { // CV45 -> F1 bis CV62 -> F28
-                    jTable1.setValueAt("Zuordnung der Ausgänge zu F"+(i-33), i, 2);
+                    jTable1.setValueAt(bundle.getString("ZuordnungZuF")+(i-33), i, 2);
                 }
                 for (int i = 62; i < 255; i++) {
                     jTable1.setValueAt(" ", i, 2);
@@ -775,18 +771,18 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(" ", 40, 2);
                 jTable1.setValueAt(" ", 50, 2);
                 jTable1.setValueAt(" ", 51, 2);
-                jTable1.setValueAt("Effekte LED1+2", 52, 2);
-                jTable1.setValueAt("Effekte LED3+4", 53, 2);
-                jTable1.setValueAt("Effekte LED5+6", 54, 2);
-                jTable1.setValueAt("Effekte LED7+8", 55, 2);
-                jTable1.setValueAt("Effekte AUX1+2", 56, 2);
-                jTable1.setValueAt("Effekte AUX3", 57, 2);
-                jTable1.setValueAt("Dimmen LED1+2", 58, 2);
-                jTable1.setValueAt("Dimmen LED3+4", 59, 2);
-                jTable1.setValueAt("Dimmen LED5+6", 60, 2);
-                jTable1.setValueAt("Dimmen LED7+8", 61, 2);
-                jTable1.setValueAt("Dimmen AUX1+2", 62, 2);
-                jTable1.setValueAt("Dimmen AUX3", 63, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " LED1+2", 52, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " LED3+4", 53, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " LED5+6", 54, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " LED7+8", 55, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX1+2", 56, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX3", 57, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " LED1+2", 58, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " LED3+4", 59, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " LED5+6", 60, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " LED7+8", 61, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX1+2", 62, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX3", 63, 2);
                 for(int i = 64; i < 111; i++)
                 {
                     jTable1.setValueAt(" ", i, 2);
@@ -802,34 +798,34 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt("F-Tasten für AUX1", 120, 2);
                 jTable1.setValueAt("F-Tasten für AUX2", 121, 2);
                 jTable1.setValueAt("F-Tasten für AUX3", 122, 2);
-                jTable1.setValueAt("Kickzeit AUX1+3", 123, 2);
+                jTable1.setValueAt(bundle.getString("Kickzeit") + " AUX1+3", 123, 2);
                 jTable1.setValueAt("defekte Leuchtstoffröhre", 124, 2);
                 jTable1.setValueAt("Einschaltzeit Leuchtstoffröhre 1+2", 125, 2);
                 jTable1.setValueAt("Einschaltzeit Leuchtstoffröhre 3+4", 126, 2);
                 jTable1.setValueAt("Einschaltzeit Leuchtstoffröhre 5+6", 127, 2);
                 jTable1.setValueAt("Einschaltzeit Leuchtstoffröhre 7+8", 128, 2);
-                jTable1.setValueAt("Voreinstellung", 129, 2);
+                jTable1.setValueAt(bundle.getString("Default"), 129, 2);
                break;
 
             case c.FD_R_ex: //FD-R extended
-                jTable1.setValueAt("zweite MM-Adresse", 46, 2);
-                jTable1.setValueAt("Abschalten bei Überlast", 47, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelMM_Addr_2.text"), 46, 2);
+                jTable1.setValueAt(bundle.getString("overload"), 47, 2);
                 jTable1.setValueAt("Konfigurations Variable 2", 46, 2);
-                jTable1.setValueAt("Hilfsregister für CV-Nummern", 49, 2);
-                jTable1.setValueAt("Hilfsregiter für Werte", 50, 2);
+                jTable1.setValueAt(bundle.getString("Hilfsregiter") + " CV-Nummern", 49, 2);
+                jTable1.setValueAt(bundle.getString("Hilfsregiter") + bundle.getString("Wert"), 50, 2);
                 jTable1.setValueAt(" ", 51, 2);
-                jTable1.setValueAt("Effekte AUX1", 52, 2);
-                jTable1.setValueAt("Effekte AUX2", 53, 2);
-                jTable1.setValueAt("Effekte AUX3", 54, 2);
-                jTable1.setValueAt("Effekte AUX4", 55, 2);
-                jTable1.setValueAt("Effekte AUX5", 56, 2);
-                jTable1.setValueAt("Effekte AUX6", 57, 2);
-                jTable1.setValueAt("Funktion Mapping Eingang 1 (Ausgänge)", 58, 2);
-                jTable1.setValueAt("Funktion Mapping Eingang 1 (Sounds + Servo)", 59, 2);
-                jTable1.setValueAt("Funktion Mapping Eingang 2 (Ausgänge)", 60, 2);
-                jTable1.setValueAt("Funktion Mapping Eingang 2 (Sounds + Servo)", 61, 2);
-                jTable1.setValueAt("Funktion Mapping Eingang 3 (Ausgänge)", 62, 2);
-                jTable1.setValueAt("Funktion Mapping Eingang 3 (Sounds)", 63, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX1", 52, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX2", 53, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX3", 54, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX4", 55, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX5", 56, 2);
+                jTable1.setValueAt(bundle.getString("FD_LED.jEffekte.TabConstraints.tabTitle") + " AUX6", 57, 2);
+                jTable1.setValueAt("Funktion Mapping " + bundle.getString("Eingang") + " 1 " + bundle.getString("Ausgaenge"), 58, 2);
+                jTable1.setValueAt("Funktion Mapping " + bundle.getString("Eingang") + " 1 (Sounds + Servo)", 59, 2);
+                jTable1.setValueAt("Funktion Mapping " + bundle.getString("Eingang") + " 2 " + bundle.getString("Ausgaenge"), 60, 2);
+                jTable1.setValueAt("Funktion Mapping " + bundle.getString("Eingang") + " 2 (Sounds + Servo)", 61, 2);
+                jTable1.setValueAt("Funktion Mapping " + bundle.getString("Eingang") + " 3 " + bundle.getString("Ausgaenge"), 62, 2);
+                jTable1.setValueAt("Funktion Mapping " + bundle.getString("Eingang") + " 3 (Sounds)", 63, 2);
                 jTable1.setValueAt(" ", 64, 2);
                 jTable1.setValueAt(" ", 65, 2);
                 jTable1.setValueAt(" ", 94, 2);
@@ -843,46 +839,46 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(" ", 102, 2);
                 jTable1.setValueAt(" ", 103, 2);
                 jTable1.setValueAt(" ", 104, 2);
-                jTable1.setValueAt("Blinkfrequenz AUX1", 115, 2);
-                jTable1.setValueAt("Blinkfrequenz AUX2", 116, 2);
-                jTable1.setValueAt("Blinkfrequenz AUX3", 117, 2);
-                jTable1.setValueAt("Blinkfrequenz AUX4", 118, 2);
-                jTable1.setValueAt("Blinkfrequenz AUX5", 109, 2);
-                jTable1.setValueAt("Blinkfrequenz AUX6", 110, 2);
-                jTable1.setValueAt("Blinkfrequenz MARs", 111, 2);
-                jTable1.setValueAt("Fahrstufe für alternatives Dimmen", 112, 2);
-                jTable1.setValueAt("Ausgänge für alt. Dimmen", 113, 2);
-                jTable1.setValueAt("Dimmen AUX1", 114, 2);
-                jTable1.setValueAt("Dimmen AUX2", 115, 2);
-                jTable1.setValueAt("Dimmen AUX3", 116, 2);
-                jTable1.setValueAt("Dimmen AUX4", 117, 2);
-                jTable1.setValueAt("Mindesteinschaltdauer Eingang 1", 118, 2);
-                jTable1.setValueAt("Mindesteinschaltdauer Eingang 2", 119, 2);
-                jTable1.setValueAt("Mindesteinschaltdauer Eingang 3", 120, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelBlinkFrequenz.text") + " AUX1", 115, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelBlinkFrequenz.text") + " AUX2", 116, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelBlinkFrequenz.text") + " AUX3", 117, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelBlinkFrequenz.text") + " AUX4", 118, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelBlinkFrequenz.text") + " AUX5", 109, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelBlinkFrequenz.text") + " AUX6", 110, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabelBlinkFrequenz.text") + " MARs", 111, 2);
+                jTable1.setValueAt(bundle.getString("speedAltDim"), 112, 2);
+                jTable1.setValueAt(bundle.getString("OutAltDim"), 113, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX1", 114, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX2", 115, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX3", 116, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen") + " AUX4", 117, 2);
+                jTable1.setValueAt(bundle.getString("Mindesteinschaltdauer") + " " + bundle.getString("Eingang") + " 1", 118, 2);
+                jTable1.setValueAt(bundle.getString("Mindesteinschaltdauer") + " " + bundle.getString("Eingang") + " 2", 119, 2);
+                jTable1.setValueAt(bundle.getString("Mindesteinschaltdauer") + " " + bundle.getString("Eingang") + " 3", 120, 2);
                 jTable1.setValueAt("", 121, 2);
-                jTable1.setValueAt("alternatives Dimmen AUX1", 122, 2);
-                jTable1.setValueAt("alternatives Dimmen AUX2", 123, 2);
-                jTable1.setValueAt("alternatives Dimmen AUX3", 124, 2);
-                jTable1.setValueAt("alternatives Dimmen AUX4", 125, 2);
+                jTable1.setValueAt(bundle.getString("alternativ") + bundle.getString("Dimmen") + " AUX1", 122, 2);
+                jTable1.setValueAt(bundle.getString("alternativ") + bundle.getString("Dimmen") + " AUX2", 123, 2);
+                jTable1.setValueAt(bundle.getString("alternativ") + bundle.getString("Dimmen") + " AUX3", 124, 2);
+                jTable1.setValueAt(bundle.getString("alternativ") + bundle.getString("Dimmen") + " AUX4", 125, 2);
                 jTable1.setValueAt("", 126, 2);
                 jTable1.setValueAt("", 127, 2);
                 jTable1.setValueAt("", 128, 2);
                 jTable1.setValueAt("", 129, 2);
-                jTable1.setValueAt("Rangierlicht", 130, 2);
-                jTable1.setValueAt("Blinken -> ON-Time AUX1", 131, 2);
-                jTable1.setValueAt("Blinken -> ON-Time AUX2", 132, 2);
-                jTable1.setValueAt("Blinken -> ON-Time AUX3", 133, 2);
-                jTable1.setValueAt("Blinken -> ON-Time AUX4", 134, 2);
-                jTable1.setValueAt("Blinken -> ON-Time AUX5", 135, 2);
-                jTable1.setValueAt("Blinken -> ON-Time AUX6", 136, 2);
+                jTable1.setValueAt(bundle.getString("FDR.jLabel29.text"), 130, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " -> ON-Time AUX1", 131, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " -> ON-Time AUX2", 132, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " -> ON-Time AUX3", 133, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " -> ON-Time AUX4", 134, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " -> ON-Time AUX5", 135, 2);
+                jTable1.setValueAt(bundle.getString("Blinken") + " -> ON-Time AUX6", 136, 2);
                 jTable1.setValueAt("", 137, 2);
                 jTable1.setValueAt("", 138, 2);
-                jTable1.setValueAt("Doppel-Blinken -> Pause AUX1", 139, 2);
-                jTable1.setValueAt("Doppel-Blinken -> Pause AUX2", 140, 2);
-                jTable1.setValueAt("Doppel-Blinken -> Pause AUX3", 141, 2);
-                jTable1.setValueAt("Doppel-Blinken -> Pause AUX4", 142, 2);
-                jTable1.setValueAt("Doppel-Blinken -> Pause AUX5", 143, 2);
-                jTable1.setValueAt("Doppel-Blinken -> Pause AUX6", 144, 2);
+                jTable1.setValueAt(bundle.getString("Doppel-Blinken") + " -> Pause AUX1", 139, 2);
+                jTable1.setValueAt(bundle.getString("Doppel-Blinken") + " -> Pause AUX2", 140, 2);
+                jTable1.setValueAt(bundle.getString("Doppel-Blinken") + " -> Pause AUX3", 141, 2);
+                jTable1.setValueAt(bundle.getString("Doppel-Blinken") + " -> Pause AUX4", 142, 2);
+                jTable1.setValueAt(bundle.getString("Doppel-Blinken") + " -> Pause AUX5", 143, 2);
+                jTable1.setValueAt(bundle.getString("Doppel-Blinken") + " -> Pause AUX6", 144, 2);
                 jTable1.setValueAt("", 145, 2);
                 jTable1.setValueAt("", 146, 2);
                 jTable1.setValueAt("Funktion Mapping SOUND F1/F13", 147, 2);
@@ -897,23 +893,23 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt("Funktion Mapping SOUND F10/F22", 156, 2);
                 jTable1.setValueAt("Funktion Mapping SOUND F11/F23", 157, 2);
                 jTable1.setValueAt("Funktion Mapping SOUND F12/F24", 157, 2);
-                jTable1.setValueAt("Lautstärke Abschwächung", 159, 2);
+                jTable1.setValueAt(bundle.getString("Laut"), 159, 2);
                 jTable1.setValueAt("", 160, 2);
-                jTable1.setValueAt("Kickzeit vorwärts", 161, 2);
-                jTable1.setValueAt("Kickzeit rückwärts", 162, 2);
+                jTable1.setValueAt(bundle.getString("Kickzeit") + " " + bundle.getString("DecTest.jVor.text"), 161, 2);
+                jTable1.setValueAt(bundle.getString("Kickzeit") + " " + bundle.getString("DecTest.jRueck.text"), 162, 2);
                 jTable1.setValueAt("", 163, 2);
                 jTable1.setValueAt("", 164, 2);
                 jTable1.setValueAt("", 165, 2);
-                jTable1.setValueAt("F5 bis F12 für Servo-Ausgang", 166, 2);
-                jTable1.setValueAt("Servoausgang ein", 167, 2);
-                jTable1.setValueAt("linker Anschlag Servo", 168, 2);
-                jTable1.setValueAt("rechter Anschlag Servo", 169, 2);
-                jTable1.setValueAt("Geschwindigkeit des Servo", 170, 2);
-                jTable1.setValueAt("letzte Position des Servo", 171, 2);
-                jTable1.setValueAt("Ausschalten von F0 bei FS 0", 172, 2);
-                jTable1.setValueAt("Einschalten von AUX bei FS0", 173, 2);
-                jTable1.setValueAt("Ausschalten von AUX bei FS0", 174, 2);
-                jTable1.setValueAt("Invertieren von AUX bei FS0", 175, 2);
+                jTable1.setValueAt(bundle.getString("FbisF") + bundle.getString("Servoausgang"), 166, 2);
+                jTable1.setValueAt(bundle.getString("Servoausgang") + " " + bundle.getString("ein"), 167, 2);
+                jTable1.setValueAt(bundle.getString("linkerAnschlag") + " Servo", 168, 2);
+                jTable1.setValueAt(bundle.getString("rechterAnschlag") + " Servo", 169, 2);
+                jTable1.setValueAt(bundle.getString("Geschw") + " Servo", 170, 2);
+                jTable1.setValueAt(bundle.getString("letztePos") + " Servo", 171, 2);
+                jTable1.setValueAt(bundle.getString("Ausschalten") + " F0" + bundle.getString("beiFS0"), 172, 2);
+                jTable1.setValueAt(bundle.getString("Einschalten") + " AUX" + bundle.getString("beiFS0"), 173, 2);
+                jTable1.setValueAt(bundle.getString("Ausschalten") + " AUX" + bundle.getString("beiFS0"), 174, 2);
+                jTable1.setValueAt(bundle.getString("Invertieren") + " AUX" + bundle.getString("beiFS0"), 175, 2);
                 jTable1.setValueAt("", 176, 2);
                 jTable1.setValueAt("", 177, 2);
                 jTable1.setValueAt("", 178, 2);
@@ -937,7 +933,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         }
         if(bPrint)
         {
-            jOK.setText("Drucken");
+            jOK.setText(bundle.getString("Drucken"));
         }
         for (int i = 0; i < 255; i++) {
             CV_To_Edit_Old[i] = CV_To_Edit[i];
