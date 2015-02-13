@@ -224,6 +224,7 @@ public class DecTest extends javax.swing.JDialog {
         buttonGroup1.add(jRueck);
         jRueck.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jRueck.setText(bundle.getString("DecTest.jRueck.text")); // NOI18N
+        jRueck.setActionCommand(bundle.getString("DecTest.jRueck.actionCommand")); // NOI18N
         jRueck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRueckActionPerformed(evt);
