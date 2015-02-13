@@ -1419,7 +1419,7 @@ public class FD_LED extends javax.swing.JFrame {
                 .addGroup(jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jKommentarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
                     .addGroup(jKommentarLayout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel36)))
