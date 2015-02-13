@@ -13,6 +13,10 @@
 
 
 
+# V 0.10 20150213 Lothar
+# - Sprache: Auswertung der Umgebumgsvariable LANG (z.B. LANG=de_DE.utf8)
+#            und Übergabe an Java
+
 # V 0.09 20150130 Lothar
 # - Erweiterung fuer OS-X - Tests
 
@@ -105,10 +109,30 @@ else
     JAVA=$JAVA_HOME/bin/java
 fi
 
+if [ -z "${JAVA_OPTS=}" ] ; then
+	[ $DEBUG == 1 ] && echo "INIT JAVA_OPTS"
+	JAVA_OPTS=""
+else
+	[ $DEBUG == 1 ] && echo "JAVA_OPTS=${JAVA_OPTS}"
+fi
+
+# parse LANG into java options
+if [ ! -z "${LANG}" ]; then
+	LANG_PARTS=`echo ${LANG} | sed -e 's#_# #' -e 's#\.# #'`
+	myNumLangParts=`echo ${LANG_PARTS} | wc -w`
+	[ $DEBUG == 1 ] && echo "myNumLangParts=${myNumLangParts}"
+	if [ ${myNumLangParts} -ge 2 ] ; then
+		myLANG=`echo ${LANG_PARTS} | cut -d " " -f 1`
+		myCOUNTRY=`echo ${LANG_PARTS} | cut -d " " -f 2`
+		JAVA_OPTS="${JAVA_OPTS} -Duser.language=${myLANG} -Duser.country=${myCOUNTRY}"
+		[ $DEBUG == 1 ] && echo "JAVA_OPTS=${JAVA_OPTS}"
+	fi
+fi
+
 [ $DEBUG == 1 ]&& echo "calling \$0=$0"
 # get the absolute path of the script (real calling path)
 SELF_PATH=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
-[ $DEBUG == 1 ]&& echo "SELF_PATH=${SELF_PATH}"
+[ $DEBUG == 1 ] && echo "SELF_PATH=${SELF_PATH}"
 
 # resolve symlinks
 while [ -h "$SELF_PATH/$(basename -- "$0")" ]; do
@@ -195,7 +219,7 @@ if [ ${LIB_FOUND} == 0 ] ; then
 fi
 	
 if [ $DEBUG == 1 ] ; then
-	echo $JAVA -Djava.library.path=${JAVA_LIBRARY_PATH} -jar "$PROG_DIR/$PROG_NAME" $*
+	echo $JAVA -Djava.library.path=${JAVA_LIBRARY_PATH}  ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
 fi
 
-$JAVA -Djava.library.path=${JAVA_LIBRARY_PATH} -jar "$PROG_DIR/$PROG_NAME" $*
+$JAVA -Djava.library.path=${JAVA_LIBRARY_PATH} ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
