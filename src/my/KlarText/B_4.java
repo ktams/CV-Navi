@@ -10,6 +10,7 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static my.KlarText.KlarTextUI.debugLevel;
@@ -25,6 +26,7 @@ public class B_4 extends javax.swing.JFrame {
     private int SendeZaehler;
     private boolean bAbbruch;
     private int lokAdr = 9999;
+    private ResourceBundle bundle;
 
 
     /** Creates new form B_4 */
@@ -48,6 +50,7 @@ public class B_4 extends javax.swing.JFrame {
         setTitle( KTUI.getMenutext( decoderList.B_4 ).trim() );
         setStatus( KTUI.getTrackStatus() );
         jAdrLok.setText(""+lokAdr);
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         setBorder();
 
         setLocationRelativeTo(ktuiThis);
@@ -58,7 +61,8 @@ public class B_4 extends javax.swing.JFrame {
     private void setBorder() {
         jPanelB4.setBorder(javax.swing.BorderFactory.createTitledBorder(
                 null,
-                "Booster B-4: zum Programmieren wird Adresse "+lokAdr+" (DCC) eingestellt.",
+                bundle.getString("B_4.jPanelB4.border.title_1")+lokAdr+bundle.getString("B_4.jPanelB4.border.title_2"),
+//                "Booster B-4: zum Programmieren wird Adresse "+lokAdr+" (DCC) eingestellt.",
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
                 javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new java.awt.Font("Tahoma", 0, 12)));
@@ -207,69 +211,70 @@ public class B_4 extends javax.swing.JFrame {
             }
         });
 
-        jPanelB4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Booster B-4: zum Programmieren wird Adresse 9999 (DCC) eingestellt.", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanelB4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("B_4.jPanelB4.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jTabbedPane1B4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         Spannung.add(jV18);
         jV18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jV18.setSelected(true);
-        jV18.setText("18V");
+        jV18.setText(bundle.getString("B_4.jV18.text")); // NOI18N
 
         Spannung.add(jV19);
         jV19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV19.setText("19V");
+        jV19.setText(bundle.getString("B_4.jV19.text")); // NOI18N
 
         Spannung.add(jV20);
         jV20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV20.setText("20V");
+        jV20.setText(bundle.getString("B_4.jV20.text")); // NOI18N
 
         Spannung.add(jV21);
         jV21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV21.setText("21V");
+        jV21.setText(bundle.getString("B_4.jV21.text")); // NOI18N
 
         Spannung.add(jV22);
         jV22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV22.setText("22V");
+        jV22.setText(bundle.getString("B_4.jV22.text")); // NOI18N
 
         Spannung.add(jV23);
         jV23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV23.setText("23V");
+        jV23.setText(bundle.getString("B_4.jV23.text")); // NOI18N
 
         Spannung.add(jV24);
         jV24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV24.setText("24V");
+        jV24.setText(bundle.getString("B_4.jV24.text")); // NOI18N
 
         Spannung.add(jV12);
         jV12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV12.setText("12V");
+        jV12.setText(bundle.getString("B_4.jV12.text")); // NOI18N
 
-        jLabel1.setText("Gleisspannung:");
+        jLabel1.setText(bundle.getString("B_4.jLabel1.text")); // NOI18N
 
         Spannung.add(jV13);
         jV13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV13.setText("13V");
+        jV13.setText(bundle.getString("B_4.jV13.text")); // NOI18N
 
         Spannung.add(jV14);
         jV14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV14.setText("14V");
+        jV14.setText(bundle.getString("B_4.jV14.text")); // NOI18N
 
         Spannung.add(jV15);
         jV15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV15.setText("15V");
+        jV15.setText(bundle.getString("B_4.jV15.text")); // NOI18N
 
         Spannung.add(jV16);
         jV16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV16.setText("16V");
+        jV16.setText(bundle.getString("B_4.jV16.text")); // NOI18N
 
         Spannung.add(jV17);
         jV17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV17.setText("17V");
+        jV17.setText(bundle.getString("B_4.jV17.text")); // NOI18N
 
         jProgressBar1.setStringPainted(true);
 
         jClose1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jClose1.setText("Schließen");
+        jClose1.setText(bundle.getString("B_4.jClose1.text")); // NOI18N
         jClose1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jClose1ActionPerformed(evt);
@@ -277,92 +282,92 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jWriteV.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWriteV.setText("Schreiben");
+        jWriteV.setText(bundle.getString("B_4.jWriteV.text")); // NOI18N
         jWriteV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWriteVActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Abschaltstrom:");
+        jLabel2.setText(bundle.getString("B_4.jLabel2.text")); // NOI18N
 
         Strom.add(jA4);
         jA4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jA4.setText("4A");
+        jA4.setText(bundle.getString("B_4.jA4.text")); // NOI18N
 
         Strom.add(jA5);
         jA5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jA5.setSelected(true);
-        jA5.setText("5A");
+        jA5.setText(bundle.getString("B_4.jA5.text")); // NOI18N
 
         Strom.add(jA2);
         jA2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jA2.setText("2A");
+        jA2.setText(bundle.getString("B_4.jA2.text")); // NOI18N
 
         Strom.add(jA3);
         jA3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jA3.setText("3A");
+        jA3.setText(bundle.getString("B_4.jA3.text")); // NOI18N
 
         jWriteA.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWriteA.setText("Schreiben");
+        jWriteA.setText(bundle.getString("B_4.jWriteA.text")); // NOI18N
         jWriteA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWriteAActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("RailCom-Lücke:");
+        jLabel3.setText(bundle.getString("B_4.jLabel3.text")); // NOI18N
 
         RailCom.add(jRC_On);
         jRC_On.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jRC_On.setSelected(true);
-        jRC_On.setText("ein");
+        jRC_On.setText(bundle.getString("B_4.jRC_On.text")); // NOI18N
 
         RailCom.add(jRC_Off);
         jRC_Off.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRC_Off.setText("aus");
+        jRC_Off.setText(bundle.getString("B_4.jRC_Off.text")); // NOI18N
 
         jWriteRC.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWriteRC.setText("Schreiben");
+        jWriteRC.setText(bundle.getString("B_4.jWriteRC.text")); // NOI18N
         jWriteRC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWriteRCActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Wiedereinschalt-Zeit:");
+        jLabel4.setText(bundle.getString("B_4.jLabel4.text")); // NOI18N
 
         Zeit.add(jZ7);
         jZ7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jZ7.setText("7 sec");
+        jZ7.setText(bundle.getString("B_4.jZ7.text")); // NOI18N
 
         Zeit.add(jZ8);
         jZ8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jZ8.setText("8 sec");
+        jZ8.setText(bundle.getString("B_4.jZ8.text")); // NOI18N
 
         Zeit.add(jZ9);
         jZ9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jZ9.setText("9 sec");
+        jZ9.setText(bundle.getString("B_4.jZ9.text")); // NOI18N
 
         Zeit.add(jZ10);
         jZ10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jZ10.setText("10 sec");
+        jZ10.setText(bundle.getString("B_4.jZ10.text")); // NOI18N
 
         Zeit.add(jZ4);
         jZ4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jZ4.setSelected(true);
-        jZ4.setText("4 sec");
+        jZ4.setText(bundle.getString("B_4.jZ4.text")); // NOI18N
 
         Zeit.add(jZ5);
         jZ5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jZ5.setText("5 sec");
+        jZ5.setText(bundle.getString("B_4.jZ5.text")); // NOI18N
 
         Zeit.add(jZ6);
         jZ6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jZ6.setText("6 sec");
+        jZ6.setText(bundle.getString("B_4.jZ6.text")); // NOI18N
 
         jWriteZ.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWriteZ.setText("Schreiben");
+        jWriteZ.setText(bundle.getString("B_4.jWriteZ.text")); // NOI18N
         jWriteZ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWriteZActionPerformed(evt);
@@ -370,8 +375,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jSchreiben.setText("Schreibe Alle");
-        jSchreiben.setToolTipText("Alle Werte von oben mit langsamem Timing");
+        jSchreiben.setText(bundle.getString("B_4.jSchreiben.text")); // NOI18N
+        jSchreiben.setToolTipText(bundle.getString("B_4.jSchreiben.toolTipText")); // NOI18N
         jSchreiben.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSchreibenActionPerformed(evt);
@@ -379,22 +384,22 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jButtonReset.setForeground(new java.awt.Color(255, 0, 0));
-        jButtonReset.setText("Zurücksetzen");
+        jButtonReset.setText(bundle.getString("B_4.jButtonReset.text")); // NOI18N
         jButtonReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonResetActionPerformed(evt);
             }
         });
 
-        jLabelReset.setText("Auslieferungswerte: ");
+        jLabelReset.setText(bundle.getString("B_4.jLabelReset.text")); // NOI18N
 
         Spannung.add(jV10);
         jV10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV10.setText("10V");
+        jV10.setText(bundle.getString("B_4.jV10.text")); // NOI18N
 
         Spannung.add(jV11);
         jV11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jV11.setText("11V");
+        jV11.setText(bundle.getString("B_4.jV11.text")); // NOI18N
 
         javax.swing.GroupLayout jPanelB4alleLayout = new javax.swing.GroupLayout(jPanelB4alle);
         jPanelB4alle.setLayout(jPanelB4alleLayout);
@@ -474,8 +479,7 @@ public class B_4 extends javax.swing.JFrame {
                                         .addGroup(jPanelB4alleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jV16, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelB4alleLayout.createSequentialGroup()
-                                                .addGap(49, 49, 49)
-                                                .addGap(4, 4, 4)
+                                                .addGap(53, 53, 53)
                                                 .addComponent(jV17)
                                                 .addGap(4, 4, 4)
                                                 .addComponent(jV18)
@@ -576,10 +580,10 @@ public class B_4 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1B4.addTab("B-4 (alle)", jPanelB4alle);
+        jTabbedPane1B4.addTab(bundle.getString("B_4.jPanelB4alle.TabConstraints.tabTitle"), jPanelB4alle); // NOI18N
 
         jClose2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jClose2.setText("Schließen");
+        jClose2.setText(bundle.getString("B_4.jClose2.text")); // NOI18N
         jClose2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jClose2ActionPerformed(evt);
@@ -587,13 +591,13 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jHintNewFunctions.setBackground(new java.awt.Color(238, 238, 238));
-        jHintNewFunctions.setText("Funktionen, die ab Firmware Version 1.6 verfügbar sind :");
+        jHintNewFunctions.setText(bundle.getString("B_4.jHintNewFunctions.text")); // NOI18N
         jHintNewFunctions.setBorder(null);
         jHintNewFunctions.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jHintNewFunctions.setFocusable(false);
 
         jAdr73.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jAdr73.setText("2040");
+        jAdr73.setText(bundle.getString("B_4.jAdr73.text")); // NOI18N
         jAdr73.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jAdr73FocusLost(evt);
@@ -606,7 +610,7 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jWrite73.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWrite73.setText("Schreiben");
+        jWrite73.setText(bundle.getString("B_4.jWrite73.text")); // NOI18N
         jWrite73.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWrite73ActionPerformed(evt);
@@ -614,13 +618,13 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jLabel73.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel73.setText("Adresse");
+        jLabel73.setText(bundle.getString("B_4.jLabel73.text")); // NOI18N
 
         jLabel76.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel76.setText("Adresse");
+        jLabel76.setText(bundle.getString("B_4.jLabel76.text")); // NOI18N
 
         jAdr76.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jAdr76.setText("2039");
+        jAdr76.setText(bundle.getString("B_4.jAdr76.text")); // NOI18N
         jAdr76.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jAdr76FocusLost(evt);
@@ -633,93 +637,93 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jWrite76.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWrite76.setText("Schreiben");
+        jWrite76.setText(bundle.getString("B_4.jWrite76.text")); // NOI18N
         jWrite76.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWrite76ActionPerformed(evt);
             }
         });
 
-        jLabel77.setText("Grenzwert der Kurzschlusswarnung bei Boostermanagement:");
+        jLabel77.setText(bundle.getString("B_4.jLabel77.text")); // NOI18N
 
         KurzschlussWarnung.add(jWarn00);
         jWarn00.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jWarn00.setSelected(true);
-        jWarn00.setText("Aus");
+        jWarn00.setText(bundle.getString("B_4.jWarn00.text")); // NOI18N
 
         KurzschlussWarnung.add(jWarn02);
         jWarn02.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWarn02.setText("0,2 A");
+        jWarn02.setText(bundle.getString("B_4.jWarn02.text")); // NOI18N
 
         KurzschlussWarnung.add(jWarn04);
         jWarn04.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWarn04.setText("0,4 A");
+        jWarn04.setText(bundle.getString("B_4.jWarn04.text")); // NOI18N
 
         KurzschlussWarnung.add(jWarn06);
         jWarn06.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWarn06.setText("0,6 A");
+        jWarn06.setText(bundle.getString("B_4.jWarn06.text")); // NOI18N
 
         KurzschlussWarnung.add(jWarn08);
         jWarn08.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWarn08.setText("0,8 A");
+        jWarn08.setText(bundle.getString("B_4.jWarn08.text")); // NOI18N
 
         KurzschlussWarnung.add(jWarn10);
         jWarn10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWarn10.setText("1,0 A");
+        jWarn10.setText(bundle.getString("B_4.jWarn10.text")); // NOI18N
 
         jWriteWarn.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWriteWarn.setText("Schreiben");
+        jWriteWarn.setText(bundle.getString("B_4.jWriteWarn.text")); // NOI18N
         jWriteWarn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWriteWarnActionPerformed(evt);
             }
         });
 
-        jLabel78.setText("Wiedereinschaltzeit nach fünfmaligem Kurzschluss:");
+        jLabel78.setText(bundle.getString("B_4.jLabel78.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ_Z);
         jWZ_Z.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ_Z.setText("gleich der Wiedereinschaltzeit nach einem Kurzschluss");
+        jWZ_Z.setText(bundle.getString("B_4.jWZ_Z.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ10);
         jWZ10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ10.setText("10 Sekunden");
+        jWZ10.setText(bundle.getString("B_4.jWZ10.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ20);
         jWZ20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ20.setText("20 Sekunden");
+        jWZ20.setText(bundle.getString("B_4.jWZ20.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ30);
         jWZ30.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ30.setText("30 Sekunden");
+        jWZ30.setText(bundle.getString("B_4.jWZ30.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ40);
         jWZ40.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ40.setText("40 Sekunden");
+        jWZ40.setText(bundle.getString("B_4.jWZ40.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ50);
         jWZ50.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ50.setText("50 Sekunden");
+        jWZ50.setText(bundle.getString("B_4.jWZ50.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ60);
         jWZ60.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jWZ60.setSelected(true);
-        jWZ60.setText("60 Sekunden");
+        jWZ60.setText(bundle.getString("B_4.jWZ60.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ70);
         jWZ70.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ70.setText("70 Sekunden");
+        jWZ70.setText(bundle.getString("B_4.jWZ70.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ80);
         jWZ80.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ80.setText("80 Sekunden");
+        jWZ80.setText(bundle.getString("B_4.jWZ80.text")); // NOI18N
 
         Wiedereinschaltzeit.add(jWZ90);
         jWZ90.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWZ90.setText("90 Sekunden");
+        jWZ90.setText(bundle.getString("B_4.jWZ90.text")); // NOI18N
 
         jWrite5Z.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWrite5Z.setText("Schreiben");
+        jWrite5Z.setText(bundle.getString("B_4.jWrite5Z.text")); // NOI18N
         jWrite5Z.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWrite5ZActionPerformed(evt);
@@ -727,7 +731,7 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jWrite71_72.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWrite71_72.setText("Schreiben");
+        jWrite71_72.setText(bundle.getString("B_4.jWrite71_72.text")); // NOI18N
         jWrite71_72.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWrite71_72ActionPerformed(evt);
@@ -735,7 +739,7 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jWrite74_75.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWrite74_75.setText("Schreiben");
+        jWrite74_75.setText(bundle.getString("B_4.jWrite74_75.text")); // NOI18N
         jWrite74_75.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWrite74_75ActionPerformed(evt);
@@ -745,64 +749,64 @@ public class B_4 extends javax.swing.JFrame {
         Abschalten.add(jAbschaltAus72);
         jAbschaltAus72.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jAbschaltAus72.setSelected(true);
-        jAbschaltAus72.setText("Aus");
+        jAbschaltAus72.setText(bundle.getString("B_4.jAbschaltAus72.text")); // NOI18N
 
         Abschalten.add(jAbschaltEin71);
         jAbschaltEin71.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jAbschaltEin71.setText("Ein");
+        jAbschaltEin71.setText(bundle.getString("B_4.jAbschaltEin71.text")); // NOI18N
 
         WatchDog.add(jWatchdogAus75);
         jWatchdogAus75.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jWatchdogAus75.setSelected(true);
-        jWatchdogAus75.setText("Aus");
+        jWatchdogAus75.setText(bundle.getString("B_4.jWatchdogAus75.text")); // NOI18N
 
         WatchDog.add(jWatchdogEin74);
         jWatchdogEin74.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jWatchdogEin74.setText("Ein");
+        jWatchdogEin74.setText(bundle.getString("B_4.jWatchdogEin74.text")); // NOI18N
 
-        jLabelAbschalten.setText("Abschalten auf Weichenbefehl");
+        jLabelAbschalten.setText(bundle.getString("B_4.jLabelAbschalten.text")); // NOI18N
 
-        jLabelWatchdog.setText("WatchDog auf Weichenbefehl");
+        jLabelWatchdog.setText(bundle.getString("B_4.jLabelWatchdog.text")); // NOI18N
 
-        jButton73g.setText("gerade");
+        jButton73g.setText(bundle.getString("B_4.jButton73g.text")); // NOI18N
         jButton73g.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton73gActionPerformed(evt);
             }
         });
 
-        jButton73r.setText("abzweig");
+        jButton73r.setText(bundle.getString("B_4.jButton73r.text")); // NOI18N
         jButton73r.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton73rActionPerformed(evt);
             }
         });
 
-        jButton76g.setText("gerade");
+        jButton76g.setText(bundle.getString("B_4.jButton76g.text")); // NOI18N
         jButton76g.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton76gActionPerformed(evt);
             }
         });
 
-        jButton76r.setText("abzweig");
+        jButton76r.setText(bundle.getString("B_4.jButton76r.text")); // NOI18N
         jButton76r.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton76rActionPerformed(evt);
             }
         });
 
-        jTestAbschalten.setText("Test Abschalten");
+        jTestAbschalten.setText(bundle.getString("B_4.jTestAbschalten.text")); // NOI18N
 
-        jTestWatchdog.setText("Test WatchDog");
+        jTestWatchdog.setText(bundle.getString("B_4.jTestWatchdog.text")); // NOI18N
 
         jAdr73copy.setEditable(false);
         jAdr73copy.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jAdr73copy.setText("2040");
+        jAdr73copy.setText(bundle.getString("B_4.jAdr73copy.text")); // NOI18N
 
         jAdr76copy.setEditable(false);
         jAdr76copy.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jAdr76copy.setText("2039");
+        jAdr76copy.setText(bundle.getString("B_4.jAdr76copy.text")); // NOI18N
 
         javax.swing.GroupLayout jPanelB4v16Layout = new javax.swing.GroupLayout(jPanelB4v16);
         jPanelB4v16.setLayout(jPanelB4v16Layout);
@@ -1015,11 +1019,11 @@ public class B_4 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1B4.addTab("B-4 (V1.6 +)", jPanelB4v16);
+        jTabbedPane1B4.addTab(bundle.getString("B_4.jPanelB4v16.TabConstraints.tabTitle"), jPanelB4v16); // NOI18N
 
         jShowVer.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowVer.setText("Softwarestand");
-        jShowVer.setToolTipText("95");
+        jShowVer.setText(bundle.getString("B_4.jShowVer.text")); // NOI18N
+        jShowVer.setToolTipText(bundle.getString("B_4.jShowVer.toolTipText")); // NOI18N
         jShowVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowVerActionPerformed(evt);
@@ -1027,8 +1031,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowShortOn1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowShortOn1.setText("Wiedereinschaltzeit nach Kurzschluß [s]");
-        jShowShortOn1.setToolTipText("96");
+        jShowShortOn1.setText(bundle.getString("B_4.jShowShortOn1.text")); // NOI18N
+        jShowShortOn1.setToolTipText(bundle.getString("B_4.jShowShortOn1.toolTipText")); // NOI18N
         jShowShortOn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowShortOn1ActionPerformed(evt);
@@ -1036,8 +1040,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowRailcom.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowRailcom.setText("Railcom (\"on\" = an, \"oF\" = aus)");
-        jShowRailcom.setToolTipText("97");
+        jShowRailcom.setText(bundle.getString("B_4.jShowRailcom.text")); // NOI18N
+        jShowRailcom.setToolTipText(bundle.getString("B_4.jShowRailcom.toolTipText")); // NOI18N
         jShowRailcom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowRailcomActionPerformed(evt);
@@ -1045,8 +1049,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowVolt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowVolt.setText("Gleisspannung [V]");
-        jShowVolt.setToolTipText("98");
+        jShowVolt.setText(bundle.getString("B_4.jShowVolt.text")); // NOI18N
+        jShowVolt.setToolTipText(bundle.getString("B_4.jShowVolt.toolTipText")); // NOI18N
         jShowVolt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowVoltActionPerformed(evt);
@@ -1054,8 +1058,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowAmpere.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowAmpere.setText("Max. Gleisstrom (Abschaltstrom) [A]");
-        jShowAmpere.setToolTipText("99");
+        jShowAmpere.setText(bundle.getString("B_4.jShowAmpere.text")); // NOI18N
+        jShowAmpere.setToolTipText(bundle.getString("B_4.jShowAmpere.toolTipText")); // NOI18N
         jShowAmpere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowAmpereActionPerformed(evt);
@@ -1063,8 +1067,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowShortOn5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowShortOn5.setText("Wiedereinschaltzeit nach 5 mal Kurzschluß [s]");
-        jShowShortOn5.setToolTipText("91");
+        jShowShortOn5.setText(bundle.getString("B_4.jShowShortOn5.text")); // NOI18N
+        jShowShortOn5.setToolTipText(bundle.getString("B_4.jShowShortOn5.toolTipText")); // NOI18N
         jShowShortOn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowShortOn5ActionPerformed(evt);
@@ -1072,8 +1076,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowShortWarnMax.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowShortWarnMax.setText("Grenzwert der Kurzschlußwarnung");
-        jShowShortWarnMax.setToolTipText("92");
+        jShowShortWarnMax.setText(bundle.getString("B_4.jShowShortWarnMax.text")); // NOI18N
+        jShowShortWarnMax.setToolTipText(bundle.getString("B_4.jShowShortWarnMax.toolTipText")); // NOI18N
         jShowShortWarnMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowShortWarnMaxActionPerformed(evt);
@@ -1081,8 +1085,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowReactWatchdog.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowReactWatchdog.setText("Reaktion auf WatchDog-Weichenbefehl (\"on\" = an, \"oF\" = aus)");
-        jShowReactWatchdog.setToolTipText("93");
+        jShowReactWatchdog.setText(bundle.getString("B_4.jShowReactWatchdog.text")); // NOI18N
+        jShowReactWatchdog.setToolTipText(bundle.getString("B_4.jShowReactWatchdog.toolTipText")); // NOI18N
         jShowReactWatchdog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowReactWatchdogActionPerformed(evt);
@@ -1090,8 +1094,8 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jShowReactSwitchCmd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jShowReactSwitchCmd.setText("Reaktion auf Abschalt-Weichenbefehl (\"on\" = an, \"oF\" = aus)");
-        jShowReactSwitchCmd.setToolTipText("94");
+        jShowReactSwitchCmd.setText(bundle.getString("B_4.jShowReactSwitchCmd.text")); // NOI18N
+        jShowReactSwitchCmd.setToolTipText(bundle.getString("B_4.jShowReactSwitchCmd.toolTipText")); // NOI18N
         jShowReactSwitchCmd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jShowReactSwitchCmdActionPerformed(evt);
@@ -1099,13 +1103,13 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jHintVersion16.setBackground(new java.awt.Color(238, 238, 238));
-        jHintVersion16.setText("ab Version 1.6+ :");
+        jHintVersion16.setText(bundle.getString("B_4.jHintVersion16.text")); // NOI18N
         jHintVersion16.setBorder(null);
         jHintVersion16.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jHintVersion16.setFocusable(false);
 
         jClose3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jClose3.setText("Schließen");
+        jClose3.setText(bundle.getString("B_4.jClose3.text")); // NOI18N
         jClose3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jClose3ActionPerformed(evt);
@@ -1113,7 +1117,7 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jHintAnzeige.setBackground(new java.awt.Color(238, 238, 238));
-        jHintAnzeige.setText("Anzeige abrufen für...");
+        jHintAnzeige.setText(bundle.getString("B_4.jHintAnzeige.text")); // NOI18N
         jHintAnzeige.setBorder(null);
         jHintAnzeige.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jHintAnzeige.setFocusable(false);
@@ -1178,9 +1182,9 @@ public class B_4 extends javax.swing.JFrame {
                     .addContainerGap(216, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1B4.addTab("mit Anzeige", jPanelB4Anzeige);
+        jTabbedPane1B4.addTab(bundle.getString("B_4.jPanelB4Anzeige.TabConstraints.tabTitle"), jPanelB4Anzeige); // NOI18N
 
-        jCbStatus.setText("Spannung Ein/Aus");
+        jCbStatus.setText(bundle.getString("B_4.jCbStatus.text")); // NOI18N
         jCbStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCbStatusActionPerformed(evt);
@@ -1188,11 +1192,11 @@ public class B_4 extends javax.swing.JFrame {
         });
 
         jLabelLok.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabelLok.setText("Lokadresse:");
-        jLabelLok.setToolTipText("Lokadresse zur Programmierung des Boosters");
+        jLabelLok.setText(bundle.getString("B_4.jLabelLok.text")); // NOI18N
+        jLabelLok.setToolTipText(bundle.getString("B_4.jLabelLok.toolTipText")); // NOI18N
 
         jAdrLok.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jAdrLok.setToolTipText("Lokadresse zur Programmierung des Boosters");
+        jAdrLok.setToolTipText(bundle.getString("B_4.jAdrLok.toolTipText")); // NOI18N
         jAdrLok.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jAdrLokFocusLost(evt);
