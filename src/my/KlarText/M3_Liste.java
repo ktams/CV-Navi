@@ -174,7 +174,8 @@ public class M3_Liste extends javax.swing.JDialog {
         jClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("M3 UID/SID-Tabelle");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        setTitle(bundle.getString("M3_Liste.title")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -191,7 +192,7 @@ public class M3_Liste extends javax.swing.JDialog {
 
             },
             new String [] {
-                "M3UID (MAC, Hex):", "M3SID (Adresse):", "Beschreibung"
+                "M3UID (MAC, Hex):", "M3SID (Adresse):", "Beschreibung / description"
             }
         ) {
             Class[] types = new Class [] {
@@ -220,28 +221,28 @@ public class M3_Liste extends javax.swing.JDialog {
             jTableM3.getColumnModel().getColumn(2).setPreferredWidth(300);
         }
 
-        jAdd.setText("Hinzufügen");
+        jAdd.setText(bundle.getString("M3_Liste.jAdd.text")); // NOI18N
         jAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAddActionPerformed(evt);
             }
         });
 
-        jDel.setText("Löschen");
+        jDel.setText(bundle.getString("M3_Liste.jDel.text")); // NOI18N
         jDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDelActionPerformed(evt);
             }
         });
 
-        jDelAll.setText("Alle Löschen");
+        jDelAll.setText(bundle.getString("M3_Liste.jDelAll.text")); // NOI18N
         jDelAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDelAllActionPerformed(evt);
             }
         });
 
-        jClose.setText("Schließen");
+        jClose.setText(bundle.getString("M3_Liste.jClose.text")); // NOI18N
         jClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCloseActionPerformed(evt);
