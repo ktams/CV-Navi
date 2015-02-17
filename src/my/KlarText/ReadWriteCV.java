@@ -11,6 +11,7 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
@@ -45,6 +46,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
     private int cvAnfrage;
     private int cvSchreiben;
     private int cvWert;
+    private ResourceBundle bundle;
 
     /**
      * Creates new form ReadWriteCV
@@ -74,6 +76,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
             this.Decoder = KTUI.Decoder;
             initComponents();
             pack();
+            bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
             setLocationRelativeTo(parent);
             setVisible(true);
         } else {
@@ -186,10 +189,11 @@ public class ReadWriteCV extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lesen / Schreiben von CVs", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("ReadWriteCV.jPanel1.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jCVListeLesen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCVListeLesen.setText("Lese CV-Liste");
+        jCVListeLesen.setText(bundle.getString("ReadWriteCV.jCVListeLesen.text")); // NOI18N
         jCVListeLesen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCVListeLesenActionPerformed(evt);
@@ -199,7 +203,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         jProgressBar1.setStringPainted(true);
 
         jControlUnitOn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jControlUnitOn.setText("Zentrale einschalten");
+        jControlUnitOn.setText(bundle.getString("ReadWriteCV.jControlUnitOn.text")); // NOI18N
         jControlUnitOn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jControlUnitOnActionPerformed(evt);
@@ -207,7 +211,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         });
 
         jAbbrechen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAbbrechen.setText("Abbrechen");
+        jAbbrechen.setText(bundle.getString("ReadWriteCV.jAbbrechen.text")); // NOI18N
         jAbbrechen.setEnabled(false);
         jAbbrechen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,7 +221,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
 
         jPOM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPOM.setSelected(true);
-        jPOM.setText("Hauptgleis-Programmierung");
+        jPOM.setText(bundle.getString("ReadWriteCV.jPOM.text")); // NOI18N
         jPOM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPOMActionPerformed(evt);
@@ -226,20 +230,20 @@ public class ReadWriteCV extends javax.swing.JDialog {
 
         jCVnr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCVnr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jCVnr.setText("8");
+        jCVnr.setText(bundle.getString("ReadWriteCV.jCVnr.text")); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("CV:");
+        jLabel1.setText(bundle.getString("ReadWriteCV.jLabel1.text")); // NOI18N
 
         jCVwert.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCVwert.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jCVwert.setText("8");
+        jCVwert.setText(bundle.getString("ReadWriteCV.jCVwert.text")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Wert:");
+        jLabel2.setText(bundle.getString("ReadWriteCV.jLabel2.text")); // NOI18N
 
         jCVSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCVSchreiben.setText("CV schreiben");
+        jCVSchreiben.setText(bundle.getString("ReadWriteCV.jCVSchreiben.text")); // NOI18N
         jCVSchreiben.setMaximumSize(new java.awt.Dimension(125, 25));
         jCVSchreiben.setMinimumSize(new java.awt.Dimension(125, 25));
         jCVSchreiben.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +253,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         });
 
         jCVLesen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCVLesen.setText("CV lesen");
+        jCVLesen.setText(bundle.getString("ReadWriteCV.jCVLesen.text")); // NOI18N
         jCVLesen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCVLesenActionPerformed(evt);
@@ -257,7 +261,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         });
 
         jCV_ListeBearbeiten.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCV_ListeBearbeiten.setText("Bearbeite CV-Liste");
+        jCV_ListeBearbeiten.setText(bundle.getString("ReadWriteCV.jCV_ListeBearbeiten.text")); // NOI18N
         jCV_ListeBearbeiten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCV_ListeBearbeitenActionPerformed(evt);
@@ -265,7 +269,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         });
 
         jCV_ListeDrucken.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCV_ListeDrucken.setText("Drucke CV-Liste");
+        jCV_ListeDrucken.setText(bundle.getString("ReadWriteCV.jCV_ListeDrucken.text")); // NOI18N
         jCV_ListeDrucken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCV_ListeDruckenActionPerformed(evt);
@@ -273,7 +277,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         });
 
         jClose.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jClose.setText("Schließen");
+        jClose.setText(bundle.getString("ReadWriteCV.jClose.text")); // NOI18N
         jClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCloseActionPerformed(evt);
@@ -281,7 +285,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         });
 
         jCVListeSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCVListeSchreiben.setText("Schreibe CV-Liste");
+        jCVListeSchreiben.setText(bundle.getString("ReadWriteCV.jCVListeSchreiben.text")); // NOI18N
         jCVListeSchreiben.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCVListeSchreibenActionPerformed(evt);
@@ -444,33 +448,15 @@ public class ReadWriteCV extends javax.swing.JDialog {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this );
         if(jPOM.isSelected())
         {
-            if(KTUI.bSpracheDE)
-            {
-                messageBox.jLabel1.setText("ACHTUNG!");
-                messageBox.jLabel2.setText("Decoder wird nun auf dem Hauptgleis,");
-                messageBox.jLabel3.setText("nicht auf dem Programmiergleis programmiert!");
-            }
-            else
-            {
-                messageBox.jLabel1.setText("Attention!");
-                messageBox.jLabel2.setText("");
-                messageBox.jLabel3.setText("Programming on main track");
-            }
+            messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+            messageBox.jLabel2.setText(bundle.getString("ReadWriteCV.POM_1"));
+            messageBox.jLabel3.setText(bundle.getString("ReadWriteCV.POM_2"));
         }
         else
         {
-            if(KTUI.bSpracheDE)
-            {
-                messageBox.jLabel1.setText("ACHTUNG!");
-                messageBox.jLabel2.setText("Decoder wird nun auf dem Programmiergleis,");
-                messageBox.jLabel3.setText("nicht auf dem Hauptgleis programmiert!");
-            }
-            else
-            {
-                messageBox.jLabel1.setText("Attention!");
-                messageBox.jLabel2.setText("");
-                messageBox.jLabel3.setText("Programming track is active");
-            }
+            messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+            messageBox.jLabel2.setText(bundle.getString("ReadWriteCV.POM_3"));
+            messageBox.jLabel3.setText(bundle.getString("ReadWriteCV.POM_4"));
         }
         messageBox.setLocationRelativeTo(this);
         messageBox.setVisible(true);
@@ -550,7 +536,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
     }//GEN-LAST:event_jCloseActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if( ! KTUI.bSpracheDE) {
+/*        if( ! KTUI.bSpracheDE) {
             TitledBorder TB = (TitledBorder)jPanel1.getBorder();
             TB.setTitle("read or write CVs");
             jControlUnitOn.setText("switch on control unit");
@@ -563,7 +549,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
             jClose.setText("Close");
             jCV_ListeBearbeiten.setText("edit CV list");
             jCV_ListeDrucken.setText("print CV list");
-        }
+        }*/
 
         Com = KTUI.safelyOpenCom( this, Com );
         if( Com == null ) {
@@ -647,11 +633,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                             //KTUI.mbGeneric(KTUI, "ZUSATZINFO", " -> retries ende bytesRead="+bytesRead, tmp, true);
                             return;
                         }
-                        if( KTUI.bSpracheDE ) {
-                            jProgressBar1.setString("Warte auf Antwort "+retries);
-                        } else {
-                            jProgressBar1.setString("Waiting for an answer "+retries);
-                        }
+                        jProgressBar1.setString(bundle.getString("ReadWriteCV.Warte")+retries);
                         return;
                     }
 
