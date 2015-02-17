@@ -373,9 +373,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.setText("Einstellungen speichern...");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jTextField1.setText(bundle.getString("SaveOpenDialog.jTextField1.text")); // NOI18N
 
-        jLabel1.setText("zuletzt geöffnet:");
+        jLabel1.setText(bundle.getString("SaveOpenDialog.jLabel1.text")); // NOI18N
 
         jFileChooser1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
