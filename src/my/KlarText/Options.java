@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.TitledBorder;
@@ -30,6 +31,7 @@ public class Options extends javax.swing.JFrame {
 
     public KlarTextUI KTUI;
     private boolean bSpracheNeu;
+    private ResourceBundle bundle;
 
     /** Creates new form Options */
     public Options(KlarTextUI ktuiThis) {
@@ -45,6 +47,7 @@ public class Options extends javax.swing.JFrame {
         KTUI.frameInstanceOPTIONS = this;
 
         initComponents();
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         bSpracheNeu = KTUI.bSpracheDE;
         //Datei lesen
 
@@ -102,9 +105,6 @@ public class Options extends javax.swing.JFrame {
                 jMetal.setSelected(true);
         }
 
-        jRadioButtonDE.setSelected(bSpracheNeu);
-        jRadioButtonEN.setSelected(!bSpracheNeu);
-
         setLocationRelativeTo(ktuiThis);
         setVisible(true);
     }
@@ -130,9 +130,6 @@ public class Options extends javax.swing.JFrame {
         jMotif = new javax.swing.JRadioButton();
         jNimbus = new javax.swing.JRadioButton();
         jWindows = new javax.swing.JRadioButton();
-        jLabelLang = new javax.swing.JLabel();
-        jRadioButtonDE = new javax.swing.JRadioButton();
-        jRadioButtonEN = new javax.swing.JRadioButton();
         jButtonAbbrechen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -145,27 +142,28 @@ public class Options extends javax.swing.JFrame {
             }
         });
 
-        jPanelOptions.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Optionen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanelOptions.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("Options.jPanelOptions.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
         jPanelOptions.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jZentrale.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jZentrale.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OpenDCC", "Intellibox", "MasterControl" }));
-        jZentrale.setBorder(javax.swing.BorderFactory.createTitledBorder("Zentrale"));
+        jZentrale.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Options.jZentrale.border.title"))); // NOI18N
 
         jSchnittstelle.setEditable(true);
         jSchnittstelle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jSchnittstelle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "/dev/ttyS0", "/dev/ttyS1", "/dev/ttyS2", "/dev/ttyS3", "/dev/ttyS4", "/dev/ttyS5", "/dev/ttyS6", "/dev/ttyS7", "/dev/ttyUSB0", "/dev/ttyUSB1", "/dev/ttyUSB2", "/dev/ttyUSB3", "/dev/ttyUSB4", "/dev/ttyUSB5", "/dev/ttyUSB6", "/dev/ttyUSB7" }));
-        jSchnittstelle.setBorder(javax.swing.BorderFactory.createTitledBorder("Schnittstelle"));
+        jSchnittstelle.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Options.jSchnittstelle.border.title"))); // NOI18N
 
         jBaudRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBaudRate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1200", "2400", "4800", "9600", "14400", "19200", "38400", "57600" }));
         jBaudRate.setSelectedIndex(1);
-        jBaudRate.setToolTipText("Die TamsMC nutzt an der USB Schnittstelle immer 57600 Baud.");
-        jBaudRate.setBorder(javax.swing.BorderFactory.createTitledBorder("Baudrate (seriell)"));
+        jBaudRate.setToolTipText(bundle.getString("Options.jBaudRate.toolTipText")); // NOI18N
+        jBaudRate.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Options.jBaudRate.border.title"))); // NOI18N
 
         jButtonSaveAndClose.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonSaveAndClose.setText("Schließen");
-        jButtonSaveAndClose.setToolTipText("<html>Änderungen Sichern und Schließen<br>Save changes and close</html>");
+        jButtonSaveAndClose.setText(bundle.getString("Options.jButtonSaveAndClose.text")); // NOI18N
+        jButtonSaveAndClose.setToolTipText(bundle.getString("Options.jButtonSaveAndClose.toolTipText")); // NOI18N
         jButtonSaveAndClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveAndCloseActionPerformed(evt);
@@ -173,17 +171,17 @@ public class Options extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Look & Feel:");
+        jLabel1.setText(bundle.getString("Options.jLabel1.text")); // NOI18N
 
         buttonGroup1.add(jMetal);
         jMetal.setSelected(true);
-        jMetal.setText("Metal");
+        jMetal.setText(bundle.getString("Options.jMetal.text")); // NOI18N
 
         buttonGroup1.add(jMotif);
-        jMotif.setText("CDE/Motif");
+        jMotif.setText(bundle.getString("Options.jMotif.text")); // NOI18N
 
         buttonGroup1.add(jNimbus);
-        jNimbus.setText("Nimbus");
+        jNimbus.setText(bundle.getString("Options.jNimbus.text")); // NOI18N
         jNimbus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jNimbusActionPerformed(evt);
@@ -191,33 +189,11 @@ public class Options extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(jWindows);
-        jWindows.setText("Windows");
-
-        jLabelLang.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelLang.setText("Sprache/Language:");
-
-        buttonGroup2.add(jRadioButtonDE);
-        jRadioButtonDE.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButtonDE.setSelected(true);
-        jRadioButtonDE.setText("Deutsch");
-        jRadioButtonDE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonDEActionPerformed(evt);
-            }
-        });
-
-        buttonGroup2.add(jRadioButtonEN);
-        jRadioButtonEN.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButtonEN.setText("English");
-        jRadioButtonEN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonENActionPerformed(evt);
-            }
-        });
+        jWindows.setText(bundle.getString("Options.jWindows.text")); // NOI18N
 
         jButtonAbbrechen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonAbbrechen.setText("Abbrechen");
-        jButtonAbbrechen.setToolTipText("<html>Änderungen verwerfen<br>Cancel changes</html>");
+        jButtonAbbrechen.setText(bundle.getString("Options.jButtonAbbrechen.text")); // NOI18N
+        jButtonAbbrechen.setToolTipText(bundle.getString("Options.jButtonAbbrechen.toolTipText")); // NOI18N
         jButtonAbbrechen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAbbrechenActionPerformed(evt);
@@ -234,17 +210,14 @@ public class Options extends javax.swing.JFrame {
                     .addComponent(jSchnittstelle, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBaudRate, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jZentrale, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButtonDE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButtonEN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelOptionsLayout.createSequentialGroup()
                         .addGroup(jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jMetal)
                             .addComponent(jMotif)
                             .addComponent(jNimbus)
                             .addComponent(jWindows)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelLang, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 61, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 111, Short.MAX_VALUE))
                     .addComponent(jButtonSaveAndClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAbbrechen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -268,20 +241,14 @@ public class Options extends javax.swing.JFrame {
                 .addComponent(jNimbus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jWindows)
-                .addGap(20, 20, 20)
-                .addComponent(jLabelLang)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonDE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonEN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jButtonAbbrechen)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSaveAndClose)
                 .addContainerGap())
         );
 
-        jBaudRate.getAccessibleContext().setAccessibleName("Baud Rate (seriell)");
+        jBaudRate.getAccessibleContext().setAccessibleName(bundle.getString("Options.jBaudRate.AccessibleContext.accessibleName")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,8 +263,8 @@ public class Options extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanelOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -346,9 +313,9 @@ public class Options extends javax.swing.JFrame {
             if( ! prop.getProperty("LookAndFeel").equals( KTUI.gsLookAndFeel )) {
                 KTUI.gsLookAndFeel = prop.getProperty("LookAndFeel");
                 MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
-                messageBox.jLabel1.setText("Hinweis!");
-                messageBox.jLabel2.setText("Ein neues Look & Feel wird erst nach");
-                messageBox.jLabel3.setText("dem nächsten Start des Programms aktiv.");
+                messageBox.jLabel1.setText(bundle.getString("Hinweis"));
+                messageBox.jLabel2.setText(bundle.getString("Options.newLook"));
+                messageBox.jLabel3.setText(bundle.getString("Options.newFeel"));
                 // messageBox.MBtimeout = 5000;
                 messageBox.setVisible(true);
             }
@@ -385,14 +352,14 @@ public class Options extends javax.swing.JFrame {
 
     private void jNimbusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNimbusActionPerformed
             MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
-            messageBox.jLabel1.setText("Hinweis!");
-            messageBox.jLabel2.setText("Dieses Look & Feel funktioniert zur Zeit");
-            messageBox.jLabel3.setText("nicht unter allen Betriebssystemen!");
+            messageBox.jLabel1.setText(bundle.getString("Hinweis"));
+            messageBox.jLabel2.setText(bundle.getString("Options.noLook"));
+            messageBox.jLabel3.setText(bundle.getString("Options.noFeel"));
             messageBox.setVisible(true);
     }//GEN-LAST:event_jNimbusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if(bSpracheNeu)
+/*        if(bSpracheNeu)
         {
             
             TitledBorder TB = (TitledBorder)jPanelOptions.getBorder();
@@ -403,7 +370,6 @@ public class Options extends javax.swing.JFrame {
             TB.setTitle("Schnittstelle");
             TB = (TitledBorder)jBaudRate.getBorder();
             TB.setTitle("Baudrate (seriell)");
-            jLabelLang.setText("Sprache:");
             jButtonSaveAndClose.setText("Sichern");
             jButtonAbbrechen.setText("Abbrechen");
         }else {
@@ -416,35 +382,10 @@ public class Options extends javax.swing.JFrame {
             TB.setTitle("interface");
             TB = (TitledBorder)jBaudRate.getBorder();
             TB.setTitle("baud rate (serial)");
-            jLabelLang.setText("Language:");
             jButtonSaveAndClose.setText("Save");
             jButtonAbbrechen.setText("Cancel");
-        }
+        }*/
     }//GEN-LAST:event_formWindowOpened
-
-    private void jRadioButtonDEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDEActionPerformed
-        int n = KTUI.getDecoderChooser();
-        bSpracheNeu = true;
-        KTUI.fillMenuSelection();
-
-        formWindowOpened(null);
-        repaint();
-        KTUI.setDecoderChooser(n);
-    }//GEN-LAST:event_jRadioButtonDEActionPerformed
-
-    private void jRadioButtonENActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonENActionPerformed
-        int n = KTUI.getDecoderChooser();
-        bSpracheNeu = false;
-        KTUI.fillMenuSelection();
-
-        formWindowOpened(null);
-        repaint();
-        KTUI.setDecoderChooser(n);
-
-        if(evt != null) {
-            KTUI.mbGeneric( this, "Information:", "Sorry!", "English translation is work in progress...", 5, false );
-        }
-    }//GEN-LAST:event_jRadioButtonENActionPerformed
 
     private void jButtonAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbbrechenActionPerformed
         this.dispose();
@@ -457,13 +398,10 @@ public class Options extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAbbrechen;
     private javax.swing.JButton jButtonSaveAndClose;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelLang;
     private javax.swing.JRadioButton jMetal;
     private javax.swing.JRadioButton jMotif;
     private javax.swing.JRadioButton jNimbus;
     private javax.swing.JPanel jPanelOptions;
-    private javax.swing.JRadioButton jRadioButtonDE;
-    private javax.swing.JRadioButton jRadioButtonEN;
     private javax.swing.JComboBox jSchnittstelle;
     private javax.swing.JRadioButton jWindows;
     private javax.swing.JComboBox jZentrale;
