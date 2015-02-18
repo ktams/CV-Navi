@@ -19,6 +19,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -84,6 +85,7 @@ public class MC extends javax.swing.JFrame {
     private int tmpBytesRead = 0;
     private String lastCmd = "";
     private boolean validMcData = false;
+    private ResourceBundle bundle;
 
     public JDialog frameInstanceHelpLC = null;
     public JDialog frameInstanceHelpHC = null;
@@ -109,6 +111,7 @@ public class MC extends javax.swing.JFrame {
         ImageIcon II = new ImageIcon(getClass().getResource("/MasterControl.gif"));
         this.setIconImage(II.getImage());
         initComponents();
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         jBild.setIcon(II);
         setTitle( KTUI.getMenutext( decoderList.MC ).trim() );
 
@@ -784,39 +787,40 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("MC.jPanel1.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Version:");
+        jLabel2.setText(bundle.getString("MC.jLabel2.text")); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Hardware:");
+        jLabel3.setText(bundle.getString("MC.jLabel3.text")); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("MCU:");
+        jLabel4.setText(bundle.getString("MC.jLabel4.text")); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("Seriennummer:");
+        jLabel5.setText(bundle.getString("MC.jLabel5.text")); // NOI18N
 
         jVersion.setEditable(false);
         jVersion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jVersion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jVersion.setText("-.-.-");
+        jVersion.setText(bundle.getString("MC.jVersion.text")); // NOI18N
 
         jHardWare.setEditable(false);
         jHardWare.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jHardWare.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jHardWare.setText("-");
+        jHardWare.setText(bundle.getString("MC.jHardWare.text")); // NOI18N
 
         jMCU.setEditable(false);
         jMCU.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMCU.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jMCU.setText("-");
+        jMCU.setText(bundle.getString("MC.jMCU.text")); // NOI18N
 
         jSerNr.setEditable(false);
         jSerNr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jSerNr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jSerNr.setText("-");
+        jSerNr.setText(bundle.getString("MC.jSerNr.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -860,20 +864,20 @@ public class MC extends javax.swing.JFrame {
         );
 
         jLangePause.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLangePause.setText("lange Pause bei MM");
+        jLangePause.setText(bundle.getString("MC.jLangePause.text")); // NOI18N
 
         jDCC_Booster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDCC_Booster.setText("DCC-Booster");
+        jDCC_Booster.setText(bundle.getString("MC.jDCC_Booster.text")); // NOI18N
 
         jDCC_Loks.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDCC_Loks.setText("Standard-Format bei neuen Loks: DCC");
+        jDCC_Loks.setText(bundle.getString("MC.jDCC_Loks.text")); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setText("Kurzschlussempfindlichkeit:");
+        jLabel6.setText(bundle.getString("MC.jLabel6.text")); // NOI18N
 
         jKurzEmpf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jKurzEmpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jKurzEmpf.setText("-");
+        jKurzEmpf.setText(bundle.getString("MC.jKurzEmpf.text")); // NOI18N
         jKurzEmpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jKurzEmpfFocusLost(evt);
@@ -881,14 +885,14 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("ms");
+        jLabel7.setText(bundle.getString("MC.jLabel7.text")); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setText("s88-Module:");
+        jLabel8.setText(bundle.getString("MC.jLabel8.text")); // NOI18N
 
         js88.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         js88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        js88.setText("-");
+        js88.setText(bundle.getString("MC.js88.text")); // NOI18N
         js88.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 js88ActionPerformed(evt);
@@ -901,11 +905,11 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setText("minimale Magnetschaltzeit:");
+        jLabel9.setText(bundle.getString("MC.jLabel9.text")); // NOI18N
 
         jMinMag.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMinMag.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jMinMag.setText("-");
+        jMinMag.setText(bundle.getString("MC.jMinMag.text")); // NOI18N
         jMinMag.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jMinMagFocusLost(evt);
@@ -913,14 +917,14 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel10.setText("ms");
+        jLabel10.setText(bundle.getString("MC.jLabel10.text")); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel11.setText("maximale Magnetschaltzeit:");
+        jLabel11.setText(bundle.getString("MC.jLabel11.text")); // NOI18N
 
         jMaxMag.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMaxMag.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jMaxMag.setText("-");
+        jMaxMag.setText(bundle.getString("MC.jMaxMag.text")); // NOI18N
         jMaxMag.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jMaxMagFocusLost(evt);
@@ -928,23 +932,23 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel12.setText("ms");
+        jLabel12.setText(bundle.getString("MC.jLabel12.text")); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel13.setText("Baudrate (seriell):");
-        jLabel13.setToolTipText("Die TamsMC nutzt an der USB Schnittstelle immer 57600 Baud.");
+        jLabel13.setText(bundle.getString("MC.jLabel13.text")); // NOI18N
+        jLabel13.setToolTipText(bundle.getString("MC.jLabel13.toolTipText")); // NOI18N
 
         jBaud.setEditable(false);
         jBaud.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBaud.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBaud.setText("-");
-        jBaud.setToolTipText("Die TamsMC nutzt an der USB Schnittstelle immer 57600 Baud.");
+        jBaud.setText(bundle.getString("MC.jBaud.text")); // NOI18N
+        jBaud.setToolTipText(bundle.getString("MC.jBaud.toolTipText")); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel14.setText("BAUD");
+        jLabel14.setText(bundle.getString("MC.jLabel14.text")); // NOI18N
 
         jKonfLesen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jKonfLesen.setText("Konfiguration aus MC lesen");
+        jKonfLesen.setText(bundle.getString("MC.jKonfLesen.text")); // NOI18N
         jKonfLesen.setMaximumSize(new java.awt.Dimension(220, 25));
         jKonfLesen.setMinimumSize(new java.awt.Dimension(220, 25));
         jKonfLesen.addActionListener(new java.awt.event.ActionListener() {
@@ -954,7 +958,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jKonfSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jKonfSchreiben.setText("Konfiguration in MC schreiben");
+        jKonfSchreiben.setText(bundle.getString("MC.jKonfSchreiben.text")); // NOI18N
         jKonfSchreiben.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jKonfSchreibenActionPerformed(evt);
@@ -962,7 +966,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jKonfLaden.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jKonfLaden.setText("Konfiguration aus Datei laden");
+        jKonfLaden.setText(bundle.getString("MC.jKonfLaden.text")); // NOI18N
         jKonfLaden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jKonfLadenActionPerformed(evt);
@@ -970,7 +974,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jKonfSichern.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jKonfSichern.setText("Konfiguration in Datei sichern");
+        jKonfSichern.setText(bundle.getString("MC.jKonfSichern.text")); // NOI18N
         jKonfSichern.setMaximumSize(new java.awt.Dimension(220, 25));
         jKonfSichern.setMinimumSize(new java.awt.Dimension(220, 25));
         jKonfSichern.addActionListener(new java.awt.event.ActionListener() {
@@ -982,7 +986,7 @@ public class MC extends javax.swing.JFrame {
         jMcRwProgress.setStringPainted(true);
 
         jCancel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCancel.setText("Abbrechen");
+        jCancel.setText(bundle.getString("MC.jCancel.text")); // NOI18N
         jCancel.setMaximumSize(new java.awt.Dimension(220, 25));
         jCancel.setMinimumSize(new java.awt.Dimension(220, 25));
         jCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -992,14 +996,14 @@ public class MC extends javax.swing.JFrame {
         });
 
         jMcRwInfo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jMcRwInfo.setText(" ");
-        jMcRwInfo.setToolTipText("");
+        jMcRwInfo.setText(bundle.getString("MC.jMcRwInfo.text")); // NOI18N
+        jMcRwInfo.setToolTipText(bundle.getString("MC.jMcRwInfo.toolTipText")); // NOI18N
 
         jRailcomSupport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRailcomSupport.setText("RailCom Support:");
+        jRailcomSupport.setText(bundle.getString("MC.jRailcomSupport.text")); // NOI18N
 
         jRailcomTailbits.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRailcomTailbits.setText("Tailbits");
+        jRailcomTailbits.setText(bundle.getString("MC.jRailcomTailbits.text")); // NOI18N
         jRailcomTailbits.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRailcomTailbitsActionPerformed(evt);
@@ -1007,7 +1011,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jRailcomIdNotify.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRailcomIdNotify.setText("+ IdNotify");
+        jRailcomIdNotify.setText(bundle.getString("MC.jRailcomIdNotify.text")); // NOI18N
         jRailcomIdNotify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRailcomIdNotifyActionPerformed(evt);
@@ -1015,7 +1019,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jRailcomAccessory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRailcomAccessory.setText("++ Accessory");
+        jRailcomAccessory.setText(bundle.getString("MC.jRailcomAccessory.text")); // NOI18N
         jRailcomAccessory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRailcomAccessoryActionPerformed(evt);
@@ -1023,31 +1027,31 @@ public class MC extends javax.swing.JFrame {
         });
 
         jWRsys.setSelected(true);
-        jWRsys.setText("Sys");
-        jWRsys.setToolTipText("write contents of System tab");
+        jWRsys.setText(bundle.getString("MC.jWRsys.text")); // NOI18N
+        jWRsys.setToolTipText(bundle.getString("MC.jWRsys.toolTipText")); // NOI18N
 
         jWRloc.setSelected(true);
-        jWRloc.setText("Loc");
-        jWRloc.setToolTipText("write contents of Loco tab");
+        jWRloc.setText(bundle.getString("MC.jWRloc.text")); // NOI18N
+        jWRloc.setToolTipText(bundle.getString("MC.jWRloc.toolTipText")); // NOI18N
 
         jWRtra.setSelected(true);
-        jWRtra.setText("Tra");
-        jWRtra.setToolTipText("write contents of Traction tab");
+        jWRtra.setText(bundle.getString("MC.jWRtra.text")); // NOI18N
+        jWRtra.setToolTipText(bundle.getString("MC.jWRtra.toolTipText")); // NOI18N
 
         jWRmag.setSelected(true);
-        jWRmag.setText("Mag");
-        jWRmag.setToolTipText("write contents of Accessory tab");
+        jWRmag.setText(bundle.getString("MC.jWRmag.text")); // NOI18N
+        jWRmag.setToolTipText(bundle.getString("MC.jWRmag.toolTipText")); // NOI18N
 
         jDatenQuelle.setEditable(false);
         jDatenQuelle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDatenQuelle.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDatenQuelle.setText("----");
+        jDatenQuelle.setText(bundle.getString("MC.jDatenQuelle.text")); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Datenquelle:");
+        jLabel1.setText(bundle.getString("MC.jLabel1.text")); // NOI18N
 
         jClose.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jClose.setText("Schließen");
+        jClose.setText(bundle.getString("MC.jClose.text")); // NOI18N
         jClose.setMaximumSize(new java.awt.Dimension(220, 25));
         jClose.setMinimumSize(new java.awt.Dimension(220, 25));
         jClose.addActionListener(new java.awt.event.ActionListener() {
@@ -1057,8 +1061,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel17.setText("#");
-        jLabel17.setToolTipText("<html>Anzahl Module (à 16 Eingänge)<br>quantity (units of 16 inputs)</html>");
+        jLabel17.setText(bundle.getString("MC.jLabel17.text")); // NOI18N
+        jLabel17.setToolTipText(bundle.getString("MC.jLabel17.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout jSystemLayout = new javax.swing.GroupLayout(jSystem);
         jSystem.setLayout(jSystemLayout);
@@ -1225,9 +1229,9 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMcRwInfo.getAccessibleContext().setAccessibleName("Info");
+        jMcRwInfo.getAccessibleContext().setAccessibleName(bundle.getString("MC.jMcRwInfo.AccessibleContext.accessibleName")); // NOI18N
 
-        jTabbedPane1.addTab("System", jSystem);
+        jTabbedPane1.addTab(bundle.getString("MC.jSystem.TabConstraints.tabTitle"), jSystem); // NOI18N
 
         jLoks.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLoks.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1503,7 +1507,7 @@ public class MC extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTableLoco.setToolTipText("Eine markierte Zeile kann mit der Taste \"Entf\" bzw. \"del\" gelöscht werden");
+        jTableLoco.setToolTipText(bundle.getString("MC.jTableLoco.toolTipText")); // NOI18N
         jTableLoco.setDragEnabled(true);
         jTableLoco.setIntercellSpacing(new java.awt.Dimension(10, 10));
         jTableLoco.setRowHeight(26);
@@ -1545,7 +1549,7 @@ public class MC extends javax.swing.JFrame {
         }
 
         jLocDelAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocDelAll.setText("Alle Löschen");
+        jLocDelAll.setText(bundle.getString("MC.jLocDelAll.text")); // NOI18N
         jLocDelAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLocDelAllActionPerformed(evt);
@@ -1553,8 +1557,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLocCheck.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocCheck.setText("Testen");
-        jLocCheck.setToolTipText("Einträge auf gültige Werte prüfen");
+        jLocCheck.setText(bundle.getString("MC.jLocCheck.text")); // NOI18N
+        jLocCheck.setToolTipText(bundle.getString("MC.jLocCheck.toolTipText")); // NOI18N
         jLocCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLocCheckActionPerformed(evt);
@@ -1562,8 +1566,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLocRepair.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocRepair.setText("Reparieren");
-        jLocRepair.setToolTipText("Ungültige Werte korrigieren (mit Standardwerten)");
+        jLocRepair.setText(bundle.getString("MC.jLocRepair.text")); // NOI18N
+        jLocRepair.setToolTipText(bundle.getString("MC.jLocRepair.toolTipText")); // NOI18N
         jLocRepair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLocRepairActionPerformed(evt);
@@ -1571,8 +1575,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLocM3sidWrite.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocM3sidWrite.setText("M3 SID/UID schreiben");
-        jLocM3sidWrite.setToolTipText("M3 SID/UID in MC schreiben");
+        jLocM3sidWrite.setText(bundle.getString("MC.jLocM3sidWrite.text")); // NOI18N
+        jLocM3sidWrite.setToolTipText(bundle.getString("MC.jLocM3sidWrite.toolTipText")); // NOI18N
         jLocM3sidWrite.setEnabled(false);
         jLocM3sidWrite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1581,8 +1585,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jTextM3UID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextM3UID.setText("0x87654321");
-        jTextM3UID.setToolTipText("M3 UID = mfx UID (8-stellig in Hex-Notation)");
+        jTextM3UID.setText(bundle.getString("MC.jTextM3UID.text")); // NOI18N
+        jTextM3UID.setToolTipText(bundle.getString("MC.jTextM3UID.toolTipText")); // NOI18N
         jTextM3UID.setEnabled(false);
         jTextM3UID.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -1605,18 +1609,18 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
-        jLabelM3UID.setText("M3UID (MAC, Hex):");
-        jLabelM3UID.setToolTipText("M3 UID = MAC Adresse");
+        jLabelM3UID.setText(bundle.getString("MC.jLabelM3UID.text")); // NOI18N
+        jLabelM3UID.setToolTipText(bundle.getString("MC.jLabelM3UID.toolTipText")); // NOI18N
         jLabelM3UID.setEnabled(false);
 
-        jLabelM3SID.setText("M3SID (Adresse):");
-        jLabelM3SID.setToolTipText("M3 SID = Lok-Adresse");
+        jLabelM3SID.setText(bundle.getString("MC.jLabelM3SID.text")); // NOI18N
+        jLabelM3SID.setToolTipText(bundle.getString("MC.jLabelM3SID.toolTipText")); // NOI18N
         jLabelM3SID.setEnabled(false);
 
         jTextM3SID.setEditable(false);
         jTextM3SID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextM3SID.setText("3");
-        jTextM3SID.setToolTipText("M3 SID = Lok-Adresse");
+        jTextM3SID.setText(bundle.getString("MC.jTextM3SID.text")); // NOI18N
+        jTextM3SID.setToolTipText(bundle.getString("MC.jTextM3SID.toolTipText")); // NOI18N
         jTextM3SID.setEnabled(false);
         jTextM3SID.setFocusable(false);
 
@@ -1625,8 +1629,8 @@ public class MC extends javax.swing.JFrame {
         jMcM3Info.setEditable(false);
 
         jLocM3cfgLoad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocM3cfgLoad.setText("M3 SID/UID-Liste Laden");
-        jLocM3cfgLoad.setToolTipText("M3 SID/UID Liste aus Datei laden");
+        jLocM3cfgLoad.setText(bundle.getString("MC.jLocM3cfgLoad.text")); // NOI18N
+        jLocM3cfgLoad.setToolTipText(bundle.getString("MC.jLocM3cfgLoad.toolTipText")); // NOI18N
         jLocM3cfgLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLocM3cfgLoadActionPerformed(evt);
@@ -1634,8 +1638,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLocM3cfgEdit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocM3cfgEdit.setText("M3 SID/UID-Liste bearbeiten");
-        jLocM3cfgEdit.setToolTipText("M3 SID/UID-Liste bearbeiten");
+        jLocM3cfgEdit.setText(bundle.getString("MC.jLocM3cfgEdit.text")); // NOI18N
+        jLocM3cfgEdit.setToolTipText(bundle.getString("MC.jLocM3cfgEdit.toolTipText")); // NOI18N
         jLocM3cfgEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLocM3cfgEditActionPerformed(evt);
@@ -1643,8 +1647,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLocM3cfgSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocM3cfgSave.setText("M3 SID/UID-Liste Sichern");
-        jLocM3cfgSave.setToolTipText("M3 SID/UID-Liste in Datei Sichern");
+        jLocM3cfgSave.setText(bundle.getString("MC.jLocM3cfgSave.text")); // NOI18N
+        jLocM3cfgSave.setToolTipText(bundle.getString("MC.jLocM3cfgSave.toolTipText")); // NOI18N
         jLocM3cfgSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLocM3cfgSaveActionPerformed(evt);
@@ -1652,7 +1656,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLocDel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocDel.setText("Löschen");
+        jLocDel.setText(bundle.getString("MC.jLocDel.text")); // NOI18N
         jLocDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLocDelActionPerformed(evt);
@@ -1660,7 +1664,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLoc2System.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLoc2System.setText("zum System");
+        jLoc2System.setText(bundle.getString("MC.jLoc2System.text")); // NOI18N
         jLoc2System.setMaximumSize(new java.awt.Dimension(220, 25));
         jLoc2System.setMinimumSize(new java.awt.Dimension(220, 25));
         jLoc2System.addActionListener(new java.awt.event.ActionListener() {
@@ -1670,8 +1674,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLocM3sidWriteList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLocM3sidWriteList.setText("ganze M3 SID/UID-Liste schreiben");
-        jLocM3sidWriteList.setToolTipText("M3 SID/UID-Liste in Datei Sichern");
+        jLocM3sidWriteList.setText(bundle.getString("MC.jLocM3sidWriteList.text")); // NOI18N
+        jLocM3sidWriteList.setToolTipText(bundle.getString("MC.jLocM3sidWriteList.toolTipText")); // NOI18N
         jLocM3sidWriteList.setEnabled(false);
         jLocM3sidWriteList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1753,9 +1757,9 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLocM3sidWrite.getAccessibleContext().setAccessibleDescription("M3 SID/UID für ausgewählte Lok schreiben");
+        jLocM3sidWrite.getAccessibleContext().setAccessibleDescription(bundle.getString("MC.jLocM3sidWrite.AccessibleContext.accessibleDescription")); // NOI18N
 
-        jTabbedPane1.addTab("Loks", jLoks);
+        jTabbedPane1.addTab(bundle.getString("MC.jLoks.TabConstraints.tabTitle"), jLoks); // NOI18N
 
         jTraktionen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTraktionen.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1938,7 +1942,7 @@ public class MC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableTraction.setToolTipText("Eine markierte Zeile kann mit der Taste \"Entf\" bzw. \"del\" gelöscht werden");
+        jTableTraction.setToolTipText(bundle.getString("MC.jTableTraction.toolTipText")); // NOI18N
         jTableTraction.setDragEnabled(true);
         jTableTraction.setIntercellSpacing(new java.awt.Dimension(10, 10));
         jTableTraction.setRowHeight(26);
@@ -1955,7 +1959,7 @@ public class MC extends javax.swing.JFrame {
         }
 
         jTraDelAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTraDelAll.setText("Alle löschen");
+        jTraDelAll.setText(bundle.getString("MC.jTraDelAll.text")); // NOI18N
         jTraDelAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTraDelAllActionPerformed(evt);
@@ -1963,11 +1967,11 @@ public class MC extends javax.swing.JFrame {
         });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel15.setText("! = Lokrichtung invertiert.");
+        jLabel15.setText(bundle.getString("MC.jLabel15.text")); // NOI18N
 
         jTraCheck.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTraCheck.setText("Testen");
-        jTraCheck.setToolTipText("Einträge auf gültige Werte prüfen");
+        jTraCheck.setText(bundle.getString("MC.jTraCheck.text")); // NOI18N
+        jTraCheck.setToolTipText(bundle.getString("MC.jTraCheck.toolTipText")); // NOI18N
         jTraCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTraCheckActionPerformed(evt);
@@ -1975,8 +1979,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jTraRepair.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTraRepair.setText("Reparieren");
-        jTraRepair.setToolTipText("Ungültige Werte korrigieren (mit Standardwerten)");
+        jTraRepair.setText(bundle.getString("MC.jTraRepair.text")); // NOI18N
+        jTraRepair.setToolTipText(bundle.getString("MC.jTraRepair.toolTipText")); // NOI18N
         jTraRepair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTraRepairActionPerformed(evt);
@@ -1984,7 +1988,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jTraDel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTraDel.setText("Löschen");
+        jTraDel.setText(bundle.getString("MC.jTraDel.text")); // NOI18N
         jTraDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTraDelActionPerformed(evt);
@@ -1992,7 +1996,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jTra2System.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTra2System.setText("zum System");
+        jTra2System.setText(bundle.getString("MC.jTra2System.text")); // NOI18N
         jTra2System.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTra2SystemActionPerformed(evt);
@@ -2040,7 +2044,7 @@ public class MC extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        jTabbedPane1.addTab("Traktionen", jTraktionen);
+        jTabbedPane1.addTab(bundle.getString("MC.jTraktionen.TabConstraints.tabTitle"), jTraktionen); // NOI18N
 
         jMagnetartikel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMagnetartikel.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -2340,7 +2344,7 @@ public class MC extends javax.swing.JFrame {
         }
 
         jMMM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jMMM.setText("Alle MM");
+        jMMM.setText(bundle.getString("MC.jMMM.text")); // NOI18N
         jMMM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMMMActionPerformed(evt);
@@ -2348,7 +2352,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jMDCC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jMDCC.setText("Alle DCC");
+        jMDCC.setText(bundle.getString("MC.jMDCC.text")); // NOI18N
         jMDCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMDCCActionPerformed(evt);
@@ -2356,8 +2360,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         jMagCheck.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jMagCheck.setText("Testen");
-        jMagCheck.setToolTipText("Einträge auf gültige Werte prüfen");
+        jMagCheck.setText(bundle.getString("MC.jMagCheck.text")); // NOI18N
+        jMagCheck.setToolTipText(bundle.getString("MC.jMagCheck.toolTipText")); // NOI18N
         jMagCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMagCheckActionPerformed(evt);
@@ -2365,18 +2369,18 @@ public class MC extends javax.swing.JFrame {
         });
 
         jMagRepair.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jMagRepair.setText("Reparieren");
-        jMagRepair.setToolTipText("Ungültige Werte korrigieren (mit Standardwerten)");
+        jMagRepair.setText(bundle.getString("MC.jMagRepair.text")); // NOI18N
+        jMagRepair.setToolTipText(bundle.getString("MC.jMagRepair.toolTipText")); // NOI18N
         jMagRepair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMagRepairActionPerformed(evt);
             }
         });
 
-        jLabel16.setText("( Adressen 1021 bis 2040 sind immer DCC )");
+        jLabel16.setText(bundle.getString("MC.jLabel16.text")); // NOI18N
 
         jMag2System.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jMag2System.setText("zum System");
+        jMag2System.setText(bundle.getString("MC.jMag2System.text")); // NOI18N
         jMag2System.setMaximumSize(new java.awt.Dimension(220, 25));
         jMag2System.setMinimumSize(new java.awt.Dimension(220, 25));
         jMag2System.addActionListener(new java.awt.event.ActionListener() {
@@ -2426,7 +2430,7 @@ public class MC extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jTabbedPane1.addTab("Magnetartikel", jMagnetartikel);
+        jTabbedPane1.addTab(bundle.getString("MC.jMagnetartikel.TabConstraints.tabTitle"), jMagnetartikel); // NOI18N
 
         jUpdate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jUpdate.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -2436,11 +2440,11 @@ public class MC extends javax.swing.JFrame {
         });
 
         jUpdDatei.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdDatei.setText("Datei eingeben...");
+        jUpdDatei.setText(bundle.getString("MC.jUpdDatei.text")); // NOI18N
 
         jUpdDateiAuswahl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdDateiAuswahl.setText("Datei auswählen");
-        jUpdDateiAuswahl.setToolTipText("<html>neue Firmware<br>new firmware</html>\n");
+        jUpdDateiAuswahl.setText(bundle.getString("MC.jUpdDateiAuswahl.text")); // NOI18N
+        jUpdDateiAuswahl.setToolTipText(bundle.getString("MC.jUpdDateiAuswahl.toolTipText")); // NOI18N
         jUpdDateiAuswahl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUpdDateiAuswahlActionPerformed(evt);
@@ -2450,8 +2454,8 @@ public class MC extends javax.swing.JFrame {
         jMcUpdProgress.setStringPainted(true);
 
         jUpdStartUpdate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdStartUpdate.setText("Aktualisierung starten");
-        jUpdStartUpdate.setToolTipText("");
+        jUpdStartUpdate.setText(bundle.getString("MC.jUpdStartUpdate.text")); // NOI18N
+        jUpdStartUpdate.setToolTipText(bundle.getString("MC.jUpdStartUpdate.toolTipText")); // NOI18N
         jUpdStartUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUpdStartUpdateActionPerformed(evt);
@@ -2459,16 +2463,16 @@ public class MC extends javax.swing.JFrame {
         });
 
         jMcUpdInfo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jMcUpdInfo.setText("Bitte Datei auswählen");
+        jMcUpdInfo.setText(bundle.getString("MC.jMcUpdInfo.text")); // NOI18N
 
         jUpdLastErrorLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdLastErrorLabel.setText("Letzter Fehler:");
+        jUpdLastErrorLabel.setText(bundle.getString("MC.jUpdLastErrorLabel.text")); // NOI18N
 
         jUpdLastError.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdLastError.setText("kein Fehler");
+        jUpdLastError.setText(bundle.getString("MC.jUpdLastError.text")); // NOI18N
 
         jUpdCancel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdCancel.setText("Abbrechen");
+        jUpdCancel.setText(bundle.getString("MC.jUpdCancel.text")); // NOI18N
         jUpdCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUpdCancelActionPerformed(evt);
@@ -2476,7 +2480,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jUpdClose.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdClose.setText("Schließen");
+        jUpdClose.setText(bundle.getString("MC.jUpdClose.text")); // NOI18N
         jUpdClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUpdCloseActionPerformed(evt);
@@ -2484,7 +2488,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jUpd2System.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpd2System.setText("zum System");
+        jUpd2System.setText(bundle.getString("MC.jUpd2System.text")); // NOI18N
         jUpd2System.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUpd2SystemActionPerformed(evt);
@@ -2495,12 +2499,12 @@ public class MC extends javax.swing.JFrame {
         jTextPane1.setBackground(new java.awt.Color(238, 238, 238));
         jTextPane1.setBorder(null);
         jTextPane1.setContentType("text/html"); // NOI18N
-        jTextPane1.setText("<html>\n  <head>\n    MasterControl\n  </head>\n  <body>\n    <p style=\"margin-top: 0\">\n      Vorbereitung der <b>MasterControl</b> (MC) für Updates:<br>\n      <br>\n      Trennen Sie die MasterControl von der Stromversorgung.<br>\n      Trennen Sie <b>alle</b> externen Steuergeräte vom EasyNet.<br>\n      Drücken Sie gleichzeitig die Tasten stop und go und schalten Sie die Stromversorgung wieder ein während Sie die bei den Tasten gedrückt halten.<br>\n      Im Display erscheint die Meldung „Boot Loader“, die Versionsnummer des Boot Loaders (= Update-Programm) sowie die Versionsnummer der Hardware, z.B. „HW = 13“.<br>\n      Die Updatedatei beginnt mit <b>Master</b> (siehe auch oben unter \"Was ist Was\" )<br>\n    </p>\n    <br>\n    <p style=\"margin-top: 0\">\n    Vorbereitung an der MC für Updates <b>externer Geräte am EasyNet</b> :<br>\n    <br>\n    Menü / \"Software Update\" / \"#\"bzw. \"ok\"<br>\n    <br>\n    für detailierte Hilfe zu externen Geräten bitte die jeweilige Hilfe unten aufrufen\n    </p>\n  </body>\n</html>\n");
+        jTextPane1.setText(bundle.getString("MC.jTextPane1.text")); // NOI18N
         jTextPane1.setFocusable(false);
         jScrollPane4.setViewportView(jTextPane1);
 
         helpLC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpLC.setText("LokControl (LC)");
+        helpLC.setText(bundle.getString("MC.helpLC.text")); // NOI18N
         helpLC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpLCActionPerformed(evt);
@@ -2508,10 +2512,10 @@ public class MC extends javax.swing.JFrame {
         });
 
         jTextField1.setBackground(new java.awt.Color(238, 238, 238));
-        jTextField1.setText("Hilfe für Update von...");
+        jTextField1.setText(bundle.getString("MC.jTextField1.text")); // NOI18N
 
         helpHC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpHC.setText("HandControl (HC)");
+        helpHC.setText(bundle.getString("MC.helpHC.text")); // NOI18N
         helpHC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpHCActionPerformed(evt);
@@ -2519,7 +2523,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         helpPC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpPC.setText("PhoneControl (PC)");
+        helpPC.setText(bundle.getString("MC.helpPC.text")); // NOI18N
         helpPC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpPCActionPerformed(evt);
@@ -2527,7 +2531,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         helpSNC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpSNC.setText("SniffControl (SNC)");
+        helpSNC.setText(bundle.getString("MC.helpSNC.text")); // NOI18N
         helpSNC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpSNCActionPerformed(evt);
@@ -2535,7 +2539,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         helpXNC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpXNC.setText("XNControl (XNC)");
+        helpXNC.setText(bundle.getString("MC.helpXNC.text")); // NOI18N
         helpXNC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpXNCActionPerformed(evt);
@@ -2543,7 +2547,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         helpMC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpMC.setText("mControl (MC)");
+        helpMC.setText(bundle.getString("MC.helpMC.text")); // NOI18N
         helpMC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpMCActionPerformed(evt);
@@ -2551,8 +2555,8 @@ public class MC extends javax.swing.JFrame {
         });
 
         helpWasIstWas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpWasIstWas.setText("<html>Dateinamen<br>Was ist Was ?</html>");
-        helpWasIstWas.setToolTipText("<html>Erklärung der Dateinamen<br>explanation of file names</html>\n");
+        helpWasIstWas.setText(bundle.getString("MC.helpWasIstWas.text")); // NOI18N
+        helpWasIstWas.setToolTipText(bundle.getString("MC.helpWasIstWas.toolTipText")); // NOI18N
         helpWasIstWas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpWasIstWasActionPerformed(evt);
@@ -2560,7 +2564,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         helpMCasLC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        helpMCasLC.setText("<html><strike>MC als LokControl</strike></html>");
+        helpMCasLC.setText(bundle.getString("MC.helpMCasLC.text")); // NOI18N
         helpMCasLC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpMCasLCActionPerformed(evt);
@@ -2664,7 +2668,7 @@ public class MC extends javax.swing.JFrame {
                         .addGap(88, 88, 88))))
         );
 
-        jTabbedPane1.addTab("Update", jUpdate);
+        jTabbedPane1.addTab(bundle.getString("MC.jUpdate.TabConstraints.tabTitle"), jUpdate); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2780,7 +2784,7 @@ public class MC extends javax.swing.JFrame {
             this.dispose();
             return;
         }
-
+/*
         if( ! KTUI.bSpracheDE ) {
             // tab update
             jUpdDateiAuswahl.setText("Select File");
@@ -2789,9 +2793,9 @@ public class MC extends javax.swing.JFrame {
             jUpdClose.setText("Close");
             jUpdLastErrorLabel.setText("Last error:");
             jUpdLastError.setText("no error");
-            setFocusUpdStart();
-            setFocusDateiAuswahl();
-        }
+        }*/
+        setFocusUpdStart();
+        setFocusDateiAuswahl();
         Com = KTUI.safelyOpenCom( this, Com, false );
         System.out.println("call Com.connect OUT: Com "+((Com == null)?"==":"!=")+" NULL" );
         System.out.println("call Com.connect OUT: isopen["+((Com == null)?"Com is undefined":Com.isconnected())+"]" );
@@ -2856,11 +2860,7 @@ public class MC extends javax.swing.JFrame {
                             // KTUI.mbDeviceReadProblem( outerThis );
                             return;
                         }
-                        if( KTUI.bSpracheDE ) {
-                            jMcRwProgress.setString("Warte auf Antwort "+retries);
-                        } else {
-                            jMcRwProgress.setString("Waiting for an answer "+retries);
-                        }
+                        jMcRwProgress.setString(bundle.getString("ReadWriteCV.Warte")+retries);
                         return;
                     }
                     tmpBytesRead = 0;
@@ -3430,7 +3430,7 @@ public class MC extends javax.swing.JFrame {
                             bUpdate = false;
                             stopIOAction();
                             Com = KTUI.safelyCloseCom( outerThis, Com );
-                            jUpdLastError.setText("Protokollfehler. Aktualisierung abgebrochen...");
+                            jUpdLastError.setText(bundle.getString("MC.Protokollfehler"));
                             System.out.println("update: read 0 bytes" );
                             KTUI.mbUpdateReadAnswerError( outerThis );
                         }
@@ -3523,21 +3523,21 @@ public class MC extends javax.swing.JFrame {
                                 timer.stop();
                                 count = 0;
                                 BlockNr = 0;
-                                jMcUpdInfo.setText("Update erfolgreich...");
+                                jMcUpdInfo.setText(bundle.getString("MC.Updateerfolg"));
                                 stopIOAction();
                                 return;
 
                             case 'A':       //Adress-Error
                                 BlockNrTemp = BlockNr * 4;
                                 if (BlockNr != 0) {
-                                    jUpdLastError.setText("Adressfehler bei Block " + BlockNrTemp + ", beginne von vorne...");
+                                    jUpdLastError.setText(bundle.getString("MC.Adressfehler_1") + BlockNrTemp + bundle.getString("MC.Adressfehler_2"));
                                 }
                                 BlockNr = 0;
                               break;
 
                             case 'C':       //CRC-Error
                                 BlockNrTemp = BlockNr * 4;
-                                jUpdLastError.setText("CRC-Fehler bei Block " + BlockNrTemp + ", Block wird noch einmal übertragen");
+                                jUpdLastError.setText(bundle.getString("MC.CRC_Fehler_1") + BlockNrTemp + bundle.getString("MC.CRC_Fehler_2"));
                                 break;
                                 
                             case 'T':       //Time out Error
@@ -3545,13 +3545,13 @@ public class MC extends javax.swing.JFrame {
                                 
                             case 'L':       //Length Error
                                 BlockNrTemp = BlockNr * 4;
-                                jUpdLastError.setText("Blocklänge fehlerhaft bei Block " + BlockNrTemp + ", beginne von vorne...");
+                                jUpdLastError.setText(bundle.getString("MC.Blockfehler_1") + BlockNrTemp + bundle.getString("MC.Adressfehler_2"));
                                 BlockNr = 0;
                                 break;
 
                             default:
                                 BlockNrTemp = BlockNr * 4;
-                                jUpdLastError.setText("Unbekannter Fehler bei Block " + BlockNrTemp + ", breche ab...");
+                                jUpdLastError.setText(bundle.getString("MC.UnbekannterFehler_1") + BlockNrTemp + bundle.getString("MC.UnbekannterFehler_2"));
                                 stopIOAction();
                                 Com = KTUI.safelyCloseCom( outerThis, Com );
                                 KTUI.mbUpdateWriteError( outerThis, (char)bArray[0]);
@@ -3561,11 +3561,7 @@ public class MC extends javax.swing.JFrame {
                         }
                         BlockNrTemp = BlockNr * 4;
                         jMcUpdProgress.setValue(BlockNrTemp/2);
-                        if( KTUI.bSpracheDE ) {
-                            jMcUpdInfo.setText("Übertrage Block: " + BlockNrTemp + " / " + (MaxBlocks+1)*2 + " a "+blockSize+" Bytes" );
-                        } else {
-                            jMcUpdInfo.setText("Transferring block: " + BlockNrTemp + " / " + (MaxBlocks+1)*2 + " a "+blockSize+" bytes" );
-                        }
+                        jMcUpdInfo.setText(bundle.getString("MC.Transferblock") + BlockNrTemp + " / " + (MaxBlocks+1)*2 + " a "+blockSize+" Bytes" );
                     }
                     else
                     {
@@ -3578,7 +3574,7 @@ public class MC extends javax.swing.JFrame {
                                 TimeOut = 0;
                                 jMcUpdProgress.setValue(0);
                                 stopIOAction();
-                                jUpdLastError.setText("keine Verbindung zur MasterControl");
+                                jUpdLastError.setText(bundle.getString("MC.keineVerbindung"));
                                 KTUI.mbTimeoutMcUpdStart( outerThis );
                                 bArray[0] = 0;
                             }
@@ -3654,21 +3650,13 @@ public class MC extends javax.swing.JFrame {
     private void jUpdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdCancelActionPerformed
         stopIOAction();
         Com = KTUI.safelyCloseCom( this, Com );
-        if( KTUI.bSpracheDE )
-            jMcUpdInfo.setText("Aktualisierung durch Benutzer abgebrochen.");
-        else
-            jMcUpdInfo.setText("Update cancelled by user.");
+        jMcUpdInfo.setText(bundle.getString("MC.Updatecancelled"));
     }//GEN-LAST:event_jUpdCancelActionPerformed
 
     private void jUpdStartUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdStartUpdateActionPerformed
 
-        if( KTUI.bSpracheDE ) {
-            jMcUpdInfo.setText("Warte auf Verbindung...");
-            jUpdLastError.setText("kein Fehler");
-        } else {
-            jMcUpdInfo.setText("waiting for connection...");
-            jUpdLastError.setText("no error");
-        }
+        jMcUpdInfo.setText(bundle.getString("MC.waitingforconnection"));
+        jUpdLastError.setText(bundle.getString("MC.noerror"));
 
         RandomAccessFile inputStream = null;
         File f = new File(jUpdDatei.getText());
@@ -3710,7 +3698,7 @@ public class MC extends javax.swing.JFrame {
             Com = KTUI.safelyOpenCom( this, Com );
             if( Com == null ){
                 stopIOAction();
-                jUpdLastError.setText("Schnitttstellenfehler");
+                jUpdLastError.setText(bundle.getString("MC.Schnitttstellenfehler"));
                 return;
             }
             KTUI.flushReadBuffer(Com);
@@ -3720,9 +3708,9 @@ public class MC extends javax.swing.JFrame {
             timer.setRepeats(true);
             startIOAction();
 
-            jMcUpdInfo.setText("Warte auf Verbindung...");
+            jMcUpdInfo.setText(bundle.getString("MC.waitingforconnection"));
             jMcUpdProgress.setMaximum(100);
-            jUpdLastError.setText("kein Fehler");
+            jUpdLastError.setText(bundle.getString("MC.noerror"));
             //binäre Daten erzeugen:
             inputStream.seek(0);
             long lSeek = 0;
@@ -4023,11 +4011,7 @@ public class MC extends javax.swing.JFrame {
         if( ! KTUI.bUseXm3sid ) {
             String sFW = KTUI.fwVersion;
             if( (sFW == null) || ( sFW.length() == 0) ) {
-                if( KTUI.bSpracheDE) {
-                    sFW = "unbekannt"; 
-                } else {
-                    sFW = "unknown"; 
-                }
+                sFW = bundle.getString("MC.unbekannt");
             }
             if( KTUI.bSpracheDE) {
                 KTUI.mbGeneric( this, "HINWEIS", "Tams MC mit Firmware ab Version \"1.4.7b\" notwendig", "Diese Zentrale hat Firmware \""+sFW+"\"", 5, true );
@@ -4821,11 +4805,7 @@ public class MC extends javax.swing.JFrame {
         jMcRwProgress.setValue(0);
         if( bUpdate ) {
             jMcUpdProgress.setValue(0);
-
-            if( KTUI.bSpracheDE )
-                jMcUpdInfo.setText("kein Fehler...");
-            else
-                jMcUpdInfo.setText("no error...");
+            jMcUpdInfo.setText(bundle.getString("MC.noerror"));
         }
 
         // set cursor to WAIT
