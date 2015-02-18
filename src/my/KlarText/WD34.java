@@ -15,6 +15,7 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 import javax.swing.border.TitledBorder;
 
@@ -38,6 +39,7 @@ public class WD34 extends javax.swing.JFrame {
     public int bytesRead=0;
     private int retries;
     private boolean bAbbruch = false;
+    private ResourceBundle bundle;
 
     /** Creates new form WD34 */
     WD34(KlarTextUI ktuiThis) {
@@ -53,6 +55,7 @@ public class WD34 extends javax.swing.JFrame {
 
         ImageIcon II = null;
         initComponents();
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         switch( KTUI.Decoder ) {
             case c.WD_34 :
                 II = new ImageIcon(getClass().getResource("/WD-34.gif"));
@@ -125,16 +128,17 @@ public class WD34 extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "WD-34 / SD-34", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("WD34.jPanel1.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jLabelOnTime2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelOnTime2.setText("On Time 2");
-        jLabelOnTime2.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 2 aktiv ist.<br>CV4</html>");
+        jLabelOnTime2.setText(bundle.getString("WD34.jLabelOnTime2.text")); // NOI18N
+        jLabelOnTime2.setToolTipText(bundle.getString("WD34.jLabelOnTime2.toolTipText")); // NOI18N
 
         jOnTime2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jOnTime2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime2.setText("5");
-        jOnTime2.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 2 aktiv ist.<br>CV4</html>");
+        jOnTime2.setText(bundle.getString("WD34.jOnTime2.text")); // NOI18N
+        jOnTime2.setToolTipText(bundle.getString("WD34.jOnTime2.toolTipText")); // NOI18N
         jOnTime2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jOnTime2FocusLost(evt);
@@ -147,16 +151,16 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jVersion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jVersion.setText("Version: ----");
+        jVersion.setText(bundle.getString("WD34.jVersion.text")); // NOI18N
 
         jLabelOnTime1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelOnTime1.setText("On Time 1");
-        jLabelOnTime1.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 1 aktiv ist.<br>CV3</html>");
+        jLabelOnTime1.setText(bundle.getString("WD34.jLabelOnTime1.text")); // NOI18N
+        jLabelOnTime1.setToolTipText(bundle.getString("WD34.jLabelOnTime1.toolTipText")); // NOI18N
 
         jOnTime1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jOnTime1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime1.setText("5");
-        jOnTime1.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 1 aktiv ist.<br>CV3</html>");
+        jOnTime1.setText(bundle.getString("WD34.jOnTime1.text")); // NOI18N
+        jOnTime1.setToolTipText(bundle.getString("WD34.jOnTime1.toolTipText")); // NOI18N
         jOnTime1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jOnTime1FocusLost(evt);
@@ -169,7 +173,7 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jAuslesen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAuslesen.setText("Lesen");
+        jAuslesen.setText(bundle.getString("WD34.jAuslesen.text")); // NOI18N
         jAuslesen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAuslesenActionPerformed(evt);
@@ -177,7 +181,7 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jSchreiben.setText("Schreiben");
+        jSchreiben.setText(bundle.getString("WD34.jSchreiben.text")); // NOI18N
         jSchreiben.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSchreibenActionPerformed(evt);
@@ -185,7 +189,7 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jClose.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jClose.setText("Schließen");
+        jClose.setText(bundle.getString("WD34.jClose.text")); // NOI18N
         jClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCloseActionPerformed(evt);
@@ -193,13 +197,13 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jLabelOnTime3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelOnTime3.setText("On Time 3");
-        jLabelOnTime3.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 3 aktiv ist.<br>CV5</html>");
+        jLabelOnTime3.setText(bundle.getString("WD34.jLabelOnTime3.text")); // NOI18N
+        jLabelOnTime3.setToolTipText(bundle.getString("WD34.jLabelOnTime3.toolTipText")); // NOI18N
 
         jOnTime3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jOnTime3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime3.setText("5");
-        jOnTime3.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 3 aktiv ist.<br>CV5</html>");
+        jOnTime3.setText(bundle.getString("WD34.jOnTime3.text")); // NOI18N
+        jOnTime3.setToolTipText(bundle.getString("WD34.jOnTime3.toolTipText")); // NOI18N
         jOnTime3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jOnTime3FocusLost(evt);
@@ -212,13 +216,13 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jLabelOnTime4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelOnTime4.setText("On Time 4");
-        jLabelOnTime4.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 4 aktiv ist.<br>CV6</html>");
+        jLabelOnTime4.setText(bundle.getString("WD34.jLabelOnTime4.text")); // NOI18N
+        jLabelOnTime4.setToolTipText(bundle.getString("WD34.jLabelOnTime4.toolTipText")); // NOI18N
 
         jOnTime4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jOnTime4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime4.setText("5");
-        jOnTime4.setToolTipText("<html>Zeit in 1/10 Sekunden, die der Ausgang 4 aktiv ist.<br>CV6</html>");
+        jOnTime4.setText(bundle.getString("WD34.jOnTime4.text")); // NOI18N
+        jOnTime4.setToolTipText(bundle.getString("WD34.jOnTime4.toolTipText")); // NOI18N
         jOnTime4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jOnTime4FocusLost(evt);
@@ -231,12 +235,12 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jLabelAdress.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelAdress.setText("Adresse:");
+        jLabelAdress.setText(bundle.getString("WD34.jLabelAdress.text")); // NOI18N
 
         jAdresse.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAdresse.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jAdresse.setText("1");
-        jAdresse.setToolTipText("<html>CV1, CV9<br>\nMM max. 255 -> [1..1020]<br>\nDCC max. 510 -> [1..2040]</html>");
+        jAdresse.setText(bundle.getString("WD34.jAdresse.text")); // NOI18N
+        jAdresse.setToolTipText(bundle.getString("WD34.jAdresse.toolTipText")); // NOI18N
         jAdresse.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jAdresseFocusLost(evt);
@@ -249,37 +253,37 @@ public class WD34 extends javax.swing.JFrame {
         });
 
         jWeichenAdresse.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jWeichenAdresse.setText("-> Weiche 1 - 4");
+        jWeichenAdresse.setText(bundle.getString("WD34.jWeichenAdresse.text")); // NOI18N
 
         jLabelRailCom.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelRailCom.setText("RailCom");
-        jLabelRailCom.setToolTipText("CV29 Bit3");
+        jLabelRailCom.setText(bundle.getString("WD34.jLabelRailCom.text")); // NOI18N
+        jLabelRailCom.setToolTipText(bundle.getString("WD34.jLabelRailCom.toolTipText")); // NOI18N
 
         jRC_Ein.setSelected(true);
-        jRC_Ein.setToolTipText("CV29 Bit3");
+        jRC_Ein.setToolTipText(bundle.getString("WD34.jRC_Ein.toolTipText")); // NOI18N
 
         jLabelRailComCheck.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelRailComCheck.setText("RailCom - Prüfung");
-        jLabelRailComCheck.setToolTipText("<html>Decoder prüft, ob RailCom möglich ist und schaltet RailCom ggfls aus.<br>CV33, Bit 0<html>");
+        jLabelRailComCheck.setText(bundle.getString("WD34.jLabelRailComCheck.text")); // NOI18N
+        jLabelRailComCheck.setToolTipText(bundle.getString("WD34.jLabelRailComCheck.toolTipText")); // NOI18N
 
         jRC_Pruefen.setSelected(true);
-        jRC_Pruefen.setToolTipText("<html>Decoder prüft, ob RailCom möglich ist und schaltet RailCom ggfls aus.<br>CV33, Bit0<html>");
+        jRC_Pruefen.setToolTipText(bundle.getString("WD34.jRC_Pruefen.toolTipText")); // NOI18N
 
         jProgressBar1.setStringPainted(true);
 
         jLabelZentraleSendetCoilOff.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelZentraleSendetCoilOff.setText("Zentrale sendet Coil-Off");
-        jLabelZentraleSendetCoilOff.setToolTipText("<html>MasterControl: Ja<br>Intellibox, Lenz, Z21: Nein<br>CV33, Bit1<html>\n");
+        jLabelZentraleSendetCoilOff.setText(bundle.getString("WD34.jLabelZentraleSendetCoilOff.text")); // NOI18N
+        jLabelZentraleSendetCoilOff.setToolTipText(bundle.getString("WD34.jLabelZentraleSendetCoilOff.toolTipText")); // NOI18N
 
-        jZentraleSendetCoilOff.setToolTipText("<html>MasterControl: Ja<br>Intellibox, Lenz, Z21: Nein<br>CV33, Bit1<html>");
+        jZentraleSendetCoilOff.setToolTipText(bundle.getString("WD34.jZentraleSendetCoilOff.toolTipText")); // NOI18N
 
         jUpdateInfo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jUpdateInfo.setText("read/write info");
-        jUpdateInfo.setToolTipText("");
+        jUpdateInfo.setText(bundle.getString("WD34.jUpdateInfo.text")); // NOI18N
+        jUpdateInfo.setToolTipText(bundle.getString("WD34.jUpdateInfo.toolTipText")); // NOI18N
 
         jAbbrechen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAbbrechen.setText("Abbrechen");
-        jAbbrechen.setToolTipText("Lesen/Schreiben abbrechen");
+        jAbbrechen.setText(bundle.getString("WD34.jAbbrechen.text")); // NOI18N
+        jAbbrechen.setToolTipText(bundle.getString("WD34.jAbbrechen.toolTipText")); // NOI18N
         jAbbrechen.setEnabled(false);
         jAbbrechen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -459,7 +463,7 @@ public class WD34 extends javax.swing.JFrame {
     }//GEN-LAST:event_jSchreibenActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if( ! KTUI.bSpracheDE ) {
+    /*    if( ! KTUI.bSpracheDE ) {
             jLabelAdress.setText("Address:");
             jLabelRailComCheck.setText("RailCom check");
             jLabelZentraleSendetCoilOff.setText("Control unit sends coil off");
@@ -468,7 +472,7 @@ public class WD34 extends javax.swing.JFrame {
             jAbbrechen.setText("Cancel");
             jClose.setText("Close");
             jWeichenAdresse.setText("-> Switch 1 - 4");
-        }
+        }*/
         TitledBorder b = (TitledBorder)jPanel1.getBorder();
         if(bWD34)
         {
@@ -501,11 +505,7 @@ public class WD34 extends javax.swing.JFrame {
                 if( bAbbruch ) {
                     System.out.println("Abbruch durch Benutzer" );
                     if( bRead || bWrite ) {
-                        if( KTUI.bSpracheDE ) {
-                            jProgressBar1.setString("Abbruch durch Benutzer");
-                        } else {
-                            jProgressBar1.setString("Cancelled by User");
-                        }
+                        jProgressBar1.setString(bundle.getString("WD34.BenutzerAbbruch"));
                         KTUI.mbRWCancelled(outerThis, 5);
                     }
                     stopIOAction();
@@ -541,11 +541,7 @@ public class WD34 extends javax.swing.JFrame {
                             KTUI.mbDeviceReadProblem( outerThis );
                             return;
                         }
-                        if( KTUI.bSpracheDE ) {
-                            jProgressBar1.setString("Warte auf Antwort "+retries);
-                        } else {
-                            jProgressBar1.setString("Waiting for an answer "+retries);
-                        }
+                        jProgressBar1.setString(bundle.getString("ReadWriteCV.Warte")+retries);
                         return;
                     }
 
@@ -577,7 +573,7 @@ public class WD34 extends javax.swing.JFrame {
                             {
                                 bRead = false;
                                 stopIOAction();
-                                jUpdateInfo.setText("read: wrong vendor");
+                                jUpdateInfo.setText(bundle.getString("WD34.wrongvendor"));
                                 KTUI.mbNoTams( outerThis, c.mbRDcancel );
                                 return;
                             }
@@ -585,7 +581,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 1;
                             s = "XPTRD 1\r"; // dec adr % 64
-                            jUpdateInfo.setText("read: decoder address low");
+                            jUpdateInfo.setText(bundle.getString("WD34.decoderaddress")+"low");
                             Com.write(s);
 
                             bWaitAnswerInProgresss = true;
@@ -599,7 +595,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 9;
                             s = "XPTRD 9\r"; // dec adr / 64
-                            jUpdateInfo.setText("read: decoder address high");
+                            jUpdateInfo.setText(bundle.getString("WD34.decoderaddress")+"high");
                             Com.write(s);
 
                             decAdr = cvWert ;
@@ -615,12 +611,12 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 3;
                             s = "XPTRD 3\r"; // OnTime 1
-                            jUpdateInfo.setText("read: On Time 1");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 1");
                             if( ! bWD34 ) {
                                 // Skip reading OnTime for SD-34
                                 cvAnfrage = 7;
                                 s = "XPTRD 7\r"; // Version
-                                jUpdateInfo.setText("read: Version");
+                                jUpdateInfo.setText(bundle.getString("WD34.read")+"Version");
                                 SendeZaehler += 4;
                             }
                             Com.write(s);
@@ -647,7 +643,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 4;
                             s = "XPTRD 4\r"; // OnTime 2
-                            jUpdateInfo.setText("read: On Time 2");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 2");
                             Com.write(s);
 
                             jOnTime1.setText("" + cvWert);
@@ -663,7 +659,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 5;
                             s = "XPTRD 5\r"; // OnTime 3
-                            jUpdateInfo.setText("read: On Time 3");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 3");
                             Com.write(s);
 
                             jOnTime2.setText("" + cvWert);
@@ -679,7 +675,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 6;
                             s = "XPTRD 6\r"; // OnTime 4
-                            jUpdateInfo.setText("read: On Time 4");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 4");
                             Com.write(s);
 
                             jOnTime3.setText("" + cvWert);
@@ -695,7 +691,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 7;
                             s = "XPTRD 7\r"; // Version
-                            jUpdateInfo.setText("read: Version");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Version");
                             Com.write(s);
 
                             jOnTime4.setText("" + cvWert);
@@ -711,7 +707,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 29;
                             s = "XPTRD 29\r"; // Konfig 1 (RailCom)
-                            jUpdateInfo.setText("read: config CV29");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"config CV29");
                             Com.write(s);
 
                             jVersion.setText("Version: V" + cvWert/10 + "." + cvWert%10);
@@ -727,7 +723,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvAnfrage = 33;
                             s = "XPTRD 33\r"; // Konfig 2
-                            jUpdateInfo.setText("read: config CV33");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"config CV33");
                             Com.write(s);
 
                             // check Bidi/Railcom bit of CV29
@@ -742,7 +738,7 @@ public class WD34 extends javax.swing.JFrame {
 
                         case 9:
                             SendeZaehler++;
-                            jUpdateInfo.setText("read: finished");
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"finished");
 
                             jRC_Pruefen.setSelected( ! ( (cvWert & 0x01) == 0x01));
                             jZentraleSendetCoilOff.setSelected((cvWert&0x02)==0x02);
@@ -772,7 +768,7 @@ public class WD34 extends javax.swing.JFrame {
                             {
                                bWrite = false;
                                stopIOAction();
-                               jUpdateInfo.setText("write: wrong vendor");
+                               jUpdateInfo.setText(bundle.getString("WD34.write")+"wrong vendor");
                                KTUI.mbNoTams( outerThis, c.mbWRcancel );
                                return;
                             }
@@ -780,7 +776,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvWert = KTUI.checkTextField( outerThis, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, false);
                             s = "XPTWD " + " 1 " + cvWert%64 + "\r";
-                            jUpdateInfo.setText("write: address low");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"address low");
                             Com.write(s);
                             System.out.println("bWrite cv[1]:="+(cvWert%64) );
 
@@ -799,7 +795,7 @@ public class WD34 extends javax.swing.JFrame {
                             }
                             cvWert = KTUI.checkTextField( outerThis, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, false);
                             s = "XPTWD 9 " + cvWert/64 + "\r";
-                            jUpdateInfo.setText("write: address high");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"address high");
                             Com.write(s);
                             System.out.println("bWrite cv[9]:="+(cvWert/64) );
 
@@ -814,7 +810,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvWert = KTUI.checkTextField( outerThis, jOnTime1, 0, 255, 0, false);
                             s = "XPTWD 3 " + cvWert + "\r";
-                            jUpdateInfo.setText("write: On Time 1");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 1");
                             Com.write(s);
                             System.out.println("bWrite cv[3]:="+cvWert );
 
@@ -829,7 +825,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvWert = KTUI.checkTextField( outerThis, jOnTime2, 0, 255, 0, false);
                             s = "XPTWD 4 " + cvWert + "\r";
-                            jUpdateInfo.setText("write: On Time 2");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 2");
                             Com.write(s);
                             System.out.println("bWrite cv[4]:="+cvWert );
 
@@ -844,7 +840,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvWert = KTUI.checkTextField( outerThis, jOnTime3, 0, 255, 0, false);
                             s = "XPTWD 5 " + cvWert + "\r";
-                            jUpdateInfo.setText("write: On Time 3");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 3");
                             Com.write(s);
                             System.out.println("bWrite cv[5]:="+cvWert );
 
@@ -859,7 +855,7 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             cvWert = KTUI.checkTextField( outerThis, jOnTime4, 0, 255, 0, false);
                             s = "XPTWD 6 " + cvWert + "\r";
-                            jUpdateInfo.setText("write: On Time 4");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 4");
                             Com.write(s);
                             System.out.println("bWrite cv[6]:="+cvWert );
 
@@ -877,7 +873,7 @@ public class WD34 extends javax.swing.JFrame {
                             else
                                 cvWert = 128;
                             s = "XPTWD 29 " + cvWert + "\r";
-                            jUpdateInfo.setText("write: config CV29");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"config CV29");
                             Com.write(s);
                             System.out.println("bWrite cv[29]:="+cvWert );
 
@@ -896,7 +892,7 @@ public class WD34 extends javax.swing.JFrame {
                             if(jZentraleSendetCoilOff.isSelected())
                                 cvWert += 0x02;
                             s = "XPTWD 33 " + cvWert + "\r";
-                            jUpdateInfo.setText("write: config CV33");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"config CV33");
                             Com.write(s);
                             System.out.println("bWrite cv[33]:="+cvWert );
 
@@ -910,7 +906,7 @@ public class WD34 extends javax.swing.JFrame {
                         default:
                             SendeZaehler++;
                             bWrite = false;
-                            jUpdateInfo.setText("write: finished");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"finished");
 
                             jProgressBar1.setString(null);
                             stopIOAction();
@@ -933,7 +929,7 @@ public class WD34 extends javax.swing.JFrame {
         SendeZaehler = 0;
         cvAnfrage = 8;
         String s = "XPTRD 8\r"; // Hersteller
-        jUpdateInfo.setText("read: verify vendor");
+        jUpdateInfo.setText(bundle.getString("WD34.read")+"verify vendor");
         Com.write(s);
         resetbArray();
         bWaitAnswerInProgresss = true;
@@ -977,11 +973,11 @@ public class WD34 extends javax.swing.JFrame {
 
         if( bRead ) {
             bRead = false;
-            jUpdateInfo.setText("read: cancelled");
+            jUpdateInfo.setText(bundle.getString("WD34.read")+bundle.getString("cancelled"));
         }
         if( bWrite ) {
             bWrite = false;
-            jUpdateInfo.setText("write: cancelled");
+            jUpdateInfo.setText(bundle.getString("WD34.write")+bundle.getString("cancelled"));
         }
 
         // set buttons to normal operation
@@ -1017,7 +1013,7 @@ public class WD34 extends javax.swing.JFrame {
         if( KTUI.bSpracheDE ) {
             ss += "Weiche " ;
         } else {
-            ss += "Switch " ;
+            ss += "point " ;
         }
         ss += (myDecAdr*4 - 3) + " - " + myDecAdr*4;
         jWeichenAdresse.setText(ss);
