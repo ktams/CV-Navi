@@ -10105,7 +10105,7 @@ public class FD_R_Extended extends javax.swing.JFrame {
     private void jDirekteingabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirekteingabeActionPerformed
         // hier wird die Direkteingabe (de)aktiviert
         String str = jDirekteingabe.getText();
-        if(str == bundle.getString("FD_LED.jDirekteingabe.text")) {
+        if(str.equals(bundle.getString("FD_LED.jDirekteingabe.text"))) {
             jCV_Inhalt.setEditable(true);
             str = bundle.getString("FD_LED.jDirekteingabe_aus.text");
             jDirekteingabe.setText(str);

@@ -12,6 +12,7 @@ package my.KlarText;
 import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
@@ -27,6 +28,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
     private int CV[][] = new int[2][200];
     public KlarTextUI KTUI;
     public String ReturnString = "Tams Elektronik";
+    private ResourceBundle bundle;
 
     /** Creates new form LDG30erPlus */
     public LDG30erPlus(KlarTextUI ktuiThis) {
@@ -41,6 +43,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         }
 
         initComponents();
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         ImageIcon II = null;
         TitledBorder b = (TitledBorder)jPanel1.getBorder();
         switch(KTUI.Decoder)
@@ -1115,12 +1118,13 @@ public class LDG30erPlus extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("LD-G-30plus"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LDG30erPlus.jPanel1.border.title"))); // NOI18N
 
         jCV_Inhalt.setEditable(false);
         jCV_Inhalt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCV_Inhalt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jCV_Inhalt.setText("62");
+        jCV_Inhalt.setText(bundle.getString("LDG30erPlus.jCV_Inhalt.text")); // NOI18N
         jCV_Inhalt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jCV_InhaltFocusLost(evt);
@@ -1133,8 +1137,8 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
 
         jSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jSave.setText("Speichern");
-        jSave.setToolTipText("<html>Gespeicherte Dateien können mit einem normalen<br>\nEditor geöffnet werden. Die Werte dürfen geändert werden.<br>\nDie Reihenfolge und Leerzeilen dürfen NICHT verändert werden!");
+        jSave.setText(bundle.getString("LDG30erPlus.jSave.text")); // NOI18N
+        jSave.setToolTipText(bundle.getString("LDG30erPlus.jSave.toolTipText")); // NOI18N
         jSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSaveActionPerformed(evt);
@@ -1144,7 +1148,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jDecodereigenschaften.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jDecodereigenschaften.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jCV29.setToolTipText("<html>Verwendete CVs:<br>\nCV#28, CV#29, CV#47");
+        jCV29.setToolTipText(bundle.getString("LDG30erPlus.jCV29.toolTipText")); // NOI18N
         jCV29.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jCV29ComponentShown(evt);
@@ -1153,7 +1157,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jCV29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jRichtung.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRichtung.setText("Fahrtrichtung umdrehen");
+        jRichtung.setText(bundle.getString("LDG30erPlus.jRichtung.text")); // NOI18N
         jRichtung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRichtungActionPerformed(evt);
@@ -1163,7 +1167,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jFS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFS.setSelected(true);
-        jFS.setText("28 / 128 Fahrstufen");
+        jFS.setText(bundle.getString("LDG30erPlus.jFS.text")); // NOI18N
         jFS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFSActionPerformed(evt);
@@ -1173,7 +1177,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jAnalog1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAnalog1.setSelected(true);
-        jAnalog1.setText("Analog-Modus");
+        jAnalog1.setText(bundle.getString("LDG30erPlus.jAnalog1.text")); // NOI18N
         jAnalog1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAnalog1ActionPerformed(evt);
@@ -1183,7 +1187,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jRailCom.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jRailCom.setSelected(true);
-        jRailCom.setText("RailCom ein");
+        jRailCom.setText(bundle.getString("LDG30erPlus.jRailCom.text")); // NOI18N
         jRailCom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRailComActionPerformed(evt);
@@ -1192,12 +1196,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jCV29.add(jRailCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jAnalog3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnalog3.setText("---");
-        jAnalog3.setEnabled(false);
+        jAnalog3.setText(bundle.getString("LDG30erPlus.jAnalog3.text")); // NOI18N
         jCV29.add(jAnalog3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         jLongAddr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLongAddr.setText("lange Adresse");
+        jLongAddr.setText(bundle.getString("LDG30erPlus.jLongAddr.text")); // NOI18N
         jLongAddr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLongAddrActionPerformed(evt);
@@ -1206,21 +1209,21 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jCV29.add(jLongAddr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jLongAddr1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLongAddr1.setText("---");
+        jLongAddr1.setText(bundle.getString("LDG30erPlus.jLongAddr1.text")); // NOI18N
         jLongAddr1.setEnabled(false);
         jCV29.add(jLongAddr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLongAddr2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLongAddr2.setText("---");
+        jLongAddr2.setText(bundle.getString("LDG30erPlus.jLongAddr2.text")); // NOI18N
         jLongAddr2.setEnabled(false);
         jCV29.add(jLongAddr2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel41.setText("RailCom Verhalten");
+        jLabel41.setText(bundle.getString("LDG30erPlus.jLabel41.text")); // NOI18N
         jCV29.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
 
         jMM_Addr_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jMM_Addr_2.setText("4");
+        jMM_Addr_2.setText(bundle.getString("LDG30erPlus.jMM_Addr_2.text")); // NOI18N
         jMM_Addr_2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jMM_Addr_2FocusGained(evt);
@@ -1238,11 +1241,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jCV29.add(jBild, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jManID.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jManID.setText("NMRA Man.-ID: xxx");
+        jManID.setText(bundle.getString("LDG30erPlus.jManID.text")); // NOI18N
         jCV29.add(jManID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
         jVersion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jVersion.setText("Decoder-Version: xx");
+        jVersion.setText(bundle.getString("LDG30erPlus.jVersion.text")); // NOI18N
         jCV29.add(jVersion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         jBild1.setMaximumSize(new java.awt.Dimension(160, 100));
@@ -1250,7 +1253,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBroadCasst.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBroadCasst.setSelected(true);
-        jBroadCasst.setText("BroadCast Meldungen");
+        jBroadCasst.setText(bundle.getString("LDG30erPlus.jBroadCasst.text")); // NOI18N
         jBroadCasst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBroadCasstActionPerformed(evt);
@@ -1260,7 +1263,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jChannel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jChannel2.setSelected(true);
-        jChannel2.setText("Kanal 2 Meldungen");
+        jChannel2.setText(bundle.getString("LDG30erPlus.jChannel2.text")); // NOI18N
         jChannel2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jChannel2ActionPerformed(evt);
@@ -1269,12 +1272,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jCV29.add(jChannel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
 
         jLabel56.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel56.setText("zweite MM-Adresse");
+        jLabel56.setText(bundle.getString("LDG30erPlus.jLabel56.text")); // NOI18N
         jCV29.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, -1, -1));
 
         jRCplus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jRCplus.setSelected(true);
-        jRCplus.setText("RailCom plus");
+        jRCplus.setText(bundle.getString("LDG30erPlus.jRCplus.text")); // NOI18N
         jRCplus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRCplusActionPerformed(evt);
@@ -1282,9 +1285,9 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
         jCV29.add(jRCplus, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
 
-        jDecodereigenschaften.addTab("Allgemein", jCV29);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jCV29.TabConstraints.tabTitle"), jCV29); // NOI18N
 
-        jFunctionMapping.setToolTipText("Verwendete CVs: CV#33 bis CV#46 und CV#180 bis CV#195");
+        jFunctionMapping.setToolTipText(bundle.getString("LDG30erPlus.jFunctionMapping.toolTipText")); // NOI18N
         jFunctionMapping.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFunctionMapping.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -1310,7 +1313,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF14_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("AUX");
+        jLabel4.setText(bundle.getString("LDG30erPlus.jLabel4.text")); // NOI18N
         jFunctionMapping.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
 
         jF1_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1482,63 +1485,63 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF17_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel6.setText("FL");
+        jLabel6.setText(bundle.getString("LDG30erPlus.jLabel6.text")); // NOI18N
         jFunctionMapping.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel7.setText("FR");
+        jLabel7.setText(bundle.getString("LDG30erPlus.jLabel7.text")); // NOI18N
         jFunctionMapping.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel8.setText("F1");
+        jLabel8.setText(bundle.getString("LDG30erPlus.jLabel8.text")); // NOI18N
         jFunctionMapping.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel9.setText("F2");
+        jLabel9.setText(bundle.getString("LDG30erPlus.jLabel9.text")); // NOI18N
         jFunctionMapping.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel10.setText("F3");
+        jLabel10.setText(bundle.getString("LDG30erPlus.jLabel10.text")); // NOI18N
         jFunctionMapping.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel11.setText("F4");
+        jLabel11.setText(bundle.getString("LDG30erPlus.jLabel11.text")); // NOI18N
         jFunctionMapping.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel12.setText("F5");
+        jLabel12.setText(bundle.getString("LDG30erPlus.jLabel12.text")); // NOI18N
         jFunctionMapping.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel13.setText("F6");
+        jLabel13.setText(bundle.getString("LDG30erPlus.jLabel13.text")); // NOI18N
         jFunctionMapping.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel14.setText("F7");
+        jLabel14.setText(bundle.getString("LDG30erPlus.jLabel14.text")); // NOI18N
         jFunctionMapping.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel15.setText("F8");
+        jLabel15.setText(bundle.getString("LDG30erPlus.jLabel15.text")); // NOI18N
         jFunctionMapping.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel16.setText("F9");
+        jLabel16.setText(bundle.getString("LDG30erPlus.jLabel16.text")); // NOI18N
         jFunctionMapping.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel18.setText("F11");
+        jLabel18.setText(bundle.getString("LDG30erPlus.jLabel18.text")); // NOI18N
         jFunctionMapping.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel19.setText("F14");
+        jLabel19.setText(bundle.getString("LDG30erPlus.jLabel19.text")); // NOI18N
         jFunctionMapping.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("FR = F0 (Licht) hinten");
+        jLabel3.setText(bundle.getString("LDG30erPlus.jLabel3.text")); // NOI18N
         jFunctionMapping.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel33.setText("FL = F0 (Licht) vorne");
+        jLabel33.setText(bundle.getString("LDG30erPlus.jLabel33.text")); // NOI18N
         jFunctionMapping.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         jFL_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1878,23 +1881,23 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF19_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
         jLabel58.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel58.setText("2");
+        jLabel58.setText(bundle.getString("LDG30erPlus.jLabel58.text")); // NOI18N
         jFunctionMapping.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel51.setText("2");
+        jLabel51.setText(bundle.getString("LDG30erPlus.jLabel51.text")); // NOI18N
         jFunctionMapping.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, -1));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel52.setText("3");
+        jLabel52.setText(bundle.getString("LDG30erPlus.jLabel52.text")); // NOI18N
         jFunctionMapping.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 10, -1));
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel59.setText("r");
+        jLabel59.setText(bundle.getString("LDG30erPlus.jLabel59.text")); // NOI18N
         jFunctionMapping.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel53.setText("1");
+        jLabel53.setText(bundle.getString("LDG30erPlus.jLabel53.text")); // NOI18N
         jFunctionMapping.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 10, -1));
 
         jF21_6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -2122,11 +2125,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF21_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
 
         jLabel60.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel60.setText("4");
+        jLabel60.setText(bundle.getString("LDG30erPlus.jLabel60.text")); // NOI18N
         jFunctionMapping.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
 
         jLabel61.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel61.setText("3");
+        jLabel61.setText(bundle.getString("LDG30erPlus.jLabel61.text")); // NOI18N
         jFunctionMapping.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         jF22_5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -2354,11 +2357,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF23_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
 
         jLabel62.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel62.setText("6");
+        jLabel62.setText(bundle.getString("LDG30erPlus.jLabel62.text")); // NOI18N
         jFunctionMapping.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
 
         jLabel63.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel63.setText("5");
+        jLabel63.setText(bundle.getString("LDG30erPlus.jLabel63.text")); // NOI18N
         jFunctionMapping.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
         jF23_6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -2586,83 +2589,83 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF13_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
 
         jLabel64.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel64.setText("7");
+        jLabel64.setText(bundle.getString("LDG30erPlus.jLabel64.text")); // NOI18N
         jFunctionMapping.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, -1));
 
         jLabel65.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel65.setText("4");
+        jLabel65.setText(bundle.getString("LDG30erPlus.jLabel65.text")); // NOI18N
         jFunctionMapping.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel20.setText("F12");
+        jLabel20.setText(bundle.getString("LDG30erPlus.jLabel20.text")); // NOI18N
         jFunctionMapping.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel21.setText("F13");
+        jLabel21.setText(bundle.getString("LDG30erPlus.jLabel21.text")); // NOI18N
         jFunctionMapping.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
 
         jLabel83.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel83.setText("5");
+        jLabel83.setText(bundle.getString("LDG30erPlus.jLabel83.text")); // NOI18N
         jFunctionMapping.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel22.setText("F10");
+        jLabel22.setText(bundle.getString("LDG30erPlus.jLabel22.text")); // NOI18N
         jFunctionMapping.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel23.setText("F15");
+        jLabel23.setText(bundle.getString("LDG30erPlus.jLabel23.text")); // NOI18N
         jFunctionMapping.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel29.setText("F16");
+        jLabel29.setText(bundle.getString("LDG30erPlus.jLabel29.text")); // NOI18N
         jFunctionMapping.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, -1));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel37.setText("F17");
+        jLabel37.setText(bundle.getString("LDG30erPlus.jLabel37.text")); // NOI18N
         jFunctionMapping.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
 
         jLabel84.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel84.setText("F18");
+        jLabel84.setText(bundle.getString("LDG30erPlus.jLabel84.text")); // NOI18N
         jFunctionMapping.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, -1, -1));
 
         jLabel85.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel85.setText("F19");
+        jLabel85.setText(bundle.getString("LDG30erPlus.jLabel85.text")); // NOI18N
         jFunctionMapping.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
         jLabel86.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel86.setText("F20");
+        jLabel86.setText(bundle.getString("LDG30erPlus.jLabel86.text")); // NOI18N
         jFunctionMapping.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         jLabel87.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel87.setText("F21");
+        jLabel87.setText(bundle.getString("LDG30erPlus.jLabel87.text")); // NOI18N
         jFunctionMapping.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
 
         jLabel88.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel88.setText("F22");
+        jLabel88.setText(bundle.getString("LDG30erPlus.jLabel88.text")); // NOI18N
         jFunctionMapping.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
 
         jLabel89.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel89.setText("F23");
+        jLabel89.setText(bundle.getString("LDG30erPlus.jLabel89.text")); // NOI18N
         jFunctionMapping.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, -1));
 
         jLabel90.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel90.setText("F24");
+        jLabel90.setText(bundle.getString("LDG30erPlus.jLabel90.text")); // NOI18N
         jFunctionMapping.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, -1, -1));
 
         jLabel91.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel91.setText("F25");
+        jLabel91.setText(bundle.getString("LDG30erPlus.jLabel91.text")); // NOI18N
         jFunctionMapping.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, -1, -1));
 
         jLabel92.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel92.setText("F26");
+        jLabel92.setText(bundle.getString("LDG30erPlus.jLabel92.text")); // NOI18N
         jFunctionMapping.add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
 
         jLabel93.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel93.setText("F27");
+        jLabel93.setText(bundle.getString("LDG30erPlus.jLabel93.text")); // NOI18N
         jFunctionMapping.add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, -1, -1));
 
         jLabel94.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel94.setText("F28");
+        jLabel94.setText(bundle.getString("LDG30erPlus.jLabel94.text")); // NOI18N
         jFunctionMapping.add(jLabel94, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, -1, -1));
 
         jF23_5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -2914,15 +2917,15 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF28_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("AUX");
+        jLabel5.setText(bundle.getString("LDG30erPlus.jLabel5.text")); // NOI18N
         jFunctionMapping.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLabel177.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel177.setText("1");
+        jLabel177.setText(bundle.getString("LDG30erPlus.jLabel177.text")); // NOI18N
         jFunctionMapping.add(jLabel177, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         jLabel178.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel178.setText("f");
+        jLabel178.setText(bundle.getString("LDG30erPlus.jLabel178.text")); // NOI18N
         jFunctionMapping.add(jLabel178, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         jFL_7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -3278,12 +3281,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFunctionMapping.add(jF28_7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, -1, -1));
 
         jLabel179.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel179.setText("6");
+        jLabel179.setText(bundle.getString("LDG30erPlus.jLabel179.text")); // NOI18N
         jFunctionMapping.add(jLabel179, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
-        jDecodereigenschaften.addTab("F-Zuordnung", jFunctionMapping);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jFunctionMapping.TabConstraints.tabTitle"), jFunctionMapping); // NOI18N
 
-        jEffekte_1.setToolTipText("<html>Verwendete CVs:<br>\nCV#53  bis CV#60, CV#104 bis CV#112, CV#132 bis CV#147");
+        jEffekte_1.setToolTipText(bundle.getString("LDG30erPlus.jEffekte_1.toolTipText")); // NOI18N
         jEffekte_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jEffekte_1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -3311,7 +3314,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_1.add(jRueck1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel32.setText("rück");
+        jLabel32.setText(bundle.getString("LDG30erPlus.jLabel32.text")); // NOI18N
         jEffekte_1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, -1, -1));
 
         jRueck2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -3333,11 +3336,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_1.add(jVor2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel44.setText("3");
+        jLabel44.setText(bundle.getString("LDG30erPlus.jLabel44.text")); // NOI18N
         jEffekte_1.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel45.setText("vor");
+        jLabel45.setText(bundle.getString("LDG30erPlus.jLabel45.text")); // NOI18N
         jEffekte_1.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
 
         jVor3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -3367,25 +3370,25 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_1.add(jBlink6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel46.setText("AUX");
+        jLabel46.setText(bundle.getString("LDG30erPlus.jLabel46.text")); // NOI18N
         jEffekte_1.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel48.setText("1");
+        jLabel48.setText(bundle.getString("LDG30erPlus.jLabel48.text")); // NOI18N
         jEffekte_1.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
         jEffekte_1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 420, 10));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel40.setText("Blinkfrequenz");
-        jEffekte_1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
+        jLabel40.setText(bundle.getString("LDG30erPlus.jLabel40.text")); // NOI18N
+        jEffekte_1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel42.setText("Blinken(Zeit):");
+        jLabel42.setText(bundle.getString("LDG30erPlus.jLabel42.text")); // NOI18N
         jEffekte_1.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jBlink_Pausezeit_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_3.setText("2");
+        jBlink_Pausezeit_3.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_3.text")); // NOI18N
         jBlink_Pausezeit_3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_3FocusGained(evt);
@@ -3399,34 +3402,34 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_3KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 30, 20));
+        jEffekte_1.add(jBlink_Pausezeit_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 30, 20));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel54.setText("Blinken");
-        jEffekte_1.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, -1, -1));
+        jLabel54.setText(bundle.getString("LDG30erPlus.jLabel54.text")); // NOI18N
+        jEffekte_1.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, -1));
 
         jLabel55.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel55.setText("doppelt");
+        jLabel55.setText(bundle.getString("LDG30erPlus.jLabel55.text")); // NOI18N
         jEffekte_1.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, -1, -1));
 
         jLabel57.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel57.setText("MARs");
+        jLabel57.setText(bundle.getString("LDG30erPlus.jLabel57.text")); // NOI18N
         jEffekte_1.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, -1, -1));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel25.setText("Bl.invers");
+        jLabel25.setText(bundle.getString("LDG30erPlus.jLabel25.text")); // NOI18N
         jEffekte_1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, -1, -1));
 
         jLabel69.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel69.setText("4");
+        jLabel69.setText(bundle.getString("LDG30erPlus.jLabel69.text")); // NOI18N
         jEffekte_1.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         jLabel70.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel70.setText("5");
+        jLabel70.setText(bundle.getString("LDG30erPlus.jLabel70.text")); // NOI18N
         jEffekte_1.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jLabel71.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel71.setText("6");
+        jLabel71.setText(bundle.getString("LDG30erPlus.jLabel71.text")); // NOI18N
         jEffekte_1.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jMARs2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -3557,7 +3560,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Pausezeit_4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_4.setText("2");
+        jBlink_Pausezeit_4.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_4.text")); // NOI18N
         jBlink_Pausezeit_4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_4FocusGained(evt);
@@ -3571,11 +3574,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_4KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 30, -1));
+        jEffekte_1.add(jBlink_Pausezeit_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 30, -1));
 
         jBlinkfrequenzMars.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenzMars.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenzMars.setText("64");
+        jBlinkfrequenzMars.setText(bundle.getString("LDG30erPlus.jBlinkfrequenzMars.text")); // NOI18N
         jBlinkfrequenzMars.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenzMarsFocusGained(evt);
@@ -3589,7 +3592,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenzMarsKeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenzMars, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 30, -1));
+        jEffekte_1.add(jBlinkfrequenzMars, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 30, -1));
 
         jDoppelBlink1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDoppelBlink1.addActionListener(new java.awt.event.ActionListener() {
@@ -3640,12 +3643,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_1.add(jDoppelBlink6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
 
         jLabel75.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel75.setText("Pause");
-        jEffekte_1.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
+        jLabel75.setText(bundle.getString("LDG30erPlus.jLabel75.text")); // NOI18N
+        jEffekte_1.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
 
         jBlink_Einschaltzeit_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_1.setText("4");
+        jBlink_Einschaltzeit_1.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_1.text")); // NOI18N
         jBlink_Einschaltzeit_1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_1FocusGained(evt);
@@ -3663,7 +3666,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Einschaltzeit_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_2.setText("4");
+        jBlink_Einschaltzeit_2.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_2.text")); // NOI18N
         jBlink_Einschaltzeit_2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_2FocusGained(evt);
@@ -3681,7 +3684,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Einschaltzeit_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_3.setText("4");
+        jBlink_Einschaltzeit_3.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_3.text")); // NOI18N
         jBlink_Einschaltzeit_3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_3FocusGained(evt);
@@ -3699,7 +3702,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Einschaltzeit_4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_4.setText("4");
+        jBlink_Einschaltzeit_4.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_4.text")); // NOI18N
         jBlink_Einschaltzeit_4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_4FocusGained(evt);
@@ -3716,12 +3719,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_1.add(jBlink_Einschaltzeit_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 30, 20));
 
         jLabel79.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel79.setText("2");
+        jLabel79.setText(bundle.getString("LDG30erPlus.jLabel79.text")); // NOI18N
         jEffekte_1.add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jBlink_Einschaltzeit_5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_5.setText("4");
+        jBlink_Einschaltzeit_5.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_5.text")); // NOI18N
         jBlink_Einschaltzeit_5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_5FocusGained(evt);
@@ -3739,7 +3742,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Einschaltzeit_6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_6.setText("4");
+        jBlink_Einschaltzeit_6.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_6.text")); // NOI18N
         jBlink_Einschaltzeit_6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_6FocusGained(evt);
@@ -3757,7 +3760,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Pausezeit_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_1.setText("2");
+        jBlink_Pausezeit_1.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_1.text")); // NOI18N
         jBlink_Pausezeit_1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_1FocusGained(evt);
@@ -3771,11 +3774,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_1KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 30, 20));
+        jEffekte_1.add(jBlink_Pausezeit_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 30, 20));
 
         jBlink_Pausezeit_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_2.setText("2");
+        jBlink_Pausezeit_2.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_2.text")); // NOI18N
         jBlink_Pausezeit_2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_2FocusGained(evt);
@@ -3789,7 +3792,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_2KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 30, 20));
+        jEffekte_1.add(jBlink_Pausezeit_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 30, 20));
 
         jAuxInv6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAuxInv6.addActionListener(new java.awt.event.ActionListener() {
@@ -3840,7 +3843,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_1.add(jAuxInv5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel26.setText("invers");
+        jLabel26.setText(bundle.getString("LDG30erPlus.jLabel26.text")); // NOI18N
         jEffekte_1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
 
         jBl_Inv1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -3892,40 +3895,40 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_1.add(jBl_Inv6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
 
         jLabel95.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel95.setText("ein");
+        jLabel95.setText(bundle.getString("LDG30erPlus.jLabel95.text")); // NOI18N
         jEffekte_1.add(jLabel95, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         jLabel47.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel47.setText("3");
+        jLabel47.setText(bundle.getString("LDG30erPlus.jLabel47.text")); // NOI18N
         jEffekte_1.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel50.setText("AUX");
+        jLabel50.setText(bundle.getString("LDG30erPlus.jLabel50.text")); // NOI18N
         jEffekte_1.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         jLabel66.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel66.setText("1");
+        jLabel66.setText(bundle.getString("LDG30erPlus.jLabel66.text")); // NOI18N
         jEffekte_1.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         jLabel72.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel72.setText("4");
+        jLabel72.setText(bundle.getString("LDG30erPlus.jLabel72.text")); // NOI18N
         jEffekte_1.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         jLabel73.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel73.setText("5");
+        jLabel73.setText(bundle.getString("LDG30erPlus.jLabel73.text")); // NOI18N
         jEffekte_1.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         jLabel96.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel96.setText("6");
+        jLabel96.setText(bundle.getString("LDG30erPlus.jLabel96.text")); // NOI18N
         jEffekte_1.add(jLabel96, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
         jLabel97.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel97.setText("2");
+        jLabel97.setText(bundle.getString("LDG30erPlus.jLabel97.text")); // NOI18N
         jEffekte_1.add(jLabel97, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         jBlink_Pausezeit_5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_5.setText("2");
+        jBlink_Pausezeit_5.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_5.text")); // NOI18N
         jBlink_Pausezeit_5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_5FocusGained(evt);
@@ -3939,11 +3942,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_5KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 30, -1));
+        jEffekte_1.add(jBlink_Pausezeit_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 30, -1));
 
         jBlink_Pausezeit_6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_6.setText("2");
+        jBlink_Pausezeit_6.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_6.text")); // NOI18N
         jBlink_Pausezeit_6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_6FocusGained(evt);
@@ -3957,15 +3960,16 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_6KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 30, -1));
+        jEffekte_1.add(jBlink_Pausezeit_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 30, -1));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel43.setText("Blinkfrequenz MARs");
-        jEffekte_1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel43.setText(bundle.getString("LDG30erPlus.jLabel43.text")); // NOI18N
+        jEffekte_1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
 
         jBlinkfrequenz3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenz3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenz3.setText("20");
+        jBlinkfrequenz3.setText(bundle.getString("LDG30erPlus.jBlinkfrequenz3.text")); // NOI18N
         jBlinkfrequenz3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenz3FocusGained(evt);
@@ -3979,11 +3983,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenz3KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenz3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 30, 20));
+        jEffekte_1.add(jBlinkfrequenz3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 30, 20));
 
         jBlinkfrequenz4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenz4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenz4.setText("20");
+        jBlinkfrequenz4.setText(bundle.getString("LDG30erPlus.jBlinkfrequenz4.text")); // NOI18N
         jBlinkfrequenz4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenz4FocusGained(evt);
@@ -3997,11 +4001,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenz4KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenz4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 30, -1));
+        jEffekte_1.add(jBlinkfrequenz4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 30, -1));
 
         jBlinkfrequenz1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenz1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenz1.setText("20");
+        jBlinkfrequenz1.setText(bundle.getString("LDG30erPlus.jBlinkfrequenz1.text")); // NOI18N
         jBlinkfrequenz1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenz1FocusGained(evt);
@@ -4015,11 +4019,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenz1KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenz1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 30, 20));
+        jEffekte_1.add(jBlinkfrequenz1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 30, 20));
 
         jBlinkfrequenz2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenz2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenz2.setText("20");
+        jBlinkfrequenz2.setText(bundle.getString("LDG30erPlus.jBlinkfrequenz2.text")); // NOI18N
         jBlinkfrequenz2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenz2FocusGained(evt);
@@ -4033,11 +4037,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenz2KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenz2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 30, 20));
+        jEffekte_1.add(jBlinkfrequenz2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 30, 20));
 
         jBlinkfrequenz5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenz5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenz5.setText("20");
+        jBlinkfrequenz5.setText(bundle.getString("LDG30erPlus.jBlinkfrequenz5.text")); // NOI18N
         jBlinkfrequenz5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenz5FocusGained(evt);
@@ -4051,11 +4055,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenz5KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenz5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 30, -1));
+        jEffekte_1.add(jBlinkfrequenz5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 30, -1));
 
         jBlinkfrequenz6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenz6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenz6.setText("20");
+        jBlinkfrequenz6.setText(bundle.getString("LDG30erPlus.jBlinkfrequenz6.text")); // NOI18N
         jBlinkfrequenz6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenz6FocusGained(evt);
@@ -4069,20 +4073,20 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenz6KeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenz6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 30, -1));
+        jEffekte_1.add(jBlinkfrequenz6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 30, -1));
         jEffekte_1.add(jBlinkBild, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 210, 150));
 
         jLabel180.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel180.setText("f");
+        jLabel180.setText(bundle.getString("LDG30erPlus.jLabel180.text")); // NOI18N
         jEffekte_1.add(jLabel180, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jLabel181.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel181.setText("r");
+        jLabel181.setText(bundle.getString("LDG30erPlus.jLabel181.text")); // NOI18N
         jEffekte_1.add(jLabel181, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         jBlink_Einschaltzeit_f.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_f.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_f.setText("4");
+        jBlink_Einschaltzeit_f.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_f.text")); // NOI18N
         jBlink_Einschaltzeit_f.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_fFocusGained(evt);
@@ -4100,7 +4104,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Einschaltzeit_r.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Einschaltzeit_r.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Einschaltzeit_r.setText("4");
+        jBlink_Einschaltzeit_r.setText(bundle.getString("LDG30erPlus.jBlink_Einschaltzeit_r.text")); // NOI18N
         jBlink_Einschaltzeit_r.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Einschaltzeit_rFocusGained(evt);
@@ -4118,7 +4122,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jBlink_Pausezeit_f.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_f.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_f.setText("2");
+        jBlink_Pausezeit_f.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_f.text")); // NOI18N
         jBlink_Pausezeit_f.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_fFocusGained(evt);
@@ -4132,11 +4136,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_fKeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_f, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 30, 20));
+        jEffekte_1.add(jBlink_Pausezeit_f, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 30, 20));
 
         jBlink_Pausezeit_r.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlink_Pausezeit_r.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlink_Pausezeit_r.setText("2");
+        jBlink_Pausezeit_r.setText(bundle.getString("LDG30erPlus.jBlink_Pausezeit_r.text")); // NOI18N
         jBlink_Pausezeit_r.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlink_Pausezeit_rFocusGained(evt);
@@ -4150,11 +4154,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlink_Pausezeit_rKeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlink_Pausezeit_r, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 30, 20));
+        jEffekte_1.add(jBlink_Pausezeit_r, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 30, 20));
 
         jBlinkfrequenzf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenzf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenzf.setText("20");
+        jBlinkfrequenzf.setText(bundle.getString("LDG30erPlus.jBlinkfrequenzf.text")); // NOI18N
         jBlinkfrequenzf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenzfFocusGained(evt);
@@ -4168,11 +4172,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenzfKeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenzf, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 30, 20));
+        jEffekte_1.add(jBlinkfrequenzf, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 30, 20));
 
         jBlinkfrequenzr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBlinkfrequenzr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBlinkfrequenzr.setText("20");
+        jBlinkfrequenzr.setText(bundle.getString("LDG30erPlus.jBlinkfrequenzr.text")); // NOI18N
         jBlinkfrequenzr.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jBlinkfrequenzrFocusGained(evt);
@@ -4186,14 +4190,14 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jBlinkfrequenzrKeyReleased(evt);
             }
         });
-        jEffekte_1.add(jBlinkfrequenzr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 30, 20));
+        jEffekte_1.add(jBlinkfrequenzr, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 30, 20));
 
         jLabel182.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel182.setText("f");
+        jLabel182.setText(bundle.getString("LDG30erPlus.jLabel182.text")); // NOI18N
         jEffekte_1.add(jLabel182, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel183.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel183.setText("r");
+        jLabel183.setText(bundle.getString("LDG30erPlus.jLabel183.text")); // NOI18N
         jEffekte_1.add(jLabel183, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jVorf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -4328,9 +4332,9 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
         jEffekte_1.add(jBl_Invr, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, -1, -1));
 
-        jDecodereigenschaften.addTab("Effekte 1", jEffekte_1);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jEffekte_1.TabConstraints.tabTitle"), jEffekte_1); // NOI18N
 
-        jEffekte_2.setToolTipText("<html>Verwendete CVs:<br>\nCV#61 bis CV#64, CV#113 bis CV#131, CV#160 bis CV#163, CV#177, CV#178");
+        jEffekte_2.setToolTipText(bundle.getString("LDG30erPlus.jEffekte_2.toolTipText")); // NOI18N
         jEffekte_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jEffekte_2.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -4341,7 +4345,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmen1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen1.setText("15");
+        jDimmen1.setText(bundle.getString("LDG30erPlus.jDimmen1.text")); // NOI18N
         jDimmen1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen1FocusGained(evt);
@@ -4359,7 +4363,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmen2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen2.setText("15");
+        jDimmen2.setText(bundle.getString("LDG30erPlus.jDimmen2.text")); // NOI18N
         jDimmen2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen2FocusGained(evt);
@@ -4376,16 +4380,16 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jDimmen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 30, -1));
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel31.setText("Dimmen");
+        jLabel31.setText(bundle.getString("LDG30erPlus.jLabel31.text")); // NOI18N
         jEffekte_2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel49.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel49.setText("3");
+        jLabel49.setText(bundle.getString("LDG30erPlus.jLabel49.text")); // NOI18N
         jEffekte_2.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jDimmen3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen3.setText("15");
+        jDimmen3.setText(bundle.getString("LDG30erPlus.jDimmen3.text")); // NOI18N
         jDimmen3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen3FocusGained(evt);
@@ -4411,7 +4415,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jKickrueck.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jKickrueck.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jKickrueck.setText("32");
+        jKickrueck.setText(bundle.getString("LDG30erPlus.jKickrueck.text")); // NOI18N
         jKickrueck.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jKickrueckFocusGained(evt);
@@ -4425,11 +4429,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jKickrueckKeyReleased(evt);
             }
         });
-        jEffekte_2.add(jKickrueck, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 30, 20));
+        jEffekte_2.add(jKickrueck, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 30, 20));
 
         jKickvor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jKickvor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jKickvor.setText("32");
+        jKickvor.setText(bundle.getString("LDG30erPlus.jKickvor.text")); // NOI18N
         jKickvor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jKickvorFocusGained(evt);
@@ -4443,43 +4447,43 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 jKickvorKeyReleased(evt);
             }
         });
-        jEffekte_2.add(jKickvor, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 30, -1));
+        jEffekte_2.add(jKickvor, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 30, -1));
 
         jLabel68.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel68.setText("AUX");
+        jLabel68.setText(bundle.getString("LDG30erPlus.jLabel68.text")); // NOI18N
         jEffekte_2.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jLabel74.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel74.setText("1");
+        jLabel74.setText(bundle.getString("LDG30erPlus.jLabel74.text")); // NOI18N
         jEffekte_2.add(jLabel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel39.setText("(entkuppeln)");
-        jEffekte_2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
+        jLabel39.setText(bundle.getString("LDG30erPlus.jLabel39.text")); // NOI18N
+        jEffekte_2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 31, 110, -1));
         jEffekte_2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 420, 10));
 
         jLabel76.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel76.setText("FS-abhängig");
+        jLabel76.setText(bundle.getString("LDG30erPlus.jLabel76.text")); // NOI18N
         jEffekte_2.add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
         jLabel77.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel77.setText("normal");
-        jEffekte_2.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+        jLabel77.setText(bundle.getString("LDG30erPlus.jLabel77.text")); // NOI18N
+        jEffekte_2.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         jLabel78.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel78.setText("Rangierlicht");
+        jLabel78.setText(bundle.getString("LDG30erPlus.jLabel78.text")); // NOI18N
         jEffekte_2.add(jLabel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
         jLabel80.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel80.setText("Schalteingänge schalten:");
+        jLabel80.setText(bundle.getString("LDG30erPlus.jLabel80.text")); // NOI18N
         jEffekte_2.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
 
         jLabel81.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel81.setText("AUX:");
+        jLabel81.setText(bundle.getString("LDG30erPlus.jLabel81.text")); // NOI18N
         jEffekte_2.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         jLabel98.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel98.setText("4");
+        jLabel98.setText(bundle.getString("LDG30erPlus.jLabel98.text")); // NOI18N
         jEffekte_2.add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jbDimmFS2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -4556,7 +4560,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmen4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen4.setText("15");
+        jDimmen4.setText(bundle.getString("LDG30erPlus.jDimmen4.text")); // NOI18N
         jDimmen4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen4FocusGained(evt);
@@ -4574,7 +4578,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimm_FS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimm_FS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimm_FS.setText("64");
+        jDimm_FS.setText(bundle.getString("LDG30erPlus.jDimm_FS.text")); // NOI18N
         jDimm_FS.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimm_FSFocusGained(evt);
@@ -4591,7 +4595,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jDimm_FS, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 30, -1));
 
         jRangierF3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRangierF3.setText("f3");
+        jRangierF3.setText(bundle.getString("LDG30erPlus.jRangierF3.text")); // NOI18N
         jRangierF3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRangierF3ActionPerformed(evt);
@@ -4600,7 +4604,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jRangierF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
 
         jRangierF4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRangierF4.setText("f4");
+        jRangierF4.setText(bundle.getString("LDG30erPlus.jRangierF4.text")); // NOI18N
         jRangierF4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRangierF4ActionPerformed(evt);
@@ -4609,12 +4613,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jRangierF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, -1, -1));
 
         jLabel101.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel101.setText("schalten");
+        jLabel101.setText(bundle.getString("LDG30erPlus.jLabel101.text")); // NOI18N
         jEffekte_2.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         jMindestSchlt1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMindestSchlt1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jMindestSchlt1.setText("1");
+        jMindestSchlt1.setText(bundle.getString("LDG30erPlus.jMindestSchlt1.text")); // NOI18N
         jMindestSchlt1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jMindestSchlt1FocusGained(evt);
@@ -4632,7 +4636,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jMindestSchlt2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMindestSchlt2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jMindestSchlt2.setText("1");
+        jMindestSchlt2.setText(bundle.getString("LDG30erPlus.jMindestSchlt2.text")); // NOI18N
         jMindestSchlt2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jMindestSchlt2FocusGained(evt);
@@ -4649,7 +4653,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jMindestSchlt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 30, 20));
 
         jLabel102.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel102.setText("2");
+        jLabel102.setText(bundle.getString("LDG30erPlus.jLabel102.text")); // NOI18N
         jEffekte_2.add(jLabel102, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jIn1Aux1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -4701,33 +4705,35 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jIn1Aux6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
 
         jLabel106.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel106.setText("rück");
+        jLabel106.setText(bundle.getString("LDG30erPlus.jLabel106.text")); // NOI18N
         jEffekte_2.add(jLabel106, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 190, -1, -1));
 
         jLabel107.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel107.setText("In1");
+        jLabel107.setText(bundle.getString("LDG30erPlus.jLabel107.text")); // NOI18N
         jEffekte_2.add(jLabel107, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         jLabel108.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel108.setText("Mindestschaltdauer In1");
-        jEffekte_2.add(jLabel108, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, -1, -1));
+        jLabel108.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel108.setText(bundle.getString("LDG30erPlus.jLabel108.text")); // NOI18N
+        jEffekte_2.add(jLabel108, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 311, 150, -1));
 
         jLabel109.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel109.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel109.setText("s");
+        jLabel109.setText(bundle.getString("LDG30erPlus.jLabel109.text")); // NOI18N
         jEffekte_2.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 20, -1));
 
         jLabel111.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel111.setText("In2");
+        jLabel111.setText(bundle.getString("LDG30erPlus.jLabel111.text")); // NOI18N
         jEffekte_2.add(jLabel111, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
         jLabel112.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel112.setText("ab FS");
-        jEffekte_2.add(jLabel112, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
+        jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel112.setText(bundle.getString("LDG30erPlus.jLabel112.text")); // NOI18N
+        jEffekte_2.add(jLabel112, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         jDimmFS3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFS3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFS3.setText("20");
+        jDimmFS3.setText(bundle.getString("LDG30erPlus.jDimmFS3.text")); // NOI18N
         jDimmFS3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFS3FocusGained(evt);
@@ -4745,7 +4751,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmFS4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFS4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFS4.setText("20");
+        jDimmFS4.setText(bundle.getString("LDG30erPlus.jDimmFS4.text")); // NOI18N
         jDimmFS4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFS4FocusGained(evt);
@@ -4763,7 +4769,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmFS1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFS1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFS1.setText("20");
+        jDimmFS1.setText(bundle.getString("LDG30erPlus.jDimmFS1.text")); // NOI18N
         jDimmFS1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFS1FocusGained(evt);
@@ -4781,7 +4787,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmFS2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFS2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFS2.setText("20");
+        jDimmFS2.setText(bundle.getString("LDG30erPlus.jDimmFS2.text")); // NOI18N
         jDimmFS2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFS2FocusGained(evt);
@@ -4798,55 +4804,55 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jDimmFS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 30, 20));
 
         jLabel67.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel67.setText("3");
+        jLabel67.setText(bundle.getString("LDG30erPlus.jLabel67.text")); // NOI18N
         jEffekte_2.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
 
         jLabel103.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel103.setText("AUX");
+        jLabel103.setText(bundle.getString("LDG30erPlus.jLabel103.text")); // NOI18N
         jEffekte_2.add(jLabel103, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
         jLabel113.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel113.setText("1");
+        jLabel113.setText(bundle.getString("LDG30erPlus.jLabel113.text")); // NOI18N
         jEffekte_2.add(jLabel113, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
 
         jLabel114.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel114.setText("4");
+        jLabel114.setText(bundle.getString("LDG30erPlus.jLabel114.text")); // NOI18N
         jEffekte_2.add(jLabel114, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
 
         jLabel115.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel115.setText("f");
+        jLabel115.setText(bundle.getString("LDG30erPlus.jLabel115.text")); // NOI18N
         jEffekte_2.add(jLabel115, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
 
         jLabel116.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel116.setText("r");
+        jLabel116.setText(bundle.getString("LDG30erPlus.jLabel116.text")); // NOI18N
         jEffekte_2.add(jLabel116, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
 
         jLabel117.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel117.setText("2");
+        jLabel117.setText(bundle.getString("LDG30erPlus.jLabel117.text")); // NOI18N
         jEffekte_2.add(jLabel117, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, -1));
 
         jLabel99.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel99.setText("3");
+        jLabel99.setText(bundle.getString("LDG30erPlus.jLabel99.text")); // NOI18N
         jEffekte_2.add(jLabel99, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
 
         jLabel118.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel118.setText("1");
+        jLabel118.setText(bundle.getString("LDG30erPlus.jLabel118.text")); // NOI18N
         jEffekte_2.add(jLabel118, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
 
         jLabel119.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel119.setText("4");
+        jLabel119.setText(bundle.getString("LDG30erPlus.jLabel119.text")); // NOI18N
         jEffekte_2.add(jLabel119, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
 
         jLabel120.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel120.setText("5");
+        jLabel120.setText(bundle.getString("LDG30erPlus.jLabel120.text")); // NOI18N
         jEffekte_2.add(jLabel120, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
 
         jLabel121.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel121.setText("6");
+        jLabel121.setText(bundle.getString("LDG30erPlus.jLabel121.text")); // NOI18N
         jEffekte_2.add(jLabel121, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, -1, -1));
 
         jLabel122.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel122.setText("2");
+        jLabel122.setText(bundle.getString("LDG30erPlus.jLabel122.text")); // NOI18N
         jEffekte_2.add(jLabel122, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
 
         jIn2Aux1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -4898,23 +4904,23 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jIn2Aux6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
 
         jLabel126.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel126.setText("Funktion:");
+        jLabel126.setText(bundle.getString("LDG30erPlus.jLabel126.text")); // NOI18N
         jEffekte_2.add(jLabel126, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         jLabel130.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel130.setText("In1");
+        jLabel130.setText(bundle.getString("LDG30erPlus.jLabel130.text")); // NOI18N
         jEffekte_2.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
 
         jLabel131.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel131.setText("In2");
+        jLabel131.setText(bundle.getString("LDG30erPlus.jLabel131.text")); // NOI18N
         jEffekte_2.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
         jLabel129.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel129.setText("f");
+        jLabel129.setText(bundle.getString("LDG30erPlus.jLabel129.text")); // NOI18N
         jEffekte_2.add(jLabel129, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
 
         jLabel184.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel184.setText("r");
+        jLabel184.setText(bundle.getString("LDG30erPlus.jLabel184.text")); // NOI18N
         jEffekte_2.add(jLabel184, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
 
         jIn1Auxf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -4982,35 +4988,35 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jIn2Func2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, -1, -1));
 
         jLabel100.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel100.setText("F5");
+        jLabel100.setText(bundle.getString("LDG30erPlus.jLabel100.text")); // NOI18N
         jEffekte_2.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         jLabel123.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel123.setText("F3");
+        jLabel123.setText(bundle.getString("LDG30erPlus.jLabel123.text")); // NOI18N
         jEffekte_2.add(jLabel123, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
 
         jLabel124.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel124.setText("F6");
+        jLabel124.setText(bundle.getString("LDG30erPlus.jLabel124.text")); // NOI18N
         jEffekte_2.add(jLabel124, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
 
         jLabel125.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel125.setText("F7");
+        jLabel125.setText(bundle.getString("LDG30erPlus.jLabel125.text")); // NOI18N
         jEffekte_2.add(jLabel125, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, -1));
 
         jLabel185.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel185.setText("F8");
+        jLabel185.setText(bundle.getString("LDG30erPlus.jLabel185.text")); // NOI18N
         jEffekte_2.add(jLabel185, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, -1, -1));
 
         jLabel186.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel186.setText("F4");
+        jLabel186.setText(bundle.getString("LDG30erPlus.jLabel186.text")); // NOI18N
         jEffekte_2.add(jLabel186, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
 
         jLabel187.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel187.setText("F1");
+        jLabel187.setText(bundle.getString("LDG30erPlus.jLabel187.text")); // NOI18N
         jEffekte_2.add(jLabel187, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
 
         jLabel188.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel188.setText("F2");
+        jLabel188.setText(bundle.getString("LDG30erPlus.jLabel188.text")); // NOI18N
         jEffekte_2.add(jLabel188, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
         jIn1Func3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5110,7 +5116,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jIn2Func8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel30.setText("FS Motor");
+        jLabel30.setText(bundle.getString("LDG30erPlus.jLabel30.text")); // NOI18N
         jEffekte_2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
 
         jKick6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5163,7 +5169,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmenf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmenf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmenf.setText("15");
+        jDimmenf.setText(bundle.getString("LDG30erPlus.jDimmenf.text")); // NOI18N
         jDimmenf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmenfFocusGained(evt);
@@ -5181,7 +5187,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmenr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmenr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmenr.setText("15");
+        jDimmenr.setText(bundle.getString("LDG30erPlus.jDimmenr.text")); // NOI18N
         jDimmenr.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmenrFocusGained(evt);
@@ -5198,7 +5204,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jDimmenr, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 30, -1));
 
         jLabel82.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel82.setText("f");
+        jLabel82.setText(bundle.getString("LDG30erPlus.jLabel82.text")); // NOI18N
         jEffekte_2.add(jLabel82, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jbDimmFSr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5218,12 +5224,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jbDimmFSf, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
 
         jLabel105.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel105.setText("r");
+        jLabel105.setText(bundle.getString("LDG30erPlus.jLabel105.text")); // NOI18N
         jEffekte_2.add(jLabel105, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jDimmFSf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFSf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFSf.setText("20");
+        jDimmFSf.setText(bundle.getString("LDG30erPlus.jDimmFSf.text")); // NOI18N
         jDimmFSf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFSfFocusGained(evt);
@@ -5241,7 +5247,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmFSr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFSr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFSr.setText("20");
+        jDimmFSr.setText(bundle.getString("LDG30erPlus.jDimmFSr.text")); // NOI18N
         jDimmFSr.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFSrFocusGained(evt);
@@ -5258,12 +5264,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jDimmFSr, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 30, 20));
 
         jLabel110.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel110.setText("5");
+        jLabel110.setText(bundle.getString("LDG30erPlus.jLabel110.text")); // NOI18N
         jEffekte_2.add(jLabel110, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jDimmen5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen5.setText("15");
+        jDimmen5.setText(bundle.getString("LDG30erPlus.jDimmen5.text")); // NOI18N
         jDimmen5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen5FocusGained(evt);
@@ -5280,7 +5286,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jDimmen5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 30, -1));
 
         jLabel127.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel127.setText("6");
+        jLabel127.setText(bundle.getString("LDG30erPlus.jLabel127.text")); // NOI18N
         jEffekte_2.add(jLabel127, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jbDimmFS5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5301,7 +5307,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmen6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmen6.setText("15");
+        jDimmen6.setText(bundle.getString("LDG30erPlus.jDimmen6.text")); // NOI18N
         jDimmen6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmen6FocusGained(evt);
@@ -5319,7 +5325,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmFS5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFS5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFS5.setText("20");
+        jDimmFS5.setText(bundle.getString("LDG30erPlus.jDimmFS5.text")); // NOI18N
         jDimmFS5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFS5FocusGained(evt);
@@ -5337,7 +5343,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDimmFS6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmFS6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDimmFS6.setText("20");
+        jDimmFS6.setText(bundle.getString("LDG30erPlus.jDimmFS6.text")); // NOI18N
         jDimmFS6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDimmFS6FocusGained(evt);
@@ -5355,7 +5361,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jKickMotor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jKickMotor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jKickMotor.setText("10");
+        jKickMotor.setText(bundle.getString("LDG30erPlus.jKickMotor.text")); // NOI18N
         jKickMotor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jKickMotorFocusGained(evt);
@@ -5377,7 +5383,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jKickMotor, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 30, -1));
 
         jLabel128.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel128.setText("Kick-Zeit");
+        jLabel128.setText(bundle.getString("LDG30erPlus.jLabel128.text")); // NOI18N
         jEffekte_2.add(jLabel128, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, -1, -1));
 
         jKickFahr1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5389,19 +5395,19 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jKickFahr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
 
         jLabel189.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel189.setText("vor");
+        jLabel189.setText(bundle.getString("LDG30erPlus.jLabel189.text")); // NOI18N
         jEffekte_2.add(jLabel189, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
         jLabel190.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel190.setText("ein");
+        jLabel190.setText(bundle.getString("LDG30erPlus.jLabel190.text")); // NOI18N
         jEffekte_2.add(jLabel190, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
 
         jLabel191.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel191.setText("fahren");
-        jEffekte_2.add(jLabel191, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
+        jLabel191.setText(bundle.getString("LDG30erPlus.jLabel191.text")); // NOI18N
+        jEffekte_2.add(jLabel191, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, 20));
 
         jLabel192.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel192.setText("ein");
+        jLabel192.setText(bundle.getString("LDG30erPlus.jLabel192.text")); // NOI18N
         jEffekte_2.add(jLabel192, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
         jKickFahr2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5452,49 +5458,50 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jEffekte_2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 10, 200));
 
         jLabel104.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel104.setText("Kicken");
+        jLabel104.setText(bundle.getString("LDG30erPlus.jLabel104.text")); // NOI18N
         jEffekte_2.add(jLabel104, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
 
         jLabel206.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel206.setText("Mindestschaltdauer In2");
-        jEffekte_2.add(jLabel206, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, -1, -1));
+        jLabel206.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel206.setText(bundle.getString("LDG30erPlus.jLabel206.text")); // NOI18N
+        jEffekte_2.add(jLabel206, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 331, 150, -1));
 
         jLabel240.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel240.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel240.setText("s");
+        jLabel240.setText(bundle.getString("LDG30erPlus.jLabel240.text")); // NOI18N
         jEffekte_2.add(jLabel240, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 20, -1));
 
         jLabel241.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel241.setText("AUX");
+        jLabel241.setText(bundle.getString("LDG30erPlus.jLabel241.text")); // NOI18N
         jEffekte_2.add(jLabel241, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
 
         jLabel242.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel242.setText("3");
+        jLabel242.setText(bundle.getString("LDG30erPlus.jLabel242.text")); // NOI18N
         jEffekte_2.add(jLabel242, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, -1, -1));
 
         jLabel243.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel243.setText("1");
+        jLabel243.setText(bundle.getString("LDG30erPlus.jLabel243.text")); // NOI18N
         jEffekte_2.add(jLabel243, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
         jLabel244.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel244.setText("4");
+        jLabel244.setText(bundle.getString("LDG30erPlus.jLabel244.text")); // NOI18N
         jEffekte_2.add(jLabel244, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, -1));
 
         jLabel245.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel245.setText("2");
+        jLabel245.setText(bundle.getString("LDG30erPlus.jLabel245.text")); // NOI18N
         jEffekte_2.add(jLabel245, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
 
         jLabel246.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel246.setText("5");
+        jLabel246.setText(bundle.getString("LDG30erPlus.jLabel246.text")); // NOI18N
         jEffekte_2.add(jLabel246, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, -1, -1));
 
         jLabel247.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel247.setText("6");
+        jLabel247.setText(bundle.getString("LDG30erPlus.jLabel247.text")); // NOI18N
         jEffekte_2.add(jLabel247, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
 
-        jDecodereigenschaften.addTab("Effekte 2", jEffekte_2);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jEffekte_2.TabConstraints.tabTitle"), jEffekte_2); // NOI18N
 
-        jSound.setToolTipText("Verwendete CV: CV#148 bis CV#160");
+        jSound.setToolTipText(bundle.getString("LDG30erPlus.jSound.toolTipText")); // NOI18N
         jSound.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jSound.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -5544,43 +5551,43 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jF9_SP, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         jLabel134.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel134.setText("F1");
+        jLabel134.setText(bundle.getString("LDG30erPlus.jLabel134.text")); // NOI18N
         jSound.add(jLabel134, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
 
         jLabel135.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel135.setText("F2");
+        jLabel135.setText(bundle.getString("LDG30erPlus.jLabel135.text")); // NOI18N
         jSound.add(jLabel135, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         jLabel136.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel136.setText("F3");
+        jLabel136.setText(bundle.getString("LDG30erPlus.jLabel136.text")); // NOI18N
         jSound.add(jLabel136, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
         jLabel137.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel137.setText("F4");
+        jLabel137.setText(bundle.getString("LDG30erPlus.jLabel137.text")); // NOI18N
         jSound.add(jLabel137, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
 
         jLabel138.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel138.setText("F5");
+        jLabel138.setText(bundle.getString("LDG30erPlus.jLabel138.text")); // NOI18N
         jSound.add(jLabel138, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
         jLabel139.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel139.setText("F6");
+        jLabel139.setText(bundle.getString("LDG30erPlus.jLabel139.text")); // NOI18N
         jSound.add(jLabel139, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         jLabel140.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel140.setText("F7");
+        jLabel140.setText(bundle.getString("LDG30erPlus.jLabel140.text")); // NOI18N
         jSound.add(jLabel140, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
 
         jLabel141.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel141.setText("F8");
+        jLabel141.setText(bundle.getString("LDG30erPlus.jLabel141.text")); // NOI18N
         jSound.add(jLabel141, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
 
         jLabel142.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel142.setText("F9");
+        jLabel142.setText(bundle.getString("LDG30erPlus.jLabel142.text")); // NOI18N
         jSound.add(jLabel142, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
 
         jLabel143.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel143.setText("F11");
+        jLabel143.setText(bundle.getString("LDG30erPlus.jLabel143.text")); // NOI18N
         jSound.add(jLabel143, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         jF1_SH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5688,7 +5695,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jF11_Gl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
 
         jLabel144.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel144.setText("wechsel:");
+        jLabel144.setText(bundle.getString("LDG30erPlus.jLabel144.text")); // NOI18N
         jSound.add(jLabel144, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, 20));
 
         jF5_SP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5716,11 +5723,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jF5_Gl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
 
         jLabel146.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel146.setText("Glocke");
+        jLabel146.setText(bundle.getString("LDG30erPlus.jLabel146.text")); // NOI18N
         jSound.add(jLabel146, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jLabel147.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel147.setText("Signalhorn");
+        jLabel147.setText(bundle.getString("LDG30erPlus.jLabel147.text")); // NOI18N
         jSound.add(jLabel147, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jF6_SP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -5844,96 +5851,96 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jF12_Gl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
 
         jLabel148.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel148.setText("F12");
+        jLabel148.setText(bundle.getString("LDG30erPlus.jLabel148.text")); // NOI18N
         jSound.add(jLabel148, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
 
         jLabel150.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel150.setText("F10");
+        jLabel150.setText(bundle.getString("LDG30erPlus.jLabel150.text")); // NOI18N
         jSound.add(jLabel150, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
 
         jLabel132.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel132.setText("Pendeln");
+        jLabel132.setText(bundle.getString("LDG30erPlus.jLabel132.text")); // NOI18N
         jSound.add(jLabel132, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, 20));
         jSound.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 122, 410, 10));
 
         jLabel133.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel133.setText("Funktions-Zuordnung Sound");
-        jSound.add(jLabel133, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 5, -1, 20));
+        jLabel133.setText(bundle.getString("LDG30erPlus.jLabel133.text")); // NOI18N
+        jSound.add(jLabel133, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 6, 190, 20));
 
         jLabel145.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel145.setText("F1");
+        jLabel145.setText(bundle.getString("LDG30erPlus.jLabel145.text")); // NOI18N
         jSound.add(jLabel145, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
 
         jLabel149.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel149.setText("F2");
+        jLabel149.setText(bundle.getString("LDG30erPlus.jLabel149.text")); // NOI18N
         jSound.add(jLabel149, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
 
         jLabel151.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel151.setText("F3");
+        jLabel151.setText(bundle.getString("LDG30erPlus.jLabel151.text")); // NOI18N
         jSound.add(jLabel151, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
 
         jLabel152.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel152.setText("F4");
+        jLabel152.setText(bundle.getString("LDG30erPlus.jLabel152.text")); // NOI18N
         jSound.add(jLabel152, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, -1));
 
         jLabel161.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel161.setText("F2");
+        jLabel161.setText(bundle.getString("LDG30erPlus.jLabel161.text")); // NOI18N
         jSound.add(jLabel161, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
 
         jLabel162.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel162.setText("F9");
+        jLabel162.setText(bundle.getString("LDG30erPlus.jLabel162.text")); // NOI18N
         jSound.add(jLabel162, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
 
         jLabel163.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel163.setText("F8");
+        jLabel163.setText(bundle.getString("LDG30erPlus.jLabel163.text")); // NOI18N
         jSound.add(jLabel163, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, -1));
 
         jLabel164.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel164.setText("F11");
+        jLabel164.setText(bundle.getString("LDG30erPlus.jLabel164.text")); // NOI18N
         jSound.add(jLabel164, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
 
         jLabel165.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel165.setText("F5");
+        jLabel165.setText(bundle.getString("LDG30erPlus.jLabel165.text")); // NOI18N
         jSound.add(jLabel165, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, -1));
 
         jLabel166.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel166.setText("F4");
+        jLabel166.setText(bundle.getString("LDG30erPlus.jLabel166.text")); // NOI18N
         jSound.add(jLabel166, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
         jLabel193.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel193.setText("F6");
+        jLabel193.setText(bundle.getString("LDG30erPlus.jLabel193.text")); // NOI18N
         jSound.add(jLabel193, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, -1, -1));
 
         jLabel194.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel194.setText("F12");
+        jLabel194.setText(bundle.getString("LDG30erPlus.jLabel194.text")); // NOI18N
         jSound.add(jLabel194, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, -1));
 
         jLabel195.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel195.setText("F7");
+        jLabel195.setText(bundle.getString("LDG30erPlus.jLabel195.text")); // NOI18N
         jSound.add(jLabel195, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
 
         jLabel196.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel196.setText("F3");
+        jLabel196.setText(bundle.getString("LDG30erPlus.jLabel196.text")); // NOI18N
         jSound.add(jLabel196, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
 
         jLabel197.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel197.setText("F1");
+        jLabel197.setText(bundle.getString("LDG30erPlus.jLabel197.text")); // NOI18N
         jSound.add(jLabel197, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
         jLabel198.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel198.setText("F10");
+        jLabel198.setText(bundle.getString("LDG30erPlus.jLabel198.text")); // NOI18N
         jSound.add(jLabel198, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, -1, -1));
 
         jLabel199.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel199.setText("Pfeiffe");
+        jLabel199.setText(bundle.getString("LDG30erPlus.jLabel199.text")); // NOI18N
         jSound.add(jLabel199, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jLabel200.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel200.setText("Ausschalten mit: ");
-        jSound.add(jLabel200, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, -1, -1));
+        jLabel200.setText(bundle.getString("LDG30erPlus.jLabel200.text")); // NOI18N
+        jSound.add(jLabel200, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 311, 110, -1));
 
         jLabel201.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel201.setText("IN 2");
+        jLabel201.setText(bundle.getString("LDG30erPlus.jLabel201.text")); // NOI18N
         jSound.add(jLabel201, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
         jF1_SP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -6145,20 +6152,21 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jF1_AKr, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
 
         jLabel202.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel202.setText("rück");
+        jLabel202.setText(bundle.getString("LDG30erPlus.jLabel202.text")); // NOI18N
         jSound.add(jLabel202, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, 20));
 
         jLabel203.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel203.setText("vor");
-        jSound.add(jLabel203, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, 20));
+        jLabel203.setText(bundle.getString("LDG30erPlus.jLabel203.text")); // NOI18N
+        jSound.add(jLabel203, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, 20));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel38.setText("FS Motor");
-        jSound.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, 20));
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel38.setText(bundle.getString("LDG30erPlus.jLabel38.text")); // NOI18N
+        jSound.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, 20));
 
         jAnkuppelMotor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAnkuppelMotor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jAnkuppelMotor.setText("10");
+        jAnkuppelMotor.setText(bundle.getString("LDG30erPlus.jAnkuppelMotor.text")); // NOI18N
         jAnkuppelMotor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jAnkuppelMotorFocusGained(evt);
@@ -6191,28 +6199,28 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jF2_AKr, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
 
         jLabel204.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel204.setText("rück");
+        jLabel204.setText(bundle.getString("LDG30erPlus.jLabel204.text")); // NOI18N
         jSound.add(jLabel204, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, 20));
 
         jLabel205.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel205.setText("vor");
-        jSound.add(jLabel205, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, 20));
+        jLabel205.setText(bundle.getString("LDG30erPlus.jLabel205.text")); // NOI18N
+        jSound.add(jLabel205, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, 20));
         jSound.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 410, 10));
 
         jLabel208.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel208.setText("Ankuppeln");
-        jSound.add(jLabel208, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, 20));
+        jLabel208.setText(bundle.getString("LDG30erPlus.jLabel208.text")); // NOI18N
+        jSound.add(jLabel208, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 131, 80, 20));
 
         jLabel209.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel209.setText("Eingang");
+        jLabel209.setText(bundle.getString("LDG30erPlus.jLabel209.text")); // NOI18N
         jSound.add(jLabel209, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jLabel210.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel210.setText("IN 1");
+        jLabel210.setText(bundle.getString("LDG30erPlus.jLabel210.text")); // NOI18N
         jSound.add(jLabel210, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 175, -1, 20));
 
         jLabel211.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel211.setText("IN 2");
+        jLabel211.setText(bundle.getString("LDG30erPlus.jLabel211.text")); // NOI18N
         jSound.add(jLabel211, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 235, -1, 20));
 
         jIN1_PendelF5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -6280,72 +6288,72 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jF1_AK12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, -1, -1));
 
         jLabel212.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel212.setText("F6");
+        jLabel212.setText(bundle.getString("LDG30erPlus.jLabel212.text")); // NOI18N
         jSound.add(jLabel212, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
 
         jLabel213.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel213.setText("F7");
+        jLabel213.setText(bundle.getString("LDG30erPlus.jLabel213.text")); // NOI18N
         jSound.add(jLabel213, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, -1, -1));
 
         jLabel214.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel214.setText("F8");
+        jLabel214.setText(bundle.getString("LDG30erPlus.jLabel214.text")); // NOI18N
         jSound.add(jLabel214, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, -1, -1));
 
         jLabel215.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel215.setText("F9");
+        jLabel215.setText(bundle.getString("LDG30erPlus.jLabel215.text")); // NOI18N
         jSound.add(jLabel215, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
 
         jLabel216.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel216.setText("F11");
+        jLabel216.setText(bundle.getString("LDG30erPlus.jLabel216.text")); // NOI18N
         jSound.add(jLabel216, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, -1, -1));
 
         jLabel217.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel217.setText("F12");
+        jLabel217.setText(bundle.getString("LDG30erPlus.jLabel217.text")); // NOI18N
         jSound.add(jLabel217, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, -1, -1));
 
         jLabel218.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel218.setText("F10");
+        jLabel218.setText(bundle.getString("LDG30erPlus.jLabel218.text")); // NOI18N
         jSound.add(jLabel218, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
         jLabel219.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel219.setText("F5");
+        jLabel219.setText(bundle.getString("LDG30erPlus.jLabel219.text")); // NOI18N
         jSound.add(jLabel219, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
 
         jLabel220.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel220.setText("F5");
+        jLabel220.setText(bundle.getString("LDG30erPlus.jLabel220.text")); // NOI18N
         jSound.add(jLabel220, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
 
         jLabel221.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel221.setText("F6");
+        jLabel221.setText(bundle.getString("LDG30erPlus.jLabel221.text")); // NOI18N
         jSound.add(jLabel221, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
 
         jLabel222.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel222.setText("F7");
+        jLabel222.setText(bundle.getString("LDG30erPlus.jLabel222.text")); // NOI18N
         jSound.add(jLabel222, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, -1, -1));
 
         jLabel223.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel223.setText("F8");
+        jLabel223.setText(bundle.getString("LDG30erPlus.jLabel223.text")); // NOI18N
         jSound.add(jLabel223, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, -1, -1));
 
         jLabel224.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel224.setText("F9");
+        jLabel224.setText(bundle.getString("LDG30erPlus.jLabel224.text")); // NOI18N
         jSound.add(jLabel224, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, -1, -1));
 
         jLabel225.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel225.setText("F11");
+        jLabel225.setText(bundle.getString("LDG30erPlus.jLabel225.text")); // NOI18N
         jSound.add(jLabel225, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, -1, -1));
 
         jLabel226.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel226.setText("F12");
+        jLabel226.setText(bundle.getString("LDG30erPlus.jLabel226.text")); // NOI18N
         jSound.add(jLabel226, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, -1, -1));
 
         jLabel227.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel227.setText("F10");
+        jLabel227.setText(bundle.getString("LDG30erPlus.jLabel227.text")); // NOI18N
         jSound.add(jLabel227, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
 
         jLabel228.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel228.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel228.setText("s");
+        jLabel228.setText(bundle.getString("LDG30erPlus.jLabel228.text")); // NOI18N
         jSound.add(jLabel228, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 20, 20));
 
         jIN1_Pendelf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -6365,20 +6373,20 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jIN1_Pendelr, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
 
         jLabel229.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel229.setText("rück");
+        jLabel229.setText(bundle.getString("LDG30erPlus.jLabel229.text")); // NOI18N
         jSound.add(jLabel229, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, 20));
 
         jLabel230.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel230.setText("vor");
-        jSound.add(jLabel230, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, 20));
+        jLabel230.setText(bundle.getString("LDG30erPlus.jLabel230.text")); // NOI18N
+        jSound.add(jLabel230, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, -1, 20));
 
         jLabel231.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel231.setText("rück");
+        jLabel231.setText(bundle.getString("LDG30erPlus.jLabel231.text")); // NOI18N
         jSound.add(jLabel231, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, 20));
 
         jLabel232.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel232.setText("vor");
-        jSound.add(jLabel232, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, -1, 20));
+        jLabel232.setText(bundle.getString("LDG30erPlus.jLabel232.text")); // NOI18N
+        jSound.add(jLabel232, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, -1, 20));
 
         jIN2_Pendelf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jIN2_Pendelf.addActionListener(new java.awt.event.ActionListener() {
@@ -6397,7 +6405,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jIN2_Pendelr, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
 
         jLabel233.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel233.setText("Eingang");
+        jLabel233.setText(bundle.getString("LDG30erPlus.jLabel233.text")); // NOI18N
         jSound.add(jLabel233, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         jIN1_PendelRW.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -6417,16 +6425,16 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jIN2_PendelRW, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, -1, -1));
 
         jLabel234.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel234.setText("gilt für: ");
-        jSound.add(jLabel234, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, 20));
+        jLabel234.setText(bundle.getString("LDG30erPlus.jLabel234.text")); // NOI18N
+        jSound.add(jLabel234, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 311, 50, 20));
 
         jLabel235.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel235.setText("Halte-");
+        jLabel235.setText(bundle.getString("LDG30erPlus.jLabel235.text")); // NOI18N
         jSound.add(jLabel235, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, 30));
 
         jIN1_PendelHaltZeit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jIN1_PendelHaltZeit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jIN1_PendelHaltZeit.setText("10");
+        jIN1_PendelHaltZeit.setText(bundle.getString("LDG30erPlus.jIN1_PendelHaltZeit.text")); // NOI18N
         jIN1_PendelHaltZeit.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jIN1_PendelHaltZeitFocusGained(evt);
@@ -6449,7 +6457,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jIN2_PendelHaltZeit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jIN2_PendelHaltZeit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jIN2_PendelHaltZeit.setText("10");
+        jIN2_PendelHaltZeit.setText(bundle.getString("LDG30erPlus.jIN2_PendelHaltZeit.text")); // NOI18N
         jIN2_PendelHaltZeit.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jIN2_PendelHaltZeitFocusGained(evt);
@@ -6466,25 +6474,25 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jSound.add(jIN2_PendelHaltZeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 50, -1));
 
         jLabel236.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel236.setText("Richtungs-");
-        jSound.add(jLabel236, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 305, -1, 20));
+        jLabel236.setText(bundle.getString("LDG30erPlus.jLabel236.text")); // NOI18N
+        jSound.add(jLabel236, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 306, 70, 20));
 
         jLabel237.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel237.setText("Zeit:");
+        jLabel237.setText(bundle.getString("LDG30erPlus.jLabel237.text")); // NOI18N
         jSound.add(jLabel237, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, 20));
 
         jLabel248.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel248.setText("IN 1");
+        jLabel248.setText(bundle.getString("LDG30erPlus.jLabel248.text")); // NOI18N
         jSound.add(jLabel248, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
         jLabel249.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel249.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel249.setText("s");
+        jLabel249.setText(bundle.getString("LDG30erPlus.jLabel249.text")); // NOI18N
         jSound.add(jLabel249, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 20, 20));
 
-        jDecodereigenschaften.addTab("Effekte 3", jSound);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jSound.TabConstraints.tabTitle"), jSound); // NOI18N
 
-        jServo.setToolTipText("Verwendete CV: CV#164 bis CV#176");
+        jServo.setToolTipText(bundle.getString("LDG30erPlus.jServo.toolTipText")); // NOI18N
         jServo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jServo.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -6495,7 +6503,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel24.setText("Geschwindigkeit:");
+        jLabel24.setText(bundle.getString("LDG30erPlus.jLabel24.text")); // NOI18N
         jServo.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, 20));
 
         jServoPOM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -6507,7 +6515,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoPOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, -1));
 
         jServoF9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF9.setText("F9");
+        jServoF9.setText(bundle.getString("LDG30erPlus.jServoF9.text")); // NOI18N
         jServoF9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF9ActionPerformed(evt);
@@ -6516,7 +6524,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoF9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
 
         jServoF10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF10.setText("F10");
+        jServoF10.setText(bundle.getString("LDG30erPlus.jServoF10.text")); // NOI18N
         jServoF10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF10ActionPerformed(evt);
@@ -6525,7 +6533,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoF10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
 
         jServoF12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF12.setText("F12");
+        jServoF12.setText(bundle.getString("LDG30erPlus.jServoF12.text")); // NOI18N
         jServoF12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF12ActionPerformed(evt);
@@ -6534,7 +6542,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoF12, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 40, 50, -1));
 
         jServoF5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF5.setText("F5");
+        jServoF5.setText(bundle.getString("LDG30erPlus.jServoF5.text")); // NOI18N
         jServoF5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF5ActionPerformed(evt);
@@ -6543,7 +6551,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         jServoF6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF6.setText("F6");
+        jServoF6.setText(bundle.getString("LDG30erPlus.jServoF6.text")); // NOI18N
         jServoF6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF6ActionPerformed(evt);
@@ -6552,7 +6560,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         jServoF7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF7.setText("F7");
+        jServoF7.setText(bundle.getString("LDG30erPlus.jServoF7.text")); // NOI18N
         jServoF7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF7ActionPerformed(evt);
@@ -6561,7 +6569,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
         jServoF8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF8.setText("F8");
+        jServoF8.setText(bundle.getString("LDG30erPlus.jServoF8.text")); // NOI18N
         jServoF8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF8ActionPerformed(evt);
@@ -6570,11 +6578,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
         jLabel167.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel167.setText("invertieren von AUX:");
-        jServo.add(jLabel167, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, 20));
+        jLabel167.setText(bundle.getString("LDG30erPlus.jLabel167.text")); // NOI18N
+        jServo.add(jLabel167, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 351, 140, 20));
 
         jGeschwindigkeit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jGeschwindigkeit.setText("5");
+        jGeschwindigkeit.setText(bundle.getString("LDG30erPlus.jGeschwindigkeit.text")); // NOI18N
         jGeschwindigkeit.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jGeschwindigkeitFocusGained(evt);
@@ -6591,7 +6599,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 50, -1));
 
         jServoF11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jServoF11.setText("F11");
+        jServoF11.setText(bundle.getString("LDG30erPlus.jServoF11.text")); // NOI18N
         jServoF11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jServoF11ActionPerformed(evt);
@@ -6601,20 +6609,20 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jLabel168.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel168.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel168.setText("Schalten mit:");
-        jServo.add(jLabel168, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
+        jLabel168.setText(bundle.getString("LDG30erPlus.jLabel168.text")); // NOI18N
+        jServo.add(jLabel168, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 41, 90, 20));
 
         jLabel169.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel169.setText("Einstellungen für Fahrstufe 0:");
+        jLabel169.setText(bundle.getString("LDG30erPlus.jLabel169.text")); // NOI18N
         jServo.add(jLabel169, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 230, -1));
 
         jLabel170.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel170.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel170.setText("rechter Anschlag:");
-        jServo.add(jLabel170, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
+        jLabel170.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel170.setText(bundle.getString("LDG30erPlus.jLabel170.text")); // NOI18N
+        jServo.add(jLabel170, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 71, 120, -1));
 
         jlinkerAnschlag.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jlinkerAnschlag.setText("5");
+        jlinkerAnschlag.setText(bundle.getString("LDG30erPlus.jlinkerAnschlag.text")); // NOI18N
         jlinkerAnschlag.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jlinkerAnschlagFocusGained(evt);
@@ -6631,7 +6639,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jlinkerAnschlag, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 50, -1));
 
         jrechterAnschlag.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jrechterAnschlag.setText("5");
+        jrechterAnschlag.setText(bundle.getString("LDG30erPlus.jrechterAnschlag.text")); // NOI18N
         jrechterAnschlag.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jrechterAnschlagFocusGained(evt);
@@ -6649,21 +6657,21 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jLabel171.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel171.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel171.setText("linker Anschlag:");
+        jLabel171.setText(bundle.getString("LDG30erPlus.jLabel171.text")); // NOI18N
         jServo.add(jLabel171, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 100, -1));
 
         jLabel172.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel172.setText("Einstellungen Servo:");
-        jServo.add(jLabel172, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 160, -1));
+        jLabel172.setText(bundle.getString("LDG30erPlus.jLabel172.text")); // NOI18N
+        jServo.add(jLabel172, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 11, 200, -1));
         jServo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 200, 10));
 
         jLabel173.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel173.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel173.setText("links und rechts tauschen:");
+        jLabel173.setText(bundle.getString("LDG30erPlus.jLabel173.text")); // NOI18N
         jServo.add(jLabel173, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 170, 20));
 
         jFS0_F5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F5.setText("F5");
+        jFS0_F5.setText(bundle.getString("LDG30erPlus.jFS0_F5.text")); // NOI18N
         jFS0_F5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F5ActionPerformed(evt);
@@ -6672,7 +6680,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
 
         jFS0_F6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F6.setText("F6");
+        jFS0_F6.setText(bundle.getString("LDG30erPlus.jFS0_F6.text")); // NOI18N
         jFS0_F6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F6ActionPerformed(evt);
@@ -6681,7 +6689,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, -1, -1));
 
         jFS0_F7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F7.setText("F7");
+        jFS0_F7.setText(bundle.getString("LDG30erPlus.jFS0_F7.text")); // NOI18N
         jFS0_F7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F7ActionPerformed(evt);
@@ -6690,7 +6698,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, -1, -1));
 
         jFS0_F8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F8.setText("F8");
+        jFS0_F8.setText(bundle.getString("LDG30erPlus.jFS0_F8.text")); // NOI18N
         jFS0_F8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F8ActionPerformed(evt);
@@ -6699,7 +6707,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
 
         jFS0_F1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F1.setText("F1");
+        jFS0_F1.setText(bundle.getString("LDG30erPlus.jFS0_F1.text")); // NOI18N
         jFS0_F1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F1ActionPerformed(evt);
@@ -6708,7 +6716,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 
         jFS0_F2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F2.setText("F2");
+        jFS0_F2.setText(bundle.getString("LDG30erPlus.jFS0_F2.text")); // NOI18N
         jFS0_F2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F2ActionPerformed(evt);
@@ -6717,7 +6725,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
 
         jFS0_F3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F3.setText("F3");
+        jFS0_F3.setText(bundle.getString("LDG30erPlus.jFS0_F3.text")); // NOI18N
         jFS0_F3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F3ActionPerformed(evt);
@@ -6726,7 +6734,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
 
         jFS0_F4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_F4.setText("F4");
+        jFS0_F4.setText(bundle.getString("LDG30erPlus.jFS0_F4.text")); // NOI18N
         jFS0_F4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_F4ActionPerformed(evt);
@@ -6735,11 +6743,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_F4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
 
         jLabel174.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel174.setText("Ausschalten von F0 mit:");
+        jLabel174.setText(bundle.getString("LDG30erPlus.jLabel174.text")); // NOI18N
         jServo.add(jLabel174, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 20));
 
         jFS0_AUX1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX1.setText("1");
+        jFS0_AUX1.setText(bundle.getString("LDG30erPlus.jFS0_AUX1.text")); // NOI18N
         jFS0_AUX1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX1ActionPerformed(evt);
@@ -6748,7 +6756,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
 
         jFS0_AUX2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX2.setText("2");
+        jFS0_AUX2.setText(bundle.getString("LDG30erPlus.jFS0_AUX2.text")); // NOI18N
         jFS0_AUX2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX2ActionPerformed(evt);
@@ -6757,7 +6765,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, -1, -1));
 
         jFS0_AUX3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX3.setText("3");
+        jFS0_AUX3.setText(bundle.getString("LDG30erPlus.jFS0_AUX3.text")); // NOI18N
         jFS0_AUX3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX3ActionPerformed(evt);
@@ -6766,7 +6774,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, -1));
 
         jFS0_AUX4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX4.setText("4");
+        jFS0_AUX4.setText(bundle.getString("LDG30erPlus.jFS0_AUX4.text")); // NOI18N
         jFS0_AUX4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX4ActionPerformed(evt);
@@ -6775,7 +6783,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, -1, -1));
 
         jFS0_AUX5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX5.setText("5");
+        jFS0_AUX5.setText(bundle.getString("LDG30erPlus.jFS0_AUX5.text")); // NOI18N
         jFS0_AUX5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX5ActionPerformed(evt);
@@ -6784,7 +6792,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, -1, -1));
 
         jFS0_AUX6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX6.setText("6");
+        jFS0_AUX6.setText(bundle.getString("LDG30erPlus.jFS0_AUX6.text")); // NOI18N
         jFS0_AUX6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX6ActionPerformed(evt);
@@ -6793,11 +6801,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
 
         jLabel175.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel175.setText("dann einschalten von AUX:");
+        jLabel175.setText(bundle.getString("LDG30erPlus.jLabel175.text")); // NOI18N
         jServo.add(jLabel175, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, 20));
 
         jFS0_AUXinv1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUXinv1.setText("1");
+        jFS0_AUXinv1.setText(bundle.getString("LDG30erPlus.jFS0_AUXinv1.text")); // NOI18N
         jFS0_AUXinv1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUXinv1ActionPerformed(evt);
@@ -6806,7 +6814,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUXinv1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, -1, -1));
 
         jFS0_AUXinv2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUXinv2.setText("2");
+        jFS0_AUXinv2.setText(bundle.getString("LDG30erPlus.jFS0_AUXinv2.text")); // NOI18N
         jFS0_AUXinv2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUXinv2ActionPerformed(evt);
@@ -6815,7 +6823,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUXinv2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
 
         jFS0_AUXinv3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUXinv3.setText("3");
+        jFS0_AUXinv3.setText(bundle.getString("LDG30erPlus.jFS0_AUXinv3.text")); // NOI18N
         jFS0_AUXinv3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUXinv3ActionPerformed(evt);
@@ -6824,7 +6832,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUXinv3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
 
         jFS0_AUXinv4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUXinv4.setText("4");
+        jFS0_AUXinv4.setText(bundle.getString("LDG30erPlus.jFS0_AUXinv4.text")); // NOI18N
         jFS0_AUXinv4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUXinv4ActionPerformed(evt);
@@ -6833,7 +6841,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUXinv4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
 
         jFS0_AUXinv5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUXinv5.setText("5");
+        jFS0_AUXinv5.setText(bundle.getString("LDG30erPlus.jFS0_AUXinv5.text")); // NOI18N
         jFS0_AUXinv5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUXinv5ActionPerformed(evt);
@@ -6842,7 +6850,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUXinv5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, -1, -1));
 
         jFS0_AUXinv6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUXinv6.setText("6");
+        jFS0_AUXinv6.setText(bundle.getString("LDG30erPlus.jFS0_AUXinv6.text")); // NOI18N
         jFS0_AUXinv6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUXinv6ActionPerformed(evt);
@@ -6852,7 +6860,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 420, 10));
 
         jFS0_AUX7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX7.setText("1");
+        jFS0_AUX7.setText(bundle.getString("LDG30erPlus.jFS0_AUX7.text")); // NOI18N
         jFS0_AUX7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX7ActionPerformed(evt);
@@ -6861,7 +6869,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
 
         jFS0_AUX8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX8.setText("2");
+        jFS0_AUX8.setText(bundle.getString("LDG30erPlus.jFS0_AUX8.text")); // NOI18N
         jFS0_AUX8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX8ActionPerformed(evt);
@@ -6870,7 +6878,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
 
         jFS0_AUX9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX9.setText("3");
+        jFS0_AUX9.setText(bundle.getString("LDG30erPlus.jFS0_AUX9.text")); // NOI18N
         jFS0_AUX9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX9ActionPerformed(evt);
@@ -6879,7 +6887,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
 
         jFS0_AUX10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX10.setText("4");
+        jFS0_AUX10.setText(bundle.getString("LDG30erPlus.jFS0_AUX10.text")); // NOI18N
         jFS0_AUX10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX10ActionPerformed(evt);
@@ -6888,7 +6896,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
 
         jFS0_AUX11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX11.setText("5");
+        jFS0_AUX11.setText(bundle.getString("LDG30erPlus.jFS0_AUX11.text")); // NOI18N
         jFS0_AUX11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX11ActionPerformed(evt);
@@ -6897,7 +6905,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, -1, -1));
 
         jFS0_AUX12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jFS0_AUX12.setText("6");
+        jFS0_AUX12.setText(bundle.getString("LDG30erPlus.jFS0_AUX12.text")); // NOI18N
         jFS0_AUX12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFS0_AUX12ActionPerformed(evt);
@@ -6906,7 +6914,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jFS0_AUX12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, -1));
 
         jLabel176.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel176.setText("bzw ausschalten von AUX:");
+        jLabel176.setText(bundle.getString("LDG30erPlus.jLabel176.text")); // NOI18N
         jServo.add(jLabel176, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, 20));
 
         jServoTausch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -6918,13 +6926,13 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jServo.add(jServoTausch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
 
         jLabel207.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel207.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel207.setText("Servo über POM steuern:");
+        jLabel207.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel207.setText(bundle.getString("LDG30erPlus.jLabel207.text")); // NOI18N
         jServo.add(jLabel207, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 160, 20));
 
-        jDecodereigenschaften.addTab("Servo + FS0", jServo);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jServo.TabConstraints.tabTitle"), jServo); // NOI18N
 
-        jAnalog.setToolTipText("Verwendete CV: CV#11,  CV#12,  CV#13,  CV#199");
+        jAnalog.setToolTipText(bundle.getString("LDG30erPlus.jAnalog.toolTipText")); // NOI18N
         jAnalog.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAnalog.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -6934,11 +6942,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Richtungswechsel bei: ");
-        jAnalog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+        jLabel2.setText(bundle.getString("LDG30erPlus.jLabel2.text")); // NOI18N
+        jAnalog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 261, 150, -1));
 
         jF1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF1.setText("F1");
+        jF1.setText(bundle.getString("LDG30erPlus.jF1.text")); // NOI18N
         jF1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF1ActionPerformed(evt);
@@ -6947,7 +6955,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         jF2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF2.setText("F2");
+        jF2.setText(bundle.getString("LDG30erPlus.jF2.text")); // NOI18N
         jF2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF2ActionPerformed(evt);
@@ -6956,7 +6964,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         jF3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF3.setText("F3");
+        jF3.setText(bundle.getString("LDG30erPlus.jF3.text")); // NOI18N
         jF3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF3ActionPerformed(evt);
@@ -6965,7 +6973,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         jF4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF4.setText("F4");
+        jF4.setText(bundle.getString("LDG30erPlus.jF4.text")); // NOI18N
         jF4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF4ActionPerformed(evt);
@@ -6974,7 +6982,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         jF5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF5.setText("F5");
+        jF5.setText(bundle.getString("LDG30erPlus.jF5.text")); // NOI18N
         jF5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF5ActionPerformed(evt);
@@ -6983,7 +6991,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
         jF6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF6.setText("F6");
+        jF6.setText(bundle.getString("LDG30erPlus.jF6.text")); // NOI18N
         jF6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF6ActionPerformed(evt);
@@ -6992,7 +7000,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         jF7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF7.setText("F7");
+        jF7.setText(bundle.getString("LDG30erPlus.jF7.text")); // NOI18N
         jF7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF7ActionPerformed(evt);
@@ -7001,7 +7009,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
 
         jF8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF8.setText("F8");
+        jF8.setText(bundle.getString("LDG30erPlus.jF8.text")); // NOI18N
         jF8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jF8ActionPerformed(evt);
@@ -7010,11 +7018,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel17.setText("Funktionen, die im Analogmodus aktiv sind: ");
+        jLabel17.setText(bundle.getString("LDG30erPlus.jLabel17.text")); // NOI18N
         jAnalog.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jPacketTimeOut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPacketTimeOut.setText("5");
+        jPacketTimeOut.setText(bundle.getString("LDG30erPlus.jPacketTimeOut.text")); // NOI18N
         jPacketTimeOut.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jPacketTimeOutFocusGained(evt);
@@ -7033,30 +7041,31 @@ public class LDG30erPlus extends javax.swing.JFrame {
         buttonGroup2.add(jAnalogRW_W);
         jAnalogRW_W.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAnalogRW_W.setSelected(true);
-        jAnalogRW_W.setText("Überspannung (Wechselstromsystem)");
+        jAnalogRW_W.setText(bundle.getString("LDG30erPlus.jAnalogRW_W.text")); // NOI18N
         jAnalogRW_W.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAnalogRW_WActionPerformed(evt);
             }
         });
-        jAnalog.add(jAnalogRW_W, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
+        jAnalog.add(jAnalogRW_W, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 251, 270, -1));
 
         buttonGroup2.add(jAnalogRW_G);
         jAnalogRW_G.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnalogRW_G.setText("Polaritätswechsel (Gleichstromsystem)");
+        jAnalogRW_G.setText(bundle.getString("LDG30erPlus.jAnalogRW_G.text")); // NOI18N
         jAnalogRW_G.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAnalogRW_GActionPerformed(evt);
             }
         });
-        jAnalog.add(jAnalogRW_G, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
+        jAnalog.add(jAnalogRW_G, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 271, 280, -1));
 
         jLabel238.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel238.setText("Empfindlichkeit Umschaltimpuls: ");
-        jAnalog.add(jLabel238, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+        jLabel238.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel238.setText(bundle.getString("LDG30erPlus.jLabel238.text")); // NOI18N
+        jAnalog.add(jLabel238, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 331, 200, -1));
 
         jUmschaltEmpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jUmschaltEmpf.setText("5");
+        jUmschaltEmpf.setText(bundle.getString("LDG30erPlus.jUmschaltEmpf.text")); // NOI18N
         jUmschaltEmpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jUmschaltEmpfFocusGained(evt);
@@ -7073,10 +7082,10 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jAnalog.add(jUmschaltEmpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 50, -1));
 
         jLabel239.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel239.setText("Time Out für Analogerkennung: ");
+        jLabel239.setText(bundle.getString("LDG30erPlus.jLabel239.text")); // NOI18N
         jAnalog.add(jLabel239, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
-        jDecodereigenschaften.addTab("Analog", jAnalog);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jAnalog.TabConstraints.tabTitle"), jAnalog); // NOI18N
 
         jPanel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -7090,7 +7099,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jComment);
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel36.setText("Kommentar eingeben:");
+        jLabel36.setText(bundle.getString("LDG30erPlus.jLabel36.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -7100,7 +7109,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel36)))
@@ -7116,11 +7125,11 @@ public class LDG30erPlus extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jDecodereigenschaften.addTab("Kommentar", jPanel3);
+        jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
 
         jCV_LesenSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCV_LesenSchreiben.setText("CVs lesen/schreiben");
-        jCV_LesenSchreiben.setToolTipText("<html>Das folgende Fenster darf nicht zusammen mit <br>\ndem Fenster zum Testen der Decoder geöffnet sein!");
+        jCV_LesenSchreiben.setText(bundle.getString("LDG30erPlus.jCV_LesenSchreiben.text")); // NOI18N
+        jCV_LesenSchreiben.setToolTipText(bundle.getString("LDG30erPlus.jCV_LesenSchreiben.toolTipText")); // NOI18N
         jCV_LesenSchreiben.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCV_LesenSchreibenActionPerformed(evt);
@@ -7128,8 +7137,8 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
 
         jDirekteingabe.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jDirekteingabe.setText("Direkt ein");
-        jDirekteingabe.setToolTipText("Hier kann die direkte Eingabe von CVs eingeschaltet werden.");
+        jDirekteingabe.setText(bundle.getString("LDG30erPlus.jDirekteingabe.text")); // NOI18N
+        jDirekteingabe.setToolTipText(bundle.getString("LDG30erPlus.jDirekteingabe.toolTipText")); // NOI18N
         jDirekteingabe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDirekteingabeActionPerformed(evt);
@@ -7137,10 +7146,10 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Adresse");
+        jLabel1.setText(bundle.getString("LDG30erPlus.jLabel1.text")); // NOI18N
 
         jOpen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jOpen.setText("Öffnen");
+        jOpen.setText(bundle.getString("LDG30erPlus.jOpen.text")); // NOI18N
         jOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jOpenActionPerformed(evt);
@@ -7149,7 +7158,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         buttonGroup1.add(jKurzeAdr);
         jKurzeAdr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jKurzeAdr.setText("kurz (CV#1)");
+        jKurzeAdr.setText(bundle.getString("LDG30erPlus.jKurzeAdr.text")); // NOI18N
         jKurzeAdr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jKurzeAdrActionPerformed(evt);
@@ -7158,7 +7167,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDecoderAdresse.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDecoderAdresse.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDecoderAdresse.setText("3");
+        jDecoderAdresse.setText(bundle.getString("LDG30erPlus.jDecoderAdresse.text")); // NOI18N
         jDecoderAdresse.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDecoderAdresseFocusGained(evt);
@@ -7174,7 +7183,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
 
         jCV_Anzeige.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCV_Anzeige.setBorder(javax.swing.BorderFactory.createTitledBorder("CV Direkteingabe"));
+        jCV_Anzeige.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("LDG30erPlus.jCV_Anzeige.border.title"))); // NOI18N
         jCV_Anzeige.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCV_AnzeigeActionPerformed(evt);
@@ -7183,7 +7192,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         buttonGroup1.add(jlangeAdr);
         jlangeAdr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jlangeAdr.setText("lang (CV#17 + 18)");
+        jlangeAdr.setText(bundle.getString("LDG30erPlus.jlangeAdr.text")); // NOI18N
         jlangeAdr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jlangeAdrActionPerformed(evt);
@@ -7191,8 +7200,8 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
 
         jAbbrechen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAbbrechen.setText("Schließen");
-        jAbbrechen.setToolTipText("");
+        jAbbrechen.setText(bundle.getString("LDG30erPlus.jAbbrechen.text")); // NOI18N
+        jAbbrechen.setToolTipText(bundle.getString("LDG30erPlus.jAbbrechen.toolTipText")); // NOI18N
         jAbbrechen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAbbrechenActionPerformed(evt);
@@ -7201,7 +7210,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jDecoderAdresse1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDecoderAdresse1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDecoderAdresse1.setText("0");
+        jDecoderAdresse1.setText(bundle.getString("LDG30erPlus.jDecoderAdresse1.text")); // NOI18N
         jDecoderAdresse1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jDecoderAdresse1FocusGained(evt);
@@ -7217,14 +7226,14 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel27.setText("Consist");
+        jLabel27.setText(bundle.getString("LDG30erPlus.jLabel27.text")); // NOI18N
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel28.setText("(Mehrfach-Traktions-Adr.)");
+        jLabel28.setText(bundle.getString("LDG30erPlus.jLabel28.text")); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setText("Test");
-        jButton1.setToolTipText("<html>Das folgende Fenster darf nicht zusammen mit <br>\ndem Fenster zum Programmieren der CVs geöffnet sein!");
+        jButton1.setText(bundle.getString("LDG30erPlus.jButton1.text")); // NOI18N
+        jButton1.setToolTipText(bundle.getString("LDG30erPlus.jButton1.toolTipText")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -7241,38 +7250,40 @@ public class LDG30erPlus extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCV_Anzeige, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCV_Inhalt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jDecoderAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jKurzeAdr)
-                                    .addComponent(jlangeAdr))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jlangeAdr)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jDirekteingabe)
+                                .addComponent(jCV_Anzeige, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCV_Inhalt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jDirekteingabe)
+                                .addGap(28, 28, 28)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
+                                .addGap(12, 12, 12)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel27)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jDecoderAdresse1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel28))))))
-                    .addComponent(jDecodereigenschaften, javax.swing.GroupLayout.PREFERRED_SIZE, 453, Short.MAX_VALUE))
-                .addGap(6, 6, 6)
+                                        .addComponent(jLabel28)))))
+                        .addGap(6, 6, 6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jDecodereigenschaften, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jAbbrechen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCV_LesenSchreiben, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                    .addComponent(jCV_LesenSchreiben, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -12556,13 +12567,13 @@ public class LDG30erPlus extends javax.swing.JFrame {
     private void jDirekteingabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirekteingabeActionPerformed
         // hier wird die Direkteingabe (de)aktiviert
         String str = jDirekteingabe.getText();
-        if(str == "Direkt ein") {
+        if(str.equals(bundle.getString("FD_LED.jDirekteingabe.text"))) {
             jCV_Inhalt.setEditable(true);
-            str = "Direkt aus";
+            str = bundle.getString("FD_LED.jDirekteingabe_aus.text");
             jDirekteingabe.setText(str);
         } else {
             jCV_Inhalt.setEditable(false);
-            str = "Direkt ein";
+            str = bundle.getString("FD_LED.jDirekteingabe.text");
             jDirekteingabe.setText(str);
         }
         jCV_Inhalt.validate();

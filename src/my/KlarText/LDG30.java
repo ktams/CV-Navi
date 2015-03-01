@@ -9,6 +9,7 @@ package my.KlarText;
 import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
@@ -26,6 +27,7 @@ public class LDG30 extends javax.swing.JFrame {
     public String ReturnString;
     private int CV[][];
     private int c1[];
+    private ResourceBundle bundle;
 
     public LDG30(KlarTextUI ktuiThis) {
         if( ktuiThis == null ) {
@@ -45,6 +47,7 @@ public class LDG30 extends javax.swing.JFrame {
             c1[i] = i*9;
         }
         initComponents();
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
 
         ImageIcon II = new ImageIcon(getClass().getResource("/decoder.gif"));
         this.setIconImage(II.getImage());
@@ -1242,12 +1245,9 @@ public class LDG30 extends javax.swing.JFrame {
                                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDimmenLayout.createSequentialGroup()
                                         .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDimmenLayout.createSequentialGroup()
-                                                .addComponent(jLabel46)
-                                                .addGap(36, 36, 36))
-                                            .addGroup(jDimmenLayout.createSequentialGroup()
-                                                .addComponent(jAltDimmenFS2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(jLabel46)
+                                            .addComponent(jAltDimmenFS2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jAltDimmen2)
                                             .addComponent(jLabel48)))
@@ -1265,9 +1265,9 @@ public class LDG30 extends javax.swing.JFrame {
                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jDimmenLayout.createSequentialGroup()
-                            .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel37)
-                                .addComponent(jLabel43))
+                            .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel37))
                             .addGap(18, 18, 18)
                             .addComponent(jLabel23)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2845,13 +2845,13 @@ public class LDG30 extends javax.swing.JFrame {
     private void jDirekteingabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirekteingabeActionPerformed
         // hier wird die Direkteingabe (de)aktiviert
         String str = jDirekteingabe.getText();
-        if(str == "Direkt ein") {
+        if(str.equals(bundle.getString("FD_LED.jDirekteingabe.text"))) {
             jCV_Inhalt.setEditable(true);
-            str = "Direkt aus";
+            str = bundle.getString("FD_LED.jDirekteingabe_aus.text");
             jDirekteingabe.setText(str);
         } else {
             jCV_Inhalt.setEditable(false);
-            str = "Direkt ein";
+            str = bundle.getString("FD_LED.jDirekteingabe.text");
             jDirekteingabe.setText(str);
         }
         jCV_Inhalt.validate();
