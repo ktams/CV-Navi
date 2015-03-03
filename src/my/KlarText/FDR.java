@@ -31,11 +31,15 @@ public class FDR extends javax.swing.JFrame {
     public KlarTextUI KTUI;
     public String ReturnString;
     ResourceBundle bundle;
+    private boolean bFD_R_basic2;
+    private boolean bFunktionsweise; //false->Funktionsdecoder, true->RaislCom-Sender
 
     public FDR(KlarTextUI ktuiThis) {
+        this.bFunktionsweise = false;
         if( ktuiThis == null ) {
             return;
         }
+        this.bFD_R_basic2 = false;
         KTUI = ktuiThis;
         if( KTUI.frameInstanceDEVICE != null ) {
             KTUI.frameInstanceDEVICE.toFront();
@@ -79,7 +83,159 @@ public class FDR extends javax.swing.JFrame {
         initCV( 112, 48 );
         initCV( 114, 4 );
 
+        //FD-R-basic2 Elemente ausblenden
+        jLabel_AUX3.setVisible(false);
+        jLabel_AUX.setVisible(false);
+        jLabel_AUX_1.setVisible(false);
+        jLabel_AUX_2.setVisible(false);
+        jLabel_AUX_3.setVisible(false);
+        jLabel_F13.setVisible(false);
+        jLabel_F14.setVisible(false);
+        jLabel_F15.setVisible(false);
+        jLabel_F16.setVisible(false);
+        jLabel_F17.setVisible(false);
+        jLabel_F18.setVisible(false);
+        jLabel_F19.setVisible(false);
+        jLabel_F20.setVisible(false);
+        jLabel_F21.setVisible(false);
+        jLabel_F22.setVisible(false);
+        jLabel_F23.setVisible(false);
+        jLabel_F24.setVisible(false);
+        jLabel_F25.setVisible(false);
+        jLabel_F26.setVisible(false);
+        jLabel_F27.setVisible(false);
+        jLabel_F28.setVisible(false);
+        jFL_3.setVisible(false);
+        jFR_3.setVisible(false);
+        jF1_3.setVisible(false);
+        jF2_3.setVisible(false);
+        jF3_3.setVisible(false);
+        jF4_3.setVisible(false);
+        jF5_3.setVisible(false);
+        jF6_3.setVisible(false);
+        jF7_3.setVisible(false);
+        jF8_3.setVisible(false);
+        jF9_3.setVisible(false);
+        jF10_3.setVisible(false);
+        jF11_3.setVisible(false);
+        jF12_3.setVisible(false);
+        jF13_3.setVisible(false);
+        jF14_3.setVisible(false);
+        jF15_3.setVisible(false);
+        jF16_3.setVisible(false);
+        jF17_3.setVisible(false);
+        jF18_3.setVisible(false);
+        jF19_3.setVisible(false);
+        jF20_3.setVisible(false);
+        jF21_3.setVisible(false);
+        jF22_3.setVisible(false);
+        jF23_3.setVisible(false);
+        jF24_3.setVisible(false);
+        jF25_3.setVisible(false);
+        jF26_3.setVisible(false);
+        jF27_3.setVisible(false);
+        jF28_3.setVisible(false);
+
+        jF13_2.setVisible(false);
+        jF14_2.setVisible(false);
+        jF15_2.setVisible(false);
+        jF16_2.setVisible(false);
+        jF17_2.setVisible(false);
+        jF18_2.setVisible(false);
+        jF19_2.setVisible(false);
+        jF20_2.setVisible(false);
+        jF21_2.setVisible(false);
+        jF22_2.setVisible(false);
+        jF23_2.setVisible(false);
+        jF24_2.setVisible(false);
+        jF25_2.setVisible(false);
+        jF26_2.setVisible(false);
+        jF27_2.setVisible(false);
+        jF28_2.setVisible(false);
+
+        jF13_1.setVisible(false);
+        jF14_1.setVisible(false);
+        jF15_1.setVisible(false);
+        jF16_1.setVisible(false);
+        jF17_1.setVisible(false);
+        jF18_1.setVisible(false);
+        jF19_1.setVisible(false);
+        jF20_1.setVisible(false);
+        jF21_1.setVisible(false);
+        jF22_1.setVisible(false);
+        jF23_1.setVisible(false);
+        jF24_1.setVisible(false);
+        jF25_1.setVisible(false);
+        jF26_1.setVisible(false);
+        jF27_1.setVisible(false);
+        jF28_1.setVisible(false);
         setLocationRelativeTo(ktuiThis);
+        setVisible(true);
+        KTUI.frameInstanceDEVICE = this;
+    }
+
+    FDR(KlarTextUI aThis, int i) {
+        this.bFunktionsweise = false;
+        if( aThis == null ) {
+            return;
+        }
+        this.bFD_R_basic2 = true;
+        KTUI = aThis;
+        if( KTUI.frameInstanceDEVICE != null ) {
+            KTUI.frameInstanceDEVICE.toFront();
+            KTUI.frameInstanceDEVICE.repaint();
+            return;
+        }
+
+        initComponents();
+        CV = new int[2][115];
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
+        ReturnString = "Tams Elektronik";
+        ImageIcon II = new ImageIcon(getClass().getResource("/FD-R2.gif"));
+        setIconImage(II.getImage());
+        jBild.setIcon(II);
+        setTitle( KTUI.getMenutext( decoderList.FD_R ).trim() );
+        jLabelMM_Addr_2.setText(bundle.getString("FDR.jLabelMM_Addr_2.text2"));
+        jLabel_AUX1.setText("2");
+        jLabel_AUX2.setText("1");
+        //---- CV-default-Werte -----
+        // Vom Decoder verwendete CVs markieren und mit Default-Werten besetzen
+        initCV( 0, 0 ); // reset jCV_Anzeige (clean all entries)
+
+        // Vom Decoder verwendete CVs markieren und mit Default-Werten besetzen
+        initCV( 1, 3 );
+        initCV( 7, 10 );
+        initCV( 8, 62 );
+        initCV( 9, 0 );
+        initCV( 17, 192 );
+        initCV( 18, 255 );
+        initCV( 19, 0 );
+        initCV( 21, 0 );
+        initCV( 28, 3 );
+        initCV( 29, 14 );
+        initCV( 33, 2 );
+        initCV( 34, 4 );
+        initCV( 35, 1 );
+        for( i = 36; i<= 46; i++ ) { // [35..46]=0
+            initCV( i, 0 );
+        }
+        initCV( 49, 64 );
+        initCV( 50, 64 );
+        initCV( 51, 64 );
+        initCV( 53, 0 );
+        initCV( 54, 0 );
+        initCV( 55, 0 );
+        initCV( 58, 0 );
+        initCV( 59, 0 );
+        initCV( 60, 0 );
+        initCV( 61, 255 );
+        initCV( 62, 255 );
+        initCV( 63, 255 );
+        
+    //    initCV( 888, 0 );
+        //die Sachen ausblenden, die es nicht gibt.....
+        jMM_Addr_2.setVisible(false);
+        setLocationRelativeTo(aThis);
         setVisible(true);
         KTUI.frameInstanceDEVICE = this;
     }
@@ -100,7 +256,7 @@ public class FDR extends javax.swing.JFrame {
     public void filfilCVs() {
         Boolean b ;
         String[] keys = { "FD-R basic" };
-        b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, KTUI );
+    b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, KTUI );
     }
 
     void updateTabs() {
@@ -124,6 +280,7 @@ public class FDR extends javax.swing.JFrame {
 
         jFileChooser1 = new javax.swing.JFileChooser();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jSave = new javax.swing.JButton();
         jOpen = new javax.swing.JButton();
@@ -150,6 +307,8 @@ public class FDR extends javax.swing.JFrame {
         jLabelMM_Addr_2 = new javax.swing.JLabel();
         jMM_Addr_2 = new javax.swing.JTextField();
         jBild = new javax.swing.JLabel();
+        jRC_Sender = new javax.swing.JRadioButton();
+        jFD = new javax.swing.JRadioButton();
         jFunctionMapping = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -166,7 +325,7 @@ public class FDR extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel_AUX1 = new javax.swing.JLabel();
         jFL_1 = new javax.swing.JCheckBox();
         jFR_1 = new javax.swing.JCheckBox();
         jF1_1 = new javax.swing.JCheckBox();
@@ -181,7 +340,7 @@ public class FDR extends javax.swing.JFrame {
         jF10_1 = new javax.swing.JCheckBox();
         jF11_1 = new javax.swing.JCheckBox();
         jF12_1 = new javax.swing.JCheckBox();
-        jLabel20 = new javax.swing.JLabel();
+        jLabel_AUX2 = new javax.swing.JLabel();
         jFL_2 = new javax.swing.JCheckBox();
         jFR_2 = new javax.swing.JCheckBox();
         jF1_2 = new javax.swing.JCheckBox();
@@ -198,6 +357,89 @@ public class FDR extends javax.swing.JFrame {
         jF12_2 = new javax.swing.JCheckBox();
         jLabel33 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jFL_3 = new javax.swing.JCheckBox();
+        jFR_3 = new javax.swing.JCheckBox();
+        jLabel_AUX3 = new javax.swing.JLabel();
+        jF1_3 = new javax.swing.JCheckBox();
+        jF2_3 = new javax.swing.JCheckBox();
+        jF3_3 = new javax.swing.JCheckBox();
+        jF4_3 = new javax.swing.JCheckBox();
+        jF5_3 = new javax.swing.JCheckBox();
+        jF6_3 = new javax.swing.JCheckBox();
+        jF7_3 = new javax.swing.JCheckBox();
+        jF8_3 = new javax.swing.JCheckBox();
+        jF9_3 = new javax.swing.JCheckBox();
+        jF10_3 = new javax.swing.JCheckBox();
+        jF11_3 = new javax.swing.JCheckBox();
+        jF28_1 = new javax.swing.JCheckBox();
+        jLabel_AUX = new javax.swing.JLabel();
+        jLabel_AUX_1 = new javax.swing.JLabel();
+        jLabel_AUX_2 = new javax.swing.JLabel();
+        jLabel_AUX_3 = new javax.swing.JLabel();
+        jLabel_F14 = new javax.swing.JLabel();
+        jLabel_F13 = new javax.swing.JLabel();
+        jLabel_F28 = new javax.swing.JLabel();
+        jLabel_F15 = new javax.swing.JLabel();
+        jLabel_F16 = new javax.swing.JLabel();
+        jLabel_F17 = new javax.swing.JLabel();
+        jLabel_F18 = new javax.swing.JLabel();
+        jLabel_F19 = new javax.swing.JLabel();
+        jLabel_F20 = new javax.swing.JLabel();
+        jLabel_F21 = new javax.swing.JLabel();
+        jLabel_F22 = new javax.swing.JLabel();
+        jLabel_F23 = new javax.swing.JLabel();
+        jLabel_F24 = new javax.swing.JLabel();
+        jLabel_F25 = new javax.swing.JLabel();
+        jLabel_F26 = new javax.swing.JLabel();
+        jLabel_F27 = new javax.swing.JLabel();
+        jF12_3 = new javax.swing.JCheckBox();
+        jF13_1 = new javax.swing.JCheckBox();
+        jF14_1 = new javax.swing.JCheckBox();
+        jF15_1 = new javax.swing.JCheckBox();
+        jF16_1 = new javax.swing.JCheckBox();
+        jF17_1 = new javax.swing.JCheckBox();
+        jF18_1 = new javax.swing.JCheckBox();
+        jF19_1 = new javax.swing.JCheckBox();
+        jF20_1 = new javax.swing.JCheckBox();
+        jF21_1 = new javax.swing.JCheckBox();
+        jF22_1 = new javax.swing.JCheckBox();
+        jF23_1 = new javax.swing.JCheckBox();
+        jF24_1 = new javax.swing.JCheckBox();
+        jF25_1 = new javax.swing.JCheckBox();
+        jF26_1 = new javax.swing.JCheckBox();
+        jF27_1 = new javax.swing.JCheckBox();
+        jF28_2 = new javax.swing.JCheckBox();
+        jF13_2 = new javax.swing.JCheckBox();
+        jF14_2 = new javax.swing.JCheckBox();
+        jF15_2 = new javax.swing.JCheckBox();
+        jF16_2 = new javax.swing.JCheckBox();
+        jF17_2 = new javax.swing.JCheckBox();
+        jF18_2 = new javax.swing.JCheckBox();
+        jF19_2 = new javax.swing.JCheckBox();
+        jF20_2 = new javax.swing.JCheckBox();
+        jF21_2 = new javax.swing.JCheckBox();
+        jF22_2 = new javax.swing.JCheckBox();
+        jF23_2 = new javax.swing.JCheckBox();
+        jF24_2 = new javax.swing.JCheckBox();
+        jF25_2 = new javax.swing.JCheckBox();
+        jF26_2 = new javax.swing.JCheckBox();
+        jF27_2 = new javax.swing.JCheckBox();
+        jF28_3 = new javax.swing.JCheckBox();
+        jF13_3 = new javax.swing.JCheckBox();
+        jF14_3 = new javax.swing.JCheckBox();
+        jF15_3 = new javax.swing.JCheckBox();
+        jF16_3 = new javax.swing.JCheckBox();
+        jF17_3 = new javax.swing.JCheckBox();
+        jF18_3 = new javax.swing.JCheckBox();
+        jF19_3 = new javax.swing.JCheckBox();
+        jF20_3 = new javax.swing.JCheckBox();
+        jF21_3 = new javax.swing.JCheckBox();
+        jF22_3 = new javax.swing.JCheckBox();
+        jF23_3 = new javax.swing.JCheckBox();
+        jF24_3 = new javax.swing.JCheckBox();
+        jF25_3 = new javax.swing.JCheckBox();
+        jF26_3 = new javax.swing.JCheckBox();
+        jF27_3 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel21 = new javax.swing.JLabel();
@@ -444,6 +686,25 @@ public class FDR extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup2.add(jRC_Sender);
+        jRC_Sender.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jRC_Sender.setText(bundle.getString("FDR.jRC_Sender.text")); // NOI18N
+        jRC_Sender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRC_SenderActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jFD);
+        jFD.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jFD.setSelected(true);
+        jFD.setText(bundle.getString("FDR.jFD.text")); // NOI18N
+        jFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jCV29Layout = new javax.swing.GroupLayout(jCV29);
         jCV29.setLayout(jCV29Layout);
         jCV29Layout.setHorizontalGroup(
@@ -472,7 +733,9 @@ public class FDR extends javax.swing.JFrame {
                                 .addComponent(jLabelBlinkFrequenz_t1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jBlinkFrequenz, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelMM_Addr_2)
-                            .addComponent(jMM_Addr_2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jMM_Addr_2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRC_Sender)
+                            .addComponent(jFD))
                         .addGap(48, 48, 48))
                     .addGroup(jCV29Layout.createSequentialGroup()
                         .addComponent(jAnalog3)
@@ -504,20 +767,24 @@ public class FDR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jCV29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jCV29Layout.createSequentialGroup()
-                        .addGap(0, 124, Short.MAX_VALUE)
+                        .addGap(0, 148, Short.MAX_VALUE)
                         .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jCV29Layout.createSequentialGroup()
                         .addGroup(jCV29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jCV29Layout.createSequentialGroup()
-                                .addComponent(jLabelMM_Addr_2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jMM_Addr_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jCV29Layout.createSequentialGroup()
                                 .addComponent(jLongAddr)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLongAddr1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLongAddr2)))
+                                .addComponent(jLongAddr2))
+                            .addGroup(jCV29Layout.createSequentialGroup()
+                                .addComponent(jLabelMM_Addr_2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jMM_Addr_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRC_Sender)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFD)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -535,67 +802,67 @@ public class FDR extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText(bundle.getString("FDR.jLabel4.text")); // NOI18N
-        jFunctionMapping.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        jFunctionMapping.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel6.setText(bundle.getString("FDR.jLabel6.text")); // NOI18N
-        jFunctionMapping.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        jFunctionMapping.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel7.setText(bundle.getString("FDR.jLabel7.text")); // NOI18N
-        jFunctionMapping.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jFunctionMapping.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel8.setText(bundle.getString("FDR.jLabel8.text")); // NOI18N
-        jFunctionMapping.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        jFunctionMapping.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel9.setText(bundle.getString("FDR.jLabel9.text")); // NOI18N
-        jFunctionMapping.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
+        jFunctionMapping.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel10.setText(bundle.getString("FDR.jLabel10.text")); // NOI18N
-        jFunctionMapping.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+        jFunctionMapping.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel11.setText(bundle.getString("FDR.jLabel11.text")); // NOI18N
-        jFunctionMapping.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 20, -1));
+        jFunctionMapping.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 20, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel12.setText(bundle.getString("FDR.jLabel12.text")); // NOI18N
-        jFunctionMapping.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
+        jFunctionMapping.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel13.setText(bundle.getString("FDR.jLabel13.text")); // NOI18N
-        jFunctionMapping.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, -1));
+        jFunctionMapping.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel14.setText(bundle.getString("FDR.jLabel14.text")); // NOI18N
-        jFunctionMapping.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
+        jFunctionMapping.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel15.setText(bundle.getString("FDR.jLabel15.text")); // NOI18N
-        jFunctionMapping.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, -1, -1));
+        jFunctionMapping.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel16.setText(bundle.getString("FDR.jLabel16.text")); // NOI18N
-        jFunctionMapping.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
+        jFunctionMapping.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel17.setText(bundle.getString("FDR.jLabel17.text")); // NOI18N
-        jFunctionMapping.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
+        jFunctionMapping.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel18.setText(bundle.getString("FDR.jLabel18.text")); // NOI18N
-        jFunctionMapping.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
+        jFunctionMapping.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel19.setText(bundle.getString("FDR.jLabel19.text")); // NOI18N
-        jFunctionMapping.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
+        jFunctionMapping.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText(bundle.getString("FDR.jLabel5.text")); // NOI18N
-        jFunctionMapping.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 10, -1));
+        jLabel_AUX1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_AUX1.setText(bundle.getString("FDR.jLabel_AUX1.text")); // NOI18N
+        jFunctionMapping.add(jLabel_AUX1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 10, -1));
 
         jFL_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFL_1.setSelected(true);
@@ -604,7 +871,7 @@ public class FDR extends javax.swing.JFrame {
                 jFL_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jFL_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jFunctionMapping.add(jFL_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         jFR_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFR_1.addActionListener(new java.awt.event.ActionListener() {
@@ -612,7 +879,7 @@ public class FDR extends javax.swing.JFrame {
                 jFR_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jFR_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        jFunctionMapping.add(jFR_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jF1_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF1_1.addActionListener(new java.awt.event.ActionListener() {
@@ -620,7 +887,7 @@ public class FDR extends javax.swing.JFrame {
                 jF1_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+        jFunctionMapping.add(jF1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         jF2_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF2_1.addActionListener(new java.awt.event.ActionListener() {
@@ -628,7 +895,7 @@ public class FDR extends javax.swing.JFrame {
                 jF2_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF2_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+        jFunctionMapping.add(jF2_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
         jF3_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF3_1.addActionListener(new java.awt.event.ActionListener() {
@@ -636,7 +903,7 @@ public class FDR extends javax.swing.JFrame {
                 jF3_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF3_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
+        jFunctionMapping.add(jF3_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
 
         jF4_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF4_1.addActionListener(new java.awt.event.ActionListener() {
@@ -644,7 +911,7 @@ public class FDR extends javax.swing.JFrame {
                 jF4_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF4_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, -1));
+        jFunctionMapping.add(jF4_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
 
         jF5_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF5_1.addActionListener(new java.awt.event.ActionListener() {
@@ -652,7 +919,7 @@ public class FDR extends javax.swing.JFrame {
                 jF5_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF5_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
+        jFunctionMapping.add(jF5_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, -1));
 
         jF6_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF6_1.addActionListener(new java.awt.event.ActionListener() {
@@ -660,7 +927,7 @@ public class FDR extends javax.swing.JFrame {
                 jF6_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF6_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
+        jFunctionMapping.add(jF6_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, -1, -1));
 
         jF7_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF7_1.addActionListener(new java.awt.event.ActionListener() {
@@ -668,7 +935,7 @@ public class FDR extends javax.swing.JFrame {
                 jF7_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF7_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+        jFunctionMapping.add(jF7_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
 
         jF8_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF8_1.addActionListener(new java.awt.event.ActionListener() {
@@ -676,7 +943,7 @@ public class FDR extends javax.swing.JFrame {
                 jF8_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF8_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
+        jFunctionMapping.add(jF8_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
         jF9_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF9_1.addActionListener(new java.awt.event.ActionListener() {
@@ -684,7 +951,7 @@ public class FDR extends javax.swing.JFrame {
                 jF9_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF9_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
+        jFunctionMapping.add(jF9_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
 
         jF10_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF10_1.addActionListener(new java.awt.event.ActionListener() {
@@ -692,7 +959,7 @@ public class FDR extends javax.swing.JFrame {
                 jF10_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF10_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
+        jFunctionMapping.add(jF10_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
 
         jF11_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF11_1.addActionListener(new java.awt.event.ActionListener() {
@@ -700,7 +967,7 @@ public class FDR extends javax.swing.JFrame {
                 jF11_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF11_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
+        jFunctionMapping.add(jF11_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, -1));
 
         jF12_1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF12_1.addActionListener(new java.awt.event.ActionListener() {
@@ -708,11 +975,11 @@ public class FDR extends javax.swing.JFrame {
                 jF12_1ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF12_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
+        jFunctionMapping.add(jF12_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel20.setText(bundle.getString("FDR.jLabel20.text")); // NOI18N
-        jFunctionMapping.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jLabel_AUX2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_AUX2.setText(bundle.getString("FDR.jLabel_AUX2.text")); // NOI18N
+        jFunctionMapping.add(jLabel_AUX2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jFL_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFL_2.addActionListener(new java.awt.event.ActionListener() {
@@ -720,7 +987,7 @@ public class FDR extends javax.swing.JFrame {
                 jFL_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jFL_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        jFunctionMapping.add(jFL_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jFR_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFR_2.setSelected(true);
@@ -729,7 +996,7 @@ public class FDR extends javax.swing.JFrame {
                 jFR_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jFR_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jFunctionMapping.add(jFR_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
         jF1_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF1_2.addActionListener(new java.awt.event.ActionListener() {
@@ -737,7 +1004,7 @@ public class FDR extends javax.swing.JFrame {
                 jF1_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
+        jFunctionMapping.add(jF1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         jF2_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF2_2.addActionListener(new java.awt.event.ActionListener() {
@@ -745,7 +1012,7 @@ public class FDR extends javax.swing.JFrame {
                 jF2_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF2_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+        jFunctionMapping.add(jF2_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jF3_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF3_2.addActionListener(new java.awt.event.ActionListener() {
@@ -753,7 +1020,7 @@ public class FDR extends javax.swing.JFrame {
                 jF3_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF3_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+        jFunctionMapping.add(jF3_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
 
         jF4_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF4_2.addActionListener(new java.awt.event.ActionListener() {
@@ -761,7 +1028,7 @@ public class FDR extends javax.swing.JFrame {
                 jF4_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF4_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+        jFunctionMapping.add(jF4_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
 
         jF5_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF5_2.addActionListener(new java.awt.event.ActionListener() {
@@ -769,7 +1036,7 @@ public class FDR extends javax.swing.JFrame {
                 jF5_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF5_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
+        jFunctionMapping.add(jF5_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
 
         jF6_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF6_2.addActionListener(new java.awt.event.ActionListener() {
@@ -777,7 +1044,7 @@ public class FDR extends javax.swing.JFrame {
                 jF6_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF6_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+        jFunctionMapping.add(jF6_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
 
         jF7_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF7_2.addActionListener(new java.awt.event.ActionListener() {
@@ -785,7 +1052,7 @@ public class FDR extends javax.swing.JFrame {
                 jF7_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF7_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
+        jFunctionMapping.add(jF7_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
 
         jF8_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF8_2.addActionListener(new java.awt.event.ActionListener() {
@@ -793,7 +1060,7 @@ public class FDR extends javax.swing.JFrame {
                 jF8_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF8_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
+        jFunctionMapping.add(jF8_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, -1, -1));
 
         jF9_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF9_2.addActionListener(new java.awt.event.ActionListener() {
@@ -801,7 +1068,7 @@ public class FDR extends javax.swing.JFrame {
                 jF9_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF9_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, -1));
+        jFunctionMapping.add(jF9_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
 
         jF10_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF10_2.addActionListener(new java.awt.event.ActionListener() {
@@ -809,7 +1076,7 @@ public class FDR extends javax.swing.JFrame {
                 jF10_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF10_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, -1));
+        jFunctionMapping.add(jF10_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
 
         jF11_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF11_2.addActionListener(new java.awt.event.ActionListener() {
@@ -817,7 +1084,7 @@ public class FDR extends javax.swing.JFrame {
                 jF11_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF11_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
+        jFunctionMapping.add(jF11_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
 
         jF12_2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jF12_2.addActionListener(new java.awt.event.ActionListener() {
@@ -825,15 +1092,355 @@ public class FDR extends javax.swing.JFrame {
                 jF12_2ActionPerformed(evt);
             }
         });
-        jFunctionMapping.add(jF12_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, -1, -1));
+        jFunctionMapping.add(jF12_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setText(bundle.getString("FDR.jLabel33.text")); // NOI18N
-        jFunctionMapping.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jFunctionMapping.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText(bundle.getString("FDR.jLabel3.text")); // NOI18N
-        jFunctionMapping.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jFunctionMapping.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
+
+        jFL_3.setText(bundle.getString("FDR.jFL_3.text")); // NOI18N
+        jFL_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFL_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jFL_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+
+        jFR_3.setText(bundle.getString("FDR.jFR_3.text")); // NOI18N
+        jFR_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFR_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jFR_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+
+        jLabel_AUX3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_AUX3.setText(bundle.getString("FDR.jLabel_AUX3.text")); // NOI18N
+        jFunctionMapping.add(jLabel_AUX3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        jF1_3.setText(bundle.getString("FDR.jF1_3.text")); // NOI18N
+        jF1_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF1_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+
+        jF2_3.setText(bundle.getString("FDR.jF2_3.text")); // NOI18N
+        jF2_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF2_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF2_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
+
+        jF3_3.setText(bundle.getString("FDR.jF3_3.text")); // NOI18N
+        jF3_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF3_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF3_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
+
+        jF4_3.setText(bundle.getString("FDR.jF4_3.text")); // NOI18N
+        jF4_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF4_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF4_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
+
+        jF5_3.setText(bundle.getString("FDR.jF5_3.text")); // NOI18N
+        jF5_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF5_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF5_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+
+        jF6_3.setText(bundle.getString("FDR.jF6_3.text")); // NOI18N
+        jF6_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF6_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF6_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
+
+        jF7_3.setText(bundle.getString("FDR.jF7_3.text")); // NOI18N
+        jF7_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF7_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF7_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
+
+        jF8_3.setText(bundle.getString("FDR.jF8_3.text")); // NOI18N
+        jF8_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF8_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF8_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, -1, -1));
+
+        jF9_3.setText(bundle.getString("FDR.jF9_3.text")); // NOI18N
+        jF9_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF9_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF9_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+
+        jF10_3.setText(bundle.getString("FDR.jF10_3.text")); // NOI18N
+        jF10_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF10_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF10_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, -1, -1));
+
+        jF11_3.setText(bundle.getString("FDR.jF11_3.text")); // NOI18N
+        jF11_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF11_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF11_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
+
+        jF28_1.setText(bundle.getString("FDR.jF28_1.text")); // NOI18N
+        jFunctionMapping.add(jF28_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, -1));
+
+        jLabel_AUX.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_AUX.setText(bundle.getString("FDR.jLabel_AUX.text")); // NOI18N
+        jFunctionMapping.add(jLabel_AUX, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        jLabel_AUX_1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_AUX_1.setText(bundle.getString("FDR.jLabel_AUX_1.text")); // NOI18N
+        jFunctionMapping.add(jLabel_AUX_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+
+        jLabel_AUX_2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_AUX_2.setText(bundle.getString("FDR.jLabel_AUX_2.text")); // NOI18N
+        jFunctionMapping.add(jLabel_AUX_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+
+        jLabel_AUX_3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_AUX_3.setText(bundle.getString("FDR.jLabel_AUX_3.text")); // NOI18N
+        jFunctionMapping.add(jLabel_AUX_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
+        jLabel_F14.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F14.setText(bundle.getString("FDR.jLabel_F14.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
+
+        jLabel_F13.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F13.setText(bundle.getString("FDR.jLabel_F13.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+
+        jLabel_F28.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F28.setText(bundle.getString("FDR.jLabel_F28.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F28, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
+
+        jLabel_F15.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F15.setText(bundle.getString("FDR.jLabel_F15.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F15, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+
+        jLabel_F16.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F16.setText(bundle.getString("FDR.jLabel_F16.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
+
+        jLabel_F17.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F17.setText(bundle.getString("FDR.jLabel_F17.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F17, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+
+        jLabel_F18.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F18.setText(bundle.getString("FDR.jLabel_F18.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F18, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+
+        jLabel_F19.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F19.setText(bundle.getString("FDR.jLabel_F19.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F19, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
+
+        jLabel_F20.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F20.setText(bundle.getString("FDR.jLabel_F20.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F20, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
+
+        jLabel_F21.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F21.setText(bundle.getString("FDR.jLabel_F21.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F21, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, -1, -1));
+
+        jLabel_F22.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F22.setText(bundle.getString("FDR.jLabel_F22.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F22, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
+
+        jLabel_F23.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F23.setText(bundle.getString("FDR.jLabel_F23.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F23, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
+
+        jLabel_F24.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F24.setText(bundle.getString("FDR.jLabel_F24.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F24, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, -1, -1));
+
+        jLabel_F25.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F25.setText(bundle.getString("FDR.jLabel_F25.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F25, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, -1, -1));
+
+        jLabel_F26.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F26.setText(bundle.getString("FDR.jLabel_F26.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F26, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
+
+        jLabel_F27.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel_F27.setText(bundle.getString("FDR.jLabel_F27.text")); // NOI18N
+        jFunctionMapping.add(jLabel_F27, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, -1, -1));
+
+        jF12_3.setText(bundle.getString("FDR.jF12_3.text")); // NOI18N
+        jF12_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF12_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF12_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, -1));
+
+        jF13_1.setText(bundle.getString("FDR.jF13_1.text")); // NOI18N
+        jFunctionMapping.add(jF13_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+
+        jF14_1.setText(bundle.getString("FDR.jF14_1.text")); // NOI18N
+        jFunctionMapping.add(jF14_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
+
+        jF15_1.setText(bundle.getString("FDR.jF15_1.text")); // NOI18N
+        jFunctionMapping.add(jF15_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
+
+        jF16_1.setText(bundle.getString("FDR.jF16_1.text")); // NOI18N
+        jFunctionMapping.add(jF16_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
+
+        jF17_1.setText(bundle.getString("FDR.jF17_1.text")); // NOI18N
+        jFunctionMapping.add(jF17_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+
+        jF18_1.setText(bundle.getString("FDR.jF18_1.text")); // NOI18N
+        jFunctionMapping.add(jF18_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+
+        jF19_1.setText(bundle.getString("FDR.jF19_1.text")); // NOI18N
+        jFunctionMapping.add(jF19_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
+
+        jF20_1.setText(bundle.getString("FDR.jF20_1.text")); // NOI18N
+        jFunctionMapping.add(jF20_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, -1, -1));
+
+        jF21_1.setText(bundle.getString("FDR.jF21_1.text")); // NOI18N
+        jFunctionMapping.add(jF21_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
+
+        jF22_1.setText(bundle.getString("FDR.jF22_1.text")); // NOI18N
+        jFunctionMapping.add(jF22_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+
+        jF23_1.setText(bundle.getString("FDR.jF23_1.text")); // NOI18N
+        jFunctionMapping.add(jF23_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
+
+        jF24_1.setText(bundle.getString("FDR.jF24_1.text")); // NOI18N
+        jFunctionMapping.add(jF24_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
+
+        jF25_1.setText(bundle.getString("FDR.jF25_1.text")); // NOI18N
+        jFunctionMapping.add(jF25_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, -1, -1));
+
+        jF26_1.setText(bundle.getString("FDR.jF26_1.text")); // NOI18N
+        jFunctionMapping.add(jF26_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
+
+        jF27_1.setText(bundle.getString("FDR.jF27_1.text")); // NOI18N
+        jFunctionMapping.add(jF27_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
+
+        jF28_2.setText(bundle.getString("FDR.jF28_2.text")); // NOI18N
+        jFunctionMapping.add(jF28_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
+
+        jF13_2.setText(bundle.getString("FDR.jF13_2.text")); // NOI18N
+        jFunctionMapping.add(jF13_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
+        jF14_2.setText(bundle.getString("FDR.jF14_2.text")); // NOI18N
+        jFunctionMapping.add(jF14_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+
+        jF15_2.setText(bundle.getString("FDR.jF15_2.text")); // NOI18N
+        jFunctionMapping.add(jF15_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
+
+        jF16_2.setText(bundle.getString("FDR.jF16_2.text")); // NOI18N
+        jFunctionMapping.add(jF16_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
+
+        jF17_2.setText(bundle.getString("FDR.jF17_2.text")); // NOI18N
+        jFunctionMapping.add(jF17_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
+
+        jF18_2.setText(bundle.getString("FDR.jF18_2.text")); // NOI18N
+        jFunctionMapping.add(jF18_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+
+        jF19_2.setText(bundle.getString("FDR.jF19_2.text")); // NOI18N
+        jFunctionMapping.add(jF19_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, -1));
+
+        jF20_2.setText(bundle.getString("FDR.jF20_2.text")); // NOI18N
+        jFunctionMapping.add(jF20_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
+
+        jF21_2.setText(bundle.getString("FDR.jF21_2.text")); // NOI18N
+        jFunctionMapping.add(jF21_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
+
+        jF22_2.setText(bundle.getString("FDR.jF22_2.text")); // NOI18N
+        jFunctionMapping.add(jF22_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
+
+        jF23_2.setText(bundle.getString("FDR.jF23_2.text")); // NOI18N
+        jFunctionMapping.add(jF23_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, -1, -1));
+
+        jF24_2.setText(bundle.getString("FDR.jF24_2.text")); // NOI18N
+        jFunctionMapping.add(jF24_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, -1));
+
+        jF25_2.setText(bundle.getString("FDR.jF25_2.text")); // NOI18N
+        jFunctionMapping.add(jF25_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
+
+        jF26_2.setText(bundle.getString("FDR.jF26_2.text")); // NOI18N
+        jFunctionMapping.add(jF26_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
+
+        jF27_2.setText(bundle.getString("FDR.jF27_2.text")); // NOI18N
+        jFunctionMapping.add(jF27_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
+
+        jF28_3.setText(bundle.getString("FDR.jF28_3.text")); // NOI18N
+        jFunctionMapping.add(jF28_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
+
+        jF13_3.setText(bundle.getString("FDR.jF13_3.text")); // NOI18N
+        jFunctionMapping.add(jF13_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+
+        jF14_3.setText(bundle.getString("FDR.jF14_3.text")); // NOI18N
+        jFunctionMapping.add(jF14_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+
+        jF15_3.setText(bundle.getString("FDR.jF15_3.text")); // NOI18N
+        jFunctionMapping.add(jF15_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
+
+        jF16_3.setText(bundle.getString("FDR.jF16_3.text")); // NOI18N
+        jFunctionMapping.add(jF16_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+
+        jF17_3.setText(bundle.getString("FDR.jF17_3.text")); // NOI18N
+        jFunctionMapping.add(jF17_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+
+        jF18_3.setText(bundle.getString("FDR.jF18_3.text")); // NOI18N
+        jFunctionMapping.add(jF18_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+
+        jF19_3.setText(bundle.getString("FDR.jF19_3.text")); // NOI18N
+        jFunctionMapping.add(jF19_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+
+        jF20_3.setText(bundle.getString("FDR.jF20_3.text")); // NOI18N
+        jFunctionMapping.add(jF20_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
+
+        jF21_3.setText(bundle.getString("FDR.jF21_3.text")); // NOI18N
+        jFunctionMapping.add(jF21_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
+
+        jF22_3.setText(bundle.getString("FDR.jF22_3.text")); // NOI18N
+        jFunctionMapping.add(jF22_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+
+        jF23_3.setText(bundle.getString("FDR.jF23_3.text")); // NOI18N
+        jFunctionMapping.add(jF23_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+
+        jF24_3.setText(bundle.getString("FDR.jF24_3.text")); // NOI18N
+        jFunctionMapping.add(jF24_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
+
+        jF25_3.setText(bundle.getString("FDR.jF25_3.text")); // NOI18N
+        jFunctionMapping.add(jF25_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, -1));
+
+        jF26_3.setText(bundle.getString("FDR.jF26_3.text")); // NOI18N
+        jFunctionMapping.add(jF26_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
+
+        jF27_3.setText(bundle.getString("FDR.jF27_3.text")); // NOI18N
+        jFunctionMapping.add(jF27_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
 
         jDecodereigenschaften.addTab(bundle.getString("FDR.jFunctionMapping.TabConstraints.tabTitle"), jFunctionMapping); // NOI18N
 
@@ -1177,7 +1784,7 @@ public class FDR extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jR_F4_2)
                             .addComponent(jRück2))))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("FDR.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -1280,7 +1887,7 @@ public class FDR extends javax.swing.JFrame {
                             .addComponent(jF1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jF5))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         jAnalogLayout.setVerticalGroup(
             jAnalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1304,7 +1911,7 @@ public class FDR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jF4))
                     .addComponent(jF8))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("FDR.jAnalog.TabConstraints.tabTitle"), jAnalog); // NOI18N
@@ -1331,7 +1938,7 @@ public class FDR extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel36)))
@@ -1343,7 +1950,7 @@ public class FDR extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel36)
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1444,12 +2051,12 @@ public class FDR extends javax.swing.JFrame {
                                 .addComponent(jDirekteingabe)
                                 .addGap(28, 28, 28)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jDecodereigenschaften, javax.swing.GroupLayout.PREFERRED_SIZE, 486, Short.MAX_VALUE))
+                    .addComponent(jDecodereigenschaften, javax.swing.GroupLayout.PREFERRED_SIZE, 522, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCV_LesenSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCV_LesenSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                     .addComponent(jAbbrechen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1499,16 +2106,12 @@ public class FDR extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1834,6 +2437,11 @@ public class FDR extends javax.swing.JFrame {
         else
             jFL_2.setSelected(false);
 
+        if((CV[1][33] & 4) == 4)
+            jFL_3.setSelected(true);
+        else
+            jFL_3.setSelected(false);
+
         if((CV[1][34] & 1) == 1)
             jFR_1.setSelected(true);
         else
@@ -1843,6 +2451,11 @@ public class FDR extends javax.swing.JFrame {
             jFR_2.setSelected(true);
         else
             jFR_2.setSelected(false);
+
+        if((CV[1][34] & 4) == 4)
+            jFR_3.setSelected(true);
+        else
+            jFR_3.setSelected(false);
 
         if((CV[1][35] & 1) == 1)
             jF1_1.setSelected(true);
@@ -1854,6 +2467,11 @@ public class FDR extends javax.swing.JFrame {
         else
             jF1_2.setSelected(false);
 
+        if((CV[1][35] & 4) == 4)
+            jF1_3.setSelected(true);
+        else
+            jF1_3.setSelected(false);
+
         if((CV[1][36] & 1) == 1)
             jF2_1.setSelected(true);
         else
@@ -1863,6 +2481,11 @@ public class FDR extends javax.swing.JFrame {
             jF2_2.setSelected(true);
         else
             jF2_2.setSelected(false);
+
+        if((CV[1][36] & 4) == 4)
+            jF2_3.setSelected(true);
+        else
+            jF2_3.setSelected(false);
 
         if((CV[1][37] & 1) == 1)
             jF3_1.setSelected(true);
@@ -1874,6 +2497,11 @@ public class FDR extends javax.swing.JFrame {
         else
             jF3_2.setSelected(false);
 
+        if((CV[1][37] & 4) == 4)
+            jF3_3.setSelected(true);
+        else
+            jF3_3.setSelected(false);
+
         if((CV[1][38] & 1) == 1)
             jF4_1.setSelected(true);
         else
@@ -1883,6 +2511,11 @@ public class FDR extends javax.swing.JFrame {
             jF4_2.setSelected(true);
         else
             jF4_2.setSelected(false);
+
+        if((CV[1][38] & 4) == 4)
+            jF4_3.setSelected(true);
+        else
+            jF4_3.setSelected(false);
 
         if((CV[1][39] & 1) == 1)
             jF5_1.setSelected(true);
@@ -1894,6 +2527,11 @@ public class FDR extends javax.swing.JFrame {
         else
             jF5_2.setSelected(false);
 
+         if((CV[1][39] & 4) == 4)
+            jF5_3.setSelected(true);
+        else
+            jF5_3.setSelected(false);
+
         if((CV[1][40] & 1) == 1)
             jF6_1.setSelected(true);
         else
@@ -1903,6 +2541,11 @@ public class FDR extends javax.swing.JFrame {
             jF6_2.setSelected(true);
         else
             jF6_2.setSelected(false);
+
+        if((CV[1][40] & 4) == 4)
+            jF6_3.setSelected(true);
+        else
+            jF6_3.setSelected(false);
 
         if((CV[1][41] & 1) == 1)
             jF7_1.setSelected(true);
@@ -1914,6 +2557,11 @@ public class FDR extends javax.swing.JFrame {
         else
             jF7_2.setSelected(false);
 
+        if((CV[1][41] & 4) == 4)
+            jF7_3.setSelected(true);
+        else
+            jF7_3.setSelected(false);
+
         if((CV[1][42] & 1) == 1)
             jF8_1.setSelected(true);
         else
@@ -1923,6 +2571,11 @@ public class FDR extends javax.swing.JFrame {
             jF8_2.setSelected(true);
         else
             jF8_2.setSelected(false);
+
+        if((CV[1][42] & 4) == 4)
+            jF8_3.setSelected(true);
+        else
+            jF8_3.setSelected(false);
 
         if((CV[1][43] & 1) == 1)
             jF9_1.setSelected(true);
@@ -1934,6 +2587,11 @@ public class FDR extends javax.swing.JFrame {
         else
             jF9_2.setSelected(false);
 
+        if((CV[1][43] & 4) == 4)
+            jF9_3.setSelected(true);
+        else
+            jF9_3.setSelected(false);
+
         if((CV[1][44] & 1) == 1)
             jF10_1.setSelected(true);
         else
@@ -1943,6 +2601,11 @@ public class FDR extends javax.swing.JFrame {
             jF10_2.setSelected(true);
         else
             jF10_2.setSelected(false);
+
+        if((CV[1][44] & 4) == 4)
+            jF10_3.setSelected(true);
+        else
+            jF10_3.setSelected(false);
 
         if((CV[1][45] & 1) == 1)
             jF11_1.setSelected(true);
@@ -1954,6 +2617,11 @@ public class FDR extends javax.swing.JFrame {
         else
             jF11_2.setSelected(false);
 
+        if((CV[1][45] & 4) == 4)
+            jF11_3.setSelected(true);
+        else
+            jF11_3.setSelected(false);
+
         if((CV[1][46] & 1) == 1)
             jF12_1.setSelected(true);
         else
@@ -1963,6 +2631,11 @@ public class FDR extends javax.swing.JFrame {
             jF12_2.setSelected(true);
         else
             jF12_2.setSelected(false);
+
+        if((CV[1][46] & 4) == 4)
+            jF12_3.setSelected(true);
+        else
+            jF12_3.setSelected(false);
     }//GEN-LAST:event_jFunctionMappingComponentShown
 
     private void jFL_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFL_1ActionPerformed
@@ -3100,6 +3773,182 @@ public class FDR extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTast2KeyReleased
 
+    private void jRC_SenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRC_SenderActionPerformed
+        bFunktionsweise = true;
+    }//GEN-LAST:event_jRC_SenderActionPerformed
+
+    private void jFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFDActionPerformed
+        bFunktionsweise = false;
+    }//GEN-LAST:event_jFDActionPerformed
+
+    private void jFL_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFL_3ActionPerformed
+         if(jFL_3.isSelected())
+        {
+            CV[1][33] |= 4;
+        }
+        else
+        {
+            CV[1][33] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+33 );
+    }//GEN-LAST:event_jFL_3ActionPerformed
+
+    private void jFR_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFR_3ActionPerformed
+        if(jFR_3.isSelected())
+        {
+            CV[1][34] |= 4;
+        }
+        else
+        {
+            CV[1][34] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+34 );
+    }//GEN-LAST:event_jFR_3ActionPerformed
+
+    private void jF1_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF1_3ActionPerformed
+        if(jF1_3.isSelected())
+        {
+            CV[1][35] |= 4;
+        }
+        else
+        {
+            CV[1][35] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+35 );
+    }//GEN-LAST:event_jF1_3ActionPerformed
+
+    private void jF2_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF2_3ActionPerformed
+        if(jF2_3.isSelected())
+        {
+            CV[1][36] |= 4;
+        }
+        else
+        {
+            CV[1][36] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+36 );
+    }//GEN-LAST:event_jF2_3ActionPerformed
+
+    private void jF3_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF3_3ActionPerformed
+        if(jF3_3.isSelected())
+        {
+            CV[1][37] |= 4;
+        }
+        else
+        {
+            CV[1][37] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+37 );
+    }//GEN-LAST:event_jF3_3ActionPerformed
+
+    private void jF4_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF4_3ActionPerformed
+        if(jF4_3.isSelected())
+        {
+            CV[1][38] |= 4;
+        }
+        else
+        {
+            CV[1][38] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+38 );
+    }//GEN-LAST:event_jF4_3ActionPerformed
+
+    private void jF5_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF5_3ActionPerformed
+        if(jF5_3.isSelected())
+        {
+            CV[1][39] |= 4;
+        }
+        else
+        {
+            CV[1][39] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+39 );
+    }//GEN-LAST:event_jF5_3ActionPerformed
+
+    private void jF6_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF6_3ActionPerformed
+        if(jF6_3.isSelected())
+        {
+            CV[1][40] |= 4;
+        }
+        else
+        {
+            CV[1][40] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+40 );
+    }//GEN-LAST:event_jF6_3ActionPerformed
+
+    private void jF7_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF7_3ActionPerformed
+        if(jF7_3.isSelected())
+        {
+            CV[1][41] |= 4;
+        }
+        else
+        {
+            CV[1][41] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+41 );
+    }//GEN-LAST:event_jF7_3ActionPerformed
+
+    private void jF8_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF8_3ActionPerformed
+        if(jF8_3.isSelected())
+        {
+            CV[1][42] |= 4;
+        }
+        else
+        {
+            CV[1][42] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+42 );
+    }//GEN-LAST:event_jF8_3ActionPerformed
+
+    private void jF9_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF9_3ActionPerformed
+        if(jF9_3.isSelected())
+        {
+            CV[1][43] |= 4;
+        }
+        else
+        {
+            CV[1][43] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+43 );
+    }//GEN-LAST:event_jF9_3ActionPerformed
+
+    private void jF10_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF10_3ActionPerformed
+        if(jF10_3.isSelected())
+        {
+            CV[1][44] |= 4;
+        }
+        else
+        {
+            CV[1][44] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+44 );
+    }//GEN-LAST:event_jF10_3ActionPerformed
+
+    private void jF11_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF11_3ActionPerformed
+        if(jF11_3.isSelected())
+        {
+            CV[1][45] |= 4;
+        }
+        else
+        {
+            CV[1][45] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+45 );
+    }//GEN-LAST:event_jF11_3ActionPerformed
+
+    private void jF12_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF12_3ActionPerformed
+        if(jF12_3.isSelected())
+        {
+            CV[1][46] |= 4;
+        }
+        else
+        {
+            CV[1][46] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+46 );
+    }//GEN-LAST:event_jF12_3ActionPerformed
+
     private int getCVfromIndexString( JComboBox jCB, String prefix) {
         int CV = 0;
         Object oSel = jCB.getSelectedItem();
@@ -3117,6 +3966,7 @@ public class FDR extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jAbbrechen;
     private javax.swing.JPanel jAnalog;
     private javax.swing.JCheckBox jAnalog1;
@@ -3138,39 +3988,102 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JCheckBox jF1;
     private javax.swing.JCheckBox jF10_1;
     private javax.swing.JCheckBox jF10_2;
+    private javax.swing.JCheckBox jF10_3;
     private javax.swing.JCheckBox jF11_1;
     private javax.swing.JCheckBox jF11_2;
+    private javax.swing.JCheckBox jF11_3;
     private javax.swing.JCheckBox jF12_1;
     private javax.swing.JCheckBox jF12_2;
+    private javax.swing.JCheckBox jF12_3;
+    private javax.swing.JCheckBox jF13_1;
+    private javax.swing.JCheckBox jF13_2;
+    private javax.swing.JCheckBox jF13_3;
+    private javax.swing.JCheckBox jF14_1;
+    private javax.swing.JCheckBox jF14_2;
+    private javax.swing.JCheckBox jF14_3;
+    private javax.swing.JCheckBox jF15_1;
+    private javax.swing.JCheckBox jF15_2;
+    private javax.swing.JCheckBox jF15_3;
+    private javax.swing.JCheckBox jF16_1;
+    private javax.swing.JCheckBox jF16_2;
+    private javax.swing.JCheckBox jF16_3;
+    private javax.swing.JCheckBox jF17_1;
+    private javax.swing.JCheckBox jF17_2;
+    private javax.swing.JCheckBox jF17_3;
+    private javax.swing.JCheckBox jF18_1;
+    private javax.swing.JCheckBox jF18_2;
+    private javax.swing.JCheckBox jF18_3;
+    private javax.swing.JCheckBox jF19_1;
+    private javax.swing.JCheckBox jF19_2;
+    private javax.swing.JCheckBox jF19_3;
     private javax.swing.JCheckBox jF1_1;
     private javax.swing.JCheckBox jF1_2;
+    private javax.swing.JCheckBox jF1_3;
     private javax.swing.JCheckBox jF2;
+    private javax.swing.JCheckBox jF20_1;
+    private javax.swing.JCheckBox jF20_2;
+    private javax.swing.JCheckBox jF20_3;
+    private javax.swing.JCheckBox jF21_1;
+    private javax.swing.JCheckBox jF21_2;
+    private javax.swing.JCheckBox jF21_3;
+    private javax.swing.JCheckBox jF22_1;
+    private javax.swing.JCheckBox jF22_2;
+    private javax.swing.JCheckBox jF22_3;
+    private javax.swing.JCheckBox jF23_1;
+    private javax.swing.JCheckBox jF23_2;
+    private javax.swing.JCheckBox jF23_3;
+    private javax.swing.JCheckBox jF24_1;
+    private javax.swing.JCheckBox jF24_2;
+    private javax.swing.JCheckBox jF24_3;
+    private javax.swing.JCheckBox jF25_1;
+    private javax.swing.JCheckBox jF25_2;
+    private javax.swing.JCheckBox jF25_3;
+    private javax.swing.JCheckBox jF26_1;
+    private javax.swing.JCheckBox jF26_2;
+    private javax.swing.JCheckBox jF26_3;
+    private javax.swing.JCheckBox jF27_1;
+    private javax.swing.JCheckBox jF27_2;
+    private javax.swing.JCheckBox jF27_3;
+    private javax.swing.JCheckBox jF28_1;
+    private javax.swing.JCheckBox jF28_2;
+    private javax.swing.JCheckBox jF28_3;
     private javax.swing.JCheckBox jF2_1;
     private javax.swing.JCheckBox jF2_2;
+    private javax.swing.JCheckBox jF2_3;
     private javax.swing.JCheckBox jF3;
     private javax.swing.JCheckBox jF3_1;
     private javax.swing.JCheckBox jF3_2;
+    private javax.swing.JCheckBox jF3_3;
     private javax.swing.JCheckBox jF4;
     private javax.swing.JCheckBox jF4_1;
     private javax.swing.JCheckBox jF4_2;
+    private javax.swing.JCheckBox jF4_3;
     private javax.swing.JCheckBox jF5;
     private javax.swing.JCheckBox jF5_1;
     private javax.swing.JCheckBox jF5_2;
+    private javax.swing.JCheckBox jF5_3;
     private javax.swing.JCheckBox jF6;
     private javax.swing.JCheckBox jF6_1;
     private javax.swing.JCheckBox jF6_2;
+    private javax.swing.JCheckBox jF6_3;
     private javax.swing.JCheckBox jF7;
     private javax.swing.JCheckBox jF7_1;
     private javax.swing.JCheckBox jF7_2;
+    private javax.swing.JCheckBox jF7_3;
     private javax.swing.JCheckBox jF8;
     private javax.swing.JCheckBox jF8_1;
     private javax.swing.JCheckBox jF8_2;
+    private javax.swing.JCheckBox jF8_3;
     private javax.swing.JCheckBox jF9_1;
     private javax.swing.JCheckBox jF9_2;
+    private javax.swing.JCheckBox jF9_3;
+    private javax.swing.JRadioButton jFD;
     private javax.swing.JCheckBox jFL_1;
     private javax.swing.JCheckBox jFL_2;
+    private javax.swing.JCheckBox jFL_3;
     private javax.swing.JCheckBox jFR_1;
     private javax.swing.JCheckBox jFR_2;
+    private javax.swing.JCheckBox jFR_3;
     private javax.swing.JCheckBox jFS;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jFunctionMapping;
@@ -3187,7 +4100,6 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -3204,7 +4116,6 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3213,6 +4124,29 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBlinkFrequenz_t1;
     private javax.swing.JLabel jLabelBlinkFrequenz_t2;
     private javax.swing.JLabel jLabelMM_Addr_2;
+    private javax.swing.JLabel jLabel_AUX;
+    private javax.swing.JLabel jLabel_AUX1;
+    private javax.swing.JLabel jLabel_AUX2;
+    private javax.swing.JLabel jLabel_AUX3;
+    private javax.swing.JLabel jLabel_AUX_1;
+    private javax.swing.JLabel jLabel_AUX_2;
+    private javax.swing.JLabel jLabel_AUX_3;
+    private javax.swing.JLabel jLabel_F13;
+    private javax.swing.JLabel jLabel_F14;
+    private javax.swing.JLabel jLabel_F15;
+    private javax.swing.JLabel jLabel_F16;
+    private javax.swing.JLabel jLabel_F17;
+    private javax.swing.JLabel jLabel_F18;
+    private javax.swing.JLabel jLabel_F19;
+    private javax.swing.JLabel jLabel_F20;
+    private javax.swing.JLabel jLabel_F21;
+    private javax.swing.JLabel jLabel_F22;
+    private javax.swing.JLabel jLabel_F23;
+    private javax.swing.JLabel jLabel_F24;
+    private javax.swing.JLabel jLabel_F25;
+    private javax.swing.JLabel jLabel_F26;
+    private javax.swing.JLabel jLabel_F27;
+    private javax.swing.JLabel jLabel_F28;
     private javax.swing.JCheckBox jLongAddr;
     private javax.swing.JCheckBox jLongAddr1;
     private javax.swing.JCheckBox jLongAddr2;
@@ -3221,6 +4155,7 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButton jRC_Sender;
     private javax.swing.JCheckBox jR_F3_1;
     private javax.swing.JCheckBox jR_F3_2;
     private javax.swing.JCheckBox jR_F4_1;

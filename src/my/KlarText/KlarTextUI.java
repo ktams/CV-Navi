@@ -63,20 +63,21 @@ interface c {
     public static final int LINE_1 =  11;
     public static final int tFD    =  12;
     public static final int FD_R   = 13;
-    public static final int FD_R_ex = 14;
-    public static final int FD_M   = 15;
-    public static final int FD_XL  = 16;
-    public static final int FD_LED = 17;
-    public static final int LINE_2 = 18;
-    public static final int tZUB   = 19;
-    public static final int WD_34  = 20;
-    public static final int SD_34  = 21;
-    public static final int LINE_3 = 22;
-    public static final int tOTHER = 23;
-    public static final int MC     = 24;
-    public static final int B_4    = 25;
-    public static final int BiDi_B = 26;
-    public static final int WIB_30 = 27;
+    public static final int FD_R2  = 14;
+    public static final int FD_R_ex = 15;
+    public static final int FD_M   = 16;
+    public static final int FD_XL  = 17;
+    public static final int FD_LED = 18;
+    public static final int LINE_2 = 19;
+    public static final int tZUB   = 20;
+    public static final int WD_34  = 21;
+    public static final int SD_34  = 22;
+    public static final int LINE_3 = 23;
+    public static final int tOTHER = 24;
+    public static final int MC     = 25;
+    public static final int B_4    = 26;
+    public static final int BiDi_B = 27;
+    public static final int WIB_30 = 28;
 
     // special numbers (used in SaveOpenDialog)
     public static final int MC_WR  = 196; // special handling of MC config writes
@@ -136,6 +137,7 @@ enum decoderList {
     line_1  (c.LINE_1, false, "____________",""),
     tFD     (c.tFD,    false, "Funktions-Dekoder","Function-Decoder"),
     FD_R    (c.FD_R,   true,  "   FD-R basic",""),
+    FD_R2    (c.FD_R2,   true,  "   FD-R basic2",""),
     FD_R_ex (c.FD_R_ex,true,  "   FD-R extended",""),
     FD_M    (c.FD_M,   true,  "   FD-M",""),
     FD_XL   (c.FD_XL,  true,  "   FD-XL",""),
@@ -2215,6 +2217,10 @@ public class KlarTextUI extends javax.swing.JFrame {
 
             case c.FD_R: // FD-R
                 FDR fDR = new FDR(this);
+                break;
+
+            case c.FD_R2: // FD-R-basic2
+                fDR = new FDR(this,2);
                 break;
 
             case c.FD_R_ex: // FD-R extended
