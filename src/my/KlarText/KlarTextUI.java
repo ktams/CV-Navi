@@ -44,7 +44,7 @@ import static javax.xml.bind.DatatypeConverter.printHexBinary;
 // die KTUI.Decoder verwenden auf "if-then-else-if..." umgeschrieben werden :(
 //
 // Zuerst die Definition der Konstanten (nur hier stehen Zahlen für Menu und switch-Anweisungen !!!)
-// Ertser Block ist für das Auswahlmenü: 
+// Erster Block ist für das Auswahlmenü: 
 //   Nur fortlaufende Nummern, beginnend mit 0 erlaubt
 //   Die Nummer ist der Index in der Auswahlliste!
 //   Das wird beim Programmstart als Erstes auf Plausibilität überprüft !
@@ -2407,13 +2407,13 @@ public class KlarTextUI extends javax.swing.JFrame {
 
         SODlocalSize = new Dimension();
 
-        if( debugLevel >= 0 ) { // TODO set to > 0 in production environment
+        if( debugLevel >= 0 ) { // TODO set to > 0 for release
             int lPVx = jLabelProgVersion.getX();
             int lPVy = jLabelProgVersion.getY();
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20150130 b)";
+            String  gsBuild ="(beta 20150308)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);

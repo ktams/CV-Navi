@@ -2761,13 +2761,13 @@ public class FDR extends javax.swing.JFrame {
     private void jF4_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF4_1ActionPerformed
         if(jF4_1.isSelected())
         {
-            CV[1][37] |= 1;
+            CV[1][38] |= 1;
         }
         else
         {
-            CV[1][37] &= ~1;
+            CV[1][38] &= ~1;
         }
-        jCV_Anzeige.setSelectedItem( "CV#"+37 );
+        jCV_Anzeige.setSelectedItem( "CV#"+38 );
     }//GEN-LAST:event_jF4_1ActionPerformed
 
     private void jF4_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF4_2ActionPerformed
