@@ -54,6 +54,11 @@ public class DecoderFilter extends FileFilter {
                         return true;
                     break;
 
+                case c.FD_R2:
+                    if (ext.equals("fdr2"))
+                        return true;
+                    break;
+
                 case c.LD_W33:
                 case c.LD_G33:
                     if (ext.equals("ld33"))
@@ -153,6 +158,9 @@ public class DecoderFilter extends FileFilter {
 
             case c.FD_R:
                 return "FD-R basic (*.fdr)";
+
+            case c.FD_R2:
+                return "FD-R basic 2 (*.fdr2)";
 
             case c.LD_W33:
                 return "LD-W-33 (*.ld33)";

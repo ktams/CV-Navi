@@ -11,6 +11,7 @@
 
 package my.KlarText;
 
+import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -31,16 +33,18 @@ public class FDR extends javax.swing.JFrame {
     public KlarTextUI KTUI;
     public String ReturnString;
     ResourceBundle bundle;
-    private boolean bFD_R_basic2;
-    private boolean bFunktionsweise; //false->Funktionsdecoder, true->RaislCom-Sender
+    private boolean bFD_R_basic2;   // fals FD-R basic ; true FD-R basic 2
+    private boolean bFunktionsweise; //false->Funktionsdecoder, true->RailCom-Sender
+    private static final int CVMAX = 888;
+    private String fileNameExtension = null;
 
     public FDR(KlarTextUI ktuiThis) {
-        this.bFunktionsweise = false;
         if( ktuiThis == null ) {
             return;
         }
-        this.bFD_R_basic2 = false;
         KTUI = ktuiThis;
+        bFD_R_basic2 = ( KTUI.Decoder == c.FD_R2 );
+        bFunktionsweise = false;
         if( KTUI.frameInstanceDEVICE != null ) {
             KTUI.frameInstanceDEVICE.toFront();
             KTUI.frameInstanceDEVICE.repaint();
@@ -48,13 +52,28 @@ public class FDR extends javax.swing.JFrame {
         }
 
         initComponents();
-        CV = new int[2][115];
+        CV = new int[2][CVMAX+1];
         bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         ReturnString = "Tams Elektronik";
-        ImageIcon II = new ImageIcon(getClass().getResource("/FD-R.gif"));
+        ImageIcon II = null;
+        switch( KTUI.Decoder ) {
+            case c.FD_R:
+                II = new ImageIcon(getClass().getResource("/FD-R.gif"));
+                setTitle( KTUI.getMenutext( decoderList.FD_R ).trim() );
+                fileNameExtension = "fdr";
+                break;
+            case c.FD_R2:
+                II = new ImageIcon(getClass().getResource("/FD-R2.gif"));
+                setTitle( KTUI.getMenutext( decoderList.FD_R2 ).trim() );
+                fileNameExtension = "fdr2";
+                break;
+            default:
+                return;
+        }
+        TitledBorder b = (TitledBorder)jPanel1.getBorder();
+        b.setTitle(this.getTitle());
         setIconImage(II.getImage());
         jBild.setIcon(II);
-        setTitle( KTUI.getMenutext( decoderList.FD_R ).trim() );
 
         //---- CV-default-Werte -----
         // Vom Decoder verwendete CVs markieren und mit Default-Werten besetzen
@@ -64,178 +83,176 @@ public class FDR extends javax.swing.JFrame {
         initCV( 1, 3 );
         initCV( 7, 10 );
         initCV( 8, 62 );
-        initCV( 13, 0 );
+        if( KTUI.Decoder == c.FD_R2 ) initCV( 9, 0 );
+        if( KTUI.Decoder == c.FD_R ) initCV( 13, 0 );
         initCV( 17, 192 );
         initCV( 18, 255 );
         initCV( 19, 0 );
+        if( KTUI.Decoder == c.FD_R2 ) initCV( 21, 0 );
+        if( KTUI.Decoder == c.FD_R2 ) initCV( 28, 3 );
         initCV( 29, 14 );
-        initCV( 33, 1 );
-        initCV( 34, 2 );
-        for( int i = 35; i<= 46; i++ ) { // [35..46]=0
+        if( KTUI.Decoder == c.FD_R ) {
+            initCV( 33, 1 );
+            initCV( 34, 2 );
+            initCV( 35, 0 );
+        }
+        if( KTUI.Decoder == c.FD_R2 ) {
+            initCV( 33, 2 );
+            initCV( 34, 4 );
+            initCV( 35, 1 );
+        }
+        for( int i = 36; i<= 46; i++ ) { // [35..46]=0 F2-F12
             initCV( i, 0 );
         }
         initCV( 49, 64 );
         initCV( 50, 64 );
+        if( KTUI.Decoder == c.FD_R2 ) initCV( 51, 64 );
         initCV( 53, 0 );
         initCV( 54, 0 );
+        if( KTUI.Decoder == c.FD_R2 ) {
+            initCV( 55, 0 );
+
+            initCV( 58, 0 );
+            initCV( 59, 0 );
+            initCV( 60, 0 );
+        }
         initCV( 61, 255 );
         initCV( 62, 255 );
-        initCV( 112, 48 );
-        initCV( 114, 4 );
+        if( KTUI.Decoder == c.FD_R2 ) {
+            initCV( 63, 255 );
 
-        //FD-R-basic2 Elemente ausblenden
-        jLabel_AUX3.setVisible(false);
-        jLabel_AUX.setVisible(false);
-        jLabel_AUX_1.setVisible(false);
-        jLabel_AUX_2.setVisible(false);
-        jLabel_AUX_3.setVisible(false);
-        jLabel_F13.setVisible(false);
-        jLabel_F14.setVisible(false);
-        jLabel_F15.setVisible(false);
-        jLabel_F16.setVisible(false);
-        jLabel_F17.setVisible(false);
-        jLabel_F18.setVisible(false);
-        jLabel_F19.setVisible(false);
-        jLabel_F20.setVisible(false);
-        jLabel_F21.setVisible(false);
-        jLabel_F22.setVisible(false);
-        jLabel_F23.setVisible(false);
-        jLabel_F24.setVisible(false);
-        jLabel_F25.setVisible(false);
-        jLabel_F26.setVisible(false);
-        jLabel_F27.setVisible(false);
-        jLabel_F28.setVisible(false);
-        jFL_3.setVisible(false);
-        jFR_3.setVisible(false);
-        jF1_3.setVisible(false);
-        jF2_3.setVisible(false);
-        jF3_3.setVisible(false);
-        jF4_3.setVisible(false);
-        jF5_3.setVisible(false);
-        jF6_3.setVisible(false);
-        jF7_3.setVisible(false);
-        jF8_3.setVisible(false);
-        jF9_3.setVisible(false);
-        jF10_3.setVisible(false);
-        jF11_3.setVisible(false);
-        jF12_3.setVisible(false);
-        jF13_3.setVisible(false);
-        jF14_3.setVisible(false);
-        jF15_3.setVisible(false);
-        jF16_3.setVisible(false);
-        jF17_3.setVisible(false);
-        jF18_3.setVisible(false);
-        jF19_3.setVisible(false);
-        jF20_3.setVisible(false);
-        jF21_3.setVisible(false);
-        jF22_3.setVisible(false);
-        jF23_3.setVisible(false);
-        jF24_3.setVisible(false);
-        jF25_3.setVisible(false);
-        jF26_3.setVisible(false);
-        jF27_3.setVisible(false);
-        jF28_3.setVisible(false);
+            for( int i = 64; i<= 79; i++ ) { // [64..79]=0 F13-F28
+                initCV( i, 0 );
+            }
+        }
+        if( KTUI.Decoder == c.FD_R ) {
+            initCV( 112, 48 );
+            initCV( 114, 4 );
+        }
+        if( KTUI.Decoder == c.FD_R2 ) initCV( 888, 0 );
 
-        jF13_2.setVisible(false);
-        jF14_2.setVisible(false);
-        jF15_2.setVisible(false);
-        jF16_2.setVisible(false);
-        jF17_2.setVisible(false);
-        jF18_2.setVisible(false);
-        jF19_2.setVisible(false);
-        jF20_2.setVisible(false);
-        jF21_2.setVisible(false);
-        jF22_2.setVisible(false);
-        jF23_2.setVisible(false);
-        jF24_2.setVisible(false);
-        jF25_2.setVisible(false);
-        jF26_2.setVisible(false);
-        jF27_2.setVisible(false);
-        jF28_2.setVisible(false);
+        if( KTUI.Decoder == c.FD_R ) {
+            // FD-R-basic2 Elemente ausblenden
+            jLabelRcChannels.setVisible(false);
+            jRcChannel1.setVisible(false);
+            jRcChannel2.setVisible(false);
+            jRC_Sender.setVisible(false);
+            jFD.setVisible(false);
 
-        jF13_1.setVisible(false);
-        jF14_1.setVisible(false);
-        jF15_1.setVisible(false);
-        jF16_1.setVisible(false);
-        jF17_1.setVisible(false);
-        jF18_1.setVisible(false);
-        jF19_1.setVisible(false);
-        jF20_1.setVisible(false);
-        jF21_1.setVisible(false);
-        jF22_1.setVisible(false);
-        jF23_1.setVisible(false);
-        jF24_1.setVisible(false);
-        jF25_1.setVisible(false);
-        jF26_1.setVisible(false);
-        jF27_1.setVisible(false);
-        jF28_1.setVisible(false);
+            jLabel_AUX3.setVisible(false);
+            jLabel_AUX.setVisible(false);
+            jLabel_AUX_1.setVisible(false);
+            jLabel_AUX_2.setVisible(false);
+            jLabel_AUX_3.setVisible(false);
+            jLabel_F13.setVisible(false);
+            jLabel_F14.setVisible(false);
+            jLabel_F15.setVisible(false);
+            jLabel_F16.setVisible(false);
+            jLabel_F17.setVisible(false);
+            jLabel_F18.setVisible(false);
+            jLabel_F19.setVisible(false);
+            jLabel_F20.setVisible(false);
+            jLabel_F21.setVisible(false);
+            jLabel_F22.setVisible(false);
+            jLabel_F23.setVisible(false);
+            jLabel_F24.setVisible(false);
+            jLabel_F25.setVisible(false);
+            jLabel_F26.setVisible(false);
+            jLabel_F27.setVisible(false);
+            jLabel_F28.setVisible(false);
+            jFL_3.setVisible(false);
+            jFR_3.setVisible(false);
+            jF1_3.setVisible(false);
+            jF2_3.setVisible(false);
+            jF3_3.setVisible(false);
+            jF4_3.setVisible(false);
+            jF5_3.setVisible(false);
+            jF6_3.setVisible(false);
+            jF7_3.setVisible(false);
+            jF8_3.setVisible(false);
+            jF9_3.setVisible(false);
+            jF10_3.setVisible(false);
+            jF11_3.setVisible(false);
+            jF12_3.setVisible(false);
+            jF13_3.setVisible(false);
+            jF14_3.setVisible(false);
+            jF15_3.setVisible(false);
+            jF16_3.setVisible(false);
+            jF17_3.setVisible(false);
+            jF18_3.setVisible(false);
+            jF19_3.setVisible(false);
+            jF20_3.setVisible(false);
+            jF21_3.setVisible(false);
+            jF22_3.setVisible(false);
+            jF23_3.setVisible(false);
+            jF24_3.setVisible(false);
+            jF25_3.setVisible(false);
+            jF26_3.setVisible(false);
+            jF27_3.setVisible(false);
+            jF28_3.setVisible(false);
+
+            jF13_2.setVisible(false);
+            jF14_2.setVisible(false);
+            jF15_2.setVisible(false);
+            jF16_2.setVisible(false);
+            jF17_2.setVisible(false);
+            jF18_2.setVisible(false);
+            jF19_2.setVisible(false);
+            jF20_2.setVisible(false);
+            jF21_2.setVisible(false);
+            jF22_2.setVisible(false);
+            jF23_2.setVisible(false);
+            jF24_2.setVisible(false);
+            jF25_2.setVisible(false);
+            jF26_2.setVisible(false);
+            jF27_2.setVisible(false);
+            jF28_2.setVisible(false);
+
+            jF13_1.setVisible(false);
+            jF14_1.setVisible(false);
+            jF15_1.setVisible(false);
+            jF16_1.setVisible(false);
+            jF17_1.setVisible(false);
+            jF18_1.setVisible(false);
+            jF19_1.setVisible(false);
+            jF20_1.setVisible(false);
+            jF21_1.setVisible(false);
+            jF22_1.setVisible(false);
+            jF23_1.setVisible(false);
+            jF24_1.setVisible(false);
+            jF25_1.setVisible(false);
+            jF26_1.setVisible(false);
+            jF27_1.setVisible(false);
+            jF28_1.setVisible(false);
+
+            jLabel_effects_BOT.setVisible(false);
+            jLabel35.setVisible(false);
+            jLabel37.setVisible(false);
+            jLabel38.setVisible(false);
+            jLabel39.setVisible(false);
+            jDimmen3.setVisible(false);
+            jTast3.setVisible(false);
+            jR_F3_3.setVisible(false);
+            jR_F4_3.setVisible(false);
+            jVor3.setVisible(false);
+            jRueck3.setVisible(false);
+        }
+
+        if( KTUI.Decoder == c.FD_R2 ) {
+            //FD-R-basic Elemente ausblenden
+            jMM_Addr_2.setVisible(false);
+            jDecodereigenschaften.remove(jAnalog);
+
+            // Labels umbenennen
+            jLabelMM_Addr_2.setText(bundle.getString("FDR.jLabelMM_Addr_2.text2"));
+            jLabel_AUX1.setText("2");
+            jLabel_AUX2.setText("1");
+            jLabel_effects_TOP.setText("AUX 3");
+            jLabel_effects_MID.setText("AUX 1");
+            jLabel_effects_BOT.setText("AUX 2");
+        }
+
         setLocationRelativeTo(ktuiThis);
-        setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
-    }
-
-    FDR(KlarTextUI aThis, int i) {
-        this.bFunktionsweise = false;
-        if( aThis == null ) {
-            return;
-        }
-        this.bFD_R_basic2 = true;
-        KTUI = aThis;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
-            return;
-        }
-
-        initComponents();
-        CV = new int[2][115];
-        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
-        ReturnString = "Tams Elektronik";
-        ImageIcon II = new ImageIcon(getClass().getResource("/FD-R2.gif"));
-        setIconImage(II.getImage());
-        jBild.setIcon(II);
-        setTitle( KTUI.getMenutext( decoderList.FD_R ).trim() );
-        jLabelMM_Addr_2.setText(bundle.getString("FDR.jLabelMM_Addr_2.text2"));
-        jLabel_AUX1.setText("2");
-        jLabel_AUX2.setText("1");
-        //---- CV-default-Werte -----
-        // Vom Decoder verwendete CVs markieren und mit Default-Werten besetzen
-        initCV( 0, 0 ); // reset jCV_Anzeige (clean all entries)
-
-        // Vom Decoder verwendete CVs markieren und mit Default-Werten besetzen
-        initCV( 1, 3 );
-        initCV( 7, 10 );
-        initCV( 8, 62 );
-        initCV( 9, 0 );
-        initCV( 17, 192 );
-        initCV( 18, 255 );
-        initCV( 19, 0 );
-        initCV( 21, 0 );
-        initCV( 28, 3 );
-        initCV( 29, 14 );
-        initCV( 33, 2 );
-        initCV( 34, 4 );
-        initCV( 35, 1 );
-        for( i = 36; i<= 46; i++ ) { // [35..46]=0
-            initCV( i, 0 );
-        }
-        initCV( 49, 64 );
-        initCV( 50, 64 );
-        initCV( 51, 64 );
-        initCV( 53, 0 );
-        initCV( 54, 0 );
-        initCV( 55, 0 );
-        initCV( 58, 0 );
-        initCV( 59, 0 );
-        initCV( 60, 0 );
-        initCV( 61, 255 );
-        initCV( 62, 255 );
-        initCV( 63, 255 );
-        
-    //    initCV( 888, 0 );
-        //die Sachen ausblenden, die es nicht gibt.....
-        jMM_Addr_2.setVisible(false);
-        setLocationRelativeTo(aThis);
         setVisible(true);
         KTUI.frameInstanceDEVICE = this;
     }
@@ -255,8 +272,16 @@ public class FDR extends javax.swing.JFrame {
 
     public void filfilCVs() {
         Boolean b ;
-        String[] keys = { "FD-R basic" };
-    b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, KTUI );
+        switch(KTUI.Decoder) {
+            case c.FD_R:
+                String[] keys1 = { "FD-R basic" };
+                b = parseString2CVs.convertString2CV( ReturnString, keys1, CV, jComment, KTUI );
+                break;
+            case c.FD_R2:
+                String[] keys2 = { "FD-R basic 2" };
+                b = parseString2CVs.convertString2CV( ReturnString, keys2, CV, jComment, KTUI );
+                break;
+        }
     }
 
     void updateTabs() {
@@ -309,6 +334,9 @@ public class FDR extends javax.swing.JFrame {
         jBild = new javax.swing.JLabel();
         jRC_Sender = new javax.swing.JRadioButton();
         jFD = new javax.swing.JRadioButton();
+        jLabelRcChannels = new javax.swing.JLabel();
+        jRcChannel1 = new javax.swing.JCheckBox();
+        jRcChannel2 = new javax.swing.JCheckBox();
         jFunctionMapping = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -442,7 +470,7 @@ public class FDR extends javax.swing.JFrame {
         jF27_3 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel21 = new javax.swing.JLabel();
+        jLabel_effects_TOP = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jVor1 = new javax.swing.JCheckBox();
@@ -453,7 +481,7 @@ public class FDR extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jR_F4_1 = new javax.swing.JCheckBox();
         jR_F3_1 = new javax.swing.JCheckBox();
-        jLabel22 = new javax.swing.JLabel();
+        jLabel_effects_MID = new javax.swing.JLabel();
         jDimmen2 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -462,8 +490,20 @@ public class FDR extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jR_F4_2 = new javax.swing.JCheckBox();
         jR_F3_2 = new javax.swing.JCheckBox();
-        jRück2 = new javax.swing.JCheckBox();
+        jRueck2 = new javax.swing.JCheckBox();
         jVor2 = new javax.swing.JCheckBox();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel_effects_BOT = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jDimmen3 = new javax.swing.JTextField();
+        jTast3 = new javax.swing.JTextField();
+        jR_F3_3 = new javax.swing.JCheckBox();
+        jR_F4_3 = new javax.swing.JCheckBox();
+        jVor3 = new javax.swing.JCheckBox();
+        jRueck3 = new javax.swing.JCheckBox();
         jAnalog = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jF1 = new javax.swing.JCheckBox();
@@ -531,6 +571,11 @@ public class FDR extends javax.swing.JFrame {
         jCV_Inhalt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jCV_InhaltFocusLost(evt);
+            }
+        });
+        jCV_Inhalt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCV_InhaltKeyReleased(evt);
             }
         });
 
@@ -705,6 +750,30 @@ public class FDR extends javax.swing.JFrame {
             }
         });
 
+        jLabelRcChannels.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelRcChannels.setText(bundle.getString("FDR.jLabelRcChannels.text")); // NOI18N
+        jLabelRcChannels.setToolTipText(bundle.getString("FDR.jLabelRcChannels.toolTipText")); // NOI18N
+
+        jRcChannel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRcChannel1.setSelected(true);
+        jRcChannel1.setText(bundle.getString("FDR.jRcChannel1.text")); // NOI18N
+        jRcChannel1.setToolTipText(bundle.getString("FDR.jRcChannel1.toolTipText")); // NOI18N
+        jRcChannel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRcChannel1ActionPerformed(evt);
+            }
+        });
+
+        jRcChannel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRcChannel2.setSelected(true);
+        jRcChannel2.setText(bundle.getString("FDR.jRcChannel2.text")); // NOI18N
+        jRcChannel2.setToolTipText(bundle.getString("FDR.jRcChannel2.toolTipText")); // NOI18N
+        jRcChannel2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRcChannel2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jCV29Layout = new javax.swing.GroupLayout(jCV29);
         jCV29.setLayout(jCV29Layout);
         jCV29Layout.setHorizontalGroup(
@@ -722,8 +791,11 @@ public class FDR extends javax.swing.JFrame {
                                 .addGroup(jCV29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLongAddr)
                                     .addComponent(jLongAddr1)
-                                    .addComponent(jLongAddr2))
-                                .addGap(90, 90, 90)
+                                    .addComponent(jLongAddr2)
+                                    .addComponent(jLabelRcChannels)
+                                    .addComponent(jRcChannel1)
+                                    .addComponent(jRcChannel2))
+                                .addGap(39, 39, 39)
                                 .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jCV29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -785,6 +857,14 @@ public class FDR extends javax.swing.JFrame {
                                 .addComponent(jRC_Sender)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFD)))
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabelRcChannels)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jCV29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRcChannel1)
+                            .addGroup(jCV29Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jRcChannel2)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1211,6 +1291,11 @@ public class FDR extends javax.swing.JFrame {
         jFunctionMapping.add(jF11_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
 
         jF28_1.setText(bundle.getString("FDR.jF28_1.text")); // NOI18N
+        jF28_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF28_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF28_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, -1));
 
         jLabel_AUX.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -1302,144 +1387,379 @@ public class FDR extends javax.swing.JFrame {
         jFunctionMapping.add(jF12_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, -1));
 
         jF13_1.setText(bundle.getString("FDR.jF13_1.text")); // NOI18N
+        jF13_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF13_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF13_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         jF14_1.setText(bundle.getString("FDR.jF14_1.text")); // NOI18N
+        jF14_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF14_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF14_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
         jF15_1.setText(bundle.getString("FDR.jF15_1.text")); // NOI18N
+        jF15_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF15_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF15_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
         jF16_1.setText(bundle.getString("FDR.jF16_1.text")); // NOI18N
+        jF16_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF16_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF16_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
 
         jF17_1.setText(bundle.getString("FDR.jF17_1.text")); // NOI18N
+        jF17_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF17_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF17_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
 
         jF18_1.setText(bundle.getString("FDR.jF18_1.text")); // NOI18N
+        jF18_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF18_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF18_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 
         jF19_1.setText(bundle.getString("FDR.jF19_1.text")); // NOI18N
+        jF19_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF19_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF19_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
 
         jF20_1.setText(bundle.getString("FDR.jF20_1.text")); // NOI18N
+        jF20_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF20_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF20_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, -1, -1));
 
         jF21_1.setText(bundle.getString("FDR.jF21_1.text")); // NOI18N
+        jF21_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF21_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF21_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
 
         jF22_1.setText(bundle.getString("FDR.jF22_1.text")); // NOI18N
+        jF22_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF22_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF22_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
 
         jF23_1.setText(bundle.getString("FDR.jF23_1.text")); // NOI18N
+        jF23_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF23_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF23_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
 
         jF24_1.setText(bundle.getString("FDR.jF24_1.text")); // NOI18N
+        jF24_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF24_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF24_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
 
         jF25_1.setText(bundle.getString("FDR.jF25_1.text")); // NOI18N
+        jF25_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF25_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF25_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, -1, -1));
 
         jF26_1.setText(bundle.getString("FDR.jF26_1.text")); // NOI18N
+        jF26_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF26_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF26_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
 
         jF27_1.setText(bundle.getString("FDR.jF27_1.text")); // NOI18N
+        jF27_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF27_1ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF27_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
 
         jF28_2.setText(bundle.getString("FDR.jF28_2.text")); // NOI18N
+        jF28_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF28_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF28_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
 
         jF13_2.setText(bundle.getString("FDR.jF13_2.text")); // NOI18N
+        jF13_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF13_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF13_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jF14_2.setText(bundle.getString("FDR.jF14_2.text")); // NOI18N
+        jF14_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF14_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF14_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
 
         jF15_2.setText(bundle.getString("FDR.jF15_2.text")); // NOI18N
+        jF15_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF15_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF15_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
 
         jF16_2.setText(bundle.getString("FDR.jF16_2.text")); // NOI18N
+        jF16_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF16_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF16_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
 
         jF17_2.setText(bundle.getString("FDR.jF17_2.text")); // NOI18N
+        jF17_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF17_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF17_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
 
         jF18_2.setText(bundle.getString("FDR.jF18_2.text")); // NOI18N
+        jF18_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF18_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF18_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
 
         jF19_2.setText(bundle.getString("FDR.jF19_2.text")); // NOI18N
+        jF19_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF19_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF19_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, -1));
 
         jF20_2.setText(bundle.getString("FDR.jF20_2.text")); // NOI18N
+        jF20_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF20_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF20_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, -1, -1));
 
         jF21_2.setText(bundle.getString("FDR.jF21_2.text")); // NOI18N
+        jF21_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF21_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF21_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         jF22_2.setText(bundle.getString("FDR.jF22_2.text")); // NOI18N
+        jF22_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF22_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF22_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
 
         jF23_2.setText(bundle.getString("FDR.jF23_2.text")); // NOI18N
+        jF23_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF23_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF23_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, -1, -1));
 
         jF24_2.setText(bundle.getString("FDR.jF24_2.text")); // NOI18N
+        jF24_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF24_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF24_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, -1));
 
         jF25_2.setText(bundle.getString("FDR.jF25_2.text")); // NOI18N
+        jF25_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF25_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF25_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
 
         jF26_2.setText(bundle.getString("FDR.jF26_2.text")); // NOI18N
+        jF26_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF26_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF26_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
 
         jF27_2.setText(bundle.getString("FDR.jF27_2.text")); // NOI18N
+        jF27_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF27_2ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF27_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
 
         jF28_3.setText(bundle.getString("FDR.jF28_3.text")); // NOI18N
+        jF28_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF28_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF28_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
 
         jF13_3.setText(bundle.getString("FDR.jF13_3.text")); // NOI18N
+        jF13_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF13_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF13_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         jF14_3.setText(bundle.getString("FDR.jF14_3.text")); // NOI18N
+        jF14_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF14_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF14_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
         jF15_3.setText(bundle.getString("FDR.jF15_3.text")); // NOI18N
+        jF15_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF15_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF15_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
 
         jF16_3.setText(bundle.getString("FDR.jF16_3.text")); // NOI18N
+        jF16_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF16_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF16_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
 
         jF17_3.setText(bundle.getString("FDR.jF17_3.text")); // NOI18N
+        jF17_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF17_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF17_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
 
         jF18_3.setText(bundle.getString("FDR.jF18_3.text")); // NOI18N
+        jF18_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF18_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF18_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
 
         jF19_3.setText(bundle.getString("FDR.jF19_3.text")); // NOI18N
+        jF19_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF19_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF19_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
         jF20_3.setText(bundle.getString("FDR.jF20_3.text")); // NOI18N
+        jF20_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF20_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF20_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
 
         jF21_3.setText(bundle.getString("FDR.jF21_3.text")); // NOI18N
+        jF21_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF21_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF21_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
 
         jF22_3.setText(bundle.getString("FDR.jF22_3.text")); // NOI18N
+        jF22_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF22_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF22_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
 
         jF23_3.setText(bundle.getString("FDR.jF23_3.text")); // NOI18N
+        jF23_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF23_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF23_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
 
         jF24_3.setText(bundle.getString("FDR.jF24_3.text")); // NOI18N
+        jF24_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF24_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF24_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
 
         jF25_3.setText(bundle.getString("FDR.jF25_3.text")); // NOI18N
+        jF25_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF25_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF25_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, -1));
 
         jF26_3.setText(bundle.getString("FDR.jF26_3.text")); // NOI18N
+        jF26_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF26_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF26_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
 
         jF27_3.setText(bundle.getString("FDR.jF27_3.text")); // NOI18N
+        jF27_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF27_3ActionPerformed(evt);
+            }
+        });
         jFunctionMapping.add(jF27_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
 
         jDecodereigenschaften.addTab(bundle.getString("FDR.jFunctionMapping.TabConstraints.tabTitle"), jFunctionMapping); // NOI18N
@@ -1452,9 +1772,9 @@ public class FDR extends javax.swing.JFrame {
             }
         });
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel21.setText(bundle.getString("FDR.jLabel21.text")); // NOI18N
-        jLabel21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jLabel_effects_TOP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_effects_TOP.setText(bundle.getString("FDR.jLabel_effects_TOP.text")); // NOI18N
+        jLabel_effects_TOP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText(bundle.getString("FDR.jLabel23.text")); // NOI18N
@@ -1556,9 +1876,9 @@ public class FDR extends javax.swing.JFrame {
             }
         });
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel22.setText(bundle.getString("FDR.jLabel22.text")); // NOI18N
-        jLabel22.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jLabel_effects_MID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_effects_MID.setText(bundle.getString("FDR.jLabel_effects_MID.text")); // NOI18N
+        jLabel_effects_MID.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jDimmen2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDimmen2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1632,17 +1952,17 @@ public class FDR extends javax.swing.JFrame {
             }
         });
 
-        jRück2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRück2.setSelected(true);
-        jRück2.setText(bundle.getString("FDR.jRück2.text")); // NOI18N
-        jRück2.addFocusListener(new java.awt.event.FocusAdapter() {
+        jRueck2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRueck2.setSelected(true);
+        jRueck2.setText(bundle.getString("FDR.jRueck2.text")); // NOI18N
+        jRueck2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jRück2FocusGained(evt);
+                jRueck2FocusGained(evt);
             }
         });
-        jRück2.addActionListener(new java.awt.event.ActionListener() {
+        jRueck2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRück2ActionPerformed(evt);
+                jRueck2ActionPerformed(evt);
             }
         });
 
@@ -1660,6 +1980,110 @@ public class FDR extends javax.swing.JFrame {
             }
         });
 
+        jLabel_effects_BOT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel_effects_BOT.setText(bundle.getString("FDR.jLabel_effects_BOT.text")); // NOI18N
+        jLabel_effects_BOT.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel35.setText(bundle.getString("FDR.jLabel35.text")); // NOI18N
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel37.setText(bundle.getString("FDR.jLabel37.text")); // NOI18N
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel38.setText(bundle.getString("FDR.jLabel38.text")); // NOI18N
+
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel39.setText(bundle.getString("FDR.jLabel39.text")); // NOI18N
+
+        jDimmen3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jDimmen3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDimmen3.setText(bundle.getString("FDR.jDimmen3.text")); // NOI18N
+        jDimmen3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jDimmen3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jDimmen3FocusLost(evt);
+            }
+        });
+        jDimmen3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDimmen3KeyReleased(evt);
+            }
+        });
+
+        jTast3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTast3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTast3.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jTast3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTast3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTast3FocusLost(evt);
+            }
+        });
+        jTast3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTast3KeyReleased(evt);
+            }
+        });
+
+        jR_F3_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jR_F3_3.setText(bundle.getString("FDR.jR_F3_3.text")); // NOI18N
+        jR_F3_3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jR_F3_3FocusGained(evt);
+            }
+        });
+        jR_F3_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jR_F3_3ActionPerformed(evt);
+            }
+        });
+
+        jR_F4_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jR_F4_3.setText(bundle.getString("FDR.jR_F4_3.text")); // NOI18N
+        jR_F4_3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jR_F4_3FocusGained(evt);
+            }
+        });
+        jR_F4_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jR_F4_3ActionPerformed(evt);
+            }
+        });
+
+        jVor3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jVor3.setSelected(true);
+        jVor3.setText(bundle.getString("FDR.jVor3.text")); // NOI18N
+        jVor3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jVor3FocusGained(evt);
+            }
+        });
+        jVor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVor3ActionPerformed(evt);
+            }
+        });
+
+        jRueck3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRueck3.setSelected(true);
+        jRueck3.setText(bundle.getString("FDR.jRueck3.text")); // NOI18N
+        jRueck3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jRueck3FocusGained(evt);
+            }
+        });
+        jRueck3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRueck3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1668,8 +2092,9 @@ public class FDR extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
+                        .addComponent(jLabel_effects_TOP)
                         .addGap(377, 377, 377))
+                    .addComponent(jSeparator2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1678,11 +2103,18 @@ public class FDR extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGap(12, 12, 12)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRück2)
+                                        .addComponent(jRueck2)
                                         .addComponent(jVor2))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel39)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jRueck3)
+                                        .addComponent(jVor3))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel_effects_MID)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jDimmen2)
@@ -1728,15 +2160,35 @@ public class FDR extends javax.swing.JFrame {
                                                 .addGap(12, 12, 12)
                                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jRueck1)
-                                                    .addComponent(jVor1))))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                    .addComponent(jVor1)))))
+                                    .addComponent(jLabel_effects_BOT)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jDimmen3)
+                                            .addComponent(jLabel35))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel37))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(68, 68, 68)
+                                                .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(12, 12, 12)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jR_F3_3)
+                                                    .addComponent(jR_F4_3)))
+                                            .addComponent(jLabel38))))
+                                .addGap(0, 30, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel21)
+                .addComponent(jLabel_effects_TOP)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
@@ -1762,7 +2214,7 @@ public class FDR extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel22)
+                        .addComponent(jLabel_effects_MID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel24)
@@ -1783,8 +2235,35 @@ public class FDR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jR_F4_2)
-                            .addComponent(jRück2))))
-                .addContainerGap(185, Short.MAX_VALUE))
+                            .addComponent(jRueck2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel_effects_BOT)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel37))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jDimmen3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel39)
+                            .addComponent(jLabel38))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jR_F3_3)
+                            .addComponent(jVor3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jR_F4_3)
+                            .addComponent(jRueck3))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("FDR.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -2119,8 +2598,16 @@ public class FDR extends javax.swing.JFrame {
 
     private void jSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveActionPerformed
         // Alle CVs werden in einer Datei gespeichert
-        CVs = "FD-R basic\r\n";
-        CVs += "Version 1.1\r\n";
+        switch( KTUI.Decoder ) {
+            case c.FD_R:
+                CVs = "FD-R basic\r\n";
+                CVs += "Version 1.1\r\n";
+                break;
+            case c.FD_R2:
+                CVs = "FD-R basic 2\r\n";
+                CVs += "Version 1.1\r\n";
+                break;
+        }
         for(int i = 0; i < CV[0].length; i++) {
             if( CV[0][i] > 0 ) { // only write used CVs (CV[0][cv] != 0 ) to file
                 CVs += "\r\nCV#" + CV[0][i] + " = " + CV[1][i];
@@ -2128,14 +2615,14 @@ public class FDR extends javax.swing.JFrame {
         }
         CVs += "\r\n\r\nKommentar:\r\n";
         CVs += jComment.getText();
-        SaveOpenDialog od = new SaveOpenDialog( this, true, false, CVs, this, "fdr");
+        SaveOpenDialog od = new SaveOpenDialog( this, true, false, CVs, this, fileNameExtension);
 }//GEN-LAST:event_jSaveActionPerformed
 
     private void jOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOpenActionPerformed
         // gespeicherte CVs werden gelesen
         jCV_Inhalt.setText("62");
         jCV_Anzeige.setSelectedItem( "CV#"+8);
-        SaveOpenDialog od = new SaveOpenDialog( this, true, true, CVs, this, "fdr");
+        SaveOpenDialog od = new SaveOpenDialog( this, true, true, CVs, this, fileNameExtension);
 }//GEN-LAST:event_jOpenActionPerformed
 
     private void jDirekteingabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirekteingabeActionPerformed
@@ -2311,7 +2798,14 @@ public class FDR extends javax.swing.JFrame {
             jlangeAdr.setSelected(false);
             jDecoderAdresse.setText("" + CV[1][1]);
         }
-        jBlinkFrequenz.setText("" + CV[1][112]);
+        switch( KTUI.Decoder ) {
+            case c.FD_R:
+                jBlinkFrequenz.setText("" + CV[1][112]);
+                break;
+            case c.FD_R2:
+                jBlinkFrequenz.setText("" + CV[1][9]);
+                break;
+        }
         jMM_Addr_2.setText("" + CV[1][114]);
     }//GEN-LAST:event_jCV29ComponentShown
 
@@ -2336,7 +2830,7 @@ public class FDR extends javax.swing.JFrame {
         {
             CV[1][29] &= ~2;
         }
-        jCV_Anzeige.setSelectedItem( "CV#"+29 );
+        jCV_Anzeige.setSelectedItem( "CV#"+29 ); //NOI18N
     }//GEN-LAST:event_jFSActionPerformed
 
     private void jAnalog1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnalog1ActionPerformed
@@ -2348,7 +2842,7 @@ public class FDR extends javax.swing.JFrame {
         {
             CV[1][29] &= ~4;
         }
-        jCV_Anzeige.setSelectedItem( "CV#"+29 );
+        jCV_Anzeige.setSelectedItem( "CV#"+29 ); //NOI18N
     }//GEN-LAST:event_jAnalog1ActionPerformed
 
     private void jRailComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRailComActionPerformed
@@ -2360,7 +2854,7 @@ public class FDR extends javax.swing.JFrame {
         {
             CV[1][29] &= ~8;
         }
-        jCV_Anzeige.setSelectedItem( "CV#"+29 );
+        jCV_Anzeige.setSelectedItem( "CV#"+29 ); //NOI18N
     }//GEN-LAST:event_jRailComActionPerformed
 
     private void jLongAddrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLongAddrActionPerformed
@@ -2370,14 +2864,14 @@ public class FDR extends javax.swing.JFrame {
             jKurzeAdr.setSelected(false);
             jlangeAdr.setSelected(true);
             int n = (CV[1][17] - 192)*256 + CV[1][18];
-            jDecoderAdresse.setText( "" + n);
+            jDecoderAdresse.setText( "" + n); //NOI18N
         }
         else
         {
             CV[1][29] &= ~32;
             jKurzeAdr.setSelected(true);
             jlangeAdr.setSelected(false);
-            jDecoderAdresse.setText( "" + CV[1][1]);
+            jDecoderAdresse.setText( "" + CV[1][1]); //NOI18N
         }
         jCV_Anzeige.setSelectedItem( "CV#"+29 );
     }//GEN-LAST:event_jLongAddrActionPerformed
@@ -2978,75 +3472,25 @@ public class FDR extends javax.swing.JFrame {
         jCV_Anzeige.setSelectedItem( "CV#"+49 );
         jDimmen1.setText( "" + CV[1][49]);
         jDimmen2.setText( "" + CV[1][50]);
+        jDimmen3.setText( "" + CV[1][51]);
+
         jTast1.setText( "" + CV[1][61]);
         jTast2.setText( "" + CV[1][62]);
-        if((CV[1][53] & 16) == 16)
-        {
-            jR_F3_1.setSelected(true);
-        }
-        else
-        {
-            jR_F3_1.setSelected(false);
-        }
-        if((CV[1][53] & 32) == 32)
-        {
-            jR_F4_1.setSelected(true);
-        }
-        else
-        {
-            jR_F4_1.setSelected(false);
-        }
+        jTast3.setText( "" + CV[1][62]);
 
-        if((CV[1][54] & 16) == 16)
-        {
-            jR_F3_2.setSelected(true);
-        }
-        else
-        {
-            jR_F3_2.setSelected(false);
-        }
-        if((CV[1][54] & 32) == 32)
-        {
-            jR_F4_2.setSelected(true);
-        }
-        else
-        {
-            jR_F4_2.setSelected(false);
-        }
+        jR_F3_1.setSelected((CV[1][53] & 16) == 16);
+        jR_F4_1.setSelected((CV[1][53] & 32) == 32);
+        jR_F3_2.setSelected((CV[1][54] & 16) == 16);
+        jR_F4_2.setSelected((CV[1][54] & 32) == 32);
+        jR_F3_3.setSelected((CV[1][55] & 16) == 16);
+        jR_F4_3.setSelected((CV[1][55] & 32) == 32);
 
-        if((CV[1][53] & 1) == 1)
-        {
-            jVor1.setSelected(false);
-        }
-        else
-        {
-            jVor1.setSelected(true);
-        }
-        if((CV[1][53] & 2) == 2)
-        {
-            jRueck1.setSelected(false);
-        }
-        else
-        {
-            jRueck1.setSelected(true);
-        }
-
-        if((CV[1][54] & 1) == 1)
-        {
-            jVor2.setSelected(false);
-        }
-        else
-        {
-            jVor2.setSelected(true);
-        }
-        if((CV[1][54] & 2) == 2)
-        {
-            jRück2.setSelected(false);
-        }
-        else
-        {
-            jRück2.setSelected(true);
-        }
+        jVor1.setSelected(  !((CV[1][53] & 1) == 1));
+        jRueck1.setSelected(!((CV[1][53] & 2) == 2));
+        jVor2.setSelected(  !((CV[1][54] & 1) == 1));
+        jRueck2.setSelected(!((CV[1][54] & 2) == 2));
+        jVor3.setSelected(  !((CV[1][55] & 1) == 1));
+        jRueck3.setSelected(!((CV[1][55] & 2) == 2));
     }//GEN-LAST:event_jPanel2ComponentShown
 
     private void jR_F3_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jR_F3_1ActionPerformed
@@ -3133,8 +3577,8 @@ public class FDR extends javax.swing.JFrame {
         jCV_Anzeige.setSelectedItem( "CV#"+54 );
     }//GEN-LAST:event_jVor2ActionPerformed
 
-    private void jRück2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRück2ActionPerformed
-        if(!jRück2.isSelected())
+    private void jRueck2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueck2ActionPerformed
+        if(!jRueck2.isSelected())
         {
             CV[1][54] |= 2;
         }
@@ -3143,7 +3587,7 @@ public class FDR extends javax.swing.JFrame {
             CV[1][54] &= ~2;
         }
         jCV_Anzeige.setSelectedItem( "CV#"+54 );
-    }//GEN-LAST:event_jRück2ActionPerformed
+    }//GEN-LAST:event_jRueck2ActionPerformed
 
     private void jPanel3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel3ComponentShown
 
@@ -3239,6 +3683,7 @@ public class FDR extends javax.swing.JFrame {
     private void jCV_InhaltFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCV_InhaltFocusLost
         int adr;
         int currCV = getCVfromIndexString(jCV_Anzeige, "CV#");
+        String oriEingabe = jCV_Inhalt.getText();
         int cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 255, 22222, false);
         String s = jCV_Inhalt.getText();
 
@@ -3251,7 +3696,7 @@ public class FDR extends javax.swing.JFrame {
         }
         switch(currCV)
         {
-            case 1: //CV#1
+            case 1:
                 cvValue = KTUI.checkTextField( this, jCV_Inhalt, 1, 255, 3, true );
                 s = jCV_Inhalt.getText();
                 if( cvValue > 127 ) {
@@ -3263,47 +3708,21 @@ public class FDR extends javax.swing.JFrame {
                 CV[1][currCV] = cvValue;
                 break;
 
-            case 13: //CV#13
+            case  9: // [0..255] Blinkfrequenz (basic 2)
+                CV[1][currCV] = cvValue;
+                jBlinkFrequenz.setText("" + cvValue);
+                break;
+
+            case 13:
                 CV[1][13] = cvValue;
-                if((CV[1][13] & 1) == 1)
-                    jF1.setSelected(true);
-                else
-                    jF1.setSelected(false);
-
-                if((CV[1][13] & 2) == 2)
-                    jF2.setSelected(true);
-                else
-                    jF2.setSelected(false);
-
-                if((CV[1][13] & 4) == 4)
-                    jF3.setSelected(true);
-                else
-                    jF3.setSelected(false);
-
-                if((CV[1][13] & 8) == 8)
-                    jF4.setSelected(true);
-                else
-                    jF4.setSelected(false);
-
-                if((CV[1][13] & 16) == 16)
-                    jF5.setSelected(true);
-                else
-                    jF5.setSelected(false);
-
-                if((CV[1][13] & 32) == 32)
-                    jF6.setSelected(true);
-                else
-                    jF6.setSelected(false);
-
-                if((CV[1][13] & 64) == 64)
-                    jF7.setSelected(true);
-                else
-                    jF7.setSelected(false);
-
-                if((CV[1][13] & 128) == 128)
-                    jF8.setSelected(true);
-                else
-                    jF8.setSelected(false);
+                jF1.setSelected((CV[1][13] &   1) ==   1);
+                jF2.setSelected((CV[1][13] &   2) ==   2);
+                jF3.setSelected((CV[1][13] &   4) ==   4);
+                jF4.setSelected((CV[1][13] &   8) ==   8);
+                jF5.setSelected((CV[1][13] &  16) ==  16);
+                jF6.setSelected((CV[1][13] &  32) ==  32);
+                jF7.setSelected((CV[1][13] &  64) ==  64);
+                jF8.setSelected((CV[1][13] & 128) == 128);
                 break;
 
             case 17: //CV#17 [192..255]
@@ -3328,7 +3747,7 @@ public class FDR extends javax.swing.JFrame {
                 jDecoderAdresse.setText(""+adr);
                 break;
 
-             case 19: //CV#19
+            case 19: //CV#19
                 if (cvValue > 127)
                 {
                     KTUI.mbValueConsist( this, 0, 127 );
@@ -3339,41 +3758,126 @@ public class FDR extends javax.swing.JFrame {
                 jDecoderAdresse1.setText(s);
                 break;
 
-             case 29: //CV#29
-             case 114: //CV#114
-                CV[1][currCV] = cvValue;
-                if((CV[1][29] & 1) == 1)
-                    jRichtung.setSelected(true);
-                else
-                    jRichtung.setSelected(false);
-
-                if((CV[1][29] & 2) == 2)
-                    jFS.setSelected(true);
-                else
-                    jFS.setSelected(false);
-
-                if((CV[1][29] & 4) == 4)
-                    jAnalog1.setSelected(true);
-                else
-                    jAnalog1.setSelected(false);
-
-                if((CV[1][29] & 8) == 8)
-                    jRailCom.setSelected(true);
-                else
-                    jRailCom.setSelected(false);
-
-                if((CV[1][29] & 32) == 32)
-                    jLongAddr.setSelected(true);
-                else
-                    jLongAddr.setSelected(false);
-
-                jMM_Addr_2.setText("" + CV[1][114]);
+            case 21: // [0..255] Consist-Control für F1 bis F8
+                // TODO add missing display handler
                 break;
 
-            case 49: //CV#49 [1..64]  22
-            case 50: //CV#50 [1..64]  23
-            case 53: //CV#53 [0..63]  24
-            case 54: //CV#54 [0..63]  25
+            case 28: // [0..3] RC channel options
+                if (cvValue > 3)
+                {
+                    KTUI.mbValueNaNcv( this, 0, 3, 3, true);
+                    cvValue = 3;
+                    jCV_Inhalt.setText("3");
+                }
+                CV[1][currCV] = cvValue;
+                jRcChannel1.setSelected((cvValue & 1) == 1);
+                jRcChannel2.setSelected((cvValue & 2) == 2);
+                // TODO : add missing display handler
+                break;
+
+            case 29:
+                cvValue &= 0x2F; // filter valid bits
+                CV[1][currCV] = cvValue;
+                jCV_Inhalt.setText(""+CV[1][currCV]);
+                jRichtung.setSelected((CV[1][29] &  1) ==  1);
+                jFS.setSelected(      (CV[1][29] &  2) ==  2);
+                jAnalog1.setSelected( (CV[1][29] &  4) ==  4);
+                jRailCom.setSelected( (CV[1][29] &  8) ==  8);
+                jLongAddr.setSelected((CV[1][29] & 32) == 32);
+                break;
+
+            case 33:
+                CV[1][currCV] = cvValue;
+                jFL_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jFL_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jFL_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 34:
+                CV[1][currCV] = cvValue;
+                jFR_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jFR_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jFR_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 35:
+                CV[1][currCV] = cvValue;
+                jF1_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF1_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF1_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 36:
+                CV[1][currCV] = cvValue;
+                jF2_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF2_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF2_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 37:
+                CV[1][currCV] = cvValue;
+                jF3_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF3_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF3_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 38:
+                CV[1][currCV] = cvValue;
+                jF4_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF4_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF4_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 39:
+                CV[1][currCV] = cvValue;
+                jF5_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF5_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF5_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 40:
+                CV[1][currCV] = cvValue;
+                jF6_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF6_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF6_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 41:
+                CV[1][currCV] = cvValue;
+                jF7_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF7_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF7_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 42:
+                CV[1][currCV] = cvValue;
+                jF8_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF8_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF8_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 43:
+                CV[1][currCV] = cvValue;
+                jF9_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF9_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF9_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 44:
+                CV[1][currCV] = cvValue;
+                jF10_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF10_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF10_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 45:
+                CV[1][currCV] = cvValue;
+                jF11_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF11_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF11_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 46:
+                CV[1][currCV] = cvValue;
+                jF12_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF12_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF12_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+
+            case 49: // [1..64] Dimmen der Ausgänge
+            case 50: // [1..64]
+            case 51: // [1..64]
+
+            case 53: // [0..63] Effekte der Ausgänge
+            case 54: // [0..63]
+            case 55: // [0..63]
                 if( currCV < 53 && ( cvValue < 1 || cvValue > 64 ) )
                 {
                     KTUI.mbValueNaNcv( this, 1, 64, currCV, true);
@@ -3390,75 +3894,131 @@ public class FDR extends javax.swing.JFrame {
 
                 jDimmen1.setText( "" + CV[1][49]);
                 jDimmen2.setText( "" + CV[1][50]);
+                jDimmen3.setText( "" + CV[1][51]);
+                jR_F3_1.setSelected( (CV[1][53] & 16) == 16);
+                jR_F4_1.setSelected( (CV[1][53] & 32) == 32);
+                jR_F3_2.setSelected( (CV[1][54] & 16) == 16);
+                jR_F4_2.setSelected( (CV[1][54] & 32) == 32);
+                jR_F3_3.setSelected( (CV[1][55] & 16) == 16);
+                jR_F4_3.setSelected( (CV[1][55] & 32) == 32);
+                jVor1.setSelected(  !((CV[1][53] & 1) == 1));
+                jRueck1.setSelected(!((CV[1][53] & 2) == 2));
+                jVor2.setSelected(  !((CV[1][54] & 1) == 1));
+                jRueck2.setSelected( !((CV[1][54] & 2) == 2));
+                jVor3.setSelected(  !((CV[1][55] & 1) == 1));
+                jRueck3.setSelected( !((CV[1][55] & 2) == 2));
+                break;
+
+            case 58: // [0..255] Dauer bis zum Einschalten
+            case 59: // [0..255]
+            case 60: // [0..255]
+                 // TODO add missing display handler
+                break;
+
+            case 61: // [0..255] Dauer "Ein" innerhalb einer Phase
+            case 62: // [0..255]
+            case 63: // [0..255]
+                CV[1][currCV] = cvValue;
                 jTast1.setText( "" + CV[1][61]);
                 jTast2.setText( "" + CV[1][62]);
-                if((CV[1][53] & 16) == 16)
-                {
-                    jR_F3_1.setSelected(true);
-                }
-                else
-                {
-                    jR_F3_1.setSelected(false);
-                }
-                if((CV[1][53] & 32) == 32)
-                {
-                    jR_F4_1.setSelected(true);
-                }
-                else
-                {
-                    jR_F4_1.setSelected(false);
-                }
+                jTast3.setText( "" + CV[1][63]);
+                break;
 
-                if((CV[1][54] & 16) == 16)
-                {
-                    jR_F3_2.setSelected(true);
-                }
-                else
-                {
-                    jR_F3_2.setSelected(false);
-                }
-                if((CV[1][54] & 32) == 32)
-                {
-                    jR_F4_2.setSelected(true);
-                }
-                else
-                {
-                    jR_F4_2.setSelected(false);
-                }
-
-                if((CV[1][53] & 1) == 1)
-                {
-                    jVor1.setSelected(false);
-                }
-                else
-                {
-                    jVor1.setSelected(true);
-                }
-                if((CV[1][53] & 2) == 2)
-                {
-                    jRueck1.setSelected(false);
-                }
-                else
-                {
-                    jRueck1.setSelected(true);
-                }
-
-                if((CV[1][54] & 1) == 1)
-                {
-                    jVor2.setSelected(false);
-                }
-                else
-                {
-                    jVor2.setSelected(true);
-                }
-                if((CV[1][54] & 2) == 2)
-                {
-                    jRück2.setSelected(false);
-                }
-                else
-                {
-                    jRück2.setSelected(true);
-                }
+            case 64:
+                CV[1][currCV] = cvValue;
+                jF13_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF13_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF13_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 65:
+                CV[1][currCV] = cvValue;
+                jF14_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF14_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF14_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 66:
+                CV[1][currCV] = cvValue;
+                jF15_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF15_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF15_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 67:
+                CV[1][currCV] = cvValue;
+                jF16_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF16_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF16_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 68:
+                CV[1][currCV] = cvValue;
+                jF17_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF17_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF17_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 69:
+                CV[1][currCV] = cvValue;
+                jF18_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF18_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF18_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 70:
+                CV[1][currCV] = cvValue;
+                jF19_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF19_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF19_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 71:
+                CV[1][currCV] = cvValue;
+                jF20_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF20_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF20_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 72:
+                CV[1][currCV] = cvValue;
+                jF21_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF21_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF21_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 73:
+                CV[1][currCV] = cvValue;
+                jF22_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF22_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF22_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 74:
+                CV[1][currCV] = cvValue;
+                jF23_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF23_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF23_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 75:
+                CV[1][currCV] = cvValue;
+                jF24_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF24_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF24_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 76:
+                CV[1][currCV] = cvValue;
+                jF25_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF25_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF25_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 77:
+                CV[1][currCV] = cvValue;
+                jF26_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF26_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF26_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 78:
+                CV[1][currCV] = cvValue;
+                jF27_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF27_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF27_3.setSelected(((CV[1][currCV] & 4) == 4));
+                break;
+            case 79:
+                CV[1][currCV] = cvValue;
+                jF28_1.setSelected(((CV[1][currCV] & 1) == 1));
+                jF28_2.setSelected(((CV[1][currCV] & 2) == 2));
+                jF28_3.setSelected(((CV[1][currCV] & 4) == 4));
                 break;
 
             case 112: //CV#112
@@ -3472,159 +4032,56 @@ public class FDR extends javax.swing.JFrame {
                 jBlinkFrequenz.setText("" + cvValue);
                 break;
 
+             case 114: //CV#114
+                jMM_Addr_2.setText("" + CV[1][114]);
+                break;
+
+            case 888: // mode
+                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 1, 0, true );
+                s = jCV_Inhalt.getText();
+                this.jFD.setSelected(cvValue == 0);
+                this.jRC_Sender.setSelected(cvValue == 1);
+                CV[1][currCV] = cvValue;
+                break;
+
             default:
-                KTUI.mbGeneric( this, "Problem", "Unknown CV "+cvValue+" from selection", "s = "+s);
+                KTUI.mbGeneric( this, "Problem", "Unknown CV "+currCV+" with value "+cvValue+" from selection", "s = "+s);
+        }
+
+        // filter unused bits from function assignments
+        if( (currCV >= 33 && currCV <= 46) || (currCV >= 64 && currCV <= 79) ) {
+            switch( KTUI.Decoder ) {
+                case c.FD_R:
+                    cvValue &= 0x3;
+                    break;
+                case c.FD_R_ex:
+                    cvValue &= 0x7;
+                    break;
+            }
         }
         CV[1][currCV] = cvValue;
-        if(currCV >= 33 && currCV <= 46)
-        {
-            if((CV[1][33] & 1) == 1)
-                jFL_1.setSelected(true);
-            else
-                jFL_1.setSelected(false);
-
-            if((CV[1][33] & 2) == 2)
-                jFL_2.setSelected(true);
-            else
-                jFL_2.setSelected(false);
-
-            if((CV[1][34] & 1) == 1)
-                jFR_1.setSelected(true);
-            else
-                jFR_1.setSelected(false);
-
-            if((CV[1][34] & 2) == 2)
-                jFR_2.setSelected(true);
-            else
-                jFR_2.setSelected(false);
-
-            if((CV[1][35] & 1) == 1)
-                jF1_1.setSelected(true);
-            else
-                jF1_1.setSelected(false);
-
-            if((CV[1][35] & 2) == 2)
-                jF1_2.setSelected(true);
-            else
-                jF1_2.setSelected(false);
-
-            if((CV[1][36] & 1) == 1)
-                jF2_1.setSelected(true);
-            else
-                jF2_1.setSelected(false);
-
-            if((CV[1][36] & 2) == 2)
-                jF2_2.setSelected(true);
-            else
-                jF2_2.setSelected(false);
-
-            if((CV[1][37] & 1) == 1)
-                jF3_1.setSelected(true);
-            else
-                jF3_1.setSelected(false);
-
-            if((CV[1][37] & 2) == 2)
-                jF3_2.setSelected(true);
-            else
-                jF3_2.setSelected(false);
-
-            if((CV[1][38] & 1) == 1)
-                jF4_1.setSelected(true);
-            else
-                jF4_1.setSelected(false);
-
-            if((CV[1][38] & 2) == 2)
-                jF4_2.setSelected(true);
-            else
-                jF4_2.setSelected(false);
-
-            if((CV[1][39] & 1) == 1)
-                jF5_1.setSelected(true);
-            else
-                jF5_1.setSelected(false);
-
-            if((CV[1][39] & 2) == 2)
-                jF5_2.setSelected(true);
-            else
-                jF5_2.setSelected(false);
-
-            if((CV[1][40] & 1) == 1)
-                jF6_1.setSelected(true);
-            else
-                jF6_1.setSelected(false);
-
-            if((CV[1][40] & 2) == 2)
-                jF6_2.setSelected(true);
-            else
-                jF6_2.setSelected(false);
-
-            if((CV[1][41] & 1) == 1)
-                jF7_1.setSelected(true);
-            else
-                jF7_1.setSelected(false);
-
-            if((CV[1][41] & 2) == 2)
-                jF7_2.setSelected(true);
-            else
-                jF7_2.setSelected(false);
-
-            if((CV[1][42] & 1) == 1)
-                jF8_1.setSelected(true);
-            else
-                jF8_1.setSelected(false);
-
-            if((CV[1][42] & 2) == 2)
-                jF8_2.setSelected(true);
-            else
-                jF8_2.setSelected(false);
-
-            if((CV[1][43] & 1) == 1)
-                jF9_1.setSelected(true);
-            else
-                jF9_1.setSelected(false);
-
-            if((CV[1][43] & 2) == 2)
-                jF9_2.setSelected(true);
-            else
-                jF9_2.setSelected(false);
-
-            if((CV[1][44] & 1) == 1)
-                jF10_1.setSelected(true);
-            else
-                jF10_1.setSelected(false);
-
-            if((CV[1][44] & 2) == 2)
-                jF10_2.setSelected(true);
-            else
-                jF10_2.setSelected(false);
-
-            if((CV[1][45] & 1) == 1)
-                jF11_1.setSelected(true);
-            else
-                jF11_1.setSelected(false);
-
-            if((CV[1][45] & 2) == 2)
-                jF11_2.setSelected(true);
-            else
-                jF11_2.setSelected(false);
-
-            if((CV[1][46] & 1) == 1)
-                jF12_1.setSelected(true);
-            else
-                jF12_1.setSelected(false);
-
-            if((CV[1][46] & 2) == 2)
-                jF12_2.setSelected(true);
-            else
-                jF12_2.setSelected(false);
-
+        if( cvValue == -1 ) {
+            System.out.println("jCV_InhaltFocusLost CV="+currCV+" Wert=\""+oriEingabe+"\" IGNORIERT");
+            jCV_Inhalt.setText(oriEingabe);
+            getDefaultToolkit().beep();
+            jCV_Inhalt.grabFocus();
+        } else {
+           CV[1][currCV] = cvValue;
+           jCV_Inhalt.setText("" + cvValue);
         }
-        jCV_Inhalt.setText("" + cvValue);
     }//GEN-LAST:event_jCV_InhaltFocusLost
 
     private void jBlinkFrequenzFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBlinkFrequenzFocusLost
-        CV[1][112] = KTUI.checkTextField( this, jBlinkFrequenz, 10, 255, 48, true );
-        jCV_Anzeige.setSelectedItem( "CV#"+112 );
+        switch( KTUI.Decoder ) {
+            case c.FD_R:
+                CV[1][112] = KTUI.checkTextField( this, jBlinkFrequenz, 10, 255, 48, true );
+                jCV_Anzeige.setSelectedItem( "CV#"+112 );
+                break;
+            case c.FD_R2:
+                CV[1][9] = KTUI.checkTextField( this, jBlinkFrequenz, 0, 255, 0, true );
+                jCV_Anzeige.setSelectedItem( "CV#"+9 );
+                break;
+        }
     }//GEN-LAST:event_jBlinkFrequenzFocusLost
 
     private void jMM_Addr_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMM_Addr_2FocusLost
@@ -3682,7 +4139,14 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jDecoderAdresse1FocusGained
 
     private void jBlinkFrequenzFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBlinkFrequenzFocusGained
-        jCV_Anzeige.setSelectedItem( "CV#"+112 );
+        switch( KTUI.Decoder ) {
+            case c.FD_R:
+                jCV_Anzeige.setSelectedItem( "CV#"+112 );
+                break;
+            case c.FD_R2:
+                jCV_Anzeige.setSelectedItem( "CV#"+9 );
+                break;
+        }
     }//GEN-LAST:event_jBlinkFrequenzFocusGained
 
     private void jDecoderAdresseFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDecoderAdresseFocusGained
@@ -3721,9 +4185,9 @@ public class FDR extends javax.swing.JFrame {
         jCV_Anzeige.setSelectedItem( "CV#"+54 );
     }//GEN-LAST:event_jVor2FocusGained
 
-    private void jRück2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRück2FocusGained
+    private void jRueck2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRueck2FocusGained
         jCV_Anzeige.setSelectedItem( "CV#"+54 );
-    }//GEN-LAST:event_jRück2FocusGained
+    }//GEN-LAST:event_jRueck2FocusGained
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         updateTabs();
@@ -3775,10 +4239,14 @@ public class FDR extends javax.swing.JFrame {
 
     private void jRC_SenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRC_SenderActionPerformed
         bFunktionsweise = true;
+        CV[1][888] = 1;
+        jCV_Anzeige.setSelectedItem( "CV#"+888 );
     }//GEN-LAST:event_jRC_SenderActionPerformed
 
     private void jFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFDActionPerformed
         bFunktionsweise = false;
+        CV[1][888] = 0;
+        jCV_Anzeige.setSelectedItem( "CV#"+888 );
     }//GEN-LAST:event_jFDActionPerformed
 
     private void jFL_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFL_3ActionPerformed
@@ -3949,6 +4417,699 @@ public class FDR extends javax.swing.JFrame {
         jCV_Anzeige.setSelectedItem( "CV#"+46 );
     }//GEN-LAST:event_jF12_3ActionPerformed
 
+    private void jF13_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF13_1ActionPerformed
+        if(jF13_1.isSelected())
+        {
+            CV[1][64] |= 1;
+        }
+        else
+        {
+            CV[1][64] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+64 );
+    }//GEN-LAST:event_jF13_1ActionPerformed
+
+    private void jF13_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF13_2ActionPerformed
+        if(jF13_2.isSelected())
+        {
+            CV[1][64] |= 2;
+        }
+        else
+        {
+            CV[1][64] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+64 );
+    }//GEN-LAST:event_jF13_2ActionPerformed
+
+    private void jF13_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF13_3ActionPerformed
+        if(jF13_3.isSelected())
+        {
+            CV[1][64] |= 4;
+        }
+        else
+        {
+            CV[1][64] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+64 );
+    }//GEN-LAST:event_jF13_3ActionPerformed
+
+    private void jF14_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF14_1ActionPerformed
+        if(jF14_1.isSelected())
+        {
+            CV[1][65] |= 1;
+        }
+        else
+        {
+            CV[1][65] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+65 );
+    }//GEN-LAST:event_jF14_1ActionPerformed
+
+    private void jF14_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF14_2ActionPerformed
+        if(jF14_2.isSelected())
+        {
+            CV[1][65] |= 2;
+        }
+        else
+        {
+            CV[1][65] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+65 );
+    }//GEN-LAST:event_jF14_2ActionPerformed
+
+    private void jF14_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF14_3ActionPerformed
+        if(jF14_3.isSelected())
+        {
+            CV[1][65] |= 4;
+        }
+        else
+        {
+            CV[1][65] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+65 );
+    }//GEN-LAST:event_jF14_3ActionPerformed
+
+    private void jF15_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF15_1ActionPerformed
+        if(jF15_1.isSelected())
+        {
+            CV[1][66] |= 1;
+        }
+        else
+        {
+            CV[1][66] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+66 );
+    }//GEN-LAST:event_jF15_1ActionPerformed
+
+    private void jF15_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF15_2ActionPerformed
+        if(jF15_2.isSelected())
+        {
+            CV[1][66] |= 2;
+        }
+        else
+        {
+            CV[1][66] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+66 );
+    }//GEN-LAST:event_jF15_2ActionPerformed
+
+    private void jF15_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF15_3ActionPerformed
+        if(jF15_3.isSelected())
+        {
+            CV[1][66] |= 4;
+        }
+        else
+        {
+            CV[1][66] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+66 );
+    }//GEN-LAST:event_jF15_3ActionPerformed
+
+    private void jF16_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF16_1ActionPerformed
+        if(jF16_1.isSelected())
+        {
+            CV[1][67] |= 1;
+        }
+        else
+        {
+            CV[1][67] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+67 );
+    }//GEN-LAST:event_jF16_1ActionPerformed
+
+    private void jF16_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF16_2ActionPerformed
+        if(jF16_2.isSelected())
+        {
+            CV[1][67] |= 2;
+        }
+        else
+        {
+            CV[1][67] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+67 );
+    }//GEN-LAST:event_jF16_2ActionPerformed
+
+    private void jF16_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF16_3ActionPerformed
+        if(jF16_3.isSelected())
+        {
+            CV[1][67] |= 4;
+        }
+        else
+        {
+            CV[1][67] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+67 );
+    }//GEN-LAST:event_jF16_3ActionPerformed
+
+    private void jF17_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF17_1ActionPerformed
+        if(jF17_1.isSelected())
+        {
+            CV[1][68] |= 1;
+        }
+        else
+        {
+            CV[1][68] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+68 );
+    }//GEN-LAST:event_jF17_1ActionPerformed
+
+    private void jF17_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF17_2ActionPerformed
+        if(jF17_2.isSelected())
+        {
+            CV[1][68] |= 2;
+        }
+        else
+        {
+            CV[1][68] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+68 );
+    }//GEN-LAST:event_jF17_2ActionPerformed
+
+    private void jF17_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF17_3ActionPerformed
+        if(jF17_3.isSelected())
+        {
+            CV[1][68] |= 4;
+        }
+        else
+        {
+            CV[1][68] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+68 );
+    }//GEN-LAST:event_jF17_3ActionPerformed
+
+    private void jF18_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF18_1ActionPerformed
+        if(jF18_1.isSelected())
+        {
+            CV[1][69] |= 1;
+        }
+        else
+        {
+            CV[1][69] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+69 );
+    }//GEN-LAST:event_jF18_1ActionPerformed
+
+    private void jF18_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF18_2ActionPerformed
+        if(jF18_2.isSelected())
+        {
+            CV[1][69] |= 2;
+        }
+        else
+        {
+            CV[1][69] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+69 );
+    }//GEN-LAST:event_jF18_2ActionPerformed
+
+    private void jF18_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF18_3ActionPerformed
+        if(jF18_3.isSelected())
+        {
+            CV[1][69] |= 4;
+        }
+        else
+        {
+            CV[1][69] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+69 );
+    }//GEN-LAST:event_jF18_3ActionPerformed
+
+    private void jF19_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF19_1ActionPerformed
+        if(jF19_1.isSelected())
+        {
+            CV[1][70] |= 1;
+        }
+        else
+        {
+            CV[1][70] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+70 );
+    }//GEN-LAST:event_jF19_1ActionPerformed
+
+    private void jF19_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF19_2ActionPerformed
+        if(jF19_2.isSelected())
+        {
+            CV[1][70] |= 2;
+        }
+        else
+        {
+            CV[1][70] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+70 );
+    }//GEN-LAST:event_jF19_2ActionPerformed
+
+    private void jF19_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF19_3ActionPerformed
+        if(jF19_3.isSelected())
+        {
+            CV[1][70] |= 4;
+        }
+        else
+        {
+            CV[1][70] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+70 );
+    }//GEN-LAST:event_jF19_3ActionPerformed
+
+    private void jF20_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF20_1ActionPerformed
+        if(jF20_1.isSelected())
+        {
+            CV[1][71] |= 1;
+        }
+        else
+        {
+            CV[1][71] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+71 );
+    }//GEN-LAST:event_jF20_1ActionPerformed
+
+    private void jF20_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF20_2ActionPerformed
+        if(jF20_2.isSelected())
+        {
+            CV[1][71] |= 2;
+        }
+        else
+        {
+            CV[1][71] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+71 );
+    }//GEN-LAST:event_jF20_2ActionPerformed
+
+    private void jF20_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF20_3ActionPerformed
+        if(jF20_3.isSelected())
+        {
+            CV[1][71] |= 4;
+        }
+        else
+        {
+            CV[1][71] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+71 );
+    }//GEN-LAST:event_jF20_3ActionPerformed
+
+    private void jF21_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF21_1ActionPerformed
+        if(jF21_1.isSelected())
+        {
+            CV[1][72] |= 1;
+        }
+        else
+        {
+            CV[1][72] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+72 );
+    }//GEN-LAST:event_jF21_1ActionPerformed
+
+    private void jF21_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF21_2ActionPerformed
+        if(jF21_2.isSelected())
+        {
+            CV[1][72] |= 2;
+        }
+        else
+        {
+            CV[1][72] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+72 );
+    }//GEN-LAST:event_jF21_2ActionPerformed
+
+    private void jF21_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF21_3ActionPerformed
+        if(jF21_3.isSelected())
+        {
+            CV[1][72] |= 4;
+        }
+        else
+        {
+            CV[1][72] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+72 );
+    }//GEN-LAST:event_jF21_3ActionPerformed
+
+    private void jF22_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF22_1ActionPerformed
+        if(jF22_1.isSelected())
+        {
+            CV[1][73] |= 1;
+        }
+        else
+        {
+            CV[1][73] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+73 );
+    }//GEN-LAST:event_jF22_1ActionPerformed
+
+    private void jF22_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF22_2ActionPerformed
+        if(jF22_2.isSelected())
+        {
+            CV[1][73] |= 2;
+        }
+        else
+        {
+            CV[1][73] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+73 );
+    }//GEN-LAST:event_jF22_2ActionPerformed
+
+    private void jF22_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF22_3ActionPerformed
+        if(jF22_3.isSelected())
+        {
+            CV[1][73] |= 4;
+        }
+        else
+        {
+            CV[1][73] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+73 );
+    }//GEN-LAST:event_jF22_3ActionPerformed
+
+    private void jF23_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF23_1ActionPerformed
+        if(jF23_1.isSelected())
+        {
+            CV[1][74] |= 1;
+        }
+        else
+        {
+            CV[1][74] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+74 );
+    }//GEN-LAST:event_jF23_1ActionPerformed
+
+    private void jF23_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF23_2ActionPerformed
+        if(jF23_2.isSelected())
+        {
+            CV[1][74] |= 2;
+        }
+        else
+        {
+            CV[1][74] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+74 );
+    }//GEN-LAST:event_jF23_2ActionPerformed
+
+    private void jF23_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF23_3ActionPerformed
+        if(jF23_3.isSelected())
+        {
+            CV[1][74] |= 4;
+        }
+        else
+        {
+            CV[1][74] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+74 );
+    }//GEN-LAST:event_jF23_3ActionPerformed
+
+    private void jF24_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF24_1ActionPerformed
+        if(jF24_1.isSelected())
+        {
+            CV[1][75] |= 1;
+        }
+        else
+        {
+            CV[1][75] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+75 );
+    }//GEN-LAST:event_jF24_1ActionPerformed
+
+    private void jF24_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF24_2ActionPerformed
+        if(jF24_2.isSelected())
+        {
+            CV[1][75] |= 2;
+        }
+        else
+        {
+            CV[1][75] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+75 );
+    }//GEN-LAST:event_jF24_2ActionPerformed
+
+    private void jF24_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF24_3ActionPerformed
+        if(jF24_3.isSelected())
+        {
+            CV[1][75] |= 4;
+        }
+        else
+        {
+            CV[1][75] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+75 );
+    }//GEN-LAST:event_jF24_3ActionPerformed
+
+    private void jF25_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF25_1ActionPerformed
+        if(jF25_1.isSelected())
+        {
+            CV[1][76] |= 1;
+        }
+        else
+        {
+            CV[1][76] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+76 );
+    }//GEN-LAST:event_jF25_1ActionPerformed
+
+    private void jF25_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF25_2ActionPerformed
+        if(jF25_2.isSelected())
+        {
+            CV[1][76] |= 2;
+        }
+        else
+        {
+            CV[1][76] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+76 );
+    }//GEN-LAST:event_jF25_2ActionPerformed
+
+    private void jF25_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF25_3ActionPerformed
+        if(jF25_3.isSelected())
+        {
+            CV[1][76] |= 4;
+        }
+        else
+        {
+            CV[1][76] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+76 );
+    }//GEN-LAST:event_jF25_3ActionPerformed
+
+    private void jF26_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF26_1ActionPerformed
+        if(jF26_1.isSelected())
+        {
+            CV[1][77] |= 1;
+        }
+        else
+        {
+            CV[1][77] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+77 );
+    }//GEN-LAST:event_jF26_1ActionPerformed
+
+    private void jF26_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF26_2ActionPerformed
+        if(jF26_2.isSelected())
+        {
+            CV[1][77] |= 2;
+        }
+        else
+        {
+            CV[1][77] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+77 );
+    }//GEN-LAST:event_jF26_2ActionPerformed
+
+    private void jF26_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF26_3ActionPerformed
+        if(jF26_3.isSelected())
+        {
+            CV[1][77] |= 4;
+        }
+        else
+        {
+            CV[1][77] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+77 );
+    }//GEN-LAST:event_jF26_3ActionPerformed
+
+    private void jF27_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF27_1ActionPerformed
+        if(jF27_1.isSelected())
+        {
+            CV[1][78] |= 1;
+        }
+        else
+        {
+            CV[1][78] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+78 );
+    }//GEN-LAST:event_jF27_1ActionPerformed
+
+    private void jF27_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF27_2ActionPerformed
+        if(jF27_2.isSelected())
+        {
+            CV[1][78] |= 2;
+        }
+        else
+        {
+            CV[1][78] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+78 );
+    }//GEN-LAST:event_jF27_2ActionPerformed
+
+    private void jF27_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF27_3ActionPerformed
+        if(jF27_3.isSelected())
+        {
+            CV[1][78] |= 4;
+        }
+        else
+        {
+            CV[1][78] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+78 );
+    }//GEN-LAST:event_jF27_3ActionPerformed
+
+    private void jF28_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF28_1ActionPerformed
+        if(jF28_1.isSelected())
+        {
+            CV[1][79] |= 1;
+        }
+        else
+        {
+            CV[1][79] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+79 );
+    }//GEN-LAST:event_jF28_1ActionPerformed
+
+    private void jF28_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF28_2ActionPerformed
+        if(jF28_2.isSelected())
+        {
+            CV[1][79] |= 2;
+        }
+        else
+        {
+            CV[1][79] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+79 );
+    }//GEN-LAST:event_jF28_2ActionPerformed
+
+    private void jF28_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF28_3ActionPerformed
+        if(jF28_3.isSelected())
+        {
+            CV[1][79] |= 4;
+        }
+        else
+        {
+            CV[1][79] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+79 );
+    }//GEN-LAST:event_jF28_3ActionPerformed
+
+    private void jCV_InhaltKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCV_InhaltKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
+    }//GEN-LAST:event_jCV_InhaltKeyReleased
+
+    private void jDimmen3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+51 );
+    }//GEN-LAST:event_jDimmen3FocusGained
+
+    private void jDimmen3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen3FocusLost
+        CV[1][51] = KTUI.checkTextField( this, jDimmen3, 1, 64, 64, true );
+    }//GEN-LAST:event_jDimmen3FocusLost
+
+    private void jDimmen3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDimmen3KeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
+    }//GEN-LAST:event_jDimmen3KeyReleased
+
+    private void jTast3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+63 );
+    }//GEN-LAST:event_jTast3FocusGained
+
+    private void jTast3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast3FocusLost
+        CV[1][63] = KTUI.checkTextField( this, jTast3, 0, 255, 255, true );
+    }//GEN-LAST:event_jTast3FocusLost
+
+    private void jTast3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast3KeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
+    }//GEN-LAST:event_jTast3KeyReleased
+
+    private void jR_F3_3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jR_F3_3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jR_F3_3FocusGained
+
+    private void jR_F3_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jR_F3_3ActionPerformed
+        if(jR_F3_3.isSelected())
+        {
+            CV[1][55] |= 16;
+        }
+        else
+        {
+            CV[1][55] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+
+    }//GEN-LAST:event_jR_F3_3ActionPerformed
+
+    private void jR_F4_3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jR_F4_3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jR_F4_3FocusGained
+
+    private void jR_F4_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jR_F4_3ActionPerformed
+        if(jR_F4_3.isSelected())
+        {
+            CV[1][55] |= 32;
+        }
+        else
+        {
+            CV[1][55] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jR_F4_3ActionPerformed
+
+    private void jVor3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jVor3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jVor3FocusGained
+
+    private void jVor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVor3ActionPerformed
+        if(!jVor3.isSelected())
+        {
+            CV[1][55] |= 1;
+        }
+        else
+        {
+            CV[1][55] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jVor3ActionPerformed
+
+    private void jRueck3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRueck3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jRueck3FocusGained
+
+    private void jRueck3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueck3ActionPerformed
+        if(!jRueck3.isSelected())
+        {
+            CV[1][55] |= 2;
+        }
+        else
+        {
+            CV[1][55] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jRueck3ActionPerformed
+
+    private void jRcChannel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRcChannel1ActionPerformed
+        if(jRcChannel1.isSelected()) {
+            CV[1][28] |= 1;
+        } else {
+            CV[1][28] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+28 );
+    }//GEN-LAST:event_jRcChannel1ActionPerformed
+
+    private void jRcChannel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRcChannel2ActionPerformed
+        if(jRcChannel2.isSelected()) {
+            CV[1][28] |= 2;
+        } else {
+            CV[1][28] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+28 );
+    }//GEN-LAST:event_jRcChannel2ActionPerformed
+
     private int getCVfromIndexString( JComboBox jCB, String prefix) {
         int CV = 0;
         Object oSel = jCB.getSelectedItem();
@@ -3984,6 +5145,7 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jDecodereigenschaften;
     private javax.swing.JTextField jDimmen1;
     private javax.swing.JTextField jDimmen2;
+    private javax.swing.JTextField jDimmen3;
     private javax.swing.JToggleButton jDirekteingabe;
     private javax.swing.JCheckBox jF1;
     private javax.swing.JCheckBox jF10_1;
@@ -4100,8 +5262,6 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -4114,7 +5274,11 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4124,6 +5288,7 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBlinkFrequenz_t1;
     private javax.swing.JLabel jLabelBlinkFrequenz_t2;
     private javax.swing.JLabel jLabelMM_Addr_2;
+    private javax.swing.JLabel jLabelRcChannels;
     private javax.swing.JLabel jLabel_AUX;
     private javax.swing.JLabel jLabel_AUX1;
     private javax.swing.JLabel jLabel_AUX2;
@@ -4147,6 +5312,9 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_F26;
     private javax.swing.JLabel jLabel_F27;
     private javax.swing.JLabel jLabel_F28;
+    private javax.swing.JLabel jLabel_effects_BOT;
+    private javax.swing.JLabel jLabel_effects_MID;
+    private javax.swing.JLabel jLabel_effects_TOP;
     private javax.swing.JCheckBox jLongAddr;
     private javax.swing.JCheckBox jLongAddr1;
     private javax.swing.JCheckBox jLongAddr2;
@@ -4158,19 +5326,27 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRC_Sender;
     private javax.swing.JCheckBox jR_F3_1;
     private javax.swing.JCheckBox jR_F3_2;
+    private javax.swing.JCheckBox jR_F3_3;
     private javax.swing.JCheckBox jR_F4_1;
     private javax.swing.JCheckBox jR_F4_2;
+    private javax.swing.JCheckBox jR_F4_3;
     private javax.swing.JCheckBox jRailCom;
+    private javax.swing.JCheckBox jRcChannel1;
+    private javax.swing.JCheckBox jRcChannel2;
     private javax.swing.JCheckBox jRichtung;
     private javax.swing.JCheckBox jRueck1;
-    private javax.swing.JCheckBox jRück2;
+    private javax.swing.JCheckBox jRueck2;
+    private javax.swing.JCheckBox jRueck3;
     private javax.swing.JButton jSave;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTast1;
     private javax.swing.JTextField jTast2;
+    private javax.swing.JTextField jTast3;
     private javax.swing.JCheckBox jVor1;
     private javax.swing.JCheckBox jVor2;
+    private javax.swing.JCheckBox jVor3;
     private javax.swing.JRadioButton jlangeAdr;
     // End of variables declaration//GEN-END:variables
 

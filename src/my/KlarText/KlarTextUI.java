@@ -137,7 +137,7 @@ enum decoderList {
     line_1  (c.LINE_1, false, "____________",""),
     tFD     (c.tFD,    false, "Funktions-Dekoder","Function-Decoder"),
     FD_R    (c.FD_R,   true,  "   FD-R basic",""),
-    FD_R2    (c.FD_R2,   true,  "   FD-R basic2",""),
+    FD_R2   (c.FD_R2,  true,  "   FD-R basic 2",""),
     FD_R_ex (c.FD_R_ex,true,  "   FD-R extended",""),
     FD_M    (c.FD_M,   true,  "   FD-M",""),
     FD_XL   (c.FD_XL,  true,  "   FD-XL",""),
@@ -2216,11 +2216,8 @@ public class KlarTextUI extends javax.swing.JFrame {
                 break;
 
             case c.FD_R: // FD-R
-                FDR fDR = new FDR(this);
-                break;
-
             case c.FD_R2: // FD-R-basic2
-                fDR = new FDR(this,2);
+                FDR fDR = new FDR(this);
                 break;
 
             case c.FD_R_ex: // FD-R extended
@@ -2413,7 +2410,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20150308)";
+            String  gsBuild ="(beta 20150308b)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);

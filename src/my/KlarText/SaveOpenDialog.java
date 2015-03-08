@@ -498,6 +498,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                                     break;
 
                                     case c.FD_R:
+                                    case c.FD_R2:
                                     myFDR.ReturnString = str1.substring(0, n);
                                     break;
 
@@ -586,6 +587,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
 
                         case c.FD_R:
                         s = KlarTextUI.gsConfigDirectory + "LastFilesFDR.lfs";
+                        break;
+
+                        case c.FD_R2:
+                        s = KlarTextUI.gsConfigDirectory + "LastFilesFDR2.lfs";
                         break;
 
                         case c.LD_W33:
@@ -710,6 +715,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
 
                             case c.FD_R:
                             s = KlarTextUI.gsConfigDirectory + "LastFilesFDR.lfs";
+                            break;
+
+                            case c.FD_R2:
+                            s = KlarTextUI.gsConfigDirectory + "LastFilesFDR2.lfs";
                             break;
 
                             case c.LD_W33:
@@ -939,6 +948,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                 break;
 
             case c.FD_R:
+            case c.FD_R2:
                 myFDR.filfilCVs();
                 myFDR.updateTabs();
                break;
@@ -1057,6 +1067,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                         s = KlarTextUI.gsConfigDirectory + "LastFilesFDR.lfs";
                         break;
 
+                    case c.FD_R2:
+                        jTextField1.setText("Einstellungen für FD-R basic 2 laden...");
+                        s = KlarTextUI.gsConfigDirectory + "LastFilesFDR2.lfs";
+                        break;
+
                     case c.LD_W33:
                         s = KlarTextUI.gsConfigDirectory + "LastFiles33.lfs";
                         jTextField1.setText("Einstellungen für LD-W-33 laden...");
@@ -1157,6 +1172,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                     case c.FD_R:
                         s = KlarTextUI.gsConfigDirectory + "LastFilesFDR.lfs";
                         jTextField1.setText("load CVs for FD-R basic...");
+                        break;
+
+                    case c.FD_R2:
+                        s = KlarTextUI.gsConfigDirectory + "LastFilesFDR2.lfs";
+                        jTextField1.setText("load CVs for FD-R basic 2...");
                         break;
 
                     case c.LD_W33:
@@ -1292,6 +1312,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                         jTextField1.setText("Einstellungen für FD-R basic speichern...");
                         break;
 
+                    case c.FD_R2:
+                        s = KlarTextUI.gsConfigDirectory + "LastFilesFDR2.lfs";
+                        jTextField1.setText("Einstellungen für FD-R basic 2 speichern...");
+                        break;
+
                     case c.LD_W33:
                         s = KlarTextUI.gsConfigDirectory + "LastFiles33.lfs";
                         jTextField1.setText("Einstellungen für LD-W-33 speichern...");
@@ -1391,6 +1416,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                     case c.FD_R:
                         s = KlarTextUI.gsConfigDirectory + "LastFilesFDR.lfs";
                         jTextField1.setText("save CVs for FD-R basic...");
+                        break;
+
+                    case c.FD_R2:
+                        s = KlarTextUI.gsConfigDirectory + "LastFilesFDR2.lfs";
+                        jTextField1.setText("save CVs for FD-R basic 2...");
                         break;
 
                     case c.LD_W33:
