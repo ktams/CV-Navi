@@ -54,7 +54,7 @@ public class FDR extends javax.swing.JFrame {
         initComponents();
         CV = new int[2][CVMAX+1];
         bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
-        ReturnString = "Tams Elektronik";
+        ReturnString = java.util.ResourceBundle.getBundle("my/KlarText/Bundle").getString("FDR.jLabelDC1.text");
         ImageIcon II = null;
         switch( KTUI.Decoder ) {
             case c.FD_R:
@@ -225,9 +225,17 @@ public class FDR extends javax.swing.JFrame {
             jF27_1.setVisible(false);
             jF28_1.setVisible(false);
 
+            jInitPause1.setEnabled(false);
+            jInitPause2.setEnabled(false);
+            // jInitPause1.setVisible(false);
+            // jInitPause2.setVisible(false);
+
             jLabel_effects_BOT.setVisible(false);
             jLabel35.setVisible(false);
-            jLabel37.setVisible(false);
+            jLabelDC3.setVisible(false);
+            jLabelIP3.setVisible(false);
+            jLabelOT3.setVisible(false);
+            jInitPause3.setVisible(false);
             jLabel38.setVisible(false);
             jLabel39.setVisible(false);
             jDimmen3.setVisible(false);
@@ -472,7 +480,7 @@ public class FDR extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel_effects_TOP = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        jLabelDC1 = new javax.swing.JLabel();
         jVor1 = new javax.swing.JCheckBox();
         jRueck1 = new javax.swing.JCheckBox();
         jDimmen1 = new javax.swing.JTextField();
@@ -484,7 +492,6 @@ public class FDR extends javax.swing.JFrame {
         jLabel_effects_MID = new javax.swing.JLabel();
         jDimmen2 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         jTast2 = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -495,7 +502,6 @@ public class FDR extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel_effects_BOT = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jDimmen3 = new javax.swing.JTextField();
@@ -504,6 +510,17 @@ public class FDR extends javax.swing.JFrame {
         jR_F4_3 = new javax.swing.JCheckBox();
         jVor3 = new javax.swing.JCheckBox();
         jRueck3 = new javax.swing.JCheckBox();
+        jInitPause1 = new javax.swing.JTextField();
+        jLabelOT1 = new javax.swing.JLabel();
+        jLabelIP1 = new javax.swing.JLabel();
+        jLabelDC2 = new javax.swing.JLabel();
+        jLabelDC3 = new javax.swing.JLabel();
+        jLabelIP2 = new javax.swing.JLabel();
+        jLabelOT2 = new javax.swing.JLabel();
+        jLabelIP3 = new javax.swing.JLabel();
+        jLabelOT3 = new javax.swing.JLabel();
+        jInitPause2 = new javax.swing.JTextField();
+        jInitPause3 = new javax.swing.JTextField();
         jAnalog = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jF1 = new javax.swing.JCheckBox();
@@ -839,7 +856,7 @@ public class FDR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jCV29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jCV29Layout.createSequentialGroup()
-                        .addGap(0, 148, Short.MAX_VALUE)
+                        .addGap(0, 195, Short.MAX_VALUE)
                         .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jCV29Layout.createSequentialGroup()
                         .addGroup(jCV29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1779,8 +1796,9 @@ public class FDR extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText(bundle.getString("FDR.jLabel23.text")); // NOI18N
 
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel25.setText(bundle.getString("FDR.jLabel25.text")); // NOI18N
+        jLabelDC1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelDC1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDC1.setText(bundle.getString("FDR.jLabelDC1.text")); // NOI18N
 
         jVor1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jVor1.setSelected(true);
@@ -1829,7 +1847,8 @@ public class FDR extends javax.swing.JFrame {
 
         jTast1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTast1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTast1.setText(bundle.getString("FDR.jTast1.text")); // NOI18N
+        jTast1.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jTast1.setToolTipText(bundle.getString("FDR.jTast1.toolTipText")); // NOI18N
         jTast1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTast1FocusGained(evt);
@@ -1900,12 +1919,10 @@ public class FDR extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setText(bundle.getString("FDR.jLabel24.text")); // NOI18N
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel26.setText(bundle.getString("FDR.jLabel26.text")); // NOI18N
-
         jTast2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTast2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTast2.setText(bundle.getString("FDR.jTast2.text")); // NOI18N
+        jTast2.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jTast2.setToolTipText(bundle.getString("FDR.jTast2.toolTipText")); // NOI18N
         jTast2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTast2FocusGained(evt);
@@ -1987,9 +2004,6 @@ public class FDR extends javax.swing.JFrame {
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel35.setText(bundle.getString("FDR.jLabel35.text")); // NOI18N
 
-        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel37.setText(bundle.getString("FDR.jLabel37.text")); // NOI18N
-
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel38.setText(bundle.getString("FDR.jLabel38.text")); // NOI18N
 
@@ -2016,6 +2030,7 @@ public class FDR extends javax.swing.JFrame {
         jTast3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTast3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTast3.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jTast3.setToolTipText(bundle.getString("FDR.jTast3.toolTipText")); // NOI18N
         jTast3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTast3FocusGained(evt);
@@ -2084,105 +2099,179 @@ public class FDR extends javax.swing.JFrame {
             }
         });
 
+        jInitPause1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jInitPause1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jInitPause1.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jInitPause1.setToolTipText(bundle.getString("FDR.jInitPause1.toolTipText")); // NOI18N
+        jInitPause1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jInitPause1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jInitPause1FocusLost(evt);
+            }
+        });
+        jInitPause1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jInitPause1KeyReleased(evt);
+            }
+        });
+
+        jLabelOT1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelOT1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelOT1.setText(bundle.getString("FDR.jLabelOT1.text")); // NOI18N
+
+        jLabelIP1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelIP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIP1.setText(bundle.getString("FDR.jLabelIP1.text")); // NOI18N
+
+        jLabelDC2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelDC2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDC2.setText(bundle.getString("FDR.jLabelDC2.text")); // NOI18N
+
+        jLabelDC3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelDC3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDC3.setText(bundle.getString("FDR.jLabelDC3.text")); // NOI18N
+
+        jLabelIP2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelIP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIP2.setText(bundle.getString("FDR.jLabelIP2.text")); // NOI18N
+
+        jLabelOT2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelOT2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelOT2.setText(bundle.getString("FDR.jLabelOT2.text")); // NOI18N
+
+        jLabelIP3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelIP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIP3.setText(bundle.getString("FDR.jLabelIP3.text")); // NOI18N
+
+        jLabelOT3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelOT3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelOT3.setText(bundle.getString("FDR.jLabelOT3.text")); // NOI18N
+
+        jInitPause2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jInitPause2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jInitPause2.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jInitPause2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jInitPause2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jInitPause2FocusLost(evt);
+            }
+        });
+        jInitPause2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jInitPause2KeyReleased(evt);
+            }
+        });
+
+        jInitPause3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jInitPause3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jInitPause3.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jInitPause3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jInitPause3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jInitPause3FocusLost(evt);
+            }
+        });
+        jInitPause3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jInitPause3KeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
+                .addComponent(jSeparator2))
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel_effects_TOP)
-                        .addGap(377, 377, 377))
-                    .addComponent(jSeparator2)
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel32)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRueck2)
-                                        .addComponent(jVor2))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel39)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRueck3)
-                                        .addComponent(jVor3))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jDimmen2)
+                                        .addComponent(jLabel24))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jDimmen1)
+                                        .addComponent(jLabel23)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addGap(7, 7, 7)
+                                                        .addComponent(jLabelIP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addComponent(jInitPause1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabelIP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jInitPause2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabelIP3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jInitPause3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                                    .addComponent(jLabelOT1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jTast1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTast2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabelOT3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jLabelOT2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(7, 7, 7)
+                                                .addComponent(jLabelDC1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jLabelDC2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_effects_TOP)
                                     .addComponent(jLabel_effects_MID)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jDimmen2)
-                                            .addComponent(jLabel24))
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel26))
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(68, 68, 68)
-                                                .addComponent(jTast2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jR_F3_2)
-                                                    .addComponent(jR_F4_2)))
-                                            .addComponent(jLabel31)))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jDimmen1)
-                                            .addComponent(jLabel23))
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(69, 69, 69)
-                                                .addComponent(jTast1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel25)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel29)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jR_F3_1)
-                                                    .addComponent(jR_F4_1))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel30)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jRueck1)
-                                                    .addComponent(jVor1)))))
-                                    .addComponent(jLabel_effects_BOT)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jDimmen3)
-                                            .addComponent(jLabel35))
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel37))
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(68, 68, 68)
-                                                .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jR_F3_3)
-                                                    .addComponent(jR_F4_3)))
-                                            .addComponent(jLabel38))))
-                                .addGap(0, 30, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jDimmen3)
+                                        .addComponent(jLabel35))
+                                    .addComponent(jLabel_effects_BOT))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelDC3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jR_F4_3)
+                            .addComponent(jR_F3_3)
+                            .addComponent(jLabel38)
+                            .addComponent(jR_F4_2)
+                            .addComponent(jR_F3_2)
+                            .addComponent(jLabel31)
+                            .addComponent(jR_F4_1)
+                            .addComponent(jR_F3_1)
+                            .addComponent(jLabel29))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(jLabel30)
+                                .addComponent(jVor1)
+                                .addComponent(jRueck1)
+                                .addComponent(jLabel32)
+                                .addComponent(jVor2)
+                                .addComponent(jRueck2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(jLabel39)
+                                .addComponent(jVor3)
+                                .addComponent(jRueck3)))))
+                .addGap(12, 12, 12))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2192,64 +2281,59 @@ public class FDR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jLabel25)
+                    .addComponent(jLabelDC1)
                     .addComponent(jLabel29)
                     .addComponent(jLabel30))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTast1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jR_F3_1)
-                            .addComponent(jVor1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jR_F4_1)
-                            .addComponent(jRueck1))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelIP1)
+                    .addComponent(jLabelOT1)
+                    .addComponent(jR_F3_1)
+                    .addComponent(jVor1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jRueck1)
+                    .addComponent(jR_F4_1)
+                    .addComponent(jTast1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jInitPause1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_effects_MID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel26))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDimmen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTast2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel24))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32)
-                            .addComponent(jLabel31))
+                            .addComponent(jLabel31)
+                            .addComponent(jLabelDC2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jR_F3_2)
-                            .addComponent(jVor2))
+                            .addComponent(jVor2)
+                            .addComponent(jLabelIP2)
+                            .addComponent(jLabelOT2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jR_F4_2)
-                            .addComponent(jRueck2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRueck2)
+                            .addComponent(jDimmen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTast2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jInitPause2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel_effects_BOT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel35)
-                            .addComponent(jLabel37))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDimmen3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabelDC3)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2258,12 +2342,17 @@ public class FDR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jR_F3_3)
-                            .addComponent(jVor3))
+                            .addComponent(jVor3)
+                            .addComponent(jLabelIP3)
+                            .addComponent(jLabelOT3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jR_F4_3)
-                            .addComponent(jRueck3))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                            .addComponent(jRueck3)
+                            .addComponent(jDimmen3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jInitPause3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("FDR.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -2390,7 +2479,7 @@ public class FDR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jF4))
                     .addComponent(jF8))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("FDR.jAnalog.TabConstraints.tabTitle"), jAnalog); // NOI18N
@@ -2429,7 +2518,7 @@ public class FDR extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel36)
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2586,7 +2675,7 @@ public class FDR extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2680,8 +2769,8 @@ public class FDR extends javax.swing.JFrame {
         {
             CV[1][13] &= ~2;
         }
-        jCV_Anzeige.setSelectedItem( "CV#"+13 );
-        jCV_Inhalt.setText("" + CV[1][13]);
+        jCV_Anzeige.setSelectedItem( "CV#"+13 ); //NOI18N
+        jCV_Inhalt.setText("" + CV[1][13]); //NOI18N
     }//GEN-LAST:event_jF2StateChanged
 
     private void jF3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jF3StateChanged
@@ -3912,7 +4001,10 @@ public class FDR extends javax.swing.JFrame {
             case 58: // [0..255] Dauer bis zum Einschalten
             case 59: // [0..255]
             case 60: // [0..255]
-                 // TODO add missing display handler
+                CV[1][currCV] = cvValue;
+                jInitPause1.setText( "" + CV[1][58]);
+                jInitPause2.setText( "" + CV[1][59]);
+                jInitPause3.setText( "" + CV[1][60]);
                 break;
 
             case 61: // [0..255] Dauer "Ein" innerhalb einer Phase
@@ -4230,11 +4322,15 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jDimmen2KeyReleased
 
     private void jTast1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast1KeyReleased
-        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
     }//GEN-LAST:event_jTast1KeyReleased
 
     private void jTast2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast2KeyReleased
-        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
     }//GEN-LAST:event_jTast2KeyReleased
 
     private void jRC_SenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRC_SenderActionPerformed
@@ -5110,6 +5206,48 @@ public class FDR extends javax.swing.JFrame {
         jCV_Anzeige.setSelectedItem( "CV#"+28 );
     }//GEN-LAST:event_jRcChannel2ActionPerformed
 
+    private void jInitPause1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause1FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+58 );
+    }//GEN-LAST:event_jInitPause1FocusGained
+
+    private void jInitPause1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause1FocusLost
+        CV[1][58] = KTUI.checkTextField( this, jInitPause1, 0, 255, 255, true );
+    }//GEN-LAST:event_jInitPause1FocusLost
+
+    private void jInitPause1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInitPause1KeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
+    }//GEN-LAST:event_jInitPause1KeyReleased
+
+    private void jInitPause2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause2FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+59 );
+    }//GEN-LAST:event_jInitPause2FocusGained
+
+    private void jInitPause2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause2FocusLost
+        CV[1][59] = KTUI.checkTextField( this, jInitPause2, 0, 255, 255, true );
+    }//GEN-LAST:event_jInitPause2FocusLost
+
+    private void jInitPause2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInitPause2KeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
+    }//GEN-LAST:event_jInitPause2KeyReleased
+
+    private void jInitPause3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+60 );
+    }//GEN-LAST:event_jInitPause3FocusGained
+
+    private void jInitPause3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause3FocusLost
+        CV[1][60] = KTUI.checkTextField( this, jInitPause3, 0, 255, 255, true );
+    }//GEN-LAST:event_jInitPause3FocusLost
+
+    private void jInitPause3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInitPause3KeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus(); 
+        }
+    }//GEN-LAST:event_jInitPause3KeyReleased
+
     private int getCVfromIndexString( JComboBox jCB, String prefix) {
         int CV = 0;
         Object oSel = jCB.getSelectedItem();
@@ -5249,6 +5387,9 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JCheckBox jFS;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jFunctionMapping;
+    private javax.swing.JTextField jInitPause1;
+    private javax.swing.JTextField jInitPause2;
+    private javax.swing.JTextField jInitPause3;
     private javax.swing.JRadioButton jKurzeAdr;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -5264,8 +5405,6 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -5276,7 +5415,6 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -5287,7 +5425,16 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBlinkFrequenz;
     private javax.swing.JLabel jLabelBlinkFrequenz_t1;
     private javax.swing.JLabel jLabelBlinkFrequenz_t2;
+    private javax.swing.JLabel jLabelDC1;
+    private javax.swing.JLabel jLabelDC2;
+    private javax.swing.JLabel jLabelDC3;
+    private javax.swing.JLabel jLabelIP1;
+    private javax.swing.JLabel jLabelIP2;
+    private javax.swing.JLabel jLabelIP3;
     private javax.swing.JLabel jLabelMM_Addr_2;
+    private javax.swing.JLabel jLabelOT1;
+    private javax.swing.JLabel jLabelOT2;
+    private javax.swing.JLabel jLabelOT3;
     private javax.swing.JLabel jLabelRcChannels;
     private javax.swing.JLabel jLabel_AUX;
     private javax.swing.JLabel jLabel_AUX1;

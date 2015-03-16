@@ -2410,7 +2410,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20150308b)";
+            String  gsBuild ="(beta 20150316a)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);
