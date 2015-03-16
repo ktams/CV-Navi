@@ -4004,19 +4004,20 @@ public class FDR extends javax.swing.JFrame {
             case 58: // [0..255] Dauer bis zum Einschalten
             case 59: // [0..255]
             case 60: // [0..255]
-                CV[1][currCV] = cvValue;
-                jInitPause1.setText( "" + CV[1][58]);
-                jInitPause2.setText( "" + CV[1][59]);
-                jInitPause3.setText( "" + CV[1][60]);
-                break;
-
             case 61: // [0..255] Dauer "Ein" innerhalb einer Phase
             case 62: // [0..255]
             case 63: // [0..255]
                 CV[1][currCV] = cvValue;
+                jInitPause1.setText( "" + CV[1][58]);
+                jInitPause2.setText( "" + CV[1][59]);
+                jInitPause3.setText( "" + CV[1][60]);
+                CV[1][61] = Math.min(CV[1][61], 255-CV[1][58]);
+                CV[1][62] = Math.min(CV[1][62], 255-CV[1][59]);
+                CV[1][63] = Math.min(CV[1][63], 255-CV[1][60]);
                 jTast1.setText( "" + CV[1][61]);
                 jTast2.setText( "" + CV[1][62]);
                 jTast3.setText( "" + CV[1][63]);
+                cvValue = CV[1][currCV];
                 break;
 
             case 64:
@@ -4195,10 +4196,12 @@ public class FDR extends javax.swing.JFrame {
 
     private void jDimmen1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen1FocusLost
         CV[1][49] = KTUI.checkTextField( this, jDimmen1, 1, 64, 64, true );
+        jCV_Inhalt.setText(""+CV[1][49]);
     }//GEN-LAST:event_jDimmen1FocusLost
 
     private void jDimmen2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen2FocusLost
         CV[1][50] = KTUI.checkTextField( this, jDimmen2, 1, 64, 64, true );
+        jCV_Inhalt.setText(""+CV[1][50]);
     }//GEN-LAST:event_jDimmen2FocusLost
 
     private void jDimmen2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen2FocusGained
@@ -4215,6 +4218,9 @@ public class FDR extends javax.swing.JFrame {
 
     private void jTast1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast1FocusLost
         CV[1][61] = KTUI.checkTextField( this, jTast1, 0, 255, 255, true );
+        CV[1][61] = Math.min(CV[1][61], 255-CV[1][58]);
+        jCV_Inhalt.setText(""+CV[1][61]);
+        jTast1.setText( "" + CV[1][61]);
     }//GEN-LAST:event_jTast1FocusLost
 
     private void jTast2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast2FocusGained
@@ -4223,6 +4229,9 @@ public class FDR extends javax.swing.JFrame {
 
     private void jTast2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast2FocusLost
         CV[1][62] = KTUI.checkTextField( this, jTast2, 0, 255, 255, true );
+        CV[1][62] = Math.min(CV[1][62], 255-CV[1][59]);
+        jCV_Inhalt.setText(""+CV[1][62]);
+        jTast2.setText( "" + CV[1][62]);
     }//GEN-LAST:event_jTast2FocusLost
 
     private void jMM_Addr_2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMM_Addr_2FocusGained
@@ -5104,6 +5113,7 @@ public class FDR extends javax.swing.JFrame {
 
     private void jDimmen3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen3FocusLost
         CV[1][51] = KTUI.checkTextField( this, jDimmen3, 1, 64, 64, true );
+        jCV_Inhalt.setText(""+CV[1][51]);
     }//GEN-LAST:event_jDimmen3FocusLost
 
     private void jDimmen3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDimmen3KeyReleased
@@ -5118,6 +5128,9 @@ public class FDR extends javax.swing.JFrame {
 
     private void jTast3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast3FocusLost
         CV[1][63] = KTUI.checkTextField( this, jTast3, 0, 255, 255, true );
+        CV[1][63] = Math.min(CV[1][63], 255-CV[1][60]);
+        jCV_Inhalt.setText(""+CV[1][63]);
+        jTast3.setText( "" + CV[1][63]);
     }//GEN-LAST:event_jTast3FocusLost
 
     private void jTast3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast3KeyReleased
@@ -5215,6 +5228,9 @@ public class FDR extends javax.swing.JFrame {
 
     private void jInitPause1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause1FocusLost
         CV[1][58] = KTUI.checkTextField( this, jInitPause1, 0, 255, 255, true );
+        jCV_Inhalt.setText(""+CV[1][58]);
+        CV[1][61] = Math.min(CV[1][61], 255-CV[1][58]);
+        jTast1.setText( "" + CV[1][61]);
     }//GEN-LAST:event_jInitPause1FocusLost
 
     private void jInitPause1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInitPause1KeyReleased
@@ -5229,6 +5245,9 @@ public class FDR extends javax.swing.JFrame {
 
     private void jInitPause2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause2FocusLost
         CV[1][59] = KTUI.checkTextField( this, jInitPause2, 0, 255, 255, true );
+        jCV_Inhalt.setText(""+CV[1][59]);
+        CV[1][62] = Math.min(CV[1][62], 255-CV[1][59]);
+        jTast2.setText( "" + CV[1][62]);
     }//GEN-LAST:event_jInitPause2FocusLost
 
     private void jInitPause2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInitPause2KeyReleased
@@ -5243,6 +5262,9 @@ public class FDR extends javax.swing.JFrame {
 
     private void jInitPause3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause3FocusLost
         CV[1][60] = KTUI.checkTextField( this, jInitPause3, 0, 255, 255, true );
+        jCV_Inhalt.setText(""+CV[1][60]);
+        CV[1][63] = Math.min(CV[1][63], 255-CV[1][60]);
+        jTast3.setText( "" + CV[1][63]);
     }//GEN-LAST:event_jInitPause3FocusLost
 
     private void jInitPause3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jInitPause3KeyReleased
