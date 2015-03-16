@@ -2152,6 +2152,7 @@ public class FDR extends javax.swing.JFrame {
         jInitPause2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jInitPause2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jInitPause2.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jInitPause2.setToolTipText(bundle.getString("FDR.jInitPause2.toolTipText")); // NOI18N
         jInitPause2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jInitPause2FocusGained(evt);
@@ -2169,6 +2170,7 @@ public class FDR extends javax.swing.JFrame {
         jInitPause3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jInitPause3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jInitPause3.setText(bundle.getString("FDR.jTast3.text")); // NOI18N
+        jInitPause3.setToolTipText(bundle.getString("FDR.jInitPause3.toolTipText")); // NOI18N
         jInitPause3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jInitPause3FocusGained(evt);
@@ -2307,10 +2309,11 @@ public class FDR extends javax.swing.JFrame {
                         .addComponent(jLabel24))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabelDC2))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDC2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel32)
+                                .addComponent(jLabel31)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jR_F3_2)
