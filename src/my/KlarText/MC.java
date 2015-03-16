@@ -3226,7 +3226,7 @@ public class MC extends javax.swing.JFrame {
                                 System.out.println("write: clear loco list s["+lastCmd+"]" );
                                 Com.write(lastCmd);
                                 resetbArray();
-                                retries = KlarTextUI.timerRetries;
+                                retries = Math.max(KlarTextUI.timerRetries, 50);
                                 jMcRwProgress.setString(null);
                                 bWaitAnswerInProgress = true;
                             }
@@ -3292,7 +3292,7 @@ public class MC extends javax.swing.JFrame {
                                 System.out.println("write: traction s["+lastCmd+"]" );
                                 Com.write(lastCmd);
                                 resetbArray();
-                                retries = KlarTextUI.timerRetries;
+                                retries = Math.max(KlarTextUI.timerRetries, 30);
                                 jMcRwProgress.setString(null);
                                 bWaitAnswerInProgress = true;
                             }
