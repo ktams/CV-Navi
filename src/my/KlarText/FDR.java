@@ -229,6 +229,15 @@ public class FDR extends javax.swing.JFrame {
             jInitPause2.setEnabled(false);
             // jInitPause1.setVisible(false);
             // jInitPause2.setVisible(false);
+            jLabelConsistControl.setVisible(false);
+            jCCF1.setVisible(false);
+            jCCF2.setVisible(false);
+            jCCF3.setVisible(false);
+            jCCF4.setVisible(false);
+            jCCF5.setVisible(false);
+            jCCF6.setVisible(false);
+            jCCF7.setVisible(false);
+            jCCF8.setVisible(false);
 
             jLabel_effects_BOT.setVisible(false);
             jLabel35.setVisible(false);
@@ -476,6 +485,15 @@ public class FDR extends javax.swing.JFrame {
         jF25_3 = new javax.swing.JCheckBox();
         jF26_3 = new javax.swing.JCheckBox();
         jF27_3 = new javax.swing.JCheckBox();
+        jLabelConsistControl = new javax.swing.JLabel();
+        jCCF1 = new javax.swing.JCheckBox();
+        jCCF2 = new javax.swing.JCheckBox();
+        jCCF3 = new javax.swing.JCheckBox();
+        jCCF4 = new javax.swing.JCheckBox();
+        jCCF5 = new javax.swing.JCheckBox();
+        jCCF6 = new javax.swing.JCheckBox();
+        jCCF7 = new javax.swing.JCheckBox();
+        jCCF8 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel_effects_TOP = new javax.swing.JLabel();
@@ -1779,6 +1797,98 @@ public class FDR extends javax.swing.JFrame {
         });
         jFunctionMapping.add(jF27_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
 
+        jLabelConsistControl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelConsistControl.setText(bundle.getString("FDR.jLabelConsistControl.text")); // NOI18N
+        jFunctionMapping.add(jLabelConsistControl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+
+        jCCF1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF1.setText(bundle.getString("FDR.jCCF1.text")); // NOI18N
+        jCCF1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF1StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+
+        jCCF2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF2.setText(bundle.getString("FDR.jCCF2.text")); // NOI18N
+        jCCF2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF2StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, -1, -1));
+
+        jCCF3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF3.setText(bundle.getString("FDR.jCCF3.text")); // NOI18N
+        jCCF3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF3StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
+
+        jCCF4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF4.setText(bundle.getString("FDR.jCCF4.text")); // NOI18N
+        jCCF4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF4StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
+
+        jCCF5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF5.setText(bundle.getString("FDR.jCCF5.text")); // NOI18N
+        jCCF5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF5.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF5StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, -1, -1));
+
+        jCCF6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF6.setText(bundle.getString("FDR.jCCF6.text")); // NOI18N
+        jCCF6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF6.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF6StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
+
+        jCCF7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF7.setText(bundle.getString("FDR.jCCF7.text")); // NOI18N
+        jCCF7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF7.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF7.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF7StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
+
+        jCCF8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCCF8.setText(bundle.getString("FDR.jCCF8.text")); // NOI18N
+        jCCF8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCCF8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jCCF8.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCCF8StateChanged(evt);
+            }
+        });
+        jFunctionMapping.add(jCCF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
+
         jDecodereigenschaften.addTab(bundle.getString("FDR.jFunctionMapping.TabConstraints.tabTitle"), jFunctionMapping); // NOI18N
 
         jPanel2.setToolTipText(bundle.getString("FDR.jPanel2.toolTipText")); // NOI18N
@@ -2969,259 +3079,122 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jLongAddrActionPerformed
 
     private void jAnalogComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jAnalogComponentShown
-        if((CV[1][13] & 1) == 1)
-            jF1.setSelected(true);
-        else
-            jF1.setSelected(false);
-
-        if((CV[1][13] & 2) == 2)
-            jF2.setSelected(true);
-        else
-            jF2.setSelected(false);
-
-        if((CV[1][13] & 4) == 4)
-            jF3.setSelected(true);
-        else
-            jF3.setSelected(false);
-
-        if((CV[1][13] & 8) == 8)
-            jF4.setSelected(true);
-        else
-            jF4.setSelected(false);
-
-        if((CV[1][13] & 16) == 16)
-            jF5.setSelected(true);
-        else
-            jF5.setSelected(false);
-
-        if((CV[1][13] & 32) == 32)
-            jF6.setSelected(true);
-        else
-            jF6.setSelected(false);
-
-        if((CV[1][13] & 64) == 64)
-            jF7.setSelected(true);
-        else
-            jF7.setSelected(false);
-
-        if((CV[1][13] & 128) == 128)
-            jF8.setSelected(true);
-        else
-            jF8.setSelected(false);
         jCV_Anzeige.setSelectedItem( "CV#"+13 );
+
+        jF1.setSelected((CV[1][13] &   1) ==   1);
+        jF2.setSelected((CV[1][13] &   2) ==   2);
+        jF3.setSelected((CV[1][13] &   4) ==   4);
+        jF4.setSelected((CV[1][13] &   8) ==   8);
+        jF5.setSelected((CV[1][13] &  16) ==  16);
+        jF6.setSelected((CV[1][13] &  32) ==  32);
+        jF7.setSelected((CV[1][13] &  64) ==  64);
+        jF8.setSelected((CV[1][13] & 128) == 128);
     }//GEN-LAST:event_jAnalogComponentShown
 
     private void jFunctionMappingComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jFunctionMappingComponentShown
         jCV_Anzeige.setSelectedItem( "CV#"+33 );
-        if((CV[1][33] & 1) == 1)
-            jFL_1.setSelected(true);
-        else
-            jFL_1.setSelected(false);
 
-        if((CV[1][33] & 2) == 2)
-            jFL_2.setSelected(true);
-        else
-            jFL_2.setSelected(false);
+        jFL_1.setSelected((CV[1][33] & 1) == 1);
+        jFL_2.setSelected((CV[1][33] & 2) == 2);
+        jFL_3.setSelected((CV[1][33] & 4) == 4);
+        jFR_1.setSelected((CV[1][34] & 1) == 1);
+        jFR_2.setSelected((CV[1][34] & 2) == 2);
+        jFR_3.setSelected((CV[1][34] & 4) == 4);
+        jF1_1.setSelected((CV[1][35] & 1) == 1);
+        jF1_2.setSelected((CV[1][35] & 2) == 2);
+        jF1_3.setSelected((CV[1][35] & 4) == 4);
+        jF2_1.setSelected((CV[1][35] & 1) == 1);
+        jF2_2.setSelected((CV[1][35] & 2) == 2);
+        jF2_3.setSelected((CV[1][36] & 4) == 4);
+        jF3_1.setSelected((CV[1][37] & 1) == 1);
+        jF3_2.setSelected((CV[1][37] & 2) == 2);
+        jF3_3.setSelected((CV[1][37] & 4) == 4);
+        jF4_1.setSelected((CV[1][38] & 1) == 1);
+        jF4_2.setSelected((CV[1][38] & 2) == 2);
+        jF4_3.setSelected((CV[1][38] & 4) == 4);
+        jF5_1.setSelected((CV[1][39] & 1) == 1);
+        jF5_2.setSelected((CV[1][39] & 2) == 2);
+        jF5_3.setSelected((CV[1][39] & 4) == 4);
+        jF6_1.setSelected((CV[1][40] & 1) == 1);
+        jF6_2.setSelected((CV[1][40] & 2) == 2);
+        jF6_3.setSelected((CV[1][40] & 4) == 4);
+        jF7_1.setSelected((CV[1][41] & 1) == 1);
+        jF7_2.setSelected((CV[1][41] & 2) == 2);
+        jF7_3.setSelected((CV[1][41] & 4) == 4);
+        jF8_1.setSelected((CV[1][42] & 1) == 1);
+        jF8_2.setSelected((CV[1][42] & 2) == 2);
+        jF8_3.setSelected((CV[1][42] & 4) == 4);
+        jF9_1.setSelected((CV[1][43] & 1) == 1);
+        jF9_2.setSelected((CV[1][43] & 2) == 2);
+        jF9_3.setSelected((CV[1][43] & 4) == 4);
+        jF10_1.setSelected((CV[1][44] & 1) == 1);
+        jF10_2.setSelected((CV[1][44] & 2) == 2);
+        jF10_3.setSelected((CV[1][44] & 4) == 4);
+        jF11_1.setSelected((CV[1][45] & 1) == 1);
+        jF11_2.setSelected((CV[1][45] & 2) == 2);
+        jF11_3.setSelected((CV[1][45] & 4) == 4);
+        jF12_1.setSelected((CV[1][46] & 1) == 1);
+        jF12_2.setSelected((CV[1][46] & 2) == 2);
+        jF12_3.setSelected((CV[1][46] & 4) == 4);
 
-        if((CV[1][33] & 4) == 4)
-            jFL_3.setSelected(true);
-        else
-            jFL_3.setSelected(false);
+        jF13_1.setSelected((CV[1][64] & 1) == 1);
+        jF13_2.setSelected((CV[1][64] & 2) == 2);
+        jF13_3.setSelected((CV[1][64] & 4) == 4);
+        jF14_1.setSelected((CV[1][65] & 1) == 1);
+        jF14_2.setSelected((CV[1][65] & 2) == 2);
+        jF14_3.setSelected((CV[1][65] & 4) == 4);
+        jF15_1.setSelected((CV[1][66] & 1) == 1);
+        jF15_2.setSelected((CV[1][66] & 2) == 2);
+        jF15_3.setSelected((CV[1][66] & 4) == 4);
+        jF16_1.setSelected((CV[1][67] & 1) == 1);
+        jF16_2.setSelected((CV[1][67] & 2) == 2);
+        jF16_3.setSelected((CV[1][67] & 4) == 4);
+        jF17_1.setSelected((CV[1][68] & 1) == 1);
+        jF17_2.setSelected((CV[1][68] & 2) == 2);
+        jF17_3.setSelected((CV[1][68] & 4) == 4);
+        jF18_1.setSelected((CV[1][69] & 1) == 1);
+        jF18_2.setSelected((CV[1][69] & 2) == 2);
+        jF18_3.setSelected((CV[1][69] & 4) == 4);
+        jF19_1.setSelected((CV[1][70] & 1) == 1);
+        jF19_2.setSelected((CV[1][70] & 2) == 2);
+        jF19_3.setSelected((CV[1][70] & 4) == 4);
+        jF20_1.setSelected((CV[1][71] & 1) == 1);
+        jF20_2.setSelected((CV[1][71] & 2) == 2);
+        jF20_3.setSelected((CV[1][71] & 4) == 4);
+        jF21_1.setSelected((CV[1][72] & 1) == 1);
+        jF21_2.setSelected((CV[1][72] & 2) == 2);
+        jF21_3.setSelected((CV[1][72] & 4) == 4);
+        jF22_1.setSelected((CV[1][73] & 1) == 1);
+        jF22_2.setSelected((CV[1][73] & 2) == 2);
+        jF22_3.setSelected((CV[1][73] & 4) == 4);
+        jF23_1.setSelected((CV[1][74] & 1) == 1);
+        jF23_2.setSelected((CV[1][74] & 2) == 2);
+        jF23_3.setSelected((CV[1][74] & 4) == 4);
+        jF24_1.setSelected((CV[1][75] & 1) == 1);
+        jF24_2.setSelected((CV[1][75] & 2) == 2);
+        jF24_3.setSelected((CV[1][75] & 4) == 4);
+        jF25_1.setSelected((CV[1][76] & 1) == 1);
+        jF25_2.setSelected((CV[1][76] & 2) == 2);
+        jF25_3.setSelected((CV[1][76] & 4) == 4);
+        jF26_1.setSelected((CV[1][77] & 1) == 1);
+        jF26_2.setSelected((CV[1][77] & 2) == 2);
+        jF26_3.setSelected((CV[1][77] & 4) == 4);
+        jF27_1.setSelected((CV[1][78] & 1) == 1);
+        jF27_2.setSelected((CV[1][78] & 2) == 2);
+        jF27_3.setSelected((CV[1][78] & 4) == 4);
+        jF28_1.setSelected((CV[1][79] & 1) == 1);
+        jF28_2.setSelected((CV[1][79] & 2) == 2);
+        jF28_3.setSelected((CV[1][79] & 4) == 4);
 
-        if((CV[1][34] & 1) == 1)
-            jFR_1.setSelected(true);
-        else
-            jFR_1.setSelected(false);
+        jCCF1.setSelected((CV[1][21] &   1) ==   1);
+        jCCF2.setSelected((CV[1][21] &   2) ==   2);
+        jCCF3.setSelected((CV[1][21] &   4) ==   4);
+        jCCF4.setSelected((CV[1][21] &   8) ==   8);
+        jCCF5.setSelected((CV[1][21] &  16) ==  16);
+        jCCF6.setSelected((CV[1][21] &  32) ==  32);
+        jCCF7.setSelected((CV[1][21] &  64) ==  64);
+        jCCF8.setSelected((CV[1][21] & 128) == 128);
 
-        if((CV[1][34] & 2) == 2)
-            jFR_2.setSelected(true);
-        else
-            jFR_2.setSelected(false);
-
-        if((CV[1][34] & 4) == 4)
-            jFR_3.setSelected(true);
-        else
-            jFR_3.setSelected(false);
-
-        if((CV[1][35] & 1) == 1)
-            jF1_1.setSelected(true);
-        else
-            jF1_1.setSelected(false);
-
-        if((CV[1][35] & 2) == 2)
-            jF1_2.setSelected(true);
-        else
-            jF1_2.setSelected(false);
-
-        if((CV[1][35] & 4) == 4)
-            jF1_3.setSelected(true);
-        else
-            jF1_3.setSelected(false);
-
-        if((CV[1][36] & 1) == 1)
-            jF2_1.setSelected(true);
-        else
-            jF2_1.setSelected(false);
-
-        if((CV[1][36] & 2) == 2)
-            jF2_2.setSelected(true);
-        else
-            jF2_2.setSelected(false);
-
-        if((CV[1][36] & 4) == 4)
-            jF2_3.setSelected(true);
-        else
-            jF2_3.setSelected(false);
-
-        if((CV[1][37] & 1) == 1)
-            jF3_1.setSelected(true);
-        else
-            jF3_1.setSelected(false);
-
-        if((CV[1][37] & 2) == 2)
-            jF3_2.setSelected(true);
-        else
-            jF3_2.setSelected(false);
-
-        if((CV[1][37] & 4) == 4)
-            jF3_3.setSelected(true);
-        else
-            jF3_3.setSelected(false);
-
-        if((CV[1][38] & 1) == 1)
-            jF4_1.setSelected(true);
-        else
-            jF4_1.setSelected(false);
-
-        if((CV[1][38] & 2) == 2)
-            jF4_2.setSelected(true);
-        else
-            jF4_2.setSelected(false);
-
-        if((CV[1][38] & 4) == 4)
-            jF4_3.setSelected(true);
-        else
-            jF4_3.setSelected(false);
-
-        if((CV[1][39] & 1) == 1)
-            jF5_1.setSelected(true);
-        else
-            jF5_1.setSelected(false);
-
-        if((CV[1][39] & 2) == 2)
-            jF5_2.setSelected(true);
-        else
-            jF5_2.setSelected(false);
-
-         if((CV[1][39] & 4) == 4)
-            jF5_3.setSelected(true);
-        else
-            jF5_3.setSelected(false);
-
-        if((CV[1][40] & 1) == 1)
-            jF6_1.setSelected(true);
-        else
-            jF6_1.setSelected(false);
-
-        if((CV[1][40] & 2) == 2)
-            jF6_2.setSelected(true);
-        else
-            jF6_2.setSelected(false);
-
-        if((CV[1][40] & 4) == 4)
-            jF6_3.setSelected(true);
-        else
-            jF6_3.setSelected(false);
-
-        if((CV[1][41] & 1) == 1)
-            jF7_1.setSelected(true);
-        else
-            jF7_1.setSelected(false);
-
-        if((CV[1][41] & 2) == 2)
-            jF7_2.setSelected(true);
-        else
-            jF7_2.setSelected(false);
-
-        if((CV[1][41] & 4) == 4)
-            jF7_3.setSelected(true);
-        else
-            jF7_3.setSelected(false);
-
-        if((CV[1][42] & 1) == 1)
-            jF8_1.setSelected(true);
-        else
-            jF8_1.setSelected(false);
-
-        if((CV[1][42] & 2) == 2)
-            jF8_2.setSelected(true);
-        else
-            jF8_2.setSelected(false);
-
-        if((CV[1][42] & 4) == 4)
-            jF8_3.setSelected(true);
-        else
-            jF8_3.setSelected(false);
-
-        if((CV[1][43] & 1) == 1)
-            jF9_1.setSelected(true);
-        else
-            jF9_1.setSelected(false);
-
-        if((CV[1][43] & 2) == 2)
-            jF9_2.setSelected(true);
-        else
-            jF9_2.setSelected(false);
-
-        if((CV[1][43] & 4) == 4)
-            jF9_3.setSelected(true);
-        else
-            jF9_3.setSelected(false);
-
-        if((CV[1][44] & 1) == 1)
-            jF10_1.setSelected(true);
-        else
-            jF10_1.setSelected(false);
-
-        if((CV[1][44] & 2) == 2)
-            jF10_2.setSelected(true);
-        else
-            jF10_2.setSelected(false);
-
-        if((CV[1][44] & 4) == 4)
-            jF10_3.setSelected(true);
-        else
-            jF10_3.setSelected(false);
-
-        if((CV[1][45] & 1) == 1)
-            jF11_1.setSelected(true);
-        else
-            jF11_1.setSelected(false);
-
-        if((CV[1][45] & 2) == 2)
-            jF11_2.setSelected(true);
-        else
-            jF11_2.setSelected(false);
-
-        if((CV[1][45] & 4) == 4)
-            jF11_3.setSelected(true);
-        else
-            jF11_3.setSelected(false);
-
-        if((CV[1][46] & 1) == 1)
-            jF12_1.setSelected(true);
-        else
-            jF12_1.setSelected(false);
-
-        if((CV[1][46] & 2) == 2)
-            jF12_2.setSelected(true);
-        else
-            jF12_2.setSelected(false);
-
-        if((CV[1][46] & 4) == 4)
-            jF12_3.setSelected(true);
-        else
-            jF12_3.setSelected(false);
     }//GEN-LAST:event_jFunctionMappingComponentShown
 
     private void jFL_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFL_1ActionPerformed
@@ -3851,7 +3824,15 @@ public class FDR extends javax.swing.JFrame {
                 break;
 
             case 21: // [0..255] Consist-Control für F1 bis F8
-                // TODO add missing display handler
+                CV[1][currCV] = cvValue;
+                jCCF1.setSelected((cvValue &   1) ==   1);
+                jCCF2.setSelected((cvValue &   2) ==   2);
+                jCCF3.setSelected((cvValue &   4) ==   4);
+                jCCF4.setSelected((cvValue &   8) ==   8);
+                jCCF5.setSelected((cvValue &  16) ==  16);
+                jCCF6.setSelected((cvValue &  32) ==  32);
+                jCCF7.setSelected((cvValue &  64) ==  64);
+                jCCF8.setSelected((cvValue & 128) == 128);
                 break;
 
             case 28: // [0..3] RC channel options
@@ -5273,6 +5254,94 @@ public class FDR extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jInitPause3KeyReleased
 
+    private void jCCF1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF1StateChanged
+        if(jCCF1.isSelected())
+        {
+            CV[1][21] |= 1;
+        } else {
+            CV[1][21] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF1StateChanged
+
+    private void jCCF2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF2StateChanged
+        if(jCCF2.isSelected())
+        {
+            CV[1][21] |= 2;
+        } else {
+            CV[1][21] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF2StateChanged
+
+    private void jCCF3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF3StateChanged
+        if(jCCF3.isSelected())
+        {
+            CV[1][21] |= 4;
+        } else {
+            CV[1][21] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF3StateChanged
+
+    private void jCCF4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF4StateChanged
+        if(jCCF4.isSelected())
+        {
+            CV[1][21] |= 8;
+        } else {
+            CV[1][21] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF4StateChanged
+
+    private void jCCF5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF5StateChanged
+        if(jCCF5.isSelected())
+        {
+            CV[1][21] |= 16;
+        } else {
+            CV[1][21] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF5StateChanged
+
+    private void jCCF6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF6StateChanged
+        if(jCCF6.isSelected())
+        {
+            CV[1][21] |= 32;
+        } else {
+            CV[1][21] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF6StateChanged
+
+    private void jCCF7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF7StateChanged
+        if(jCCF7.isSelected())
+        {
+            CV[1][21] |= 64;
+        } else {
+            CV[1][21] &= ~64;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF7StateChanged
+
+    private void jCCF8StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCCF8StateChanged
+        if(jCCF8.isSelected())
+        {
+            CV[1][21] |= 128;
+        } else {
+            CV[1][21] &= ~128;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+21 );
+        jCV_Inhalt.setText("" + CV[1][21]);
+    }//GEN-LAST:event_jCCF8StateChanged
+
     private int getCVfromIndexString( JComboBox jCB, String prefix) {
         int CV = 0;
         Object oSel = jCB.getSelectedItem();
@@ -5298,6 +5367,14 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jBild;
     private javax.swing.JTextField jBlinkFrequenz;
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCCF1;
+    private javax.swing.JCheckBox jCCF2;
+    private javax.swing.JCheckBox jCCF3;
+    private javax.swing.JCheckBox jCCF4;
+    private javax.swing.JCheckBox jCCF5;
+    private javax.swing.JCheckBox jCCF6;
+    private javax.swing.JCheckBox jCCF7;
+    private javax.swing.JCheckBox jCCF8;
     private javax.swing.JPanel jCV29;
     private javax.swing.JComboBox jCV_Anzeige;
     private javax.swing.JTextField jCV_Inhalt;
@@ -5450,6 +5527,7 @@ public class FDR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBlinkFrequenz;
     private javax.swing.JLabel jLabelBlinkFrequenz_t1;
     private javax.swing.JLabel jLabelBlinkFrequenz_t2;
+    private javax.swing.JLabel jLabelConsistControl;
     private javax.swing.JLabel jLabelDC1;
     private javax.swing.JLabel jLabelDC2;
     private javax.swing.JLabel jLabelDC3;
