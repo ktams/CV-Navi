@@ -532,13 +532,13 @@ public class KlarTextUI extends javax.swing.JFrame {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
         messageBox.jLabel1.setText(bundle.getString("Hinweis"));
         messageBox.jLabel2.setText(bundle.getString("successful"));
-        messageBox.jLabel3.setText("" + block + bundle.getString("transferred"));
+        messageBox.jLabel3.setText("" + block + " " +bundle.getString("transferred"));
         messageBox.setVisible(true);
     }
     public void mbUpdateWriteError( Container cont, char c ) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont );
         messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
-        messageBox.jLabel2.setText(bundle.getString("Unexpected") + c + bundle.getString("empfangen"));
+        messageBox.jLabel2.setText(bundle.getString("Unexpected") + " " + c + " " + bundle.getString("empfangen"));
         messageBox.jLabel3.setText(bundle.getString("restartupdate"));
         messageBox.setVisible(true);
     }
@@ -2410,7 +2410,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20150316a)";
+            String  gsBuild ="(beta 20150430a)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);
@@ -2593,7 +2593,6 @@ public class KlarTextUI extends javax.swing.JFrame {
         long lSwVersion = 0;
         char b = ' ';
         
-        // ZZZ Tests missing
         /*
          * Version Info:
          * IB      6 answers first is 2 Bytes (BCD)
@@ -2675,6 +2674,10 @@ public class KlarTextUI extends javax.swing.JFrame {
                 }
                 return bGotoUpdate;
             }
+            return false;
+        }
+        if( lenAntwort < 0 ) {
+            System.out.println("Antwort["+numAnswers+"] : Länge ("+lenAntwort+") ist negativ -> Abbruch bVerifyXVer");
             return false;
         }
         numAnswers++;

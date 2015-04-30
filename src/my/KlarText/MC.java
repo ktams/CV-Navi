@@ -46,6 +46,7 @@ public class MC extends javax.swing.JFrame {
     public KlarTextUI KTUI = null;
     public String ReturnString = "Tams Elektronik";
     private TwoWaySerialComm Com = null;
+    private int gsBaudRateSaved = 0;
     private boolean bReadStatus;
     private boolean bReadCfg;
     private boolean bReadRC;
@@ -636,13 +637,6 @@ public class MC extends javax.swing.JFrame {
         return ret;
     }
 
-    private int readAndPArseFirmware() {
-        // TODO brauche ich das ?
-        int retVal = 0;
-
-        return retVal;
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -2784,16 +2778,8 @@ public class MC extends javax.swing.JFrame {
             this.dispose();
             return;
         }
-/*
-        if( ! KTUI.bSpracheDE ) {
-            // tab update
-            jUpdDateiAuswahl.setText("Select File");
-            jUpdStartUpdate.setText("Start Update");
-            jUpdCancel.setText("Cancel");
-            jUpdClose.setText("Close");
-            jUpdLastErrorLabel.setText("Last error:");
-            jUpdLastError.setText("no error");
-        }*/
+
+        gsBaudRateSaved = KTUI.gsBaudRate;
         setFocusUpdStart();
         setFocusDateiAuswahl();
         Com = KTUI.safelyOpenCom( this, Com, false );
@@ -3430,6 +3416,7 @@ public class MC extends javax.swing.JFrame {
                             bUpdate = false;
                             stopIOAction();
                             Com = KTUI.safelyCloseCom( outerThis, Com );
+                            KTUI.gsBaudRate = gsBaudRateSaved;
                             jUpdLastError.setText(bundle.getString("MC.Protokollfehler"));
                             System.out.println("update: read 0 bytes" );
                             KTUI.mbUpdateReadAnswerError( outerThis );
@@ -3519,6 +3506,7 @@ public class MC extends javax.swing.JFrame {
                             case 'F':       //Fertich
                                 KTUI.mbUpdateWriteSuccess( outerThis, BlockNr*4);
                                 Com = KTUI.safelyCloseCom( outerThis, Com );
+                                KTUI.gsBaudRate = gsBaudRateSaved;
                                 bUpdate = false;
                                 timer.stop();
                                 count = 0;
@@ -3554,6 +3542,8 @@ public class MC extends javax.swing.JFrame {
                                 jUpdLastError.setText(bundle.getString("MC.UnbekannterFehler_1") + BlockNrTemp + bundle.getString("MC.UnbekannterFehler_2"));
                                 stopIOAction();
                                 Com = KTUI.safelyCloseCom( outerThis, Com );
+                                System.out.println("mbUpdateWriteError: numBytes from MC="+n+" Content:");
+                                KTUI.dumpbArrayBIN( bArray, n );
                                 KTUI.mbUpdateWriteError( outerThis, (char)bArray[0]);
                                 count = 0;
                                 BlockNr = 0;
@@ -3561,7 +3551,7 @@ public class MC extends javax.swing.JFrame {
                         }
                         BlockNrTemp = BlockNr * 4;
                         jMcUpdProgress.setValue(BlockNrTemp/2);
-                        jMcUpdInfo.setText(bundle.getString("MC.Transferblock") + BlockNrTemp + " / " + (MaxBlocks+1)*2 + " a "+blockSize+" Bytes" );
+                        jMcUpdInfo.setText(bundle.getString("MC.Transferblock") + BlockNrTemp + " / " + (MaxBlocks/2+1)*4 + " a "+blockSize+" Bytes" );
                     }
                     else
                     {
@@ -3570,6 +3560,7 @@ public class MC extends javax.swing.JFrame {
                             jMcUpdProgress.setValue(TimeOut * 5);
                             if (TimeOut > 20) {
                                 Com = KTUI.safelyCloseCom( outerThis, Com );
+                                KTUI.gsBaudRate = gsBaudRateSaved;
                                 bUpdate = false;
                                 TimeOut = 0;
                                 jMcUpdProgress.setValue(0);
@@ -3692,25 +3683,6 @@ public class MC extends javax.swing.JFrame {
             * ac muss in 128 oder 256 Byte-Blöcke binär aufgeteilt werden dies passiert zur Laufzeit
             * Dazu wird ac zuerst komplett in binär gewandelt und in UpdateData gespeichert
             */
-            //serielle Schnittstelle auf 38400,8,n,1 einstellen
-            Com = KTUI.safelyCloseCom( this, Com );
-
-            Com = KTUI.safelyOpenCom( this, Com );
-            if( Com == null ){
-                stopIOAction();
-                jUpdLastError.setText(bundle.getString("MC.Schnitttstellenfehler"));
-                return;
-            }
-            KTUI.flushReadBuffer(Com);
-            bUpdate = true;
-            timer.setInitialDelay(250);
-            timer.setDelay(250);
-            timer.setRepeats(true);
-            startIOAction();
-
-            jMcUpdInfo.setText(bundle.getString("MC.waitingforconnection"));
-            jMcUpdProgress.setMaximum(100);
-            jUpdLastError.setText(bundle.getString("MC.noerror"));
             //binäre Daten erzeugen:
             inputStream.seek(0);
             long lSeek = 0;
@@ -3906,10 +3878,27 @@ public class MC extends javax.swing.JFrame {
 
             BlockNr = 0;
             inputStream.close();
-            timer.setInitialDelay(10);
-            timer.setDelay(10);
-            timer.restart();
-            timer.start();
+
+            // force 38400 baud for firmware updates (for RS232 only)
+            Com = KTUI.safelyCloseCom( this, Com);
+            KTUI.gsBaudRate = 38400;
+            Com = KTUI.safelyOpenCom( this, Com );
+            if( Com == null ){
+                stopIOAction();
+                jUpdLastError.setText(bundle.getString("MC.Schnitttstellenfehler"));
+                return;
+            }
+            KTUI.flushReadBuffer(Com);
+            bUpdate = true;
+            timer.setInitialDelay(250); // set to 10 ?
+            timer.setDelay(250); // set to 10 ?
+            timer.setRepeats(true);
+            jMcUpdProgress.setMaximum(100);
+            startIOAction();
+
+            // jMcUpdInfo.setText(bundle.getString("MC.noerror"));
+            jMcUpdInfo.setText(bundle.getString("MC.waitingforconnection"));
+
 
         } catch (IOException ex) {
             KTUI.mbFileReadError( this );
@@ -4803,10 +4792,6 @@ public class MC extends javax.swing.JFrame {
 
         // init progress bars
         jMcRwProgress.setValue(0);
-        if( bUpdate ) {
-            jMcUpdProgress.setValue(0);
-            jMcUpdInfo.setText(bundle.getString("MC.noerror"));
-        }
 
         // set cursor to WAIT
         Cursor c = new Cursor(Cursor.WAIT_CURSOR);
@@ -4845,6 +4830,7 @@ public class MC extends javax.swing.JFrame {
         }
         if( bUpdate ) {
             bUpdate = false;
+            KTUI.gsBaudRate = gsBaudRateSaved;
             if( KTUI.bSpracheDE )
                 jMcUpdInfo.setText("Aktualisierung abgebrochen");
             else
