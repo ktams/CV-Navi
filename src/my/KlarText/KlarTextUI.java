@@ -57,27 +57,28 @@ interface c {
     public static final int LD_W33 =  5;
     public static final int LD_G33 =  6;
     public static final int LD_G34 =  7;
-    public static final int LD_G33Plus =  8;
-    public static final int LD_G34Plus =  9;
-    public static final int LD_G36Plus =  10;
-    public static final int LINE_1 =  11;
-    public static final int tFD    =  12;
-    public static final int FD_R   = 13;
-    public static final int FD_R2  = 14;
-    public static final int FD_R_ex = 15;
-    public static final int FD_M   = 16;
-    public static final int FD_XL  = 17;
-    public static final int FD_LED = 18;
-    public static final int LINE_2 = 19;
-    public static final int tZUB   = 20;
-    public static final int WD_34  = 21;
-    public static final int SD_34  = 22;
-    public static final int LINE_3 = 23;
-    public static final int tOTHER = 24;
-    public static final int MC     = 25;
-    public static final int B_4    = 26;
-    public static final int BiDi_B = 27;
-    public static final int WIB_30 = 28;
+    public static final int LD_G31plus =  8;
+    public static final int LD_G33Plus =  9;
+    public static final int LD_G34Plus =  10;
+    public static final int LD_G36Plus =  11;
+    public static final int LINE_1 =  12;
+    public static final int tFD    =  13;
+    public static final int FD_R   = 14;
+    public static final int FD_R2  = 15;
+    public static final int FD_R_ex = 16;
+    public static final int FD_M   = 17;
+    public static final int FD_XL  = 18;
+    public static final int FD_LED = 19;
+    public static final int LINE_2 = 20;
+    public static final int tZUB   = 21;
+    public static final int WD_34  = 22;
+    public static final int SD_34  = 23;
+    public static final int LINE_3 = 24;
+    public static final int tOTHER = 25;
+    public static final int MC     = 26;
+    public static final int B_4    = 27;
+    public static final int BiDi_B = 28;
+    public static final int WIB_30 = 29;
 
     // special numbers (used in SaveOpenDialog)
     public static final int MC_WR  = 196; // special handling of MC config writes
@@ -131,6 +132,7 @@ enum decoderList {
     LD_W33  (c.LD_W33, true,  "   LD-W-33",""),
     LD_G33  (c.LD_G33, true,  "   LD-G-33",""),
     LD_G34  (c.LD_G34, true,  "   LD-G-34",""),
+    LD_G31Plus  (c.LD_G31plus, true,  "   LD-G-31Plus",""),
     LD_G33Plus  (c.LD_G33Plus, true,  "   LD-G-33Plus",""),
     LD_G34Plus  (c.LD_G34Plus, true,  "   LD-G-34Plus",""),
     LD_G36Plus  (c.LD_G36Plus, true,  "   LD-G-36Plus",""),
@@ -1837,7 +1839,7 @@ public class KlarTextUI extends javax.swing.JFrame {
 
         jDecoderChooser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDecoderChooser.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Lok-Decoder", ".   LD-G-30", ".   LD-G-31", ".   LD-W-32", ".   LD-G-32", ".   LD-W-33", ".   LD-G-33", ".   LD-G-34", ".   LD-G-33Plus", ".   LD-G-34Plus", ".   LD-G-36Plus", "____________", "Funktions-Decoder", ".   FD-R basic", ".   FD-R extended", ".   FD-M", ".   FD-XL", "____________", "Zubehör-Decoder", ".   WD-34", ".   SD-34", "____________", "Sonstiges", ".   MasterControl", ".   B-4", ".   WIB-30er" };
+            String[] strings = { "Lok-Decoder", ".   LD-G-30", ".   LD-G-31", ".   LD-W-32", ".   LD-G-32", ".   LD-W-33", ".   LD-G-33", ".   LD-G-34", ".   LD-G-31Plus", ".   LD-G-33Plus", ".   LD-G-34Plus", ".   LD-G-36Plus", "____________", "Funktions-Decoder", ".   FD-R basic", ".   FD-R extended", ".   FD-M", ".   FD-XL", "____________", "Zubehör-Decoder", ".   WD-34", ".   SD-34", "____________", "Sonstiges", ".   MasterControl", ".   B-4", ".   WIB-30er" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -2209,6 +2211,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                 LDG33 lDG33 = new LDG33(this);
                 break;
 
+            case c.LD_G31plus: // LD-G-31Plus
             case c.LD_G33Plus: // LD-G-33Plus
             case c.LD_G34Plus: // LD-G-33Plus
             case c.LD_G36Plus: // LD-G-33Plus

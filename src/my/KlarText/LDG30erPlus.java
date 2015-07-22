@@ -48,6 +48,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
         TitledBorder b = (TitledBorder)jPanel1.getBorder();
         switch(KTUI.Decoder)
         {
+            case c.LD_G31plus:
+                b.setTitle("LD-G-31plus");
+                II =new ImageIcon(getClass().getResource("/LD-G-31plus.gif"));
+                setTitle( KTUI.getMenutext( decoderList.LD_G31Plus ).trim() );
+                break;
+                
             case c.LD_G33Plus:
                 b.setTitle("LD-G-33plus");
                 II =new ImageIcon(getClass().getResource("/LD-G-33plus.gif"));
@@ -269,6 +275,333 @@ public class LDG30erPlus extends javax.swing.JFrame {
         initCV( 199, 100 ); // seite 59 Intensität des Umschaltimpulses
 
         //---------------------------
+        if(KTUI.Decoder == c.LD_G31plus)
+        {
+            jFL_5.setVisible(false);
+            jFL_6.setVisible(false);
+            jFL_7.setVisible(false);
+            jFL_8.setVisible(false);
+            
+            jFR_5.setVisible(false);
+            jFR_6.setVisible(false);
+            jFR_7.setVisible(false);
+            jFR_8.setVisible(false);
+
+            jF1_5.setVisible(false);
+            jF1_6.setVisible(false);
+            jF1_7.setVisible(false);
+            jF1_8.setVisible(false);
+
+            jF2_5.setVisible(false);
+            jF2_6.setVisible(false);
+            jF2_7.setVisible(false);
+            jF2_8.setVisible(false);
+
+            jF3_5.setVisible(false);
+            jF3_6.setVisible(false);
+            jF3_7.setVisible(false);
+            jF3_8.setVisible(false);
+
+            jF4_5.setVisible(false);
+            jF4_6.setVisible(false);
+            jF4_7.setVisible(false);
+            jF4_8.setVisible(false);
+
+            jF5_5.setVisible(false);
+            jF5_6.setVisible(false);
+            jF5_7.setVisible(false);
+            jF5_8.setVisible(false);
+
+            jF6_5.setVisible(false);
+            jF6_6.setVisible(false);
+            jF6_7.setVisible(false);
+            jF6_8.setVisible(false);
+
+            jF7_5.setVisible(false);
+            jF7_6.setVisible(false);
+            jF7_7.setVisible(false);
+            jF7_8.setVisible(false);
+
+            jF8_5.setVisible(false);
+            jF8_6.setVisible(false);
+            jF8_7.setVisible(false);
+            jF8_8.setVisible(false);
+
+            jF9_5.setVisible(false);
+            jF9_6.setVisible(false);
+            jF9_7.setVisible(false);
+            jF9_8.setVisible(false);
+
+            jF10_5.setVisible(false);
+            jF10_6.setVisible(false);
+            jF10_7.setVisible(false);
+            jF10_8.setVisible(false);
+
+            jF11_5.setVisible(false);
+            jF11_6.setVisible(false);
+            jF11_7.setVisible(false);
+            jF11_8.setVisible(false);
+
+            jF12_5.setVisible(false);
+            jF12_6.setVisible(false);
+            jF12_7.setVisible(false);
+            jF12_8.setVisible(false);
+
+            jF13_3.setVisible(false);
+            jF13_4.setVisible(false);
+            jF13_5.setVisible(false);
+            jF13_6.setVisible(false);
+            jF13_7.setVisible(false);
+
+            jF14_3.setVisible(false);
+            jF14_4.setVisible(false);
+            jF14_5.setVisible(false);
+            jF14_6.setVisible(false);
+            jF14_7.setVisible(false);
+
+            jF15_3.setVisible(false);
+            jF15_4.setVisible(false);
+            jF15_5.setVisible(false);
+            jF15_6.setVisible(false);
+            jF15_7.setVisible(false);
+
+            jF16_3.setVisible(false);
+            jF16_4.setVisible(false);
+            jF16_5.setVisible(false);
+            jF16_6.setVisible(false);
+            jF16_7.setVisible(false);
+
+            jF17_3.setVisible(false);
+            jF17_4.setVisible(false);
+            jF17_5.setVisible(false);
+            jF17_6.setVisible(false);
+            jF17_7.setVisible(false);
+
+            jF18_3.setVisible(false);
+            jF18_4.setVisible(false);
+            jF18_5.setVisible(false);
+            jF18_6.setVisible(false);
+            jF18_7.setVisible(false);
+
+            jF19_3.setVisible(false);
+            jF19_4.setVisible(false);
+            jF19_5.setVisible(false);
+            jF19_6.setVisible(false);
+            jF19_7.setVisible(false);
+
+            jF20_3.setVisible(false);
+            jF20_4.setVisible(false);
+            jF20_5.setVisible(false);
+            jF20_6.setVisible(false);
+            jF20_7.setVisible(false);
+
+            jF21_3.setVisible(false);
+            jF21_4.setVisible(false);
+            jF21_5.setVisible(false);
+            jF21_6.setVisible(false);
+            jF21_7.setVisible(false);
+
+            jF22_3.setVisible(false);
+            jF22_4.setVisible(false);
+            jF22_5.setVisible(false);
+            jF22_6.setVisible(false);
+            jF22_7.setVisible(false);
+
+            jF23_3.setVisible(false);
+            jF23_4.setVisible(false);
+            jF23_5.setVisible(false);
+            jF23_6.setVisible(false);
+            jF23_7.setVisible(false);
+
+            jF24_3.setVisible(false);
+            jF24_4.setVisible(false);
+            jF24_5.setVisible(false);
+            jF24_6.setVisible(false);
+            jF24_7.setVisible(false);
+
+            jF25_3.setVisible(false);
+            jF25_4.setVisible(false);
+            jF25_5.setVisible(false);
+            jF25_6.setVisible(false);
+            jF25_7.setVisible(false);
+
+            jF26_3.setVisible(false);
+            jF26_4.setVisible(false);
+            jF26_5.setVisible(false);
+            jF26_6.setVisible(false);
+            jF26_7.setVisible(false);
+
+            jF27_3.setVisible(false);
+            jF27_4.setVisible(false);
+            jF27_5.setVisible(false);
+            jF27_6.setVisible(false);
+            jF27_7.setVisible(false);
+
+            jF28_3.setVisible(false);
+            jF28_4.setVisible(false);
+            jF28_5.setVisible(false);
+            jF28_6.setVisible(false);
+            jF28_7.setVisible(false);
+            
+            jLabel61.setVisible(false);
+            jLabel60.setVisible(false);
+            jLabel63.setVisible(false);
+            jLabel62.setVisible(false);
+            
+            jLabel52.setVisible(false);
+            jLabel65.setVisible(false);
+            jLabel83.setVisible(false);
+            jLabel179.setVisible(false);
+            jLabel64.setVisible(false);
+            
+//---------------------- Effekte --------------
+            
+            jVor3.setVisible(false);
+            jVor4.setVisible(false);
+            jVor5.setVisible(false);
+            jVor6.setVisible(false);
+            
+            jRueck3.setVisible(false);
+            jRueck4.setVisible(false);
+            jRueck5.setVisible(false);
+            jRueck6.setVisible(false);
+            
+            jAuxInv3.setVisible(false);
+            jAuxInv4.setVisible(false);
+            jAuxInv5.setVisible(false);
+            jAuxInv6.setVisible(false);
+            
+            jMARs3.setVisible(false);
+            jMARs4.setVisible(false);
+            jMARs5.setVisible(false);
+            jMARs6.setVisible(false);
+            
+            jBlink3.setVisible(false);
+            jBlink4.setVisible(false);
+            jBlink5.setVisible(false);
+            jBlink6.setVisible(false);
+            
+            jDoppelBlink3.setVisible(false);
+            jDoppelBlink4.setVisible(false);
+            jDoppelBlink5.setVisible(false);
+            jDoppelBlink6.setVisible(false);
+            
+            jBl_Inv3.setVisible(false);
+            jBl_Inv4.setVisible(false);
+            jBl_Inv5.setVisible(false);
+            jBl_Inv6.setVisible(false);
+            
+            jBlink_Einschaltzeit_3.setVisible(false);
+            jBlink_Einschaltzeit_4.setVisible(false);
+            jBlink_Einschaltzeit_5.setVisible(false);
+            jBlink_Einschaltzeit_6.setVisible(false);
+            
+            jBlink_Pausezeit_3.setVisible(false);
+            jBlink_Pausezeit_4.setVisible(false);
+            jBlink_Pausezeit_5.setVisible(false);
+            jBlink_Pausezeit_6.setVisible(false);
+            
+            jBlinkfrequenz3.setVisible(false);
+            jBlinkfrequenz4.setVisible(false);
+            jBlinkfrequenz5.setVisible(false);
+            jBlinkfrequenz6.setVisible(false);
+            
+            jLabel44.setVisible(false);
+            jLabel69.setVisible(false);
+            jLabel70.setVisible(false);
+            jLabel71.setVisible(false);
+            
+            jLabel47.setVisible(false);
+            jLabel72.setVisible(false);
+            jLabel73.setVisible(false);
+            jLabel96.setVisible(false);
+            
+            jLabel49.setVisible(false);
+            jLabel98.setVisible(false);
+            jLabel110.setVisible(false);
+            jLabel127.setVisible(false);
+            
+            jLabel67.setVisible(false);
+            jLabel114.setVisible(false);
+
+            jLabel242.setVisible(false);
+            jLabel244.setVisible(false);
+            jLabel246.setVisible(false);
+            jLabel247.setVisible(false);
+            
+            jLabel99.setVisible(false);
+            jLabel119.setVisible(false);
+            jLabel120.setVisible(false);
+            jLabel121.setVisible(false);
+            
+            jFS0_AUX3.setVisible(false);
+            jFS0_AUX4.setVisible(false);
+            jFS0_AUX5.setVisible(false);
+            jFS0_AUX6.setVisible(false);
+            
+            jFS0_AUX9.setVisible(false);
+            jFS0_AUX10.setVisible(false);
+            jFS0_AUX11.setVisible(false);
+            jFS0_AUX12.setVisible(false);
+            
+            jFS0_AUXinv3.setVisible(false);
+            jFS0_AUXinv4.setVisible(false);
+            jFS0_AUXinv5.setVisible(false);
+            jFS0_AUXinv6.setVisible(false);
+            
+            jDimmen3.setVisible(false);
+            jDimmen4.setVisible(false);
+            jDimmen5.setVisible(false);
+            jDimmen6.setVisible(false);
+            
+            jbDimmFS3.setVisible(false);
+            jbDimmFS4.setVisible(false);
+            jbDimmFS5.setVisible(false);
+            jbDimmFS6.setVisible(false);
+            
+            jDimmFS3.setVisible(false);
+            jDimmFS4.setVisible(false);
+            jDimmFS5.setVisible(false);
+            jDimmFS6.setVisible(false);
+            
+            jRangier3.setVisible(false);
+            jRangier4.setVisible(false);
+            
+            jIn1Aux3.setVisible(false);
+            jIn1Aux4.setVisible(false);
+            jIn1Aux5.setVisible(false);
+            jIn1Aux6.setVisible(false);
+            
+            jIn2Aux3.setVisible(false);
+            jIn2Aux4.setVisible(false);
+            jIn2Aux5.setVisible(false);
+            jIn2Aux6.setVisible(false);
+            
+            jKick3.setVisible(false);
+            jKick4.setVisible(false);
+            jKick5.setVisible(false);
+            jKick6.setVisible(false);
+            
+            jKickFahr3.setVisible(false);
+            jKickFahr4.setVisible(false);
+            jKickFahr5.setVisible(false);
+            jKickFahr6.setVisible(false);
+            
+            jServoF5.setVisible(false);
+            jServoF6.setVisible(false);
+            jServoF7.setVisible(false);
+            jServoF8.setVisible(false);
+            jServoF9.setVisible(false);
+            jServoF10.setVisible(false);
+            jServoF11.setVisible(false);
+            jServoF12.setVisible(false);
+            
+            jlinkerAnschlag.setVisible(false);
+            jrechterAnschlag.setVisible(false);
+            jGeschwindigkeit.setVisible(false);
+            jServoTausch.setVisible(false);
+            jServoPOM.setVisible(false);
+        }
         setLocationRelativeTo(ktuiThis);
         setVisible(true);
         KTUI.frameInstanceDEVICE = this;
@@ -6662,7 +6995,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
 
         jLabel172.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel172.setText(bundle.getString("LDG30erPlus.jLabel172.text")); // NOI18N
-        jServo.add(jLabel172, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 11, 200, -1));
+        jServo.add(jLabel172, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 330, -1));
         jServo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 200, 10));
 
         jLabel173.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
