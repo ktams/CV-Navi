@@ -57,7 +57,7 @@ interface c {
     public static final int LD_W33 =  5;
     public static final int LD_G33 =  6;
     public static final int LD_G34 =  7;
-    public static final int LD_G31plus =  8;
+    public static final int LD_G31Plus =  8;
     public static final int LD_G33Plus =  9;
     public static final int LD_G34Plus =  10;
     public static final int LD_G36Plus =  11;
@@ -132,7 +132,7 @@ enum decoderList {
     LD_W33  (c.LD_W33, true,  "   LD-W-33",""),
     LD_G33  (c.LD_G33, true,  "   LD-G-33",""),
     LD_G34  (c.LD_G34, true,  "   LD-G-34",""),
-    LD_G31Plus  (c.LD_G31plus, true,  "   LD-G-31Plus",""),
+    LD_G31Plus  (c.LD_G31Plus, true,  "   LD-G-31Plus",""),
     LD_G33Plus  (c.LD_G33Plus, true,  "   LD-G-33Plus",""),
     LD_G34Plus  (c.LD_G34Plus, true,  "   LD-G-34Plus",""),
     LD_G36Plus  (c.LD_G36Plus, true,  "   LD-G-36Plus",""),
@@ -2211,7 +2211,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                 LDG33 lDG33 = new LDG33(this);
                 break;
 
-            case c.LD_G31plus: // LD-G-31Plus
+            case c.LD_G31Plus: // LD-G-31Plus
             case c.LD_G33Plus: // LD-G-33Plus
             case c.LD_G34Plus: // LD-G-33Plus
             case c.LD_G36Plus: // LD-G-33Plus
@@ -2413,7 +2413,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20150430a)";
+            String  gsBuild ="(beta 20151203a)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);

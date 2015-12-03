@@ -70,6 +70,7 @@ public class DecoderFilter extends FileFilter {
                         return true;
                     break;
 
+                case c.LD_G31Plus:
                 case c.LD_G33Plus:
                 case c.LD_G34Plus:
                     if (ext.equals("30p"))
@@ -170,6 +171,9 @@ public class DecoderFilter extends FileFilter {
 
             case c.LD_G34:
                 return "LD-G-34 (*.ld34)";
+
+            case c.LD_G31Plus:
+                return "LD-G-31plus (*.30p)";
 
             case c.LD_G33Plus:
                 return "LD-G-33plus (*.30p)";

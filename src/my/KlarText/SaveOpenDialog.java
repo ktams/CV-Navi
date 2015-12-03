@@ -502,6 +502,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                                     myFDR.ReturnString = str1.substring(0, n);
                                     break;
 
+                                    case c.LD_G31Plus:
                                     case c.LD_G33Plus:
                                     case c.LD_G34Plus:
                                     case c.LD_G36Plus:
@@ -600,6 +601,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
 
                         case c.LD_G34:
                         s = KlarTextUI.gsConfigDirectory + "LastFiles34.lfs";
+                        break;
+
+                        case c.LD_G31Plus:
+                        s = KlarTextUI.gsConfigDirectory + "LastFiles31plus.lfs";
                         break;
 
                         case c.LD_G33Plus:
@@ -728,6 +733,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
 
                             case c.LD_G34:
                             s = KlarTextUI.gsConfigDirectory + "LastFiles34.lfs";
+                            break;
+
+                            case c.LD_G31Plus:
+                            s = KlarTextUI.gsConfigDirectory + "LastFiles31plus.lfs";
                             break;
 
                             case c.LD_G33Plus:
@@ -953,6 +962,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                 myFDR.updateTabs();
                break;
 
+            case c.LD_G31Plus:
             case c.LD_G33Plus:
             case c.LD_G34Plus:
             case c.LD_G36Plus:
@@ -1087,6 +1097,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                         jTextField1.setText("Einstellungen für LD-G-34 laden...");
                         break;
 
+                    case c.LD_G31Plus:
+                        s = KlarTextUI.gsConfigDirectory + "LastFiles31plus.lfs";
+                        jTextField1.setText("Einstellungen für LD-G-31plus laden...");
+                        break;
+
                     case c.LD_G33Plus:
                         s = KlarTextUI.gsConfigDirectory + "LastFiles33plus.lfs";
                         jTextField1.setText("Einstellungen für LD-G-33plus laden...");
@@ -1192,6 +1207,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                     case c.LD_G34:
                         s = KlarTextUI.gsConfigDirectory + "LastFiles34.lfs";
                         jTextField1.setText("load CVs for LD-G-34...");
+                        break;
+
+                    case c.LD_G31Plus:
+                        s = KlarTextUI.gsConfigDirectory + "LastFiles31plus.lfs";
+                        jTextField1.setText("load CVs for LD-G-31plus...");
                         break;
 
                     case c.LD_G33Plus:
@@ -1332,6 +1352,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                         jTextField1.setText("Einstellungen für LD-G-34 speichern...");
                         break;
 
+                    case c.LD_G31Plus:
+                        s = KlarTextUI.gsConfigDirectory + "LastFiles31plus.lfs";
+                        jTextField1.setText("Einstellungen für LD-G-31plus speichern...");
+                        break;
+
                     case c.LD_G33Plus:
                         s = KlarTextUI.gsConfigDirectory + "LastFiles33plus.lfs";
                         jTextField1.setText("Einstellungen für LD-G-33plus speichern...");
@@ -1436,6 +1461,11 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                     case c.LD_G34:
                         s = KlarTextUI.gsConfigDirectory + "LastFiles34.lfs";
                         jTextField1.setText("save CVs for LD-G-34...");
+                        break;
+
+                    case c.LD_G31Plus:
+                        s = KlarTextUI.gsConfigDirectory + "LastFiles31plus.lfs";
+                        jTextField1.setText("save CVs for LD-G-31plus...");
                         break;
 
                     case c.LD_G33Plus:

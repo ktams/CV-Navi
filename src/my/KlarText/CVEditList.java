@@ -807,7 +807,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(bundle.getString("Default"), 129, 2);
                break;
 
-            case c.LD_G31plus:
+            case c.LD_G31Plus:
             case c.LD_G33Plus:
             case c.LD_G34Plus:
                 jTable1.setValueAt("Funktion Mapping SOUND F1", 147, 2);

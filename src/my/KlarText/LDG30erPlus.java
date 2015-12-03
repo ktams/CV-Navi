@@ -48,7 +48,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         TitledBorder b = (TitledBorder)jPanel1.getBorder();
         switch(KTUI.Decoder)
         {
-            case c.LD_G31plus:
+            case c.LD_G31Plus:
                 b.setTitle("LD-G-31plus");
                 II =new ImageIcon(getClass().getResource("/LD-G-31plus.gif"));
                 setTitle( KTUI.getMenutext( decoderList.LD_G31Plus ).trim() );
@@ -275,13 +275,13 @@ public class LDG30erPlus extends javax.swing.JFrame {
         initCV( 199, 100 ); // seite 59 Intensität des Umschaltimpulses
 
         //---------------------------
-        if(KTUI.Decoder == c.LD_G31plus)
+        if(KTUI.Decoder == c.LD_G31Plus)
         {
             jFL_5.setVisible(false);
             jFL_6.setVisible(false);
             jFL_7.setVisible(false);
             jFL_8.setVisible(false);
-            
+
             jFR_5.setVisible(false);
             jFR_6.setVisible(false);
             jFR_7.setVisible(false);
@@ -453,74 +453,74 @@ public class LDG30erPlus extends javax.swing.JFrame {
             jLabel83.setVisible(false);
             jLabel179.setVisible(false);
             jLabel64.setVisible(false);
-            
+
 //---------------------- Effekte --------------
-            
+
             jVor3.setVisible(false);
             jVor4.setVisible(false);
             jVor5.setVisible(false);
             jVor6.setVisible(false);
-            
+
             jRueck3.setVisible(false);
             jRueck4.setVisible(false);
             jRueck5.setVisible(false);
             jRueck6.setVisible(false);
-            
+
             jAuxInv3.setVisible(false);
             jAuxInv4.setVisible(false);
             jAuxInv5.setVisible(false);
             jAuxInv6.setVisible(false);
-            
+
             jMARs3.setVisible(false);
             jMARs4.setVisible(false);
             jMARs5.setVisible(false);
             jMARs6.setVisible(false);
-            
+
             jBlink3.setVisible(false);
             jBlink4.setVisible(false);
             jBlink5.setVisible(false);
             jBlink6.setVisible(false);
-            
+
             jDoppelBlink3.setVisible(false);
             jDoppelBlink4.setVisible(false);
             jDoppelBlink5.setVisible(false);
             jDoppelBlink6.setVisible(false);
-            
+
             jBl_Inv3.setVisible(false);
             jBl_Inv4.setVisible(false);
             jBl_Inv5.setVisible(false);
             jBl_Inv6.setVisible(false);
-            
+
             jBlink_Einschaltzeit_3.setVisible(false);
             jBlink_Einschaltzeit_4.setVisible(false);
             jBlink_Einschaltzeit_5.setVisible(false);
             jBlink_Einschaltzeit_6.setVisible(false);
-            
+
             jBlink_Pausezeit_3.setVisible(false);
             jBlink_Pausezeit_4.setVisible(false);
             jBlink_Pausezeit_5.setVisible(false);
             jBlink_Pausezeit_6.setVisible(false);
-            
+
             jBlinkfrequenz3.setVisible(false);
             jBlinkfrequenz4.setVisible(false);
             jBlinkfrequenz5.setVisible(false);
             jBlinkfrequenz6.setVisible(false);
-            
+
             jLabel44.setVisible(false);
             jLabel69.setVisible(false);
             jLabel70.setVisible(false);
             jLabel71.setVisible(false);
-            
+
             jLabel47.setVisible(false);
             jLabel72.setVisible(false);
             jLabel73.setVisible(false);
             jLabel96.setVisible(false);
-            
+
             jLabel49.setVisible(false);
             jLabel98.setVisible(false);
             jLabel110.setVisible(false);
             jLabel127.setVisible(false);
-            
+
             jLabel67.setVisible(false);
             jLabel114.setVisible(false);
 
@@ -528,65 +528,66 @@ public class LDG30erPlus extends javax.swing.JFrame {
             jLabel244.setVisible(false);
             jLabel246.setVisible(false);
             jLabel247.setVisible(false);
-            
+
             jLabel99.setVisible(false);
             jLabel119.setVisible(false);
             jLabel120.setVisible(false);
             jLabel121.setVisible(false);
-            
+
             jFS0_AUX3.setVisible(false);
             jFS0_AUX4.setVisible(false);
             jFS0_AUX5.setVisible(false);
             jFS0_AUX6.setVisible(false);
-            
+
             jFS0_AUX9.setVisible(false);
             jFS0_AUX10.setVisible(false);
             jFS0_AUX11.setVisible(false);
             jFS0_AUX12.setVisible(false);
-            
+
             jFS0_AUXinv3.setVisible(false);
             jFS0_AUXinv4.setVisible(false);
             jFS0_AUXinv5.setVisible(false);
             jFS0_AUXinv6.setVisible(false);
-            
+
             jDimmen3.setVisible(false);
             jDimmen4.setVisible(false);
             jDimmen5.setVisible(false);
             jDimmen6.setVisible(false);
-            
+
             jbDimmFS3.setVisible(false);
             jbDimmFS4.setVisible(false);
             jbDimmFS5.setVisible(false);
             jbDimmFS6.setVisible(false);
-            
+
             jDimmFS3.setVisible(false);
             jDimmFS4.setVisible(false);
             jDimmFS5.setVisible(false);
             jDimmFS6.setVisible(false);
-            
+
             jRangier3.setVisible(false);
             jRangier4.setVisible(false);
-            
+
             jIn1Aux3.setVisible(false);
             jIn1Aux4.setVisible(false);
             jIn1Aux5.setVisible(false);
             jIn1Aux6.setVisible(false);
-            
+
             jIn2Aux3.setVisible(false);
             jIn2Aux4.setVisible(false);
             jIn2Aux5.setVisible(false);
             jIn2Aux6.setVisible(false);
-            
+
             jKick3.setVisible(false);
             jKick4.setVisible(false);
             jKick5.setVisible(false);
             jKick6.setVisible(false);
-            
+
             jKickFahr3.setVisible(false);
             jKickFahr4.setVisible(false);
             jKickFahr5.setVisible(false);
             jKickFahr6.setVisible(false);
-            
+
+            jLabelSwitchWith.setVisible(false);
             jServoF5.setVisible(false);
             jServoF6.setVisible(false);
             jServoF7.setVisible(false);
@@ -595,11 +596,16 @@ public class LDG30erPlus extends javax.swing.JFrame {
             jServoF10.setVisible(false);
             jServoF11.setVisible(false);
             jServoF12.setVisible(false);
-            
+
+            jLabelLeftPos.setVisible(false);
             jlinkerAnschlag.setVisible(false);
+            jLabelRightPos.setVisible(false);
             jrechterAnschlag.setVisible(false);
+            jLabelVelocity.setVisible(false);
             jGeschwindigkeit.setVisible(false);
+            jLabelChangeLR.setVisible(false);
             jServoTausch.setVisible(false);
+            jLabelServoPOM.setVisible(false);
             jServoPOM.setVisible(false);
         }
         setLocationRelativeTo(ktuiThis);
@@ -1353,7 +1359,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jLabel248 = new javax.swing.JLabel();
         jLabel249 = new javax.swing.JLabel();
         jServo = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
+        jLabelVelocity = new javax.swing.JLabel();
         jServoPOM = new javax.swing.JCheckBox();
         jServoF9 = new javax.swing.JCheckBox();
         jServoF10 = new javax.swing.JCheckBox();
@@ -1365,15 +1371,15 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jLabel167 = new javax.swing.JLabel();
         jGeschwindigkeit = new javax.swing.JTextField();
         jServoF11 = new javax.swing.JCheckBox();
-        jLabel168 = new javax.swing.JLabel();
+        jLabelSwitchWith = new javax.swing.JLabel();
         jLabel169 = new javax.swing.JLabel();
-        jLabel170 = new javax.swing.JLabel();
+        jLabelRightPos = new javax.swing.JLabel();
         jlinkerAnschlag = new javax.swing.JTextField();
         jrechterAnschlag = new javax.swing.JTextField();
-        jLabel171 = new javax.swing.JLabel();
+        jLabelLeftPos = new javax.swing.JLabel();
         jLabel172 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel173 = new javax.swing.JLabel();
+        jLabelChangeLR = new javax.swing.JLabel();
         jFS0_F5 = new javax.swing.JCheckBox();
         jFS0_F6 = new javax.swing.JCheckBox();
         jFS0_F7 = new javax.swing.JCheckBox();
@@ -1405,7 +1411,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jFS0_AUX12 = new javax.swing.JCheckBox();
         jLabel176 = new javax.swing.JLabel();
         jServoTausch = new javax.swing.JCheckBox();
-        jLabel207 = new javax.swing.JLabel();
+        jLabelServoPOM = new javax.swing.JLabel();
         jAnalog = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jF1 = new javax.swing.JCheckBox();
@@ -6834,10 +6840,10 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
         jServo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel24.setText(bundle.getString("LDG30erPlus.jLabel24.text")); // NOI18N
-        jServo.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, 20));
+        jLabelVelocity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelVelocity.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelVelocity.setText(bundle.getString("LDG30erPlus.jLabelVelocity.text")); // NOI18N
+        jServo.add(jLabelVelocity, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, 20));
 
         jServoPOM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jServoPOM.addActionListener(new java.awt.event.ActionListener() {
@@ -6940,19 +6946,19 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
         jServo.add(jServoF11, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 40, 50, -1));
 
-        jLabel168.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel168.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel168.setText(bundle.getString("LDG30erPlus.jLabel168.text")); // NOI18N
-        jServo.add(jLabel168, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 41, 90, 20));
+        jLabelSwitchWith.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelSwitchWith.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelSwitchWith.setText(bundle.getString("LDG30erPlus.jLabelSwitchWith.text")); // NOI18N
+        jServo.add(jLabelSwitchWith, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 41, 90, 20));
 
         jLabel169.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel169.setText(bundle.getString("LDG30erPlus.jLabel169.text")); // NOI18N
         jServo.add(jLabel169, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 230, -1));
 
-        jLabel170.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel170.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel170.setText(bundle.getString("LDG30erPlus.jLabel170.text")); // NOI18N
-        jServo.add(jLabel170, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 71, 120, -1));
+        jLabelRightPos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelRightPos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelRightPos.setText(bundle.getString("LDG30erPlus.jLabelRightPos.text")); // NOI18N
+        jServo.add(jLabelRightPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 71, 120, -1));
 
         jlinkerAnschlag.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jlinkerAnschlag.setText(bundle.getString("LDG30erPlus.jlinkerAnschlag.text")); // NOI18N
@@ -6988,20 +6994,20 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
         jServo.add(jrechterAnschlag, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 50, -1));
 
-        jLabel171.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel171.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel171.setText(bundle.getString("LDG30erPlus.jLabel171.text")); // NOI18N
-        jServo.add(jLabel171, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 100, -1));
+        jLabelLeftPos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelLeftPos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelLeftPos.setText(bundle.getString("LDG30erPlus.jLabelLeftPos.text")); // NOI18N
+        jServo.add(jLabelLeftPos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 100, -1));
 
         jLabel172.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel172.setText(bundle.getString("LDG30erPlus.jLabel172.text")); // NOI18N
         jServo.add(jLabel172, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 330, -1));
         jServo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 200, 10));
 
-        jLabel173.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel173.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel173.setText(bundle.getString("LDG30erPlus.jLabel173.text")); // NOI18N
-        jServo.add(jLabel173, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 170, 20));
+        jLabelChangeLR.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelChangeLR.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelChangeLR.setText(bundle.getString("LDG30erPlus.jLabelChangeLR.text")); // NOI18N
+        jServo.add(jLabelChangeLR, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 170, 20));
 
         jFS0_F5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jFS0_F5.setText(bundle.getString("LDG30erPlus.jFS0_F5.text")); // NOI18N
@@ -7258,10 +7264,10 @@ public class LDG30erPlus extends javax.swing.JFrame {
         });
         jServo.add(jServoTausch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
 
-        jLabel207.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel207.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel207.setText(bundle.getString("LDG30erPlus.jLabel207.text")); // NOI18N
-        jServo.add(jLabel207, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 160, 20));
+        jLabelServoPOM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelServoPOM.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelServoPOM.setText(bundle.getString("LDG30erPlus.jLabelServoPOM.text")); // NOI18N
+        jServo.add(jLabelServoPOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 160, 20));
 
         jDecodereigenschaften.addTab(bundle.getString("LDG30erPlus.jServo.TabConstraints.tabTitle"), jServo); // NOI18N
 
@@ -8302,6 +8308,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         jCV_Anzeige.setSelectedItem( "CV#"+8 );
         SaveOpenDialog od;
         switch( KTUI.Decoder ) {
+            case c.LD_G31Plus:
             case c.LD_G33Plus:
             case c.LD_G34Plus:
                 od = new SaveOpenDialog( this, true, true, CVs, this, "30p");
@@ -8318,6 +8325,9 @@ public class LDG30erPlus extends javax.swing.JFrame {
         DecTest dt = new DecTest(this, true, KTUI);
         switch(KTUI.Decoder)
         {
+            case c.LD_G31Plus:
+                dt.jDecType.setText("Decoder: LD-G-31plus");
+                break;
             case c.LD_G33Plus:
                 dt.jDecType.setText("Decoder: LD-G-33plus");
                 break;
@@ -12917,6 +12927,7 @@ public class LDG30erPlus extends javax.swing.JFrame {
         // Alle CVs werden in einer Datei gespeichert
         SaveOpenDialog od;
         switch( KTUI.Decoder ) {
+            case c.LD_G31Plus:
             case c.LD_G33Plus:
             case c.LD_G34Plus:
                 CVs = "LD-G-30plus\r\n";
@@ -15440,13 +15451,9 @@ public class LDG30erPlus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel165;
     private javax.swing.JLabel jLabel166;
     private javax.swing.JLabel jLabel167;
-    private javax.swing.JLabel jLabel168;
     private javax.swing.JLabel jLabel169;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel170;
-    private javax.swing.JLabel jLabel171;
     private javax.swing.JLabel jLabel172;
-    private javax.swing.JLabel jLabel173;
     private javax.swing.JLabel jLabel174;
     private javax.swing.JLabel jLabel175;
     private javax.swing.JLabel jLabel176;
@@ -15484,7 +15491,6 @@ public class LDG30erPlus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel204;
     private javax.swing.JLabel jLabel205;
     private javax.swing.JLabel jLabel206;
-    private javax.swing.JLabel jLabel207;
     private javax.swing.JLabel jLabel208;
     private javax.swing.JLabel jLabel209;
     private javax.swing.JLabel jLabel21;
@@ -15520,7 +15526,6 @@ public class LDG30erPlus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel237;
     private javax.swing.JLabel jLabel238;
     private javax.swing.JLabel jLabel239;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel240;
     private javax.swing.JLabel jLabel241;
     private javax.swing.JLabel jLabel242;
@@ -15611,6 +15616,12 @@ public class LDG30erPlus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
+    private javax.swing.JLabel jLabelChangeLR;
+    private javax.swing.JLabel jLabelLeftPos;
+    private javax.swing.JLabel jLabelRightPos;
+    private javax.swing.JLabel jLabelServoPOM;
+    private javax.swing.JLabel jLabelSwitchWith;
+    private javax.swing.JLabel jLabelVelocity;
     private javax.swing.JCheckBox jLongAddr;
     private javax.swing.JCheckBox jLongAddr1;
     private javax.swing.JCheckBox jLongAddr2;
