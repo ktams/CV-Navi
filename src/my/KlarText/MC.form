@@ -1747,15 +1747,20 @@
                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                       <Component id="helpMCasLC" min="-2" pref="153" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="helpSNC" min="-2" pref="153" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="helpSNC" min="-2" pref="153" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="Firmware" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jUpdLastErrorLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jUpdLastError" min="-2" pref="405" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane4" alignment="0" pref="666" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane4" alignment="0" pref="691" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   </Group>
@@ -1763,7 +1768,7 @@
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="jMcUpdInfo" min="-2" pref="455" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                              <EmptySpace pref="74" max="32767" attributes="0"/>
                                               <Component id="helpWasIstWas" min="-2" pref="173" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jUpdDatei" max="32767" attributes="0"/>
@@ -1772,7 +1777,7 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jUpd2System" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jUpd2System" alignment="1" pref="155" max="32767" attributes="0"/>
                                   <Component id="jUpdClose" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jUpdDateiAuswahl" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jUpdCancel" alignment="1" max="32767" attributes="0"/>
@@ -1833,11 +1838,16 @@
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="jScrollPane4" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="helpLC" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="helpSNC" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="helpLC" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="helpSNC" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="Firmware" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                           </Group>
@@ -2103,6 +2113,22 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="helpMCasLCActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="Firmware">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.Firmware.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.Firmware.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FirmwareActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
