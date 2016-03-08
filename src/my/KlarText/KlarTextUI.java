@@ -1846,6 +1846,9 @@ public class KlarTextUI extends javax.swing.JFrame {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
         });
 
         KlarTextMainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("KlarTextUI.KlarTextMainPanel.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -2435,7 +2438,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20160308c)";
+            String  gsBuild ="(beta 20160308d)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);
@@ -2609,6 +2612,11 @@ public class KlarTextUI extends javax.swing.JFrame {
 
         verifyZentrale(false);
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // leave through OS closing the app -> simulate exit-button event
+        jButtonEndActionPerformed( null );
+    }//GEN-LAST:event_formWindowClosing
 
     private Boolean verifyXVer( byte[] bIn ) {
         int lenIn = bIn.length;
