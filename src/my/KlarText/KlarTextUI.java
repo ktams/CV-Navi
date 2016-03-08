@@ -103,7 +103,9 @@ interface c {
     public static final int cuPowerUnknown = -1;
     public static final int cuPowerOff = 0;
     public static final int cuPowerOn = 1;
-    // MailBoxErrorCodes
+    // S88
+    public static final int maxS88 = 52;
+    // MessageBoxErrorCodes
     public static final int mbRDcancel = 1;
     public static final int mbWRcancel = 2;
     public static final int mbRDtimeout = 3;
@@ -249,6 +251,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     public ModeZentrale gModeZentrale = ModeZentrale.UNKNOWN ;
     public MZ gMZvorAktion = MZ.UNKNOWN ;
     private ResourceBundle bundle;
+    private int numS88 = 0;
 
     public KlarTextUI() {
         mainWindowLocation = new Point();
@@ -400,6 +403,16 @@ public class KlarTextUI extends javax.swing.JFrame {
             } else {
                 return dl.getMenutextEng();
             }
+        }
+    }
+
+    public int getNumS88() {
+        return numS88;
+    }
+
+    public void setNumS88( int num ) {
+        if( checkNumRange( num, 0, c.maxS88 ) ) {
+            numS88 = num;
         }
     }
 
@@ -1089,6 +1102,14 @@ public class KlarTextUI extends javax.swing.JFrame {
         messageBox.jLabel1.setText(bundle.getString("Fehler"));
         messageBox.jLabel2.setText(bundle.getString("Wrongcu") + gsZentrale + "\" "+bundle.getString("configured"));
         messageBox.jLabel3.setText(bundle.getString("PleaseSelectMC"));
+        messageBox.setVisible(true);
+    }
+
+    public void mbNoS88modules( Container cont ) {
+        MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
+        messageBox.jLabel1.setText(bundle.getString("Information"));
+        messageBox.jLabel2.setText(bundle.getString("NoS88modules"));
+        messageBox.jLabel3.setText(bundle.getString("SkipS88monitor"));
         messageBox.setVisible(true);
     }
 
@@ -2414,7 +2435,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20151203b)";
+            String  gsBuild ="(beta 20160308c)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);

@@ -52,6 +52,8 @@ public class MC extends javax.swing.JFrame {
     private boolean bReadStatus;
     private boolean bReadCfg;
     private boolean bReadRC;
+    private boolean bReadS88num = false;
+    private boolean bReadS88value = false;
     private boolean bWriteCfg;
     private boolean bWriteM3sid;
     private boolean bWriteM3sidList;
@@ -76,9 +78,13 @@ public class MC extends javax.swing.JFrame {
     private int locoTableSelCol = -1;
     private Boolean checkM3uidValidActive = false;
     private M3_Liste M3L = null;
+    public S88monitor S88mon = null;
     
     public String M3liste[][] = null;
     public int M3used = 0;
+
+    public int modulNr = 1;
+    public int moduleValue = 0;
 
     private boolean bWaitAnswerInProgress = false;
     private byte[] bArray = new byte[0xFFFF];
@@ -581,6 +587,7 @@ public class MC extends javax.swing.JFrame {
                                     break;
                                 case "s88MODULES":
                                     js88.setText(strArr1[1]);
+                                    updateS88field(Integer.parseInt(js88.getText()));
                                     break;
                                 case "MAGMINTIME":
                                     jMinMag.setText(strArr1[1]);
@@ -696,6 +703,7 @@ public class MC extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jClose = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
+        jSysS88monitor = new javax.swing.JButton();
         jLoks = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLoco = new javax.swing.JTable();
@@ -1061,6 +1069,16 @@ public class MC extends javax.swing.JFrame {
         jLabel17.setText(bundle.getString("MC.jLabel17.text")); // NOI18N
         jLabel17.setToolTipText(bundle.getString("MC.jLabel17.toolTipText")); // NOI18N
 
+        jSysS88monitor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jSysS88monitor.setText(bundle.getString("MC.jSysS88monitor.text")); // NOI18N
+        jSysS88monitor.setToolTipText(bundle.getString("MC.jSysS88monitor.toolTipText")); // NOI18N
+        jSysS88monitor.setEnabled(false);
+        jSysS88monitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSysS88monitorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jSystemLayout = new javax.swing.GroupLayout(jSystem);
         jSystem.setLayout(jSystemLayout);
         jSystemLayout.setHorizontalGroup(
@@ -1112,13 +1130,18 @@ public class MC extends javax.swing.JFrame {
                                     .addComponent(jBaud, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jKurzEmpf, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel17))
-                                .addGap(143, 143, 143))
+                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jSystemLayout.createSequentialGroup()
+                                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel12))
+                                        .addGap(143, 143, 143))
+                                    .addGroup(jSystemLayout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
                                 .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1157,7 +1180,8 @@ public class MC extends javax.swing.JFrame {
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(js88, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel17))
+                            .addComponent(jLabel17)
+                            .addComponent(jSysS88monitor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jMinMag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1180,7 +1204,7 @@ public class MC extends javax.swing.JFrame {
                             .addComponent(jDatenQuelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jSystemLayout.createSequentialGroup()
@@ -2711,6 +2735,7 @@ public class MC extends javax.swing.JFrame {
         KTUI.frameInstanceDEVICE = null;
         stopIOAction();
         Com = KTUI.safelyCloseCom( this, Com );
+        KTUI.setNumS88(0);
         KTUI.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
@@ -2840,29 +2865,31 @@ public class MC extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if( bWaitAnswerInProgress ) {
+                    if( debugLevel > 2 ) {
+                        System.out.println("bWaitAnswerInProgress");
+                    }
                     tmpBytesRead = Com.read(bArrayTmp); // was gibts Neues ?
                     if( tmpBytesRead > 0 ) {
                         //wenn ja, an bisher empfangene Daten anhängen
                         System.arraycopy(bArrayTmp, 0, bArray, bytesRead, tmpBytesRead);
-                        if( KlarTextUI.debugLevel > 0 ) {
-                            System.out.println("2739 MERGE PRE bytesRead="+bytesRead+" tmpBytesRead="+tmpBytesRead+" res="+(bytesRead+tmpBytesRead) );
+                        if( KlarTextUI.debugLevel > 2 ) {
+                            System.out.println("2875 MERGE PRE bytesRead="+bytesRead+" tmpBytesRead="+tmpBytesRead+" res="+(bytesRead+tmpBytesRead) );
                         }
                         bytesRead += tmpBytesRead;
                         bArray[bytesRead] = 0;
                         if( KlarTextUI.debugLevel > 2 ) {
-                            System.out.println("2744 aktueller Stand: bytesRead="+bytesRead );
+                            System.out.println("2880 current: bytesRead="+bytesRead );
                             KTUI.dumpbArray(bArray);
                         }
                     }
 
                     if( tmpBytesRead == 0 ) {
-                        System.out.print("->"+retries+" ");  // kein Newline
+                        System.out.print("->"+retries+" ");  // no newline
                         retries--;
                         if( retries == 0 ) {
                             jMcRwProgress.setString(null);
                             System.out.println(" -> retries ende" );
                             stopIOAction();
-                            // KTUI.mbDeviceReadProblem( outerThis );
                             return;
                         }
                         jMcRwProgress.setString(bundle.getString("ReadWriteCV.Warte")+retries);
@@ -2874,14 +2901,14 @@ public class MC extends javax.swing.JFrame {
                     bArray[bytesRead] = 0;
 
                     if(bReadStatus){
-                        System.out.println("2772 PRE  checkCfgReadComplete: bytesRead="+bytesRead );
+                        System.out.println("2903 PRE  checkCfgReadComplete: bytesRead="+bytesRead );
                         if( ! KTUI.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             System.out.println("2775 POST checkCfgReadComplete: INCOMPLETE");
                             return;
                         }
                         timer.stop();
-                        System.out.println("2779 POST checkCfgReadComplete: COMPLETE");
+                        System.out.println("2910 POST checkCfgReadComplete: COMPLETE");
                         bWaitAnswerInProgress = false;
                         // Datensatz vollständig -> Teste/Analysiere erwarteten Wert
                     }
@@ -2921,6 +2948,29 @@ public class MC extends javax.swing.JFrame {
                         bWaitAnswerInProgress = false;
                         jMcRwProgress.setValue(++readWriteProgress);
                         // Datensatz vollständig -> Teste/Analysiere Antwort
+                    }
+                    if(bReadS88num) {
+                        if( ! KTUI.checkReadComplete(bArray) ) {
+                            // incomplete -> wait for more
+                            return;
+                        }
+                        stopIOAction();
+                        bWaitAnswerInProgress = false;
+                        bReadS88num = false;
+                        checkS88num(bArray, bytesRead);
+                    }
+                    if(bReadS88value) {
+                        if( ! KTUI.checkReadComplete(bArray) ) {
+                            // incomplete -> wait for more
+                            return;
+                        }
+                        pauseS88read();
+                        if( debugLevel > 2 ) {
+                            System.out.println("bReadS88value: bytesRead="+bytesRead);
+                        }
+                        bWaitAnswerInProgress = false;
+                        checkS88read(bArray, bytesRead);
+                        startS88read();
                     }
                 }
 
@@ -3397,7 +3447,7 @@ public class MC extends javax.swing.JFrame {
                             return;
                     }
                     // calculate sM3UID for count
-                    if( KTUI.debugLevel >= 2 ) {
+                    if( debugLevel >= 2 ) {
                         System.out.println("write: sysIdx["+sysIdx+"] locIdx["+locIdx+"] traIdx["+traIdx+"] magIdx["+magIdx+"]" );
                     }
                     // jMcRwProgress.setValue(count);
@@ -3598,9 +3648,16 @@ public class MC extends javax.swing.JFrame {
         actionListener.actionPerformed(null);
 
         if( KTUI.bGotoUpdate ) {
+            // jump immediately to the update page
             KTUI.bGotoUpdate = false;
             jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount()-1);
             jUpdDateiAuswahl.grabFocus();
+        } else {
+            // is there a valid number of s88 modules ?
+            if( KTUI.getNumS88() == 0 ) {
+                // no -> start reading number from command station
+                readS88num();
+            }
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -4467,6 +4524,7 @@ public class MC extends javax.swing.JFrame {
 
     private void js88FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_js88FocusLost
         KTUI.checkTextField( this, js88, 0, 52, 52, true);
+        updateS88field(Integer.parseInt(js88.getText()));
     }//GEN-LAST:event_js88FocusLost
 
     private void js88ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_js88ActionPerformed
@@ -4675,6 +4733,20 @@ public class MC extends javax.swing.JFrame {
         return;
     }//GEN-LAST:event_FirmwareActionPerformed
 
+    private void jSysS88monitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSysS88monitorActionPerformed
+        if( debugLevel > 0 ) {
+            System.out.println("jSysS88monitorActionPerformed pre NEW");
+        }
+        if( KTUI.getNumS88() <= 0 ) {
+            KTUI.mbNoS88modules( this );
+            return;            
+        }
+        S88mon = new S88monitor( this, false );
+        if( debugLevel > 0 ) {
+            System.out.println("jSysS88monitorActionPerformed post NEW S88mon valid="+(S88mon != null));
+        }
+    }//GEN-LAST:event_jSysS88monitorActionPerformed
+
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
             return false;
@@ -4710,7 +4782,7 @@ public class MC extends javax.swing.JFrame {
             checkM3uidValidActive = false;
             return false;
         }
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("checkM3uidValid lM3UID="+lM3UID );
             System.out.println("checkM3uidValid l3UID=0x"+String.format("%8s", Long.toHexString( lM3UID )).replace(' ', '0'));
         }
@@ -4916,6 +4988,186 @@ public class MC extends javax.swing.JFrame {
         // close interface
         /* TODO auch hier ??? */
         Com = KTUI.safelyCloseCom( this, Com);
+    }
+    
+
+    private void updateS88field( int num ) {
+        KTUI.setNumS88(num);
+        js88.setText(""+num);
+        jSysS88monitor.setEnabled(num > 0);
+    }
+
+    public void readS88num() {
+        if( debugLevel > 0 ) {
+            System.out.println("readS88num()" );
+        }
+        Com = KTUI.safelyOpenCom( this, Com );
+        if( Com == null ){
+            System.out.println("readS88num() Com == null" );
+            return;
+        }
+
+        KTUI.flushReadBuffer(Com);
+        String s = "XSE\r";
+        Com.write(s);
+        timer.setInitialDelay(KlarTextUI.MCtimer1);
+        timer.setDelay(KlarTextUI.MCtimer2);
+        retries = KlarTextUI.timerRetries;
+        bWaitAnswerInProgress = true;
+        bReadS88num = true;
+        startIOAction();
+    }
+
+    public void initS88read() {
+        if( debugLevel > 0 ) {
+            System.out.println("initS88read()" );
+        }
+        Com = KTUI.safelyOpenCom( this, Com );
+        if( Com == null ){
+            System.out.println("initS88read() Com == null" );
+            return;
+        }
+
+        KTUI.flushReadBuffer(Com);
+        String s = "XSR 0\r";
+        Com.write(s);
+        timer.setInitialDelay(KlarTextUI.MCtimer1);
+        timer.setDelay(KlarTextUI.MCtimer2);
+        startIOAction();
+
+        jCancel.setEnabled(false);
+        jUpdCancel.setEnabled(false);
+        jKonfLesen.setEnabled(false);
+        jSysS88monitor.setEnabled(false);
+    }
+
+    public void startS88read() {
+        if( Com == null ){
+            System.out.println("startS88read() ERROR Com == null" );
+            return;
+        }
+        if( debugLevel > 1 ) {
+            System.out.println("startS88read() moduleNr "+this.modulNr );
+        }
+        if( this.modulNr <= 0 ) {
+            System.out.println("startS88read() moduleNr="+this.modulNr+" <= 0 -> skip reading" );
+            return;
+        }
+
+        String s = "XSS "+this.modulNr+"\r";
+        Com.write(s);
+        resetbArray();
+        retries = KlarTextUI.timerRetries;
+        bWaitAnswerInProgress = true;
+        bReadS88value = true;
+        timer.start();
+    }
+
+    public void stopS88read() {
+        if( debugLevel > 0 ) {
+            System.out.println("stopS88read()" );
+        }
+        stopIOAction();
+        jSysS88monitor.setEnabled(true);
+        bReadS88value = false;
+    }
+
+    public void pauseS88read() {
+        if( debugLevel > 1 ) {
+            System.out.println("pauseS88read()" );
+        }
+        timer.stop();
+        bReadS88value = false;
+    }
+
+    private boolean checkS88num( byte[] bArray, int num ) {
+        if( bArray == null ) {
+            return false;
+        }
+        // convert byteArray into a String
+        String str_bArr = new String(bArray);
+        // Split string into parts
+        String[] strParts = str_bArr.split(" = | |\r|\\000");
+        if( debugLevel > 1 ) {
+            for( int i = 0 ; i < strParts.length ; i++ ) {
+                System.out.println("checkS88num strParts["+i+"]=\""+strParts[i]+"\""+((strParts[i].startsWith("]"))?" (ENDE)":"" ));
+            }
+        }
+        if( strParts.length == 3) {
+            if( strParts[0].startsWith("SE") && strParts[2].startsWith("]") ) {
+                // answer is complete !
+                // answer is number of 8 sensor modules !
+                System.out.println("LRLRLR checkS88num strParts[1]=\""+strParts[1]+"\"");
+                int num8 = Integer.parseInt(strParts[1]);
+                int num16 = (num8+1)/2 ;
+                System.out.println("checkS88num #modules(16)="+num16);
+                updateS88field(num16);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkS88read( byte[] bArray, int num ) {
+        if( bArray == null ) {
+            return false;
+        }
+        // convert byteArray into a String
+        String str_bArr = new String(bArray);
+        // Split string into parts
+        String[] strParts = str_bArr.split(" = | |\r|\\000");
+        if( debugLevel > 1 ) {
+            for( int i = 0 ; i < strParts.length ; i++ ) {
+                System.out.println("checkS88read strParts["+i+"]=\""+strParts[i]+"\""+((strParts[i].startsWith("]"))?" (ENDE)":"" ));
+            }
+        }
+        if( strParts.length == 9) {
+            if( strParts[8].startsWith("]") ) {
+                // answer is complete !
+                if( debugLevel > 2 ) {
+                    System.out.println("checkS88read strParts.length="+strParts.length+" strParts["+(strParts.length-1)+"]=["+strParts[strParts.length-1]+"] COMPLETE");
+                }
+                int readMod = Integer.parseInt(strParts[1].substring(1));
+                if( readMod != this.modulNr ) {
+                    System.out.println("checkS88read: wanted #"+modulNr+" read #"+readMod+" -> ignore");
+                    return true;
+                }
+                int newValue = 0;
+                for( int j = 0 ; j <= 7 ; j++ ) {
+                    if( strParts[6].charAt(7-j) == '1' ) {
+                        newValue |= (1 << j) ;
+                    }
+                    if( strParts[7].charAt(7-j) == '1' ) {
+                        newValue |= (1 << (j+8)) ;
+                    }
+                }
+                int oldValue = moduleValue;
+                moduleValue |= newValue;
+                if( moduleValue != oldValue ) {
+                    if( debugLevel > 1 ) {
+                        System.out.println("checkS88read moduleNr %d: "+this.modulNr+
+                                " len6="+ strParts[6].length()+" "+strParts[6]+
+                                " len7="+ strParts[7].length()+" "+strParts[7] );
+                    }
+                    if( debugLevel > 0 ) {
+                        System.out.printf("checkS88read value changed: old %s new %s moduleValue %s\n",
+                                String.format("%16s", Integer.toBinaryString(oldValue)).replace(' ', '0'),
+                                String.format("%16s", Integer.toBinaryString(newValue)).replace(' ', '0'),
+                                String.format("%16s", Integer.toBinaryString(moduleValue)).replace(' ', '0'));
+                    }
+                    if( S88mon != null ) {
+                        if( debugLevel > 0 ) {
+                            System.out.println("checkS88read redrawValues()");
+                        }
+                        S88mon.redrawValues();
+                    } else {
+                        System.out.println("checkS88read S88mon == null, no redraw");
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean checkTableLoco( boolean repair, boolean show ) {
@@ -5676,6 +5928,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jSerNr;
+    private javax.swing.JButton jSysS88monitor;
     private javax.swing.JPanel jSystem;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableAccessory;
