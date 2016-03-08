@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.URL;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -282,6 +285,9 @@ public class MC extends javax.swing.JFrame {
         // ...die anderen Spalten nach speziellen Regeln...
         rowSorter.setComparator(0, compAdrTra);
         rowSorter.setComparator(2, compAdrTra);
+
+        // initialize M3 list if file is available
+        readM3();
 
         // set to top to avoid scrolling to bottom
         this.jTextPane1.setCaretPosition(0);
@@ -723,6 +729,7 @@ public class MC extends javax.swing.JFrame {
         jLocDel = new javax.swing.JButton();
         jLoc2System = new javax.swing.JButton();
         jLocM3sidWriteList = new javax.swing.JButton();
+        jM3count = new javax.swing.JLabel();
         jTraktionen = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTraction = new javax.swing.JTable();
@@ -1704,13 +1711,19 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
+        jM3count.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jM3count.setText("(0)"); // NOI18N
+        jM3count.setToolTipText(bundle.getString("MC.jM3count.toolTipText")); // NOI18N
+        jM3count.setRequestFocusEnabled(false);
+        jM3count.setVerifyInputWhenFocusTarget(false);
+
         javax.swing.GroupLayout jLoksLayout = new javax.swing.GroupLayout(jLoks);
         jLoks.setLayout(jLoksLayout);
         jLoksLayout.setHorizontalGroup(
             jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLocDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1718,7 +1731,7 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jLocRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocM3sidWrite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
-                        .addGap(0, 22, Short.MAX_VALUE)
+                        .addGap(0, 26, Short.MAX_VALUE)
                         .addComponent(jLabelM3UID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextM3UID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1729,11 +1742,12 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jMcM3Progress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jMcM3Info)
                     .addComponent(jLocM3cfgLoad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLocM3cfgEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLocM3cfgSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocDel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLoc2System, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLocM3sidWriteList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLocM3sidWriteList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLocM3cfgEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLocM3cfgSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jM3count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jLoksLayout.setVerticalGroup(
@@ -1771,6 +1785,8 @@ public class MC extends javax.swing.JFrame {
                         .addComponent(jLocM3cfgEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLocM3cfgSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jM3count)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLoc2System, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
@@ -5097,7 +5113,7 @@ public class MC extends javax.swing.JFrame {
             if( strParts[0].startsWith("SE") && strParts[2].startsWith("]") ) {
                 // answer is complete !
                 // answer is number of 8 sensor modules !
-                System.out.println("LRLRLR checkS88num strParts[1]=\""+strParts[1]+"\"");
+                System.out.println("checkS88num strParts[1]=\""+strParts[1]+"\"");
                 int num8 = Integer.parseInt(strParts[1]);
                 int num16 = (num8+1)/2 ;
                 System.out.println("checkS88num #modules(16)="+num16);
@@ -5572,6 +5588,68 @@ public class MC extends javax.swing.JFrame {
         return retVal;
     }
 
+    private Boolean readM3() {
+        if( debugLevel > 0 ) {
+            System.out.println("Read M3 data from DIR: "+KTUI.gsSaveOpenM3Directory+" NAME: \""+KTUI.gsSaveOpenM3Filename+"\"" );
+        }
+        if( (KTUI.gsSaveOpenM3Filename.length() <= 1) && (KTUI.gsSaveOpenM3Filename.contentEquals(" ")) ) {
+            System.out.println("Read M3 data from DIR: "+KTUI.gsSaveOpenM3Directory+" NAME is empty :\""+KTUI.gsSaveOpenM3Filename+"\"" );
+            return false;
+        }
+        String filenameM3 = KTUI.gsSaveOpenM3Directory+"/"+KTUI.gsSaveOpenM3Filename;
+        File f = new File( filenameM3 );
+        long filelen = f.length();
+
+        if( debugLevel > 0 ) {
+            System.out.println("Read M3 data from file: "+filenameM3+" ("+filelen+" bytes)" );
+        }
+        //Datei lesen
+        String s = "";
+        char ac[] = new char[(int)filelen+1];
+        if(f.isFile())
+        {
+            FileReader inputStream = null;
+            try
+            {
+                try {
+                    inputStream = new FileReader(f);
+                    try {
+
+                        int n = inputStream.read(ac, 0, (int) filelen);
+                        if(n == -1)
+                        {
+                            KTUI.mbFileReadError(this);
+                            return false;
+                        }
+                        String str1 = new String(ac);
+                        ReturnString = str1.substring(0, n);
+                    } catch (IOException ex) {
+                        Logger.getLogger(SaveOpenDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(SaveOpenDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            finally
+            {
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(SaveOpenDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+        else
+        {
+            KTUI.mbFileNotFound( this, filenameM3 );
+            return false;
+        }
+        updateM3uid();
+        return true;
+    }
+
     public void updateM3uid() {
         System.out.println("updateM3uid: Gelesen "+ReturnString.length()+" Bytes");
         if( (ReturnString == null) || (ReturnString.length() == 0) ) {
@@ -5593,6 +5671,7 @@ public class MC extends javax.swing.JFrame {
                 // M3UID-Tabelle startet
                 // setze altes Array auf 0
                 M3used = 0;
+                updateM3count();
                 parseData = true;
                 continue;
             }
@@ -5638,6 +5717,7 @@ public class MC extends javax.swing.JFrame {
                 }
                 M3used++;
             }
+            updateM3count();
 
             if( M3used == c.MAX_M3_ENTRIES) {
                 KTUI.mbM3TooMany(this);
@@ -5647,6 +5727,7 @@ public class MC extends javax.swing.JFrame {
             }
         }
         System.out.println("updateM3uid: Ende nach "+M3used+" Datensätzen");
+        updateM3count();
         if( debugLevel > 0 ) {
             KTUI.mbConfigReadSuccess( this, 3 );
         }
@@ -5659,6 +5740,11 @@ public class MC extends javax.swing.JFrame {
             checkM3sid(locoTableSelRow);
         }
 
+    }
+
+    public void updateM3count() {
+        jM3count.setText("( "+M3used+" )");
+        return;
     }
 
     void delMultipleLocoLines() {
@@ -5903,6 +5989,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton jLocM3sidWriteList;
     private javax.swing.JButton jLocRepair;
     private javax.swing.JPanel jLoks;
+    private javax.swing.JLabel jM3count;
     private javax.swing.JTextField jMCU;
     private javax.swing.JButton jMDCC;
     private javax.swing.JButton jMMM;

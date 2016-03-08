@@ -938,7 +938,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="541" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="544" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLocDelAll" alignment="0" max="32767" attributes="1"/>
@@ -946,7 +946,7 @@
                           <Component id="jLocRepair" alignment="0" max="32767" attributes="1"/>
                           <Component id="jLocM3sidWrite" alignment="0" max="32767" attributes="1"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
                               <Component id="jLabelM3UID" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextM3UID" min="-2" pref="139" max="-2" attributes="0"/>
@@ -959,11 +959,12 @@
                           <Component id="jMcM3Progress" alignment="0" max="32767" attributes="0"/>
                           <Component id="jMcM3Info" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLocM3cfgLoad" alignment="1" max="32767" attributes="1"/>
-                          <Component id="jLocM3cfgEdit" alignment="1" max="32767" attributes="1"/>
-                          <Component id="jLocM3cfgSave" alignment="1" max="32767" attributes="1"/>
                           <Component id="jLocDel" alignment="1" max="32767" attributes="1"/>
                           <Component id="jLoc2System" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLocM3sidWriteList" alignment="1" max="32767" attributes="1"/>
+                          <Component id="jLocM3cfgEdit" alignment="1" max="32767" attributes="1"/>
+                          <Component id="jLocM3cfgSave" alignment="1" max="32767" attributes="1"/>
+                          <Component id="jM3count" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1006,6 +1007,8 @@
                               <Component id="jLocM3cfgEdit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLocM3cfgSave" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jM3count" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLoc2System" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -1312,6 +1315,17 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jLocM3sidWriteListActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jM3count">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="(0)" noResource="true"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jM3count.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
+                <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

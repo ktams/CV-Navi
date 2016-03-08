@@ -155,6 +155,7 @@ public class M3_Liste extends javax.swing.JDialog {
 
         setLocationRelativeTo(parent);
         setVisible(true);
+        mc.updateM3count();
     }
 
     /**
@@ -310,6 +311,7 @@ public class M3_Liste extends javax.swing.JDialog {
         mc.M3liste[1][mc.M3used] = "";
         mc.M3liste[2][mc.M3used] = "";
         mc.M3used++;
+        mc.updateM3count();
 
         rows = this.jTableM3.getRowCount();
         if( debugLevel >= 1 ) {
@@ -371,6 +373,7 @@ public class M3_Liste extends javax.swing.JDialog {
                 }
             }
         }
+        mc.updateM3count();
 
         rows = this.jTableM3.getRowCount();
         if( debugLevel >= 1 ) {
@@ -395,6 +398,7 @@ public class M3_Liste extends javax.swing.JDialog {
             model.removeRow(0);
             mc.M3used = 0;
         }
+        mc.updateM3count();
 
         rows = this.jTableM3.getRowCount();
         if( debugLevel >= 1 ) {

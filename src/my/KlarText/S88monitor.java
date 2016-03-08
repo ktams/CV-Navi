@@ -546,7 +546,7 @@ public class S88monitor extends javax.swing.JDialog {
     private void jCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCloseActionPerformed
         // "Close" was pressed
         if( debugLevel > 0 ) {
-            System.out.println("LRLRLR jCloseActionPerformed");
+            System.out.println("S88monitor: jCloseActionPerformed");
         }
         // calls formWindowClosed
         this.dispose();
@@ -593,7 +593,7 @@ public class S88monitor extends javax.swing.JDialog {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // stop feedback reader
         if( debugLevel > 0 ) {
-            System.out.println("LRLRLR S88monitor formWindowClosed");
+            System.out.println("S88monitor: formWindowClosed");
         }
         mc.stopS88read();
         // invalidate s88 monitor instance in mc instance
