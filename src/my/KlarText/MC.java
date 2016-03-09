@@ -5157,11 +5157,26 @@ public class MC extends javax.swing.JFrame {
                         newValue |= (1 << (j+8)) ;
                     }
                 }
+                // first check for changes by user...
+                int shownValue = S88mon.getShownValue();
+                if( shownValue != moduleValue ) {
+                    // reset to correct value
+                    System.out.println("checkS88read moduleNr "+modulNr+" :"+
+                            " shownValue="+shownValue+" != moduleValue="+moduleValue );
+                    if( S88mon != null ) {
+                        if( debugLevel > 0 ) {
+                            System.out.println("checkS88read redrawValues()");
+                        }
+                        S88mon.redrawValues();
+                    } else {
+                        System.out.println("checkS88read S88mon == null, no redraw");
+                    }
+                }
                 int oldValue = moduleValue;
                 moduleValue |= newValue;
                 if( moduleValue != oldValue ) {
                     if( debugLevel > 1 ) {
-                        System.out.println("checkS88read moduleNr %d: "+this.modulNr+
+                        System.out.println("checkS88read moduleNr "+modulNr+" :"+
                                 " len6="+ strParts[6].length()+" "+strParts[6]+
                                 " len7="+ strParts[7].length()+" "+strParts[7] );
                     }

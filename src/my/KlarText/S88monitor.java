@@ -127,6 +127,27 @@ public class S88monitor extends javax.swing.JDialog {
         this.jRadioButton16.setSelected((mc.moduleValue & 0x8000)!=0);
     }
 
+    public int getShownValue() {
+        int value = 0;
+        if( jRadioButton01.isSelected() ) { value |= 0x0001 ;};
+        if( jRadioButton02.isSelected() ) { value |= 0x0002 ;};
+        if( jRadioButton03.isSelected() ) { value |= 0x0004 ;};
+        if( jRadioButton04.isSelected() ) { value |= 0x0008 ;};
+        if( jRadioButton05.isSelected() ) { value |= 0x0010 ;};
+        if( jRadioButton06.isSelected() ) { value |= 0x0020 ;};
+        if( jRadioButton07.isSelected() ) { value |= 0x0040 ;};
+        if( jRadioButton08.isSelected() ) { value |= 0x0080 ;};
+        if( jRadioButton09.isSelected() ) { value |= 0x0100 ;};
+        if( jRadioButton10.isSelected() ) { value |= 0x0200 ;};
+        if( jRadioButton11.isSelected() ) { value |= 0x0400 ;};
+        if( jRadioButton12.isSelected() ) { value |= 0x0800 ;};
+        if( jRadioButton13.isSelected() ) { value |= 0x1000 ;};
+        if( jRadioButton14.isSelected() ) { value |= 0x2000 ;};
+        if( jRadioButton15.isSelected() ) { value |= 0x4000 ;};
+        if( jRadioButton16.isSelected() ) { value |= 0x8000 ;};
+        return value;
+    }
+
 
         /**
      * This method is called from within the constructor to initialize the form.
@@ -649,9 +670,9 @@ public class S88monitor extends javax.swing.JDialog {
             if( currNr == 0 ) {
                 mc.stopS88read();            
             }
-            this.redrawNumbers();
+            redrawNumbers();
         }
-        this.redrawValues();
+        redrawValues();
     }//GEN-LAST:event_jSpinnerS88monitorStateChanged
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
