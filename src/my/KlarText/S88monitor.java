@@ -170,7 +170,6 @@ public class S88monitor extends javax.swing.JDialog {
         });
 
         jRadioButton01.setText("<html>777<br>1</html>");
-        jRadioButton01.setEnabled(false);
         jRadioButton01.setFocusPainted(false);
         jRadioButton01.setFocusable(false);
         jRadioButton01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -180,9 +179,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton01.setRolloverEnabled(false);
         jRadioButton01.setVerifyInputWhenFocusTarget(false);
         jRadioButton01.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton01.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton01MouseClicked(evt);
+            }
+        });
 
         jRadioButton02.setText("<html>777<br>1</html>");
-        jRadioButton02.setEnabled(false);
         jRadioButton02.setFocusPainted(false);
         jRadioButton02.setFocusable(false);
         jRadioButton02.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -192,9 +195,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton02.setRolloverEnabled(false);
         jRadioButton02.setVerifyInputWhenFocusTarget(false);
         jRadioButton02.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton02.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton02MouseClicked(evt);
+            }
+        });
 
         jRadioButton03.setText("<html>777<br>1</html>");
-        jRadioButton03.setEnabled(false);
         jRadioButton03.setFocusPainted(false);
         jRadioButton03.setFocusable(false);
         jRadioButton03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,9 +211,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton03.setRolloverEnabled(false);
         jRadioButton03.setVerifyInputWhenFocusTarget(false);
         jRadioButton03.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton03.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton03MouseClicked(evt);
+            }
+        });
 
         jRadioButton04.setText("<html>777<br>1</html>");
-        jRadioButton04.setEnabled(false);
         jRadioButton04.setFocusPainted(false);
         jRadioButton04.setFocusable(false);
         jRadioButton04.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -216,9 +227,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton04.setRolloverEnabled(false);
         jRadioButton04.setVerifyInputWhenFocusTarget(false);
         jRadioButton04.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton04.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton04MouseClicked(evt);
+            }
+        });
 
         jRadioButton05.setText("<html>777<br>1</html>");
-        jRadioButton05.setEnabled(false);
         jRadioButton05.setFocusPainted(false);
         jRadioButton05.setFocusable(false);
         jRadioButton05.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -228,9 +243,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton05.setRolloverEnabled(false);
         jRadioButton05.setVerifyInputWhenFocusTarget(false);
         jRadioButton05.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton05.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton05MouseClicked(evt);
+            }
+        });
 
         jRadioButton06.setText("<html>777<br>1</html>");
-        jRadioButton06.setEnabled(false);
         jRadioButton06.setFocusPainted(false);
         jRadioButton06.setFocusable(false);
         jRadioButton06.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -240,9 +259,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton06.setRolloverEnabled(false);
         jRadioButton06.setVerifyInputWhenFocusTarget(false);
         jRadioButton06.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton06.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton06MouseClicked(evt);
+            }
+        });
 
         jRadioButton07.setText("<html>777<br>1</html>");
-        jRadioButton07.setEnabled(false);
         jRadioButton07.setFocusPainted(false);
         jRadioButton07.setFocusable(false);
         jRadioButton07.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -252,9 +275,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton07.setRolloverEnabled(false);
         jRadioButton07.setVerifyInputWhenFocusTarget(false);
         jRadioButton07.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton07.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton07MouseClicked(evt);
+            }
+        });
 
         jRadioButton08.setText("<html>777<br>1</html>");
-        jRadioButton08.setEnabled(false);
         jRadioButton08.setFocusPainted(false);
         jRadioButton08.setFocusable(false);
         jRadioButton08.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -264,9 +291,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton08.setRolloverEnabled(false);
         jRadioButton08.setVerifyInputWhenFocusTarget(false);
         jRadioButton08.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jRadioButton08.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton08MouseClicked(evt);
+            }
+        });
 
         jRadioButton09.setText("<html>777<br>1</html>");
-        jRadioButton09.setEnabled(false);
         jRadioButton09.setFocusPainted(false);
         jRadioButton09.setFocusable(false);
         jRadioButton09.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -276,9 +307,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton09.setRolloverEnabled(false);
         jRadioButton09.setVerifyInputWhenFocusTarget(false);
         jRadioButton09.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton09.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton09MouseClicked(evt);
+            }
+        });
 
         jRadioButton10.setText("<html>777<br>1</html>");
-        jRadioButton10.setEnabled(false);
         jRadioButton10.setFocusPainted(false);
         jRadioButton10.setFocusable(false);
         jRadioButton10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -288,9 +323,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton10.setRolloverEnabled(false);
         jRadioButton10.setVerifyInputWhenFocusTarget(false);
         jRadioButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton10MouseClicked(evt);
+            }
+        });
 
         jRadioButton11.setText("<html>777<br>1</html>");
-        jRadioButton11.setEnabled(false);
         jRadioButton11.setFocusPainted(false);
         jRadioButton11.setFocusable(false);
         jRadioButton11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -300,9 +339,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton11.setRolloverEnabled(false);
         jRadioButton11.setVerifyInputWhenFocusTarget(false);
         jRadioButton11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton11MouseClicked(evt);
+            }
+        });
 
         jRadioButton12.setText("<html>777<br>1</html>");
-        jRadioButton12.setEnabled(false);
         jRadioButton12.setFocusPainted(false);
         jRadioButton12.setFocusable(false);
         jRadioButton12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -312,9 +355,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton12.setRolloverEnabled(false);
         jRadioButton12.setVerifyInputWhenFocusTarget(false);
         jRadioButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton12MouseClicked(evt);
+            }
+        });
 
         jRadioButton13.setText("<html>777<br>1</html>");
-        jRadioButton13.setEnabled(false);
         jRadioButton13.setFocusPainted(false);
         jRadioButton13.setFocusable(false);
         jRadioButton13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -324,9 +371,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton13.setRolloverEnabled(false);
         jRadioButton13.setVerifyInputWhenFocusTarget(false);
         jRadioButton13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton13MouseClicked(evt);
+            }
+        });
 
         jRadioButton14.setText("<html>777<br>1</html>");
-        jRadioButton14.setEnabled(false);
         jRadioButton14.setFocusPainted(false);
         jRadioButton14.setFocusable(false);
         jRadioButton14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -336,9 +387,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton14.setRolloverEnabled(false);
         jRadioButton14.setVerifyInputWhenFocusTarget(false);
         jRadioButton14.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton14MouseClicked(evt);
+            }
+        });
 
         jRadioButton15.setText("<html>777<br>1</html>");
-        jRadioButton15.setEnabled(false);
         jRadioButton15.setFocusPainted(false);
         jRadioButton15.setFocusable(false);
         jRadioButton15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -348,9 +403,13 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton15.setRolloverEnabled(false);
         jRadioButton15.setVerifyInputWhenFocusTarget(false);
         jRadioButton15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton15MouseClicked(evt);
+            }
+        });
 
         jRadioButton16.setText("<html>777<br>1</html>");
-        jRadioButton16.setEnabled(false);
         jRadioButton16.setFocusPainted(false);
         jRadioButton16.setFocusable(false);
         jRadioButton16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -360,6 +419,11 @@ public class S88monitor extends javax.swing.JDialog {
         jRadioButton16.setRolloverEnabled(false);
         jRadioButton16.setVerifyInputWhenFocusTarget(false);
         jRadioButton16.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jRadioButton16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton16MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelS88monitorLayout = new javax.swing.GroupLayout(jPanelS88monitor);
         jPanelS88monitor.setLayout(jPanelS88monitorLayout);
@@ -511,7 +575,7 @@ public class S88monitor extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jReset2zero)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jClose)))
                 .addContainerGap())
         );
@@ -599,6 +663,70 @@ public class S88monitor extends javax.swing.JDialog {
         // invalidate s88 monitor instance in mc instance
         mc.S88mon = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void jRadioButton01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton01MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton01MouseClicked
+
+    private void jRadioButton02MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton02MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton02MouseClicked
+
+    private void jRadioButton03MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton03MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton03MouseClicked
+
+    private void jRadioButton04MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton04MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton04MouseClicked
+
+    private void jRadioButton05MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton05MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton05MouseClicked
+
+    private void jRadioButton06MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton06MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton06MouseClicked
+
+    private void jRadioButton07MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton07MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton07MouseClicked
+
+    private void jRadioButton08MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton08MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton08MouseClicked
+
+    private void jRadioButton09MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton09MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton09MouseClicked
+
+    private void jRadioButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton10MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton10MouseClicked
+
+    private void jRadioButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton11MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton11MouseClicked
+
+    private void jRadioButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton12MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton12MouseClicked
+
+    private void jRadioButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton13MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton13MouseClicked
+
+    private void jRadioButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton14MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton14MouseClicked
+
+    private void jRadioButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton15MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton15MouseClicked
+
+    private void jRadioButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton16MouseClicked
+        redrawValues();
+    }//GEN-LAST:event_jRadioButton16MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
