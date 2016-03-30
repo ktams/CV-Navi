@@ -1,3 +1,10 @@
+# private files (still in repo)
+private/private.properties
+nbproject/genfiles.properties
+nbproject/private/private.xml
+.gitignore
+#
+#
 *.class
 
 # Mobile Tools for Java (J2ME)

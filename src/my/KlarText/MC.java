@@ -82,6 +82,7 @@ public class MC extends javax.swing.JFrame {
     private Boolean checkM3uidValidActive = false;
     private M3_Liste M3L = null;
     public S88monitor S88mon = null;
+    private boolean bUpdateModeActive = false;
     
     public String M3liste[][] = null;
     public int M3used = 0;
@@ -120,12 +121,25 @@ public class MC extends javax.swing.JFrame {
         }
         retries = KlarTextUI.timerRetries;
 
-        ImageIcon II = new ImageIcon(getClass().getResource("/MasterControl.gif"));
-        this.setIconImage(II.getImage());
         initComponents();
+
+        ImageIcon II = null;
+        switch( KTUI.Decoder ) {
+            case c.MC:
+                II = new ImageIcon(getClass().getResource("/MasterControl.gif"));
+                setTitle( KTUI.getMenutext( decoderList.MC ).trim() );
+                jEasyNetUpdate.setVisible(false);
+                break;
+            case c.RB:
+                II = new ImageIcon(getClass().getResource("/RedBox.gif")); // replace with final version
+                setTitle( KTUI.getMenutext( decoderList.RB ).trim() );
+                break;
+        }
         bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
-        jBild.setIcon(II);
-        setTitle( KTUI.getMenutext( decoderList.MC ).trim() );
+        if( II != null ) {
+            setIconImage(II.getImage());
+            jBild.setIcon(II);
+        }
 
         jDatenQuelle.setText(KTUI.gsSchnittstelle);
 
@@ -771,6 +785,7 @@ public class MC extends javax.swing.JFrame {
         helpWasIstWas = new javax.swing.JButton();
         helpMCasLC = new javax.swing.JButton();
         Firmware = new javax.swing.JButton();
+        jEasyNetUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1107,12 +1122,12 @@ public class MC extends javax.swing.JFrame {
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRailcomTailbits, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRailcomAccessory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                                    .addComponent(jRailcomAccessory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                                     .addGroup(jSystemLayout.createSequentialGroup()
                                         .addComponent(jRailcomSupport)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jRailcomIdNotify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(76, 76, 76))
+                                .addGap(0, 0, 0))
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1150,7 +1165,7 @@ public class MC extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
-                                .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1213,24 +1228,21 @@ public class MC extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jSystemLayout.createSequentialGroup()
-                            .addComponent(jLangePause)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jDCC_Booster)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jDCC_Loks)
-                            .addGap(23, 23, 23)
-                            .addComponent(jRailcomSupport)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRailcomTailbits)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRailcomIdNotify)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRailcomAccessory))
-                        .addGroup(jSystemLayout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
+                        .addComponent(jLangePause)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDCC_Booster)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDCC_Loks)
+                        .addGap(23, 23, 23)
+                        .addComponent(jRailcomSupport)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRailcomTailbits)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRailcomIdNotify)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRailcomAccessory)
+                        .addGap(75, 75, 75))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
                         .addComponent(jKonfLesen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1247,7 +1259,8 @@ public class MC extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jKonfSichern, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBild, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jMcRwProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1723,7 +1736,7 @@ public class MC extends javax.swing.JFrame {
             jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLocDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1731,7 +1744,7 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jLocRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocM3sidWrite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
-                        .addGap(0, 26, Short.MAX_VALUE)
+                        .addGap(0, 81, Short.MAX_VALUE)
                         .addComponent(jLabelM3UID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextM3UID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2048,7 +2061,7 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jTraktionenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jTraktionenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTraDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
@@ -2433,7 +2446,7 @@ public class MC extends javax.swing.JFrame {
             .addGroup(jMagnetartikelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jMagnetartikelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
                     .addComponent(jLabel16))
                 .addGap(29, 29, 29)
                 .addGroup(jMagnetartikelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2617,6 +2630,14 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
+        jEasyNetUpdate.setText(bundle.getString("MC.jEasyNetUpdate.text")); // NOI18N
+        jEasyNetUpdate.setToolTipText(bundle.getString("MC.jEasyNetUpdate.toolTipText")); // NOI18N
+        jEasyNetUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEasyNetUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jUpdateLayout = new javax.swing.GroupLayout(jUpdate);
         jUpdate.setLayout(jUpdateLayout);
         jUpdateLayout.setHorizontalGroup(
@@ -2627,9 +2648,23 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jMcUpdProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jUpdateLayout.createSequentialGroup()
                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jUpdateLayout.createSequentialGroup()
-                                .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jUpdateLayout.createSequentialGroup()
+                                .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jUpdateLayout.createSequentialGroup()
+                                        .addComponent(jMcUpdInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(helpWasIstWas, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jUpdDatei))
+                                .addGap(4, 4, 4))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jUpdateLayout.createSequentialGroup()
+                                .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jUpdateLayout.createSequentialGroup()
+                                        .addComponent(jUpdLastErrorLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jUpdLastError, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jEasyNetUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jUpdateLayout.createSequentialGroup()
                                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(helpHC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(helpLC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2646,21 +2681,8 @@ public class MC extends javax.swing.JFrame {
                                                 .addComponent(helpSNC, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(Firmware))))
-                                    .addGroup(jUpdateLayout.createSequentialGroup()
-                                        .addComponent(jUpdLastErrorLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jUpdLastError, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE))
-                                .addGap(15, 15, 15))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jUpdateLayout.createSequentialGroup()
-                                .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jUpdateLayout.createSequentialGroup()
-                                        .addComponent(jMcUpdInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                                        .addComponent(helpWasIstWas, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jUpdDatei))
-                                .addGap(4, 4, 4)))
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(15, 15, 15)))
                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jUpd2System, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                             .addComponent(jUpdClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2688,7 +2710,9 @@ public class MC extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jUpdateLayout.createSequentialGroup()
-                        .addComponent(jUpdStartUpdate)
+                        .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jUpdStartUpdate)
+                            .addComponent(jEasyNetUpdate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jUpdCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
@@ -4763,6 +4787,44 @@ public class MC extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jSysS88monitorActionPerformed
 
+    private void jEasyNetUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEasyNetUpdateActionPerformed
+
+        if( bUpdateModeActive ) {
+            return;
+        }
+
+        if( KTUI.debugOffline == false ) {
+            Com = KTUI.safelyOpenCom( this, Com );
+            if( Com == null ){
+                return;
+            }
+
+            KTUI.flushReadBuffer(Com);
+            String s = "SWUPDATE\r";
+            Com.write(s);
+        }
+        bUpdateModeActive = true;
+        resetbArray();
+        retries = KlarTextUI.timerRetries;
+        jMcRwProgress.setString(null);
+        jMcRwInfo.setText("RedBox set to SWUPDATE mode");
+        jEasyNetUpdate.setText(bundle.getString("MC.jEasyNetUpdate.EasyNetActivated"));
+        jEasyNetUpdate.setForeground(Color.red);
+
+        if( 1 == 0 ) { // TODO: do we have to wait for an answer ?
+            bWaitAnswerInProgress = true;
+            // bReadCfg = true;
+            readWriteProgress = 0;
+            jMcRwProgress.setMaximum(6);
+            jMcRwProgress.setValue(0);
+            timer.setInitialDelay(KlarTextUI.MCtimer1);
+            timer.setDelay(KlarTextUI.MCtimer2);
+            startIOAction();
+            jMcRwInfo.setText("read: MC config read in progress");
+            jMcRwProgress.setValue(++readWriteProgress);
+        }
+    }//GEN-LAST:event_jEasyNetUpdateActionPerformed
+
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
             return false;
@@ -5967,6 +6029,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JCheckBox jDCC_Booster;
     private javax.swing.JCheckBox jDCC_Loks;
     private javax.swing.JTextField jDatenQuelle;
+    private javax.swing.JButton jEasyNetUpdate;
     private javax.swing.JTextField jHardWare;
     private javax.swing.JButton jKonfLaden;
     private javax.swing.JButton jKonfLesen;
