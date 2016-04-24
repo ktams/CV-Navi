@@ -119,6 +119,7 @@ interface c {
     //
     public static final long MIN_MC_XFUNCS_VERSION = 0x01040666; // 1.4.6f
     public static final long MIN_MC_XM3SID_VERSION = 0x01040762; // 1.4.7b
+    public static final long MIN_MC_SO999_VERSION  = 0x01040863; // 1.4.8c
     // other
     public static final int MAX_M3_SID = 16383;
     public static final String ERR_PROBLEM_LEFT = "<- Problem !";
@@ -2444,7 +2445,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20160330a)";
+            String  gsBuild ="(beta 20160424a)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);

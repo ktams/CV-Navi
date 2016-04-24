@@ -55,6 +55,9 @@ public class MC extends javax.swing.JFrame {
     private boolean bReadStatus;
     private boolean bReadCfg;
     private boolean bReadRC;
+    private boolean bReadSo1 = false;
+    private boolean bReadSo999 = false;
+    private boolean bWriteSo999 = false;
     private boolean bReadS88num = false;
     private boolean bReadS88value = false;
     private boolean bWriteCfg;
@@ -4800,7 +4803,7 @@ public class MC extends javax.swing.JFrame {
             }
 
             KTUI.flushReadBuffer(Com);
-            String s = "SWUPDATE\r";
+            String s = "xSWUPDATE\r";
             Com.write(s);
         }
         bUpdateModeActive = true;
