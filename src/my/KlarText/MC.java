@@ -38,8 +38,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import static javax.xml.bind.DatatypeConverter.printHexBinary;
 import my.KlarText.KlarTextUI.MZ;
-import static my.KlarText.KlarTextUI.bUseXfuncs;
-import static my.KlarText.KlarTextUI.bUseXm3sid;
 import static my.KlarText.KlarTextUI.debugLevel;
 
 
@@ -55,7 +53,6 @@ public class MC extends javax.swing.JFrame {
     private boolean bReadStatus;
     private boolean bReadCfg;
     private boolean bReadRC;
-    private boolean bReadSo1 = false;
     private boolean bReadSo999 = false;
     private boolean bWriteSo999 = false;
     private boolean bReadS88num = false;
@@ -75,6 +72,7 @@ public class MC extends javax.swing.JFrame {
     private boolean bFalscheEingabe = false;
     private int FehlerArt = 0;
     private int rcValue = -1;
+    private int so999Value = -1;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -427,6 +425,10 @@ public class MC extends javax.swing.JFrame {
         if( str1 != null && str1.length() > 0 ) {
             int locTabIdx = 0;
             int traTabIdx = 0;
+            rcValue = -1;
+            updateRailComCheckboxes( 0 );
+            so999Value = -1;
+            updateSO999checkboxes( 0 );
             initLocoTable();
             initTractionTable();
             initAccessoryTable();
@@ -623,7 +625,11 @@ public class MC extends javax.swing.JFrame {
                                     break;
                                 case "RAILCOM":
                                     rcValue = Integer.parseInt(strArr1[1]);
-                                    setRailComBits( rcValue );
+                                    updateRailComCheckboxes( rcValue );
+                                    break;
+                                case "SO999":
+                                    so999Value = Integer.parseInt(strArr1[1]);
+                                    updateSO999checkboxes( so999Value );
                                     break;
                                 default:
                                     System.out.println("inside parseInputArray [SYSTEM] -> UNKNOWN ENTRY j=["+j+"] strArr[0]=["+strArr1[0]+"]");
@@ -727,6 +733,9 @@ public class MC extends javax.swing.JFrame {
         jClose = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jSysS88monitor = new javax.swing.JButton();
+        jBoosterOpts = new javax.swing.JLabel();
+        jBoostOptNoAccDrive = new javax.swing.JCheckBox();
+        jBoostOptNoAccBreak = new javax.swing.JCheckBox();
         jLoks = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLoco = new javax.swing.JTable();
@@ -1104,6 +1113,27 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
+        jBoosterOpts.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jBoosterOpts.setText(bundle.getString("MC.jBoosterOpts.text")); // NOI18N
+
+        jBoostOptNoAccDrive.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jBoostOptNoAccDrive.setText(bundle.getString("MC.jBoostOptNoAccDrive.text")); // NOI18N
+        jBoostOptNoAccDrive.setEnabled(false);
+        jBoostOptNoAccDrive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBoostOptNoAccDriveActionPerformed(evt);
+            }
+        });
+
+        jBoostOptNoAccBreak.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jBoostOptNoAccBreak.setText(bundle.getString("MC.jBoostOptNoAccBreak.text")); // NOI18N
+        jBoostOptNoAccBreak.setEnabled(false);
+        jBoostOptNoAccBreak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBoostOptNoAccBreakActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jSystemLayout = new javax.swing.GroupLayout(jSystem);
         jSystem.setLayout(jSystemLayout);
         jSystemLayout.setHorizontalGroup(
@@ -1122,23 +1152,24 @@ public class MC extends javax.swing.JFrame {
                         .addComponent(jClose, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jSystemLayout.createSequentialGroup()
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRailcomTailbits, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRailcomAccessory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                            .addComponent(jRailcomIdNotify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRailcomTailbits, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRailcomAccessory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                                    .addGroup(jSystemLayout.createSequentialGroup()
-                                        .addComponent(jRailcomSupport)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jRailcomIdNotify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, 0))
-                            .addGroup(jSystemLayout.createSequentialGroup()
-                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRailcomSupport)
                                     .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jDCC_Booster)
                                         .addComponent(jLangePause)
                                         .addComponent(jDCC_Loks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jSystemLayout.createSequentialGroup()
+                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jBoosterOpts)
+                                    .addComponent(jBoostOptNoAccDrive)
+                                    .addComponent(jBoostOptNoAccBreak))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1245,7 +1276,13 @@ public class MC extends javax.swing.JFrame {
                         .addComponent(jRailcomIdNotify)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRailcomAccessory)
-                        .addGap(75, 75, 75))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBoosterOpts)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBoostOptNoAccDrive)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBoostOptNoAccBreak)
+                        .addGap(4, 4, 4))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
                         .addComponent(jKonfLesen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -2979,11 +3016,62 @@ public class MC extends javax.swing.JFrame {
                         jMcRwProgress.setValue(++readWriteProgress);
                         // Datensatz vollständig -> Teste/Analysiere erwarteten Wert
                     }
+                    if(bReadSo999) {
+                        jMcRwInfo.setText("read: MC SO 999 option read in progress ("+bytesRead+")");
+
+                        if( bytesRead == 0 ) {
+                            return;
+                        }
+                        byte[] mYbArray = new byte[bytesRead];
+                        System.arraycopy(bArray, 0, mYbArray, 0, bytesRead);
+                        Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
+                        if( ( ! ok) && ( debugLevel == 0 ) ) {
+                            KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
+                        }
+                        if( debugLevel > 0 ) {
+                            System.out.println("mYbArray("+bytesRead+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
+                            System.out.println("readProgress="+readWriteProgress);
+                        }
+                        if( ok && ( bytesRead == 1 ) ) {
+                            // "OK" arrived but data byte missing
+                            return;
+                        }
+                        if( ok && (bytesRead == 2 )) {
+                            so999Value = bArray[1] & 0xFF ;
+                            System.out.println("bReadSo999 : new value = "+ so999Value );
+                            updateSO999checkboxes( so999Value );
+                        }
+
+                        timer.stop();
+                        System.out.println("3030 POST checkSO999ReadComplete: COMPLETE bytesRead="+bytesRead);
+                        bWaitAnswerInProgress = false;
+                        jMcRwProgress.setValue(++readWriteProgress);
+                        // Datensatz vollständig analysiert
+                    }
+
                     if(bWriteCfg) {
                         if( KlarTextUI.debugLevel > 1 ) {
                             jMcRwInfo.setText("read: MC config write in progress ("+bytesRead+")");
                         }
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( bWriteSo999 ) {
+                            // expect exaclty one byte as answer from MC
+                            System.out.println("bWriteCfg &&  bWriteSo999 : #bytes="+ bytesRead);
+                            if( bytesRead == 0 ) {
+                                return;
+                            }
+                            byte[] mYbArray = new byte[bytesRead];
+                            System.arraycopy(bArray, 0, mYbArray, 0, bytesRead);
+                            Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
+                            if( ( ! ok ) && ( debugLevel == 0 ) ) {
+                                KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
+                            }
+                            if( debugLevel >= 1 ) {
+                                System.out.println("mYbArray("+bytesRead+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
+                                System.out.println("readProgress="+readWriteProgress);
+                            }
+                            bWriteSo999 = false;
+                        }
+                        else if( ! KTUI.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -3169,7 +3257,7 @@ public class MC extends javax.swing.JFrame {
                     if (strArr[0].startsWith("RC ")) {
                         try {
                             rcValue = Integer.parseInt(strArr[0].substring(3));
-                            setRailComBits(rcValue);
+                            updateRailComCheckboxes(rcValue);
                             if( debugLevel >= 1 ) {
                                 System.out.println("readRC strArr[0].length["+strArr[0].length()+"] rcValue["+rcValue+"]" );
                             }
@@ -3193,10 +3281,39 @@ public class MC extends javax.swing.JFrame {
                     if( debugLevel >= 1 ) {
                         System.out.println("readProgress="+readWriteProgress);
                     }
-                    bReadRC = false;
+
+                    if( KlarTextUI.bUseSo999 ) { // (at least 1.4.8c was detected)
+                        lastCmd = "XSoGet 999 " ;
+                        System.out.println("read: Booster option s["+lastCmd+"]" );
+                        byte[] wArray = new byte[4];
+                        wArray[0] = (byte) 0x78; // x
+                        wArray[1] = (byte) 0xa4; // XSoGet (requires 1.4.8c)
+                        wArray[2] = (byte) (   999        & 0xFF );  // SO low byte
+                        wArray[3] = (byte) ( ( 999 >> 8 ) & 0xFF );  // SO high byte
+                        Com.write(wArray);
+                        bReadSo999 = true;
+                        resetbArray();
+                        retries = KlarTextUI.timerRetries;
+                        jMcRwProgress.setString(null);
+                        bWaitAnswerInProgress = true;
+                        timer.setInitialDelay(KlarTextUI.MCtimer1);
+                        timer.setDelay(KlarTextUI.MCtimer2);
+                        timer.start();
+                        jMcRwInfo.setText("read: MC SO 999 option read started");
+                        jMcRwProgress.setValue(++readWriteProgress);
+                    }
+                    else {
+                        stopIOAction();
+                        resetbArray();
+                    }
+                    return;
+                }
+
+                if(bReadSo999) {
+                    jMcRwInfo.setText("read: MC SO 999 read finished");
+                    bReadSo999 = false;
                     stopIOAction();
                     resetbArray();
-                    return;
                 }
 
                 if(bWriteCfg) {
@@ -3295,7 +3412,7 @@ public class MC extends javax.swing.JFrame {
                             sysIdx++;
                             if( jWRsys.isSelected() ) {
                                 jMcRwInfo.setText("write: RailCom option");
-                                rcValue = getRailComBits();
+                                rcValue = getRailComValueFromCheckboxes();
                                 if( debugLevel > 0 ) {
                                     System.out.println("write: RailCom option ["+rcValue+"]");
                                 }
@@ -3312,7 +3429,36 @@ public class MC extends javax.swing.JFrame {
                             }
                             timer.start();
                             break;
-                        case 3: // clear loco list
+                        case 3: // booster option
+                            nextWriteJob++;
+                            sysIdx++;
+                            if( jWRsys.isSelected() && KlarTextUI.bUseSo999 ) { // (at least 1.4.8c was detected)
+                                jMcRwInfo.setText("write: Booster option");
+                                updateSo999Value();
+                                if( debugLevel > 0 ) {
+                                    System.out.println("write: Booster option ["+so999Value+"]");
+                                }
+                                lastCmd = "XSoSet 999 " + so999Value ;
+                                System.out.println("write: Booster option s["+lastCmd+"]" );
+                                byte[] wArray = new byte[5];
+                                wArray[0] = (byte) 0x78; // x
+                                wArray[1] = (byte) 0xa3; // XSoSet (requires 1.4.8c)
+                                wArray[2] = (byte) (   999        & 0xFF );  // SO low byte
+                                wArray[3] = (byte) ( ( 999 >> 8 ) & 0xFF );  // SO high byte
+                                wArray[4] = (byte) (   so999Value & 0xFF );  // SO value (1 byte)
+                                Com.write(wArray);
+                                bWriteSo999 = true;
+                                resetbArray();
+                                retries = KlarTextUI.timerRetries;
+                                jMcRwProgress.setString(null);
+                                bWaitAnswerInProgress = true;
+                            } else {
+                                jMcRwInfo.setText("write: skip Booster option");
+                                System.out.println("write: skip Booster option");
+                            }
+                            timer.start();
+                            break;
+                        case 4: // clear loco list
                             nextWriteJob++;
                             sysIdx++;
                             if( ! jWRloc.isSelected() ) {
@@ -3330,7 +3476,7 @@ public class MC extends javax.swing.JFrame {
                             }
                             timer.start();
                             break;
-                        case 4: // locos
+                        case 5: // locos
                             if( ! jWRloc.isSelected() ) {
                                 nextWriteJob++;
                                 jMcRwInfo.setText("write: skip locos");
@@ -3378,7 +3524,7 @@ public class MC extends javax.swing.JFrame {
                             }
                             timer.start();
                             break;
-                        case 5: // clear traction list
+                        case 6: // clear traction list
                             nextWriteJob++;
                             sysIdx++;
                             if( ! jWRtra.isSelected() ) {
@@ -3396,7 +3542,7 @@ public class MC extends javax.swing.JFrame {
                             }
                             timer.start();
                             break;
-                        case 6: // tractions
+                        case 7: // tractions
                             if( ! jWRtra.isSelected() ) {
                                 nextWriteJob++;
                                 jMcRwInfo.setText("write: skip tractions");
@@ -3432,7 +3578,7 @@ public class MC extends javax.swing.JFrame {
                             }
                             timer.start();
                             break;
-                        case 7: // accessories
+                        case 8: // accessories
                             if( ! jWRmag.isSelected() ) {
                                 nextWriteJob++;
                                 jMcRwInfo.setText("write: skip accessory list");
@@ -3476,7 +3622,7 @@ public class MC extends javax.swing.JFrame {
                             }
                             timer.start();
                             break;
-                        case 8:
+                        case 9:
                             nextWriteJob++;
                             sysIdx++;
                             timer.start();
@@ -3712,7 +3858,7 @@ public class MC extends javax.swing.JFrame {
         bytesRead = 0;
     }
 
-    private void setRailComBits( int bits ) {
+    private void updateRailComCheckboxes( int bits ) {
         if( bits == -1 )
             return;
         jRailcomTailbits.setSelected((bits & 0x01) == 0x01);
@@ -3720,7 +3866,7 @@ public class MC extends javax.swing.JFrame {
         jRailcomAccessory.setSelected((bits & 0x04) == 0x04);
     }
 
-    private int getRailComBits() {
+    private int getRailComValueFromCheckboxes() {
         int bits = 0x00;
         if( jRailcomTailbits.isSelected() )
             bits += 0x01;
@@ -3731,8 +3877,26 @@ public class MC extends javax.swing.JFrame {
         return bits;
     }
     
-    private void updateRailComBits() {
-        rcValue = getRailComBits();
+    private void updateRailComValue() {
+        rcValue = getRailComValueFromCheckboxes();
+    }
+
+    private void updateSO999checkboxes( int bits ) {
+        if( bits == -1 )
+            return;
+        jBoostOptNoAccDrive.setSelected((bits & 0x01) == 0x01);
+        jBoostOptNoAccBreak.setSelected((bits & 0x02) == 0x02);
+    }
+
+    private int getSO999ValueFromCheckboxes() {
+        int val = 0;
+        val += jBoostOptNoAccDrive.isSelected()?1:0 ;
+        val += jBoostOptNoAccBreak.isSelected()?2:0 ;
+        return val;
+    }
+
+    private void updateSo999Value() {
+        so999Value = getSO999ValueFromCheckboxes();
     }
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -4262,7 +4426,7 @@ public class MC extends javax.swing.JFrame {
             jRailcomTailbits.setSelected(true);
             jRailcomIdNotify.setSelected(true);
         }
-        updateRailComBits();
+        updateRailComValue();
     }//GEN-LAST:event_jRailcomAccessoryActionPerformed
 
     private void jRailcomIdNotifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRailcomIdNotifyActionPerformed
@@ -4271,7 +4435,7 @@ public class MC extends javax.swing.JFrame {
         } else {
             jRailcomAccessory.setSelected(false);
         }
-        updateRailComBits();
+        updateRailComValue();
     }//GEN-LAST:event_jRailcomIdNotifyActionPerformed
 
     private void jRailcomTailbitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRailcomTailbitsActionPerformed
@@ -4279,7 +4443,7 @@ public class MC extends javax.swing.JFrame {
             jRailcomIdNotify.setSelected(false);
             jRailcomAccessory.setSelected(false);
         }
-        updateRailComBits();
+        updateRailComValue();
     }//GEN-LAST:event_jRailcomTailbitsActionPerformed
 
     private void jCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelActionPerformed
@@ -4393,6 +4557,9 @@ public class MC extends javax.swing.JFrame {
         str += "BAUDRATE " + jBaud.getText() + "\r\n";
         if( rcValue != -1 ) {
             str += "RAILCOM " + rcValue + "\r\n";
+        }
+        if( so999Value != -1 ) {
+            str += "SO999 " + so999Value + "\r\n";
         }
         str += "*END*\r\n";
 
@@ -4828,6 +4995,14 @@ public class MC extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jEasyNetUpdateActionPerformed
 
+    private void jBoostOptNoAccDriveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoostOptNoAccDriveActionPerformed
+        updateSo999Value();
+    }//GEN-LAST:event_jBoostOptNoAccDriveActionPerformed
+
+    private void jBoostOptNoAccBreakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoostOptNoAccBreakActionPerformed
+        updateSo999Value();
+    }//GEN-LAST:event_jBoostOptNoAccBreakActionPerformed
+
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
             return false;
@@ -4962,6 +5137,8 @@ public class MC extends javax.swing.JFrame {
         jRailcomTailbits.setEnabled(false);
         jRailcomIdNotify.setEnabled(false);
         jRailcomAccessory.setEnabled(false);
+        jBoostOptNoAccDrive.setEnabled(false);
+        jBoostOptNoAccBreak.setEnabled(false);
         jKurzEmpf.setEnabled(false);
         js88.setEnabled(false);
         jMinMag.setEnabled(false);
@@ -5040,6 +5217,10 @@ public class MC extends javax.swing.JFrame {
         jRailcomTailbits.setEnabled(true);
         jRailcomIdNotify.setEnabled(true);
         jRailcomAccessory.setEnabled(true);
+        if( KlarTextUI.bUseSo999 ) {
+            jBoostOptNoAccDrive.setEnabled(true);
+            jBoostOptNoAccBreak.setEnabled(true);
+        }
         jKurzEmpf.setEnabled(true);
         js88.setEnabled(true);
         jMinMag.setEnabled(true);
@@ -5971,8 +6152,6 @@ public class MC extends javax.swing.JFrame {
     }
 
     void reCheckVersionInfo() {
-        bUseXm3sid = false;
-        bUseXfuncs = false;
         String jVer = jVersion.getText();
         byte[] bVersion = jVer.replace(".", "").getBytes();
         System.out.println("jVer="+jVer+" bVersion.length="+bVersion.length );
@@ -5989,18 +6168,18 @@ public class MC extends javax.swing.JFrame {
             lSwVersion += (long) (bVersion[3] & 0xFF);
         }
 
-        if( lSwVersion >= c.MIN_MC_XFUNCS_VERSION ) {
-            KlarTextUI.bUseXfuncs = true;
-        }
-        if( lSwVersion >= c.MIN_MC_XM3SID_VERSION ) {
-            KlarTextUI.bUseXm3sid = true;
-        }
+        KlarTextUI.bUseXfuncs = ( lSwVersion >= c.MIN_MC_XFUNCS_VERSION );
+        KlarTextUI.bUseXm3sid = ( lSwVersion >= c.MIN_MC_XM3SID_VERSION );
+        KlarTextUI.bUseSo999  = ( lSwVersion >= c.MIN_MC_SO999_VERSION  );
+        jBoostOptNoAccDrive.setEnabled(KlarTextUI.bUseSo999);
+        jBoostOptNoAccBreak.setEnabled(KlarTextUI.bUseSo999);
+
         KTUI.fwVersion = jVer;
         String sSwVersion = "MasterControl Version "+KTUI.fwVersion;
-        System.out.println("--- "+sSwVersion+" --- bUseXfuncs="+bUseXfuncs+" bUseXm3sid="+bUseXm3sid);
+        System.out.println("--- "+sSwVersion+" --- bUseXfuncs="+KlarTextUI.bUseXfuncs+" bUseXm3sid="+KlarTextUI.bUseXm3sid);
         if( lSwVersion > 0 ) {
             System.out.println("lSwVersion="+lSwVersion+" in HEX="+String.format("0x%16s", Long.toHexString(lSwVersion)).replace(' ', '0') );
-            System.out.println("bUseXfuncs="+bUseXfuncs+" bUseXm3sid="+bUseXm3sid);
+            System.out.println("bUseXfuncs="+KlarTextUI.bUseXfuncs+" bUseXm3sid="+KlarTextUI.bUseXm3sid+" bUseSo999="+KlarTextUI.bUseSo999);
         }
         KTUI.fillMenuSelection();
     }
@@ -6027,6 +6206,9 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton helpXNC;
     private javax.swing.JTextField jBaud;
     private javax.swing.JLabel jBild;
+    private javax.swing.JCheckBox jBoostOptNoAccBreak;
+    private javax.swing.JCheckBox jBoostOptNoAccDrive;
+    private javax.swing.JLabel jBoosterOpts;
     private javax.swing.JButton jCancel;
     private javax.swing.JButton jClose;
     private javax.swing.JCheckBox jDCC_Booster;

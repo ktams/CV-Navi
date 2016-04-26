@@ -228,6 +228,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     public String fwVersion = null;
     public static Boolean bUseXfuncs = false; // MC >= 1.4.6f ; OpenDCC >= 23.08 ; IB >= 2.000
     public static Boolean bUseXm3sid = false; // MC >= 1.4.7b
+    public static Boolean bUseSo999  = false; // MC >= 1.4.8c
     public String  gsSchnittstelle = "noCom";
     public int     gsBaudRate = -1 ;
     public boolean gsRtsCts = true;
@@ -1656,38 +1657,38 @@ public class KlarTextUI extends javax.swing.JFrame {
             case 0x00 : // OK
                 return true;
             case 0x02 :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XBADPRM");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XBADPRM");
                 break;
             case 0x06 :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XPWOFF");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XPWOFF");
                 break;
             case 0x07 :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XNOTSPC");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XNOTSPC");
                 break;
             case 0x08 :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XNOLSPC");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XNOLSPC");
                 break;
             case 0x0A :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XNODATA");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XNODATA");
                 break;
             case 0x0B :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XNOSLOT");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XNOSLOT");
                 break;
             case 0x0D :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XLKBUSY");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XLKBUSY");
                 break;
             case 0x0E :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XBADTNP");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XBADTNP");
                 break;
             case 0x41 :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XLKHALT");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XLKHALT");
                 break;
             case 0x42 :
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+"XLKPOFF");
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode+" XLKPOFF");
                 //        "Lok-Kommando akzeptiert, aber nicht ausgeführt, da Steuerung im STOP-Modus ist.\nDie Geschwindigkeit wird auf 0 gesetzt." );
                 break;
             default:
-                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode, String.format("%02X ", bArr[0]));
+                if( show ) mbGeneric( cont, "checkMCAnswerByte", errCode, String.format(" %02X (unknown)", bArr[0]));
         }
         return false;
     }
@@ -2445,7 +2446,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20160424a)";
+            String  gsBuild ="(beta 20160426a)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);
@@ -2796,12 +2797,10 @@ public class KlarTextUI extends javax.swing.JFrame {
                 lSwVersion += (long)((bVersion[0] & 0xFF) << 24 );
                 lSwVersion += (long)((bVersion[1] & 0xFF) << 16 );
                 lSwVersion += (long)((bVersion[2] & 0xFF) << 8 );
-                if( lSwVersion >= c.MIN_MC_XFUNCS_VERSION ) {
-                    bUseXfuncs = true;
-                }
-                if( lSwVersion >= c.MIN_MC_XM3SID_VERSION ) {
-                    bUseXm3sid = true;
-                }
+
+                bUseXfuncs = ( lSwVersion >= c.MIN_MC_XFUNCS_VERSION );
+                bUseXm3sid = ( lSwVersion >= c.MIN_MC_XM3SID_VERSION );
+                bUseSo999  = ( lSwVersion >= c.MIN_MC_SO999_VERSION  );
                 fwVersion = ""
                         + (int) (bVersion[0] & 0xFF) +"."
                         + (int) (bVersion[1] & 0xFF) +"."
