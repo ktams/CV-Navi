@@ -2440,13 +2440,13 @@ public class KlarTextUI extends javax.swing.JFrame {
 
         SODlocalSize = new Dimension();
 
-        if( debugLevel >= 0 ) { // TODO set to > 0 for release
+        if( debugLevel > 0 ) { // TODO set to > 0 for release
             int lPVx = jLabelProgVersion.getX();
             int lPVy = jLabelProgVersion.getY();
             int lPVwidth = jLabelProgVersion.getWidth();
             int lPVheight = jLabelProgVersion.getHeight();
 
-            String  gsBuild ="(beta 20160426a)";
+            String  gsBuild ="(release 20160606a)";
             System.out.println("Build: "+gsBuild);
             JLabel jLabelBuild = new JLabel();
             jLabelBuild.setText(gsBuild);
