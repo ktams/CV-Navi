@@ -1,4 +1,4 @@
-CV-Navi Version 1.11
+CV-Navi Version 1.12
 
 English version after german section.
 
@@ -11,6 +11,9 @@ Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
+
+Aenderungen in V1.12
+- Pfad fuer gentoo ins Startskript
 
 Aenderungen in V1.11
 - detaillierte Anleitungen zu Firmware-Updates integriert (Dank an Peter Mueller)

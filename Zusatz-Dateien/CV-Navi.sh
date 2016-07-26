@@ -13,6 +13,9 @@
 
 
 
+# V 0.11 20160726 Lothar
+# - Pfad fuer rxtx-Bibliothek unter gentoo hinzugefuegt (von Markus F.)
+
 # V 0.10 20150213 Lothar
 # - Sprache: Auswertung der Umgebumgsvariable LANG (z.B. LANG=de_DE.utf8)
 #            und Übergabe an Java
@@ -51,7 +54,7 @@
 #
 # Jeweils als root oder mit root-Rechten (sudo) ausfuehren:
 #
-# Fedora (14/16/17/18/19/20):
+# Fedora:
 #
 #   yum install rxtx
 #   usermod -a -G dialout <user>
@@ -63,7 +66,7 @@
 #   -> Benutzerrechte: siehe Fedora
 #
 #
-# Debian (6), Ubuntu (12.04), Raspbian (RaspberryPi, BananaPi):
+# Debian, Ubuntu, Raspbian (RaspberryPi, BananaPi):
 #
 #   apt-get install librxtx-java
 #   usermod -a -G dialout <user>
@@ -148,8 +151,8 @@ done
 PROG_DIR=${SELF_PATH}
 [ $DEBUG == 1 ]&& echo "PROG_DIR=$PROG_DIR"
 
-DIRLISTE_x86_64="/usr/lib64/rxtx   /usr/lib64     /usr/lib/jni	${PROG_DIR}/lib	${PROG_DIR}"
-DIRLISTE_i386="  /usr/lib/rxtx     /usr/lib       /usr/lib/jni	${PROG_DIR}/lib	${PROG_DIR}"
+DIRLISTE_x86_64="/usr/lib64/rxtx /usr/lib64/rxtx-2 /usr/lib64 /usr/lib/jni  ${PROG_DIR}/lib  ${PROG_DIR}"
+DIRLISTE_i386="  /usr/lib/rxtx   /usr/lib/rxtx-2   /usr/lib   /usr/lib/jni  ${PROG_DIR}/lib  ${PROG_DIR}"
 
 SYSTEMTYPE=`uname -m`
 if [ $DEBUG == 1 ]; then
