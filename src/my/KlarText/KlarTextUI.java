@@ -1842,6 +1842,8 @@ public class KlarTextUI extends javax.swing.JFrame {
         jSchnittstelle = new javax.swing.JTextField();
         jBaudrateTitle = new javax.swing.JTextField();
         jBaudRate = new javax.swing.JTextField();
+        jLabelBuild = new javax.swing.JLabel();
+        jLabelOS = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
@@ -1978,6 +1980,14 @@ public class KlarTextUI extends javax.swing.JFrame {
         jBaudRate.setText(bundle.getString("KlarTextUI.jBaudRate.text")); // NOI18N
         jBaudRate.setToolTipText(bundle.getString("KlarTextUI.jBaudRate.toolTipText")); // NOI18N
 
+        jLabelBuild.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelBuild.setText("build");
+        jLabelBuild.setIconTextGap(0);
+
+        jLabelOS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelOS.setText("os info");
+        jLabelOS.setIconTextGap(0);
+
         javax.swing.GroupLayout KlarTextMainPanelLayout = new javax.swing.GroupLayout(KlarTextMainPanel);
         KlarTextMainPanel.setLayout(KlarTextMainPanelLayout);
         KlarTextMainPanelLayout.setHorizontalGroup(
@@ -2007,15 +2017,18 @@ public class KlarTextUI extends javax.swing.JFrame {
                                 .addComponent(jLabel3))
                             .addComponent(jButtonStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(KlarTextMainPanelLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabelProgVersion))
                             .addComponent(jBaudrateTitle, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jBaudRate, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSchnittstelle, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSchnittstelleTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                             .addComponent(jZentrale, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jZentraleTitle, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                            .addComponent(jZentraleTitle, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(KlarTextMainPanelLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(KlarTextMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabelBuild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelProgVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelOS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
         );
         KlarTextMainPanelLayout.setVerticalGroup(
             KlarTextMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2029,7 +2042,11 @@ public class KlarTextUI extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelProgVersion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelOS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelBuild, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                         .addComponent(jButtonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(jButtonOptions)
@@ -2440,22 +2457,19 @@ public class KlarTextUI extends javax.swing.JFrame {
 
         SODlocalSize = new Dimension();
 
-        if( debugLevel >= 0 ) { // TODO set to > 0 for release
-            int lPVx = jLabelProgVersion.getX();
-            int lPVy = jLabelProgVersion.getY();
-            int lPVwidth = jLabelProgVersion.getWidth();
-            int lPVheight = jLabelProgVersion.getHeight();
+        String osName = System.getProperty("os.name");
+        String osArch = System.getProperty("os.arch");
+        String dataModel = System.getProperty("sun.arch.data.model");
+        String osInfo = "( "+osName+"["+osArch+"] , "+dataModel+"bit )";
+        jLabelOS.setText(osInfo);
 
-            String  gsBuild ="(beta 20160726a)"; // "(release 20160606a)"
-            System.out.println("Build: "+gsBuild);
-            JLabel jLabelBuild = new JLabel();
+        String gsBuild ="beta 20160821a"; // "(release 20160606a)"
+        System.out.println("Build: "+gsBuild);
+        if( debugLevel >= 0 ) { // TODO set to > 0 for release
             jLabelBuild.setText(gsBuild);
-            KlarTextMainPanel.add(jLabelBuild,BorderLayout.NORTH);
-            jLabelBuild.setSize(jLabelBuild.getPreferredSize());
-            Dimension size = jLabelBuild.getPreferredSize();
-            int buildWidth = jLabelBuild.getWidth();
-            int buildHeight = jLabelBuild.getHeight();
-            jLabelBuild.setLocation(lPVx+((lPVwidth-buildWidth)/2), lPVy+lPVheight+lPVheight/2);
+        }
+        else {
+            jLabelBuild.setText("");
         }
 
         // store pointer to instance in a final variable -> useable inside ActionListener
@@ -3216,6 +3230,8 @@ public class KlarTextUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelBuild;
+    private javax.swing.JLabel jLabelOS;
     private javax.swing.JLabel jLabelProgName;
     private javax.swing.JLabel jLabelProgVersion;
     private javax.swing.JTextField jSchnittstelle;
