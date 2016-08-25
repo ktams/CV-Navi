@@ -3022,8 +3022,9 @@ public class MC extends javax.swing.JFrame {
                         if( bytesRead == 0 ) {
                             return;
                         }
-                        byte[] mYbArray = new byte[bytesRead];
-                        System.arraycopy(bArray, 0, mYbArray, 0, bytesRead);
+                        // check 1st byte for error code
+                        byte[] mYbArray = new byte[1];
+                        System.arraycopy(bArray, 0, mYbArray, 0, 1);
                         Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
                         if( ( ! ok) && ( debugLevel == 0 ) ) {
                             KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
