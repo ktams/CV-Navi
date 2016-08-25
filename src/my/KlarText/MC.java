@@ -4163,8 +4163,10 @@ public class MC extends javax.swing.JFrame {
             inputStream.close();
 
             // force 38400 baud for firmware updates (for RS232 only)
+            /*
             Com = KTUI.safelyCloseCom( this, Com);
             KTUI.gsBaudRate = 38400;
+            */
             Com = KTUI.safelyOpenCom( this, Com );
             if( Com == null ){
                 stopIOAction();
