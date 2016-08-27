@@ -75,11 +75,10 @@ interface c {
     public static final int SD_34  = 23;
     public static final int LINE_3 = 24;
     public static final int tOTHER = 25;
-    public static final int MC     = 26; // MasterControl
-    public static final int RB     = 27; // RedBox
-    public static final int B_4    = 28;
-    public static final int BiDi_B = 29;
-    public static final int WIB_30 = 30;
+    public static final int MC     = 26; // MasterControl/RedBox
+    public static final int B_4    = 27;
+    public static final int BiDi_B = 28;
+    public static final int WIB_30 = 29;
 
     // special numbers (used in SaveOpenDialog)
     public static final int MC_WR  = 196; // special handling of MC config writes
@@ -155,8 +154,7 @@ enum decoderList {
     SD_34   (c.SD_34,  true,  "   SD-34",""),
     line_3  (c.LINE_3, false, "____________",""),
     tOTHER  (c.tOTHER, false, "Sonstiges","Other"),
-    MC      (c.MC,     true,  "   MasterControl",""),
-    RB      (c.RB,     true,  "   RedBox",""),
+    MC      (c.MC,     true,  "   MasterControl/RedBox",""),
     B_4     (c.B_4,    true,  "   B-4",""),
     BiDi_B  (c.BiDi_B, true,  "   BiDi-Booster",""),
     WIB_30  (c.WIB_30, true,  "   WIB-30er","");
@@ -2289,12 +2287,8 @@ public class KlarTextUI extends javax.swing.JFrame {
                 WD34 wD34 = new WD34(this);
                 break;
 
-            case c.MC: // MasterControl
+            case c.MC: // MasterControl/RedBox
                 MC mC = new MC(this);
-                break;
-
-            case c.RB: // RedBox
-                mC = new MC(this);
                 break;
 
             case c.B_4: // B-4
@@ -2463,7 +2457,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         String osInfo = "( "+osName+"["+osArch+"] , java "+dataModel+"bit )";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20160827a"; // "(release 20160606a)"
+        String gsBuild ="beta 20160827b"; // "(release 20160606a)"
         System.out.println("Build: "+gsBuild);
         if( debugLevel >= 0 ) { // TODO set to > 0 for release
             jLabelBuild.setText(gsBuild);
