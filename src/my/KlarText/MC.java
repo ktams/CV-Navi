@@ -3682,9 +3682,9 @@ public class MC extends javax.swing.JFrame {
                         }
                         return;
                     }
-                    if(bArray[0] != 0)
+                    if(bArray[n-1] != 0)
                     {
-                        switch(bArray[0])
+                        switch(bArray[n-1])
                         {
                             case '*':       //letzter Block wurde erfolgreich übertragen (256 Bytes)
                                 BlockNr++;
