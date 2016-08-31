@@ -197,6 +197,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     private static int userTimer2 = -1;
     private static int userTimer3 = -1;
     private static int userTimerRetries = -1;
+    public static int userTimerFwUp = 150;
     public static int MCtimer1 = -1;
     public static int MCtimer2 = -1;
     public static int timer1 = -1;
@@ -557,6 +558,13 @@ public class KlarTextUI extends javax.swing.JFrame {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont );
         messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
         messageBox.jLabel2.setText(bundle.getString("Unexpected") + " " + c + " " + bundle.getString("empfangen"));
+        messageBox.jLabel3.setText(bundle.getString("restartupdate"));
+        messageBox.setVisible(true);
+    }
+    public void mbUpdateWriteError( Container cont, String s ) {
+        MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont );
+        messageBox.jLabel1.setText(bundle.getString("ACHTUNG"));
+        messageBox.jLabel2.setText(bundle.getString("Unexpected") + " " + s + " " + bundle.getString("empfangen"));
         messageBox.jLabel3.setText(bundle.getString("restartupdate"));
         messageBox.setVisible(true);
     }
@@ -1578,10 +1586,32 @@ public class KlarTextUI extends javax.swing.JFrame {
         System.out.print("HEX: ");
         for (byte theByte : bArray)
         {
-            System.out.printf( " %02d", theByte );
+            System.out.printf( " %02x", theByte );
             // System.out.print(Integer.toHexString(theByte)+" ");
         }
         System.out.println("");
+    }
+    /**
+     *
+     * @param bArray array of bytes (answer from command station)
+     * @return String with array in Hex
+     */
+    public String dumpbArrayHexAsString( byte[] bArray ) {
+        String sRet;
+        String sTmp;
+        String sTmp2;
+        if( bArray == null ) {
+            sRet = "null";
+            return sRet;
+        }
+        sTmp = ("HEX: ");
+        for (byte theByte : bArray)
+        {
+            sTmp2 = String.format(" %02x", theByte);
+            sTmp.concat(sTmp2);
+        }
+        sRet = sTmp;
+        return sRet;
     }
 
     public void dumpbArrayBIN( byte[] bArray, int num ) {
@@ -2457,7 +2487,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         String osInfo = "( "+osName+"["+osArch+"] , java "+dataModel+"bit )";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20160827b"; // "(release 20160606a)"
+        String gsBuild ="beta 20160831a"; // "(release 20160606a)"
         System.out.println("Build: "+gsBuild);
         if( debugLevel >= 0 ) { // TODO set to > 0 for release
             jLabelBuild.setText(gsBuild);
@@ -2641,6 +2671,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         String sSwVersion = null;
         long lSwVersion = 0;
         char b = ' ';
+        char bNum = ' ';
         
         /*
          * Version Info:
@@ -2798,6 +2829,8 @@ public class KlarTextUI extends javax.swing.JFrame {
                         break;
                 }
                 break;
+            case 5: // Tams beta prerelease #
+                bNum = (char) ( bVersion[4] & 0xFF );
             case 4: // Tams beta release
                 b = (char) ( bVersion[3] & 0xFF );
                 lSwVersion = (long) (bVersion[3] & 0xFF);
@@ -2813,7 +2846,8 @@ public class KlarTextUI extends javax.swing.JFrame {
                         + (int) (bVersion[0] & 0xFF) +"."
                         + (int) (bVersion[1] & 0xFF) +"."
                         + (int) (bVersion[2] & 0xFF)
-                        + b;
+                        + b
+                        + bNum;
                 sSwVersion = "MasterControl Version "+fwVersion;
                 System.out.println("--- "+sSwVersion+" ---");
                 mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuMasterControl );
@@ -3021,6 +3055,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         System.out.println("\t-t2 <num>  \tread/write CVs: delay timeout [ms] (default: 500)");
         System.out.println("\t-t3 <num>  \tread/write CVs: extra pause [ms] between CV requests (default: 0)");
         System.out.println("\t-tr <num>  \tread/write CVs: number of retries with delay timeout (default: 9)");
+        System.out.println("\t-tfu <num> \ttimer interval during firmware updates (default: 250)");
         System.out.println("\t-u         \tupdate window always visible");
         System.out.println("\t-no17      \tdo not read CV17");
         System.out.println("\t-no18      \tdo not read CV18");
@@ -3121,6 +3156,15 @@ public class KlarTextUI extends javax.swing.JFrame {
                         n++;
                         userTimerRetries = Integer.parseInt(args[n]);
                         System.out.println("userTimerRetries set to "+userTimerRetries);
+                        break;
+                    case "-tfu":
+                        if( n == (argc-1) || args[n+1].startsWith("-") ) {
+                            // ohne Parameter -> Zahl fehlt => ignorieren
+                            break;
+                        }
+                        n++;
+                        userTimerFwUp = Integer.parseInt(args[n]);
+                        System.out.println("userTimerFwUp set to "+userTimerFwUp);
                         break;
                     case "-u":
                         updateAlwaysVisible = true;

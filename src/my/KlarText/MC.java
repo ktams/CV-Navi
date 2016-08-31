@@ -1199,7 +1199,7 @@ public class MC extends javax.swing.JFrame {
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBild2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                .addComponent(jBild2, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1783,7 +1783,7 @@ public class MC extends javax.swing.JFrame {
             jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLocDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1791,7 +1791,7 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jLocRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocM3sidWrite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
-                        .addGap(0, 89, Short.MAX_VALUE)
+                        .addGap(0, 151, Short.MAX_VALUE)
                         .addComponent(jLabelM3UID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextM3UID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2108,7 +2108,7 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jTraktionenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jTraktionenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTraDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
@@ -2493,7 +2493,7 @@ public class MC extends javax.swing.JFrame {
             .addGroup(jMagnetartikelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jMagnetartikelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
                     .addComponent(jLabel16))
                 .addGap(29, 29, 29)
                 .addGroup(jMagnetartikelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2800,7 +2800,7 @@ public class MC extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1139, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -3806,13 +3806,30 @@ public class MC extends javax.swing.JFrame {
                             default:
                                 BlockNrTemp = BlockNr * 4;
                                 jUpdLastError.setText(bundle.getString("MC.UnbekannterFehler_1") + BlockNrTemp + bundle.getString("MC.UnbekannterFehler_2"));
-                                stopIOAction();
-                                Com = KTUI.safelyCloseCom( outerThis, Com );
                                 System.out.println("mbUpdateWriteError: numBytes from MC="+n+" Content:");
                                 KTUI.dumpbArrayBIN( bArray, n );
-                                KTUI.mbUpdateWriteError( outerThis, (char)bArray[0]);
-                                count = 0;
-                                BlockNr = 0;
+                                if( debugLevel == 0 ) {
+                                    stopIOAction();
+                                    Com = KTUI.safelyCloseCom( outerThis, Com );
+                                    KTUI.mbUpdateWriteError( outerThis, (char)bArray[0]);
+                                    count = 0;
+                                    BlockNr = 0;
+                                }
+                                else {
+                                    String strOut;
+                                    if( debugLevel == 1 ) {
+                                        strOut = KTUI.dumpbArrayHexAsString( bArray );
+                                        KTUI.mbUpdateWriteError( outerThis, strOut );
+                                        stopIOAction();
+                                        Com = KTUI.safelyCloseCom( outerThis, Com );
+                                        count = 0;
+                                        BlockNr = 0;
+                                    }
+                                    else {
+                                        // may be dangerous
+                                        // do not reset the count and BlockNr, just ignore
+                                    }
+                                }
                                 break;
                         }
                         BlockNrTemp = BlockNr * 4;
@@ -4183,8 +4200,8 @@ public class MC extends javax.swing.JFrame {
             }
             KTUI.flushReadBuffer(Com);
             bUpdate = true;
-            timer.setInitialDelay(250); // set to 10 ?
-            timer.setDelay(250); // set to 10 ?
+            timer.setInitialDelay(KlarTextUI.userTimerFwUp);
+            timer.setDelay(KlarTextUI.userTimerFwUp);
             timer.setRepeats(true);
             jMcUpdProgress.setMaximum(100);
             startIOAction();
