@@ -2487,7 +2487,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         String osInfo = "( "+osName+"["+osArch+"] , java "+dataModel+"bit )";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20160831a"; // "(release 20160606a)"
+        String gsBuild ="beta 20160904a"; // "(release 20160606a)"
         System.out.println("Build: "+gsBuild);
         if( debugLevel >= 0 ) { // TODO set to > 0 for release
             jLabelBuild.setText(gsBuild);
