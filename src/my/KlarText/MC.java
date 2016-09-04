@@ -4187,16 +4187,17 @@ public class MC extends javax.swing.JFrame {
             BlockNr = 0;
             inputStream.close();
 
-            // force 38400 baud for firmware updates (for RS232 only)
-            /*
-            Com = KTUI.safelyCloseCom( this, Com);
-            KTUI.gsBaudRate = 38400;
-            */
-            Com = KTUI.safelyOpenCom( this, Com );
-            if( Com == null ){
-                stopIOAction();
-                jUpdLastError.setText(bundle.getString("MC.Schnitttstellenfehler"));
-                return;
+            // force 38400 baud for firmware updates for RS232 on MC and USB-2 (!) on RedBox
+            if( KTUI.gsBaudRate != 38400 ) {
+                System.out.println("forcing baud rate for updates to 38400");
+                Com = KTUI.safelyCloseCom( this, Com);
+                KTUI.gsBaudRate = 38400;
+                Com = KTUI.safelyOpenCom( this, Com );
+                if( Com == null ){
+                    stopIOAction();
+                    jUpdLastError.setText(bundle.getString("MC.Schnitttstellenfehler"));
+                    return;
+                }
             }
             KTUI.flushReadBuffer(Com);
             bUpdate = true;
@@ -4206,7 +4207,6 @@ public class MC extends javax.swing.JFrame {
             jMcUpdProgress.setMaximum(100);
             startIOAction();
 
-            // jMcUpdInfo.setText(bundle.getString("MC.noerror"));
             jMcUpdInfo.setText(bundle.getString("MC.waitingforconnection"));
 
 
