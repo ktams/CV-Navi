@@ -83,7 +83,6 @@ public class MC extends javax.swing.JFrame {
     private Boolean checkM3uidValidActive = false;
     private M3_Liste M3L = null;
     public S88monitor S88mon = null;
-    private boolean bUpdateModeActive = false;
     
     public String M3liste[][] = null;
     public int M3used = 0;
@@ -4986,10 +4985,6 @@ public class MC extends javax.swing.JFrame {
 
     private void jEasyNetUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEasyNetUpdateActionPerformed
 
-        if( bUpdateModeActive ) {
-            return;
-        }
-
         if( KTUI.debugOffline == false ) {
             Com = KTUI.safelyOpenCom( this, Com );
             if( Com == null ){
@@ -5000,26 +4995,12 @@ public class MC extends javax.swing.JFrame {
             String s = "xSWUPDATE\r";
             Com.write(s);
         }
-        bUpdateModeActive = true;
         resetbArray();
         retries = KlarTextUI.timerRetries;
         jMcRwProgress.setString(null);
-        jMcRwInfo.setText("RedBox set to SWUPDATE mode");
+        jMcRwInfo.setText("MC/RedBox set to SWUPDATE mode");
         jEasyNetUpdate.setText(bundle.getString("MC.jEasyNetUpdate.EasyNetActivated"));
         jEasyNetUpdate.setForeground(Color.red);
-
-        if( 1 == 0 ) { // TODO: do we have to wait for an answer ?
-            bWaitAnswerInProgress = true;
-            // bReadCfg = true;
-            readWriteProgress = 0;
-            jMcRwProgress.setMaximum(6);
-            jMcRwProgress.setValue(0);
-            timer.setInitialDelay(KlarTextUI.MCtimer1);
-            timer.setDelay(KlarTextUI.MCtimer2);
-            startIOAction();
-            jMcRwInfo.setText("read: MC config read in progress");
-            jMcRwProgress.setValue(++readWriteProgress);
-        }
     }//GEN-LAST:event_jEasyNetUpdateActionPerformed
 
     private void jBoostOptNoAccDriveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoostOptNoAccDriveActionPerformed
