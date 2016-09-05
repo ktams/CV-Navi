@@ -1843,7 +1843,7 @@
                                               <Component id="jUpdLastErrorLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jUpdLastError" min="-2" pref="405" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                              <EmptySpace pref="152" max="32767" attributes="0"/>
                                               <Component id="jEasyNetUpdate" min="-2" pref="315" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -1879,6 +1879,7 @@
                                   <Component id="jUpdDateiAuswahl" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jUpdCancel" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jUpdStartUpdate" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jMRST" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -1915,7 +1916,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jUpdCancel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="308" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jMRST" min="-2" pref="108" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jUpd2System" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="helpXNC" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1936,7 +1939,7 @@
                                   <Component id="jUpdLastErrorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="268" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -2242,6 +2245,23 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jEasyNetUpdateActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jMRST">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jMRST.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMRSTActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
