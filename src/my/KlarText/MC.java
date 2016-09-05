@@ -5201,6 +5201,9 @@ public class MC extends javax.swing.JFrame {
         jUpdDateiAuswahl.setEnabled(false);
         jUpdStartUpdate.setEnabled(false);
 
+        jEasyNetUpdate.setEnabled(false);
+        jMRST.setEnabled(false);
+
         // init progress bars
         jMcRwProgress.setValue(0);
 
@@ -5292,6 +5295,9 @@ public class MC extends javax.swing.JFrame {
         jUpdDatei.setEnabled(true);
         jUpdDateiAuswahl.setEnabled(true);
         jUpdStartUpdate.setEnabled(true);
+
+        jEasyNetUpdate.setEnabled(true);
+        jMRST.setEnabled(true);
 
         // set cursor
         Cursor c = new Cursor(Cursor.DEFAULT_CURSOR );
