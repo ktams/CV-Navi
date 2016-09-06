@@ -733,6 +733,7 @@ public class MC extends javax.swing.JFrame {
         jBoostOptNoAccDrive = new javax.swing.JCheckBox();
         jBoostOptNoAccBreak = new javax.swing.JCheckBox();
         jBild2 = new javax.swing.JLabel();
+        jMRST = new javax.swing.JButton();
         jLoks = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLoco = new javax.swing.JTable();
@@ -795,7 +796,6 @@ public class MC extends javax.swing.JFrame {
         helpMCasLC = new javax.swing.JButton();
         Firmware = new javax.swing.JButton();
         jEasyNetUpdate = new javax.swing.JButton();
-        jMRST = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1132,6 +1132,16 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
+        jMRST.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMRST.setForeground(java.awt.Color.red);
+        jMRST.setText(bundle.getString("MC.jMRST.text")); // NOI18N
+        jMRST.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMRST.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMRSTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jSystemLayout = new javax.swing.GroupLayout(jSystem);
         jSystem.setLayout(jSystemLayout);
         jSystemLayout.setHorizontalGroup(
@@ -1167,8 +1177,13 @@ public class MC extends javax.swing.JFrame {
                                     .addComponent(jBoosterOpts)
                                     .addComponent(jBoostOptNoAccDrive)
                                     .addComponent(jBoostOptNoAccBreak))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jSystemLayout.createSequentialGroup()
+                                .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBild2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
@@ -1195,28 +1210,24 @@ public class MC extends javax.swing.JFrame {
                                     .addGroup(jSystemLayout.createSequentialGroup()
                                         .addComponent(jLabel17)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jSystemLayout.createSequentialGroup()
-                                .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBild2, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jSystemLayout.createSequentialGroup()
-                                                .addComponent(jWRsys)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jWRloc)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jWRtra)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jWRmag))
-                                            .addComponent(jCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jKonfSchreiben, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jKonfSichern, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jKonfLaden, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(74, 74, 74)))
+                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jMRST)
+                            .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jSystemLayout.createSequentialGroup()
+                                    .addComponent(jWRsys)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jWRloc)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jWRtra)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jWRmag))
+                                .addComponent(jCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jKonfSichern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jKonfLaden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -1258,8 +1269,13 @@ public class MC extends javax.swing.JFrame {
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jDatenQuelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jSystemLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jSystemLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jMRST, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
@@ -2685,16 +2701,6 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
-        jMRST.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMRST.setForeground(java.awt.Color.red);
-        jMRST.setText(bundle.getString("MC.jMRST.text")); // NOI18N
-        jMRST.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMRST.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMRSTActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jUpdateLayout = new javax.swing.GroupLayout(jUpdate);
         jUpdate.setLayout(jUpdateLayout);
         jUpdateLayout.setHorizontalGroup(
@@ -2745,8 +2751,7 @@ public class MC extends javax.swing.JFrame {
                             .addComponent(jUpdClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jUpdDateiAuswahl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jUpdCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jUpdStartUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jMRST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jUpdStartUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jUpdateLayout.setVerticalGroup(
@@ -2773,8 +2778,6 @@ public class MC extends javax.swing.JFrame {
                             .addComponent(jEasyNetUpdate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jUpdCancel)
-                        .addGap(40, 40, 40)
-                        .addComponent(jMRST, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jUpd2System)
@@ -4201,16 +4204,26 @@ public class MC extends javax.swing.JFrame {
             inputStream.close();
 
             // force 38400 baud for firmware updates for RS232 on MC and USB-2 (!) on RedBox
-            if( KTUI.gsBaudRate != 38400 ) {
-                System.out.println("forcing baud rate for updates to 38400");
-                Com = KTUI.safelyCloseCom( this, Com);
-                KTUI.gsBaudRate = 38400;
-                Com = KTUI.safelyOpenCom( this, Com );
-                if( Com == null ){
-                    stopIOAction();
-                    jUpdLastError.setText(bundle.getString("MC.Schnitttstellenfehler"));
-                    return;
+            if( KTUI.rs232_or_rb_usb_2 ) {
+                int oldBaudRate = KTUI.gsBaudRate;
+                if( KTUI.gsBaudRate != 38400 ) {
+                    System.out.println("forcing baud rate for updates to 38400");
+                    Com = KTUI.safelyCloseCom( this, Com);
+                    KTUI.gsBaudRate = 38400;
+                    Com = KTUI.safelyOpenCom( this, Com );
+                    if( Com == null ){
+                        // Umstellung auf 38400 schlägt fehl, also wieder zurück auf alte BaudRate
+                        KTUI.gsBaudRate = oldBaudRate;
+                        Com = KTUI.safelyOpenCom( this, Com );
+                        if( Com == null ){
+                            // geht nicht -> Abbruch
+                            stopIOAction();
+                            jUpdLastError.setText(bundle.getString("MC.Schnitttstellenfehler"));
+                            return;
+                        }
+                    }
                 }
+                KTUI.gsBaudRate = oldBaudRate;
             }
             KTUI.flushReadBuffer(Com);
             bUpdate = true;

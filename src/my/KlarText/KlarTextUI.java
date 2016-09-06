@@ -209,6 +209,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     public static boolean skipCV18 = false;
     private static int trackStatus = c.cuPowerUnknown;
     private boolean bReadStatusBin = false;
+    public static boolean rs232_or_rb_usb_2 = false; // TODO: LRLRLR konfigurierbar machen und Wert in Konfigdatei sichern
 
     // Globale Variablen, die nur einmal eingelesen werden sollten
     // gs = GlobalSetting
@@ -3057,6 +3058,9 @@ public class KlarTextUI extends javax.swing.JFrame {
         System.out.println("\t-tr <num>  \tread/write CVs: number of retries with delay timeout (default: 9)");
         System.out.println("\t-tfu <num> \ttimer interval during firmware updates (default: 250)");
         System.out.println("\t-u         \tupdate window always visible");
+        System.out.println("\t-usb1      \tuse USB-1 in RedBox/MasterControl -> no BaudRate changes on firmware updates (default: on)");
+        System.out.println("\t-usb2      \tuse USB-2 in RedBox -> BaudRate change to 38400 on firmware-updates (default: off)");
+        System.out.println("\t-rs232     \tuse RS232 in RedBox/MasterControl -> BaudRate change to 38400 on firmware-updates (default: off)");
         System.out.println("\t-no17      \tdo not read CV17");
         System.out.println("\t-no18      \tdo not read CV18");
     }
@@ -3169,6 +3173,15 @@ public class KlarTextUI extends javax.swing.JFrame {
                     case "-u":
                         updateAlwaysVisible = true;
                         System.out.println("updateVisible set to true");
+                        break;
+                    case "-usb1":
+                        rs232_or_rb_usb_2 = false;
+                        System.out.println("force using usb-1 mode");
+                        break;
+                    case "-usb2":
+                    case "-rs232":
+                        rs232_or_rb_usb_2 = true;
+                        System.out.println("force using usb-2/rs232 mode");
                         break;
                     case "-no17":
                         skipCV17 = true;
