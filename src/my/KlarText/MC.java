@@ -39,6 +39,7 @@ import javax.swing.table.TableRowSorter;
 import static javax.xml.bind.DatatypeConverter.printHexBinary;
 import my.KlarText.KlarTextUI.MZ;
 import static my.KlarText.KlarTextUI.debugLevel;
+import static my.KlarText.KlarTextUI.rs232_or_rb_usb_2;
 
 
 /**
@@ -680,6 +681,10 @@ public class MC extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jSystem = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -796,6 +801,9 @@ public class MC extends javax.swing.JFrame {
         helpMCasLC = new javax.swing.JButton();
         Firmware = new javax.swing.JButton();
         jEasyNetUpdate = new javax.swing.JButton();
+        jUSB1 = new javax.swing.JRadioButton();
+        jUSB2 = new javax.swing.JRadioButton();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1214,18 +1222,17 @@ public class MC extends javax.swing.JFrame {
                                 .addGap(74, 74, 74)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jMRST)
-                            .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jSystemLayout.createSequentialGroup()
-                                    .addComponent(jWRsys)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jWRloc)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jWRtra)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jWRmag))
-                                .addComponent(jCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jSystemLayout.createSequentialGroup()
+                                .addComponent(jWRsys)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jWRloc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jWRtra)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jWRmag))
+                            .addComponent(jCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfSichern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfLaden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -2701,6 +2708,26 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jUSB1);
+        jUSB1.setSelected(true);
+        jUSB1.setText(bundle.getString("MC.jUSB1.text")); // NOI18N
+        jUSB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUSB1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jUSB2);
+        jUSB2.setText(bundle.getString("MC.jUSB2.text")); // NOI18N
+        jUSB2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUSB2ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText(bundle.getString("MC.jLabel18.text")); // NOI18N
+        jLabel18.setToolTipText(bundle.getString("MC.jLabel18.toolTipText")); // NOI18N
+
         javax.swing.GroupLayout jUpdateLayout = new javax.swing.GroupLayout(jUpdate);
         jUpdate.setLayout(jUpdateLayout);
         jUpdateLayout.setHorizontalGroup(
@@ -2715,6 +2742,13 @@ public class MC extends javax.swing.JFrame {
                                 .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jUpdateLayout.createSequentialGroup()
                                         .addComponent(jMcUpdInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jUpdateLayout.createSequentialGroup()
+                                                .addComponent(jUSB1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jUSB2))
+                                            .addComponent(jLabel18))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(helpWasIstWas, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jUpdDatei))
@@ -2761,14 +2795,17 @@ public class MC extends javax.swing.JFrame {
                 .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jUpdDatei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jUpdDateiAuswahl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jUpdateLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jMcUpdInfo))
-                    .addGroup(jUpdateLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(helpWasIstWas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(jLabel18)
+                        .addGap(3, 3, 3)
+                        .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jMcUpdInfo)
+                            .addComponent(jUSB1)
+                            .addComponent(jUSB2)))
+                    .addComponent(helpWasIstWas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addComponent(jMcUpdProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2927,6 +2964,13 @@ public class MC extends javax.swing.JFrame {
         }
 
         gsBaudRateSaved = KTUI.gsBaudRate;
+        if( KTUI.rs232_or_rb_usb_2 ) {
+            jUSB1.setSelected(false);
+            jUSB2.setSelected(true);
+        } else {
+            jUSB1.setSelected(true);
+            jUSB2.setSelected(false);
+        }
         setFocusUpdStart();
         setFocusDateiAuswahl();
         Com = KTUI.safelyOpenCom( this, Com, false );
@@ -4981,7 +5025,8 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_helpWasIstWasActionPerformed
 
     private void helpMCasLCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMCasLCActionPerformed
-        // TODO add your handling code here:
+        // Knopf noch nicht benutuzt -> für Debugging nutzen ;-)
+        System.out.println("KTUI.rs232_or_rb_usb_2="+KTUI.rs232_or_rb_usb_2+"  KTUI.rs232_mode_was_forced="+KTUI.rs232_mode_was_forced);
     }//GEN-LAST:event_helpMCasLCActionPerformed
 
     private void FirmwareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirmwareActionPerformed
@@ -5065,6 +5110,18 @@ public class MC extends javax.swing.JFrame {
         jMcRwInfo.setText("MC/RedBox reset to factory default");
         // keine Antwort von MC/RB
     }//GEN-LAST:event_jMRSTActionPerformed
+
+    private void jUSB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUSB1ActionPerformed
+        rs232_or_rb_usb_2 = false;
+        jUSB2.setSelected(false);
+        KTUI.rs232_mode_was_forced = false;
+    }//GEN-LAST:event_jUSB1ActionPerformed
+
+    private void jUSB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUSB2ActionPerformed
+        rs232_or_rb_usb_2 = true;
+        jUSB1.setSelected(false);
+        KTUI.rs232_mode_was_forced = false;
+    }//GEN-LAST:event_jUSB2ActionPerformed
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
@@ -6265,6 +6322,10 @@ public class MC extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Firmware;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JButton helpHC;
     private javax.swing.JButton helpLC;
     private javax.swing.JButton helpMC;
@@ -6300,6 +6361,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -6365,6 +6427,8 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton jTraDelAll;
     private javax.swing.JButton jTraRepair;
     private javax.swing.JPanel jTraktionen;
+    private javax.swing.JRadioButton jUSB1;
+    private javax.swing.JRadioButton jUSB2;
     private javax.swing.JButton jUpd2System;
     private javax.swing.JButton jUpdCancel;
     private javax.swing.JButton jUpdClose;

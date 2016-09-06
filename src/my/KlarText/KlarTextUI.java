@@ -209,7 +209,8 @@ public class KlarTextUI extends javax.swing.JFrame {
     public static boolean skipCV18 = false;
     private static int trackStatus = c.cuPowerUnknown;
     private boolean bReadStatusBin = false;
-    public static boolean rs232_or_rb_usb_2 = false; // TODO: LRLRLR konfigurierbar machen und Wert in Konfigdatei sichern
+    public static boolean rs232_or_rb_usb_2 = false;
+    public static boolean rs232_mode_was_forced = false;
 
     // Globale Variablen, die nur einmal eingelesen werden sollten
     // gs = GlobalSetting
@@ -2165,6 +2166,14 @@ public class KlarTextUI extends javax.swing.JFrame {
             prop.setProperty("OpenFirmwareFilename",  gsOpenFirmwareFilename);
             prop.setProperty("WindowLocationX",  ""+mainWindowLocation.x);
             prop.setProperty("WindowLocationY",  ""+mainWindowLocation.y);
+            if( ! rs232_mode_was_forced ) {
+                // only store if it was not forced on command line
+                if( rs232_or_rb_usb_2 ) {
+                    prop.setProperty("DeviceForFwUpdate",  "usb2");
+                } else {
+                    prop.setProperty("DeviceForFwUpdate",  "usb1");
+                }
+            }
             prop.storeToXML(new FileOutputStream(gsConfigFilename), gsConfigComment);
         } catch (IOException ex) {
             Logger.getLogger(KlarTextUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -2467,6 +2476,10 @@ public class KlarTextUI extends javax.swing.JFrame {
         gsSaveOpenM3Filename  = prop.getProperty("SaveOpenM3Filename"," ");
         gsOpenFirmwareDirectory = prop.getProperty("OpenFirmwareDirectory",System.getProperty("user.home"));
         gsOpenFirmwareFilename  = prop.getProperty("OpenFirmwareFilename"," ");
+        if( ! rs232_mode_was_forced ) {
+            // nur nach Änderung durch Benutzer zurückschreiben (Umstellung per Aufrufparameter ignorieren)
+            rs232_or_rb_usb_2 = prop.getProperty("DeviceForFwUpdate","usb1").contentEquals("usb2");
+        }
 
         int x = Integer.parseInt( prop.getProperty("WindowLocationX", "-1" ) );
         int y = Integer.parseInt( prop.getProperty("WindowLocationY", "-1" ) );
@@ -3177,11 +3190,13 @@ public class KlarTextUI extends javax.swing.JFrame {
                     case "-usb1":
                         rs232_or_rb_usb_2 = false;
                         System.out.println("force using usb-1 mode");
+                        rs232_mode_was_forced = true;
                         break;
                     case "-usb2":
                     case "-rs232":
                         rs232_or_rb_usb_2 = true;
                         System.out.println("force using usb-2/rs232 mode");
+                        rs232_mode_was_forced = true;
                         break;
                     case "-no17":
                         skipCV17 = true;
