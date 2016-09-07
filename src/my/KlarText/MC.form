@@ -1861,19 +1861,18 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jMcUpdInfo" min="-2" pref="455" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
+                                                  <Component id="jMcUpdInfo" min="-2" pref="455" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jUSB1" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                       <Component id="jUSB2" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="helpWasIstWas" min="-2" pref="173" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Component id="jUpdDatei" max="32767" attributes="0"/>
                                       </Group>
@@ -1885,7 +1884,7 @@
                                               <Component id="jUpdLastErrorLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jUpdLastError" min="-2" pref="405" max="-2" attributes="0"/>
-                                              <EmptySpace pref="152" max="32767" attributes="0"/>
+                                              <EmptySpace pref="197" max="32767" attributes="0"/>
                                               <Component id="jEasyNetUpdate" min="-2" pref="315" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -1921,6 +1920,7 @@
                                   <Component id="jUpdDateiAuswahl" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jUpdCancel" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jUpdStartUpdate" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="helpWasIstWas" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -1936,20 +1936,16 @@
                           <Component id="jUpdDatei" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jUpdDateiAuswahl" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jMcUpdInfo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jUSB1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jUSB2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="helpWasIstWas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jUSB1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jUSB2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="helpWasIstWas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jMcUpdInfo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jMcUpdProgress" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1981,7 +1977,7 @@
                                   <Component id="jUpdLastErrorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" pref="268" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="247" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
