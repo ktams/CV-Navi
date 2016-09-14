@@ -117,6 +117,11 @@ public class DecoderFilter extends FileFilter {
                         return true;
                     break;
 
+                case c.TXT:
+                    if (ext.equals("txt"))
+                        return true;
+                    break;
+
                 case c.M3:
                     if (ext.equals("m3"))
                         return true;
@@ -204,6 +209,9 @@ public class DecoderFilter extends FileFilter {
 
             case c.HEX:
                 return "EasyControl Update (*.hex)";
+
+            case c.TXT:
+                return "Text File (*.txt)";
 
             case c.M3:
                 return "M3 UIDs (*.m3)";

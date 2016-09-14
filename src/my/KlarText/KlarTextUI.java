@@ -85,6 +85,7 @@ interface c {
     public static final int M3     = 197; // M3 uid/sid Liste
     public static final int KENN   = 198; // (Motor-)Kennlinie
     public static final int HEX    = 199; // Firmware
+    public static final int TXT    = 200; // Firmware
 
     // MC-Konstanten:
     public static final int MAX_SYSWRITES = 11; // #zu schreibende Variablen für ein Restore der Basiseinstellungen (ohne Listen)

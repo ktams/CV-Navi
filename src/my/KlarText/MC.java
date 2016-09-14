@@ -7,27 +7,35 @@
 package my.KlarText;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.ListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.Timer;
@@ -62,6 +70,7 @@ public class MC extends javax.swing.JFrame {
     private boolean bWriteM3sid;
     private boolean bWriteM3sidList;
     private boolean bReadPTdirekt;
+    private boolean bReadPTList;
     private boolean bUpdate;
     private int TimeOut;
     private int BlockNr = 0;
@@ -110,6 +119,54 @@ public class MC extends javax.swing.JFrame {
     public JDialog frameInstanceHelpWIW = null;
     public JDialog frameInstanceHelpMC = null;
 
+    
+    
+    private String Hersteller(int data) {
+        String file_name = "/manID.csv";
+        Class c = getClass();
+        InputStream is = c.getResourceAsStream (file_name);
+        String s = null;
+        String[] strArr1 = null;
+        int bytesRead = 0;
+        if( is != null)
+        {
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF8"));
+                char[] ac = null;
+                s = br.readLine() + "\n";
+                String s1 = "1";
+                while(s1 != null)
+                {
+                    s1 = br.readLine();
+                    s +=  s1 + "\n";
+                }
+                br.close();
+                strArr1 = s.substring(0, s.length()).split("\n"); //
+            } catch (UnsupportedEncodingException ex) {
+                System.out.println("Error reading File ManID.csv");
+            } catch (IOException ex) {
+                System.out.println("Error reading File ManID.csv");
+            }
+        }
+        String ManIDstr = "" + data;
+        if(s.length() != 0)
+        {
+            int i;
+            for(i = 0; i < strArr1.length; i++)
+            {
+                if(strArr1[i].contains("" + data + ","))
+                {
+                    ManIDstr = strArr1[i];
+                    strArr1 = ManIDstr.substring(0, ManIDstr.length()).split(",");
+                    ManIDstr = strArr1[0] + " [" + strArr1[1] + "]";
+                    break;
+                }
+            }
+        }
+        return ManIDstr;
+    }
+    
+    
     /** Creates new form MC */
     public MC(KlarTextUI ktuiThis) {
         if( ktuiThis == null ) {
@@ -895,14 +952,14 @@ public class MC extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -2676,10 +2733,20 @@ public class MC extends javax.swing.JFrame {
         });
 
         jListeLesen.setText(bundle.getString("MC.jListeLesen.text")); // NOI18N
+        jListeLesen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListeLesenActionPerformed(evt);
+            }
+        });
 
         jListeSchreiben.setText(bundle.getString("MC.jListeSchreiben.text")); // NOI18N
 
         jListeBearbeiten.setText(bundle.getString("MC.jListeBearbeiten.text")); // NOI18N
+        jListeBearbeiten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListeBearbeitenActionPerformed(evt);
+            }
+        });
 
         jLabel28.setText(bundle.getString("MC.jLabel28.text")); // NOI18N
 
@@ -2757,8 +2824,9 @@ public class MC extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel25)
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel26))
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel26)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2916,7 +2984,7 @@ public class MC extends javax.swing.JFrame {
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jMMRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3159,42 +3227,41 @@ public class MC extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel9Layout.createSequentialGroup()
-                            .addComponent(jf19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel9Layout.createSequentialGroup()
-                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addComponent(jf15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jf16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jf9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jf11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jf12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jf10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jf7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jf5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jf6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jf8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addComponent(jf13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jf14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel9Layout.createSequentialGroup()
-                                    .addComponent(jf17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jf18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jf19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jf15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jf16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jf9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jf11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jf12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jf10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jf7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jf5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jf6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jf8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jf13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jf14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jf17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jf18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3383,7 +3450,7 @@ public class MC extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -3698,7 +3765,7 @@ public class MC extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -3792,6 +3859,7 @@ public class MC extends javax.swing.JFrame {
         }
     }
 
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         // Ist die TamsMC auch eingestellt ?
@@ -3856,34 +3924,16 @@ public class MC extends javax.swing.JFrame {
                     }
                     tmpBytesRead = Com.read(bArrayTmp); // was gibts Neues ?
                     if( tmpBytesRead > 0 ) {
-                        if(bReadPTdirekt)
-                            {
-                                if( ! KTUI.checkReadComplete(bArrayTmp) ) {
-                                    // incomplete -> wait for more
-                                    return;
-                                }
-                                bWaitAnswerInProgress = false;
-                                bArrayTmp[tmpBytesRead] = 0;
-                                String s = new String(bArrayTmp);
-                                s = s.substring(0, tmpBytesRead);
-                                int cvWert = Integer.parseInt(s);
-                                jWertDirekt.setText("" + cvWert);
-                                bReadPTdirekt = false;
-                                stopIOAction();
-                            }
-                        else
-                        {
-                            //wenn ja, an bisher empfangene Daten anhängen
-                            System.arraycopy(bArrayTmp, 0, bArray, bytesRead, tmpBytesRead);
-                            if( KlarTextUI.debugLevel > 2 ) {
-                                System.out.println("2875 MERGE PRE bytesRead="+bytesRead+" tmpBytesRead="+tmpBytesRead+" res="+(bytesRead+tmpBytesRead) );
-                            }
-                            bytesRead += tmpBytesRead;
-                            bArray[bytesRead] = 0;
-                            if( KlarTextUI.debugLevel > 2 ) {
-                                System.out.println("2880 current: bytesRead="+bytesRead );
-                                KTUI.dumpbArray(bArray);
-                            }
+                        //wenn ja, an bisher empfangene Daten anhängen
+                        System.arraycopy(bArrayTmp, 0, bArray, bytesRead, tmpBytesRead);
+                        if( KlarTextUI.debugLevel > 2 ) {
+                            System.out.println("2875 MERGE PRE bytesRead="+bytesRead+" tmpBytesRead="+tmpBytesRead+" res="+(bytesRead+tmpBytesRead) );
+                        }
+                        bytesRead += tmpBytesRead;
+                        bArray[bytesRead] = 0;
+                        if( KlarTextUI.debugLevel > 2 ) {
+                            System.out.println("2880 current: bytesRead="+bytesRead );
+                            KTUI.dumpbArray(bArray);
                         }
                     }
 
@@ -3904,6 +3954,95 @@ public class MC extends javax.swing.JFrame {
                     // ist ein vollständiger Datensatz angekommen ?
                     bArray[bytesRead] = 0;
 
+                    if(bReadPTdirekt)
+                    {
+                        if( ! KTUI.checkReadComplete(bArray) ) {
+                            // incomplete -> wait for more
+                            return;
+                        }
+                        bWaitAnswerInProgress = false;
+                        String s = new String(bArray);
+                        int indexOf = s.indexOf(" ");
+                        s = s.substring(0, indexOf);
+                        int cvWert = 0;
+                        try {
+                            cvWert = Integer.parseInt(s);
+                        } catch (NumberFormatException numberFormatException) {
+                            cvWert = 255;
+                        }
+                        jWertDirekt.setText("" + cvWert);
+                        bReadPTdirekt = false;
+                        stopIOAction();
+                        int CV = Integer.parseInt(jCV_Direkt.getText());
+                        if(CV == 8)
+                            jHerstellerInfo.setText(Hersteller(cvWert));
+                    }
+                    if(bReadPTList)
+                    {
+                        if( ! KTUI.checkReadComplete(bArray) ) {
+                            // incomplete -> wait for more
+                            return;
+                        }
+                        bWaitAnswerInProgress = false;
+                        String s = new String(bArray);
+                        int indexOf = s.indexOf(" ");
+                        s = s.substring(0, indexOf);
+                        int cvWert = 0;
+                        try {
+                            cvWert = Integer.parseInt(s);
+                        } catch (NumberFormatException numberFormatException) {
+                            cvWert = 255;
+                        }
+                        int Index = jCVListe.getSelectedIndex();
+                        if(Index >= 0)
+                        {
+                            s = (String)jCVListe.getSelectedValue();
+                            s = s.substring(0, 5) + "       " + cvWert;
+                            ListModel model = jCVListe.getModel();
+                            DefaultListModel dlm = new DefaultListModel();
+                            for(int i = 0; i < model.getSize(); i++)
+                            {
+                                if(i == Index)
+                                {
+                                    dlm.add(i, s);
+                                }
+                                else
+                                {
+                                    Object elementAt = model.getElementAt(i);
+                                    dlm.add(i, elementAt);
+                                }
+                            }
+                            jCVListe.setModel(dlm);
+                            int j = dlm.getSize();
+                            if(j > Index)
+                            {
+                                KTUI.flushReadBuffer( Com );
+                                for(int i = 0; i < bArray.length; i++)
+                                    bArray[i] = 0;
+                                bytesRead = 0;
+                                jCVListe.setSelectedIndex(Index + 1);
+                                s = (String)jCVListe.getSelectedValue();
+                                s = "XPTRD" + s + "\r";
+                                Com.write(s);
+                                timer.setInitialDelay(KlarTextUI.timer1);
+                                timer.setDelay(KlarTextUI.timer2);
+                                timer.setRepeats(true);
+                                bWaitAnswerInProgress = true;
+                                retries = KlarTextUI.timerRetries * 2;
+                                timer.start();            
+                            }
+                            else
+                            {
+                                bReadPTList = false;
+                                stopIOAction();
+                            }
+                        }
+                        else
+                        {
+                            bReadPTList = false;
+                            stopIOAction();
+                        }
+                   }
                     if(bReadStatus){
                         System.out.println("2903 PRE  checkCfgReadComplete: bytesRead="+bytesRead );
                         if( ! KTUI.checkReadComplete(bArray) ) {
@@ -6014,9 +6153,18 @@ public class MC extends javax.swing.JFrame {
         try {
             int CV = Integer.parseInt(jCV_Direkt.getText());
             int Wert = Integer.parseInt(jWertDirekt.getText());
-            int DecAdr = Integer.parseInt(jDecAdr.getText());
-            String s = "XPD " + DecAdr + " " + CV + " " + Wert + "\r";
-            System.out.println("497 jCVSchreibenActionPerformed POM : XPD " + DecAdr + " " + CV + " " + Wert );
+            String s = null;
+            if(jHauptGleis.isSelected())
+            {
+                int DecAdr = Integer.parseInt(jDecAdr.getText());
+                s = "XPD " + DecAdr + " " + CV + " " + Wert + "\r";
+                System.out.println("497 jCVSchreibenActionPerformed POM : XPD " + DecAdr + " " + CV + " " + Wert );
+            }
+            else
+            {
+                s = "XPTWD " + " " + CV + " " + Wert + "\r";
+                System.out.println("505 jCVSchreibenActionPerformed not POM : XPTWD " + CV + " " + Wert );
+            }
             if(Com == null)
             {
                 Com = KTUI.safelyOpenCom(this, Com);
@@ -6046,6 +6194,9 @@ public class MC extends javax.swing.JFrame {
             Com = KTUI.safelyOpenCom(this, Com);
         }
         KTUI.flushReadBuffer( Com );
+        for(int i = 0; i < bArray.length; i++)
+            bArray[i] = 0;
+        bytesRead = 0;
         int cvAnfrage = KTUI.checkTextField( this, jCV_Direkt, 1, 1024, 8, false);
         System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
         String s = "XPTRD " + cvAnfrage + "\r";
@@ -6054,8 +6205,52 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
+        retries = KlarTextUI.timerRetries * 2;
         timer.start();            
     }//GEN-LAST:event_jDirektLesenActionPerformed
+
+    private void jListeLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeLesenActionPerformed
+        bReadPTList = true;
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        for(int i = 0; i < bArray.length; i++)
+            bArray[i] = 0;
+        bytesRead = 0;
+        jCVListe.clearSelection();
+        jCVListe.setSelectedIndex(0);
+        String s = (String)jCVListe.getSelectedValue();
+        s = "XPTRD" + s + "\r";
+        Com.write(s);
+        timer.setInitialDelay(KlarTextUI.timer1);
+        timer.setDelay(KlarTextUI.timer2);
+        timer.setRepeats(true);
+        bWaitAnswerInProgress = true;
+        retries = KlarTextUI.timerRetries * 2;
+        timer.start();            
+    }//GEN-LAST:event_jListeLesenActionPerformed
+
+    public ListModel getList()
+    {
+        return jCVListe.getModel();
+    }
+
+    public void setList(String s)
+    {
+        DefaultListModel dlm = new DefaultListModel();
+        String[] split = s.split("\n");
+        for(int i = 0; i < split.length; i++)
+        {
+            dlm.add(i, split[i]);
+        }
+        jCVListe.setModel(dlm);
+    }
+    
+    private void jListeBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeBearbeitenActionPerformed
+        new MC_RB_CV_List(this, true).setVisible(true);
+    }//GEN-LAST:event_jListeBearbeitenActionPerformed
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
@@ -7253,7 +7448,7 @@ public class MC extends javax.swing.JFrame {
 
         jTabbedPane1.setSelectedIndex(idx);
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Firmware;
     private javax.swing.ButtonGroup buttonGroup1;

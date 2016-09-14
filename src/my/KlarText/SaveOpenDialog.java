@@ -551,6 +551,12 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                                     myMC.setUpdDatei( f.getPath() );
                                     myMC.ReturnString = str1.substring(0, n);
                                     break;
+
+                                    case c.TXT:
+                                    // TODO SICHERUNG von LastFirmwareLoadDirectory und LastFirmwareLoadFile ???
+                                    myMC.setUpdDatei( f.getPath() );
+                                    myMC.ReturnString = str1.substring(0, n);
+                                    break;
                                 }
                             } catch (IOException ex) {
                                 Logger.getLogger(SaveOpenDialog.class.getName()).log(Level.SEVERE, null, ex);
