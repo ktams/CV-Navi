@@ -84,6 +84,8 @@ public class MC extends javax.swing.JFrame {
     private int FehlerArt = 0;
     private int rcValue = -1;
     private int so999Value = -1;
+    private boolean bWriteList;
+    private boolean bProg_m3;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -864,6 +866,7 @@ public class MC extends javax.swing.JFrame {
         jmfxUID = new javax.swing.JTextField();
         jm3Schreiben = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jMMRegister = new javax.swing.JTextField();
@@ -2740,6 +2743,11 @@ public class MC extends javax.swing.JFrame {
         });
 
         jListeSchreiben.setText(bundle.getString("MC.jListeSchreiben.text")); // NOI18N
+        jListeSchreiben.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListeSchreibenActionPerformed(evt);
+            }
+        });
 
         jListeBearbeiten.setText(bundle.getString("MC.jListeBearbeiten.text")); // NOI18N
         jListeBearbeiten.addActionListener(new java.awt.event.ActionListener() {
@@ -2898,8 +2906,15 @@ public class MC extends javax.swing.JFrame {
         jmfxUID.setText(bundle.getString("MC.jmfxUID.text")); // NOI18N
 
         jm3Schreiben.setText(bundle.getString("MC.jm3Schreiben.text")); // NOI18N
+        jm3Schreiben.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm3SchreibenActionPerformed(evt);
+            }
+        });
 
         jLabel27.setText(bundle.getString("MC.jLabel27.text")); // NOI18N
+
+        jLabel32.setText(bundle.getString("MC.jLabel32.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -2918,7 +2933,8 @@ public class MC extends javax.swing.JFrame {
                         .addComponent(jmfxUID, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jm3Schreiben, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel27))
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel32))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -2926,7 +2942,9 @@ public class MC extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel27)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jm3Addr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2984,7 +3002,7 @@ public class MC extends javax.swing.JFrame {
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jMMRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3943,6 +3961,11 @@ public class MC extends javax.swing.JFrame {
                         if( retries == 0 ) {
                             jMcRwProgress.setString(null);
                             System.out.println(" -> retries ende" );
+                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
+                            jListeBearbeiten.setEnabled(true);
+                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
+                            jListeSchreiben.setEnabled(true);
+                            jDirektSchreiben.setEnabled(true);
                             stopIOAction();
                             return;
                         }
@@ -3975,7 +3998,12 @@ public class MC extends javax.swing.JFrame {
                         stopIOAction();
                         int CV = Integer.parseInt(jCV_Direkt.getText());
                         if(CV == 8)
-                            jHerstellerInfo.setText(Hersteller(cvWert));
+                        jHerstellerInfo.setText(Hersteller(cvWert));
+                        if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
+                        jListeBearbeiten.setEnabled(true);
+                        if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
+                        jListeSchreiben.setEnabled(true);
+                        jDirektSchreiben.setEnabled(true);
                     }
                     if(bReadPTList)
                     {
@@ -4034,15 +4062,108 @@ public class MC extends javax.swing.JFrame {
                             else
                             {
                                 bReadPTList = false;
+                                if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
+                                jListeBearbeiten.setEnabled(true);
+                                if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
+                                jListeSchreiben.setEnabled(true);
+                                jDirektSchreiben.setEnabled(true);
                                 stopIOAction();
                             }
                         }
                         else
                         {
                             bReadPTList = false;
+                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
+                            jListeBearbeiten.setEnabled(true);
+                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
+                            jListeSchreiben.setEnabled(true);
+                            jDirektSchreiben.setEnabled(true);
                             stopIOAction();
                         }
                    }
+                    if(bWriteList)
+                    {
+                        if( ! KTUI.checkReadComplete(bArray) ) {
+                            // incomplete -> wait for more
+                            return;
+                        }
+                        bWaitAnswerInProgress = false;
+                        String s = new String(bArray);
+                        if(s.contains("Ok"))
+                        {
+                            int Index = jCVListe.getSelectedIndex();
+                            if(Index >= 0)
+                            {
+                                s = (String)jCVListe.getSelectedValue();
+                                ListModel model = jCVListe.getModel();
+                                int j = model.getSize();
+                                if(j != Index + 1)
+                                {
+                                    KTUI.flushReadBuffer( Com );
+                                    for(int i = 0; i < bArray.length; i++)
+                                        bArray[i] = 0;
+                                    bytesRead = 0;
+                                    jCVListe.setSelectedIndex(Index + 1);
+                                    s = (String)jCVListe.getSelectedValue();
+                                    if(jHauptGleis.isSelected())
+                                    {
+                                        int DecAdr;
+                                        try {
+                                            DecAdr = Integer.parseInt(jDecAdr.getText());
+                                        } catch (NumberFormatException numberFormatException) {
+                                            DecAdr = 3;
+                                        }
+                                        s = "XPD" + DecAdr + s + "\r";
+                                    }
+                                    else
+                                    {
+                                        s = "XPTWD" + s + "\r";
+                                    }
+                                    Com.write(s);
+                                    timer.setInitialDelay(KlarTextUI.timer1);
+                                    timer.setDelay(KlarTextUI.timer2);
+                                    timer.setRepeats(true);
+                                    bWaitAnswerInProgress = true;
+                                    retries = KlarTextUI.timerRetries * 2;
+                                    timer.start();            
+                                }
+                                else
+                                {
+                                    bWriteList = false;
+                                    if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
+                                    jListeBearbeiten.setEnabled(true);
+                                    if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
+                                    jListeSchreiben.setEnabled(true);
+                                    jDirektSchreiben.setEnabled(true);
+                                    stopIOAction();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
+                            jListeBearbeiten.setEnabled(true);
+                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
+                            jListeSchreiben.setEnabled(true);
+                            jDirektSchreiben.setEnabled(true);
+                            bWriteList = false;
+                            stopIOAction();
+                        }
+                    }
+                    if(bProg_m3)
+                    {
+                        if( ! KTUI.checkReadComplete(bArray) ) {
+                            // incomplete -> wait for more
+                            return;
+                        }
+                        bWaitAnswerInProgress = false;
+                        String s = new String(bArray);
+                        s = "0x" + s.substring(0, 8);
+                        jmfxUID.setText(s);
+                        bProg_m3 = false;
+                        jm3Schreiben.setEnabled(true);
+                        stopIOAction();
+                    }
                     if(bReadStatus){
                         System.out.println("2903 PRE  checkCfgReadComplete: bytesRead="+bytesRead );
                         if( ! KTUI.checkReadComplete(bArray) ) {
@@ -6144,6 +6265,11 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton48ActionPerformed
 
     private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        Com.write((byte)0x60);
         jHauptGleis.setSelected(true);
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
@@ -6153,17 +6279,19 @@ public class MC extends javax.swing.JFrame {
         try {
             int CV = Integer.parseInt(jCV_Direkt.getText());
             int Wert = Integer.parseInt(jWertDirekt.getText());
-            String s = null;
+            String s;
             if(jHauptGleis.isSelected())
             {
                 int DecAdr = Integer.parseInt(jDecAdr.getText());
                 s = "XPD " + DecAdr + " " + CV + " " + Wert + "\r";
                 System.out.println("497 jCVSchreibenActionPerformed POM : XPD " + DecAdr + " " + CV + " " + Wert );
+                retries = 1;
             }
             else
             {
                 s = "XPTWD " + " " + CV + " " + Wert + "\r";
                 System.out.println("505 jCVSchreibenActionPerformed not POM : XPTWD " + CV + " " + Wert );
+                retries = KlarTextUI.timerRetries;
             }
             if(Com == null)
             {
@@ -6171,7 +6299,6 @@ public class MC extends javax.swing.JFrame {
             }
             KTUI.flushReadBuffer( Com );
             Com.write(s);
-
         } catch (NumberFormatException numberFormatException) {
             KTUI.mbGeneric( this, "Eingabefehler");
         }
@@ -6183,11 +6310,21 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jProgGleisActionPerformed
 
     private void jHauptGleisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHauptGleisActionPerformed
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        Com.write((byte)0x60);
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
     }//GEN-LAST:event_jHauptGleisActionPerformed
 
     private void jDirektLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektLesenActionPerformed
+        jDirektLesen.setEnabled(false);
+        jListeBearbeiten.setEnabled(false);
+        jListeLesen.setEnabled(false);
+        jListeSchreiben.setEnabled(false);
+        jDirektSchreiben.setEnabled(false);
         bReadPTdirekt = true;
         if(Com == null)
         {
@@ -6210,6 +6347,11 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jDirektLesenActionPerformed
 
     private void jListeLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeLesenActionPerformed
+        jDirektLesen.setEnabled(false);
+        jListeBearbeiten.setEnabled(false);
+        jListeLesen.setEnabled(false);
+        jListeSchreiben.setEnabled(false);
+        jDirektSchreiben.setEnabled(false);
         bReadPTList = true;
         if(Com == null)
         {
@@ -6243,14 +6385,94 @@ public class MC extends javax.swing.JFrame {
         String[] split = s.split("\n");
         for(int i = 0; i < split.length; i++)
         {
+            if(split[i].contains("\t"))
+            {
+                split[i] = split[i].replace("\t", "       ");
+            }
+//ToDo   Auf Gültigkeit prüfen
             dlm.add(i, split[i]);
         }
         jCVListe.setModel(dlm);
     }
     
     private void jListeBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeBearbeitenActionPerformed
+        jDirektLesen.setEnabled(false);
+        jListeBearbeiten.setEnabled(false);
+        jListeLesen.setEnabled(false);
+        jListeSchreiben.setEnabled(false);
+        jDirektSchreiben.setEnabled(false);
         new MC_RB_CV_List(this, true).setVisible(true);
+        if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
+        jListeBearbeiten.setEnabled(true);
+        if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
+        jListeSchreiben.setEnabled(true);
+        jDirektSchreiben.setEnabled(true);
     }//GEN-LAST:event_jListeBearbeitenActionPerformed
+
+    private void jListeSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeSchreibenActionPerformed
+        jDirektLesen.setEnabled(false);
+        jListeBearbeiten.setEnabled(false);
+        jListeLesen.setEnabled(false);
+        jListeSchreiben.setEnabled(false);
+        jDirektSchreiben.setEnabled(false);
+        bWriteList = true;
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        for(int i = 0; i < bArray.length; i++)
+            bArray[i] = 0;
+        bytesRead = 0;
+        jCVListe.clearSelection();
+        jCVListe.setSelectedIndex(0);
+        String s = (String)jCVListe.getSelectedValue();
+        if(jHauptGleis.isSelected())
+        {
+            int DecAdr;
+            try {
+                DecAdr = Integer.parseInt(jDecAdr.getText());
+            } catch (NumberFormatException numberFormatException) {
+                DecAdr = 3;
+            }
+            s = "XPD" + DecAdr + s + "\r";
+            System.out.println("497 jCVSchreibenActionPerformed POM : " + s );
+        }
+        else
+        {
+            s = "XPTWD" + s + "\r";
+            System.out.println("497 jCVSchreibenActionPerformed PT : " + s );
+        }
+        Com.write(s);
+        timer.setInitialDelay(KlarTextUI.timer1);
+        timer.setDelay(KlarTextUI.timer2);
+        timer.setRepeats(true);
+        bWaitAnswerInProgress = true;
+        retries = KlarTextUI.timerRetries * 2;
+        timer.start();            
+    }//GEN-LAST:event_jListeSchreibenActionPerformed
+
+    private void jm3SchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm3SchreibenActionPerformed
+        bProg_m3 = true;
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        for(int i = 0; i < bArray.length; i++)
+            bArray[i] = 0;
+        bytesRead = 0;
+        
+        String s = "xMFX " + jm3Addr.getText() + "\r";
+        Com.write(s);
+        timer.setInitialDelay(KlarTextUI.timer1);
+        timer.setDelay(KlarTextUI.timer2);
+        timer.setRepeats(true);
+        bWaitAnswerInProgress = true;
+        retries = 0; //KlarTextUI.timerRetries * 4;
+        timer.start();   
+        jm3Schreiben.setEnabled(false);
+    }//GEN-LAST:event_jm3SchreibenActionPerformed
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
@@ -7535,6 +7757,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

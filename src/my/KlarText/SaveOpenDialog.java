@@ -660,6 +660,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                         case c.HEX:
                         s = KlarTextUI.gsConfigDirectory + "LastFilesFirmware.lfs";
                         break;
+
+                        case c.TXT:
+                        s = KlarTextUI.gsConfigDirectory + "LastFilesTXT.lfs";
+                        break;
                     }
                     outputStream = null;
                     inputStream = null;
@@ -791,6 +795,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
 
                             case c.HEX:
                             s = KlarTextUI.gsConfigDirectory + "LastFilesFirmware.lfs";
+                            break;
+
+                            case c.TXT:
+                            s = KlarTextUI.gsConfigDirectory + "LastFilesTXT.lfs";
                             break;
                         }
                         try {

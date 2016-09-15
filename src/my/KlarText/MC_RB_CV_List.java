@@ -137,6 +137,7 @@ public class MC_RB_CV_List extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         SaveOpenDialog od = new SaveOpenDialog( myParent, true, true, null, myParent, "txt", c.TXT);
+        jCV_List.setText(myParent.ReturnString);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
