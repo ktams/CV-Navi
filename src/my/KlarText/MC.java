@@ -121,8 +121,8 @@ public class MC extends javax.swing.JFrame {
     public JDialog frameInstanceHelpWIW = null;
     public JDialog frameInstanceHelpMC = null;
 
-    
-    
+
+
     private String Hersteller(int data) {
         String file_name = "/manID.csv";
         Class c = getClass();
@@ -167,8 +167,8 @@ public class MC extends javax.swing.JFrame {
         }
         return ManIDstr;
     }
-    
-    
+
+
     /** Creates new form MC */
     public MC(KlarTextUI ktuiThis) {
         if( ktuiThis == null ) {
@@ -1780,10 +1780,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1856,10 +1856,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2903,6 +2903,7 @@ public class MC extends javax.swing.JFrame {
 
         jm3Addr.setText(bundle.getString("MC.jm3Addr.text")); // NOI18N
 
+        jmfxUID.setEditable(false);
         jmfxUID.setText(bundle.getString("MC.jmfxUID.text")); // NOI18N
 
         jm3Schreiben.setText(bundle.getString("MC.jm3Schreiben.text")); // NOI18N
@@ -3877,7 +3878,7 @@ public class MC extends javax.swing.JFrame {
         }
     }
 
-    
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         // Ist die TamsMC auch eingestellt ?
@@ -4057,7 +4058,7 @@ public class MC extends javax.swing.JFrame {
                                 timer.setRepeats(true);
                                 bWaitAnswerInProgress = true;
                                 retries = KlarTextUI.timerRetries * 2;
-                                timer.start();            
+                                timer.start();
                             }
                             else
                             {
@@ -4125,7 +4126,7 @@ public class MC extends javax.swing.JFrame {
                                     timer.setRepeats(true);
                                     bWaitAnswerInProgress = true;
                                     retries = KlarTextUI.timerRetries * 2;
-                                    timer.start();            
+                                    timer.start();
                                 }
                                 else
                                 {
@@ -6343,7 +6344,7 @@ public class MC extends javax.swing.JFrame {
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
         retries = KlarTextUI.timerRetries * 2;
-        timer.start();            
+        timer.start();
     }//GEN-LAST:event_jDirektLesenActionPerformed
 
     private void jListeLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeLesenActionPerformed
@@ -6371,7 +6372,7 @@ public class MC extends javax.swing.JFrame {
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
         retries = KlarTextUI.timerRetries * 2;
-        timer.start();            
+        timer.start();
     }//GEN-LAST:event_jListeLesenActionPerformed
 
     public ListModel getList()
@@ -6394,7 +6395,7 @@ public class MC extends javax.swing.JFrame {
         }
         jCVListe.setModel(dlm);
     }
-    
+
     private void jListeBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeBearbeitenActionPerformed
         jDirektLesen.setEnabled(false);
         jListeBearbeiten.setEnabled(false);
@@ -6449,7 +6450,7 @@ public class MC extends javax.swing.JFrame {
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
         retries = KlarTextUI.timerRetries * 2;
-        timer.start();            
+        timer.start();
     }//GEN-LAST:event_jListeSchreibenActionPerformed
 
     private void jm3SchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm3SchreibenActionPerformed
@@ -6462,7 +6463,7 @@ public class MC extends javax.swing.JFrame {
         for(int i = 0; i < bArray.length; i++)
             bArray[i] = 0;
         bytesRead = 0;
-        
+
         String s = "xMFX " + jm3Addr.getText() + "\r";
         Com.write(s);
         timer.setInitialDelay(KlarTextUI.timer1);
@@ -6470,7 +6471,7 @@ public class MC extends javax.swing.JFrame {
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
         retries = 0; //KlarTextUI.timerRetries * 4;
-        timer.start();   
+        timer.start();
         jm3Schreiben.setEnabled(false);
     }//GEN-LAST:event_jm3SchreibenActionPerformed
 
@@ -7670,7 +7671,7 @@ public class MC extends javax.swing.JFrame {
 
         jTabbedPane1.setSelectedIndex(idx);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Firmware;
     private javax.swing.ButtonGroup buttonGroup1;
