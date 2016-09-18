@@ -86,6 +86,12 @@ public class MC extends javax.swing.JFrame {
     private int so999Value = -1;
     private boolean bWriteList;
     private boolean bProg_m3;
+    private boolean bProg_MM;
+    private int DisplayCursor;
+    private int DisplayState;
+    private String OldDisplayString;
+    private boolean bAskLokState;
+    private int AskedLokAdr;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -870,7 +876,7 @@ public class MC extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jMMRegister = new javax.swing.JTextField();
-        jMMRegister1 = new javax.swing.JTextField();
+        jMMWert = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jStartMMProg = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
@@ -954,6 +960,7 @@ public class MC extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1212, 2147483647));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -967,6 +974,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTabbedPane1.setMaximumSize(new java.awt.Dimension(1115, 32767));
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
@@ -1333,7 +1341,7 @@ public class MC extends javax.swing.JFrame {
                                     .addComponent(jBoosterOpts)
                                     .addComponent(jBoostOptNoAccDrive)
                                     .addComponent(jBoostOptNoAccBreak))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1780,10 +1788,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1856,10 +1864,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1954,7 +1962,7 @@ public class MC extends javax.swing.JFrame {
             jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLocDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1962,7 +1970,7 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jLocRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocM3sidWrite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
-                        .addGap(0, 179, Short.MAX_VALUE)
+                        .addGap(0, 156, Short.MAX_VALUE)
                         .addComponent(jLabelM3UID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextM3UID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2279,7 +2287,7 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jTraktionenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jTraktionenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTraDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
@@ -2664,7 +2672,7 @@ public class MC extends javax.swing.JFrame {
             .addGroup(jMagnetartikelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jMagnetartikelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
                     .addComponent(jLabel16))
                 .addGap(29, 29, 29)
                 .addGroup(jMagnetartikelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2700,13 +2708,16 @@ public class MC extends javax.swing.JFrame {
 
         jTabbedPane1.addTab(bundle.getString("MC.jMagnetartikel.TabConstraints.tabTitle"), jMagnetartikel); // NOI18N
 
+        jPanel2.setMaximumSize(new java.awt.Dimension(1110, 32767));
         jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jPanel2ComponentShown(evt);
             }
         });
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MC.jPanel3.border.title"))); // NOI18N
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jCVListe.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { " 0002", " 0003", " 0004", " 0005", " 0029" };
@@ -2715,9 +2726,13 @@ public class MC extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jCVListe);
 
+        jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 45, 224, 275));
+
         jLabel25.setText(bundle.getString("MC.jLabel25.text")); // NOI18N
+        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 24, -1, -1));
 
         jLabel26.setText(bundle.getString("MC.jLabel26.text")); // NOI18N
+        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 24, -1, -1));
 
         buttonGroup1.add(jHauptGleis);
         jHauptGleis.setText(bundle.getString("MC.jHauptGleis.text")); // NOI18N
@@ -2726,6 +2741,7 @@ public class MC extends javax.swing.JFrame {
                 jHauptGleisActionPerformed(evt);
             }
         });
+        jPanel3.add(jHauptGleis, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 27, -1, -1));
 
         buttonGroup1.add(jProgGleis);
         jProgGleis.setText(bundle.getString("MC.jProgGleis.text")); // NOI18N
@@ -2734,6 +2750,7 @@ public class MC extends javax.swing.JFrame {
                 jProgGleisActionPerformed(evt);
             }
         });
+        jPanel3.add(jProgGleis, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 52, -1, -1));
 
         jListeLesen.setText(bundle.getString("MC.jListeLesen.text")); // NOI18N
         jListeLesen.addActionListener(new java.awt.event.ActionListener() {
@@ -2741,6 +2758,7 @@ public class MC extends javax.swing.JFrame {
                 jListeLesenActionPerformed(evt);
             }
         });
+        jPanel3.add(jListeLesen, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 221, 150, -1));
 
         jListeSchreiben.setText(bundle.getString("MC.jListeSchreiben.text")); // NOI18N
         jListeSchreiben.addActionListener(new java.awt.event.ActionListener() {
@@ -2748,6 +2766,7 @@ public class MC extends javax.swing.JFrame {
                 jListeSchreibenActionPerformed(evt);
             }
         });
+        jPanel3.add(jListeSchreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 258, 150, -1));
 
         jListeBearbeiten.setText(bundle.getString("MC.jListeBearbeiten.text")); // NOI18N
         jListeBearbeiten.addActionListener(new java.awt.event.ActionListener() {
@@ -2755,11 +2774,19 @@ public class MC extends javax.swing.JFrame {
                 jListeBearbeitenActionPerformed(evt);
             }
         });
+        jPanel3.add(jListeBearbeiten, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 184, -1, -1));
 
         jLabel28.setText(bundle.getString("MC.jLabel28.text")); // NOI18N
+        jPanel3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
 
         jHerstellerInfo.setEditable(false);
         jHerstellerInfo.setText(bundle.getString("MC.jHerstellerInfo.text")); // NOI18N
+        jHerstellerInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jHerstellerInfoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jHerstellerInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 180, -1));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MC.jPanel8.border.title"))); // NOI18N
 
@@ -2820,91 +2847,31 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 77, 254, 95));
+
         jLabel31.setText(bundle.getString("MC.jLabel31.text")); // NOI18N
+        jPanel3.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 31, -1, -1));
 
         jDecAdr.setText(bundle.getString("MC.jDecAdr.text")); // NOI18N
+        jPanel3.add(jDecAdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 29, 55, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel25)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel26)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel28)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jHerstellerInfo))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jProgGleis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jListeLesen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jListeSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jListeBearbeiten))
-                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jHauptGleis)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel31)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDecAdr, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel26))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jHauptGleis)
-                            .addComponent(jLabel31)
-                            .addComponent(jDecAdr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jProgGleis)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jListeBearbeiten)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jListeLesen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jListeSchreiben)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel28)
-                            .addComponent(jHerstellerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-        );
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 510, 340));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MC.jPanel4.border.title"))); // NOI18N
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setText(bundle.getString("MC.jLabel19.text")); // NOI18N
+        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 80, -1, -1));
 
         jLabel20.setText(bundle.getString("MC.jLabel20.text")); // NOI18N
+        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 80, -1, -1));
 
         jm3Addr.setText(bundle.getString("MC.jm3Addr.text")); // NOI18N
+        jPanel4.add(jm3Addr, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 78, 96, -1));
 
         jmfxUID.setEditable(false);
         jmfxUID.setText(bundle.getString("MC.jmfxUID.text")); // NOI18N
+        jPanel4.add(jmfxUID, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 78, 90, -1));
 
         jm3Schreiben.setText(bundle.getString("MC.jm3Schreiben.text")); // NOI18N
         jm3Schreiben.addActionListener(new java.awt.event.ActionListener() {
@@ -2912,147 +2879,157 @@ public class MC extends javax.swing.JFrame {
                 jm3SchreibenActionPerformed(evt);
             }
         });
+        jPanel4.add(jm3Schreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
         jLabel27.setText(bundle.getString("MC.jLabel27.text")); // NOI18N
+        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 28, -1, -1));
 
         jLabel32.setText(bundle.getString("MC.jLabel32.text")); // NOI18N
+        jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jm3Addr, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jmfxUID, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jm3Schreiben, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel32))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel27)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jm3Addr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jm3Schreiben)
-                    .addComponent(jmfxUID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
-                .addContainerGap())
-        );
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 361, 510, 110));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MC.jPanel5.border.title"))); // NOI18N
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setText(bundle.getString("MC.jLabel21.text")); // NOI18N
+        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 81, -1, -1));
 
         jMMRegister.setText(bundle.getString("MC.jMMRegister.text")); // NOI18N
+        jPanel5.add(jMMRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 79, 90, -1));
 
-        jMMRegister1.setText(bundle.getString("MC.jMMRegister1.text")); // NOI18N
+        jMMWert.setText(bundle.getString("MC.jMMWert.text")); // NOI18N
+        jMMWert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMMWertActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jMMWert, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 70, -1));
 
         jLabel22.setText(bundle.getString("MC.jLabel22.text")); // NOI18N
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
 
         jStartMMProg.setText(bundle.getString("MC.jStartMMProg.text")); // NOI18N
+        jStartMMProg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStartMMProgActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jStartMMProg, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 111, -1));
 
         jLabel23.setText(bundle.getString("MC.jLabel23.text")); // NOI18N
+        jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 28, -1, -1));
 
         jLabel24.setText(bundle.getString("MC.jLabel24.text")); // NOI18N
+        jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 49, -1, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jMMRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jMMRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jStartMMProg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel24)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jMMRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMMRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22)
-                    .addComponent(jStartMMProg))
-                .addContainerGap())
-        );
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 510, 110));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MC.jPanel6.border.title"))); // NOI18N
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jGeschwindigkeit.setMaximum(126);
+        jGeschwindigkeit.setValue(0);
+        jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 210, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         j1.setText(bundle.getString("MC.j1.text")); // NOI18N
         j1.setPreferredSize(new java.awt.Dimension(44, 44));
+        j1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j1ActionPerformed(evt);
+            }
+        });
 
         j2.setText(bundle.getString("MC.j2.text")); // NOI18N
         j2.setPreferredSize(new java.awt.Dimension(44, 44));
+        j2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j2ActionPerformed(evt);
+            }
+        });
 
         j3.setText(bundle.getString("MC.j3.text")); // NOI18N
         j3.setPreferredSize(new java.awt.Dimension(44, 44));
+        j3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j3ActionPerformed(evt);
+            }
+        });
 
         j4.setText(bundle.getString("MC.j4.text")); // NOI18N
         j4.setPreferredSize(new java.awt.Dimension(44, 44));
+        j4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j4ActionPerformed(evt);
+            }
+        });
 
         j5.setText(bundle.getString("MC.j5.text")); // NOI18N
         j5.setPreferredSize(new java.awt.Dimension(44, 44));
+        j5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j5ActionPerformed(evt);
+            }
+        });
 
         j6.setText(bundle.getString("MC.j6.text")); // NOI18N
         j6.setPreferredSize(new java.awt.Dimension(44, 44));
+        j6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j6ActionPerformed(evt);
+            }
+        });
 
         j7.setText(bundle.getString("MC.j7.text")); // NOI18N
         j7.setPreferredSize(new java.awt.Dimension(44, 44));
+        j7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j7ActionPerformed(evt);
+            }
+        });
 
         j8.setText(bundle.getString("MC.j8.text")); // NOI18N
         j8.setPreferredSize(new java.awt.Dimension(44, 44));
         j8.setRequestFocusEnabled(false);
+        j8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j8ActionPerformed(evt);
+            }
+        });
 
         j9.setText(bundle.getString("MC.j9.text")); // NOI18N
         j9.setPreferredSize(new java.awt.Dimension(44, 44));
+        j9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j9ActionPerformed(evt);
+            }
+        });
 
         jStern.setText(bundle.getString("MC.jStern.text")); // NOI18N
         jStern.setPreferredSize(new java.awt.Dimension(44, 44));
+        jStern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSternActionPerformed(evt);
+            }
+        });
 
         j0.setText(bundle.getString("MC.j0.text")); // NOI18N
         j0.setPreferredSize(new java.awt.Dimension(44, 44));
+        j0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j0ActionPerformed(evt);
+            }
+        });
 
         jRaute.setText(bundle.getString("MC.jRaute.text")); // NOI18N
         jRaute.setPreferredSize(new java.awt.Dimension(44, 44));
+        jRaute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRauteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -3113,26 +3090,35 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 214, -1, -1));
+
         jf0.setText(bundle.getString("MC.jf0.text")); // NOI18N
         jf0.setPreferredSize(new java.awt.Dimension(47, 45));
+        jPanel6.add(jf0, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
 
         jf1.setText(bundle.getString("MC.jf1.text")); // NOI18N
         jf1.setPreferredSize(new java.awt.Dimension(47, 45));
+        jPanel6.add(jf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
 
         jf2.setText(bundle.getString("MC.jf2.text")); // NOI18N
         jf2.setPreferredSize(new java.awt.Dimension(47, 45));
+        jPanel6.add(jf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
 
         jf3.setText(bundle.getString("MC.jf3.text")); // NOI18N
         jf3.setPreferredSize(new java.awt.Dimension(47, 45));
+        jPanel6.add(jf3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
         jf4.setText(bundle.getString("MC.jf4.text")); // NOI18N
         jf4.setPreferredSize(new java.awt.Dimension(47, 45));
+        jPanel6.add(jf4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
         jGO.setText(bundle.getString("MC.jGO.text")); // NOI18N
         jGO.setPreferredSize(new java.awt.Dimension(52, 45));
+        jPanel6.add(jGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 60, -1));
 
         jSTOP.setText(bundle.getString("MC.jSTOP.text")); // NOI18N
         jSTOP.setPreferredSize(new java.awt.Dimension(66, 45));
+        jPanel6.add(jSTOP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 70, -1));
 
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -3356,6 +3342,8 @@ public class MC extends javax.swing.JFrame {
                 .addGap(57, 57, 57))
         );
 
+        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, 562));
+
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
 
         jDisplay.setColumns(16);
@@ -3381,101 +3369,9 @@ public class MC extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jf0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jf3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jf4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addComponent(jGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSTOP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jGeschwindigkeit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jf0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jf3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jf4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSTOP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jGeschwindigkeit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 577, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(17, 17, 17))
-        );
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 590, 590));
 
         jTabbedPane1.addTab(bundle.getString("MC.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
 
@@ -3684,7 +3580,7 @@ public class MC extends javax.swing.JFrame {
                                         .addComponent(jUpdLastErrorLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jUpdLastError, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                                         .addComponent(jEasyNetUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jUpdateLayout.createSequentialGroup()
                                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -3777,14 +3673,14 @@ public class MC extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3959,6 +3855,95 @@ public class MC extends javax.swing.JFrame {
                     if( tmpBytesRead == 0 ) {
                         System.out.print("->"+retries+" ");  // no newline
                         retries--;
+                        if(bProg_MM)
+                        {
+                            switch(retries)
+                            {
+                                case 3:
+                                    System.out.println(" -> MM-Prog ende" );
+                                    jStartMMProg.setEnabled(true);
+                                    jMMRegister.setEnabled(true);
+                                    jMMWert.setEnabled(true);
+                                    jMcRwProgress.setString(null);
+                                    Com.write((byte)0x61);
+                                    stopIOAction();
+                                    return;
+                                    
+                                case 6:
+                                    int MM_Wert;
+                                    MM_Wert = Integer.parseInt(jMMWert.getText());
+                                    Com.write((byte)0);
+                                    Com.write((byte)MM_Wert);
+                                    break;
+                                    
+                                case 7:
+                                    MM_Wert = Integer.parseInt(jMMWert.getText());
+                                    Com.write((byte)15);
+                                    Com.write((byte)MM_Wert);
+                                    break;
+                                    
+                                case 8:
+                                    try {
+                                        MM_Wert = Integer.parseInt(jMMWert.getText());
+                                    } catch (NumberFormatException numberFormatException) {
+                                        stopIOAction();
+                                        jStartMMProg.setEnabled(true);
+                                        jMMRegister.setEnabled(true);
+                                        jMMWert.setEnabled(true);
+                                        jMcRwProgress.setString(null);
+                                         KTUI.mbGeneric(null, "Eingabe falsch: Wert");
+                                        return;
+                                    }
+                                    if(MM_Wert > 255 || MM_Wert == 0)
+                                    {
+                                        MM_Wert = 255;
+                                        jMMWert.setText("255");
+                                    }
+                                    Com.write((byte)0);
+                                    Com.write((byte)MM_Wert);
+                                    break;
+                                    
+                                case 9:
+                                    int MM_Adr;
+                                    MM_Adr = Integer.parseInt(jMMRegister.getText());
+                                    Com.write((byte)0);
+                                    Com.write((byte)MM_Adr);
+                                    break;
+                                    
+                                case 10:
+                                    MM_Adr = 0;
+                                    MM_Adr = Integer.parseInt(jMMRegister.getText());
+                                    Com.write((byte)15);
+                                    Com.write((byte)MM_Adr);
+                                    break;
+                                    
+                                case 11:
+                                    try {
+                                        MM_Adr = Integer.parseInt(jMMRegister.getText());
+                                    } catch (NumberFormatException numberFormatException) {
+                                        stopIOAction();
+                                        jStartMMProg.setEnabled(true);
+                                        jMMRegister.setEnabled(true);
+                                        jMMWert.setEnabled(true);
+                                        jMcRwProgress.setString(null);
+                                         KTUI.mbGeneric(null, "Eingabe falsch: Register");
+                                        return;
+                                    }
+                                    if(MM_Adr > 255 || MM_Adr == 0)
+                                    {
+                                        MM_Adr = 255;
+                                        jMMRegister.setText("255");
+                                    }
+                                    Com.write((byte)0);
+                                    Com.write((byte)MM_Adr);
+                                    break;
+                                    
+                                case 12:
+                                    Com.write((byte)0);
+                                    Com.write((byte)80);
+                                    break;
+                            }
+                        }
                         if( retries == 0 ) {
                             jMcRwProgress.setString(null);
                             System.out.println(" -> retries ende" );
@@ -3978,6 +3963,99 @@ public class MC extends javax.swing.JFrame {
                     // ist ein vollständiger Datensatz angekommen ?
                     bArray[bytesRead] = 0;
 
+                    if(bAskLokState)
+                    {
+                        if( ! KTUI.checkReadComplete(bArray) ) {
+                            // incomplete -> wait for more
+                            return;
+                        }
+                        bWaitAnswerInProgress = false;
+                        String s = new String(bArray);
+                        
+                        String str;
+                        if(s.contains("L "))
+                        {
+                            s = s.substring(2);
+                            String text = jDisplay.getText();
+                            s = s.substring(s.indexOf(" ")+1);
+                            str = s.substring(0, s.indexOf(" "));
+                            int V = Integer.parseInt(str);
+                            jGeschwindigkeit.setValue(V);
+                            str += "  ";
+                            str = text.substring(0, 12) + str.substring(0, 3);
+                            s = s.substring(s.indexOf(" ")+1);
+                            if(s.contains("f"))
+                            {
+                                text = str + "^" + text.substring(16,28);
+                            }
+                            else
+                            {
+                                text = str + "v" + text.substring(16,28);
+                            }
+                            if(s.substring(0, 1).contains("1"))
+                                text += "*";
+                            else
+                                text += "-";
+                            if(s.substring(4, 5).contains("1"))
+                                text += "*";
+                            else
+                                text += "-";
+                            if(s.substring(6, 7).contains("1"))
+                                text += "*";
+                            else
+                                text += "-";
+                            if(s.substring(8, 9).contains("1"))
+                                text += "*";
+                            else
+                                text += "-";
+                            if(s.substring(10, 11).contains("1"))
+                                text += "*";
+                            else
+                                text += "-";
+                            jDisplay.setText(text);
+                        }
+                        else if(s.contains("unused"))
+                        {
+                            jDisplay.setText(" not in refresh \n                ");
+                        }
+                        else
+                        {
+                            if(s.contains("DCC"))
+                            {
+                                str = "DCC  ";
+                            }
+                            else if(s.contains("m3"))
+                            {
+                                str = "m3   ";
+                            }
+                            else if(s.contains("Old"))
+                            {
+                                str = "MM1  ";
+                            }
+                            else if(s.contains("New"))
+                            {
+                                str = "MM2  ";
+                            }
+                            else
+                            {
+                                str = "???  ";
+                            }
+                            String text = jDisplay.getText();
+                            jDisplay.setText(text.substring(0, 7) + str + text.substring(12));
+                            s = "XL " + AskedLokAdr + "\r";
+                            KTUI.flushReadBuffer( Com );
+                            for(int i = 0; i < bArray.length; i++)
+                                bArray[i] = 0;
+                            bytesRead = 0;
+                            Com.write(s);
+                            timer.setInitialDelay(KlarTextUI.timer1);
+                            timer.setDelay(KlarTextUI.timer2);
+                            timer.setRepeats(true);
+                            bWaitAnswerInProgress = true;
+                            retries = KlarTextUI.timerRetries;
+                            timer.start();
+                        }
+                    }
                     if(bReadPTdirekt)
                     {
                         if( ! KTUI.checkReadComplete(bArray) ) {
@@ -6270,6 +6348,9 @@ public class MC extends javax.swing.JFrame {
         {
             Com = KTUI.safelyOpenCom(this, Com);
         }
+        jDisplay.setText("----          0 \n           -----");
+        DisplayCursor = 0;
+        DisplayState = -1;
         Com.write((byte)0x60);
         jHauptGleis.setSelected(true);
         jDirektLesen.setEnabled(false);
@@ -6474,6 +6555,281 @@ public class MC extends javax.swing.JFrame {
         timer.start();
         jm3Schreiben.setEnabled(false);
     }//GEN-LAST:event_jm3SchreibenActionPerformed
+
+    private void jMMWertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMMWertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMMWertActionPerformed
+
+    private void jHerstellerInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHerstellerInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jHerstellerInfoActionPerformed
+
+    private void jStartMMProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartMMProgActionPerformed
+        bProg_MM = true;
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        Com.write((byte)0x61);
+//        Com.write("xTPM 80\r");
+        KTUI.flushReadBuffer( Com );
+        for(int i = 0; i < bArray.length; i++)
+            bArray[i] = 0;
+        bytesRead = 0;
+
+        KTUI.mbGeneric(this, "Hinweis", "Für die Lokadressen " + jMMRegister.getText() + " und " + jMMWert.getText() + " muss das MM Protokoll eingestellt werde.", "Bitte stellen Sie an Ihrer MM-Lok nun den Programmiermodus ein.");
+        timer.setInitialDelay(KlarTextUI.timer1);
+        timer.setDelay(KlarTextUI.timer2);
+        timer.setRepeats(true);
+        bWaitAnswerInProgress = true;
+        retries = 14;
+        timer.start();
+        jStartMMProg.setEnabled(false);
+        jMMRegister.setEnabled(false);
+        jMMWert.setEnabled(false);
+    }//GEN-LAST:event_jStartMMProgActionPerformed
+
+    private void j1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j1ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 1      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '1';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j1ActionPerformed
+
+    private void jSternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSternActionPerformed
+        if(DisplayState == 0)
+        {
+            jDisplay.setText(OldDisplayString);
+            DisplayState = -1;
+        }
+    }//GEN-LAST:event_jSternActionPerformed
+
+    private void j2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j2ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 2      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '2';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j2ActionPerformed
+
+    private void j3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j3ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 3      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '3';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j3ActionPerformed
+
+    private void j4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j4ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 4      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '4';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j4ActionPerformed
+
+    private void j5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j5ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 5      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '5';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j5ActionPerformed
+
+    private void j6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j6ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 6      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '6';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j6ActionPerformed
+
+    private void j7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j7ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 7      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '7';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j7ActionPerformed
+
+    private void j8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j8ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 8      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '8';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j8ActionPerformed
+
+    private void j9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j9ActionPerformed
+        if(DisplayState != 0)
+        {
+            DisplayState = 0;
+            OldDisplayString = jDisplay.getText();
+            jDisplay.setText("ADR: 9      " + jDisplay.getText().substring(12, 17) + "*=Abbruch       ");
+            DisplayCursor = 5;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '9';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j9ActionPerformed
+
+    private void j0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j0ActionPerformed
+        if(DisplayState != 0)
+        {
+            return;
+        }
+        String text = jDisplay.getText();
+        byte[] ba = text.getBytes();
+        if(DisplayCursor < 10)
+        {
+            ba[DisplayCursor++] = '0';
+        }
+        
+        text = new String(ba);
+        jDisplay.setText(text);
+    }//GEN-LAST:event_j0ActionPerformed
+
+    private void jRauteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRauteActionPerformed
+        if(DisplayState == 0)
+        {
+            String text = jDisplay.getText();
+            int parseInt;
+            String substring = text.substring(5, DisplayCursor);
+            try {
+                parseInt = Integer.parseInt(substring);
+            } catch (NumberFormatException numberFormatException) {
+                parseInt = 16384;
+            }
+            if(parseInt > 16384)
+                return;
+            if(substring.length() < 5)
+            {
+                substring += "     ";
+                substring = substring.substring(0, 5);
+            }
+            text = substring + "     " + OldDisplayString.substring(10);
+            jDisplay.setText(text);
+            DisplayState = -1;
+        
+            bAskLokState = true;
+            if(Com == null)
+            {
+                Com = KTUI.safelyOpenCom(this, Com);
+            }
+            KTUI.flushReadBuffer( Com );
+            for(int i = 0; i < bArray.length; i++)
+                bArray[i] = 0;
+            bytesRead = 0;
+            
+            System.out.print("LokAnfrage Adr.: "+parseInt);
+            String s = "XLC " + parseInt + "\r";
+            AskedLokAdr = parseInt;
+            Com.write(s);
+            timer.setInitialDelay(KlarTextUI.timer1);
+            timer.setDelay(KlarTextUI.timer2);
+            timer.setRepeats(true);
+            bWaitAnswerInProgress = true;
+            retries = KlarTextUI.timerRetries * 2;
+            timer.start();
+        }
+        
+    }//GEN-LAST:event_jRauteActionPerformed
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
@@ -7787,7 +8143,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton jMDCC;
     private javax.swing.JButton jMMM;
     private javax.swing.JTextField jMMRegister;
-    private javax.swing.JTextField jMMRegister1;
+    private javax.swing.JTextField jMMWert;
     private javax.swing.JButton jMRST;
     private javax.swing.JButton jMag2System;
     private javax.swing.JButton jMagCheck;
