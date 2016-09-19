@@ -7,7 +7,6 @@
 package my.KlarText;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Font;
@@ -28,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -92,6 +90,8 @@ public class MC extends javax.swing.JFrame {
     private String OldDisplayString;
     private boolean bAskLokState;
     private int AskedLokAdr;
+    private String AktLokState;
+    private String AktLokFormat;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -2930,7 +2930,19 @@ public class MC extends javax.swing.JFrame {
 
         jGeschwindigkeit.setMaximum(126);
         jGeschwindigkeit.setValue(0);
-        jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 210, -1));
+        jGeschwindigkeit.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jGeschwindigkeitStateChanged(evt);
+            }
+        });
+        jGeschwindigkeit.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jGeschwindigkeitCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 190, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -3051,17 +3063,20 @@ public class MC extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(j6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(j7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(j8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(j9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jStern, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(j0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRaute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jStern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(j7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(j8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(j9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(j0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jRaute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -3094,31 +3109,66 @@ public class MC extends javax.swing.JFrame {
 
         jf0.setText(bundle.getString("MC.jf0.text")); // NOI18N
         jf0.setPreferredSize(new java.awt.Dimension(47, 45));
+        jf0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf0ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jf0, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
 
         jf1.setText(bundle.getString("MC.jf1.text")); // NOI18N
         jf1.setPreferredSize(new java.awt.Dimension(47, 45));
+        jf1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf1ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
 
         jf2.setText(bundle.getString("MC.jf2.text")); // NOI18N
         jf2.setPreferredSize(new java.awt.Dimension(47, 45));
+        jf2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf2ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
 
         jf3.setText(bundle.getString("MC.jf3.text")); // NOI18N
         jf3.setPreferredSize(new java.awt.Dimension(47, 45));
+        jf3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf3ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jf3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
         jf4.setText(bundle.getString("MC.jf4.text")); // NOI18N
         jf4.setPreferredSize(new java.awt.Dimension(47, 45));
+        jf4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf4ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jf4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
         jGO.setText(bundle.getString("MC.jGO.text")); // NOI18N
         jGO.setPreferredSize(new java.awt.Dimension(52, 45));
-        jPanel6.add(jGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 60, -1));
+        jGO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jGOActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 70, -1));
 
         jSTOP.setText(bundle.getString("MC.jSTOP.text")); // NOI18N
         jSTOP.setPreferredSize(new java.awt.Dimension(66, 45));
-        jPanel6.add(jSTOP, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 70, -1));
+        jSTOP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSTOPActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jSTOP, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 70, -1));
 
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -3342,36 +3392,23 @@ public class MC extends javax.swing.JFrame {
                 .addGap(57, 57, 57))
         );
 
-        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, 562));
+        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 562));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jDisplay.setEditable(false);
         jDisplay.setColumns(16);
         jDisplay.setFont(new java.awt.Font("Courier 10 Pitch", 1, 32)); // NOI18N
         jDisplay.setRows(2);
         jDisplay.setText(bundle.getString("MC.jDisplay.text")); // NOI18N
         jScrollPane6.setViewportView(jDisplay);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel10.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 19, 310, 70));
 
-        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 340, 110));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 590, 590));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 570, 590));
 
         jTabbedPane1.addTab(bundle.getString("MC.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
 
@@ -3976,6 +4013,7 @@ public class MC extends javax.swing.JFrame {
                         if(s.contains("L "))
                         {
                             s = s.substring(2);
+                            AktLokState = s.substring(0, s.indexOf("]")-1);
                             String text = jDisplay.getText();
                             s = s.substring(s.indexOf(" ")+1);
                             str = s.substring(0, s.indexOf(" "));
@@ -4023,18 +4061,22 @@ public class MC extends javax.swing.JFrame {
                             if(s.contains("DCC"))
                             {
                                 str = "DCC  ";
+                                AktLokFormat = "DCC ";
                             }
                             else if(s.contains("m3"))
                             {
                                 str = "m3   ";
+                                AktLokFormat = "m3  ";
                             }
                             else if(s.contains("Old"))
                             {
                                 str = "MM1  ";
+                                AktLokFormat = "MM1 ";
                             }
                             else if(s.contains("New"))
                             {
                                 str = "MM2  ";
+                                AktLokFormat = "MM2 ";
                             }
                             else
                             {
@@ -6830,6 +6872,230 @@ public class MC extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jRauteActionPerformed
+
+    private void jGeschwindigkeitCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jGeschwindigkeitCaretPositionChanged
+
+    }//GEN-LAST:event_jGeschwindigkeitCaretPositionChanged
+
+    private void jGeschwindigkeitStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jGeschwindigkeitStateChanged
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        int v = jGeschwindigkeit.getValue();
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(0, s.indexOf(" "));
+        int Vrb = Integer.parseInt(s);
+        if(Vrb != v)
+        {
+            //neue Geschwindigkeit senden
+            s = AktLokState.substring(0, AktLokState.indexOf(" "));
+            s = "XL " + s + " " + v + "\r"; 
+            if(Com == null)
+            {
+                Com = KTUI.safelyOpenCom(this, Com);
+            }
+            Com.write(s);
+            s = jDisplay.getText();
+            s = s.substring(0, 12);
+            s += v + "  ";
+            s = s.substring(0, 15);
+            s += jDisplay.getText().substring(15);
+            jDisplay.setText(s);
+            s = "" + v + "  ";
+            s = s.substring(0, 3);
+            int i = AktLokState.indexOf(" ")+1;
+            String str = AktLokState.substring(AktLokState.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            AktLokState = AktLokState.substring(0, i) + s + str;
+            i = 0;
+        }
+    }//GEN-LAST:event_jGeschwindigkeitStateChanged
+
+    private void jGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGOActionPerformed
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        Com.write((byte)0x60);
+        String s = jDisplay.getText().substring(0, 7) + AktLokFormat + jDisplay.getText().substring(11);
+        jDisplay.setText(s);
+    }//GEN-LAST:event_jGOActionPerformed
+
+    private void jSTOPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSTOPActionPerformed
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        Com.write((byte)0x61);
+        String s = jDisplay.getText().substring(0, 7) + "STOP" + jDisplay.getText().substring(11);
+        jDisplay.setText(s);
+    }//GEN-LAST:event_jSTOPActionPerformed
+
+    private void jf0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf0ActionPerformed
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(0, s.indexOf(" "));
+        if(s.contains("0"))
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 28);
+            s += "*";
+            s += jDisplay.getText().substring(29);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+1)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+3));
+        }
+        else
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 28);
+            s += "-";
+            s += jDisplay.getText().substring(29);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+1)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+3));
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s = "XL " + AktLokState + "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf0ActionPerformed
+
+    private void jf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf1ActionPerformed
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(0, s.indexOf(" "));
+        if(s.contains("0"))
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 29);
+            s += "*";
+            s += jDisplay.getText().substring(30);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+7)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9));
+        }
+        else
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 29);
+            s += "-";
+            s += jDisplay.getText().substring(30);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+7)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9));
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s = "XL " + AktLokState + "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf1ActionPerformed
+
+    private void jf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf2ActionPerformed
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(0, s.indexOf(" "));
+        if(s.contains("0"))
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 30);
+            s += "*";
+            s += jDisplay.getText().substring(31);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11));
+        }
+        else
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 30);
+            s += "-";
+            s += jDisplay.getText().substring(31);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11));
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s = "XL " + AktLokState + "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf2ActionPerformed
+
+    private void jf3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf3ActionPerformed
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        s = s.substring(0, s.indexOf(" "));
+        if(s.contains("0"))
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 31);
+            s += "*";
+            s += jDisplay.getText().substring(32);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13));
+        }
+        else
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 31);
+            s += "-";
+            s += jDisplay.getText().substring(32);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13));
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s = "XL " + AktLokState + "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf3ActionPerformed
+
+    private void jf4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf4ActionPerformed
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(s.lastIndexOf(" ")+1);
+        if(s.contains("0"))
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 32);
+            s += "*";
+            s += jDisplay.getText().substring(33);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)+2);
+        }
+        else
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 32);
+            s += "-";
+            s += jDisplay.getText().substring(33);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)+2);
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s = "XL " + AktLokState + "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf4ActionPerformed
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
