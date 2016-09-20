@@ -2429,7 +2429,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="220" y="510" width="190" height="-1"/>
+                      <AbsoluteConstraints x="220" y="510" width="180" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -2985,6 +2985,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf5ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf9">
                       <Properties>
@@ -2995,6 +2998,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf9ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf6">
                       <Properties>
@@ -3005,6 +3011,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf6ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf8">
                       <Properties>
@@ -3015,6 +3024,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf8ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf7">
                       <Properties>
@@ -3025,6 +3037,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf7ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf10">
                       <Properties>
@@ -3048,6 +3063,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf11ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf12">
                       <Properties>
@@ -3084,6 +3102,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf13ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf17">
                       <Properties>
@@ -3104,6 +3125,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf14ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf19">
                       <Properties>
@@ -3124,6 +3148,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf15ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jf16">
                       <Properties>
@@ -3137,6 +3164,9 @@
                           <Dimension value="[55, 39]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jf16ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton40">
                       <Properties>
@@ -3249,7 +3279,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="50" y="70" width="340" height="110"/>
+                      <AbsoluteConstraints x="50" y="80" width="340" height="100"/>
                     </Constraint>
                   </Constraints>
 
@@ -3263,7 +3293,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="17" y="19" width="310" height="70"/>
+                          <AbsoluteConstraints x="10" y="10" width="320" height="80"/>
                         </Constraint>
                       </Constraints>
 
@@ -3272,20 +3302,55 @@
                         <Component class="javax.swing.JTextArea" name="jDisplay">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="columns" type="int" value="16"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Courier 10 Pitch" size="32" style="1"/>
                             </Property>
-                            <Property name="rows" type="int" value="2"/>
+                            <Property name="tabSize" type="int" value="1"/>
                             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                               <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jDisplay.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                             </Property>
+                            <Property name="autoscrolls" type="boolean" value="false"/>
+                            <Property name="focusable" type="boolean" value="false"/>
+                            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[304, 66]"/>
+                            </Property>
+                            <Property name="requestFocusEnabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JLabel" name="jLabel33">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="DejaVu Sans Condensed" size="12" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jLabel33.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="310" y="230" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel34">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="DejaVu Sans Condensed" size="18" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jLabel34.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="370" y="230" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

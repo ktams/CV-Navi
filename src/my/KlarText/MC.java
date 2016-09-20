@@ -85,6 +85,7 @@ public class MC extends javax.swing.JFrame {
     private boolean bWriteList;
     private boolean bProg_m3;
     private boolean bProg_MM;
+    private boolean bMustAskStatus;
     private int DisplayCursor;
     private int DisplayState;
     private String OldDisplayString;
@@ -92,6 +93,9 @@ public class MC extends javax.swing.JFrame {
     private int AskedLokAdr;
     private String AktLokState;
     private String AktLokFormat;
+    private int[] Funktionen;
+    private int AktLokAdr;
+    private Color DefBackground;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -189,7 +193,9 @@ public class MC extends javax.swing.JFrame {
         retries = KlarTextUI.timerRetries;
 
         initComponents();
-
+        Funktionen = new int[28];
+        for(int i = 0; i < 28; i++)
+            Funktionen[i] = 0;
         ImageIcon II = null;
         ImageIcon II2 = null;
         II = new ImageIcon(getClass().getResource("/MasterControl.gif"));
@@ -931,6 +937,8 @@ public class MC extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jDisplay = new javax.swing.JTextArea();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
         jUpdate = new javax.swing.JPanel();
         jUpdDatei = new javax.swing.JTextField();
         jUpdDateiAuswahl = new javax.swing.JButton();
@@ -2942,7 +2950,7 @@ public class MC extends javax.swing.JFrame {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 190, -1));
+        jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 180, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -3174,18 +3182,43 @@ public class MC extends javax.swing.JFrame {
 
         jf5.setText(bundle.getString("MC.jf5.text")); // NOI18N
         jf5.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf5ActionPerformed(evt);
+            }
+        });
 
         jf9.setText(bundle.getString("MC.jf9.text")); // NOI18N
         jf9.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf9ActionPerformed(evt);
+            }
+        });
 
         jf6.setText(bundle.getString("MC.jf6.text")); // NOI18N
         jf6.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf6ActionPerformed(evt);
+            }
+        });
 
         jf8.setText(bundle.getString("MC.jf8.text")); // NOI18N
         jf8.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf8ActionPerformed(evt);
+            }
+        });
 
         jf7.setText(bundle.getString("MC.jf7.text")); // NOI18N
         jf7.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf7ActionPerformed(evt);
+            }
+        });
 
         jf10.setText(bundle.getString("MC.jf10.text")); // NOI18N
         jf10.setPreferredSize(new java.awt.Dimension(55, 39));
@@ -3197,6 +3230,11 @@ public class MC extends javax.swing.JFrame {
 
         jf11.setText(bundle.getString("MC.jf11.text")); // NOI18N
         jf11.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf11ActionPerformed(evt);
+            }
+        });
 
         jf12.setText(bundle.getString("MC.jf12.text")); // NOI18N
         jf12.setPreferredSize(new java.awt.Dimension(55, 39));
@@ -3216,22 +3254,42 @@ public class MC extends javax.swing.JFrame {
 
         jf13.setText(bundle.getString("MC.jf13.text")); // NOI18N
         jf13.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf13ActionPerformed(evt);
+            }
+        });
 
         jf17.setText(bundle.getString("MC.jf17.text")); // NOI18N
         jf17.setPreferredSize(new java.awt.Dimension(55, 39));
 
         jf14.setText(bundle.getString("MC.jf14.text")); // NOI18N
         jf14.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf14ActionPerformed(evt);
+            }
+        });
 
         jf19.setText(bundle.getString("MC.jf19.text")); // NOI18N
         jf19.setPreferredSize(new java.awt.Dimension(55, 39));
 
         jf15.setText(bundle.getString("MC.jf15.text")); // NOI18N
         jf15.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf15ActionPerformed(evt);
+            }
+        });
 
         jf16.setText(bundle.getString("MC.jf16.text")); // NOI18N
         jf16.setMaximumSize(new java.awt.Dimension(47, 55));
         jf16.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf16ActionPerformed(evt);
+            }
+        });
 
         jButton40.setText(bundle.getString("MC.jButton40.text")); // NOI18N
         jButton40.setPreferredSize(new java.awt.Dimension(55, 39));
@@ -3398,15 +3456,26 @@ public class MC extends javax.swing.JFrame {
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDisplay.setEditable(false);
-        jDisplay.setColumns(16);
         jDisplay.setFont(new java.awt.Font("Courier 10 Pitch", 1, 32)); // NOI18N
-        jDisplay.setRows(2);
+        jDisplay.setTabSize(1);
         jDisplay.setText(bundle.getString("MC.jDisplay.text")); // NOI18N
+        jDisplay.setAutoscrolls(false);
+        jDisplay.setFocusable(false);
+        jDisplay.setMaximumSize(new java.awt.Dimension(304, 66));
+        jDisplay.setRequestFocusEnabled(false);
         jScrollPane6.setViewportView(jDisplay);
 
-        jPanel10.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 19, 310, 70));
+        jPanel10.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 80));
 
-        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 340, 110));
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 340, 100));
+
+        jLabel33.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 12)); // NOI18N
+        jLabel33.setText(bundle.getString("MC.jLabel33.text")); // NOI18N
+        jPanel6.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+
+        jLabel34.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 18)); // NOI18N
+        jLabel34.setText(bundle.getString("MC.jLabel34.text")); // NOI18N
+        jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 570, 590));
 
@@ -4035,26 +4104,78 @@ public class MC extends javax.swing.JFrame {
                             else
                                 text += "-";
                             if(s.substring(4, 5).contains("1"))
+                            {
                                 text += "*";
+                                Funktionen[0] = 1;
+                            }
                             else
+                            {
                                 text += "-";
+                                Funktionen[0] = 0;
+                            }
                             if(s.substring(6, 7).contains("1"))
+                            {
                                 text += "*";
+                                Funktionen[1] = 1;
+                            }
                             else
+                            {
                                 text += "-";
+                                Funktionen[1] = 0;
+                            }
                             if(s.substring(8, 9).contains("1"))
+                            {
                                 text += "*";
+                                Funktionen[2] = 1;
+                            }
                             else
+                            {
                                 text += "-";
+                                Funktionen[2] = 0;
+                            }
                             if(s.substring(10, 11).contains("1"))
+                            {
                                 text += "*";
+                                Funktionen[3] = 1;
+                            }
                             else
+                            {
                                 text += "-";
+                                Funktionen[3] = 0;
+                            }
                             jDisplay.setText(text);
+                            if(bMustAskStatus)
+                            {
+                                s = "XLC " + AskedLokAdr + "\r";
+                                KTUI.flushReadBuffer( Com );
+                                for(int i = 0; i < bArray.length; i++)
+                                    bArray[i] = 0;
+                                bytesRead = 0;
+                                bMustAskStatus = false;
+                                Com.write(s);
+                                timer.setInitialDelay(KlarTextUI.timer1);
+                                timer.setDelay(KlarTextUI.timer2);
+                                timer.setRepeats(true);
+                                bWaitAnswerInProgress = true;
+                                retries = KlarTextUI.timerRetries;
+                                timer.start();
+                            }
                         }
                         else if(s.contains("unused"))
                         {
-                            jDisplay.setText(" not in refresh \n                ");
+                            s = "XL " + AskedLokAdr + " 0 0 f 0 0 0 0\r";
+                            KTUI.flushReadBuffer( Com );
+                            for(int i = 0; i < bArray.length; i++)
+                                bArray[i] = 0;
+                            bytesRead = 0;
+                            bMustAskStatus = true;
+                            Com.write(s);
+                            timer.setInitialDelay(KlarTextUI.timer1);
+                            timer.setDelay(KlarTextUI.timer2);
+                            timer.setRepeats(true);
+                            bWaitAnswerInProgress = true;
+                            retries = KlarTextUI.timerRetries;
+                            timer.start();
                         }
                         else
                         {
@@ -4085,6 +4206,7 @@ public class MC extends javax.swing.JFrame {
                             String text = jDisplay.getText();
                             jDisplay.setText(text.substring(0, 7) + str + text.substring(12));
                             s = "XL " + AskedLokAdr + "\r";
+                            AktLokAdr = AskedLokAdr;
                             KTUI.flushReadBuffer( Com );
                             for(int i = 0; i < bArray.length; i++)
                                 bArray[i] = 0;
@@ -6362,7 +6484,33 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jUSB2ActionPerformed
 
     private void jf10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf10ActionPerformed
-        // TODO add your handling code here:
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[9] == 0)
+        {
+            Funktionen[9] = 1;
+            jf10.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[9] = 0;
+            jf10.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
     }//GEN-LAST:event_jf10ActionPerformed
 
     private void jf18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf18ActionPerformed
@@ -6370,7 +6518,33 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf18ActionPerformed
 
     private void jf12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf12ActionPerformed
-        // TODO add your handling code here:
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[11] == 0)
+        {
+            Funktionen[11] = 1;
+            jf12.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[11] = 0;
+            jf12.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
     }//GEN-LAST:event_jf12ActionPerformed
 
     private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
@@ -6390,6 +6564,7 @@ public class MC extends javax.swing.JFrame {
         {
             Com = KTUI.safelyOpenCom(this, Com);
         }
+        jDisplay.setAutoscrolls(false);
         jDisplay.setText("----          0 \n           -----");
         DisplayCursor = 0;
         DisplayState = -1;
@@ -6397,6 +6572,7 @@ public class MC extends javax.swing.JFrame {
         jHauptGleis.setSelected(true);
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
+        DefBackground = jf5.getBackground();
     }//GEN-LAST:event_jPanel2ComponentShown
 
     private void jDirektSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektSchreibenActionPerformed
@@ -6862,6 +7038,7 @@ public class MC extends javax.swing.JFrame {
             System.out.print("LokAnfrage Adr.: "+parseInt);
             String s = "XLC " + parseInt + "\r";
             AskedLokAdr = parseInt;
+            AktLokAdr = 0;
             Com.write(s);
             timer.setInitialDelay(KlarTextUI.timer1);
             timer.setDelay(KlarTextUI.timer2);
@@ -6903,9 +7080,13 @@ public class MC extends javax.swing.JFrame {
             s = s.substring(0, 3);
             int i = AktLokState.indexOf(" ")+1;
             String str = AktLokState.substring(AktLokState.indexOf(" ")+1);
-            str = str.substring(str.indexOf(" ")+1);
-            AktLokState = AktLokState.substring(0, i) + s + str;
-            i = 0;
+            str = str.substring(str.indexOf(" "));
+            AktLokState = AktLokState.substring(0, i) + v + str;
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jGeschwindigkeitStateChanged
 
@@ -6962,12 +7143,41 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf0ActionPerformed
 
     private void jf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf1ActionPerformed
+        if(DisplayState == 0)
+        {
+            String text = jDisplay.getText();
+            int parseInt;
+            String substring = text.substring(5, DisplayCursor);
+            try {
+                parseInt = Integer.parseInt(substring);
+            } catch (NumberFormatException numberFormatException) {
+                parseInt = 16384;
+            }
+            if(parseInt > 16384)
+                return;
+            jDisplay.setText(OldDisplayString);
+            DisplayState = -1;
+            if(Com == null)
+            {
+                Com = KTUI.safelyOpenCom(this, Com);
+            }
+            KTUI.flushReadBuffer( Com );
+            for(int i = 0; i < bArray.length; i++)
+                bArray[i] = 0;
+            bytesRead = 0;
+            System.out.print("Weiche: "+parseInt + "gerade");
+            String s = "XT " + parseInt + " g 1\r";
+            Com.write(s);
+            return;
+        }
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
         String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
         s = s.substring(s.indexOf(" ")+1);
         s = s.substring(s.indexOf(" ")+1);
         s = s.substring(s.indexOf(" ")+1);
         s = s.substring(0, s.indexOf(" "));
+        int Index;
+        String str;
         if(s.contains("0"))
         {
             s = jDisplay.getText();
@@ -6975,7 +7185,14 @@ public class MC extends javax.swing.JFrame {
             s += "*";
             s += jDisplay.getText().substring(30);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+7)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9));
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            s += str.substring(0, 4) + "1 ";
+            AktLokState = s + str.substring(6, str.length());
+            Funktionen[0] = 1;
         }
         else
         {
@@ -6984,7 +7201,14 @@ public class MC extends javax.swing.JFrame {
             s += "-";
             s += jDisplay.getText().substring(30);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+7)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9));
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            s += str.substring(0, 4) + "0 ";
+            AktLokState = s + str.substring(6, str.length());
+            Funktionen[0] = 0;
         }
         if(Com == null)
         {
@@ -6996,6 +7220,33 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf1ActionPerformed
 
     private void jf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf2ActionPerformed
+        if(DisplayState == 0)
+        {
+            String text = jDisplay.getText();
+            int parseInt;
+            String substring = text.substring(5, DisplayCursor);
+            try {
+                parseInt = Integer.parseInt(substring);
+            } catch (NumberFormatException numberFormatException) {
+                parseInt = 16384;
+            }
+            if(parseInt > 16384)
+                return;
+            jDisplay.setText(OldDisplayString);
+            DisplayState = -1;
+            if(Com == null)
+            {
+                Com = KTUI.safelyOpenCom(this, Com);
+            }
+            KTUI.flushReadBuffer( Com );
+            for(int i = 0; i < bArray.length; i++)
+                bArray[i] = 0;
+            bytesRead = 0;
+            System.out.print("Weiche: "+parseInt + "Abzweig");
+            String s = "XT " + parseInt + " r 1\r";
+            Com.write(s);
+            return;
+        }
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
         String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
         s = s.substring(s.indexOf(" ")+1);
@@ -7003,6 +7254,8 @@ public class MC extends javax.swing.JFrame {
         s = s.substring(s.indexOf(" ")+1);
         s = s.substring(s.indexOf(" ")+1);
         s = s.substring(0, s.indexOf(" "));
+        int Index;
+        String str;
         if(s.contains("0"))
         {
             s = jDisplay.getText();
@@ -7010,8 +7263,15 @@ public class MC extends javax.swing.JFrame {
             s += "*";
             s += jDisplay.getText().substring(31);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11));
-        }
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            s += str.substring(0, 6) + "1 ";
+            AktLokState = s + str.substring(8, str.length());
+            Funktionen[1] = 1;
+       }
         else
         {
             s = jDisplay.getText();
@@ -7019,7 +7279,14 @@ public class MC extends javax.swing.JFrame {
             s += "-";
             s += jDisplay.getText().substring(31);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+9)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11));
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            s += str.substring(0, 6) + "0 ";
+            AktLokState = s + str.substring(8, str.length());
+            Funktionen[1] = 0;
         }
         if(Com == null)
         {
@@ -7039,6 +7306,8 @@ public class MC extends javax.swing.JFrame {
         s = s.substring(s.indexOf(" ")+1);
         s = s.substring(s.indexOf(" ")+1);
         s = s.substring(0, s.indexOf(" "));
+        int Index;
+        String str;
         if(s.contains("0"))
         {
             s = jDisplay.getText();
@@ -7046,7 +7315,14 @@ public class MC extends javax.swing.JFrame {
             s += "*";
             s += jDisplay.getText().substring(32);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13));
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            s += str.substring(0, 8) + "1 ";
+            AktLokState = s + str.substring(10, str.length());
+            Funktionen[2] = 1;
         }
         else
         {
@@ -7055,7 +7331,14 @@ public class MC extends javax.swing.JFrame {
             s += "-";
             s += jDisplay.getText().substring(32);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+11)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13));
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            s += str.substring(0, 8) + "0 ";
+            AktLokState = s + str.substring(10, str.length());
+            Funktionen[2] = 0;
         }
         if(Com == null)
         {
@@ -7070,6 +7353,8 @@ public class MC extends javax.swing.JFrame {
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
         String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
         s = s.substring(s.lastIndexOf(" ")+1);
+        int Index;
+        String str;
         if(s.contains("0"))
         {
             s = jDisplay.getText();
@@ -7077,7 +7362,13 @@ public class MC extends javax.swing.JFrame {
             s += "*";
             s += jDisplay.getText().substring(33);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)+2);
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            AktLokState = s + str.substring(0, 10) + "1";
+            Funktionen[3] = 1;
         }
         else
         {
@@ -7086,7 +7377,13 @@ public class MC extends javax.swing.JFrame {
             s += "-";
             s += jDisplay.getText().substring(33);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+13)+2);
+            Index = AktLokState.indexOf(" ")+1;
+            s = AktLokState.substring(0,Index);
+            str = AktLokState.substring(Index);
+            s += str.substring(0, str.indexOf(" ")+1);
+            str = str.substring(str.indexOf(" ")+1);
+            AktLokState = s + str.substring(0, 10) + "0";
+            Funktionen[3] = 0;
         }
         if(Com == null)
         {
@@ -7096,6 +7393,306 @@ public class MC extends javax.swing.JFrame {
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jf4ActionPerformed
+
+    private void jf5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf5ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[4] == 0)
+        {
+            Funktionen[4] = 1;
+            jf5.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[4] = 0;
+            jf5.setBackground(DefBackground);
+        }
+        String s = "XF " + AktLokAdr;
+        for(int i = 0; i < 8; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf5ActionPerformed
+
+    private void jf6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf6ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[5] == 0)
+        {
+            Funktionen[5] = 1;
+            jf6.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[5] = 0;
+            jf6.setBackground(DefBackground);
+        }
+        String s = "XF " + AktLokAdr;
+        for(int i = 0; i < 8; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf6ActionPerformed
+
+    private void jf7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf7ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[6] == 0)
+        {
+            Funktionen[6] = 1;
+            jf7.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[6] = 0;
+            jf7.setBackground(DefBackground);
+        }
+        String s = "XF " + AktLokAdr;
+        for(int i = 0; i < 8; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf7ActionPerformed
+
+    private void jf8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf8ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[7] == 0)
+        {
+            Funktionen[7] = 1;
+            jf8.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[7] = 0;
+            jf8.setBackground(DefBackground);
+        }
+        String s = "XF " + AktLokAdr;
+        for(int i = 0; i < 8; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf8ActionPerformed
+
+    private void jf9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf9ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[8] == 0)
+        {
+            Funktionen[8] = 1;
+            jf9.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[8] = 0;
+            jf9.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf9ActionPerformed
+
+    private void jf11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf11ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[10] == 0)
+        {
+            Funktionen[10] = 1;
+            jf11.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[10] = 0;
+            jf11.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf11ActionPerformed
+
+    private void jf13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf13ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[12] == 0)
+        {
+            Funktionen[12] = 1;
+            jf13.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[12] = 0;
+            jf13.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf13ActionPerformed
+
+    private void jf14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf14ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[13] == 0)
+        {
+            Funktionen[13] = 1;
+            jf14.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[13] = 0;
+            jf14.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf14ActionPerformed
+
+    private void jf15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf15ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[14] == 0)
+        {
+            Funktionen[14] = 1;
+            jf15.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[14] = 0;
+            jf15.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf15ActionPerformed
+
+    private void jf16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf16ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[15] == 0)
+        {
+            Funktionen[15] = 1;
+            jf16.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[15] = 0;
+            jf16.setBackground(DefBackground);
+        }
+        String s = "XFX " + AktLokAdr;
+        for(int i = 8; i < 16; i++)
+        {
+            if(Funktionen[i] == 0)
+                s += " 0";
+            else
+                s += " 1";
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s += "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jf16ActionPerformed
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
@@ -8381,6 +8978,8 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
