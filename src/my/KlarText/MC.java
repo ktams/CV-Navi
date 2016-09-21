@@ -93,6 +93,8 @@ public class MC extends javax.swing.JFrame {
     private int AskedLokAdr;
     private String AktLokState;
     private String AktLokFormat;
+    private String LokName;
+    private int Fahrstufen;
     private int[] Funktionen;
     private int AktLokAdr;
     private Color DefBackground;
@@ -181,6 +183,8 @@ public class MC extends javax.swing.JFrame {
 
     /** Creates new form MC */
     public MC(KlarTextUI ktuiThis) {
+        this.LokName = "";
+        this.Fahrstufen = 28;
         if( ktuiThis == null ) {
             return;
         }
@@ -925,20 +929,22 @@ public class MC extends javax.swing.JFrame {
         jf19 = new javax.swing.JButton();
         jf15 = new javax.swing.JButton();
         jf16 = new javax.swing.JButton();
-        jButton40 = new javax.swing.JButton();
-        jButton41 = new javax.swing.JButton();
-        jButton42 = new javax.swing.JButton();
-        jButton43 = new javax.swing.JButton();
-        jButton44 = new javax.swing.JButton();
-        jButton45 = new javax.swing.JButton();
-        jButton46 = new javax.swing.JButton();
-        jButton47 = new javax.swing.JButton();
-        jButton48 = new javax.swing.JButton();
+        jf20 = new javax.swing.JButton();
+        jf22 = new javax.swing.JButton();
+        jf21 = new javax.swing.JButton();
+        jf23 = new javax.swing.JButton();
+        jf24 = new javax.swing.JButton();
+        jf26 = new javax.swing.JButton();
+        jf25 = new javax.swing.JButton();
+        jf27 = new javax.swing.JButton();
+        jf28 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jDisplay = new javax.swing.JTextArea();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
+        jRueck = new javax.swing.JButton();
+        jVor = new javax.swing.JButton();
         jUpdate = new javax.swing.JPanel();
         jUpdDatei = new javax.swing.JTextField();
         jUpdDateiAuswahl = new javax.swing.JButton();
@@ -2766,7 +2772,7 @@ public class MC extends javax.swing.JFrame {
                 jListeLesenActionPerformed(evt);
             }
         });
-        jPanel3.add(jListeLesen, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 221, 150, -1));
+        jPanel3.add(jListeLesen, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 221, 160, -1));
 
         jListeSchreiben.setText(bundle.getString("MC.jListeSchreiben.text")); // NOI18N
         jListeSchreiben.addActionListener(new java.awt.event.ActionListener() {
@@ -2774,7 +2780,7 @@ public class MC extends javax.swing.JFrame {
                 jListeSchreibenActionPerformed(evt);
             }
         });
-        jPanel3.add(jListeSchreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 258, 150, -1));
+        jPanel3.add(jListeSchreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 258, 160, -1));
 
         jListeBearbeiten.setText(bundle.getString("MC.jListeBearbeiten.text")); // NOI18N
         jListeBearbeiten.addActionListener(new java.awt.event.ActionListener() {
@@ -2782,7 +2788,7 @@ public class MC extends javax.swing.JFrame {
                 jListeBearbeitenActionPerformed(evt);
             }
         });
-        jPanel3.add(jListeBearbeiten, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 184, -1, -1));
+        jPanel3.add(jListeBearbeiten, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 184, 160, -1));
 
         jLabel28.setText(bundle.getString("MC.jLabel28.text")); // NOI18N
         jPanel3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
@@ -2887,7 +2893,7 @@ public class MC extends javax.swing.JFrame {
                 jm3SchreibenActionPerformed(evt);
             }
         });
-        jPanel4.add(jm3Schreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
+        jPanel4.add(jm3Schreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 110, -1));
 
         jLabel27.setText(bundle.getString("MC.jLabel27.text")); // NOI18N
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 28, -1, -1));
@@ -3291,45 +3297,45 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
-        jButton40.setText(bundle.getString("MC.jButton40.text")); // NOI18N
-        jButton40.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf20.setText(bundle.getString("MC.jf20.text")); // NOI18N
+        jf20.setPreferredSize(new java.awt.Dimension(55, 39));
 
-        jButton41.setText(bundle.getString("MC.jButton41.text")); // NOI18N
-        jButton41.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf22.setText(bundle.getString("MC.jf22.text")); // NOI18N
+        jf22.setPreferredSize(new java.awt.Dimension(55, 39));
 
-        jButton42.setText(bundle.getString("MC.jButton42.text")); // NOI18N
-        jButton42.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf21.setText(bundle.getString("MC.jf21.text")); // NOI18N
+        jf21.setPreferredSize(new java.awt.Dimension(55, 39));
 
-        jButton43.setText(bundle.getString("MC.jButton43.text")); // NOI18N
-        jButton43.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf23.setText(bundle.getString("MC.jf23.text")); // NOI18N
+        jf23.setPreferredSize(new java.awt.Dimension(55, 39));
 
-        jButton44.setText(bundle.getString("MC.jButton44.text")); // NOI18N
-        jButton44.setPreferredSize(new java.awt.Dimension(55, 39));
-        jButton44.addActionListener(new java.awt.event.ActionListener() {
+        jf24.setText(bundle.getString("MC.jf24.text")); // NOI18N
+        jf24.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton44ActionPerformed(evt);
+                jf24ActionPerformed(evt);
             }
         });
 
-        jButton45.setText(bundle.getString("MC.jButton45.text")); // NOI18N
-        jButton45.setPreferredSize(new java.awt.Dimension(55, 39));
-        jButton45.addActionListener(new java.awt.event.ActionListener() {
+        jf26.setText(bundle.getString("MC.jf26.text")); // NOI18N
+        jf26.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton45ActionPerformed(evt);
+                jf26ActionPerformed(evt);
             }
         });
 
-        jButton46.setText(bundle.getString("MC.jButton46.text")); // NOI18N
-        jButton46.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf25.setText(bundle.getString("MC.jf25.text")); // NOI18N
+        jf25.setPreferredSize(new java.awt.Dimension(55, 39));
 
-        jButton47.setText(bundle.getString("MC.jButton47.text")); // NOI18N
-        jButton47.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf27.setText(bundle.getString("MC.jf27.text")); // NOI18N
+        jf27.setPreferredSize(new java.awt.Dimension(55, 39));
 
-        jButton48.setText(bundle.getString("MC.jButton48.text")); // NOI18N
-        jButton48.setPreferredSize(new java.awt.Dimension(55, 39));
-        jButton48.addActionListener(new java.awt.event.ActionListener() {
+        jf28.setText(bundle.getString("MC.jf28.text")); // NOI18N
+        jf28.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf28.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton48ActionPerformed(evt);
+                jf28ActionPerformed(evt);
             }
         });
 
@@ -3343,7 +3349,7 @@ public class MC extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jf19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jf20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
@@ -3379,21 +3385,21 @@ public class MC extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jf21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jf22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jf23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jf24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jf25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jf26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jButton47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jf27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jf28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -3430,23 +3436,23 @@ public class MC extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jf19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jf20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jf21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jf22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jf23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jf24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jf25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jf26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jf27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jf28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57))
         );
 
@@ -3456,7 +3462,7 @@ public class MC extends javax.swing.JFrame {
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDisplay.setEditable(false);
-        jDisplay.setFont(new java.awt.Font("Courier 10 Pitch", 1, 32)); // NOI18N
+        jDisplay.setFont(new java.awt.Font("Liberation Mono", 1, 32)); // NOI18N
         jDisplay.setTabSize(1);
         jDisplay.setText(bundle.getString("MC.jDisplay.text")); // NOI18N
         jDisplay.setAutoscrolls(false);
@@ -3465,9 +3471,9 @@ public class MC extends javax.swing.JFrame {
         jDisplay.setRequestFocusEnabled(false);
         jScrollPane6.setViewportView(jDisplay);
 
-        jPanel10.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 80));
+        jPanel10.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 320, 90));
 
-        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 340, 100));
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 340, 110));
 
         jLabel33.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 12)); // NOI18N
         jLabel33.setText(bundle.getString("MC.jLabel33.text")); // NOI18N
@@ -3476,6 +3482,22 @@ public class MC extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 18)); // NOI18N
         jLabel34.setText(bundle.getString("MC.jLabel34.text")); // NOI18N
         jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
+
+        jRueck.setText(bundle.getString("MC.jRueck.text")); // NOI18N
+        jRueck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRueckActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jRueck, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, -1, -1));
+
+        jVor.setText(bundle.getString("MC.jVor.text")); // NOI18N
+        jVor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVorActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jVor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 570, 590));
 
@@ -4088,7 +4110,21 @@ public class MC extends javax.swing.JFrame {
                             str = s.substring(0, s.indexOf(" "));
                             int V = Integer.parseInt(str);
                             jGeschwindigkeit.setValue(V);
-                            str += "  ";
+                            switch(Fahrstufen)
+                            {
+                                case 14:
+                                    V = (V + 8)/9;
+                                    break;
+                                    
+                                case 27:
+                                    V = (V*3 + 11)/14;
+                                    break;
+                                    
+                                case 28:
+                                    V = (V*2 + 7)/9;
+                                    break;
+                            }
+                            str = "" + V +"  ";
                             str = text.substring(0, 12) + str.substring(0, 3);
                             s = s.substring(s.indexOf(" ")+1);
                             if(s.contains("f"))
@@ -4183,30 +4219,178 @@ public class MC extends javax.swing.JFrame {
                             {
                                 str = "DCC  ";
                                 AktLokFormat = "DCC ";
+                                jf5.setEnabled(true);
+                                jf6.setEnabled(true);
+                                jf7.setEnabled(true);
+                                jf8.setEnabled(true);
+                                jf9.setEnabled(true);
+                                jf10.setEnabled(true);
+                                jf11.setEnabled(true);
+                                jf12.setEnabled(true);
+                                jf13.setEnabled(true);
+                                jf14.setEnabled(true);
+                                jf15.setEnabled(true);
+                                jf16.setEnabled(true);
+                                jf17.setEnabled(true);
+                                jf18.setEnabled(true);
+                                jf19.setEnabled(true);
+                                jf20.setEnabled(true);
+                                jf21.setEnabled(true);
+                                jf22.setEnabled(true);
+                                jf23.setEnabled(true);
+                                jf24.setEnabled(true);
+                                jf25.setEnabled(true);
+                                jf26.setEnabled(true);
+                                jf27.setEnabled(true);
+                                jf28.setEnabled(true);
+                                Fahrstufen = 28;
                             }
                             else if(s.contains("m3"))
                             {
                                 str = "m3   ";
                                 AktLokFormat = "m3  ";
-                            }
+                                jf5.setEnabled(true);
+                                jf6.setEnabled(true);
+                                jf7.setEnabled(true);
+                                jf8.setEnabled(true);
+                                jf9.setEnabled(true);
+                                jf10.setEnabled(true);
+                                jf11.setEnabled(true);
+                                jf12.setEnabled(true);
+                                jf13.setEnabled(true);
+                                jf14.setEnabled(true);
+                                jf15.setEnabled(true);
+                                jf16.setEnabled(false);
+                                jf17.setEnabled(false);
+                                jf18.setEnabled(false);
+                                jf19.setEnabled(false);
+                                jf20.setEnabled(false);
+                                jf21.setEnabled(false);
+                                jf22.setEnabled(false);
+                                jf23.setEnabled(false);
+                                jf24.setEnabled(false);
+                                jf25.setEnabled(false);
+                                jf26.setEnabled(false);
+                                jf27.setEnabled(false);
+                                jf28.setEnabled(false);
+                                Fahrstufen = 126;
+                           }
                             else if(s.contains("Old"))
                             {
                                 str = "MM1  ";
                                 AktLokFormat = "MM1 ";
+                                jf5.setEnabled(false);
+                                jf6.setEnabled(false);
+                                jf7.setEnabled(false);
+                                jf8.setEnabled(false);
+                                jf9.setEnabled(false);
+                                jf10.setEnabled(false);
+                                jf11.setEnabled(false);
+                                jf12.setEnabled(false);
+                                jf13.setEnabled(false);
+                                jf14.setEnabled(false);
+                                jf15.setEnabled(false);
+                                jf16.setEnabled(false);
+                                jf17.setEnabled(false);
+                                jf18.setEnabled(false);
+                                jf19.setEnabled(false);
+                                jf20.setEnabled(false);
+                                jf21.setEnabled(false);
+                                jf22.setEnabled(false);
+                                jf23.setEnabled(false);
+                                jf24.setEnabled(false);
+                                jf25.setEnabled(false);
+                                jf26.setEnabled(false);
+                                jf27.setEnabled(false);
+                                jf28.setEnabled(false);
+                                Fahrstufen = 14;
                             }
                             else if(s.contains("New"))
                             {
                                 str = "MM2  ";
                                 AktLokFormat = "MM2 ";
+                                jf5.setEnabled(false);
+                                jf6.setEnabled(false);
+                                jf7.setEnabled(false);
+                                jf8.setEnabled(false);
+                                jf9.setEnabled(false);
+                                jf10.setEnabled(false);
+                                jf11.setEnabled(false);
+                                jf12.setEnabled(false);
+                                jf13.setEnabled(false);
+                                jf14.setEnabled(false);
+                                jf15.setEnabled(false);
+                                jf16.setEnabled(false);
+                                jf17.setEnabled(false);
+                                jf18.setEnabled(false);
+                                jf19.setEnabled(false);
+                                jf20.setEnabled(false);
+                                jf21.setEnabled(false);
+                                jf22.setEnabled(false);
+                                jf23.setEnabled(false);
+                                jf24.setEnabled(false);
+                                jf25.setEnabled(false);
+                                jf26.setEnabled(false);
+                                jf27.setEnabled(false);
+                                jf28.setEnabled(false);
+                                Fahrstufen = 14;
                             }
                             else
                             {
                                 str = "???  ";
+                                jf5.setEnabled(false);
+                                jf6.setEnabled(false);
+                                jf7.setEnabled(false);
+                                jf8.setEnabled(false);
+                                jf9.setEnabled(false);
+                                jf10.setEnabled(false);
+                                jf11.setEnabled(false);
+                                jf12.setEnabled(false);
+                                jf13.setEnabled(false);
+                                jf14.setEnabled(false);
+                                jf15.setEnabled(false);
+                                jf16.setEnabled(false);
+                                jf17.setEnabled(false);
+                                jf18.setEnabled(false);
+                                jf19.setEnabled(false);
+                                jf20.setEnabled(false);
+                                jf21.setEnabled(false);
+                                jf22.setEnabled(false);
+                                jf23.setEnabled(false);
+                                jf24.setEnabled(false);
+                                jf25.setEnabled(false);
+                                jf26.setEnabled(false);
+                                jf27.setEnabled(false);
+                                jf28.setEnabled(false);
+                                Fahrstufen = 28;
+                            }
+                            AktLokAdr = AskedLokAdr;
+                            for (int i = 0; i < jTableLoco.getRowCount(); i++)
+                            {
+                                Object oAdr = jTableLoco.getValueAt(i, 0);
+                                String Adr = (String)oAdr;
+                                try {
+                                    if (AktLokAdr == Integer.parseInt(Adr)) {
+                                        Adr = (String) jTableLoco.getValueAt(i, 1);
+                                        Fahrstufen = Integer.parseInt(Adr);
+                                        LokName = (String) jTableLoco.getValueAt(i, 3);
+                                    }
+                                } catch (NumberFormatException numberFormatException) {
+                                    break;
+                                }
                             }
                             String text = jDisplay.getText();
-                            jDisplay.setText(text.substring(0, 7) + str + text.substring(12));
+                            if(LokName.length() > 0)
+                            {
+                                s = LokName + "          ";
+                                s = s.substring(0, 11);
+                                jDisplay.setText(text.substring(0, 7) + str + text.substring(12, 17) + s + text.substring(29));
+                            }
+                            else
+                            {
+                                jDisplay.setText(text.substring(0, 7) + str + text.substring(12, 17) + "           " + text.substring(29));
+                            }
                             s = "XL " + AskedLokAdr + "\r";
-                            AktLokAdr = AskedLokAdr;
                             KTUI.flushReadBuffer( Com );
                             for(int i = 0; i < bArray.length; i++)
                                 bArray[i] = 0;
@@ -6547,17 +6731,17 @@ public class MC extends javax.swing.JFrame {
         Com.write(s);
     }//GEN-LAST:event_jf12ActionPerformed
 
-    private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
+    private void jf24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf24ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton44ActionPerformed
+    }//GEN-LAST:event_jf24ActionPerformed
 
-    private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
+    private void jf26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf26ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton45ActionPerformed
+    }//GEN-LAST:event_jf26ActionPerformed
 
-    private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
+    private void jf28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf28ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton48ActionPerformed
+    }//GEN-LAST:event_jf28ActionPerformed
 
     private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
         if(Com == null)
@@ -6573,6 +6757,32 @@ public class MC extends javax.swing.JFrame {
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
         DefBackground = jf5.getBackground();
+        jf5.setEnabled(false);
+        jf6.setEnabled(false);
+        jf7.setEnabled(false);
+        jf8.setEnabled(false);
+        jf9.setEnabled(false);
+        jf10.setEnabled(false);
+        jf11.setEnabled(false);
+        jf12.setEnabled(false);
+        jf13.setEnabled(false);
+        jf14.setEnabled(false);
+        jf15.setEnabled(false);
+        jf16.setEnabled(false);
+        jf17.setEnabled(false);
+        jf18.setEnabled(false);
+        jf19.setEnabled(false);
+        jf20.setEnabled(false);
+        jf21.setEnabled(false);
+        jf22.setEnabled(false);
+        jf23.setEnabled(false);
+        jf24.setEnabled(false);
+        jf25.setEnabled(false);
+        jf26.setEnabled(false);
+        jf27.setEnabled(false);
+        jf28.setEnabled(false);
+        if(jSerNr.getText().contains("-"))
+            this.jKonfLesenActionPerformed(null);
     }//GEN-LAST:event_jPanel2ComponentShown
 
     private void jDirektSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektSchreibenActionPerformed
@@ -7072,7 +7282,22 @@ public class MC extends javax.swing.JFrame {
             Com.write(s);
             s = jDisplay.getText();
             s = s.substring(0, 12);
-            s += v + "  ";
+            int V = v;
+            switch(Fahrstufen)
+            {
+                case 14:
+                    V = (V + 8)/9;
+                    break;
+
+                case 27:
+                    V = (V*3 + 11)/14;
+                    break;
+
+                case 28:
+                    V = (V*2 + 7)/9;
+                    break;
+            }
+            s += V + "  ";
             s = s.substring(0, 15);
             s += jDisplay.getText().substring(15);
             jDisplay.setText(s);
@@ -7693,6 +7918,54 @@ public class MC extends javax.swing.JFrame {
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf16ActionPerformed
+
+    private void jRueckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueckActionPerformed
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ")+1) + "0 " + s;
+        jGeschwindigkeit.setValue(0);
+        if(AktLokState.contains("f"))
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 12);
+            s += "0  v";
+            s += jDisplay.getText().substring(16);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.replace('f', 'r');
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s = "XL " + AktLokState + "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jRueckActionPerformed
+
+    private void jVorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVorActionPerformed
+        //AktLokState = z.B. 3 20 0 r 1 0 0 1
+        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
+        s = s.substring(s.indexOf(" ")+1);
+        AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ")+1) + "0 " + s;
+        jGeschwindigkeit.setValue(0);
+        if(AktLokState.contains("r"))
+        {
+            s = jDisplay.getText();
+            s = s.substring(0, 12);
+            s += "0  ^";
+            s += jDisplay.getText().substring(16);
+            jDisplay.setText(s);
+            AktLokState = AktLokState.replace('r', 'f');
+        }
+        if(Com == null)
+        {
+            Com = KTUI.safelyOpenCom(this, Com);
+        }
+        KTUI.flushReadBuffer( Com );
+        s = "XL " + AktLokState + "\r";
+        Com.write(s);
+    }//GEN-LAST:event_jVorActionPerformed
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
@@ -8921,15 +9194,6 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JCheckBox jBoostOptNoAccBreak;
     private javax.swing.JCheckBox jBoostOptNoAccDrive;
     private javax.swing.JLabel jBoosterOpts;
-    private javax.swing.JButton jButton40;
-    private javax.swing.JButton jButton41;
-    private javax.swing.JButton jButton42;
-    private javax.swing.JButton jButton43;
-    private javax.swing.JButton jButton44;
-    private javax.swing.JButton jButton45;
-    private javax.swing.JButton jButton46;
-    private javax.swing.JButton jButton47;
-    private javax.swing.JButton jButton48;
     private javax.swing.JList jCVListe;
     private javax.swing.JTextField jCV_Direkt;
     private javax.swing.JButton jCancel;
@@ -9038,6 +9302,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JLabel jRailcomSupport;
     private javax.swing.JCheckBox jRailcomTailbits;
     private javax.swing.JButton jRaute;
+    private javax.swing.JButton jRueck;
     private javax.swing.JButton jSTOP;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -9076,6 +9341,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton jUpdStartUpdate;
     private javax.swing.JPanel jUpdate;
     private javax.swing.JTextField jVersion;
+    private javax.swing.JButton jVor;
     private javax.swing.JCheckBox jWRloc;
     private javax.swing.JCheckBox jWRmag;
     private javax.swing.JCheckBox jWRsys;
@@ -9094,6 +9360,15 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton jf18;
     private javax.swing.JButton jf19;
     private javax.swing.JButton jf2;
+    private javax.swing.JButton jf20;
+    private javax.swing.JButton jf21;
+    private javax.swing.JButton jf22;
+    private javax.swing.JButton jf23;
+    private javax.swing.JButton jf24;
+    private javax.swing.JButton jf25;
+    private javax.swing.JButton jf26;
+    private javax.swing.JButton jf27;
+    private javax.swing.JButton jf28;
     private javax.swing.JButton jf3;
     private javax.swing.JButton jf4;
     private javax.swing.JButton jf5;
