@@ -119,6 +119,48 @@ public class MC_RB_CV_List extends javax.swing.JDialog {
 
     private void jOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOKActionPerformed
         String s = jCV_List.getText();
+        String[] split = s.split("\n");
+        String str = "";
+        s = "";
+        for(int i = 0; i < split.length; i++)
+        {
+            if(split[i].length() > 0)
+            {
+                int j;
+                split[i] += "    ";
+                for(j = 0; j < split[i].length(); j++)
+                {
+                    if(split[i].charAt(j) != ' ')
+                        break;
+                }
+                str = split[i].substring(j, split[i].indexOf(" ", j));
+                try {
+                    Integer.parseInt(str);
+                    str = "000" + str + " ";
+                    str = " " + str.substring(str.lastIndexOf(" ") - 4, str.lastIndexOf(" "));
+                    j += split[i].indexOf(" ", j);
+                    String sg = split[i].substring(j);
+                    for(j = 0; j < sg.length(); j++)
+                    {
+                        if(sg.charAt(j) != ' ')
+                            break;
+                    }
+                    sg = sg.substring(j);
+                    j = sg.indexOf(" ");
+                    if(j != -1)
+                    {
+                        sg = sg.substring(0, j);
+                    }
+                    if(sg.length() > 0)
+                    {
+                        Integer.parseInt(sg);
+                    }
+                    str += "       " + sg;
+                    s += str + "\n";
+                } catch (NumberFormatException numberFormatException) {
+                }
+            }            
+        }
         myParent.setList(s);
         this.dispose();
     }//GEN-LAST:event_jOKActionPerformed

@@ -4372,6 +4372,10 @@ public class MC extends javax.swing.JFrame {
                                 try {
                                     if (AktLokAdr == Integer.parseInt(Adr)) {
                                         Adr = (String) jTableLoco.getValueAt(i, 1);
+                                        if(Adr.charAt(0) == '2')
+                                        {
+                                            Adr = Adr.substring(0, 2);  //27a oder 27b kann parseInt nicht. Muss sich um Zahlen handeln...
+                                        }
                                         Fahrstufen = Integer.parseInt(Adr);
                                         LokName = (String) jTableLoco.getValueAt(i, 3);
                                     }
