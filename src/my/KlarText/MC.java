@@ -7249,7 +7249,7 @@ public class MC extends javax.swing.JFrame {
                 substring = substring.substring(0, 5);
             }
 //            text = substring + "     " + OldDisplayString.substring(10);
-            text = substring + "          \n  please wait   " ;
+            text = substring + "           \nplease wait     " ;
             jDisplay.setText(text);
             DisplayState = -1;
         
