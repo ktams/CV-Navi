@@ -4108,7 +4108,11 @@ public class MC extends javax.swing.JFrame {
                             String text = jDisplay.getText();
                             s = s.substring(s.indexOf(" ")+1);
                             str = s.substring(0, s.indexOf(" "));
-                            int V = Integer.parseInt(str);
+                            int V = 0;
+                            try {
+                                V = Integer.parseInt(str);
+                            } catch (NumberFormatException numberFormatException) {
+                            }
                             jGeschwindigkeit.setValue(V);
                             switch(Fahrstufen)
                             {
@@ -4196,6 +4200,11 @@ public class MC extends javax.swing.JFrame {
                                 retries = KlarTextUI.timerRetries;
                                 timer.start();
                             }
+                            else
+                            {
+                                bAskLokState = false;
+                            }
+
                         }
                         else if(s.contains("unused"))
                         {
@@ -4337,34 +4346,37 @@ public class MC extends javax.swing.JFrame {
                             }
                             else
                             {
-                                str = "???  ";
-                                jf5.setEnabled(false);
-                                jf6.setEnabled(false);
-                                jf7.setEnabled(false);
-                                jf8.setEnabled(false);
-                                jf9.setEnabled(false);
-                                jf10.setEnabled(false);
-                                jf11.setEnabled(false);
-                                jf12.setEnabled(false);
-                                jf13.setEnabled(false);
-                                jf14.setEnabled(false);
-                                jf15.setEnabled(false);
-                                jf16.setEnabled(false);
-                                jf17.setEnabled(false);
-                                jf18.setEnabled(false);
-                                jf19.setEnabled(false);
-                                jf20.setEnabled(false);
-                                jf21.setEnabled(false);
-                                jf22.setEnabled(false);
-                                jf23.setEnabled(false);
-                                jf24.setEnabled(false);
-                                jf25.setEnabled(false);
-                                jf26.setEnabled(false);
-                                jf27.setEnabled(false);
-                                jf28.setEnabled(false);
-                                Fahrstufen = 28;
+                                jf5.setEnabled(true);
+                                jf6.setEnabled(true);
+                                jf7.setEnabled(true);
+                                jf8.setEnabled(true);
+                                jf9.setEnabled(true);
+                                jf10.setEnabled(true);
+                                jf11.setEnabled(true);
+                                jf12.setEnabled(true);
+                                jf13.setEnabled(true);
+                                jf14.setEnabled(true);
+                                jf15.setEnabled(true);
+                                jf16.setEnabled(true);
+                                jf17.setEnabled(true);
+                                jf18.setEnabled(true);
+                                jf19.setEnabled(true);
+                                jf20.setEnabled(true);
+                                jf21.setEnabled(true);
+                                jf22.setEnabled(true);
+                                jf23.setEnabled(true);
+                                jf24.setEnabled(true);
+                                jf25.setEnabled(true);
+                                jf26.setEnabled(true);
+                                jf27.setEnabled(true);
+                                jf28.setEnabled(true);
+                                bAskLokState = false;               
+                                return;
                             }
                             AktLokAdr = AskedLokAdr;
+                            String txt = jDisplay.getText();
+                            jDisplay.setText(txt.substring(0, 6) + "          \n                ");
+                            LokName = " ";
                             for (int i = 0; i < jTableLoco.getRowCount(); i++)
                             {
                                 Object oAdr = jTableLoco.getValueAt(i, 0);
@@ -6840,6 +6852,7 @@ public class MC extends javax.swing.JFrame {
         jListeSchreiben.setEnabled(false);
         jDirektSchreiben.setEnabled(false);
         bReadPTdirekt = true;
+        bAskLokState = false;
         if(Com == null)
         {
             Com = KTUI.safelyOpenCom(this, Com);
@@ -7235,7 +7248,8 @@ public class MC extends javax.swing.JFrame {
                 substring += "     ";
                 substring = substring.substring(0, 5);
             }
-            text = substring + "     " + OldDisplayString.substring(10);
+//            text = substring + "     " + OldDisplayString.substring(10);
+            text = substring + "          \n  please wait   " ;
             jDisplay.setText(text);
             DisplayState = -1;
         
