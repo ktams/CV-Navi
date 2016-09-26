@@ -1802,10 +1802,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1878,10 +1878,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2950,10 +2950,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jGeschwindigkeit.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jGeschwindigkeitCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 180, -1));
@@ -3993,7 +3993,7 @@ public class MC extends javax.swing.JFrame {
                                     jMMRegister.setEnabled(true);
                                     jMMWert.setEnabled(true);
                                     jMcRwProgress.setString(null);
-                                    Com.write((byte)0x61);
+                                    Com.write((byte)0x61); // STOP
                                     stopIOAction();
                                     return;
 
@@ -4075,11 +4075,6 @@ public class MC extends javax.swing.JFrame {
                         if( retries == 0 ) {
                             jMcRwProgress.setString(null);
                             System.out.println(" -> retries ende" );
-                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                            jListeBearbeiten.setEnabled(true);
-                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                            jListeSchreiben.setEnabled(true);
-                            jDirektSchreiben.setEnabled(true);
                             stopIOAction();
                             return;
                         }
@@ -4188,9 +4183,7 @@ public class MC extends javax.swing.JFrame {
                             {
                                 s = "XLC " + AskedLokAdr + "\r";
                                 KTUI.flushReadBuffer( Com );
-                                for(int i = 0; i < bArray.length; i++)
-                                    bArray[i] = 0;
-                                bytesRead = 0;
+                                resetbArray();
                                 bMustAskStatus = false;
                                 Com.write(s);
                                 timer.setInitialDelay(KlarTextUI.timer1);
@@ -4210,9 +4203,7 @@ public class MC extends javax.swing.JFrame {
                         {
                             s = "XL " + AskedLokAdr + " 0 0 f 0 0 0 0\r";
                             KTUI.flushReadBuffer( Com );
-                            for(int i = 0; i < bArray.length; i++)
-                                bArray[i] = 0;
-                            bytesRead = 0;
+                            resetbArray();
                             bMustAskStatus = true;
                             Com.write(s);
                             timer.setInitialDelay(KlarTextUI.timer1);
@@ -4408,9 +4399,7 @@ public class MC extends javax.swing.JFrame {
                             }
                             s = "XL " + AskedLokAdr + "\r";
                             KTUI.flushReadBuffer( Com );
-                            for(int i = 0; i < bArray.length; i++)
-                                bArray[i] = 0;
-                            bytesRead = 0;
+                            resetbArray();
                             Com.write(s);
                             timer.setInitialDelay(KlarTextUI.timer1);
                             timer.setDelay(KlarTextUI.timer2);
@@ -4442,11 +4431,6 @@ public class MC extends javax.swing.JFrame {
                         int CV = Integer.parseInt(jCV_Direkt.getText());
                         if(CV == 8)
                         jHerstellerInfo.setText(Hersteller(cvWert));
-                        if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                        jListeBearbeiten.setEnabled(true);
-                        if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                        jListeSchreiben.setEnabled(true);
-                        jDirektSchreiben.setEnabled(true);
                     }
                     if(bReadPTList)
                     {
@@ -4488,9 +4472,7 @@ public class MC extends javax.swing.JFrame {
                             if(j > Index)
                             {
                                 KTUI.flushReadBuffer( Com );
-                                for(int i = 0; i < bArray.length; i++)
-                                    bArray[i] = 0;
-                                bytesRead = 0;
+                                resetbArray();
                                 jCVListe.setSelectedIndex(Index + 1);
                                 s = (String)jCVListe.getSelectedValue();
                                 s = "XPTRD" + s + "\r";
@@ -4505,25 +4487,15 @@ public class MC extends javax.swing.JFrame {
                             else
                             {
                                 bReadPTList = false;
-                                if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                                jListeBearbeiten.setEnabled(true);
-                                if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                                jListeSchreiben.setEnabled(true);
-                                jDirektSchreiben.setEnabled(true);
                                 stopIOAction();
                             }
                         }
                         else
                         {
                             bReadPTList = false;
-                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                            jListeBearbeiten.setEnabled(true);
-                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                            jListeSchreiben.setEnabled(true);
-                            jDirektSchreiben.setEnabled(true);
                             stopIOAction();
                         }
-                   }
+                    }
                     if(bWriteList)
                     {
                         if( ! KTUI.checkReadComplete(bArray) ) {
@@ -4543,9 +4515,7 @@ public class MC extends javax.swing.JFrame {
                                 if(j != Index + 1)
                                 {
                                     KTUI.flushReadBuffer( Com );
-                                    for(int i = 0; i < bArray.length; i++)
-                                        bArray[i] = 0;
-                                    bytesRead = 0;
+                                    resetbArray();
                                     jCVListe.setSelectedIndex(Index + 1);
                                     s = (String)jCVListe.getSelectedValue();
                                     if(jHauptGleis.isSelected())
@@ -4573,22 +4543,12 @@ public class MC extends javax.swing.JFrame {
                                 else
                                 {
                                     bWriteList = false;
-                                    if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                                    jListeBearbeiten.setEnabled(true);
-                                    if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                                    jListeSchreiben.setEnabled(true);
-                                    jDirektSchreiben.setEnabled(true);
                                     stopIOAction();
                                 }
                             }
                         }
                         else
                         {
-                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                            jListeBearbeiten.setEnabled(true);
-                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                            jListeSchreiben.setEnabled(true);
-                            jDirektSchreiben.setEnabled(true);
                             bWriteList = false;
                             stopIOAction();
                         }
@@ -5497,9 +5457,10 @@ public class MC extends javax.swing.JFrame {
 
     private void resetbArray() {
         // Reset bArray with '0'
-        for( int i = 0 ; i < bytesRead ; i++ ) {
+        for( int i = 0 ; i < bArray.length ; i++ ) {
             bArray[i] = 0;
         }
+        // also reset counter for valid bytes read into this array
         bytesRead = 0;
     }
 
@@ -6363,7 +6324,6 @@ public class MC extends javax.swing.JFrame {
         }
 
         KTUI.flushReadBuffer(Com);
-        // Com.write((byte)0x61);
         String s = "xcfgdump\r";
         Com.write(s);
         resetbArray();
@@ -6760,15 +6720,17 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf28ActionPerformed
 
     private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
-        if(Com == null)
-        {
-            Com = KTUI.safelyOpenCom(this, Com);
+        Com = KTUI.safelyOpenCom(this, Com);
+        if(Com == null) {
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        Com.write((byte)0x60); // GO
+
         jDisplay.setAutoscrolls(false);
         jDisplay.setText("----          0 \n           -----");
         DisplayCursor = 0;
         DisplayState = -1;
-        Com.write((byte)0x60);
         jHauptGleis.setSelected(true);
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
@@ -6802,6 +6764,12 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2ComponentShown
 
     private void jDirektSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektSchreibenActionPerformed
+        Com = KTUI.safelyOpenCom(this, Com);
+        if(Com == null)
+        {
+            // LRLRLR: Todo Message-Box and return
+            return;
+        }
         try {
             int CV = Integer.parseInt(jCV_Direkt.getText());
             int Wert = Integer.parseInt(jWertDirekt.getText());
@@ -6819,10 +6787,6 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("505 jCVSchreibenActionPerformed not POM : XPTWD " + CV + " " + Wert );
                 retries = KlarTextUI.timerRetries;
             }
-            if(Com == null)
-            {
-                Com = KTUI.safelyOpenCom(this, Com);
-            }
             KTUI.flushReadBuffer( Com );
             Com.write(s);
         } catch (NumberFormatException numberFormatException) {
@@ -6836,31 +6800,28 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jProgGleisActionPerformed
 
     private void jHauptGleisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHauptGleisActionPerformed
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
-        Com.write((byte)0x60);
+        Com.write((byte)0x60); // GO
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
     }//GEN-LAST:event_jHauptGleisActionPerformed
 
     private void jDirektLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektLesenActionPerformed
-        jDirektLesen.setEnabled(false);
-        jListeBearbeiten.setEnabled(false);
-        jListeLesen.setEnabled(false);
-        jListeSchreiben.setEnabled(false);
-        jDirektSchreiben.setEnabled(false);
-        bReadPTdirekt = true;
-        bAskLokState = false;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bReadPTdirekt = true;
+        bAskLokState = false;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
         int cvAnfrage = KTUI.checkTextField( this, jCV_Direkt, 1, 1024, 8, false);
         System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
         String s = "XPTRD " + cvAnfrage + "\r";
@@ -6869,25 +6830,20 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = KlarTextUI.timerRetries * 2;
-        timer.start();
+        retries = KlarTextUI.timerRetries * 2; // LRLRLR warum doppelte Anzahl ???
+        startIOAction();
     }//GEN-LAST:event_jDirektLesenActionPerformed
 
     private void jListeLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeLesenActionPerformed
-        jDirektLesen.setEnabled(false);
-        jListeBearbeiten.setEnabled(false);
-        jListeLesen.setEnabled(false);
-        jListeSchreiben.setEnabled(false);
-        jDirektSchreiben.setEnabled(false);
-        bReadPTList = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bReadPTList = true;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
         jCVListe.clearSelection();
         jCVListe.setSelectedIndex(0);
         String s = (String)jCVListe.getSelectedValue();
@@ -6897,8 +6853,8 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = KlarTextUI.timerRetries * 2;
-        timer.start();
+        retries = KlarTextUI.timerRetries * 2; // LRLRLR warum doppelte Anzahl ???
+        startIOAction();
     }//GEN-LAST:event_jListeLesenActionPerformed
 
     public ListModel getList()
@@ -6923,34 +6879,34 @@ public class MC extends javax.swing.JFrame {
     }
 
     private void jListeBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeBearbeitenActionPerformed
+        /* Aufruf der Listenbearbeitung öffnet modales Fenster -> aufrufendes Fenster ist eh nicht bedienbar
+        ** sonst ggf. Auslagerung in startIOAction() / stopOPAction mit optionalem Parameter...
         jDirektLesen.setEnabled(false);
         jListeBearbeiten.setEnabled(false);
         jListeLesen.setEnabled(false);
         jListeSchreiben.setEnabled(false);
         jDirektSchreiben.setEnabled(false);
+        */
         new MC_RB_CV_List(this, true).setVisible(true);
+        /*
         if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
         jListeBearbeiten.setEnabled(true);
         if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
         jListeSchreiben.setEnabled(true);
         jDirektSchreiben.setEnabled(true);
+        */
     }//GEN-LAST:event_jListeBearbeitenActionPerformed
 
     private void jListeSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeSchreibenActionPerformed
-        jDirektLesen.setEnabled(false);
-        jListeBearbeiten.setEnabled(false);
-        jListeLesen.setEnabled(false);
-        jListeSchreiben.setEnabled(false);
-        jDirektSchreiben.setEnabled(false);
-        bWriteList = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bWriteList = true;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
         jCVListe.clearSelection();
         jCVListe.setSelectedIndex(0);
         String s = (String)jCVListe.getSelectedValue();
@@ -6975,20 +6931,20 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = KlarTextUI.timerRetries * 2;
-        timer.start();
+        retries = KlarTextUI.timerRetries * 2; // LRLRLR warum doppelte Anzahl ???
+        startIOAction();
     }//GEN-LAST:event_jListeSchreibenActionPerformed
 
     private void jm3SchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm3SchreibenActionPerformed
-        bProg_m3 = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bProg_m3 = true;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
 
         String s = "xMFX " + jm3Addr.getText() + "\r";
         Com.write(s);
@@ -6997,8 +6953,7 @@ public class MC extends javax.swing.JFrame {
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
         retries = 0; //KlarTextUI.timerRetries * 4;
-        timer.start();
-        jm3Schreiben.setEnabled(false);
+        startIOAction();
     }//GEN-LAST:event_jm3SchreibenActionPerformed
 
     private void jMMWertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMMWertActionPerformed
@@ -7010,28 +6965,24 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jHerstellerInfoActionPerformed
 
     private void jStartMMProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartMMProgActionPerformed
-        bProg_MM = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
-        Com.write((byte)0x61);
-//        Com.write("xTPM 80\r");
+        bProg_MM = true;
+        Com.write((byte)0x61); // STOP
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
 
         KTUI.mbGeneric(this, "Hinweis", "Für die Lokadressen " + jMMRegister.getText() + " und " + jMMWert.getText() + " muss das MM Protokoll eingestellt werde.", "Bitte stellen Sie an Ihrer MM-Lok nun den Programmiermodus ein.");
         timer.setInitialDelay(KlarTextUI.timer1);
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = 14;
-        timer.start();
-        jStartMMProg.setEnabled(false);
-        jMMRegister.setEnabled(false);
-        jMMWert.setEnabled(false);
+        retries = 14; // LRLRLR Warum genau 14 ?
+        startIOAction();
     }//GEN-LAST:event_jStartMMProgActionPerformed
 
     private void j1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j1ActionPerformed
@@ -7258,9 +7209,7 @@ public class MC extends javax.swing.JFrame {
                 Com = KTUI.safelyOpenCom(this, Com);
             }
             KTUI.flushReadBuffer( Com );
-            for(int i = 0; i < bArray.length; i++)
-                bArray[i] = 0;
-            bytesRead = 0;
+            resetbArray();
 
             System.out.print("LokAnfrage Adr.: "+parseInt);
             String s = "XLC " + parseInt + "\r";
@@ -7337,7 +7286,7 @@ public class MC extends javax.swing.JFrame {
         {
             Com = KTUI.safelyOpenCom(this, Com);
         }
-        Com.write((byte)0x60);
+        Com.write((byte)0x60); // GO
         String s = jDisplay.getText().substring(0, 7) + AktLokFormat + jDisplay.getText().substring(11);
         jDisplay.setText(s);
     }//GEN-LAST:event_jGOActionPerformed
@@ -7347,7 +7296,7 @@ public class MC extends javax.swing.JFrame {
         {
             Com = KTUI.safelyOpenCom(this, Com);
         }
-        Com.write((byte)0x61);
+        Com.write((byte)0x61); // STOP
         String s = jDisplay.getText().substring(0, 7) + "STOP" + jDisplay.getText().substring(11);
         jDisplay.setText(s);
     }//GEN-LAST:event_jSTOPActionPerformed
@@ -7404,9 +7353,8 @@ public class MC extends javax.swing.JFrame {
                 Com = KTUI.safelyOpenCom(this, Com);
             }
             KTUI.flushReadBuffer( Com );
-            for(int i = 0; i < bArray.length; i++)
-                bArray[i] = 0;
-            bytesRead = 0;
+            resetbArray();
+
             System.out.print("Weiche: "+parseInt + "gerade");
             String s = "XT " + parseInt + " g 1\r";
             Com.write(s);
@@ -7481,9 +7429,8 @@ public class MC extends javax.swing.JFrame {
                 Com = KTUI.safelyOpenCom(this, Com);
             }
             KTUI.flushReadBuffer( Com );
-            for(int i = 0; i < bArray.length; i++)
-                bArray[i] = 0;
-            bytesRead = 0;
+            resetbArray();
+
             System.out.print("Weiche: "+parseInt + "Abzweig");
             String s = "XT " + parseInt + " r 1\r";
             Com.write(s);
@@ -8135,6 +8082,19 @@ public class MC extends javax.swing.JFrame {
         jEasyNetUpdate.setEnabled(false);
         jMRST.setEnabled(false);
 
+        jDirektLesen.setEnabled(false);
+        jListeLesen.setEnabled(false);
+        jListeBearbeiten.setEnabled(false);
+        jListeSchreiben.setEnabled(false);
+        jDirektSchreiben.setEnabled(false);
+
+        jm3Addr.setEnabled(false);
+        jm3Schreiben.setEnabled(false);
+
+        jMMRegister.setEnabled(false);
+        jMMWert.setEnabled(false);
+        jStartMMProg.setEnabled(false);
+
         // init progress bars
         jMcRwProgress.setValue(0);
 
@@ -8180,6 +8140,25 @@ public class MC extends javax.swing.JFrame {
                 jMcUpdInfo.setText("Aktualisierung abgebrochen");
             else
                 jMcUpdInfo.setText("update cancelled");
+        }
+
+        if( bAskLokState ) {
+            bAskLokState = false;
+        }
+        if( bReadPTdirekt ) {
+            bReadPTdirekt = false;
+        }
+        if( bReadPTList ) {
+            bReadPTList = false;
+        }
+        if( bWriteList ) {
+            bWriteList = false;
+        }
+        if( bProg_m3 ) {
+            bProg_m3 = false;
+        }
+        if( bProg_MM ) {
+            bProg_MM = false;
         }
 
         // set buttons to normal operation
@@ -8229,6 +8208,21 @@ public class MC extends javax.swing.JFrame {
 
         jEasyNetUpdate.setEnabled(true);
         jMRST.setEnabled(true);
+
+        if( ! jHauptGleis.isSelected() ) {
+            jDirektLesen.setEnabled(true);
+            jListeLesen.setEnabled(true);
+        }
+        jListeBearbeiten.setEnabled(true);
+        jListeSchreiben.setEnabled(true);
+        jDirektSchreiben.setEnabled(true);
+
+        jm3Addr.setEnabled(true);
+        jm3Schreiben.setEnabled(true);
+
+        jMMRegister.setEnabled(true);
+        jMMWert.setEnabled(true);
+        jStartMMProg.setEnabled(true);
 
         // set cursor
         Cursor c = new Cursor(Cursor.DEFAULT_CURSOR );
