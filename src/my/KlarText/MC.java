@@ -2943,6 +2943,7 @@ public class MC extends javax.swing.JFrame {
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jGeschwindigkeit.setMaximum(126);
+        jGeschwindigkeit.setToolTipText(bundle.getString("MC.jGeschwindigkeit.toolTipText")); // NOI18N
         jGeschwindigkeit.setValue(0);
         jGeschwindigkeit.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -3484,6 +3485,7 @@ public class MC extends javax.swing.JFrame {
         jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
 
         jRueck.setText(bundle.getString("MC.jRueck.text")); // NOI18N
+        jRueck.setToolTipText(bundle.getString("MC.jRueck.toolTipText")); // NOI18N
         jRueck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRueckActionPerformed(evt);
@@ -3492,6 +3494,7 @@ public class MC extends javax.swing.JFrame {
         jPanel6.add(jRueck, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, -1, -1));
 
         jVor.setText(bundle.getString("MC.jVor.text")); // NOI18N
+        jVor.setToolTipText(bundle.getString("MC.jVor.toolTipText")); // NOI18N
         jVor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jVorActionPerformed(evt);
