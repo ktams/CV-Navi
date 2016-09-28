@@ -5849,6 +5849,7 @@ public class MC extends javax.swing.JFrame {
 
     private void jUpdDateiAuswahlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdDateiAuswahlActionPerformed
         SaveOpenDialog od = new SaveOpenDialog( this, true, true, null, this, "hex", c.HEX);
+        jSerNr.setText("???");
         return;
     }//GEN-LAST:event_jUpdDateiAuswahlActionPerformed
 
