@@ -181,7 +181,7 @@ enum decoderList {
 public class KlarTextUI extends javax.swing.JFrame {
     /** Creates new form KlarTextUI */
     public int     gsVersionMayor = 2;
-    public int     gsVersionMinor = 0;
+    public int     gsVersionMinor = 1;
     public JFrame  frameInstanceDEVICE = null;
     public JFrame  frameInstanceOPTIONS = null;
     public JFrame  frameInstanceINFO = null;
@@ -750,7 +750,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     }
     public void mbConfigWriteError( Container cont, String sError, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
-        
+
         messageBox.jLabel1.setText(bundle.getString("Fehler"));
         messageBox.jLabel2.setText(bundle.getString("Errorwriting"));
         if( (sError != null) && (sError.length() > 0 ) ) {
@@ -1159,7 +1159,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         messageBox.setVisible(true);
     }
-    
+
     public void mbValueTooBig( Container cont ) {
         mbValueTooBig( cont, 0, 0, false);
     }
@@ -1185,7 +1185,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         messageBox.setVisible(true);
     }
-    
+
     public void mbValueNaN( Container cont ) {
         mbValueNaN( cont, 0, 0, false);
     }
@@ -1430,7 +1430,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         return value;
     }
-    
+
     public Boolean setCVvalue( int[][] CV, int cv, int value ) {
         if( CV == null ) {
             return false;
@@ -1679,7 +1679,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         String errCode;
         errCode = bundle.getString("Errorcode");
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("checkMCAnswerByte: len="+len+" bArr[0]="+String.format("%02X ", bArr[0]));
         }
         switch( bArr[0] ) {
@@ -1780,7 +1780,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         return( safelyOpenCom( cont, Com, true));
     }
     public TwoWaySerialComm safelyOpenCom( Container cont, TwoWaySerialComm Com, Boolean showMbox  ) {
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("safelyOpenCom: Com "+ Com==null?"=":"!" +"= null");
         }
         if( Com != null ) {
@@ -1822,7 +1822,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         return( safelyCloseCom( cont, Com, true));
     }
     public TwoWaySerialComm safelyCloseCom( Container cont, TwoWaySerialComm Com, Boolean showMbox ) {
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("safelyCloseCom: Com "+ Com==null?"=":"!" +"= null" );
             System.out.println("cont name="+cont.getName() +" class="+cont.getClass() );;
         }
@@ -2183,7 +2183,9 @@ public class KlarTextUI extends javax.swing.JFrame {
 
     public void fillMenuSelection() {
         int prevIdx = this.getDecoderChooser();
-        System.out.println("fillMenuSelection prevIdx="+prevIdx);
+        if( debugLevel > 0 ) {
+            System.out.println("fillMenuSelection prevIdx="+prevIdx);
+        }
 
         int coSize = decoderList.values().length;
         final String[] myStrings = new String[coSize];
@@ -2249,19 +2251,23 @@ public class KlarTextUI extends javax.swing.JFrame {
             timer3 = userTimer3;
         if( userTimerRetries >= 0 )
             timerRetries = userTimerRetries;
-        System.out.println("timerSettings MCtimer1="+MCtimer1+" MCtimer2="+MCtimer2+" timer1="+timer1+" timer2="+timer2+" timer3="+timer3+" timerRetries="+timerRetries);
+        if( debugLevel > 0 ) {
+            System.out.println("timerSettings MCtimer1="+MCtimer1+" MCtimer2="+MCtimer2+" timer1="+timer1+" timer2="+timer2+" timer3="+timer3+" timerRetries="+timerRetries);
+        }
 
         jDecoderChooser.setModel(new javax.swing.AbstractListModel() {
             public int getSize() { return myStrings.length; }
             public Object getElementAt(int i) { return myStrings[i]; }
         });
-        System.out.println("fillMenuSelection prevIdx("+prevIdx+")");
+        if( debugLevel > 0 ) {
+            System.out.println("fillMenuSelection prevIdx("+prevIdx+")");
+        }
         this.setDecoderChooser(prevIdx);
     }
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
         currSelection = jDecoderChooser.getSelectedIndex();
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jButtonStartActionPerformed currSelection="+currSelection );
         }
 
@@ -2269,7 +2275,7 @@ public class KlarTextUI extends javax.swing.JFrame {
             this.frameInstanceDEVICE.toFront();
             this.frameInstanceDEVICE.repaint();
 
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("jButtonStartActionPerformed: there is already an instance running for Decoder="+Decoder );
             }
             return;
@@ -2500,9 +2506,9 @@ public class KlarTextUI extends javax.swing.JFrame {
         String osInfo = "( "+osName+"["+osArch+"] , java "+dataModel+"bit )";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20160919a"; // "(release 20160606a)"
+        String gsBuild ="beta 20160926a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
-        if( debugLevel >= 0 ) { // TODO set to > 0 for release
+        if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
         }
         else {
@@ -2515,20 +2521,20 @@ public class KlarTextUI extends javax.swing.JFrame {
         final ActionListener actionListener = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println( "actionPerformed" );
                 }
                 byte[] bArray = new byte[0xFFFF];
 
                 if( bReadStatusBin ) {
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println( "actionPerformed bReadStatusBin " );
                     }
                     bReadStatusBin = false;
                     stopIOAction();
                     int tmpBytesRead = ExternalCom.read(bArray); // Gbts was Neues ?
                     ExternalCom = null;
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println( "actionPerformed bReadStatusBin tmpBytesRead="+tmpBytesRead );
                     }
                     if( tmpBytesRead > 0 ) {
@@ -2577,7 +2583,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                         bArray[5] = 0x00;
                         nBytes = 6;
                     }
-                    
+
                     if( debugDummyData == 3 ) {
                         // DUMMY - Werte zum DEBUGGEN : IB
                         /*
@@ -2645,7 +2651,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                     {
                         mbTimeout( outerThis, c.mbRDverify );
                     } else {
-                        if( debugLevel >= 1 ) {
+                        if( debugLevel > 0 ) {
                             System.out.println("Xver: finished bArraySize="+nBytes);
                         }
                         byte[] mYbArray = new byte[nBytes];
@@ -2654,7 +2660,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                         bZentraleVerified = true;
                         fillMenuSelection();
                         if( ok && bGotoUpdate ) {
-                            if( debugLevel >= 1 ) {
+                            if( debugLevel > 0 ) {
                                 System.out.println("bVerifyZentraleInProgress jDecoderChooser.setSelectedIndex="+c.MC );
                             }
                             jDecoderChooser.setSelectedIndex(c.MC);
@@ -2685,7 +2691,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         long lSwVersion = 0;
         char b = ' ';
         char bNum = ' ';
-        
+
         /*
          * Version Info:
          * IB      6 answers first is 2 Bytes (BCD)
@@ -2696,19 +2702,19 @@ public class KlarTextUI extends javax.swing.JFrame {
          * MoPi    2 answer           3 Bytes (BYTE) (stores version: major, minor, build)
          */
         /* First in byte tells how much bytes are in next answer. */
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("bIn("+lenIn+")=0x"+printHexBinary(bIn));
         }
 
         if( lenIn <= 0 ) {
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("verifyXVer bIn is empty lenIn="+lenIn);
             }
             return false;
         }
         int lenAntwort = (int) bIn[idx];
         idx++;
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("Antwort["+numAnswers+"] ist "+lenAntwort+" Bytes lang");
         }
         if( lenAntwort > lenIn ) {
@@ -2726,7 +2732,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                 // 0x54 = 84 = 'T' Time out Error
                 String s = new String( bIn );
                 String cs = s.substring(0, 4);
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("bIN as String="+s+" len="+s.length()+" cs="+cs );
                 }
                 // die ersten 4 Zeichen vergleichen
@@ -2762,7 +2768,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                 }
                 bGotoUpdate = (getZentrale() == c.cuMasterControl);
                 mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuMasterControl );
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("bVerifyXVer bGotoUpdate="+bGotoUpdate );
                 }
                 return bGotoUpdate;
@@ -2782,7 +2788,7 @@ public class KlarTextUI extends javax.swing.JFrame {
 
         while( idx < lenIn ) {
             lenAntwort = (int) bIn[idx];
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("2880 Antwort["+numAnswers+"] ist "+lenAntwort+" Bytes lang");
             }
             idx++;
@@ -2790,19 +2796,19 @@ public class KlarTextUI extends javax.swing.JFrame {
                 if( lenAntwort > 0 ) {
                     numAnswers++;
                 } else {
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("2888 ENDE Xver : idx["+idx+"] + lenAntwort["+lenAntwort+"] <= lenIn["+lenIn+"]");
                     }
                 }
             } else {
                 // Ooops
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("2894 Oooops : idx["+idx+"] + lenAntwort["+lenAntwort+"] <= lenIn["+lenIn+"]");
                 }
             }
             idx += lenAntwort;
         }
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("numAnswers="+numAnswers);
         }
         switch( lenVersion ) {
@@ -2871,7 +2877,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
 
         if( lSwVersion > 0 ) {
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("lSwVersion="+lSwVersion+" in HEX="+String.format("0x%16s", Long.toHexString(lSwVersion)).replace(' ', '0') );
                 System.out.println("bUseXfuncs="+bUseXfuncs+" bUseXm3sid="+bUseXm3sid);
             }
@@ -3022,7 +3028,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         wArray[2] = (byte) (address & 0xFF); // AdrLow
         wArray[3] = (byte) ( ( (address >> 8) & 0x07) | (straight?0x80:0x00) | (coilOn?0x40:0x00) ); // AdrHigh (3bits) + Bit8 = turnout, Bit7= coilOn
         Com.write( wArray );
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("Weiche "+address+" gerade="+straight+ " aktiv="+coilOn );
         }
         dumpbArrayBIN(wArray, 4);
@@ -3219,7 +3225,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         if( debugLevel > 0 )
             System.out.println("debugLevel="+debugLevel);
-        
+
         if( verifySelectionList() == false )
             return;
 

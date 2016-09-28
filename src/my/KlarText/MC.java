@@ -108,7 +108,7 @@ public class MC extends javax.swing.JFrame {
     private Boolean checkM3uidValidActive = false;
     private M3_Liste M3L = null;
     public S88monitor S88mon = null;
-    
+
     public String M3liste[][] = null;
     public int M3used = 0;
 
@@ -520,7 +520,7 @@ public class MC extends javax.swing.JFrame {
                 try {
                     // special handling of "]" needed, because prompt from MC has no correct string termination !
                     if( strArr[j].startsWith("]")) {
-                        if( debugLevel >= 1 ) {
+                        if( debugLevel > 0 ) {
                             System.out.println("inside parseInputArray SKIP BRACKET j["+j+"] strArr[0]=\""+strArr1[0]+"\" len["+strArr1[0].length()+"]");
                         }
                         mode = Parser.END;
@@ -547,7 +547,7 @@ public class MC extends javax.swing.JFrame {
                         case "*END*":
                             mode = Parser.END;
                             ret = true;
-                            if( debugLevel >= 1 ) {
+                            if( debugLevel > 0 ) {
                                 System.out.println("inside parseInputArray search section found *END* SKIP j["+j+"] strArr[j]=["+strArr[j]+"]" );
                             }
                             continue;
@@ -1802,10 +1802,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1878,10 +1878,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2943,6 +2943,7 @@ public class MC extends javax.swing.JFrame {
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jGeschwindigkeit.setMaximum(126);
+        jGeschwindigkeit.setToolTipText(bundle.getString("MC.jGeschwindigkeit.toolTipText")); // NOI18N
         jGeschwindigkeit.setValue(0);
         jGeschwindigkeit.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -2950,10 +2951,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jGeschwindigkeit.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jGeschwindigkeitCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 180, -1));
@@ -3484,6 +3485,7 @@ public class MC extends javax.swing.JFrame {
         jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
 
         jRueck.setText(bundle.getString("MC.jRueck.text")); // NOI18N
+        jRueck.setToolTipText(bundle.getString("MC.jRueck.toolTipText")); // NOI18N
         jRueck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRueckActionPerformed(evt);
@@ -3492,6 +3494,7 @@ public class MC extends javax.swing.JFrame {
         jPanel6.add(jRueck, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, -1, -1));
 
         jVor.setText(bundle.getString("MC.jVor.text")); // NOI18N
+        jVor.setToolTipText(bundle.getString("MC.jVor.toolTipText")); // NOI18N
         jVor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jVorActionPerformed(evt);
@@ -3817,7 +3820,7 @@ public class MC extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // falls Schnittstelle offen und verbunden -> schliessen
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("formWindowClosed");
         }
         KTUI.frameInstanceDEVICE = null;
@@ -3839,7 +3842,7 @@ public class MC extends javax.swing.JFrame {
              public void valueChanged(ListSelectionEvent e) {
                 locoTableSelRow = jTableLoco.getSelectedRow();
                 locoTableSelCol = jTableLoco.getSelectedColumn();
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("LOCO ListSelectionListener valueChanged row="+locoTableSelRow+" col="+locoTableSelCol);
                 }
                 if( locoTableSelRow >= 0 ) {
@@ -3865,13 +3868,13 @@ public class MC extends javax.swing.JFrame {
     }
     private String getM3UID( Object loco ) {
         String sLoco = ""+loco;
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("getM3UID sLoco="+sLoco );
         }
         for( int i = 0 ; i < M3used ; i++ ) {
             String sM3uid = ""+M3liste[0][i];
             String sM3sid = ""+M3liste[1][i];
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("getM3UID sM3uid="+sM3uid+" sM3sid="+sM3sid );
             }
             if( sM3sid.equals(sLoco) ) {
@@ -3993,23 +3996,23 @@ public class MC extends javax.swing.JFrame {
                                     jMMRegister.setEnabled(true);
                                     jMMWert.setEnabled(true);
                                     jMcRwProgress.setString(null);
-                                    Com.write((byte)0x61);
+                                    Com.write((byte)0x61); // STOP
                                     stopIOAction();
                                     return;
-                                    
+
                                 case 6:
                                     int MM_Wert;
                                     MM_Wert = Integer.parseInt(jMMWert.getText());
                                     Com.write((byte)0);
                                     Com.write((byte)MM_Wert);
                                     break;
-                                    
+
                                 case 7:
                                     MM_Wert = Integer.parseInt(jMMWert.getText());
                                     Com.write((byte)15);
                                     Com.write((byte)MM_Wert);
                                     break;
-                                    
+
                                 case 8:
                                     try {
                                         MM_Wert = Integer.parseInt(jMMWert.getText());
@@ -4030,21 +4033,21 @@ public class MC extends javax.swing.JFrame {
                                     Com.write((byte)0);
                                     Com.write((byte)MM_Wert);
                                     break;
-                                    
+
                                 case 9:
                                     int MM_Adr;
                                     MM_Adr = Integer.parseInt(jMMRegister.getText());
                                     Com.write((byte)0);
                                     Com.write((byte)MM_Adr);
                                     break;
-                                    
+
                                 case 10:
                                     MM_Adr = 0;
                                     MM_Adr = Integer.parseInt(jMMRegister.getText());
                                     Com.write((byte)15);
                                     Com.write((byte)MM_Adr);
                                     break;
-                                    
+
                                 case 11:
                                     try {
                                         MM_Adr = Integer.parseInt(jMMRegister.getText());
@@ -4065,7 +4068,7 @@ public class MC extends javax.swing.JFrame {
                                     Com.write((byte)0);
                                     Com.write((byte)MM_Adr);
                                     break;
-                                    
+
                                 case 12:
                                     Com.write((byte)0);
                                     Com.write((byte)80);
@@ -4075,11 +4078,6 @@ public class MC extends javax.swing.JFrame {
                         if( retries == 0 ) {
                             jMcRwProgress.setString(null);
                             System.out.println(" -> retries ende" );
-                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                            jListeBearbeiten.setEnabled(true);
-                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                            jListeSchreiben.setEnabled(true);
-                            jDirektSchreiben.setEnabled(true);
                             stopIOAction();
                             return;
                         }
@@ -4099,7 +4097,7 @@ public class MC extends javax.swing.JFrame {
                         }
                         bWaitAnswerInProgress = false;
                         String s = new String(bArray);
-                        
+
                         String str;
                         if(s.contains("L "))
                         {
@@ -4119,11 +4117,11 @@ public class MC extends javax.swing.JFrame {
                                 case 14:
                                     V = (V + 8)/9;
                                     break;
-                                    
+
                                 case 27:
                                     V = (V*3 + 11)/14;
                                     break;
-                                    
+
                                 case 28:
                                     V = (V*2 + 7)/9;
                                     break;
@@ -4188,9 +4186,7 @@ public class MC extends javax.swing.JFrame {
                             {
                                 s = "XLC " + AskedLokAdr + "\r";
                                 KTUI.flushReadBuffer( Com );
-                                for(int i = 0; i < bArray.length; i++)
-                                    bArray[i] = 0;
-                                bytesRead = 0;
+                                resetbArray();
                                 bMustAskStatus = false;
                                 Com.write(s);
                                 timer.setInitialDelay(KlarTextUI.timer1);
@@ -4210,9 +4206,7 @@ public class MC extends javax.swing.JFrame {
                         {
                             s = "XL " + AskedLokAdr + " 0 0 f 0 0 0 0\r";
                             KTUI.flushReadBuffer( Com );
-                            for(int i = 0; i < bArray.length; i++)
-                                bArray[i] = 0;
-                            bytesRead = 0;
+                            resetbArray();
                             bMustAskStatus = true;
                             Com.write(s);
                             timer.setInitialDelay(KlarTextUI.timer1);
@@ -4408,9 +4402,7 @@ public class MC extends javax.swing.JFrame {
                             }
                             s = "XL " + AskedLokAdr + "\r";
                             KTUI.flushReadBuffer( Com );
-                            for(int i = 0; i < bArray.length; i++)
-                                bArray[i] = 0;
-                            bytesRead = 0;
+                            resetbArray();
                             Com.write(s);
                             timer.setInitialDelay(KlarTextUI.timer1);
                             timer.setDelay(KlarTextUI.timer2);
@@ -4442,11 +4434,6 @@ public class MC extends javax.swing.JFrame {
                         int CV = Integer.parseInt(jCV_Direkt.getText());
                         if(CV == 8)
                         jHerstellerInfo.setText(Hersteller(cvWert));
-                        if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                        jListeBearbeiten.setEnabled(true);
-                        if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                        jListeSchreiben.setEnabled(true);
-                        jDirektSchreiben.setEnabled(true);
                     }
                     if(bReadPTList)
                     {
@@ -4488,9 +4475,7 @@ public class MC extends javax.swing.JFrame {
                             if(j > Index)
                             {
                                 KTUI.flushReadBuffer( Com );
-                                for(int i = 0; i < bArray.length; i++)
-                                    bArray[i] = 0;
-                                bytesRead = 0;
+                                resetbArray();
                                 jCVListe.setSelectedIndex(Index + 1);
                                 s = (String)jCVListe.getSelectedValue();
                                 s = "XPTRD" + s + "\r";
@@ -4505,25 +4490,15 @@ public class MC extends javax.swing.JFrame {
                             else
                             {
                                 bReadPTList = false;
-                                if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                                jListeBearbeiten.setEnabled(true);
-                                if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                                jListeSchreiben.setEnabled(true);
-                                jDirektSchreiben.setEnabled(true);
                                 stopIOAction();
                             }
                         }
                         else
                         {
                             bReadPTList = false;
-                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                            jListeBearbeiten.setEnabled(true);
-                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                            jListeSchreiben.setEnabled(true);
-                            jDirektSchreiben.setEnabled(true);
                             stopIOAction();
                         }
-                   }
+                    }
                     if(bWriteList)
                     {
                         if( ! KTUI.checkReadComplete(bArray) ) {
@@ -4543,9 +4518,7 @@ public class MC extends javax.swing.JFrame {
                                 if(j != Index + 1)
                                 {
                                     KTUI.flushReadBuffer( Com );
-                                    for(int i = 0; i < bArray.length; i++)
-                                        bArray[i] = 0;
-                                    bytesRead = 0;
+                                    resetbArray();
                                     jCVListe.setSelectedIndex(Index + 1);
                                     s = (String)jCVListe.getSelectedValue();
                                     if(jHauptGleis.isSelected())
@@ -4573,22 +4546,12 @@ public class MC extends javax.swing.JFrame {
                                 else
                                 {
                                     bWriteList = false;
-                                    if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                                    jListeBearbeiten.setEnabled(true);
-                                    if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                                    jListeSchreiben.setEnabled(true);
-                                    jDirektSchreiben.setEnabled(true);
                                     stopIOAction();
                                 }
                             }
                         }
                         else
                         {
-                            if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
-                            jListeBearbeiten.setEnabled(true);
-                            if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
-                            jListeSchreiben.setEnabled(true);
-                            jDirektSchreiben.setEnabled(true);
                             bWriteList = false;
                             stopIOAction();
                         }
@@ -4693,7 +4656,7 @@ public class MC extends javax.swing.JFrame {
                             if( ( ! ok ) && ( debugLevel == 0 ) ) {
                                 KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
                             }
-                            if( debugLevel >= 1 ) {
+                            if( debugLevel > 0 ) {
                                 System.out.println("mYbArray("+bytesRead+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
                                 System.out.println("readProgress="+readWriteProgress);
                             }
@@ -4744,7 +4707,7 @@ public class MC extends javax.swing.JFrame {
                     byte[] mYbArray = new byte[nBytes];
                     System.arraycopy(bArray, 0, mYbArray, 0, nBytes);
                     Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("mYbArray("+nBytes+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
                         System.out.println("readProgress="+readWriteProgress);
                     }
@@ -4771,7 +4734,7 @@ public class MC extends javax.swing.JFrame {
                     byte[] mYbArray = new byte[nBytes];
                     System.arraycopy(bArray, 0, mYbArray, 0, nBytes);
                     Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("mYbArray("+nBytes+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
                         System.out.println("readProgress="+readWriteProgress+" M3used="+M3used);
                     }
@@ -4788,7 +4751,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if( ( readWriteProgress / 2 ) == M3used ) {
                         // commit for last dataset
-                        if( debugLevel >= 1 ) {
+                        if( debugLevel > 0 ) {
                             System.out.println("last dataset commited readProgress="+readWriteProgress);
                         }
                         bWriteM3sidList = false;
@@ -4800,7 +4763,7 @@ public class MC extends javax.swing.JFrame {
                     int listIdx = readWriteProgress / 2 ;
                     long lM3UID = Long.decode( M3liste[0][listIdx] );
                     int iAdr = Integer.decode( M3liste[1][listIdx] );
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("lM3UID="+String.format("%8s", Long.toHexString( lM3UID )).replace(' ', '0') + " iAdr="+iAdr);
                     }
 
@@ -4815,7 +4778,7 @@ public class MC extends javax.swing.JFrame {
                     wArray[7] = (byte) ( ( lM3UID >> 24 ) & 0xFF );
                     Com.write(wArray);
 
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("written to MC wArray=0x"+printHexBinary(wArray));
                     }
                     jMcM3Info.setText("Xm3Sid: write list in progress");
@@ -4834,7 +4797,7 @@ public class MC extends javax.swing.JFrame {
                     resetbArray();
 
                     MZ pre = KTUI.getMZ();
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("bReadStatus="+strArr[0]+ " MZ pre="+pre.toString() );
                     }
 
@@ -4848,7 +4811,7 @@ public class MC extends javax.swing.JFrame {
                     bReadCfg = false;
 
                     String str = new String(bArray);
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("Parser 1 nBytes="+bytesRead+" str.length="+str.length() );
                     }
                     int tmpMcRwMax = jMcRwProgress.getMaximum();
@@ -4886,7 +4849,7 @@ public class MC extends javax.swing.JFrame {
                         try {
                             rcValue = Integer.parseInt(strArr[0].substring(3));
                             updateRailComCheckboxes(rcValue);
-                            if( debugLevel >= 1 ) {
+                            if( debugLevel > 0 ) {
                                 System.out.println("readRC strArr[0].length["+strArr[0].length()+"] rcValue["+rcValue+"]" );
                             }
                         } catch ( Exception ex ) {
@@ -4894,7 +4857,7 @@ public class MC extends javax.swing.JFrame {
                             System.out.println("readRC bArray=" );
                             KTUI.dumpbArray(bArray);
                         }
-                        if( debugLevel >= 1 ) {
+                        if( debugLevel > 0 ) {
                             System.out.println("readRC bArray=" );
                             KTUI.dumpbArray(bArray);
                         }
@@ -4906,7 +4869,7 @@ public class MC extends javax.swing.JFrame {
 
                     jMcRwInfo.setText("read: MC read finished");
                     jMcRwProgress.setValue(++readWriteProgress);
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("readProgress="+readWriteProgress);
                     }
 
@@ -4947,13 +4910,13 @@ public class MC extends javax.swing.JFrame {
                 if(bWriteCfg) {
                     // es sind "bytesRead" Bytes an Daten in "bArray" verfügbar, endend mit "\r]"
                     // Ausnahme: erster Aufruf. Dann gibt es noch keine Daten znd es mußdie erste Anfrage generiert werden !
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("bWriteCfg bWaitAnswerInProgresss["+bWaitAnswerInProgress+"] bytesRead=["+bytesRead+"] nextWriteJob["+nextWriteJob+"] locIdx["+locIdx+"] traIdx["+traIdx+"] magIdx["+magIdx+"]" );
                     }
                     if( bytesRead > 0 ) {
                         String str = new String(bArray);
                         String[] strArr = str.split("\r");
-                        if( debugLevel >= 1 ) {
+                        if( debugLevel > 0 ) {
                             System.out.println("bWriteCfg bWaitAnswerInProgresss["+bWaitAnswerInProgress+"] nextWriteJob["+nextWriteJob+"] locIdx["+locIdx+"] traIdx["+traIdx+"] magIdx["+magIdx+"]" );
                             System.out.println("bWriteCfg bytesRead=["+bytesRead+"] strArr.length="+strArr.length );
                             if( debugLevel >= 3 ) {
@@ -5218,7 +5181,7 @@ public class MC extends javax.swing.JFrame {
                             {
                                 // assumption jTableAccessory was checked successfully
                                 // -> all jTableAccessory entries are OK and we can skip some validation checks here
- 
+
                                 String sIdx = (""+jTableAccessory.getValueAt(magIdx, 0)).trim();
                                 String sFmt = (""+jTableAccessory.getValueAt(magIdx, 1)).trim().toUpperCase();
                                 if( (sIdx.length() > 0) && (sFmt.length() > 0 ) ) {
@@ -5358,7 +5321,7 @@ public class MC extends javax.swing.JFrame {
                                 data1[260] = crc % 256;
                                 Com.write(data1);
                                break;
-                               
+
                             case '+':       //letzter Block wurde erfolgreich übertragen (128 Bytes)
                                 BlockNr++;
                             case '?':       //Block wiederholen (128 Bytes)
@@ -5388,7 +5351,7 @@ public class MC extends javax.swing.JFrame {
                                 data[130] = crc % 256;
                                 Com.write(data);
                                 break;
-                                
+
                             case 'F':       //Fertich
                                 KTUI.mbUpdateWriteSuccess( outerThis, BlockNr*4);
                                 Com = KTUI.safelyCloseCom( outerThis, Com );
@@ -5413,10 +5376,10 @@ public class MC extends javax.swing.JFrame {
                                 BlockNrTemp = BlockNr * 4;
                                 jUpdLastError.setText(bundle.getString("MC.CRC_Fehler_1") + BlockNrTemp + bundle.getString("MC.CRC_Fehler_2"));
                                 break;
-                                
+
                             case 'T':       //Time out Error
                                 break;
-                                
+
                             case 'L':       //Length Error
                                 BlockNrTemp = BlockNr * 4;
                                 jUpdLastError.setText(bundle.getString("MC.Blockfehler_1") + BlockNrTemp + bundle.getString("MC.Adressfehler_2"));
@@ -5497,9 +5460,10 @@ public class MC extends javax.swing.JFrame {
 
     private void resetbArray() {
         // Reset bArray with '0'
-        for( int i = 0 ; i < bytesRead ; i++ ) {
+        for( int i = 0 ; i < bArray.length ; i++ ) {
             bArray[i] = 0;
         }
+        // also reset counter for valid bytes read into this array
         bytesRead = 0;
     }
 
@@ -5521,7 +5485,7 @@ public class MC extends javax.swing.JFrame {
             bits += 0x04;
         return bits;
     }
-    
+
     private void updateRailComValue() {
         rcValue = getRailComValueFromCheckboxes();
     }
@@ -5646,7 +5610,7 @@ public class MC extends javax.swing.JFrame {
                     }
                 }
             }
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("strtDwnl A count["+count+"] lSeek="+lSeek);
             }
             if(n == 0xFFFF)
@@ -5682,7 +5646,7 @@ public class MC extends javax.swing.JFrame {
                             count++;
                         }
                         else {
-                            if( debugLevel >= 1 ) {
+                            if( debugLevel > 0 ) {
                                 System.out.println("strtDwnl A count["+count+"] reset to 0 i["+i+"]");
                             }
                             count = 0;
@@ -5696,7 +5660,7 @@ public class MC extends javax.swing.JFrame {
                         }
                     }
                 }
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("strtDwnl B count["+count+"] lSeek="+lSeek);
                 }
                 if(n == 0xFFFF)
@@ -5733,7 +5697,7 @@ public class MC extends javax.swing.JFrame {
                                 count++;
                             }
                             else {
-                                if( debugLevel >= 1 ) {
+                                if( debugLevel > 0 ) {
                                     System.out.println("strtDwnl B count["+count+"] reset to 0 i["+i+"]");
                                 }
                                 count = 0;
@@ -5747,7 +5711,7 @@ public class MC extends javax.swing.JFrame {
                             }
                         }
                     }
-                    if( debugLevel >= 1 ) {
+                    if( debugLevel > 0 ) {
                         System.out.println("strtDwnl C count["+count+"] lSeek="+lSeek);
                     }
                     if(n == 0xFFFF)
@@ -5783,7 +5747,7 @@ public class MC extends javax.swing.JFrame {
                                     count++;
                                 }
                                 else {
-                                    if( debugLevel >= 1 ) {
+                                    if( debugLevel > 0 ) {
                                         System.out.println("strtDwnl C count["+count+"] reset to 0 i["+i+"]");
                                     }
                                     count = 0;
@@ -5800,7 +5764,7 @@ public class MC extends javax.swing.JFrame {
                     }
                 }
             }
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("strtDwnl D count["+count+"] i["+i+"] lSeek="+lSeek+" n="+n);
             }
 
@@ -5954,7 +5918,7 @@ public class MC extends javax.swing.JFrame {
         String sM3UID = jTextM3UID.getText();
         // int iM3UID = Integer.decode(sM3UID);
         long lM3UID = Long.decode(sM3UID);
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("lM3UID="+String.format("%8s", Long.toHexString( lM3UID )).replace(' ', '0'));
         }
 
@@ -5982,7 +5946,7 @@ public class MC extends javax.swing.JFrame {
             KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+sM3UID, "writing to MC wArray=0x"+printHexBinary(wArray), 10, false );
         }
         Com.write(wArray);
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("written to MC wArray=0x"+printHexBinary(wArray));
         }
         bWriteM3sid = true;
@@ -6028,7 +5992,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableLocoKeyReleased
 
     private void jTableLocoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableLocoPropertyChange
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jTableLocoPropertyChange col="+jTableLoco.getEditingColumn()+" row="+jTableLoco.getEditingRow());
         }
         int edRow = jTableLoco.getEditingRow();
@@ -6050,19 +6014,19 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableLocoPropertyChange
 
     private void jTableLocoCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTableLocoCaretPositionChanged
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jTableLocoCaretPositionChanged col="+jTableLoco.getEditingColumn()+" row="+jTableLoco.getEditingRow());
         }
     }//GEN-LAST:event_jTableLocoCaretPositionChanged
 
     private void jTableLocoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableLocoFocusLost
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jTableLocoFocusLost col="+jTableLoco.getEditingColumn()+" row="+jTableLoco.getEditingRow());
         }
     }//GEN-LAST:event_jTableLocoFocusLost
 
     private void jTableLocoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableLocoFocusGained
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jTableLocoFocusGained col="+jTableLoco.getEditingColumn()+" row="+jTableLoco.getEditingRow());
         }
     }//GEN-LAST:event_jTableLocoFocusGained
@@ -6073,7 +6037,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jSystemComponentShown
 
     private void jCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCloseActionPerformed
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jCloseActionPerformed");
         }
         this.dispose();
@@ -6105,7 +6069,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jRailcomTailbitsActionPerformed
 
     private void jCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelActionPerformed
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jCancelActionPerformed");
         }
         stopIOAction();
@@ -6116,7 +6080,7 @@ public class MC extends javax.swing.JFrame {
         this.jMcRwProgress.setMaximum(100);
         this.jMcRwProgress.setValue(0);
         String str = "[INFO]\r\nVERSION " + jVersion.getText() + "\r\nHARDWARE " + jHardWare.getText() + "\r\nMCU " + jMCU.getText() + "\r\nSERIAL " + jSerNr.getText() + "\r\n[LOCO]\r\n";
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jKonfSichernActionPerformed Version["+jVersion.getText()+"]" );
         }
         this.jMcRwProgress.setValue(10);
@@ -6127,7 +6091,7 @@ public class MC extends javax.swing.JFrame {
             String s3 = (""+jTableLoco.getValueAt(i, 2)).trim();
             String s4 = (""+jTableLoco.getValueAt(i, 3)).trim();
             if((s1.length() > 0) && (s2.length() > 0) && (s3.length() > 0 )) {
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("jKonfSichernActionPerformed i["+i+"] s1["+s1+"] s2["+s2+"] s3["+s3+"]");
                 }
                 str += s1 + ", " + s2 + ", " + s3;
@@ -6139,7 +6103,7 @@ public class MC extends javax.swing.JFrame {
         }
         this.jMcRwProgress.setValue(35);
         str += "[TRAKTIONS]\r\n";
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jKonfSichernActionPerformed TRAKTIONS");
         }
         for(int i = 0; i < c.MAX_TRACTIONS; i++)
@@ -6155,7 +6119,7 @@ public class MC extends javax.swing.JFrame {
             }
         }
         this.jMcRwProgress.setValue(55);
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("jKonfSichernActionPerformed ACCFMT");
         }
         str += "[ACCFMT]\r\n";
@@ -6273,12 +6237,12 @@ public class MC extends javax.swing.JFrame {
             jMcRwInfo.setText("write: prepare loco table");
             // check loco table without "repair"-Option in silent mode (no show)
             Boolean chkLocOK = checkTableLoco( false, false );
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("KonfSchreiben chkLoc=["+chkLocOK+"]" );
             }
             if( chkLocOK == false ) {
                 // KTUI.mbTableCheck( FehlerArt, false );
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("KonfSchreiben chkLoc=["+chkLocOK+"] RETURN");
                 }
                 jMcRwInfo.setText("write: prepare -> loco list with errors -> cancel");
@@ -6293,12 +6257,12 @@ public class MC extends javax.swing.JFrame {
             jMcRwInfo.setText("write: prepare traction table");
             // check traction table without "repair"-Option in silent mode (no show)
             Boolean chkTraOK = checkTableTraction( false, false );
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("KonfSchreiben chkTra=["+chkTraOK+"]" );
             }
             if( chkTraOK == false ) {
                 // KTUI.mbTableCheck( FehlerArt, false );
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("KonfSchreiben chkTra=["+chkTraOK+"] RETURN" );
                 }
                 jMcRwInfo.setText("write: prepare -> traction list with errors -> cancel");
@@ -6313,12 +6277,12 @@ public class MC extends javax.swing.JFrame {
             jMcRwInfo.setText("write: prepare accessory table");
             // check accesory table without "repair"-Option in silent mode (no show)
             Boolean chkAccOK = checkTableAccessory( false, false );
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("KonfSchreiben chkAcc=["+chkAccOK+"]" );
             }
             if( chkAccOK == false ) {
                 // KTUI.mbTableCheck( FehlerArt, false );
-                if( debugLevel >= 1 ) {
+                if( debugLevel > 0 ) {
                     System.out.println("KonfSchreiben chkAcc=["+chkAccOK+"] RETURN" );
                 }
                 jMcRwInfo.setText("write: prepare -> accessory list with errors -> cancel");
@@ -6339,7 +6303,7 @@ public class MC extends javax.swing.JFrame {
         bFalscheEingabe = false;
         FehlerArt = 0;
         int nR = KTUI.flushReadBuffer(Com);
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("KonfSchreiben clean buffer pre 0x61 write read "+nR+" bytes" );
         }
 
@@ -6364,7 +6328,6 @@ public class MC extends javax.swing.JFrame {
         }
 
         KTUI.flushReadBuffer(Com);
-        // Com.write((byte)0x61);
         String s = "xcfgdump\r";
         Com.write(s);
         resetbArray();
@@ -6509,7 +6472,7 @@ public class MC extends javax.swing.JFrame {
 
         long lM3UID = Long.decode( M3liste[0][0] );
         int iAdr = Integer.decode( M3liste[1][0] );
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("lM3UID="+String.format("%8s", Long.toHexString( lM3UID )).replace(' ', '0') + " iAdr="+iAdr);
         }
 
@@ -6536,7 +6499,7 @@ public class MC extends javax.swing.JFrame {
             KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+lM3UID, "writing to MC wArray=0x"+printHexBinary(wArray), 10, false );
         }
         Com.write(wArray);
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("written to MC wArray=0x"+printHexBinary(wArray));
         }
         bWriteM3sidList = true;
@@ -6761,15 +6724,17 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf28ActionPerformed
 
     private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
-        if(Com == null)
-        {
-            Com = KTUI.safelyOpenCom(this, Com);
+        Com = KTUI.safelyOpenCom(this, Com);
+        if(Com == null) {
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        Com.write((byte)0x60); // GO
+
         jDisplay.setAutoscrolls(false);
         jDisplay.setText("----          0 \n           -----");
         DisplayCursor = 0;
         DisplayState = -1;
-        Com.write((byte)0x60);
         jHauptGleis.setSelected(true);
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
@@ -6803,6 +6768,12 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2ComponentShown
 
     private void jDirektSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektSchreibenActionPerformed
+        Com = KTUI.safelyOpenCom(this, Com);
+        if(Com == null)
+        {
+            // LRLRLR: Todo Message-Box and return
+            return;
+        }
         try {
             int CV = Integer.parseInt(jCV_Direkt.getText());
             int Wert = Integer.parseInt(jWertDirekt.getText());
@@ -6820,10 +6791,6 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("505 jCVSchreibenActionPerformed not POM : XPTWD " + CV + " " + Wert );
                 retries = KlarTextUI.timerRetries;
             }
-            if(Com == null)
-            {
-                Com = KTUI.safelyOpenCom(this, Com);
-            }
             KTUI.flushReadBuffer( Com );
             Com.write(s);
         } catch (NumberFormatException numberFormatException) {
@@ -6837,31 +6804,28 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jProgGleisActionPerformed
 
     private void jHauptGleisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHauptGleisActionPerformed
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
-        Com.write((byte)0x60);
+        Com.write((byte)0x60); // GO
         jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
     }//GEN-LAST:event_jHauptGleisActionPerformed
 
     private void jDirektLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektLesenActionPerformed
-        jDirektLesen.setEnabled(false);
-        jListeBearbeiten.setEnabled(false);
-        jListeLesen.setEnabled(false);
-        jListeSchreiben.setEnabled(false);
-        jDirektSchreiben.setEnabled(false);
-        bReadPTdirekt = true;
-        bAskLokState = false;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bReadPTdirekt = true;
+        bAskLokState = false;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
         int cvAnfrage = KTUI.checkTextField( this, jCV_Direkt, 1, 1024, 8, false);
         System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
         String s = "XPTRD " + cvAnfrage + "\r";
@@ -6870,25 +6834,20 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = KlarTextUI.timerRetries * 2;
-        timer.start();
+        retries = KlarTextUI.timerRetries * 2; // LRLRLR warum doppelte Anzahl ???
+        startIOAction();
     }//GEN-LAST:event_jDirektLesenActionPerformed
 
     private void jListeLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeLesenActionPerformed
-        jDirektLesen.setEnabled(false);
-        jListeBearbeiten.setEnabled(false);
-        jListeLesen.setEnabled(false);
-        jListeSchreiben.setEnabled(false);
-        jDirektSchreiben.setEnabled(false);
-        bReadPTList = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bReadPTList = true;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
         jCVListe.clearSelection();
         jCVListe.setSelectedIndex(0);
         String s = (String)jCVListe.getSelectedValue();
@@ -6898,8 +6857,8 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = KlarTextUI.timerRetries * 2;
-        timer.start();
+        retries = KlarTextUI.timerRetries * 2; // LRLRLR warum doppelte Anzahl ???
+        startIOAction();
     }//GEN-LAST:event_jListeLesenActionPerformed
 
     public ListModel getList()
@@ -6924,34 +6883,34 @@ public class MC extends javax.swing.JFrame {
     }
 
     private void jListeBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeBearbeitenActionPerformed
+        /* Aufruf der Listenbearbeitung öffnet modales Fenster -> aufrufendes Fenster ist eh nicht bedienbar
+        ** sonst ggf. Auslagerung in startIOAction() / stopOPAction mit optionalem Parameter...
         jDirektLesen.setEnabled(false);
         jListeBearbeiten.setEnabled(false);
         jListeLesen.setEnabled(false);
         jListeSchreiben.setEnabled(false);
         jDirektSchreiben.setEnabled(false);
+        */
         new MC_RB_CV_List(this, true).setVisible(true);
+        /*
         if(!jHauptGleis.isSelected()) jDirektLesen.setEnabled(true);
         jListeBearbeiten.setEnabled(true);
         if(!jHauptGleis.isSelected()) jListeLesen.setEnabled(true);
         jListeSchreiben.setEnabled(true);
         jDirektSchreiben.setEnabled(true);
+        */
     }//GEN-LAST:event_jListeBearbeitenActionPerformed
 
     private void jListeSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeSchreibenActionPerformed
-        jDirektLesen.setEnabled(false);
-        jListeBearbeiten.setEnabled(false);
-        jListeLesen.setEnabled(false);
-        jListeSchreiben.setEnabled(false);
-        jDirektSchreiben.setEnabled(false);
-        bWriteList = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bWriteList = true;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
         jCVListe.clearSelection();
         jCVListe.setSelectedIndex(0);
         String s = (String)jCVListe.getSelectedValue();
@@ -6976,20 +6935,20 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = KlarTextUI.timerRetries * 2;
-        timer.start();
+        retries = KlarTextUI.timerRetries * 2; // LRLRLR warum doppelte Anzahl ???
+        startIOAction();
     }//GEN-LAST:event_jListeSchreibenActionPerformed
 
     private void jm3SchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm3SchreibenActionPerformed
-        bProg_m3 = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
+        bProg_m3 = true;
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
 
         String s = "xMFX " + jm3Addr.getText() + "\r";
         Com.write(s);
@@ -6998,8 +6957,7 @@ public class MC extends javax.swing.JFrame {
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
         retries = 0; //KlarTextUI.timerRetries * 4;
-        timer.start();
-        jm3Schreiben.setEnabled(false);
+        startIOAction();
     }//GEN-LAST:event_jm3SchreibenActionPerformed
 
     private void jMMWertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMMWertActionPerformed
@@ -7011,28 +6969,24 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jHerstellerInfoActionPerformed
 
     private void jStartMMProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartMMProgActionPerformed
-        bProg_MM = true;
+        Com = KTUI.safelyOpenCom(this, Com);
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            // LRLRLR: Todo Message-Box and return
+            return;
         }
-        Com.write((byte)0x61);
-//        Com.write("xTPM 80\r");
+        bProg_MM = true;
+        Com.write((byte)0x61); // STOP
         KTUI.flushReadBuffer( Com );
-        for(int i = 0; i < bArray.length; i++)
-            bArray[i] = 0;
-        bytesRead = 0;
+        resetbArray();
 
         KTUI.mbGeneric(this, "Hinweis", "Für die Lokadressen " + jMMRegister.getText() + " und " + jMMWert.getText() + " muss das MM Protokoll eingestellt werde.", "Bitte stellen Sie an Ihrer MM-Lok nun den Programmiermodus ein.");
         timer.setInitialDelay(KlarTextUI.timer1);
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = 14;
-        timer.start();
-        jStartMMProg.setEnabled(false);
-        jMMRegister.setEnabled(false);
-        jMMWert.setEnabled(false);
+        retries = 14; // LRLRLR Warum genau 14 ?
+        startIOAction();
     }//GEN-LAST:event_jStartMMProgActionPerformed
 
     private void j1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j1ActionPerformed
@@ -7049,7 +7003,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '1';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j1ActionPerformed
@@ -7076,7 +7030,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '2';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j2ActionPerformed
@@ -7095,7 +7049,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '3';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
         // TODO add your handling code here:
@@ -7115,7 +7069,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '4';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j4ActionPerformed
@@ -7134,7 +7088,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '5';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j5ActionPerformed
@@ -7153,7 +7107,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '6';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j6ActionPerformed
@@ -7172,7 +7126,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '7';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j7ActionPerformed
@@ -7191,7 +7145,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '8';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j8ActionPerformed
@@ -7210,7 +7164,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '9';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j9ActionPerformed
@@ -7226,7 +7180,7 @@ public class MC extends javax.swing.JFrame {
         {
             ba[DisplayCursor++] = '0';
         }
-        
+
         text = new String(ba);
         jDisplay.setText(text);
     }//GEN-LAST:event_j0ActionPerformed
@@ -7249,21 +7203,18 @@ public class MC extends javax.swing.JFrame {
                 substring += "     ";
                 substring = substring.substring(0, 5);
             }
-//            text = substring + "     " + OldDisplayString.substring(10);
             text = substring + "           \nplease wait     " ;
             jDisplay.setText(text);
             DisplayState = -1;
-        
+
             bAskLokState = true;
             if(Com == null)
             {
                 Com = KTUI.safelyOpenCom(this, Com);
             }
             KTUI.flushReadBuffer( Com );
-            for(int i = 0; i < bArray.length; i++)
-                bArray[i] = 0;
-            bytesRead = 0;
-            
+            resetbArray();
+
             System.out.print("LokAnfrage Adr.: "+parseInt);
             String s = "XLC " + parseInt + "\r";
             AskedLokAdr = parseInt;
@@ -7276,7 +7227,7 @@ public class MC extends javax.swing.JFrame {
             retries = KlarTextUI.timerRetries * 2;
             timer.start();
         }
-        
+
     }//GEN-LAST:event_jRauteActionPerformed
 
     private void jGeschwindigkeitCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jGeschwindigkeitCaretPositionChanged
@@ -7339,7 +7290,7 @@ public class MC extends javax.swing.JFrame {
         {
             Com = KTUI.safelyOpenCom(this, Com);
         }
-        Com.write((byte)0x60);
+        Com.write((byte)0x60); // GO
         String s = jDisplay.getText().substring(0, 7) + AktLokFormat + jDisplay.getText().substring(11);
         jDisplay.setText(s);
     }//GEN-LAST:event_jGOActionPerformed
@@ -7349,7 +7300,7 @@ public class MC extends javax.swing.JFrame {
         {
             Com = KTUI.safelyOpenCom(this, Com);
         }
-        Com.write((byte)0x61);
+        Com.write((byte)0x61); // STOP
         String s = jDisplay.getText().substring(0, 7) + "STOP" + jDisplay.getText().substring(11);
         jDisplay.setText(s);
     }//GEN-LAST:event_jSTOPActionPerformed
@@ -7406,9 +7357,8 @@ public class MC extends javax.swing.JFrame {
                 Com = KTUI.safelyOpenCom(this, Com);
             }
             KTUI.flushReadBuffer( Com );
-            for(int i = 0; i < bArray.length; i++)
-                bArray[i] = 0;
-            bytesRead = 0;
+            resetbArray();
+
             System.out.print("Weiche: "+parseInt + "gerade");
             String s = "XT " + parseInt + " g 1\r";
             Com.write(s);
@@ -7483,9 +7433,8 @@ public class MC extends javax.swing.JFrame {
                 Com = KTUI.safelyOpenCom(this, Com);
             }
             KTUI.flushReadBuffer( Com );
-            for(int i = 0; i < bArray.length; i++)
-                bArray[i] = 0;
-            bytesRead = 0;
+            resetbArray();
+
             System.out.print("Weiche: "+parseInt + "Abzweig");
             String s = "XT " + parseInt + " r 1\r";
             Com.write(s);
@@ -7991,7 +7940,7 @@ public class MC extends javax.swing.JFrame {
             return false;
         checkM3uidValidActive = true;
         String sM3UID = ""+jTextM3UID.getText().trim();
-        if( debugLevel >= 1 ) {
+        if( debugLevel > 0 ) {
             System.out.println("checkM3uidValid sM3UID="+sM3UID);
         }
         if( sM3UID.length() == 0 ) {
@@ -8028,7 +7977,7 @@ public class MC extends javax.swing.JFrame {
 
         sM3UID = String.format("0x%8s", Long.toHexString( lM3UID )).replace(' ', '0');
         if( sM3UID.length() > 10 ) {
-            if( debugLevel >= 1 ) {
+            if( debugLevel > 0 ) {
                 System.out.println("checkM3uidValid NumberFormatException (INTEGER)" );
             }
             jTextM3UID.setText(sM3UID);
@@ -8137,6 +8086,19 @@ public class MC extends javax.swing.JFrame {
         jEasyNetUpdate.setEnabled(false);
         jMRST.setEnabled(false);
 
+        jDirektLesen.setEnabled(false);
+        jListeLesen.setEnabled(false);
+        jListeBearbeiten.setEnabled(false);
+        jListeSchreiben.setEnabled(false);
+        jDirektSchreiben.setEnabled(false);
+
+        jm3Addr.setEnabled(false);
+        jm3Schreiben.setEnabled(false);
+
+        jMMRegister.setEnabled(false);
+        jMMWert.setEnabled(false);
+        jStartMMProg.setEnabled(false);
+
         // init progress bars
         jMcRwProgress.setValue(0);
 
@@ -8182,6 +8144,25 @@ public class MC extends javax.swing.JFrame {
                 jMcUpdInfo.setText("Aktualisierung abgebrochen");
             else
                 jMcUpdInfo.setText("update cancelled");
+        }
+
+        if( bAskLokState ) {
+            bAskLokState = false;
+        }
+        if( bReadPTdirekt ) {
+            bReadPTdirekt = false;
+        }
+        if( bReadPTList ) {
+            bReadPTList = false;
+        }
+        if( bWriteList ) {
+            bWriteList = false;
+        }
+        if( bProg_m3 ) {
+            bProg_m3 = false;
+        }
+        if( bProg_MM ) {
+            bProg_MM = false;
         }
 
         // set buttons to normal operation
@@ -8232,6 +8213,21 @@ public class MC extends javax.swing.JFrame {
         jEasyNetUpdate.setEnabled(true);
         jMRST.setEnabled(true);
 
+        if( ! jHauptGleis.isSelected() ) {
+            jDirektLesen.setEnabled(true);
+            jListeLesen.setEnabled(true);
+        }
+        jListeBearbeiten.setEnabled(true);
+        jListeSchreiben.setEnabled(true);
+        jDirektSchreiben.setEnabled(true);
+
+        jm3Addr.setEnabled(true);
+        jm3Schreiben.setEnabled(true);
+
+        jMMRegister.setEnabled(true);
+        jMMWert.setEnabled(true);
+        jStartMMProg.setEnabled(true);
+
         // set cursor
         Cursor c = new Cursor(Cursor.DEFAULT_CURSOR );
         setCursor(c);
@@ -8240,7 +8236,6 @@ public class MC extends javax.swing.JFrame {
         /* TODO auch hier ??? */
         Com = KTUI.safelyCloseCom( this, Com);
     }
-    
 
     private void updateS88field( int num ) {
         KTUI.setNumS88(num);
@@ -8754,7 +8749,7 @@ public class MC extends javax.swing.JFrame {
 
         return retVal;
     }
-    
+
     private boolean checkTableAccessory( boolean repair, boolean show ) {
         boolean retVal = true;
         String errorIdxList = "";
@@ -8796,9 +8791,6 @@ public class MC extends javax.swing.JFrame {
                             sFmt = "DCC";
                         else
                             sFmt = "MM";
-                        if( show ) {
-                            
-                        }
                         if( repair ) {
                             jTableAccessory.setValueAt(sFmt, localMagIdx, 1);
                         }

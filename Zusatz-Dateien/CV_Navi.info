@@ -1,4 +1,4 @@
-CV-Navi Version 2.0
+CV-Navi Version 2.1
 
 English version after german section.
 
@@ -12,12 +12,15 @@ Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen 
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
+Aenderungen in V2.1
+- 
+
 Aenderungen in V2.0
 - Pfad fuer gentoo ins Startskript
 - Betriebssystem-Infos auf der Uebersichtsseite
 - Firmware-Update-Timer angepasst
 - Unterstuetzung fuer Firmware ab V2.00
-- Programmierreiter hinzugefuegt
+- Reiter fuer Programmierung/LokControl hinzugefuegt
 
 Aenderungen in V1.11
 - detaillierte Anleitungen zu Firmware-Updates integriert (Dank an Peter Mueller)
