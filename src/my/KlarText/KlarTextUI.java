@@ -181,7 +181,7 @@ enum decoderList {
 public class KlarTextUI extends javax.swing.JFrame {
     /** Creates new form KlarTextUI */
     public int     gsVersionMayor = 2;
-    public int     gsVersionMinor = 2;
+    public int     gsVersionMinor = 3;
     public JFrame  frameInstanceDEVICE = null;
     public JFrame  frameInstanceOPTIONS = null;
     public JFrame  frameInstanceINFO = null;
@@ -2506,7 +2506,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         String osInfo = "( "+osName+"["+osArch+"] , java "+dataModel+"bit )";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="release 20161018b"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20161018c"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);

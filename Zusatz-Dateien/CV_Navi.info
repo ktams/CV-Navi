@@ -12,8 +12,11 @@ Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen 
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
-Aenderungen in V2.2
+Aenderungen in V2.3
 - 
+
+Aenderungen in V2.2
+- Fehler bei DCC-Fahrstufen in Loktabelle korrigiert
 
 Aenderungen in V2.1
 - MC/RedBox: Prüfung/Reparatur der Einträge in der Loktabelle überarbeitet
