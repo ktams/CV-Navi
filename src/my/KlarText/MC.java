@@ -33,6 +33,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -1802,10 +1803,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1878,10 +1879,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2951,10 +2952,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jGeschwindigkeit.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jGeschwindigkeitCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 180, -1));
@@ -8507,9 +8508,34 @@ public class MC extends javax.swing.JFrame {
                         break;
                     default: // others
                         if( repair ) {
-                            sFS = "28";
+                            
+                            String[] str = {"MM1", "MM2", "DCC", "m3"};
+                            int showOptionDialog = JOptionPane.showOptionDialog(this, "Format:", bundle.getString("MC.chooseFormat"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
+                            switch(showOptionDialog)
+                            {
+                                case 0:
+                                    sFS = "14";
+                                    sFormat = "MM1";
+                                    break;
+                                    
+                                case 1:
+                                    sFS = "14";
+                                    sFormat = "MM2";
+                                    break;
+                                    
+                                case 2:
+                                    sFS = "28";
+                                    sFormat = "DCC";
+                                    break;
+                                    
+                                default:
+                                    sFS = "128";
+                                    sFormat = "m3";
+                                    break;
+                                    
+                            }
+                            
                             jTableLoco.setValueAt(sFS, localLocIdx, 1);
-                            sFormat = "DCC";
                             jTableLoco.setValueAt(sFormat, localLocIdx, 2);
                         }
                         retVal = false;
