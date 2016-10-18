@@ -13,7 +13,7 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
 Aenderungen in V2.1
-- 
+- MC/RedBox: Prüfung/Reparatur der Einträge in der Loktabelle überarbeitet
 
 Aenderungen in V2.0
 - Pfad fuer gentoo ins Startskript

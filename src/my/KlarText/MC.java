@@ -1826,11 +1826,15 @@ public class MC extends javax.swing.JFrame {
         if (jTableLoco.getColumnModel().getColumnCount() > 0) {
             jTableLoco.getColumnModel().getColumn(0).setResizable(false);
             jTableLoco.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTableLoco.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title0")); // NOI18N
             jTableLoco.getColumnModel().getColumn(1).setResizable(false);
             jTableLoco.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTableLoco.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title1")); // NOI18N
             jTableLoco.getColumnModel().getColumn(2).setResizable(false);
             jTableLoco.getColumnModel().getColumn(2).setPreferredWidth(50);
+            jTableLoco.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title2")); // NOI18N
             jTableLoco.getColumnModel().getColumn(3).setResizable(false);
+            jTableLoco.getColumnModel().getColumn(3).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title3")); // NOI18N
         }
 
         jLocDelAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -8529,26 +8533,22 @@ public class MC extends javax.swing.JFrame {
                         if( repair ) {
 
                             String[] str = {"MM1", "MM2", "DCC", "m3"};
-                            int showOptionDialog = JOptionPane.showOptionDialog(this, "Format:", bundle.getString("MC.chooseFormat"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
+                            int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFS+"\" \""+sFormat+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseFormat"), bundle.getString("MC.chooseFormat"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
                             switch(showOptionDialog)
                             {
                                 case 0:
-                                    sFS = "14";
                                     sFormat = "MM1";
                                     break;
 
                                 case 1:
-                                    sFS = "14";
                                     sFormat = "MM2";
                                     break;
 
                                 case 2:
-                                    sFS = "28";
                                     sFormat = "DCC";
                                     break;
 
                                 default:
-                                    sFS = "128";
                                     sFormat = "m3";
                                     break;
 
@@ -8585,7 +8585,23 @@ public class MC extends javax.swing.JFrame {
                                 break;
                             default:
                                 if( repair ) {
-                                    sFS = "14";
+                                    String[] str = {"14", "28", "128"};
+                                    int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFS+"\" \""+sFormat+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseSpeedsteps"), bundle.getString("MC.chooseSpeedsteps"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
+                                    switch(showOptionDialog)
+                                    {
+                                        case 0:
+                                            sFS = "14";
+                                            break;
+                                        case 1:
+                                            sFS = "28";
+                                            break;
+                                        case 2:
+                                            sFS = "128";
+                                            break;
+                                        default:
+                                            sFS = "14";
+                                            break;
+                                    }
                                     jTableLoco.setValueAt( sFS, localLocIdx, 1);
                                 }
                                 retVal = false;
@@ -8603,8 +8619,24 @@ public class MC extends javax.swing.JFrame {
                                 break;
                             default:
                                 if( repair ) {
-                                    sFS = "14";
-                                    jTableLoco.setValueAt( sFS, localLocIdx, 1);
+                                     String[] str = {"14", "27a", "27b"};
+                                    int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFS+"\" \""+sFormat+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseSpeedsteps"), bundle.getString("MC.chooseSpeedsteps"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
+                                    switch(showOptionDialog)
+                                    {
+                                        case 0:
+                                            sFS = "14";
+                                            break;
+                                        case 1:
+                                            sFS = "27a";
+                                            break;
+                                        case 2:
+                                            sFS = "27b";
+                                            break;
+                                        default:
+                                            sFS = "14";
+                                            break;
+                                    }
+                                   jTableLoco.setValueAt( sFS, localLocIdx, 1);
                                 }
                                 retVal = false;
                                 bFalscheEingabe = true;
@@ -8618,6 +8650,7 @@ public class MC extends javax.swing.JFrame {
                                 break;
                             default:
                                 if( repair ) {
+                                    // no choice
                                     sFS = "126";
                                     jTableLoco.setValueAt( sFS, localLocIdx, 1);
                                 }
