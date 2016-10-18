@@ -8585,7 +8585,7 @@ public class MC extends javax.swing.JFrame {
                                 break;
                             default:
                                 if( repair ) {
-                                    String[] str = {"14", "28", "128"};
+                                    String[] str = {"14", "28", "126 (128)"};
                                     int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFS+"\" \""+sFormat+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseSpeedsteps"), bundle.getString("MC.chooseSpeedsteps"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
                                     switch(showOptionDialog)
                                     {
@@ -8596,7 +8596,7 @@ public class MC extends javax.swing.JFrame {
                                             sFS = "28";
                                             break;
                                         case 2:
-                                            sFS = "128";
+                                            sFS = "126";
                                             break;
                                         default:
                                             sFS = "14";
