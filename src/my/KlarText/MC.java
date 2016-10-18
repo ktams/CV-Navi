@@ -946,6 +946,9 @@ public class MC extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jRueck = new javax.swing.JButton();
         jVor = new javax.swing.JButton();
+        jMC_ESC = new javax.swing.JLabel();
+        jMC_MENU = new javax.swing.JLabel();
+        jMC_OK = new javax.swing.JLabel();
         jUpdate = new javax.swing.JPanel();
         jUpdDatei = new javax.swing.JTextField();
         jUpdDateiAuswahl = new javax.swing.JButton();
@@ -1803,10 +1806,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1879,10 +1882,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2952,10 +2955,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jGeschwindigkeit.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jGeschwindigkeitCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 180, -1));
@@ -3123,6 +3126,7 @@ public class MC extends javax.swing.JFrame {
 
         jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 214, -1, -1));
 
+        jf0.setBackground(new java.awt.Color(255, 255, 0));
         jf0.setText(bundle.getString("MC.jf0.text")); // NOI18N
         jf0.setPreferredSize(new java.awt.Dimension(47, 45));
         jf0.addActionListener(new java.awt.event.ActionListener() {
@@ -3132,6 +3136,7 @@ public class MC extends javax.swing.JFrame {
         });
         jPanel6.add(jf0, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
 
+        jf1.setBackground(new java.awt.Color(51, 153, 255));
         jf1.setText(bundle.getString("MC.jf1.text")); // NOI18N
         jf1.setPreferredSize(new java.awt.Dimension(47, 45));
         jf1.addActionListener(new java.awt.event.ActionListener() {
@@ -3141,6 +3146,7 @@ public class MC extends javax.swing.JFrame {
         });
         jPanel6.add(jf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
 
+        jf2.setBackground(new java.awt.Color(51, 153, 255));
         jf2.setText(bundle.getString("MC.jf2.text")); // NOI18N
         jf2.setPreferredSize(new java.awt.Dimension(47, 45));
         jf2.addActionListener(new java.awt.event.ActionListener() {
@@ -3150,6 +3156,7 @@ public class MC extends javax.swing.JFrame {
         });
         jPanel6.add(jf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
 
+        jf3.setBackground(new java.awt.Color(51, 153, 255));
         jf3.setText(bundle.getString("MC.jf3.text")); // NOI18N
         jf3.setPreferredSize(new java.awt.Dimension(47, 45));
         jf3.addActionListener(new java.awt.event.ActionListener() {
@@ -3159,6 +3166,7 @@ public class MC extends javax.swing.JFrame {
         });
         jPanel6.add(jf3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
+        jf4.setBackground(new java.awt.Color(51, 153, 255));
         jf4.setText(bundle.getString("MC.jf4.text")); // NOI18N
         jf4.setPreferredSize(new java.awt.Dimension(47, 45));
         jf4.addActionListener(new java.awt.event.ActionListener() {
@@ -3168,6 +3176,7 @@ public class MC extends javax.swing.JFrame {
         });
         jPanel6.add(jf4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
+        jGO.setBackground(new java.awt.Color(0, 255, 0));
         jGO.setText(bundle.getString("MC.jGO.text")); // NOI18N
         jGO.setPreferredSize(new java.awt.Dimension(52, 45));
         jGO.addActionListener(new java.awt.event.ActionListener() {
@@ -3177,6 +3186,7 @@ public class MC extends javax.swing.JFrame {
         });
         jPanel6.add(jGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 70, -1));
 
+        jSTOP.setBackground(new java.awt.Color(255, 0, 0));
         jSTOP.setText(bundle.getString("MC.jSTOP.text")); // NOI18N
         jSTOP.setPreferredSize(new java.awt.Dimension(66, 45));
         jSTOP.addActionListener(new java.awt.event.ActionListener() {
@@ -3502,6 +3512,15 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jPanel6.add(jVor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, -1, -1));
+
+        jMC_ESC.setText(bundle.getString("MC.jMC_ESC.text")); // NOI18N
+        jPanel6.add(jMC_ESC, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, -1));
+
+        jMC_MENU.setText(bundle.getString("MC.jMC_MENU.text")); // NOI18N
+        jPanel6.add(jMC_MENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
+
+        jMC_OK.setText(bundle.getString("MC.jMC_OK.text")); // NOI18N
+        jPanel6.add(jMC_OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 570, 590));
 
@@ -8508,7 +8527,7 @@ public class MC extends javax.swing.JFrame {
                         break;
                     default: // others
                         if( repair ) {
-                            
+
                             String[] str = {"MM1", "MM2", "DCC", "m3"};
                             int showOptionDialog = JOptionPane.showOptionDialog(this, "Format:", bundle.getString("MC.chooseFormat"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
                             switch(showOptionDialog)
@@ -8517,24 +8536,24 @@ public class MC extends javax.swing.JFrame {
                                     sFS = "14";
                                     sFormat = "MM1";
                                     break;
-                                    
+
                                 case 1:
                                     sFS = "14";
                                     sFormat = "MM2";
                                     break;
-                                    
+
                                 case 2:
                                     sFS = "28";
                                     sFormat = "DCC";
                                     break;
-                                    
+
                                 default:
                                     sFS = "128";
                                     sFormat = "m3";
                                     break;
-                                    
+
                             }
-                            
+
                             jTableLoco.setValueAt(sFS, localLocIdx, 1);
                             jTableLoco.setValueAt(sFormat, localLocIdx, 2);
                         }
@@ -9306,6 +9325,9 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JPanel jLoks;
     private javax.swing.JLabel jM3count;
     private javax.swing.JTextField jMCU;
+    private javax.swing.JLabel jMC_ESC;
+    private javax.swing.JLabel jMC_MENU;
+    private javax.swing.JLabel jMC_OK;
     private javax.swing.JButton jMDCC;
     private javax.swing.JButton jMMM;
     private javax.swing.JTextField jMMRegister;
