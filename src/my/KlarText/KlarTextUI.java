@@ -181,7 +181,7 @@ enum decoderList {
 public class KlarTextUI extends javax.swing.JFrame {
     /** Creates new form KlarTextUI */
     public int     gsVersionMayor = 2;
-    public int     gsVersionMinor = 1;
+    public int     gsVersionMinor = 2;
     public JFrame  frameInstanceDEVICE = null;
     public JFrame  frameInstanceOPTIONS = null;
     public JFrame  frameInstanceINFO = null;
