@@ -8956,6 +8956,7 @@ public class MC extends javax.swing.JFrame {
                         }
                         String str1 = new String(ac);
                         ReturnString = str1.substring(0, n);
+                        System.out.println("INFO: Read M3 data from file succeeded: "+filenameM3+" ("+filelen+" bytes)" );
                     } catch (IOException ex) {
                         Logger.getLogger(SaveOpenDialog.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -8976,7 +8977,8 @@ public class MC extends javax.swing.JFrame {
         }
         else
         {
-            KTUI.mbFileNotFound( this, filenameM3 );
+            // KTUI.mbFileNotFound( this, filenameM3 );
+            System.out.println("INFO: Read M3 data from file failed FileNotFound: "+filenameM3 );
             return false;
         }
         updateM3uid();
