@@ -10,6 +10,43 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup4">
     </Component>
+    <Component class="javax.swing.JComboBox" name="jCBformat">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="DCC"/>
+            <StringItem index="1" value="MM1"/>
+            <StringItem index="2" value="MM2"/>
+            <StringItem index="3" value="m3"/>
+          </StringArray>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jCBformat.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCBspeed">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="14"/>
+            <StringItem index="1" value="27a"/>
+            <StringItem index="2" value="27b"/>
+            <StringItem index="3" value="28"/>
+            <StringItem index="4" value="126"/>
+          </StringArray>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jCBspeed.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -1132,8 +1169,8 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="250">
                         <Column editable="true" title="Adresse" type="java.lang.String"/>
-                        <Column editable="true" title="Fahrstufen" type="java.lang.String"/>
-                        <Column editable="true" title="Format" type="java.lang.String"/>
+                        <Column editable="true" title="Format" type="java.lang.Object"/>
+                        <Column editable="true" title="Speedsteps" type="java.lang.Object"/>
                         <Column editable="true" title="Name" type="java.lang.String"/>
                       </Table>
                     </Property>
@@ -1151,16 +1188,20 @@
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="false">
                           <Title editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                            <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jTableLoco.columnModel.title1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                            <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jTableLoco.columnModel.title2" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                           </Title>
-                          <Editor/>
+                          <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                            <Connection code="new DefaultCellEditor(jCBformat)" type="code"/>
+                          </Editor>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="false">
                           <Title editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                            <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jTableLoco.columnModel.title2" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                            <ResourceString bundle="my/KlarText/Bundle.properties" key="MC.jTableLoco.columnModel.title1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                           </Title>
-                          <Editor/>
+                          <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                            <Connection code="new DefaultCellEditor(jCBspeed)" type="code"/>
+                          </Editor>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">

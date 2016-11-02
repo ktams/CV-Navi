@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -597,8 +598,8 @@ public class MC extends javax.swing.JFrame {
                                     }
                                 }
                                 jTableLoco.setValueAt(strArr1[0], thisAdrIdx, 0);
-                                jTableLoco.setValueAt(strArr1[1], thisAdrIdx, 1);
-                                jTableLoco.setValueAt(strArr1[2], thisAdrIdx, 2);
+                                jTableLoco.setValueAt(strArr1[1], thisAdrIdx, 2);
+                                jTableLoco.setValueAt(strArr1[2], thisAdrIdx, 1);
                                 if (strArr1.length >= 4) {
                                     // re-split with "," to get real name (may be with more than 1 consecutive space inside !)
                                     String[] strArrName = strArr[j].split(",");
@@ -762,6 +763,8 @@ public class MC extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
+        jCBformat = new javax.swing.JComboBox<>();
+        jCBspeed = new javax.swing.JComboBox<>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jSystem = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -977,6 +980,13 @@ public class MC extends javax.swing.JFrame {
         jUSB2 = new javax.swing.JRadioButton();
         jLabel18 = new javax.swing.JLabel();
 
+        jCBformat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DCC", "MM1", "MM2", "m3" }));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jCBformat.setToolTipText(bundle.getString("MC.jCBformat.toolTipText")); // NOI18N
+
+        jCBspeed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "14", "27a", "27b", "28", "126" }));
+        jCBspeed.setToolTipText(bundle.getString("MC.jCBspeed.toolTipText")); // NOI18N
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1212, 2147483647));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1006,7 +1016,6 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("MC.jPanel1.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1781,11 +1790,11 @@ public class MC extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Adresse", "Fahrstufen", "Format", "Name"
+                "Adresse", "Format", "Speedsteps", "Name"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1829,10 +1838,12 @@ public class MC extends javax.swing.JFrame {
             jTableLoco.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title0")); // NOI18N
             jTableLoco.getColumnModel().getColumn(1).setResizable(false);
             jTableLoco.getColumnModel().getColumn(1).setPreferredWidth(50);
-            jTableLoco.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title1")); // NOI18N
+            jTableLoco.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title2")); // NOI18N
+            jTableLoco.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(jCBformat));
             jTableLoco.getColumnModel().getColumn(2).setResizable(false);
             jTableLoco.getColumnModel().getColumn(2).setPreferredWidth(50);
-            jTableLoco.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title2")); // NOI18N
+            jTableLoco.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title1")); // NOI18N
+            jTableLoco.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jCBspeed));
             jTableLoco.getColumnModel().getColumn(3).setResizable(false);
             jTableLoco.getColumnModel().getColumn(3).setHeaderValue(bundle.getString("MC.jTableLoco.columnModel.title3")); // NOI18N
         }
@@ -3876,7 +3887,7 @@ public class MC extends javax.swing.JFrame {
         });
     }
     private void checkM3sid( int row ) {
-        String sFormat = ""+jTableLoco.getValueAt(row, 2);
+        String sFormat = ""+jTableLoco.getValueAt(row, 1);
         Boolean showM3 = "M3".equalsIgnoreCase(sFormat);
         jLabelM3SID.setEnabled(showM3);
         jTextM3SID.setEnabled(showM3);
@@ -4401,7 +4412,7 @@ public class MC extends javax.swing.JFrame {
                                 String Adr = (String)oAdr;
                                 try {
                                     if (AktLokAdr == Integer.parseInt(Adr)) {
-                                        Adr = (String) jTableLoco.getValueAt(i, 1);
+                                        Adr = (String) jTableLoco.getValueAt(i, 2);
                                         if(Adr.charAt(0) == '2')
                                         {
                                             Adr = Adr.substring(0, 2);  //27a oder 27b kann parseInt nicht. Muss sich um Zahlen handeln...
@@ -5108,8 +5119,8 @@ public class MC extends javax.swing.JFrame {
                                 Object oAdr = jTableLoco.getValueAt(locIdx, 0);
                                 String sAdr = "" + oAdr;
                                 if( sAdr.trim().length() > 0) {
-                                    String sFS     = "" + jTableLoco.getValueAt( locIdx, 1);
-                                    String sFormat = "" + jTableLoco.getValueAt( locIdx, 2);
+                                    String sFormat = "" + jTableLoco.getValueAt( locIdx, 1);
+                                    String sFS     = "" + jTableLoco.getValueAt( locIdx, 2);
                                     String sName = null;
 
                                     Object oName = jTableLoco.getValueAt( locIdx, 3);
@@ -6025,13 +6036,13 @@ public class MC extends javax.swing.JFrame {
         if( edRow >= 0 && edCol >= 0 ) {
             switch( edCol ) {
                 case 1:
-                    str = (""+jTableLoco.getValueAt(edRow, edCol)).toLowerCase().replaceAll("\\s","");
-                    jTableLoco.setValueAt(str, edRow, edCol);
-                    break;
-                case 2:
                     str = (""+jTableLoco.getValueAt(edRow, edCol)).toUpperCase().replaceAll("\\s","");
                     jTableLoco.setValueAt(str, edRow, edCol);
                     checkM3sid(edRow);
+                    break;
+                case 2:
+                    str = (""+jTableLoco.getValueAt(edRow, edCol)).toLowerCase().replaceAll("\\s","");
+                    jTableLoco.setValueAt(str, edRow, edCol);
                     break;
             }
         }
@@ -6111,8 +6122,8 @@ public class MC extends javax.swing.JFrame {
         for(int i = 0; i < c.MAX_LOCS; i++)
         {
             String s1 = (""+jTableLoco.getValueAt(i, 0)).trim();
-            String s2 = (""+jTableLoco.getValueAt(i, 1)).trim();
-            String s3 = (""+jTableLoco.getValueAt(i, 2)).trim();
+            String s2 = (""+jTableLoco.getValueAt(i, 2)).trim();
+            String s3 = (""+jTableLoco.getValueAt(i, 1)).trim();
             String s4 = (""+jTableLoco.getValueAt(i, 3)).trim();
             if((s1.length() > 0) && (s2.length() > 0) && (s3.length() > 0 )) {
                 if( debugLevel > 0 ) {
@@ -8461,14 +8472,14 @@ public class MC extends javax.swing.JFrame {
         bFalscheEingabe = false;
 
         String sAdr = "";
-        String sFS = "";
         String sFormat = "";
+        String sFS = "";
         String sName = "";
 
         for( int localLocIdx = 0 ; localLocIdx < c.MAX_LOCS; localLocIdx++) {
             sAdr = "";
-            sFS = "";
             sFormat = "";
+            sFS = "";
             sName = "";
             if( debugLevel >= 2 ) {
                 System.out.println("check: loco ("+(localLocIdx+1)+"/"+c.MAX_LOCS+")" );
@@ -8478,19 +8489,19 @@ public class MC extends javax.swing.JFrame {
             if( oAdr != null )
                 sAdr += oAdr;
             if( sAdr.trim().length() > 0 ) {
-                Object oFS = jTableLoco.getValueAt( localLocIdx, 1);
-                Object oFormat = jTableLoco.getValueAt( localLocIdx, 2);
+                Object oFormat = jTableLoco.getValueAt( localLocIdx, 1);
+                Object oFS = jTableLoco.getValueAt( localLocIdx, 2);
                 Object oName = jTableLoco.getValueAt( localLocIdx, 3);
-                if( oFS != null )
-                    sFS += oFS;
                 if( oFormat != null )
                     sFormat += oFormat;
+                if( oFS != null )
+                    sFS += oFS;
                 if(oName != null)
                     sName += oName;
 
                 // 1st check protocol format
                 sFormat = sFormat.trim().toUpperCase();
-                jTableLoco.setValueAt( sFormat, localLocIdx, 2);
+                jTableLoco.setValueAt( sFormat, localLocIdx, 1);
                 switch( sFormat ) {
                     case "DCC":
                         if( ! KTUI.checkNumRange( sAdr, 1, 10239 ) ) {
@@ -8533,7 +8544,7 @@ public class MC extends javax.swing.JFrame {
                         if( repair ) {
 
                             String[] str = {"MM1", "MM2", "DCC", "m3"};
-                            int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFS+"\" \""+sFormat+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseFormat"), bundle.getString("MC.chooseFormat"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
+                            int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFormat+"\" \""+sFS+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseFormat"), bundle.getString("MC.chooseFormat"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
                             switch(showOptionDialog)
                             {
                                 case 0:
@@ -8554,8 +8565,8 @@ public class MC extends javax.swing.JFrame {
 
                             }
 
-                            jTableLoco.setValueAt(sFS, localLocIdx, 1);
-                            jTableLoco.setValueAt(sFormat, localLocIdx, 2);
+                            jTableLoco.setValueAt(sFormat, localLocIdx, 1);
+                            jTableLoco.setValueAt(sFS, localLocIdx, 2);
                         }
                         retVal = false;
                         bFalscheEingabe = true;
@@ -8586,7 +8597,7 @@ public class MC extends javax.swing.JFrame {
                             default:
                                 if( repair ) {
                                     String[] str = {"14", "28", "126 (128)"};
-                                    int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFS+"\" \""+sFormat+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseSpeedsteps"), bundle.getString("MC.chooseSpeedsteps"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
+                                    int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFormat+"\" \""+sFS+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseSpeedsteps"), bundle.getString("MC.chooseSpeedsteps"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
                                     switch(showOptionDialog)
                                     {
                                         case 0:
@@ -8599,15 +8610,16 @@ public class MC extends javax.swing.JFrame {
                                             sFS = "126";
                                             break;
                                         default:
+                                            // no valid choice
                                             sFS = "14";
+                                            retVal = false;
+                                            bFalscheEingabe = true;
+                                            FehlerArt |= 0x0010;
+                                            errorIdxList += " " + (localLocIdx+1);
                                             break;
                                     }
-                                    jTableLoco.setValueAt( sFS, localLocIdx, 1);
+                                    jTableLoco.setValueAt( sFS, localLocIdx, 2);
                                 }
-                                retVal = false;
-                                bFalscheEingabe = true;
-                                FehlerArt |= 0x0010;
-                                errorIdxList += " " + (localLocIdx+1);
                         }
                         break;
                     case "MM1":
@@ -8620,7 +8632,7 @@ public class MC extends javax.swing.JFrame {
                             default:
                                 if( repair ) {
                                      String[] str = {"14", "27a", "27b"};
-                                    int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFS+"\" \""+sFormat+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseSpeedsteps"), bundle.getString("MC.chooseSpeedsteps"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
+                                    int showOptionDialog = JOptionPane.showOptionDialog(this, ""+bundle.getString("MC.zeile")+" "+(localLocIdx+1)+":\n\""+sAdr+"\" \""+sFormat+"\" \""+sFS+"\" \""+sName+ "\"\n"+bundle.getString("MC.chooseSpeedsteps"), bundle.getString("MC.chooseSpeedsteps"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, str, "DCC");
                                     switch(showOptionDialog)
                                     {
                                         case 0:
@@ -8633,15 +8645,16 @@ public class MC extends javax.swing.JFrame {
                                             sFS = "27b";
                                             break;
                                         default:
+                                            // no valid choice
                                             sFS = "14";
+                                            retVal = false;
+                                            bFalscheEingabe = true;
+                                            FehlerArt |= 0x0010;
+                                            errorIdxList += " " + (localLocIdx+1);
                                             break;
                                     }
-                                   jTableLoco.setValueAt( sFS, localLocIdx, 1);
+                                   jTableLoco.setValueAt( sFS, localLocIdx, 2);
                                 }
-                                retVal = false;
-                                bFalscheEingabe = true;
-                                FehlerArt |= 0x0010;
-                                errorIdxList += " " + (localLocIdx+1);
                         }
                         break;
                     case "M3":
@@ -8652,7 +8665,7 @@ public class MC extends javax.swing.JFrame {
                                 if( repair ) {
                                     // no choice
                                     sFS = "126";
-                                    jTableLoco.setValueAt( sFS, localLocIdx, 1);
+                                    jTableLoco.setValueAt( sFS, localLocIdx, 2);
                                 }
                                 retVal = false;
                                 bFalscheEingabe = true;
@@ -9115,10 +9128,10 @@ public class MC extends javax.swing.JFrame {
             // TODO Umstellung auf loop über 0 .. < getAnzahlSpalten
             Object o = jTableLoco.getValueAt(k+1, 0);
             jTableLoco.setValueAt(o, k, 0);
-            o = jTableLoco.getValueAt(k+1, 1);
-            jTableLoco.setValueAt(o, k, 1);
             o = jTableLoco.getValueAt(k+1, 2);
             jTableLoco.setValueAt(o, k, 2);
+            o = jTableLoco.getValueAt(k+1, 1);
+            jTableLoco.setValueAt(o, k, 1);
             o = jTableLoco.getValueAt(k+1, 3);
             jTableLoco.setValueAt(o, k, 3);
         }
@@ -9283,6 +9296,8 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JCheckBox jBoostOptNoAccBreak;
     private javax.swing.JCheckBox jBoostOptNoAccDrive;
     private javax.swing.JLabel jBoosterOpts;
+    private javax.swing.JComboBox<String> jCBformat;
+    private javax.swing.JComboBox<String> jCBspeed;
     private javax.swing.JList jCVListe;
     private javax.swing.JTextField jCV_Direkt;
     private javax.swing.JButton jCancel;

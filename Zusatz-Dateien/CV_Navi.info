@@ -13,7 +13,7 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
 Aenderungen in V2.3
-- 
+- MC/RB: Loktabelle: Umstellung Format/Protokoll und Fahrstufen auf Kombobox
 
 Aenderungen in V2.2
 - Fehler bei DCC-Fahrstufen in Loktabelle korrigiert
