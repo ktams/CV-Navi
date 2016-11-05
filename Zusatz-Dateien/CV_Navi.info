@@ -14,12 +14,14 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 Aenderungen in V2.3
 - MC/RB: Loktabelle: Umstellung Format/Protokoll und Fahrstufen auf Kombobox
+- Fehler beim Einlesen von Decodern mit CVs ueber 256 korrigiert (u.a. FD-R Basic 2)
+- Anzegie bei FD-R Basic 2 nach dem Einlesen aller CVs korrigiert
 
 Aenderungen in V2.2
 - Fehler bei DCC-Fahrstufen in Loktabelle korrigiert
 
 Aenderungen in V2.1
-- MC/RedBox: Prüfung/Reparatur der Einträge in der Loktabelle überarbeitet
+- MC/RedBox: Pruefung/Reparatur der Eintraege in der Loktabelle ueberarbeitet
 
 Aenderungen in V2.0
 - Pfad fuer gentoo ins Startskript
