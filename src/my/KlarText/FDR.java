@@ -3006,6 +3006,10 @@ public class FDR extends javax.swing.JFrame {
                 break;
             case c.FD_R2:
                 jBlinkFrequenz.setText("" + CV[1][9]);
+                jRcChannel1.setSelected((CV[1][28] & 1) == 1);
+                jRcChannel2.setSelected((CV[1][28] & 2) == 2);
+                jFD.setSelected(CV[1][888] == 0);
+                jRC_Sender.setSelected(CV[1][888] == 1);
                 break;
         }
         jMM_Addr_2.setText("" + CV[1][114]);
@@ -3103,8 +3107,8 @@ public class FDR extends javax.swing.JFrame {
         jF1_1.setSelected((CV[1][35] & 1) == 1);
         jF1_2.setSelected((CV[1][35] & 2) == 2);
         jF1_3.setSelected((CV[1][35] & 4) == 4);
-        jF2_1.setSelected((CV[1][35] & 1) == 1);
-        jF2_2.setSelected((CV[1][35] & 2) == 2);
+        jF2_1.setSelected((CV[1][36] & 1) == 1);
+        jF2_2.setSelected((CV[1][36] & 2) == 2);
         jF2_3.setSelected((CV[1][36] & 4) == 4);
         jF3_1.setSelected((CV[1][37] & 1) == 1);
         jF3_2.setSelected((CV[1][37] & 2) == 2);
