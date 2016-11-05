@@ -119,6 +119,7 @@ interface c {
     public static final long MIN_MC_XM3SID_VERSION = 0x01040762; // 1.4.7b
     public static final long MIN_MC_SO999_VERSION  = 0x01040863; // 1.4.8c
     // other
+    public static final int MAX_CV = 1024;
     public static final int MAX_M3_SID = 16383;
     public static final String ERR_PROBLEM_LEFT = "<- Problem !";
     public static final String TamsFirmwareURL = "http://tams-online.de/epages/642f1858-c39b-4b7d-af86-f6a1feaca0e4.sf/de_DE/?ObjectPath=/Shops/642f1858-c39b-4b7d-af86-f6a1feaca0e4/Categories/Download1/Firmware";

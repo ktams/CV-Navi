@@ -26,7 +26,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
 
     public int DecAdr;
     public int CV[][];
-    byte[] bArray = new byte[200];
+    byte[] bArray;
     public int bytesRead;
     public int Decoder;
     private byte CV_To_Edit[];
@@ -53,6 +53,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
      */
     public ReadWriteCV(Frame parent, boolean modal, KlarTextUI ktui, int[][] CV ) throws IOException {
         super(parent, modal);
+        this.bArray = new byte[c.MAX_CV+1];
         this.DecAdr = 3;
         this.CV = CV;
         this.bytesRead = 0;
@@ -469,7 +470,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         }
         KTUI.flushReadBuffer( Com );
 
-        cvSchreiben = KTUI.checkTextField( this, jCVnr, 1, 1024, 0, false);
+        cvSchreiben = KTUI.checkTextField( this, jCVnr, 1, c.MAX_CV, 0, false);
         if( ! KTUI.checkNumRange(jCVwert.getText(), 0, 255) ) {
             KTUI.mbValueNaN(this, 0, 255, false);
             jCVwert.grabFocus();
@@ -507,7 +508,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         }
         KTUI.flushReadBuffer( Com );
 
-        cvAnfrage = KTUI.checkTextField( this, jCVnr, 1, 1024, 8, false);
+        cvAnfrage = KTUI.checkTextField( this, jCVnr, 1, c.MAX_CV, 8, false);
         System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
         String s = "XPTRD " + cvAnfrage + "\r";
         Com.write(s);
@@ -560,8 +561,8 @@ public class ReadWriteCV extends javax.swing.JDialog {
             System.out.println("inside formWindowOpened Com.connected="+Com.isconnected());
         }
 
-        CV_To_Edit = new byte[256];
-        for(int i = 0; i < 256; i++)
+        CV_To_Edit = new byte[c.MAX_CV+1];
+        for(int i = 0; i < c.MAX_CV+1; i++)
         {
             CV_To_Edit[i] = 0;
         }
