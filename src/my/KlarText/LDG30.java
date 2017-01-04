@@ -61,7 +61,10 @@ public class LDG30 extends javax.swing.JFrame {
                 setTitle( KTUI.getMenutext( decoderList.LD_G30 ).trim() );
                 break;
 
+            case c.LD_W32_2: //LD-W-32
             case c.LD_W32: //LD-W-32
+                TitledBorder b = (TitledBorder)jPanel1.getBorder();
+                b.setTitle("LD-W-32.2");
                 jCV117_CV9_Text.setText("Motorfrequenz");
                 jUeberlast.setText("480 Hz");
                 jUeberlast.setEditable(false);
@@ -70,22 +73,103 @@ public class LDG30 extends javax.swing.JFrame {
                 jKi.setEditable(false);
                 jKd.setEditable(false);
                 jMotorListe.setEnabled(false);
-                TitledBorder b = (TitledBorder)jPanel1.getBorder();
-                b.setTitle("LD-W-32");
-                jBild.setIcon(new ImageIcon(getClass().getResource("/LD-W-32.gif")));
-                setTitle( KTUI.getMenutext( decoderList.LD_W32 ).trim() );
+                jBild.setIcon(new ImageIcon(getClass().getResource("/LD-W-32-2.gif")));
+                setTitle( KTUI.getMenutext( decoderList.LD_W32_2 ).trim() );
+                if(KTUI.Decoder == c.LD_W32)
+                {
+                    jLabel66.setVisible(false);
+                    jFL_3.setVisible(false);
+                    jFR_3.setVisible(false);
+                    jF1_3.setVisible(false);
+                    jF2_3.setVisible(false);
+                    jF3_3.setVisible(false);
+                    jF4_3.setVisible(false);
+                    jF5_3.setVisible(false);
+                    jF6_3.setVisible(false);
+                    jF7_3.setVisible(false);
+                    jF8_3.setVisible(false);
+                    jF9_3.setVisible(false);
+                    jF10_3.setVisible(false);
+                    jF11_3.setVisible(false);
+                    jF12_3.setVisible(false);
+                    
+                    jLabel64.setVisible(false);
+                    jLabel65.setVisible(false);
+                    jLabel67.setVisible(false);
+                    jLabel68.setVisible(false);
+                    jLabel69.setVisible(false);
+                    jDimmen3.setVisible(false);
+                    jAltDim3aus.setVisible(false);
+                    jAltDim3ein.setVisible(false);
+                    jAltDimmenFS3.setVisible(false);
+                    jAltDimmen3.setVisible(false);
+
+                    jLabel70.setVisible(false);
+                    jLabel71.setVisible(false);
+                    jLabel72.setVisible(false);
+                    jTast3.setVisible(false);
+                    jInvertBlink3.setVisible(false);
+                    jVor3.setVisible(false);
+                    jRueck3.setVisible(false);
+
+                    jBild.setIcon(new ImageIcon(getClass().getResource("/LD-W-32.gif")));
+                    b.setTitle("LD-W-32");
+                    setTitle( KTUI.getMenutext( decoderList.LD_W32 ).trim() );
+                }
                 break;
 
+            case c.LD_G32_2: //LD-G-32
             case c.LD_G32: //LD-G-32
                 b = (TitledBorder)jPanel1.getBorder();
-                b.setTitle("LD-G-32");
+                b.setTitle("LD-G-32.2");
                 jFahreigenschaften.remove(j480Hz);
                 jFahreigenschaften.remove(j80Hz);
                 jCV117_CV9_Text.setText("Motorfrequenz");
                 jUeberlast.setText("32 kHz");
                 jUeberlast.setEditable(false);
-                jBild.setIcon(new ImageIcon(getClass().getResource("/LD-G-32.gif")));
-                setTitle( KTUI.getMenutext( decoderList.LD_G32 ).trim() );
+                jBild.setIcon(new ImageIcon(getClass().getResource("/LD-G-32-2.gif")));
+                setTitle( KTUI.getMenutext( decoderList.LD_G32_2 ).trim() );
+                if(KTUI.Decoder == c.LD_G32)
+                {
+                    jLabel66.setVisible(false);
+                    jFL_3.setVisible(false);
+                    jFR_3.setVisible(false);
+                    jF1_3.setVisible(false);
+                    jF2_3.setVisible(false);
+                    jF3_3.setVisible(false);
+                    jF4_3.setVisible(false);
+                    jF5_3.setVisible(false);
+                    jF6_3.setVisible(false);
+                    jF7_3.setVisible(false);
+                    jF8_3.setVisible(false);
+                    jF9_3.setVisible(false);
+                    jF10_3.setVisible(false);
+                    jF11_3.setVisible(false);
+                    jF12_3.setVisible(false);
+                    
+                    jLabel64.setVisible(false);
+                    jLabel65.setVisible(false);
+                    jLabel67.setVisible(false);
+                    jLabel68.setVisible(false);
+                    jLabel69.setVisible(false);
+                    jDimmen3.setVisible(false);
+                    jAltDim3aus.setVisible(false);
+                    jAltDim3ein.setVisible(false);
+                    jAltDimmenFS3.setVisible(false);
+                    jAltDimmen3.setVisible(false);
+
+                    jLabel70.setVisible(false);
+                    jLabel71.setVisible(false);
+                    jLabel72.setVisible(false);
+                    jTast3.setVisible(false);
+                    jInvertBlink3.setVisible(false);
+                    jVor3.setVisible(false);
+                    jRueck3.setVisible(false);
+
+                    jBild.setIcon(new ImageIcon(getClass().getResource("/LD-G-32.gif")));
+                    b.setTitle("LD-G-32");
+                    setTitle( KTUI.getMenutext( decoderList.LD_G32 ).trim() );
+                }
                 break;
             default:
                 return;
@@ -121,7 +205,11 @@ public class LDG30 extends javax.swing.JFrame {
         initCV( 52, 40 );
         initCV( 53, 0 );
         initCV( 54, 0 );
+        if((KTUI.Decoder == c.LD_G32_2) || (KTUI.Decoder == c.LD_W32_2))
+            initCV( 55, 0 );
         initCV( 62, 255 );
+        if((KTUI.Decoder == c.LD_G32_2) || (KTUI.Decoder == c.LD_W32_2))
+            initCV( 63, 15 );
         initCV( 65, 0 );
         for( int i = 0 ; i < 28 ; i++ ) { // Motor Kennlinie
             initCV( 67+i, i*6);
@@ -133,6 +221,8 @@ public class LDG30 extends javax.swing.JFrame {
         initCV( 116, 0 );
         initCV( 117, 64 );
         initCV( 118, 255 );
+        if((KTUI.Decoder == c.LD_G32_2) || (KTUI.Decoder == c.LD_W32_2))
+            initCV( 119, 15 );
         initCV( 124, 3 );
         //---------------------------
         setLocationRelativeTo(ktuiThis);
@@ -168,6 +258,7 @@ public class LDG30 extends javax.swing.JFrame {
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jCV_Anzeige = new javax.swing.JComboBox();
         jCV_Inhalt = new javax.swing.JTextField();
@@ -247,6 +338,21 @@ public class LDG30 extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
+        jF12_3 = new javax.swing.JCheckBox();
+        jFL_3 = new javax.swing.JCheckBox();
+        jFR_3 = new javax.swing.JCheckBox();
+        jF1_3 = new javax.swing.JCheckBox();
+        jF2_3 = new javax.swing.JCheckBox();
+        jF3_3 = new javax.swing.JCheckBox();
+        jF4_3 = new javax.swing.JCheckBox();
+        jF5_3 = new javax.swing.JCheckBox();
+        jF6_3 = new javax.swing.JCheckBox();
+        jF7_3 = new javax.swing.JCheckBox();
+        jF8_3 = new javax.swing.JCheckBox();
+        jF9_3 = new javax.swing.JCheckBox();
+        jF10_3 = new javax.swing.JCheckBox();
+        jF11_3 = new javax.swing.JCheckBox();
+        jLabel66 = new javax.swing.JLabel();
         jDimmen = new javax.swing.JPanel();
         jDimmen1 = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
@@ -270,6 +376,18 @@ public class LDG30 extends javax.swing.JFrame {
         jAltDimmen2 = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
+        jAltDim3ein = new javax.swing.JRadioButton();
+        jAltDimmen3 = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel65 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jAltDimmenFS3 = new javax.swing.JTextField();
+        jDimmen3 = new javax.swing.JTextField();
+        jAltDim3aus = new javax.swing.JRadioButton();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
         jEffekte = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel21 = new javax.swing.JLabel();
@@ -286,6 +404,14 @@ public class LDG30 extends javax.swing.JFrame {
         jVor2 = new javax.swing.JCheckBox();
         jInvertBlink1 = new javax.swing.JCheckBox();
         jInvertBlink2 = new javax.swing.JCheckBox();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel71 = new javax.swing.JLabel();
+        jTast3 = new javax.swing.JTextField();
+        jLabel72 = new javax.swing.JLabel();
+        jVor3 = new javax.swing.JCheckBox();
+        jRueck3 = new javax.swing.JCheckBox();
+        jInvertBlink3 = new javax.swing.JCheckBox();
+        jLabel70 = new javax.swing.JLabel();
         jRangieren = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jRL_F4 = new javax.swing.JCheckBox();
@@ -301,6 +427,7 @@ public class LDG30 extends javax.swing.JFrame {
         jAB_F4 = new javax.swing.JCheckBox();
         jR_F1 = new javax.swing.JCheckBox();
         jR_F2 = new javax.swing.JCheckBox();
+        jRL_3 = new javax.swing.JCheckBox();
         jFahreigenschaften = new javax.swing.JPanel();
         jAnfahrGeschw = new javax.swing.JTextField();
         jLabel49 = new javax.swing.JLabel();
@@ -700,7 +827,7 @@ public class LDG30 extends javax.swing.JFrame {
                     .addGroup(jCV29Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("LDG30.jCV29.TabConstraints.tabTitle"), jCV29); // NOI18N
@@ -1010,11 +1137,128 @@ public class LDG30 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText(bundle.getString("LDG30.jLabel3.text")); // NOI18N
-        jFunctionMapping.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jFunctionMapping.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setText(bundle.getString("LDG30.jLabel33.text")); // NOI18N
-        jFunctionMapping.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jFunctionMapping.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+
+        jF12_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF12_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF12_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF12_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, -1, -1));
+
+        jFL_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jFL_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFL_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jFL_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jFR_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jFR_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFR_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jFR_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        jF1_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF1_3.setSelected(true);
+        jF1_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF1_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+
+        jF2_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF2_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF2_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF2_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
+
+        jF3_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF3_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF3_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF3_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+
+        jF4_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF4_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF4_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF4_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
+
+        jF5_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF5_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF5_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF5_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
+
+        jF6_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF6_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF6_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF6_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+
+        jF7_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF7_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF7_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF7_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
+
+        jF8_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF8_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF8_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF8_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, -1, -1));
+
+        jF9_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF9_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF9_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF9_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+
+        jF10_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF10_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF10_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF10_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+
+        jF11_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF11_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF11_3ActionPerformed(evt);
+            }
+        });
+        jFunctionMapping.add(jF11_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
+
+        jLabel66.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel66.setText(bundle.getString("LDG30.jLabel66.text")); // NOI18N
+        jFunctionMapping.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jDecodereigenschaften.addTab(bundle.getString("LDG30.jFunctionMapping.TabConstraints.tabTitle"), jFunctionMapping); // NOI18N
 
@@ -1196,100 +1440,227 @@ public class LDG30 extends javax.swing.JFrame {
         jLabel62.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel62.setText(bundle.getString("LDG30.jLabel62.text")); // NOI18N
 
+        buttonGroup6.add(jAltDim3ein);
+        jAltDim3ein.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAltDim3ein.setText(bundle.getString("LDG30.jAltDim3ein.text")); // NOI18N
+        jAltDim3ein.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAltDim3einActionPerformed(evt);
+            }
+        });
+
+        jAltDimmen3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAltDimmen3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jAltDimmen3.setText(bundle.getString("LDG30.jAltDimmen3.text")); // NOI18N
+        jAltDimmen3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jAltDimmen3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jAltDimmen3FocusLost(evt);
+            }
+        });
+        jAltDimmen3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jAltDimmen3KeyReleased(evt);
+            }
+        });
+
+        jLabel65.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel65.setText(bundle.getString("LDG30.jLabel65.text")); // NOI18N
+
+        jLabel67.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel67.setText(bundle.getString("LDG30.jLabel67.text")); // NOI18N
+
+        jLabel68.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel68.setText(bundle.getString("LDG30.jLabel68.text")); // NOI18N
+
+        jAltDimmenFS3.setEditable(false);
+        jAltDimmenFS3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAltDimmenFS3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jAltDimmenFS3.setText(bundle.getString("LDG30.jAltDimmenFS3.text")); // NOI18N
+        jAltDimmenFS3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jAltDimmenFS3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jAltDimmenFS3FocusLost(evt);
+            }
+        });
+        jAltDimmenFS3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jAltDimmenFS3KeyReleased(evt);
+            }
+        });
+
+        jDimmen3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jDimmen3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDimmen3.setText(bundle.getString("LDG30.jDimmen3.text")); // NOI18N
+        jDimmen3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jDimmen3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jDimmen3FocusLost(evt);
+            }
+        });
+        jDimmen3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDimmen3KeyReleased(evt);
+            }
+        });
+
+        buttonGroup6.add(jAltDim3aus);
+        jAltDim3aus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAltDim3aus.setSelected(true);
+        jAltDim3aus.setText(bundle.getString("LDG30.jAltDim3aus.text")); // NOI18N
+        jAltDim3aus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAltDim3ausActionPerformed(evt);
+            }
+        });
+
+        jLabel69.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel69.setText(bundle.getString("LDG30.jLabel69.text")); // NOI18N
+
+        jLabel64.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel64.setText(bundle.getString("LDG30.jLabel64.text")); // NOI18N
+        jLabel64.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel63.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel63.setText(bundle.getString("LDG30.jLabel63.text")); // NOI18N
+
         javax.swing.GroupLayout jDimmenLayout = new javax.swing.GroupLayout(jDimmen);
         jDimmen.setLayout(jDimmenLayout);
         jDimmenLayout.setHorizontalGroup(
             jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jAltDimmenFS3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel65)
+                    .addComponent(jAltDimmen3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
             .addGroup(jDimmenLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDimmenLayout.createSequentialGroup()
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(jDimmenLayout.createSequentialGroup()
                         .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel42)
                             .addComponent(jLabel37)
                             .addGroup(jDimmenLayout.createSequentialGroup()
                                 .addGap(35, 35, 35)
-                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jDimmen1)
-                                        .addComponent(jLabel23))
-                                    .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jDimmen2)
-                                        .addComponent(jLabel24)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jDimmen1)
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDimmen2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jDimmenLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jAltDim1aus)
-                                    .addComponent(jAltDim1ein))
-                                .addGap(37, 37, 37)
-                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel45)
-                                    .addComponent(jAltDimmenFS1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jDimmenLayout.createSequentialGroup()
+                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jAltDim1aus)
+                                            .addComponent(jAltDim1ein))
+                                        .addGap(37, 37, 37)
+                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jAltDimmenFS1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jAltDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel47)))
                                     .addComponent(jLabel43))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jAltDimmen1)
-                                    .addComponent(jLabel47))
-                                .addGap(32, 32, 32))
+                                .addContainerGap(26, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jAltDim2ein)
-                                    .addComponent(jAltDim2aus))
-                                .addGap(37, 37, 37)
+                                    .addGroup(jDimmenLayout.createSequentialGroup()
+                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jAltDim2ein)
+                                            .addComponent(jAltDim2aus))
+                                        .addGap(37, 37, 37)
+                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jDimmenLayout.createSequentialGroup()
+                                                .addComponent(jLabel62)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(jDimmenLayout.createSequentialGroup()
+                                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jDimmenLayout.createSequentialGroup()
+                                                        .addComponent(jLabel46)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addGroup(jDimmenLayout.createSequentialGroup()
+                                                        .addComponent(jAltDimmenFS2)
+                                                        .addGap(15, 15, 15)))
+                                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel48)
+                                                    .addComponent(jAltDimmen2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(28, 28, 28))))
+                                    .addGroup(jDimmenLayout.createSequentialGroup()
+                                        .addComponent(jLabel44)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(jDimmenLayout.createSequentialGroup()
+                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
                                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDimmenLayout.createSequentialGroup()
-                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel46)
-                                            .addComponent(jAltDimmenFS2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jAltDimmen2)
-                                            .addComponent(jLabel48)))
+                                        .addGap(40, 40, 40)
+                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jDimmen3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel67)))
+                                    .addComponent(jLabel64))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel69)
                                     .addGroup(jDimmenLayout.createSequentialGroup()
+                                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jAltDim3ein)
+                                            .addComponent(jAltDim3aus))
+                                        .addGap(40, 40, 40)
                                         .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel44)
-                                            .addComponent(jLabel62))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(31, 31, 31))))))
+                                            .addComponent(jLabel68)
+                                            .addComponent(jLabel63))))
+                                .addGap(66, 66, 66)))
+                        .addContainerGap())))
         );
         jDimmenLayout.setVerticalGroup(
             jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDimmenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDimmenLayout.createSequentialGroup()
-                            .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel43, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel37))
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel23)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jDimmenLayout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jDimmenLayout.createSequentialGroup()
-                                    .addComponent(jAltDim1ein)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jAltDim1aus))
-                                .addGroup(jDimmenLayout.createSequentialGroup()
-                                    .addComponent(jLabel45)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jAltDimmenFS1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDimmenLayout.createSequentialGroup()
-                        .addComponent(jLabel47)
+                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel37)
+                            .addComponent(jLabel43))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jAltDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDimmenLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jDimmenLayout.createSequentialGroup()
+                                .addComponent(jAltDim1ein)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jAltDim1aus))
+                            .addGroup(jDimmenLayout.createSequentialGroup()
+                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel45)
+                                    .addComponent(jLabel47))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jAltDimmenFS1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jAltDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(39, 39, 39)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel44)
+                .addGap(18, 18, 18)
                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDimmenLayout.createSequentialGroup()
                         .addComponent(jLabel42)
@@ -1298,28 +1669,55 @@ public class LDG30 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDimmen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDimmenLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jAltDim2ein)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jAltDim2aus))
+                    .addGroup(jDimmenLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel62)
                         .addGap(2, 2, 2)
-                        .addComponent(jLabel44)
+                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel48))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jAltDimmenFS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jAltDimmen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDimmenLayout.createSequentialGroup()
                         .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDimmenLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jAltDim2ein)
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel65))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel69)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel68)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel63)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jAltDimmenFS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jAltDimmen3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel64)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
+                                .addComponent(jLabel67)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDimmen3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
+                                .addComponent(jAltDim3ein)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jAltDim2aus))
-                            .addGroup(jDimmenLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel62)
-                                .addGap(2, 2, 2)
-                                .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jDimmenLayout.createSequentialGroup()
-                                        .addComponent(jLabel48)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jAltDimmen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jDimmenLayout.createSequentialGroup()
-                                        .addComponent(jLabel46)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jAltDimmenFS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                                .addComponent(jAltDim3aus)))))
+                .addGap(47, 47, 47))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("LDG30.jDimmen.TabConstraints.tabTitle"), jDimmen); // NOI18N
@@ -1387,6 +1785,11 @@ public class LDG30 extends javax.swing.JFrame {
         jTast2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTast2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTast2.setText(bundle.getString("LDG30.jTast2.text")); // NOI18N
+        jTast2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTast2ActionPerformed(evt);
+            }
+        });
         jTast2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTast2FocusGained(evt);
@@ -1438,6 +1841,59 @@ public class LDG30 extends javax.swing.JFrame {
             }
         });
 
+        jLabel71.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel71.setText(bundle.getString("LDG30.jLabel71.text")); // NOI18N
+
+        jTast3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTast3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTast3.setText(bundle.getString("LDG30.jTast3.text")); // NOI18N
+        jTast3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTast3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTast3FocusLost(evt);
+            }
+        });
+        jTast3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTast3KeyReleased(evt);
+            }
+        });
+
+        jLabel72.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel72.setText(bundle.getString("LDG30.jLabel72.text")); // NOI18N
+
+        jVor3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jVor3.setSelected(true);
+        jVor3.setText(bundle.getString("LDG30.jVor3.text")); // NOI18N
+        jVor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVor3ActionPerformed(evt);
+            }
+        });
+
+        jRueck3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRueck3.setSelected(true);
+        jRueck3.setText(bundle.getString("LDG30.jRueck3.text")); // NOI18N
+        jRueck3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRueck3ActionPerformed(evt);
+            }
+        });
+
+        jInvertBlink3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jInvertBlink3.setText(bundle.getString("LDG30.jInvertBlink3.text")); // NOI18N
+        jInvertBlink3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jInvertBlink3ActionPerformed(evt);
+            }
+        });
+
+        jLabel70.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel70.setText(bundle.getString("LDG30.jLabel70.text")); // NOI18N
+        jLabel70.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jEffekteLayout = new javax.swing.GroupLayout(jEffekte);
         jEffekte.setLayout(jEffekteLayout);
         jEffekteLayout.setHorizontalGroup(
@@ -1446,55 +1902,67 @@ public class LDG30 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jEffekteLayout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())
+                        .addComponent(jLabel70)
+                        .addGap(0, 0, 0))
                     .addGroup(jEffekteLayout.createSequentialGroup()
                         .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addGroup(jEffekteLayout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addGap(0, 0, 0))
                             .addGroup(jEffekteLayout.createSequentialGroup()
                                 .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel25)
+                                    .addGroup(jEffekteLayout.createSequentialGroup()
+                                        .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel71)
+                                            .addGroup(jEffekteLayout.createSequentialGroup()
+                                                .addGap(40, 40, 40)
+                                                .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(90, 90, 90)
+                                        .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel72)
+                                            .addComponent(jVor3)
+                                            .addComponent(jRueck3)))
+                                    .addGroup(jEffekteLayout.createSequentialGroup()
+                                        .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel25)
+                                            .addGroup(jEffekteLayout.createSequentialGroup()
+                                                .addGap(40, 40, 40)
+                                                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jInvertBlink1)
+                                                    .addComponent(jTast1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(90, 90, 90)
+                                        .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel30)
+                                            .addComponent(jVor1)
+                                            .addComponent(jRueck1)))
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22)
                                     .addGroup(jEffekteLayout.createSequentialGroup()
                                         .addGap(40, 40, 40)
                                         .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jInvertBlink1)
-                                            .addComponent(jTast1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(90, 90, 90)
-                                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel30)
-                                    .addGroup(jEffekteLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRueck1)
-                                            .addComponent(jVor1)))))
-                            .addComponent(jLabel21)
-                            .addGroup(jEffekteLayout.createSequentialGroup()
-                                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
-                                    .addGroup(jEffekteLayout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jInvertBlink2)
-                                            .addComponent(jTast2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel32)
-                                    .addGroup(jEffekteLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRueck2)
-                                            .addComponent(jVor2)))))
-                            .addComponent(jLabel22))
-                        .addGap(77, 77, 77))))
+                                            .addComponent(jInvertBlink3)
+                                            .addGroup(jEffekteLayout.createSequentialGroup()
+                                                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jInvertBlink2)
+                                                    .addComponent(jTast2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(105, 105, 105)
+                                                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jVor2)
+                                                    .addComponent(jRueck2)
+                                                    .addComponent(jLabel32))))))
+                                .addGap(10, 10, 10)))
+                        .addContainerGap())))
         );
         jEffekteLayout.setVerticalGroup(
             jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEffekteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jEffekteLayout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel25))
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
                     .addComponent(jLabel30))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1504,9 +1972,9 @@ public class LDG30 extends javax.swing.JFrame {
                 .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jInvertBlink1)
                     .addComponent(jRueck1))
-                .addGap(40, 40, 40)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel22)
                 .addGap(18, 18, 18)
                 .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1520,7 +1988,23 @@ public class LDG30 extends javax.swing.JFrame {
                 .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jInvertBlink2)
                     .addComponent(jRueck2))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel70)
+                .addGap(20, 20, 20)
+                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel71)
+                    .addComponent(jLabel72))
+                .addGap(6, 6, 6)
+                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTast3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jVor3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jInvertBlink3)
+                    .addComponent(jRueck3))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("LDG30.jEffekte.TabConstraints.tabTitle"), jEffekte); // NOI18N
@@ -1624,6 +2108,14 @@ public class LDG30 extends javax.swing.JFrame {
             }
         });
 
+        jRL_3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jRL_3.setText(bundle.getString("LDG30.jRL_3.text")); // NOI18N
+        jRL_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRL_3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jRangierenLayout = new javax.swing.GroupLayout(jRangieren);
         jRangieren.setLayout(jRangierenLayout);
         jRangierenLayout.setHorizontalGroup(
@@ -1639,7 +2131,8 @@ public class LDG30 extends javax.swing.JFrame {
                             .addComponent(jRL_1)
                             .addComponent(jRL_2)
                             .addComponent(jRL_F4)
-                            .addComponent(jRL_F3))))
+                            .addComponent(jRL_F3)
+                            .addComponent(jRL_3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jRangierenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel58)
@@ -1688,13 +2181,15 @@ public class LDG30 extends javax.swing.JFrame {
                         .addComponent(jRL_1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRL_2)
-                        .addGap(46, 46, 46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRL_3)
+                        .addGap(23, 23, 23)
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRL_F3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRL_F4)))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("LDG30.jRangieren.TabConstraints.tabTitle"), jRangieren); // NOI18N
@@ -2035,7 +2530,7 @@ public class LDG30 extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel57)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
                     .addGroup(jFahreigenschaftenLayout.createSequentialGroup()
                         .addGroup(jFahreigenschaftenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jFahreigenschaftenLayout.createSequentialGroup()
@@ -2081,7 +2576,7 @@ public class LDG30 extends javax.swing.JFrame {
                         .addGroup(jFahreigenschaftenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jAnfahrKick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel61))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                         .addGroup(jFahreigenschaftenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jFahreigenschaftenLayout.createSequentialGroup()
                                 .addGroup(jFahreigenschaftenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2622,7 +3117,7 @@ public class LDG30 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jF4))
                     .addComponent(jF8))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("LDG30.jAnalog.TabConstraints.tabTitle"), jAnalog); // NOI18N
@@ -2661,7 +3156,7 @@ public class LDG30 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel36)
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2789,8 +3284,7 @@ public class LDG30 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2875,6 +3369,14 @@ public class LDG30 extends javax.swing.JFrame {
                 case c.LD_G32:
                     dt.jDecType.setText("Decoder: LD-G-32, Adresse: " + jDecoderAdresse.getText());
                     break;
+
+                case c.LD_W32_2:
+                    dt.jDecType.setText("Decoder: LD-W-32.2, Adresse: " + jDecoderAdresse.getText());
+                    break;
+
+                case c.LD_G32_2:
+                    dt.jDecType.setText("Decoder: LD-G-32.2, Adresse: " + jDecoderAdresse.getText());
+                    break;
             }
         } else {
             switch(KTUI.Decoder)
@@ -2889,6 +3391,14 @@ public class LDG30 extends javax.swing.JFrame {
 
                 case c.LD_G32:
                     dt.jDecType.setText("decoder: LD-G-32, address: " + jDecoderAdresse.getText());
+                    break;
+
+                case c.LD_W32_2:
+                    dt.jDecType.setText("decoder: LD-W-32.2, address: " + jDecoderAdresse.getText());
+                    break;
+
+                case c.LD_G32_2:
+                    dt.jDecType.setText("decoder: LD-G-32.2, address: " + jDecoderAdresse.getText());
                     break;
             }
         }
@@ -3261,6 +3771,11 @@ public class LDG30 extends javax.swing.JFrame {
         else
             jFL_2.setSelected(false);
 
+        if((CV[1][33] & 4) == 4)
+            jFL_3.setSelected(true);
+        else
+            jFL_3.setSelected(false);
+
         if((CV[1][34] & 1) == 1)
             jFR_1.setSelected(true);
         else
@@ -3270,6 +3785,11 @@ public class LDG30 extends javax.swing.JFrame {
             jFR_2.setSelected(true);
         else
             jFR_2.setSelected(false);
+
+        if((CV[1][34] & 4) == 4)
+            jFR_3.setSelected(true);
+        else
+            jFR_3.setSelected(false);
 
         if((CV[1][35] & 1) == 1)
             jF1_1.setSelected(true);
@@ -3281,6 +3801,11 @@ public class LDG30 extends javax.swing.JFrame {
         else
             jF1_2.setSelected(false);
 
+        if((CV[1][35] & 4) == 4)
+            jF1_3.setSelected(true);
+        else
+            jF1_3.setSelected(false);
+
         if((CV[1][36] & 1) == 1)
             jF2_1.setSelected(true);
         else
@@ -3290,6 +3815,11 @@ public class LDG30 extends javax.swing.JFrame {
             jF2_2.setSelected(true);
         else
             jF2_2.setSelected(false);
+
+        if((CV[1][36] & 4) == 4)
+            jF2_3.setSelected(true);
+        else
+            jF2_3.setSelected(false);
 
         if((CV[1][37] & 1) == 1)
             jF3_1.setSelected(true);
@@ -3301,6 +3831,11 @@ public class LDG30 extends javax.swing.JFrame {
         else
             jF3_2.setSelected(false);
 
+        if((CV[1][37] & 4) == 4)
+            jF3_3.setSelected(true);
+        else
+            jF3_3.setSelected(false);
+
         if((CV[1][38] & 1) == 1)
             jF4_1.setSelected(true);
         else
@@ -3310,6 +3845,11 @@ public class LDG30 extends javax.swing.JFrame {
             jF4_2.setSelected(true);
         else
             jF4_2.setSelected(false);
+
+        if((CV[1][38] & 4) == 4)
+            jF4_3.setSelected(true);
+        else
+            jF4_3.setSelected(false);
 
         if((CV[1][39] & 1) == 1)
             jF5_1.setSelected(true);
@@ -3321,6 +3861,11 @@ public class LDG30 extends javax.swing.JFrame {
         else
             jF5_2.setSelected(false);
 
+        if((CV[1][39] & 4) == 4)
+            jF5_3.setSelected(true);
+        else
+            jF5_3.setSelected(false);
+
         if((CV[1][40] & 1) == 1)
             jF6_1.setSelected(true);
         else
@@ -3330,6 +3875,11 @@ public class LDG30 extends javax.swing.JFrame {
             jF6_2.setSelected(true);
         else
             jF6_2.setSelected(false);
+
+        if((CV[1][40] & 4) == 4)
+            jF6_3.setSelected(true);
+        else
+            jF6_3.setSelected(false);
 
         if((CV[1][41] & 1) == 1)
             jF7_1.setSelected(true);
@@ -3341,6 +3891,11 @@ public class LDG30 extends javax.swing.JFrame {
         else
             jF7_2.setSelected(false);
 
+        if((CV[1][41] & 4) == 4)
+            jF7_3.setSelected(true);
+        else
+            jF7_3.setSelected(false);
+
         if((CV[1][42] & 1) == 1)
             jF8_1.setSelected(true);
         else
@@ -3350,6 +3905,11 @@ public class LDG30 extends javax.swing.JFrame {
             jF8_2.setSelected(true);
         else
             jF8_2.setSelected(false);
+
+        if((CV[1][42] & 4) == 4)
+            jF8_3.setSelected(true);
+        else
+            jF8_3.setSelected(false);
 
         if((CV[1][43] & 1) == 1)
             jF9_1.setSelected(true);
@@ -3361,6 +3921,11 @@ public class LDG30 extends javax.swing.JFrame {
         else
             jF9_2.setSelected(false);
 
+        if((CV[1][43] & 4) == 4)
+            jF9_3.setSelected(true);
+        else
+            jF9_3.setSelected(false);
+
         if((CV[1][44] & 1) == 1)
             jF10_1.setSelected(true);
         else
@@ -3370,6 +3935,11 @@ public class LDG30 extends javax.swing.JFrame {
             jF10_2.setSelected(true);
         else
             jF10_2.setSelected(false);
+
+        if((CV[1][44] & 4) == 4)
+            jF10_3.setSelected(true);
+        else
+            jF10_3.setSelected(false);
 
         if((CV[1][45] & 1) == 1)
             jF11_1.setSelected(true);
@@ -3381,6 +3951,11 @@ public class LDG30 extends javax.swing.JFrame {
         else
             jF11_2.setSelected(false);
 
+        if((CV[1][45] & 4) == 4)
+            jF11_3.setSelected(true);
+        else
+            jF11_3.setSelected(false);
+
         if((CV[1][46] & 1) == 1)
             jF12_1.setSelected(true);
         else
@@ -3390,37 +3965,18 @@ public class LDG30 extends javax.swing.JFrame {
             jF12_2.setSelected(true);
         else
             jF12_2.setSelected(false);
+
+        if((CV[1][46] & 4) == 4)
+            jF12_3.setSelected(true);
+        else
+            jF12_3.setSelected(false);
     }//GEN-LAST:event_jFunctionMappingComponentShown
-
-    private void jVor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVor1ActionPerformed
-        if(!jVor1.isSelected()) {
-            CV[1][53] |= 1;
-        } else {
-            CV[1][53] &= ~1;
-        }
-        jCV_Anzeige.setSelectedItem( "CV#"+53 );
-    }//GEN-LAST:event_jVor1ActionPerformed
-
-    private void jRueck1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueck1ActionPerformed
-        if(!jRueck1.isSelected()) {
-            CV[1][53] |= 2;
-        } else {
-            CV[1][53] &= ~2;
-        }
-        jCV_Anzeige.setSelectedItem( "CV#"+53 );
-    }//GEN-LAST:event_jRueck1ActionPerformed
 
     private void jDimmen1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDimmen1KeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
             transferFocus();
         }
     }//GEN-LAST:event_jDimmen1KeyReleased
-
-    private void jTast1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast1KeyReleased
-        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
-            transferFocus();
-        }
-    }//GEN-LAST:event_jTast1KeyReleased
 
     private void jRL_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRL_2ActionPerformed
         if(jRL_2.isSelected()) {
@@ -3446,12 +4002,6 @@ public class LDG30 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jDimmen2KeyReleased
 
-    private void jTast2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast2KeyReleased
-        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
-            transferFocus();
-        }
-    }//GEN-LAST:event_jTast2KeyReleased
-
     private void jRL_F4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRL_F4ActionPerformed
         if(jRL_F4.isSelected()) {
             CV[1][115] |= 128;
@@ -3469,63 +4019,6 @@ public class LDG30 extends javax.swing.JFrame {
         }
         jCV_Anzeige.setSelectedItem( "CV#"+115 );
 }//GEN-LAST:event_jRL_F3ActionPerformed
-
-    private void jRueck2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueck2ActionPerformed
-        if(!jRueck2.isSelected()) {
-            CV[1][54] |= 2;
-        } else {
-            CV[1][54] &= ~2;
-        }
-        jCV_Anzeige.setSelectedItem( "CV#"+54 );
-    }//GEN-LAST:event_jRueck2ActionPerformed
-
-    private void jVor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVor2ActionPerformed
-        if(!jVor2.isSelected()) {
-            CV[1][54] |= 1;
-        } else {
-            CV[1][54] &= ~1;
-        }
-        jCV_Anzeige.setSelectedItem( "CV#"+54 );
-    }//GEN-LAST:event_jVor2ActionPerformed
-
-    private void jEffekteComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jEffekteComponentShown
-        jCV_Anzeige.setSelectedItem( "CV#"+53 );
-        jTast1.setText( "" + ((CV[1][53] & 0xF0) >> 4));
-        jTast2.setText( "" + ((CV[1][54] & 0xF0) >> 4));
-
-        if((CV[1][53] & 8) == 8) {
-            jInvertBlink1.setSelected(true);
-        } else {
-            jInvertBlink1.setSelected(false);
-        }
-        if((CV[1][54] & 8) == 8) {
-            jInvertBlink2.setSelected(true);
-        } else {
-            jInvertBlink2.setSelected(false);
-        }
-
-        if((CV[1][53] & 1) == 1) {
-            jVor1.setSelected(false);
-        } else {
-            jVor1.setSelected(true);
-        }
-        if((CV[1][53] & 2) == 2) {
-            jRueck1.setSelected(false);
-        } else {
-            jRueck1.setSelected(true);
-        }
-
-        if((CV[1][54] & 1) == 1) {
-            jVor2.setSelected(false);
-        } else {
-            jVor2.setSelected(true);
-        }
-        if((CV[1][54] & 2) == 2) {
-            jRueck2.setSelected(false);
-        } else {
-            jRueck2.setSelected(true);
-        }
-}//GEN-LAST:event_jEffekteComponentShown
 
     private void jAnalogComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jAnalogComponentShown
         if((CV[1][13] & 1) == 1)
@@ -3594,6 +4087,16 @@ public class LDG30 extends javax.swing.JFrame {
                 CVs = "LD-G-32\r\n";
                 extension = "ld32";
                 break;
+            case c.LD_W32_2:     //LD-W-32
+                CVs = "LD-W-32.2\r\n";
+                extension = "ld32_2";
+                break;
+                
+            case c.LD_G32_2:     //LD-G-32
+                CVs = "LD-G-32.2\r\n";
+                extension = "ld32_2";
+                break;
+
             default:
                 return;
         }
@@ -3622,6 +4125,11 @@ public class LDG30 extends javax.swing.JFrame {
             case c.LD_W32:
             case c.LD_G32:
                 od = new SaveOpenDialog( this, true, true, CVs, this, "ld32");
+                break;
+
+            case c.LD_W32_2:
+            case c.LD_G32_2:
+                od = new SaveOpenDialog( this, true, true, CVs, this, "ld32_2");
                 break;
         }
         updateTabs();
@@ -3908,9 +4416,7 @@ public class LDG30 extends javax.swing.JFrame {
         jFS26.setValue(c1[25]);
         jFS27.setValue(c1[26]);
         jFS28.setValue(c1[27]);
-        for (int i = 0; i < 28; i++) {
-            CV[1][67 + i] = c1[i];
-        }
+        System.arraycopy(c1, 0, CV[1], 67, 28);
         jCV_Anzeige.setSelectedItem( "CV#"+67 );
     }//GEN-LAST:event_jKurve4ActionPerformed
 
@@ -3953,22 +4459,6 @@ public class LDG30 extends javax.swing.JFrame {
             CV[1][49] |= 4;
         jCV_Anzeige.setSelectedItem( "CV#"+49 );
 }//GEN-LAST:event_jR_F2ActionPerformed
-
-    private void jInvertBlink1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvertBlink1ActionPerformed
-        if(jInvertBlink1.isSelected())
-            CV[1][53] |= 8;
-        else
-            CV[1][53] &= ~8;
-        jCV_Anzeige.setSelectedItem( "CV#"+53 );
-    }//GEN-LAST:event_jInvertBlink1ActionPerformed
-
-    private void jInvertBlink2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvertBlink2ActionPerformed
-        if(jInvertBlink2.isSelected())
-            CV[1][54] |= 8;
-        else
-            CV[1][54] &= ~8;
-        jCV_Anzeige.setSelectedItem( "CV#"+54 );
-    }//GEN-LAST:event_jInvertBlink2ActionPerformed
 
     private void jF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF1ActionPerformed
         if(jF1.isSelected()) {
@@ -4053,10 +4543,13 @@ public class LDG30 extends javax.swing.JFrame {
     private void jDimmenComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDimmenComponentShown
         jDimmen1.setText("" + (CV[1][62] & 0x0F));
         jDimmen2.setText("" + ((CV[1][62] & 0xF0)>>4));
+        jDimmen3.setText("" + (CV[1][63] & 0x0F));
         jAltDimmenFS2.setText("" + CV[1][113]);
         jAltDimmenFS1.setText("" + CV[1][113]);
+        jAltDimmenFS3.setText("" + CV[1][113]);
         jAltDimmen1.setText("" + (CV[1][118] & 0x0F));
         jAltDimmen2.setText("" + ((CV[1][118] & 0xF0)>>4));
+        jAltDimmen3.setText("" + (CV[1][119] & 0x0F));
         if((CV[1][116] & 1) == 1)
             jF8.setSelected(true);
         else
@@ -4104,6 +4597,11 @@ public class LDG30 extends javax.swing.JFrame {
             jRL_2.setSelected(true);
         else
             jRL_2.setSelected(false);
+
+        if((CV[1][115] & 4) == 4)
+            jRL_3.setSelected(true);
+        else
+            jRL_3.setSelected(false);
 
         if((CV[1][115] & 64) == 64)
             jRL_F3.setSelected(true);
@@ -4160,6 +4658,7 @@ public class LDG30 extends javax.swing.JFrame {
                 break;
 
             case c.LD_W32:
+            case c.LD_W32_2:
                 if(CV[1][9] == 0)
                 {
                     jUeberlast.setText("480 Hz");
@@ -4175,6 +4674,7 @@ public class LDG30 extends javax.swing.JFrame {
                 break;
 
             case c.LD_G32:
+            case c.LD_G32_2:
                 jUeberlast.setText("32 kHz");
                 break;
         }
@@ -4627,6 +5127,7 @@ public class LDG30 extends javax.swing.JFrame {
                 switch(KTUI.Decoder)
                 {
                     case c.LD_W32:
+                    case c.LD_W32_2:
                         cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 1, 1, true );
                         s = jCV_Inhalt.getText();
                         CV[1][currCV] = cvValue;
@@ -4645,6 +5146,7 @@ public class LDG30 extends javax.swing.JFrame {
                         break;
 
                     case c.LD_G32:
+                    case c.LD_G32_2:
                         jUeberlast.setText("32 kHz");
                         break;
                 }
@@ -4782,6 +5284,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jFL_2.setSelected(true);
                 else
                     jFL_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jFL_3.setSelected(true);
+                else
+                    jFL_3.setSelected(false);
                 break;
 
             case 34: //CV#34
@@ -4795,6 +5302,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jFR_2.setSelected(true);
                 else
                     jFR_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jFR_3.setSelected(true);
+                else
+                    jFR_3.setSelected(false);
                 break;
 
             case 35: //CV#35
@@ -4809,6 +5321,10 @@ public class LDG30 extends javax.swing.JFrame {
                 else
                     jF1_2.setSelected(false);
 
+                if((cvValue & 4) == 4 )
+                    jF1_3.setSelected(true);
+                else
+                    jF1_3.setSelected(false);
                 break;
 
             case 36: //CV#36
@@ -4822,6 +5338,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF2_2.setSelected(true);
                 else
                     jF2_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF2_3.setSelected(true);
+                else
+                    jF2_3.setSelected(false);
                 break;
 
             case 37: //CV#37
@@ -4835,6 +5356,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF3_2.setSelected(true);
                 else
                     jF3_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF3_3.setSelected(true);
+                else
+                    jF3_3.setSelected(false);
                 break;
 
             case 38: //CV#38
@@ -4848,6 +5374,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF4_2.setSelected(true);
                 else
                     jF4_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF4_3.setSelected(true);
+                else
+                    jF4_3.setSelected(false);
                 break;
 
             case 39: //CV#39
@@ -4861,6 +5392,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF5_2.setSelected(true);
                 else
                     jF5_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF5_3.setSelected(true);
+                else
+                    jF5_3.setSelected(false);
                 break;
 
             case 40: //CV#40
@@ -4874,6 +5410,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF6_2.setSelected(true);
                 else
                     jF6_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF6_3.setSelected(true);
+                else
+                    jF6_3.setSelected(false);
                 break;
 
             case 41: //CV#41
@@ -4887,6 +5428,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF7_2.setSelected(true);
                 else
                     jF7_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF7_3.setSelected(true);
+                else
+                    jF7_3.setSelected(false);
                 break;
 
             case 42: //CV#42
@@ -4900,6 +5446,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF8_2.setSelected(true);
                 else
                     jF8_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF8_3.setSelected(true);
+                else
+                    jF8_3.setSelected(false);
                 break;
 
             case 43: //CV#43
@@ -4913,6 +5464,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF9_2.setSelected(true);
                 else
                     jF9_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF9_3.setSelected(true);
+                else
+                    jF9_3.setSelected(false);
                 break;
 
             case 44: //CV#44
@@ -4926,6 +5482,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF10_2.setSelected(true);
                 else
                     jF10_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF10_3.setSelected(true);
+                else
+                    jF10_3.setSelected(false);
                 break;
 
             case 45: //CV#45
@@ -4939,6 +5500,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF11_2.setSelected(true);
                 else
                     jF11_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF11_3.setSelected(true);
+                else
+                    jF11_3.setSelected(false);
                 break;
 
             case 46: //CV#46
@@ -4952,6 +5518,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jF12_2.setSelected(true);
                 else
                     jF12_2.setSelected(false);
+
+                if((cvValue & 4) == 4 )
+                    jF12_3.setSelected(true);
+                else
+                    jF12_3.setSelected(false);
                 break;
 
             case 49: //CV#49
@@ -5002,9 +5573,11 @@ public class LDG30 extends javax.swing.JFrame {
 
             case 53: //CV53
             case 54: //CV54
+            case 55: //CV55
                 CV[1][currCV] = cvValue;
                 jTast1.setText( "" + ((CV[1][53] & 0xF0) >> 4));
                 jTast2.setText( "" + ((CV[1][54] & 0xF0) >> 4));
+                jTast3.setText( "" + ((CV[1][55] & 0xF0) >> 4));
                 if((CV[1][53] & 1) == 1) {
                     jVor1.setSelected(false);
                 } else {
@@ -5036,6 +5609,22 @@ public class LDG30 extends javax.swing.JFrame {
                 } else {
                     jInvertBlink2.setSelected(false);
                 }
+
+                if((CV[1][55] & 1) == 1) {
+                    jVor3.setSelected(false);
+                } else {
+                    jVor3.setSelected(true);
+                }
+                if((CV[1][55] & 2) == 2) {
+                    jRueck3.setSelected(false);
+                } else {
+                    jRueck3.setSelected(true);
+                }
+                if((CV[1][55] & 8) == 8) {
+                    jInvertBlink3.setSelected(true);
+                } else {
+                    jInvertBlink3.setSelected(false);
+                }
                 break;
 
             case 62: //CV62 (Dimmen)
@@ -5044,6 +5633,13 @@ public class LDG30 extends javax.swing.JFrame {
                 CV[1][currCV] = cvValue;
                 jDimmen1.setText("" + (CV[1][62] & 0x0F));
                 jDimmen2.setText("" + ((CV[1][62] & 0xF0)>>4));
+                break;
+
+            case 63: //CV63 (Dimmen)
+                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 1, 15, 15, true );
+                s = jCV_Inhalt.getText();
+                CV[1][currCV] = cvValue;
+                jDimmen3.setText("" + (CV[1][63] & 0x0F));
                 break;
 
             case 65: //CV#65
@@ -5063,6 +5659,7 @@ public class LDG30 extends javax.swing.JFrame {
                 CV[1][currCV] = cvValue;
                 jAltDimmenFS1.setText(s);
                 jAltDimmenFS2.setText(s);
+                jAltDimmenFS3.setText(s);
                 break;
 
             case 114: //CV114 (2te MM-Adresse)
@@ -5082,6 +5679,11 @@ public class LDG30 extends javax.swing.JFrame {
                     jRL_2.setSelected(true);
                 else
                     jRL_2.setSelected(false);
+
+                if((cvValue & 4) == 4)
+                    jRL_3.setSelected(true);
+                else
+                    jRL_3.setSelected(false);
 
                 if((cvValue & 64) == 64)
                     jRL_F3.setSelected(true);
@@ -5112,6 +5714,13 @@ public class LDG30 extends javax.swing.JFrame {
                     jAltDim2ein.setSelected(false);
                     jAltDim2aus.setSelected(true);
                 }
+                if((cvValue & 4) == 4) {
+                    jAltDim3ein.setSelected(true);
+                    jAltDim3aus.setSelected(false);
+                } else {
+                    jAltDim3ein.setSelected(false);
+                    jAltDim3aus.setSelected(true);
+                }
                 break;
 
             case 117: //CV117 (Überlast)
@@ -5133,6 +5742,13 @@ public class LDG30 extends javax.swing.JFrame {
                 jAltDimmen2.setText("" + ((CV[1][118] & 0xF0)>>4));
                 break;
 
+            case 119: //CV119 (AltDimmen)
+                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 1, 15, 15, true );
+                s = jCV_Inhalt.getText();
+                CV[1][currCV] = cvValue;
+                jAltDimmen3.setText("" + (CV[1][119] & 0x0F));
+                break;
+
             case 124: //CV#124 Optimierung der Lastregelung / MotorArt
                 int defValue;
                 switch(KTUI.Decoder) {
@@ -5140,6 +5756,7 @@ public class LDG30 extends javax.swing.JFrame {
                         defValue = 3;
                         break;
                     case c.LD_G32:
+                    case c.LD_G32_2:
                         defValue = 2;
                         break;
                     default:
@@ -5216,14 +5833,6 @@ public class LDG30 extends javax.swing.JFrame {
     private void jAltDimmen2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAltDimmen2FocusGained
         jCV_Anzeige.setSelectedItem( "CV#"+118 );
     }//GEN-LAST:event_jAltDimmen2FocusGained
-
-    private void jTast1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast1FocusGained
-        jCV_Anzeige.setSelectedItem( "CV#"+53 );
-    }//GEN-LAST:event_jTast1FocusGained
-
-    private void jTast2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast2FocusGained
-        jCV_Anzeige.setSelectedItem( "CV#"+54 );
-    }//GEN-LAST:event_jTast2FocusGained
 
     private void jAnfahrGeschwFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAnfahrGeschwFocusGained
         jCV_Anzeige.setSelectedItem( "CV#"+2 );
@@ -5303,18 +5912,6 @@ public class LDG30 extends javax.swing.JFrame {
         jCV_Anzeige.setSelectedItem( "CV#"+118 );
     }//GEN-LAST:event_jAltDimmen2FocusLost
 
-    private void jTast1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast1FocusLost
-        int cvValue = KTUI.checkTextField( this, jTast1, 0, 15, 15, true );
-        CV[1][53] = (CV[1][53] & 0x0F) + cvValue*16;
-        jCV_Anzeige.setSelectedItem( "CV#"+53 );
-    }//GEN-LAST:event_jTast1FocusLost
-
-    private void jTast2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast2FocusLost
-        int cvValue = KTUI.checkTextField( this, jTast2, 0, 15, 15, true );
-        CV[1][54] = (CV[1][54] & 0x0F) + cvValue*16;
-        jCV_Anzeige.setSelectedItem( "CV#"+54 );
-    }//GEN-LAST:event_jTast2FocusLost
-
     private void jAnfahrGeschwFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAnfahrGeschwFocusLost
         int defValue = 5; // LD-G-30, LD-G-32
         switch( KTUI.Decoder) {
@@ -5364,6 +5961,7 @@ public class LDG30 extends javax.swing.JFrame {
                 defValue = 3;
                 break;
             case c.LD_G32:
+            case c.LD_G32_2:
                 defValue = 2;
                 break;
         }
@@ -5406,6 +6004,7 @@ public class LDG30 extends javax.swing.JFrame {
                 defValue = 40 ;
                 break;
             case c.LD_G32:
+            case c.LD_G32_2:
                 defValue = 90 ;
                 break;
             default:
@@ -5424,6 +6023,7 @@ public class LDG30 extends javax.swing.JFrame {
                 defValue = 30 ;
                 break;
             case c.LD_G32:
+            case c.LD_G32_2:
                 defValue = 70 ;
                 break;
             default:
@@ -5440,6 +6040,7 @@ public class LDG30 extends javax.swing.JFrame {
         switch( KTUI.Decoder) {
             case c.LD_G30:
             case c.LD_G32:
+            case c.LD_G32_2:
                 defValue = 40 ;
                 break;
             default:
@@ -5485,6 +6086,385 @@ public class LDG30 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jDecoderAdresse1KeyReleased
 
+    private void jF12_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF12_3ActionPerformed
+        if(jF12_3.isSelected()) {
+            CV[1][46] |= 4;
+        } else {
+            CV[1][46] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+46 );
+    }//GEN-LAST:event_jF12_3ActionPerformed
+
+    private void jFL_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFL_3ActionPerformed
+        if(jFL_3.isSelected()) {
+            CV[1][33] |= 4;
+        } else {
+            CV[1][33] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+33 );
+    }//GEN-LAST:event_jFL_3ActionPerformed
+
+    private void jFR_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFR_3ActionPerformed
+        if(jFR_3.isSelected()) {
+            CV[1][34] |= 4;
+        } else {
+            CV[1][34] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+34 );
+    }//GEN-LAST:event_jFR_3ActionPerformed
+
+    private void jF1_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF1_3ActionPerformed
+        if(jF1_3.isSelected()) {
+            CV[1][35] |= 4;
+        } else {
+            CV[1][35] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+35 );
+    }//GEN-LAST:event_jF1_3ActionPerformed
+
+    private void jF2_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF2_3ActionPerformed
+        if(jF2_3.isSelected()) {
+            CV[1][36] |= 4;
+        } else {
+            CV[1][36] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+36 );
+    }//GEN-LAST:event_jF2_3ActionPerformed
+
+    private void jF3_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF3_3ActionPerformed
+        if(jF3_3.isSelected()) {
+            CV[1][37] |= 4;
+        } else {
+            CV[1][37] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+37 );
+    }//GEN-LAST:event_jF3_3ActionPerformed
+
+    private void jF4_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF4_3ActionPerformed
+        if(jF4_3.isSelected()) {
+            CV[1][38] |= 4;
+        } else {
+            CV[1][38] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+38 );
+    }//GEN-LAST:event_jF4_3ActionPerformed
+
+    private void jF5_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF5_3ActionPerformed
+        if(jF5_3.isSelected()) {
+            CV[1][39] |= 4;
+        } else {
+            CV[1][39] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+39 );
+    }//GEN-LAST:event_jF5_3ActionPerformed
+
+    private void jF6_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF6_3ActionPerformed
+        if(jF6_3.isSelected()) {
+            CV[1][40] |= 4;
+        } else {
+            CV[1][40] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+40 );
+    }//GEN-LAST:event_jF6_3ActionPerformed
+
+    private void jF7_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF7_3ActionPerformed
+        if(jF7_3.isSelected()) {
+            CV[1][41] |= 4;
+        } else {
+            CV[1][41] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+41 );
+    }//GEN-LAST:event_jF7_3ActionPerformed
+
+    private void jF8_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF8_3ActionPerformed
+        if(jF8_3.isSelected()) {
+            CV[1][42] |= 4;
+        } else {
+            CV[1][42] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+42 );
+    }//GEN-LAST:event_jF8_3ActionPerformed
+
+    private void jF9_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF9_3ActionPerformed
+        if(jF9_3.isSelected()) {
+            CV[1][43] |= 4;
+        } else {
+            CV[1][43] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+43 );
+    }//GEN-LAST:event_jF9_3ActionPerformed
+
+    private void jF10_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF10_3ActionPerformed
+        if(jF10_3.isSelected()) {
+            CV[1][44] |= 4;
+        } else {
+            CV[1][44] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+44 );
+    }//GEN-LAST:event_jF10_3ActionPerformed
+
+    private void jF11_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF11_3ActionPerformed
+        if(jF11_3.isSelected()) {
+            CV[1][45] |= 4;
+        } else {
+            CV[1][45] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+45 );
+    }//GEN-LAST:event_jF11_3ActionPerformed
+
+    private void jAltDim3einActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltDim3einActionPerformed
+        CV[1][116] |= 4;
+        jCV_Inhalt.setText("" + CV[1][116]);
+        jCV_Inhalt.setText("" + CV[1][116]);
+    }//GEN-LAST:event_jAltDim3einActionPerformed
+
+    private void jAltDimmen3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAltDimmen3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+119 );
+    }//GEN-LAST:event_jAltDimmen3FocusGained
+
+    private void jAltDimmen3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAltDimmen3FocusLost
+        int cvValue = KTUI.checkTextField( this, jAltDimmen3, 0, 15, 15, true );
+        CV[1][119] = (CV[1][119] & 0xF0) + cvValue;
+        jCV_Anzeige.setSelectedItem( "CV#"+119 );
+    }//GEN-LAST:event_jAltDimmen3FocusLost
+
+    private void jAltDimmen3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAltDimmen3KeyReleased
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
+            transferFocus();
+        }
+    }//GEN-LAST:event_jAltDimmen3KeyReleased
+
+    private void jAltDimmenFS3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAltDimmenFS3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+113 );
+    }//GEN-LAST:event_jAltDimmenFS3FocusGained
+
+    private void jAltDimmenFS3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAltDimmenFS3FocusLost
+        // nicht editierbar
+    }//GEN-LAST:event_jAltDimmenFS3FocusLost
+
+    private void jDimmen3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+63 );
+    }//GEN-LAST:event_jDimmen3FocusGained
+
+    private void jDimmen3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen3FocusLost
+        int cvValue = KTUI.checkTextField( this, jDimmen3, 0, 15, 15, true );
+        CV[1][63] = (CV[1][63] & 0xF0) + cvValue;
+        jCV_Anzeige.setSelectedItem( "CV#"+63 );
+    }//GEN-LAST:event_jDimmen3FocusLost
+
+    private void jDimmen3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDimmen3KeyReleased
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
+            transferFocus();
+        }
+    }//GEN-LAST:event_jDimmen3KeyReleased
+
+    private void jAltDim3ausActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltDim3ausActionPerformed
+        CV[1][116] &= ~4;
+        jCV_Inhalt.setText("" + CV[1][116]);
+        jCV_Inhalt.setText("" + CV[1][116]);
+    }//GEN-LAST:event_jAltDim3ausActionPerformed
+
+    private void jAltDimmenFS3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAltDimmenFS3KeyReleased
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
+            transferFocus();
+        }
+    }//GEN-LAST:event_jAltDimmenFS3KeyReleased
+
+    private void jEffekteComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jEffekteComponentShown
+        jCV_Anzeige.setSelectedItem( "CV#"+53 );
+        jTast1.setText( "" + ((CV[1][53] & 0xF0) >> 4));
+        jTast2.setText( "" + ((CV[1][54] & 0xF0) >> 4));
+        jTast3.setText( "" + ((CV[1][55] & 0xF0) >> 4));
+
+        if((CV[1][53] & 8) == 8) {
+            jInvertBlink1.setSelected(true);
+        } else {
+            jInvertBlink1.setSelected(false);
+        }
+        if((CV[1][54] & 8) == 8) {
+            jInvertBlink2.setSelected(true);
+        } else {
+            jInvertBlink2.setSelected(false);
+        }
+        if((CV[1][55] & 8) == 8) {
+            jInvertBlink3.setSelected(true);
+        } else {
+            jInvertBlink3.setSelected(false);
+        }
+
+        if((CV[1][53] & 1) == 1) {
+            jVor1.setSelected(false);
+        } else {
+            jVor1.setSelected(true);
+        }
+        if((CV[1][53] & 2) == 2) {
+            jRueck1.setSelected(false);
+        } else {
+            jRueck1.setSelected(true);
+        }
+
+        if((CV[1][54] & 1) == 1) {
+            jVor2.setSelected(false);
+        } else {
+            jVor2.setSelected(true);
+        }
+        if((CV[1][54] & 2) == 2) {
+            jRueck2.setSelected(false);
+        } else {
+            jRueck2.setSelected(true);
+        }
+        
+        if((CV[1][55] & 1) == 1) {
+            jVor3.setSelected(false);
+        } else {
+            jVor3.setSelected(true);
+        }
+        if((CV[1][55] & 2) == 2) {
+            jRueck3.setSelected(false);
+        } else {
+            jRueck3.setSelected(true);
+        }
+    }//GEN-LAST:event_jEffekteComponentShown
+
+    private void jInvertBlink3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvertBlink3ActionPerformed
+        if(jInvertBlink3.isSelected())
+        CV[1][55] |= 8;
+        else
+        CV[1][55] &= ~8;
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jInvertBlink3ActionPerformed
+
+    private void jRueck3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueck3ActionPerformed
+        if(!jRueck3.isSelected()) {
+            CV[1][55] |= 2;
+        } else {
+            CV[1][55] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jRueck3ActionPerformed
+
+    private void jVor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVor3ActionPerformed
+        if(!jVor3.isSelected()) {
+            CV[1][55] |= 1;
+        } else {
+            CV[1][55] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jVor3ActionPerformed
+
+    private void jTast3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast3KeyReleased
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
+            transferFocus();
+        }
+    }//GEN-LAST:event_jTast3KeyReleased
+
+    private void jTast3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast3FocusLost
+        int cvValue = KTUI.checkTextField( this, jTast3, 0, 15, 15, true );
+        CV[1][53] = (CV[1][55] & 0x0F) + cvValue*16;
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jTast3FocusLost
+
+    private void jTast3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast3FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+55 );
+    }//GEN-LAST:event_jTast3FocusGained
+
+    private void jInvertBlink2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvertBlink2ActionPerformed
+        if(jInvertBlink2.isSelected())
+        CV[1][54] |= 8;
+        else
+        CV[1][54] &= ~8;
+        jCV_Anzeige.setSelectedItem( "CV#"+54 );
+    }//GEN-LAST:event_jInvertBlink2ActionPerformed
+
+    private void jInvertBlink1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInvertBlink1ActionPerformed
+        if(jInvertBlink1.isSelected())
+        CV[1][53] |= 8;
+        else
+        CV[1][53] &= ~8;
+        jCV_Anzeige.setSelectedItem( "CV#"+53 );
+    }//GEN-LAST:event_jInvertBlink1ActionPerformed
+
+    private void jVor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVor2ActionPerformed
+        if(!jVor2.isSelected()) {
+            CV[1][54] |= 1;
+        } else {
+            CV[1][54] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+54 );
+    }//GEN-LAST:event_jVor2ActionPerformed
+
+    private void jRueck2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueck2ActionPerformed
+        if(!jRueck2.isSelected()) {
+            CV[1][54] |= 2;
+        } else {
+            CV[1][54] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+54 );
+    }//GEN-LAST:event_jRueck2ActionPerformed
+
+    private void jTast2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast2KeyReleased
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
+            transferFocus();
+        }
+    }//GEN-LAST:event_jTast2KeyReleased
+
+    private void jTast2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast2FocusLost
+        int cvValue = KTUI.checkTextField( this, jTast2, 0, 15, 15, true );
+        CV[1][54] = (CV[1][54] & 0x0F) + cvValue*16;
+        jCV_Anzeige.setSelectedItem( "CV#"+54 );
+    }//GEN-LAST:event_jTast2FocusLost
+
+    private void jTast2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast2FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+54 );
+    }//GEN-LAST:event_jTast2FocusGained
+
+    private void jTast2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTast2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTast2ActionPerformed
+
+    private void jTast1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTast1KeyReleased
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER ) {
+            transferFocus();
+        }
+    }//GEN-LAST:event_jTast1KeyReleased
+
+    private void jTast1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast1FocusLost
+        int cvValue = KTUI.checkTextField( this, jTast1, 0, 15, 15, true );
+        CV[1][53] = (CV[1][53] & 0x0F) + cvValue*16;
+        jCV_Anzeige.setSelectedItem( "CV#"+53 );
+    }//GEN-LAST:event_jTast1FocusLost
+
+    private void jTast1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast1FocusGained
+        jCV_Anzeige.setSelectedItem( "CV#"+53 );
+    }//GEN-LAST:event_jTast1FocusGained
+
+    private void jRueck1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueck1ActionPerformed
+        if(!jRueck1.isSelected()) {
+            CV[1][53] |= 2;
+        } else {
+            CV[1][53] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+53 );
+    }//GEN-LAST:event_jRueck1ActionPerformed
+
+    private void jVor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVor1ActionPerformed
+        if(!jVor1.isSelected()) {
+            CV[1][53] |= 1;
+        } else {
+            CV[1][53] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+53 );
+    }//GEN-LAST:event_jVor1ActionPerformed
+
+    private void jRL_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRL_3ActionPerformed
+        if(jRL_3.isSelected()) {
+            CV[1][115] |= 4;
+        } else {
+            CV[1][115] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem( "CV#"+115 );
+    }//GEN-LAST:event_jRL_3ActionPerformed
+
     private void setMotorTyp() {
         int iMotorTyp = jMotorListe.getSelectedIndex();
         switch(iMotorTyp)
@@ -5494,6 +6474,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("150");
                         jKi.setText("80");
                         jKd.setText("90");
@@ -5512,6 +6493,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("90");
                         jKi.setText("55");
                         jKd.setText("60");
@@ -5529,6 +6511,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("95");
                         jKi.setText("80");
                         jKd.setText("70");
@@ -5546,6 +6529,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("90");
                         jKi.setText("80");
                         jKd.setText("90");
@@ -5563,6 +6547,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("90");
                         jKi.setText("70");
                         jKd.setText("80");
@@ -5580,6 +6565,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("90");
                         jKi.setText("70");
                         jKd.setText("90");
@@ -5597,6 +6583,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("180");
                         jKi.setText("60");
                         jKd.setText("90");
@@ -5614,6 +6601,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("180");
                         jKi.setText("70");
                         jKd.setText("90");
@@ -5631,6 +6619,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("140");
                         jKi.setText("70");
                         jKd.setText("90");
@@ -5648,6 +6637,7 @@ public class LDG30 extends javax.swing.JFrame {
                 {
                     case c.LD_G30: //LD-G-30
                     case c.LD_G32: //LD-G-32
+                    case c.LD_G32_2: //LD-G-32
                         jKp.setText("100");
                         jKi.setText("80");
                         jKd.setText("90");
@@ -5665,7 +6655,7 @@ public class LDG30 extends javax.swing.JFrame {
 
     void filfilCVs() {
         Boolean b ;
-        String[] keys = { "LD-G-30", "LD-W-32",  "LD-G-32" };
+        String[] keys = { "LD-G-30", "LD-W-32",  "LD-G-32", "LD-W-32_2",  "LD-G-32_2" };
         b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, KTUI );
     }
 
@@ -5700,6 +6690,7 @@ public class LDG30 extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.JRadioButton j480Hz;
     private javax.swing.JRadioButton j80Hz;
     private javax.swing.JCheckBox jAB_F3;
@@ -5709,10 +6700,14 @@ public class LDG30 extends javax.swing.JFrame {
     private javax.swing.JRadioButton jAltDim1ein;
     private javax.swing.JRadioButton jAltDim2aus;
     private javax.swing.JRadioButton jAltDim2ein;
+    private javax.swing.JRadioButton jAltDim3aus;
+    private javax.swing.JRadioButton jAltDim3ein;
     private javax.swing.JTextField jAltDimmen1;
     private javax.swing.JTextField jAltDimmen2;
+    private javax.swing.JTextField jAltDimmen3;
     private javax.swing.JTextField jAltDimmenFS1;
     private javax.swing.JTextField jAltDimmenFS2;
+    private javax.swing.JTextField jAltDimmenFS3;
     private javax.swing.JCheckBox jAltKennlinie;
     private javax.swing.JPanel jAnalog;
     private javax.swing.JCheckBox jAnalog1;
@@ -5737,44 +6732,59 @@ public class LDG30 extends javax.swing.JFrame {
     private javax.swing.JPanel jDimmen;
     private javax.swing.JTextField jDimmen1;
     private javax.swing.JTextField jDimmen2;
+    private javax.swing.JTextField jDimmen3;
     private javax.swing.JToggleButton jDirekteingabe;
     private javax.swing.JPanel jEffekte;
     private javax.swing.JCheckBox jF1;
     private javax.swing.JCheckBox jF10_1;
     private javax.swing.JCheckBox jF10_2;
+    private javax.swing.JCheckBox jF10_3;
     private javax.swing.JCheckBox jF11_1;
     private javax.swing.JCheckBox jF11_2;
+    private javax.swing.JCheckBox jF11_3;
     private javax.swing.JCheckBox jF12_1;
     private javax.swing.JCheckBox jF12_2;
+    private javax.swing.JCheckBox jF12_3;
     private javax.swing.JCheckBox jF1_1;
     private javax.swing.JCheckBox jF1_2;
+    private javax.swing.JCheckBox jF1_3;
     private javax.swing.JCheckBox jF2;
     private javax.swing.JCheckBox jF2_1;
     private javax.swing.JCheckBox jF2_2;
+    private javax.swing.JCheckBox jF2_3;
     private javax.swing.JCheckBox jF3;
     private javax.swing.JCheckBox jF3_1;
     private javax.swing.JCheckBox jF3_2;
+    private javax.swing.JCheckBox jF3_3;
     private javax.swing.JCheckBox jF4;
     private javax.swing.JCheckBox jF4_1;
     private javax.swing.JCheckBox jF4_2;
+    private javax.swing.JCheckBox jF4_3;
     private javax.swing.JCheckBox jF5;
     private javax.swing.JCheckBox jF5_1;
     private javax.swing.JCheckBox jF5_2;
+    private javax.swing.JCheckBox jF5_3;
     private javax.swing.JCheckBox jF6;
     private javax.swing.JCheckBox jF6_1;
     private javax.swing.JCheckBox jF6_2;
+    private javax.swing.JCheckBox jF6_3;
     private javax.swing.JCheckBox jF7;
     private javax.swing.JCheckBox jF7_1;
     private javax.swing.JCheckBox jF7_2;
+    private javax.swing.JCheckBox jF7_3;
     private javax.swing.JCheckBox jF8;
     private javax.swing.JCheckBox jF8_1;
     private javax.swing.JCheckBox jF8_2;
+    private javax.swing.JCheckBox jF8_3;
     private javax.swing.JCheckBox jF9_1;
     private javax.swing.JCheckBox jF9_2;
+    private javax.swing.JCheckBox jF9_3;
     private javax.swing.JCheckBox jFL_1;
     private javax.swing.JCheckBox jFL_2;
+    private javax.swing.JCheckBox jFL_3;
     private javax.swing.JCheckBox jFR_1;
     private javax.swing.JCheckBox jFR_2;
+    private javax.swing.JCheckBox jFR_3;
     private javax.swing.JCheckBox jFS;
     private javax.swing.JSlider jFS1;
     private javax.swing.JSlider jFS10;
@@ -5810,6 +6820,7 @@ public class LDG30 extends javax.swing.JFrame {
     private javax.swing.JPanel jFunctionMapping;
     private javax.swing.JCheckBox jInvertBlink1;
     private javax.swing.JCheckBox jInvertBlink2;
+    private javax.swing.JCheckBox jInvertBlink3;
     private javax.swing.JTextField jKd;
     private javax.swing.JPanel jKennlinie;
     private javax.swing.JTextField jKi;
@@ -5879,7 +6890,17 @@ public class LDG30 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JCheckBox jLongAddr;
@@ -5895,6 +6916,7 @@ public class LDG30 extends javax.swing.JFrame {
     private javax.swing.JCheckBox jPosBrems;
     private javax.swing.JCheckBox jRL_1;
     private javax.swing.JCheckBox jRL_2;
+    private javax.swing.JCheckBox jRL_3;
     private javax.swing.JCheckBox jRL_F3;
     private javax.swing.JCheckBox jRL_F4;
     private javax.swing.JCheckBox jR_F1;
@@ -5906,18 +6928,23 @@ public class LDG30 extends javax.swing.JFrame {
     private javax.swing.JCheckBox jRichtung;
     private javax.swing.JCheckBox jRueck1;
     private javax.swing.JCheckBox jRueck2;
+    private javax.swing.JCheckBox jRueck3;
     private javax.swing.JButton jSave;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField jTast1;
     private javax.swing.JTextField jTast2;
+    private javax.swing.JTextField jTast3;
     private javax.swing.JTextField jUeberlast;
     private javax.swing.JTextField jVMax;
     private javax.swing.JLabel jVersion;
     private javax.swing.JCheckBox jVor1;
     private javax.swing.JCheckBox jVor2;
+    private javax.swing.JCheckBox jVor3;
     private javax.swing.JRadioButton jlangeAdr;
     // End of variables declaration//GEN-END:variables
 

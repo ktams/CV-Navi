@@ -51,32 +51,34 @@ interface c {
     public static final int LD_G30 =  1;
     public static final int LD_G31 =  2;
     public static final int LD_W32 =  3;
-    public static final int LD_G32 =  4;
-    public static final int LD_W33 =  5;
-    public static final int LD_G33 =  6;
-    public static final int LD_G34 =  7;
-    public static final int LD_G31Plus =  8;
-    public static final int LD_G33Plus =  9;
-    public static final int LD_G34Plus =  10;
-    public static final int LD_G36Plus =  11;
-    public static final int LINE_1 =  12;
-    public static final int tFD    =  13;
-    public static final int FD_R   = 14;
-    public static final int FD_R2  = 15;
-    public static final int FD_R_ex = 16;
-    public static final int FD_M   = 17;
-    public static final int FD_XL  = 18;
-    public static final int FD_LED = 19;
-    public static final int LINE_2 = 20;
-    public static final int tZUB   = 21;
-    public static final int WD_34  = 22;
-    public static final int SD_34  = 23;
-    public static final int LINE_3 = 24;
-    public static final int tOTHER = 25;
-    public static final int MC     = 26; // MasterControl/RedBox
-    public static final int B_4    = 27;
-    public static final int BiDi_B = 28;
-    public static final int WIB_30 = 29;
+    public static final int LD_W32_2 =  4;
+    public static final int LD_G32 =  5;
+    public static final int LD_G32_2 =  6;
+    public static final int LD_W33 =  7;
+    public static final int LD_G33 =  8;
+    public static final int LD_G34 =  9;
+    public static final int LD_G31Plus =  10;
+    public static final int LD_G33Plus =  11;
+    public static final int LD_G34Plus =  12;
+    public static final int LD_G36Plus =  13;
+    public static final int LINE_1 =  14;
+    public static final int tFD    =  15;
+    public static final int FD_R   = 16;
+    public static final int FD_R2  = 17;
+    public static final int FD_R_ex = 18;
+    public static final int FD_M   = 19;
+    public static final int FD_XL  = 20;
+    public static final int FD_LED = 21;
+    public static final int LINE_2 = 22;
+    public static final int tZUB   = 23;
+    public static final int WD_34  = 24;
+    public static final int SD_34  = 25;
+    public static final int LINE_3 = 26;
+    public static final int tOTHER = 27;
+    public static final int MC     = 28; // MasterControl/RedBox
+    public static final int B_4    = 29;
+    public static final int BiDi_B = 30;
+    public static final int WIB_30 = 31;
 
     // special numbers (used in SaveOpenDialog)
     public static final int MC_WR  = 196; // special handling of MC config writes
@@ -132,7 +134,9 @@ enum decoderList {
     LD_G30  (c.LD_G30, true,  "   LD-G-30",""),
     LD_G31  (c.LD_G31, true,  "   LD-G-31",""),
     LD_W32  (c.LD_W32, true,  "   LD-W-32",""),
+    LD_W32_2  (c.LD_W32_2, true,  "   LD-W-32.2",""),
     LD_G32  (c.LD_G32, true,  "   LD-G-32",""),
+    LD_G32_2  (c.LD_G32_2, true,  "   LD-G-32.2",""),
     LD_W33  (c.LD_W33, true,  "   LD-W-33",""),
     LD_G33  (c.LD_G33, true,  "   LD-G-33",""),
     LD_G34  (c.LD_G34, true,  "   LD-G-34",""),
@@ -1647,7 +1651,6 @@ public class KlarTextUI extends javax.swing.JFrame {
      * @return true if answer starts with 0x00
      * 
      * Liste der Error-Codes:
-
           0x00  OK      - kein Fehler, Befehl korrekt ausgeführt
           0x02  XBADPRM - Parameterfehler (Parameterbyte außerhalb der zulässigen Werte)
           0x06  XPWOFF  - Befehl nicht ausgeführt, da MC im Modus STOP
@@ -1662,7 +1665,6 @@ public class KlarTextUI extends javax.swing.JFrame {
                           im HALT-Modus ist. Die Geschwindigkeit wird auf 0 gesetzt.
           0x42  XLKPOFF - Lok-Kommando akzeptiert, aber nicht ausgeführt, da Steuerung
                           im STOP-Modus ist. Die Geschwindigkeit wird auf 0 gesetzt.
-
      */
     public boolean checkMCAnswerByte( Container cont, byte[] bArr, Boolean show ) {
         if( bArr == null ) {
@@ -1825,7 +1827,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     public TwoWaySerialComm safelyCloseCom( Container cont, TwoWaySerialComm Com, Boolean showMbox ) {
         if( debugLevel > 0 ) {
             System.out.println("safelyCloseCom: Com "+ Com==null?"=":"!" +"= null" );
-            System.out.println("cont name="+cont.getName() +" class="+cont.getClass() );;
+            System.out.println("cont name="+cont.getName() +" class="+cont.getClass() );
         }
         if( Com != null ) {
             try {
@@ -2287,6 +2289,8 @@ public class KlarTextUI extends javax.swing.JFrame {
             case c.LD_G30: // LD-G-30
             case c.LD_W32: // LD-W-32
             case c.LD_G32: // LD-G-32
+            case c.LD_W32_2: // LD-W-32.2
+            case c.LD_G32_2: // LD-G-32.2
                 LDG30 lDG30 = new LDG30(this);
                 break;
 
@@ -2596,17 +2600,14 @@ public class KlarTextUI extends javax.swing.JFrame {
                         01h, <DNG version>,
                         05h, <IB serial number: 5 bytes (digits 98, 76, 54, 32, 10)>,
                         00h
-
                         A single byte version # is to be interpreted as: H.L
                         For example: 10h -> version 1.0
                         A two byte version # (low/high) is to be interpreted as: H.HLL
                         For example: 23h, 10h -> version 1.023
                         (the version numbers and the serial number are sent in BCD
                         notation - Binary Coded Decimal).
-
                         The serial number is to be interpreted as: '9876543210' - i.e.
                         digit '9' is the most significant digit, etc...
-
                         SPU = System Processing Unit (the IB 'heart')
                         KPU = Keypad Processing Unit (user interface)
                         PPU = Peripheral Processing Unit (digital signal generator)
