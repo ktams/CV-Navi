@@ -1,4 +1,4 @@
-CV-Navi Version 2.2
+CV-Navi Version 2.4
 
 English version after german section.
 
@@ -11,6 +11,10 @@ Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
+
+Aenderungen in V2.4
+- LD-W-32.2 und LD-G-32.2 hinzugefuegt
+- Baudrate fuer RS-232 an MC/RB bzw. USB-2 an RB wieder umstellbar
 
 Aenderungen in V2.3
 - MC/RB: Loktabelle: Umstellung Format/Protokoll und Fahrstufen auf Kombobox

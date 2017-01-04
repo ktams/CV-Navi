@@ -696,7 +696,7 @@ public class MC extends javax.swing.JFrame {
                                     jMaxMag.setText(strArr1[1]);
                                     break;
                                 case "BAUDRATE":
-                                    jBaud.setText(strArr1[1]);
+                                    jBaud.setSelectedItem(strArr1[1]);
                                     break;
                                 case "RAILCOM":
                                     rcValue = Integer.parseInt(strArr1[1]);
@@ -790,8 +790,7 @@ public class MC extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jMaxMag = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jBaud = new javax.swing.JTextField();
+        jLabelBaudrate = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jKonfLesen = new javax.swing.JButton();
         jKonfSchreiben = new javax.swing.JButton();
@@ -819,6 +818,7 @@ public class MC extends javax.swing.JFrame {
         jBoostOptNoAccBreak = new javax.swing.JCheckBox();
         jBild2 = new javax.swing.JLabel();
         jMRST = new javax.swing.JButton();
+        jBaud = new javax.swing.JComboBox<>();
         jLoks = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLoco = new javax.swing.JTable();
@@ -1117,10 +1117,12 @@ public class MC extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText(bundle.getString("MC.jLabel8.text")); // NOI18N
+        jLabel8.setToolTipText(bundle.getString("MC.jLabel17.toolTipText")); // NOI18N
 
         js88.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         js88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         js88.setText(bundle.getString("MC.js88.text")); // NOI18N
+        js88.setToolTipText(bundle.getString("MC.jLabel17.toolTipText")); // NOI18N
         js88.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 js88ActionPerformed(evt);
@@ -1162,18 +1164,13 @@ public class MC extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText(bundle.getString("MC.jLabel12.text")); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel13.setText(bundle.getString("MC.jLabel13.text")); // NOI18N
-        jLabel13.setToolTipText(bundle.getString("MC.jLabel13.toolTipText")); // NOI18N
-
-        jBaud.setEditable(false);
-        jBaud.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jBaud.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jBaud.setText(bundle.getString("MC.jBaud.text")); // NOI18N
-        jBaud.setToolTipText(bundle.getString("MC.jBaud.toolTipText")); // NOI18N
+        jLabelBaudrate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelBaudrate.setText(bundle.getString("MC.jLabelBaudrate.text")); // NOI18N
+        jLabelBaudrate.setToolTipText(bundle.getString("MC.jLabelBaudrate.toolTipText")); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText(bundle.getString("MC.jLabel14.text")); // NOI18N
+        jLabel14.setToolTipText(bundle.getString("MC.jLabelBaudrate.toolTipText")); // NOI18N
 
         jKonfLesen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jKonfLesen.setText(bundle.getString("MC.jKonfLesen.text")); // NOI18N
@@ -1333,6 +1330,9 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
+        jBaud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2400", "4800", "9600", "14400", "19200", "38400", "57600" }));
+        jBaud.setToolTipText(bundle.getString("MC.jLabelBaudrate.toolTipText")); // NOI18N
+
         javax.swing.GroupLayout jSystemLayout = new javax.swing.GroupLayout(jSystem);
         jSystem.setLayout(jSystemLayout);
         jSystemLayout.setHorizontalGroup(
@@ -1368,7 +1368,7 @@ public class MC extends javax.swing.JFrame {
                                     .addComponent(jBoosterOpts)
                                     .addComponent(jBoostOptNoAccDrive)
                                     .addComponent(jBoostOptNoAccBreak))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1377,31 +1377,28 @@ public class MC extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
+                                    .addComponent(jLabelBaudrate)
                                     .addComponent(jLabel11)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel6))
                                 .addGap(15, 15, 15)
-                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(js88, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jMinMag, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jMaxMag, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBaud, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jKurzEmpf, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jSystemLayout.createSequentialGroup()
-                                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel12))
-                                        .addGap(143, 143, 143))
-                                    .addGroup(jSystemLayout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(js88, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jMinMag, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jMaxMag, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jKurzEmpf, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jBaud, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(74, 74, 74)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jMRST)
@@ -1428,6 +1425,18 @@ public class MC extends javax.swing.JFrame {
             .addGroup(jSystemLayout.createSequentialGroup()
                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jSystemLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jDatenQuelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jSystemLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jSystemLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jMRST, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jSystemLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -1450,23 +1459,12 @@ public class MC extends javax.swing.JFrame {
                             .addComponent(jLabel12)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBaud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel13)))
-                    .addGroup(jSystemLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jDatenQuelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jSystemLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jSystemLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jMRST, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                            .addComponent(jLabelBaudrate)
+                            .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jBaud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel14)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
                         .addComponent(jKonfLesen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3698,6 +3696,7 @@ public class MC extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(jUSB1);
+        jUSB1.setSelected(true);
         jUSB1.setText(bundle.getString("MC.jUSB1.text")); // NOI18N
         jUSB1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3977,11 +3976,10 @@ public class MC extends javax.swing.JFrame {
             }
             //jDatenQuelle.setText("invalid");
             jDatenQuelle.setForeground(Color.red);
-            jBaud.setText("-");
+            jBaud.setSelectedItem("0");
             Com = null;
             KTUI.mbDeviceConnectProblemOffline( this );
         } else {
-            // jBaud.setText(Integer.toString(KTUI.gsBaudRate));
             Com = KTUI.safelyCloseCom( this, Com );
         }
         jCancel.setEnabled(false);
@@ -4999,7 +4997,7 @@ public class MC extends javax.swing.JFrame {
                                     lastCmd += "N, ";
                                 lastCmd += js88.getText();
                                 lastCmd += ", ";
-                                lastCmd += jBaud.getText();
+                                lastCmd += jBaud.getSelectedItem().toString();
                                 System.out.println("write: basic config cmd["+lastCmd+"]");
                                 lastCmd += "\r";
                                 Com.write(lastCmd);
@@ -6211,7 +6209,7 @@ public class MC extends javax.swing.JFrame {
         str += "s88MODULES " + js88.getText() + "\r\n";
         str += "MAGMINTIME " + jMinMag.getText() + "\r\n";
         str += "MAGMAXTIME " + jMaxMag.getText() + "\r\n";
-        str += "BAUDRATE " + jBaud.getText() + "\r\n";
+        str += "BAUDRATE " + jBaud.getSelectedItem().toString() + "\r\n";
         if( rcValue != -1 ) {
             str += "RAILCOM " + rcValue + "\r\n";
         }
@@ -9292,7 +9290,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton j7;
     private javax.swing.JButton j8;
     private javax.swing.JButton j9;
-    private javax.swing.JTextField jBaud;
+    private javax.swing.JComboBox<String> jBaud;
     private javax.swing.JLabel jBild;
     private javax.swing.JLabel jBild2;
     private javax.swing.JCheckBox jBoostOptNoAccBreak;
@@ -9326,7 +9324,6 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -9356,6 +9353,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBaudrate;
     private javax.swing.JLabel jLabelM3SID;
     private javax.swing.JLabel jLabelM3UID;
     private javax.swing.JCheckBox jLangePause;

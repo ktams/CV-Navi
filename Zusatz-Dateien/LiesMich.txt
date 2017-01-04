@@ -1,4 +1,4 @@
-Dies ist die Version 2.3 von CV-Navi, der Programmiersoftware fuer die neueren Tams-Decoder (ab LD-30er) und andere Geraete.
+Dies ist die Version 2.4 von CV-Navi, der Programmiersoftware fuer die neueren Tams-Decoder (ab LD-30er) und andere Geraete.
 Um das Programm zu starten reicht es, KlarText.jar zu starten (Doppel-Klick mit der Maus).
 Bei Linux muss das Startscript CV-Navi.sh gestartet werden.
 Wenn beim Setup angegeben, kann das Programm auch aus dem Start-Menue oder der Schnellstartleiste gestartet werden (Windows).
@@ -10,7 +10,7 @@ Ich bitte um Meldung von Fehlern und Wuenschen an ktams@tams-online.de
 Viel Spass!
 
 
-This is Version 2.3 of CV-Navi. It is a programming software for produkts of Tams Elektronik.
+This is Version 2.4 of CV-Navi. It is a programming software for produkts of Tams Elektronik.
 This program is written in Java, so You need the JRE (Java Runtime Environment).
 If it is not installed on you PC, you can download it from the web site of Sun / Oracle.
 
