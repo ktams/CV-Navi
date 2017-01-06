@@ -73,12 +73,13 @@ interface c {
     public static final int tZUB   = 23;
     public static final int WD_34  = 24;
     public static final int SD_34  = 25;
-    public static final int LINE_3 = 26;
-    public static final int tOTHER = 27;
-    public static final int MC     = 28; // MasterControl/RedBox
-    public static final int B_4    = 29;
-    public static final int BiDi_B = 30;
-    public static final int WIB_30 = 31;
+    public static final int MultiDecoder = 26;
+    public static final int LINE_3 = 27;
+    public static final int tOTHER = 28;
+    public static final int MC     = 29; // MasterControl/RedBox
+    public static final int B_4    = 30;
+    public static final int BiDi_B = 31;
+    public static final int WIB_30 = 32;
 
     // special numbers (used in SaveOpenDialog)
     public static final int MC_WR  = 196; // special handling of MC config writes
@@ -156,6 +157,7 @@ enum decoderList {
     tZUB    (c.tZUB,   false, "Zubehör-Decoder","Accessory-Decoder"),
     WD_34   (c.WD_34,  true,  "   WD-34",""),
     SD_34   (c.SD_34,  true,  "   SD-34",""),
+    MultiDecoder   (c.MultiDecoder,  true,  "   MultiDecoder",""),
     line_3  (c.LINE_3, false, "____________",""),
     tOTHER  (c.tOTHER, false, "Sonstiges","Other"),
     MC      (c.MC,     true,  "   MasterControl/RedBox",""),
@@ -2335,6 +2337,10 @@ public class KlarTextUI extends javax.swing.JFrame {
             case c.WD_34: // WD-34
             case c.SD_34: // SD-34
                 WD34 wD34 = new WD34(this);
+                break;
+
+            case c.MultiDecoder: // MasterControl/RedBox
+                MultiDec MD = new MultiDec(this);
                 break;
 
             case c.MC: // MasterControl/RedBox
