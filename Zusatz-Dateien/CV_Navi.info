@@ -1,4 +1,4 @@
-CV-Navi Version 2.4
+CV-Navi Version 2.5
 
 English version after german section.
 
@@ -11,6 +11,9 @@ Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
+
+Aenderungen in V2.5
+- Multidecoder hinzugefuegt
 
 Aenderungen in V2.4
 - LD-W-32.2 und LD-G-32.2 hinzugefuegt
@@ -112,13 +115,13 @@ Ihr Tams Elektronik Team.
 ___________________________________________________
 
 This program is freeware.
-You use it on your own risk.
-Please send us a description of mistakes you found: info@tams-online.de.
+Use it on your own risk.
+Please send bug reports with a short description to: info@tams-online.de
 
-My english is very bad, so give me a suggestion, what I could make better.
+My english is very bad, so give me a suggestion, what I can make better.
 
 If you have problems with PC <-> control unit, please check first 
-if you have choosen the right contral unit, interface and baud rate.
+if you have chosen the right control unit, interface and baud rate.
 
 If you use the IB you must switch the interface settings to "6051 + IB".
 
