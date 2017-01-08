@@ -333,10 +333,7 @@ public class MC extends javax.swing.JFrame {
                         return 1;
                     }
                 }
-                // Vergleiche Fahrstufen numerisch ( hier 27 ohne [aAbB] )
-                int n1 = KTUI.checkAndGetStrNumRangeDef( null, s1.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
-                int n2 = KTUI.checkAndGetStrNumRangeDef( null, s2.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
-                return n1 - n2;
+                return o1.compareTo(o2);
             }
         });
         rowSorter.setComparator(2, new Comparator<String>() {
@@ -363,7 +360,10 @@ public class MC extends javax.swing.JFrame {
                         return 1;
                     }
                 }
-                return o1.compareTo(o2);
+                // Vergleiche Fahrstufen numerisch ( hier 27 ohne [aAbB] )
+                int n1 = KTUI.checkAndGetStrNumRangeDef( null, s1.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
+                int n2 = KTUI.checkAndGetStrNumRangeDef( null, s2.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
+                return n1 - n2;
             }
         });
 
