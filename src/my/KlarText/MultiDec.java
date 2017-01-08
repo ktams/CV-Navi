@@ -5,6 +5,10 @@
  */
 package my.KlarText;
 
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 
 /**
@@ -14,6 +18,23 @@ import javax.swing.ImageIcon;
 public class MultiDec extends javax.swing.JFrame {
 
     public KlarTextUI KTUI;
+    private TwoWaySerialComm Com = null;
+    private javax.swing.Timer timer = null;
+    private boolean bAbbruch = false;
+    private boolean bRead = false;
+    private boolean bWrite = false;
+    private ResourceBundle bundle;
+    private boolean bWaitAnswerInProgresss=false;
+    byte[] bArray = new byte[200];
+    public int bytesRead=0;
+    private int retries;
+    private int cvWert = -1;
+    private int cvAnfrage = -1;
+    private int decAdr = -1;
+    private int SendeZaehler;
+    private int CV_Max = 68;
+    private int ServoTemp = 0;
+
     /**
      * Creates new form MultiDec
      */
@@ -32,6 +53,7 @@ public class MultiDec extends javax.swing.JFrame {
             return;
         }
         initComponents();
+        bundle = java.util.ResourceBundle.getBundle("my.KlarText/Bundle");
         ImageIcon II = null;
         II = new ImageIcon(getClass().getResource("/WD-34.gif"));
         jBild.setIcon(II);
@@ -53,11 +75,11 @@ public class MultiDec extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jExit = new javax.swing.JButton();
+        jClose = new javax.swing.JButton();
         jBild = new javax.swing.JLabel();
-        jRead = new javax.swing.JButton();
-        jWrite = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jAuslesen = new javax.swing.JButton();
+        jSchreiben = new javax.swing.JButton();
+        jAbbrechen = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jMode1 = new javax.swing.JRadioButton();
@@ -67,11 +89,15 @@ public class MultiDec extends javax.swing.JFrame {
         jMode5 = new javax.swing.JRadioButton();
         jMode6 = new javax.swing.JRadioButton();
         jModeLabel = new javax.swing.JLabel();
-        jRC_on = new javax.swing.JCheckBox();
-        jCh1 = new javax.swing.JCheckBox();
+        jRC_Ein = new javax.swing.JCheckBox();
+        jCH1 = new javax.swing.JCheckBox();
         jCH2 = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jVersion = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jAdresse = new javax.swing.JTextField();
+        jWeichenAdresse = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jOntimeLabel1 = new javax.swing.JLabel();
         jOntimeLabel2 = new javax.swing.JLabel();
@@ -150,29 +176,59 @@ public class MultiDec extends javax.swing.JFrame {
         jControlOff7 = new javax.swing.JCheckBox();
         jControlOff8 = new javax.swing.JCheckBox();
         jLabel25 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jNachlaufzeit = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
+        jLP1 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLP2 = new javax.swing.JLabel();
+        jLP3 = new javax.swing.JLabel();
+        jLP4 = new javax.swing.JLabel();
+        jLP5 = new javax.swing.JLabel();
+        jLP6 = new javax.swing.JLabel();
+        jLP7 = new javax.swing.JLabel();
+        jLP8 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jUpdateInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jExit.setText("Close");
-        jExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jExitActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
-        getContentPane().add(jExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 121, -1));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jClose.setText("Close");
+        jClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCloseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 121, -1));
         getContentPane().add(jBild, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 192, 120));
 
-        jRead.setText("Read");
-        getContentPane().add(jRead, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 120, -1));
+        jAuslesen.setText("Read");
+        jAuslesen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAuslesenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jAuslesen, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 120, -1));
 
-        jWrite.setText("Write");
-        getContentPane().add(jWrite, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 120, -1));
+        jSchreiben.setText("Write");
+        getContentPane().add(jSchreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 120, -1));
 
-        jButton1.setText("Cancel");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 120, -1));
+        jAbbrechen.setText("Cancel");
+        jAbbrechen.setEnabled(false);
+        jAbbrechen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAbbrechenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jAbbrechen, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 120, -1));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -234,13 +290,13 @@ public class MultiDec extends javax.swing.JFrame {
         jModeLabel.setBorder(javax.swing.BorderFactory.createTitledBorder("Mode"));
         jPanel1.add(jModeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 330, 150));
 
-        jRC_on.setSelected(true);
-        jRC_on.setText("on");
-        jPanel1.add(jRC_on, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
+        jRC_Ein.setSelected(true);
+        jRC_Ein.setText("on");
+        jPanel1.add(jRC_Ein, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
 
-        jCh1.setSelected(true);
-        jCh1.setText("Channel 1");
-        jPanel1.add(jCh1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
+        jCH1.setSelected(true);
+        jCH1.setText("Channel 1");
+        jPanel1.add(jCH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
 
         jCH2.setSelected(true);
         jCH2.setText("Channel 2");
@@ -251,6 +307,19 @@ public class MultiDec extends javax.swing.JFrame {
 
         jVersion.setText("Version: 1.0.0 ");
         jPanel1.add(jVersion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
+
+        jLabel27.setText("Address");
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        jAdresse.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jAdresse.setText("1");
+        jPanel1.add(jAdresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 40, -1));
+
+        jWeichenAdresse.setText("-> points 1 - 4");
+        jPanel1.add(jWeichenAdresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
+
+        jLabel28.setText("ATTENTION: the device must be powered by an external power supply!");
+        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jTabbedPane1.addTab("General", jPanel1);
 
@@ -269,38 +338,38 @@ public class MultiDec extends javax.swing.JFrame {
         jPanel2.add(jOntimeLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         jOnTime4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime4.setText("5");
+        jOnTime4.setText("-1");
         jPanel2.add(jOnTime4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 40, -1));
 
         jOnTime1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime1.setText("5");
+        jOnTime1.setText("-1");
         jPanel2.add(jOnTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 40, -1));
 
         jOnTime2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime2.setText("5");
+        jOnTime2.setText("-1");
         jPanel2.add(jOnTime2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 40, -1));
 
         jOnTime3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime3.setText("5");
+        jOnTime3.setText("-1");
         jPanel2.add(jOnTime3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 40, -1));
 
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder("On Time r / g"));
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 270, 110));
 
         jOnTime5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime5.setText("5");
+        jOnTime5.setText("-1");
         jPanel2.add(jOnTime5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 40, -1));
 
         jOnTime6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime6.setText("5");
+        jOnTime6.setText("-1");
         jPanel2.add(jOnTime6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 40, -1));
 
         jOnTime7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime7.setText("5");
+        jOnTime7.setText("-1");
         jPanel2.add(jOnTime7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 40, -1));
 
         jOnTime8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime8.setText("5");
+        jOnTime8.setText("-1");
         jPanel2.add(jOnTime8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 40, -1));
 
         jPaired1.setSelected(true);
@@ -392,155 +461,191 @@ public class MultiDec extends javax.swing.JFrame {
         jLabel18.setText("Position l");
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
-        jLabel22.setText("Control in rest");
-        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        jLabel22.setText("Last pos.");
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
 
         jLabel23.setText("Position r");
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
 
         jServoSpeed1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed1.setText("16");
+        jServoSpeed1.setText("0");
         jPanel3.add(jServoSpeed1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 60, -1));
 
         jServoPosL1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL1.setText("1400");
+        jServoPosL1.setText("0");
+        jServoPosL1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jServoPosL1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jServoPosL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 60, -1));
 
         jServoPosR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR1.setText("1600");
+        jServoPosR1.setText("0");
         jPanel3.add(jServoPosR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 60, -1));
 
         jServoPosR2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR2.setText("1600");
+        jServoPosR2.setText("0");
         jPanel3.add(jServoPosR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 60, -1));
 
         jServoPosL2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL2.setText("1400");
+        jServoPosL2.setText("0");
         jPanel3.add(jServoPosL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 60, -1));
 
         jServoSpeed2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed2.setText("16");
+        jServoSpeed2.setText("0");
         jPanel3.add(jServoSpeed2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 60, -1));
 
         jServoPosL3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL3.setText("1400");
+        jServoPosL3.setText("0");
         jPanel3.add(jServoPosL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 60, -1));
 
         jServoPosR3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR3.setText("1600");
+        jServoPosR3.setText("0");
         jPanel3.add(jServoPosR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 60, -1));
 
         jServoSpeed3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed3.setText("16");
+        jServoSpeed3.setText("0");
         jPanel3.add(jServoSpeed3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 60, -1));
 
         jServoPosL4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL4.setText("1400");
+        jServoPosL4.setText("0");
         jPanel3.add(jServoPosL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 60, -1));
 
         jServoPosR4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR4.setText("1600");
+        jServoPosR4.setText("0");
         jPanel3.add(jServoPosR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 60, -1));
 
         jServoSpeed4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed4.setText("16");
+        jServoSpeed4.setText("0");
         jPanel3.add(jServoSpeed4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 60, -1));
 
         jServoPosL5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL5.setText("1400");
+        jServoPosL5.setText("0");
         jPanel3.add(jServoPosL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 60, -1));
 
         jServoPosR5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR5.setText("1600");
+        jServoPosR5.setText("0");
         jPanel3.add(jServoPosR5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 60, -1));
 
         jServoSpeed5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed5.setText("16");
+        jServoSpeed5.setText("0");
         jPanel3.add(jServoSpeed5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 60, -1));
 
         jServoSpeed6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed6.setText("16");
+        jServoSpeed6.setText("0");
         jPanel3.add(jServoSpeed6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 60, -1));
 
         jServoPosL6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL6.setText("1400");
+        jServoPosL6.setText("0");
         jPanel3.add(jServoPosL6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 60, -1));
 
         jServoPosR6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR6.setText("1600");
+        jServoPosR6.setText("0");
         jPanel3.add(jServoPosR6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 60, -1));
 
         jServoPosR7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR7.setText("1600");
+        jServoPosR7.setText("0");
         jPanel3.add(jServoPosR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 60, -1));
 
         jServoSpeed7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed7.setText("16");
+        jServoSpeed7.setText("0");
         jPanel3.add(jServoSpeed7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 60, -1));
 
         jServoPosR8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosR8.setText("1600");
+        jServoPosR8.setText("0");
         jPanel3.add(jServoPosR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 60, -1));
 
         jServoPosL7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL7.setText("1400");
+        jServoPosL7.setText("0");
         jPanel3.add(jServoPosL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 60, -1));
 
         jServoSpeed8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoSpeed8.setText("16");
+        jServoSpeed8.setText("0");
         jPanel3.add(jServoSpeed8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 60, -1));
 
         jServoPosL8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jServoPosL8.setText("1400");
+        jServoPosL8.setText("0");
         jPanel3.add(jServoPosL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 60, -1));
 
         jLabel24.setText("Speed");
         jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
 
         jControlOff1.setText("off");
-        jPanel3.add(jControlOff1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, -1));
+        jPanel3.add(jControlOff1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, 20));
 
         jControlOff2.setText("off");
-        jPanel3.add(jControlOff2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, -1, -1));
+        jPanel3.add(jControlOff2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, -1, 20));
 
         jControlOff3.setText("off");
-        jPanel3.add(jControlOff3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
+        jPanel3.add(jControlOff3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, 20));
 
         jControlOff4.setText("off");
         jPanel3.add(jControlOff4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, -1));
 
         jControlOff5.setText("off");
-        jPanel3.add(jControlOff5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
+        jPanel3.add(jControlOff5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, 20));
 
         jControlOff6.setText("off");
-        jPanel3.add(jControlOff6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
+        jPanel3.add(jControlOff6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, 20));
 
         jControlOff7.setText("off");
-        jPanel3.add(jControlOff7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
+        jPanel3.add(jControlOff7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 20));
 
         jControlOff8.setText("off");
-        jPanel3.add(jControlOff8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, -1));
+        jPanel3.add(jControlOff8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, 20));
 
         jLabel25.setText("Follow up time:");
         jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, 20));
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("255");
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 40, -1));
+        jNachlaufzeit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jNachlaufzeit.setText("255");
+        jPanel3.add(jNachlaufzeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 40, -1));
 
         jLabel26.setText("x100 msec");
         jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, 20));
 
+        jLP1.setText("_");
+        jPanel3.add(jLP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 10, 20));
+
+        jLabel30.setText("Control in rest");
+        jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+
+        jLP2.setText("_");
+        jPanel3.add(jLP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 10, 20));
+
+        jLP3.setText("_");
+        jPanel3.add(jLP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 10, 20));
+
+        jLP4.setText("_");
+        jPanel3.add(jLP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 10, 20));
+
+        jLP5.setText("_");
+        jPanel3.add(jLP5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 10, 20));
+
+        jLP6.setText("_");
+        jPanel3.add(jLP6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 10, 20));
+
+        jLP7.setText("_");
+        jPanel3.add(jLP7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 10, 20));
+
+        jLP8.setText("_");
+        jPanel3.add(jLP8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 10, 20));
+
         jTabbedPane1.addTab("Servos", jPanel3);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 490, 290));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 270, -1));
+
+        jUpdateInfo.setText("read/write info");
+        getContentPane().add(jUpdateInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 270, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExitActionPerformed
+    private void jCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCloseActionPerformed
         dispose();
-    }//GEN-LAST:event_jExitActionPerformed
+    }//GEN-LAST:event_jCloseActionPerformed
 
     private void jMode1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMode1ActionPerformed
         // TODO add your handling code here:
@@ -566,6 +671,1393 @@ public class MultiDec extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMode6ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+                // store pointer to instance in a final variable -> useable inside ActionListener
+        final MultiDec outerThis = this;
+        
+        final ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String s;
+
+                if( bAbbruch ) {
+                    System.out.println("Abbruch durch Benutzer" );
+                    if( bRead || bWrite ) {
+                        jProgressBar1.setString(bundle.getString("WD34.BenutzerAbbruch"));
+                        KTUI.mbRWCancelled(outerThis, 5);
+                    }
+                    stopIOAction();
+                    bAbbruch = false;
+                    return;
+                }
+
+                if( bWaitAnswerInProgresss ) {
+                    byte[] bArrayTmp = new byte[200];
+                    int newBytes;
+                    newBytes = Com.read(bArrayTmp); // was gibts Neues ?
+                    if( newBytes > 0 ) {
+                        //wenn ja, an bisher empfangene Daten anhängen
+                        System.arraycopy(bArrayTmp, 0, bArray, bytesRead, newBytes);
+                        if( KlarTextUI.debugLevel > 0 ) {
+                            System.out.println("524 MERGE PRE bytesRead="+bytesRead+" newBytes="+newBytes+" res="+(bytesRead+newBytes) );
+                        }
+                        bytesRead += newBytes;
+                        bArray[bytesRead] = 0;
+                        if( KlarTextUI.debugLevel > 2 ) {
+                            System.out.println("529 aktueller Stand: bytesRead="+bytesRead );
+                            KTUI.dumpbArray(bArray);
+                        }
+                    }
+
+                    if( newBytes == 0 ) {
+                        System.out.print("->"+retries+" ");
+                        retries--;
+                        if( retries == 0 ) {
+                            jProgressBar1.setString("Timeout");
+                            System.out.println(" -> retries ende bytesRead="+bytesRead );
+                            stopIOAction();
+                            KTUI.mbDeviceReadProblem( outerThis );
+                            return;
+                        }
+                        jProgressBar1.setString(bundle.getString("ReadWriteCV.Warte")+retries);
+                        return;
+                    }
+
+                    // es ist ein vollständiger Datensatz angekommen ?
+                    bArray[bytesRead] = 0; // zur Sicherheit ;)
+
+                    if( ! KTUI.checkReadComplete(bArray) ) {
+                        // incomplete -> wait for more
+                        return;
+                    }
+                    bWaitAnswerInProgresss = false;
+                    // Datensatz vollständig -> Teste/Analysiere erwarteten Wert
+                }
+
+                if(bRead) {
+                    // check for a valid PTRD answer
+                    cvWert = KTUI.checkPTRDAnswer( bArray );
+                    if( KlarTextUI.debugLevel >= 0 ) {
+                        System.out.println("bRead cv["+cvAnfrage+"]="+cvWert );
+                    }
+                    if( cvWert < 0 ) {
+                        // TODO handle error on read
+                        System.out.println("bRead ERROR cv["+cvAnfrage+"]="+cvWert );
+                    }
+
+                    switch (SendeZaehler) {
+                        case 0:
+                            if(cvWert != 62)
+                            {
+                                bRead = false;
+                                stopIOAction();
+                                jUpdateInfo.setText(bundle.getString("WD34.wrongvendor"));
+                                KTUI.mbNoTams( outerThis, c.mbRDcancel );
+                                return;
+                            }
+
+                            SendeZaehler++;
+                            cvAnfrage = 1;
+                            s = "XPTRD 1\r"; // dec adr % 64
+                            jUpdateInfo.setText(bundle.getString("WD34.decoderaddress")+"low");
+                            Com.write(s);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            
+                            SendeZaehler++;
+                            
+                            
+                            break;
+/*
+                        case 1:
+                            SendeZaehler++;
+                            cvAnfrage = 9;
+                            s = "XPTRD 9\r"; // dec adr / 64
+                            jUpdateInfo.setText(bundle.getString("WD34.decoderaddress")+"high");
+                            Com.write(s);
+
+                            decAdr = cvWert ;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+*/
+                        case 2:
+                            SendeZaehler++;
+                            cvAnfrage = 3;
+                            s = "XPTRD 3\r"; // OnTime 1
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 1");
+                            Com.write(s);
+
+                            decAdr = cvWert ;
+
+
+//                            decAdr += cvWert*64;
+                            jAdresse.setText("" + decAdr);
+                            String ss = "-> ";
+                            if( KTUI.bSpracheDE ) {
+                                ss += "Weiche " ;
+                            } else {
+                                ss += "Switch " ;
+                            }
+                            ss += (decAdr*4 - 3) + " - " + decAdr*4;
+                            jWeichenAdresse.setText(ss);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 3:
+                            SendeZaehler++;
+                            cvAnfrage = 4;
+                            s = "XPTRD 4\r"; // OnTime 2
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 2");
+                            Com.write(s);
+
+                            jOnTime1.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 4:
+                            SendeZaehler++;
+                            cvAnfrage = 5;
+                            s = "XPTRD 5\r"; // OnTime 3
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 3");
+                            Com.write(s);
+
+                            jOnTime2.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 5:
+                            SendeZaehler++;
+                            cvAnfrage = 6;
+                            s = "XPTRD 6\r"; // OnTime 4
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time 4");
+                            Com.write(s);
+
+                            jOnTime3.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 6:
+                            SendeZaehler++;
+                            cvAnfrage = 7;
+                            s = "XPTRD 7\r"; // Version
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Version");
+                            Com.write(s);
+
+                            jOnTime4.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 7:
+                            SendeZaehler++;
+                            cvAnfrage = 29;
+                            s = "XPTRD 29\r"; // Konfig 1 (RailCom)
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"config CV29");
+                            Com.write(s);
+
+                            jVersion.setText("Version: V" + cvWert/10 + "." + cvWert%10);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 8:
+                            SendeZaehler++;
+                            cvAnfrage = 28;
+                            s = "XPTRD 28\r"; // Konfig 2
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"config CV28");
+                            Com.write(s);
+
+                            // check Bidi/Railcom bit of CV29
+                            jRC_Ein.setSelected((cvWert&0x08)==0x08);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 9:
+                            SendeZaehler++;
+                            cvAnfrage = 33;
+                            s = "XPTRD 33\r"; // On Time 1a
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time CV33");
+                            Com.write(s);
+
+                            // check Bidi/Railcom bit of CV28
+                            jCH1.setSelected((cvWert&0x01)==0x01);
+                            jCH2.setSelected((cvWert&0x02)==0x02);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 10:
+                            SendeZaehler++;
+                            cvAnfrage = 34;
+                            s = "XPTRD 34\r"; // On Time 2a
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time CV34");
+                            Com.write(s);
+
+                            jOnTime5.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 11:
+                            SendeZaehler++;
+                            cvAnfrage = 35;
+                            s = "XPTRD 35\r"; // On Time 3a
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time CV35");
+                            Com.write(s);
+
+                            jOnTime6.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 12:
+                            SendeZaehler++;
+                            cvAnfrage = 36;
+                            s = "XPTRD 36\r"; // On Time 4a
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"On Time CV36");
+                            Com.write(s);
+
+                            jOnTime7.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 13:
+                            SendeZaehler++;
+                            cvAnfrage = 38;
+                            s = "XPTRD 38\r"; // Mode
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Mode CV38");
+                            Com.write(s);
+
+                            jOnTime8.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 14:
+                            SendeZaehler++;
+                            cvAnfrage = 37;
+                            s = "XPTRD 37\r"; //Switch Mode
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Switch mode CV37");
+                            Com.write(s);
+
+                            jMode1.setSelected(false);
+                            jMode2.setSelected(false);
+                            jMode3.setSelected(false);
+                            jMode4.setSelected(false);
+                            jMode5.setSelected(false);
+                            jMode6.setSelected(false);
+                            switch(cvWert)
+                            {
+                                case 0:
+                                    jMode1.setSelected(true);
+                                    break;
+                                    
+                                case 1:
+                                    jMode2.setSelected(true);
+                                    break;
+                                    
+                                case 2:
+                                    jMode3.setSelected(true);
+                                    break;
+                                    
+                                case 3:
+                                    jMode4.setSelected(true);
+                                    break;
+                                    
+                                case 4:
+                                    jMode5.setSelected(true);
+                                    break;
+                                    
+                                case 5:
+                                    jMode6.setSelected(true);
+                                    break;
+                                }
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 15:
+                            SendeZaehler++;
+                            cvAnfrage = 66;
+                            s = "XPTRD 66\r"; // Endabschaltung?
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Limit stop CV66");
+                            Com.write(s);
+
+                            // check paired
+                            jPaired1.setSelected((cvWert&0x01)==0x01);
+                            jPaired2.setSelected((cvWert&0x02)==0x02);
+                            jPaired1.setSelected((cvWert&0x04)==0x04);
+                            jPaired2.setSelected((cvWert&0x08)==0x08);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 16:
+                            SendeZaehler++;
+                            cvAnfrage = 65;
+                            s = "XPTRD 65\r"; // Servoansteuerung in Ruhe?
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo control in rest CV65");
+                            Com.write(s);
+
+                            // check paired
+                            jLimitStop1.setSelected((cvWert&0x01)==0x01);
+                            jLimitStop2.setSelected((cvWert&0x02)==0x02);
+                            jLimitStop3.setSelected((cvWert&0x04)==0x04);
+                            jLimitStop4.setSelected((cvWert&0x08)==0x08);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 17:
+                            SendeZaehler++;
+                            cvAnfrage = 67;
+                            s = "XPTRD 67\r"; // Nachlaufzeit
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo follow up time CV67");
+                            Com.write(s);
+
+                            // check paired
+                            jControlOff1.setSelected((cvWert&0x01)==0x01);
+                            jControlOff2.setSelected((cvWert&0x02)==0x02);
+                            jControlOff3.setSelected((cvWert&0x04)==0x04);
+                            jControlOff4.setSelected((cvWert&0x08)==0x08);
+                            jControlOff5.setSelected((cvWert&0x10)==0x10);
+                            jControlOff6.setSelected((cvWert&0x20)==0x20);
+                            jControlOff7.setSelected((cvWert&0x40)==0x40);
+                            jControlOff8.setSelected((cvWert&0x80)==0x80);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 18:
+                            SendeZaehler++;
+                            cvAnfrage = 40;
+                            s = "XPTRD 40\r"; // Servo1 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo1 Pos l. CV40");
+                            Com.write(s);
+
+                            jNachlaufzeit.setText("" + cvWert);
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 19:
+                            SendeZaehler++;
+                            cvAnfrage = 140;
+                            s = "XPTRD 140\r"; // Servo1 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo1 Pos l. CV140");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 20:
+                            SendeZaehler++;
+                            cvAnfrage = 41;
+                            s = "XPTRD 41\r"; // Servo1 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo1 Pos r. CV41");
+                            Com.write(s);
+
+                            jServoPosL1.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 21:
+                            SendeZaehler++;
+                            cvAnfrage = 141;
+                            s = "XPTRD 141\r"; // Servo1 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo1 Pos r. CV141");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 22:
+                            SendeZaehler++;
+                            cvAnfrage = 42;
+                            s = "XPTRD 42\r"; // Servo1 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo1 speed CV42");
+                            Com.write(s);
+
+                            jServoPosR1.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 23:
+                            SendeZaehler++;
+                            cvAnfrage = 142;
+                            s = "XPTRD 142\r"; // Servo1 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo1 speed. CV142");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 24:
+                            SendeZaehler++;
+                            cvAnfrage = 43;
+                            s = "XPTRD 43\r"; // Servo2 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo2 Pos l. CV43");
+                            Com.write(s);
+
+                            jServoSpeed1.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 25:
+                            SendeZaehler++;
+                            cvAnfrage = 143;
+                            s = "XPTRD 143\r"; // Servo2 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo2 Pos l. CV143");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 26:
+                            SendeZaehler++;
+                            cvAnfrage = 44;
+                            s = "XPTRD 44\r"; // Servo2 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo2 Pos r. CV44");
+                            Com.write(s);
+
+                            jServoPosL2.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 27:
+                            SendeZaehler++;
+                            cvAnfrage = 144;
+                            s = "XPTRD 144\r"; // Servo2 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo2 Pos r. CV144");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 28:
+                            SendeZaehler++;
+                            cvAnfrage = 45;
+                            s = "XPTRD 45\r"; // Servo1 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo2 speed CV45");
+                            Com.write(s);
+
+                            jServoPosR2.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 29:
+                            SendeZaehler++;
+                            cvAnfrage = 145;
+                            s = "XPTRD 145\r"; // Servo2 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo2 speed. CV145");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 30:
+                            SendeZaehler++;
+                            cvAnfrage = 46;
+                            s = "XPTRD 46\r"; // Servo3 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo3 Pos l. CV46");
+                            Com.write(s);
+
+                            jServoSpeed2.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 31:
+                            SendeZaehler++;
+                            cvAnfrage = 146;
+                            s = "XPTRD 146\r"; // Servo3 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo3 Pos l. CV146");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 32:
+                            SendeZaehler++;
+                            cvAnfrage = 47;
+                            s = "XPTRD 47\r"; // Servo3 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo3 Pos r. CV47");
+                            Com.write(s);
+
+                            jServoPosL3.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 33:
+                            SendeZaehler++;
+                            cvAnfrage = 147;
+                            s = "XPTRD 147\r"; // Servo3 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo2 Pos r. CV147");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 34:
+                            SendeZaehler++;
+                            cvAnfrage = 48;
+                            s = "XPTRD 48\r"; // Servo3 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo3 speed CV48");
+                            Com.write(s);
+
+                            jServoPosR3.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 35:
+                            SendeZaehler++;
+                            cvAnfrage = 148;
+                            s = "XPTRD 148\r"; // Servo3 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo3 speed. CV148");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 36:
+                            SendeZaehler++;
+                            cvAnfrage = 49;
+                            s = "XPTRD 49\r"; // Servo4 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo4 Pos l. CV49");
+                            Com.write(s);
+
+                            jServoSpeed3.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 37:
+                            SendeZaehler++;
+                            cvAnfrage = 149;
+                            s = "XPTRD 149\r"; // Servo4 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo4 Pos l. CV149");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 38:
+                            SendeZaehler++;
+                            cvAnfrage = 50;
+                            s = "XPTRD 50\r"; // Servo4 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo4 Pos r. CV50");
+                            Com.write(s);
+
+                            jServoPosL4.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 39:
+                            SendeZaehler++;
+                            cvAnfrage = 150;
+                            s = "XPTRD 150\r"; // Servo4 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo4 Pos r. CV150");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 40:
+                            SendeZaehler++;
+                            cvAnfrage = 51;
+                            s = "XPTRD 51\r"; // Servo4 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo4 speed CV51");
+                            Com.write(s);
+
+                            jServoPosR4.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 41:
+                            SendeZaehler++;
+                            cvAnfrage = 151;
+                            s = "XPTRD 151\r"; // Servo4 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo4 speed. CV151");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 42:
+                            SendeZaehler++;
+                            cvAnfrage = 52;
+                            s = "XPTRD 52\r"; // Servo5 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo5 Pos l. CV52");
+                            Com.write(s);
+
+                            jServoSpeed4.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 43:
+                            SendeZaehler++;
+                            cvAnfrage = 152;
+                            s = "XPTRD 152\r"; // Servo5 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo5 Pos l. CV152");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 44:
+                            SendeZaehler++;
+                            cvAnfrage = 53;
+                            s = "XPTRD 53\r"; // Servo5 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo5 Pos r. CV53");
+                            Com.write(s);
+
+                            jServoPosL5.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 45:
+                            SendeZaehler++;
+                            cvAnfrage = 153;
+                            s = "XPTRD 153\r"; // Servo5 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo5 Pos r. CV153");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 46:
+                            SendeZaehler++;
+                            cvAnfrage = 54;
+                            s = "XPTRD 54\r"; // Servo5 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo5 speed CV54");
+                            Com.write(s);
+
+                            jServoPosR5.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 47:
+                            SendeZaehler++;
+                            cvAnfrage = 154;
+                            s = "XPTRD 154\r"; // Servo5 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo5 speed. CV154");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 48:
+                            SendeZaehler++;
+                            cvAnfrage = 55;
+                            s = "XPTRD 55\r"; // Servo6 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo6 Pos l. CV55");
+                            Com.write(s);
+
+                            jServoSpeed5.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 49:
+                            SendeZaehler++;
+                            cvAnfrage = 155;
+                            s = "XPTRD 155\r"; // Servo6 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo6 Pos l. CV155");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 50:
+                            SendeZaehler++;
+                            cvAnfrage = 56;
+                            s = "XPTRD 56\r"; // Servo6 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo6 Pos r. CV56");
+                            Com.write(s);
+
+                            jServoPosL6.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 51:
+                            SendeZaehler++;
+                            cvAnfrage = 156;
+                            s = "XPTRD 156\r"; // Servo6 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo6 Pos r. CV156");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 52:
+                            SendeZaehler++;
+                            cvAnfrage = 57;
+                            s = "XPTRD 57\r"; // Servo6 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo6 speed CV57");
+                            Com.write(s);
+
+                            jServoPosR6.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 53:
+                            SendeZaehler++;
+                            cvAnfrage = 157;
+                            s = "XPTRD 157\r"; // Servo6 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo6 speed. CV157");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 54:
+                            SendeZaehler++;
+                            cvAnfrage = 58;
+                            s = "XPTRD 58\r"; // Servo7 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo7 Pos l. CV58");
+                            Com.write(s);
+
+                            jServoSpeed6.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 55:
+                            SendeZaehler++;
+                            cvAnfrage = 158;
+                            s = "XPTRD 158\r"; // Servo7 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo7 Pos l. CV158");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 56:
+                            SendeZaehler++;
+                            cvAnfrage = 59;
+                            s = "XPTRD 59\r"; // Servo7 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo7 Pos r. CV59");
+                            Com.write(s);
+
+                            jServoPosL7.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 57:
+                            SendeZaehler++;
+                            cvAnfrage = 159;
+                            s = "XPTRD 159\r"; // Servo7 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo7 Pos r. CV159");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 58:
+                            SendeZaehler++;
+                            cvAnfrage = 60;
+                            s = "XPTRD 60\r"; // Servo7 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo7 speed CV60");
+                            Com.write(s);
+
+                            jServoPosR7.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 59:
+                            SendeZaehler++;
+                            cvAnfrage = 160;
+                            s = "XPTRD 160\r"; // Servo7 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo7 speed. CV160");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 60:
+                            SendeZaehler++;
+                            cvAnfrage = 61;
+                            s = "XPTRD 61\r"; // Servo8 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo8 Pos l. CV61");
+                            Com.write(s);
+
+                            jServoSpeed7.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 61:
+                            SendeZaehler++;
+                            cvAnfrage = 161;
+                            s = "XPTRD 161\r"; // Servo8 Pos li 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo8 Pos l. CV161");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 62:
+                            SendeZaehler++;
+                            cvAnfrage = 62;
+                            s = "XPTRD 62\r"; // Servo8 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo8 Pos r. CV62");
+                            Com.write(s);
+
+                            jServoPosL8.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 63:
+                            SendeZaehler++;
+                            cvAnfrage = 162;
+                            s = "XPTRD 162\r"; // Servo8 Pos re 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo8 Pos r. CV162");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 64:
+                            SendeZaehler++;
+                            cvAnfrage = 63;
+                            s = "XPTRD 63\r"; // Servo8 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo8 speed CV63");
+                            Com.write(s);
+
+                            jServoPosR8.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 65:
+                            SendeZaehler++;
+                            cvAnfrage = 163;
+                            s = "XPTRD 163\r"; // Servo8 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Servo8 speed. CV163");
+                            Com.write(s);
+
+                            ServoTemp = cvWert;
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 66:
+                            SendeZaehler++;
+                            cvAnfrage = 64;
+                            s = "XPTRD 64\r"; // Servo8 Geschw 
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"Last pos. CV64");
+                            Com.write(s);
+
+                            jServoSpeed8.setText("" + (cvWert*100 + ServoTemp));
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+
+                        case 67:
+                            SendeZaehler++;
+                            jUpdateInfo.setText(bundle.getString("WD34.read")+"finished");
+
+                            if((cvWert & 1) == 1)
+                                jLP1.setText("r");
+                            else
+                                jLP1.setText("l");
+                            
+                            if((cvWert & 2) == 2)
+                                jLP2.setText("r");
+                            else
+                                jLP2.setText("l");
+                            
+                            if((cvWert & 4) == 4)
+                                jLP3.setText("r");
+                            else
+                                jLP3.setText("l");
+                            
+                            if((cvWert & 8) == 8)
+                                jLP4.setText("r");
+                            else
+                                jLP4.setText("l");
+                            
+                            if((cvWert & 0x10) == 0x10)
+                                jLP5.setText("r");
+                            else
+                                jLP5.setText("l");
+                            
+                            if((cvWert & 0x20) == 0x20)
+                                jLP6.setText("r");
+                            else
+                                jLP6.setText("l");
+                            
+                            if((cvWert & 0x40) == 0x40)
+                                jLP7.setText("r");
+                            else
+                                jLP7.setText("l");
+                            
+                            if((cvWert & 0x80) == 0x80)
+                                jLP8.setText("r");
+                            else
+                                jLP8.setText("l");
+                            
+                            bRead = false;
+
+                            jProgressBar1.setString(null);
+                            stopIOAction();
+                            break;
+                    }
+                    jProgressBar1.setValue(SendeZaehler);
+                }
+                
+            }
+        };
+        timer = new javax.swing.Timer(5000, actionListener);
+        timer.setRepeats(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        stopIOAction();
+        KTUI.frameInstanceDEVICE = null;
+        KTUI.setFocus();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jAuslesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuslesenActionPerformed
+        Com = KTUI.safelyOpenCom( this, Com );
+        if( Com == null ) {
+            return;
+        }
+
+        KTUI.flushReadBuffer(Com);
+        SendeZaehler = 0;
+        cvAnfrage = 8;
+        String s = "XPTRD 8\r"; // Hersteller
+        jUpdateInfo.setText(bundle.getString("WD34.read")+"verify vendor");
+        Com.write(s);
+        resetbArray();
+        bWaitAnswerInProgresss = true;
+        timer.setInitialDelay(KlarTextUI.timer1);
+        timer.setDelay(KlarTextUI.timer2);
+        timer.setRepeats(true);
+        retries = KlarTextUI.timerRetries;
+        jProgressBar1.setMaximum(CV_Max);
+        bRead = true;
+        startIOAction();
+    }//GEN-LAST:event_jAuslesenActionPerformed
+
+    private void jServoPosL1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jServoPosL1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jServoPosL1ActionPerformed
+
+    private void jAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAbbrechenActionPerformed
+        bAbbruch = true;
+    }//GEN-LAST:event_jAbbrechenActionPerformed
+
+
+    private void stopIOAction() {
+        // stop timer
+        timer.stop();
+
+        if( bRead ) {
+            bRead = false;
+            jUpdateInfo.setText(bundle.getString("WD34.read")+bundle.getString("cancelled"));
+        }
+        if( bWrite ) {
+            bWrite = false;
+            jUpdateInfo.setText(bundle.getString("WD34.write")+bundle.getString("cancelled"));
+        }
+
+        // set buttons to normal operation
+        jAuslesen.setEnabled(true);
+        jSchreiben.setEnabled(true);
+        jAbbrechen.setEnabled(false);
+        jAdresse.setEnabled(true);
+        jRC_Ein.setEnabled(true);
+        jCH1.setEnabled(true);
+        jCH2.setEnabled(true);
+        jMode1.setEnabled(true);
+        jMode2.setEnabled(true);
+        jMode3.setEnabled(true);
+        jMode4.setEnabled(true);
+        jMode5.setEnabled(true);
+        jMode6.setEnabled(true);
+
+        // set cursor
+        Cursor c = new Cursor(Cursor.DEFAULT_CURSOR );
+        setCursor(c);
+
+        // close interface
+        Com = KTUI.safelyCloseCom( this, Com );
+    }
+    
+        private void resetbArray() {
+        // reset bArray with '0'
+        for( int i = 0 ; i < bytesRead ; i++ ) {
+            bArray[i] = 0;
+        }
+        bytesRead = 0;
+    }
+
+    private void startIOAction() {
+        bAbbruch = false;
+        // set buttons for IO in progress
+        jMode1.setEnabled(false);
+        jMode2.setEnabled(false);
+        jMode3.setEnabled(false);
+        jMode4.setEnabled(false);
+        jMode5.setEnabled(false);
+        jMode6.setEnabled(false);
+        jAdresse.setEnabled(false);
+        jRC_Ein.setEnabled(false);
+        jCH1.setEnabled(false);
+        jCH2.setEnabled(false);
+        jAuslesen.setEnabled(false);
+        jSchreiben.setEnabled(false);
+        jAbbrechen.setEnabled(true);
+        // init progress bar
+        jProgressBar1.setValue(0);
+        jProgressBar1.setString(null);
+        // set cursor to WAIT
+        Cursor c = new Cursor(Cursor.WAIT_CURSOR);
+        this.setCursor(c);
+        //start timer
+        timer.start();
+    }
+
+    
     /**
      * @param args the command line arguments
      */
@@ -603,10 +2095,13 @@ public class MultiDec extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jAbbrechen;
+    private javax.swing.JTextField jAdresse;
+    private javax.swing.JButton jAuslesen;
     private javax.swing.JLabel jBild;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCH1;
     private javax.swing.JCheckBox jCH2;
-    private javax.swing.JCheckBox jCh1;
+    private javax.swing.JButton jClose;
     private javax.swing.JCheckBox jControlOff1;
     private javax.swing.JCheckBox jControlOff2;
     private javax.swing.JCheckBox jControlOff3;
@@ -615,7 +2110,14 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JCheckBox jControlOff6;
     private javax.swing.JCheckBox jControlOff7;
     private javax.swing.JCheckBox jControlOff8;
-    private javax.swing.JButton jExit;
+    private javax.swing.JLabel jLP1;
+    private javax.swing.JLabel jLP2;
+    private javax.swing.JLabel jLP3;
+    private javax.swing.JLabel jLP4;
+    private javax.swing.JLabel jLP5;
+    private javax.swing.JLabel jLP6;
+    private javax.swing.JLabel jLP7;
+    private javax.swing.JLabel jLP8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -635,7 +2137,10 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -653,6 +2158,7 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JRadioButton jMode5;
     private javax.swing.JRadioButton jMode6;
     private javax.swing.JLabel jModeLabel;
+    private javax.swing.JTextField jNachlaufzeit;
     private javax.swing.JTextField jOnTime1;
     private javax.swing.JTextField jOnTime2;
     private javax.swing.JTextField jOnTime3;
@@ -672,8 +2178,9 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JCheckBox jRC_on;
-    private javax.swing.JButton jRead;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JCheckBox jRC_Ein;
+    private javax.swing.JButton jSchreiben;
     private javax.swing.JTextField jServoPosL1;
     private javax.swing.JTextField jServoPosL2;
     private javax.swing.JTextField jServoPosL3;
@@ -699,8 +2206,8 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JTextField jServoSpeed7;
     private javax.swing.JTextField jServoSpeed8;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jUpdateInfo;
     private javax.swing.JLabel jVersion;
-    private javax.swing.JButton jWrite;
+    private javax.swing.JLabel jWeichenAdresse;
     // End of variables declaration//GEN-END:variables
 }
