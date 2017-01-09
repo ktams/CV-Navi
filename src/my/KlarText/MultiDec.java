@@ -5,11 +5,15 @@
  */
 package my.KlarText;
 
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
+import static my.KlarText.KlarTextUI.gsConfigFilename;
 
 /**
  *
@@ -98,6 +102,9 @@ public class MultiDec extends javax.swing.JFrame {
         jAdresse = new javax.swing.JTextField();
         jWeichenAdresse = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        jPOM = new javax.swing.JCheckBox();
+        jAktAddr = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jOntimeLabel1 = new javax.swing.JLabel();
         jOntimeLabel2 = new javax.swing.JLabel();
@@ -219,6 +226,11 @@ public class MultiDec extends javax.swing.JFrame {
         getContentPane().add(jAuslesen, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 120, -1));
 
         jSchreiben.setText("Write");
+        jSchreiben.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSchreibenActionPerformed(evt);
+            }
+        });
         getContentPane().add(jSchreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 120, -1));
 
         jAbbrechen.setText("Cancel");
@@ -230,6 +242,11 @@ public class MultiDec extends javax.swing.JFrame {
         });
         getContentPane().add(jAbbrechen, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 120, -1));
 
+        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel1ComponentShown(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroup1.add(jMode1);
@@ -313,6 +330,16 @@ public class MultiDec extends javax.swing.JFrame {
 
         jAdresse.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jAdresse.setText("1");
+        jAdresse.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jAdresseFocusLost(evt);
+            }
+        });
+        jAdresse.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jAdresseKeyReleased(evt);
+            }
+        });
         jPanel1.add(jAdresse, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 40, -1));
 
         jWeichenAdresse.setText("-> points 1 - 4");
@@ -321,8 +348,29 @@ public class MultiDec extends javax.swing.JFrame {
         jLabel28.setText("ATTENTION: the device must be powered by an external power supply!");
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
+        jPOM.setText("POM");
+        jPOM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPOMActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jPOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
+
+        jAktAddr.setEditable(false);
+        jAktAddr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jAktAddr.setText("1");
+        jPanel1.add(jAktAddr, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 40, -1));
+
+        jLabel29.setText("current Address");
+        jPanel1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, 20));
+
         jTabbedPane1.addTab("General", jPanel1);
 
+        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel2ComponentShown(evt);
+            }
+        });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jOntimeLabel1.setText("On Time point 1:");
@@ -354,7 +402,7 @@ public class MultiDec extends javax.swing.JFrame {
         jPanel2.add(jOnTime3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 40, -1));
 
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder("On Time r / g"));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 270, 110));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 280, 110));
 
         jOnTime5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime5.setText("-1");
@@ -374,19 +422,19 @@ public class MultiDec extends javax.swing.JFrame {
 
         jPaired1.setSelected(true);
         jPaired1.setText("paired");
-        jPanel2.add(jPaired1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jPanel2.add(jPaired1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
         jPaired2.setSelected(true);
         jPaired2.setText("paired");
-        jPanel2.add(jPaired2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
+        jPanel2.add(jPaired2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
         jPaired3.setSelected(true);
         jPaired3.setText("paired");
-        jPanel2.add(jPaired3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+        jPanel2.add(jPaired3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         jPaired4.setSelected(true);
         jPaired4.setText("paired");
-        jPanel2.add(jPaired4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+        jPanel2.add(jPaired4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
         jLabel3.setText("Point 4");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, 20));
@@ -404,19 +452,19 @@ public class MultiDec extends javax.swing.JFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 140, 110));
 
         jLimitStop1.setText("yes");
-        jPanel2.add(jLimitStop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
+        jPanel2.add(jLimitStop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, -1));
 
         jLimitStop2.setText("yes");
-        jPanel2.add(jLimitStop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+        jPanel2.add(jLimitStop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
 
         jLimitStop3.setText("yes");
-        jPanel2.add(jLimitStop3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        jPanel2.add(jLimitStop3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
 
         jLimitStop4.setText("yes");
-        jPanel2.add(jLimitStop4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, -1, -1));
+        jPanel2.add(jLimitStop4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
         jLabel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Limit stop"));
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 120, 110));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 130, 110));
 
         jLabel9.setText("Point 1");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, 20));
@@ -432,6 +480,11 @@ public class MultiDec extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Outputs", jPanel2);
 
+        jPanel3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel3ComponentShown(evt);
+            }
+        });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setText("Servo 8");
@@ -1052,8 +1105,8 @@ public class MultiDec extends javax.swing.JFrame {
                             // check paired
                             jPaired1.setSelected((cvWert&0x01)==0x01);
                             jPaired2.setSelected((cvWert&0x02)==0x02);
-                            jPaired1.setSelected((cvWert&0x04)==0x04);
-                            jPaired2.setSelected((cvWert&0x08)==0x08);
+                            jPaired3.setSelected((cvWert&0x04)==0x04);
+                            jPaired4.setSelected((cvWert&0x08)==0x08);
 
                             bWaitAnswerInProgresss = true;
                             jProgressBar1.setString(null);
@@ -1942,7 +1995,1611 @@ public class MultiDec extends javax.swing.JFrame {
                     }
                     jProgressBar1.setValue(SendeZaehler);
                 }
-                
+                if(bWrite) {
+                    int Adr = 1;
+                    switch (SendeZaehler) {
+                        case 0:
+                            if(!jPOM.isSelected())
+                            {
+                                // check for a valid PTRD answer
+                                cvWert = KTUI.checkPTRDAnswer( bArray );
+                                if( KlarTextUI.debugLevel >= 0 ) {
+                                    System.out.println("bWrite read cv["+cvAnfrage+"]="+cvWert );
+                                }
+                                if( cvWert < 0 ) {
+                                    // TODO handle error on read
+                                    System.out.println("bWrite ERROR cv["+cvAnfrage+"]="+cvWert );
+                                }
+                                // check for a valid PTRD answer
+
+                                if(cvWert != 62)
+                                {
+                                   bWrite = false;
+                                   stopIOAction();
+                                   jUpdateInfo.setText(bundle.getString("WD34.write")+"wrong vendor");
+                                   KTUI.mbNoTams( outerThis, c.mbWRcancel );
+                                   return;
+                                }
+                            }
+
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jAdresse, 1, c.MAX_MM1_ACCMOD, 1, false);
+                            Adr = KTUI.checkTextField( outerThis, jAktAddr, 1, c.MAX_MM1_ACCMOD, 1, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD " + " 1 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 1 " + cvWert + " 10\r";
+                            }
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"address");
+                            Com.write(s);
+                            System.out.println("bWrite cv[1]:="+(cvWert) );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 1:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime1, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 3 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 3 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 1");
+                            Com.write(s);
+                            System.out.println("bWrite cv[3]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 2:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime5, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 33 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 33 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 1");
+                            Com.write(s);
+                            System.out.println("bWrite cv[33]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 3:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime2, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 4 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 4 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 2");
+                            Com.write(s);
+                            System.out.println("bWrite cv[4]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 4:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime6, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 34 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 34 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 2");
+                            Com.write(s);
+                            System.out.println("bWrite cv[34]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 5:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime3, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 5 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 5 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 3");
+                            Com.write(s);
+                            System.out.println("bWrite cv[5]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 6:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime7, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 35 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 35 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 3");
+                            Com.write(s);
+                            System.out.println("bWrite cv[35]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 7:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime4, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 6 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 6 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 4");
+                            Com.write(s);
+                            System.out.println("bWrite cv[6]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 8:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jOnTime8, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 36 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 36 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 4");
+                            Com.write(s);
+                            System.out.println("bWrite cv[36]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 9:
+                            SendeZaehler++;
+                            if(jMode1.isSelected())
+                                cvWert = 0;
+                            else if(jMode2.isSelected())
+                                cvWert = 1;
+                            else if(jMode3.isSelected())
+                                cvWert = 2;
+                            else if(jMode4.isSelected())
+                                cvWert = 3;
+                            else if(jMode5.isSelected())
+                                cvWert = 4;
+                            else 
+                                cvWert = 5;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 38 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 38 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Mode");
+                            Com.write(s);
+                            System.out.println("bWrite cv[38]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 10:
+                            SendeZaehler++;
+                            cvWert = 0;
+                            if(jCH1.isSelected())
+                                cvWert = 1;
+                            if(jCH2.isSelected())
+                                cvWert += 2;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 28 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 28 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"RailCom");
+                            Com.write(s);
+                            System.out.println("bWrite cv[28]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 11:
+                            SendeZaehler++;
+                            cvWert = 128;
+                            if(jCH1.isSelected())
+                                cvWert = 136;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 29 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 29 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"RailCom");
+                            Com.write(s);
+                            System.out.println("bWrite cv[29]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 12:
+                            SendeZaehler++;
+                            cvWert = 0;
+                            if(jPaired1.isSelected())
+                                cvWert = 1;
+                            if(jPaired2.isSelected())
+                                cvWert += 2;
+                            if(jPaired3.isSelected())
+                                cvWert += 4;
+                            if(jPaired4.isSelected())
+                                cvWert += 8;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 37 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 37 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Switch mode");
+                            Com.write(s);
+                            System.out.println("bWrite cv[37]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 13:
+                            SendeZaehler++;
+                            cvWert = 0;
+                            if(jLimitStop1.isSelected())
+                                cvWert = 1;
+                            if(jLimitStop2.isSelected())
+                                cvWert += 2;
+                            if(jLimitStop3.isSelected())
+                                cvWert += 4;
+                            if(jLimitStop4.isSelected())
+                                cvWert += 8;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 66 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 66 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Limit stop");
+                            Com.write(s);
+                            System.out.println("bWrite cv[66]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 14:
+                            SendeZaehler++;
+                            cvWert = 0;
+                            if(jControlOff1.isSelected())
+                                cvWert = 1;
+                            if(jControlOff2.isSelected())
+                                cvWert += 2;
+                            if(jControlOff3.isSelected())
+                                cvWert += 4;
+                            if(jControlOff4.isSelected())
+                                cvWert += 8;
+                            if(jControlOff5.isSelected())
+                                cvWert += 0x10;
+                            if(jControlOff6.isSelected())
+                                cvWert += 0x20;
+                            if(jControlOff7.isSelected())
+                                cvWert += 0x40;
+                            if(jControlOff8.isSelected())
+                                cvWert += 0x80;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 65 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 65 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo control in rest");
+                            Com.write(s);
+                            System.out.println("bWrite cv[65]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 15:
+                            SendeZaehler++;
+                            cvWert = KTUI.checkTextField( outerThis, jNachlaufzeit, 0, 255, 0, false);
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 67 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 67 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Follow up Time");
+                            Com.write(s);
+                            System.out.println("bWrite cv[67]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 16:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL1.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 40 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 40 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 1 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[40]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 17:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL1.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 140 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 140 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 1 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[140]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 18:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR1.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 41 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 41 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 1 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[41]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 19:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR1.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 141 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 141 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 1 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[141]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 20:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed1.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 42 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 42 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 1 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[42]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 21:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed1.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 142 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 142 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 1 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[142]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 22:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL2.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 43 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 43 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 2 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[43]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 23:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL2.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 143 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 143 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 2 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[143]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 24:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR2.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 44 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 44 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 2 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[44]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 25:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR2.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 144 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 144 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 21 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[144]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 26:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed2.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 45 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 45 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 2 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[45]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 27:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed2.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 145 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 145 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 2 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[145]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 28:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL3.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 46 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 46 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 3 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[46]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 29:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL3.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 146 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 146 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 3 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[146]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 30:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR3.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 47 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 47 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 3 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[47]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 31:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR3.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 147 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 147 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 3 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[147]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 32:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed3.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 48 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 48 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 3 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[48]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 33:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed3.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 148 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 148 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 3 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[148]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 34:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL4.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 49 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 49 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 4 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[49]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 35:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL4.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 149 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 149 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 4 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[149]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 36:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR4.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 50 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 50 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 4 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[50]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 37:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR1.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 150 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 150 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 4 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[150]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 38:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed4.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 51 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 51 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 4 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[51]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 39:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed4.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 151 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 151 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 4 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[151]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 40:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL5.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 52 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 52 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 5 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[52]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 41:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL5.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 152 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 152 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 5 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[152]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 42:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR5.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 53 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 53 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 5 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[53]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 43:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR5.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 153 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 153 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 5 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[153]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 44:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed5.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 54 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 54 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 5 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[54]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 45:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed5.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 154 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 154 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 5 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[154]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 46:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL6.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 55 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 55 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 6 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[55]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 47:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL6.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 155 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 155 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 6 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[155]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 48:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR6.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 56 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 56 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 6 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[56]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 49:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR6.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 156 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 156 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 6 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[156]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 50:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed6.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 57 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 57 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 6 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[57]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 51:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed6.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 157 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 157 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 6 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[157]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 52:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL7.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 58 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 58 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 7 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[58]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 53:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL7.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 158 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 158 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 7 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[158]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 54:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR7.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 59 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 59 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 7 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[59]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 55:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR7.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 159 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 159 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 7 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[159]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 56:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed7.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 60 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 60 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 7 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[60]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 57:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed7.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 160 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 160 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 7 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[160]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 58:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL8.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 61 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 61 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 8 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[61]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 59:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosL8.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 161 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 161 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 8 pos. L");
+                            Com.write(s);
+                            System.out.println("bWrite cv[161]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 60:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR8.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 62 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 62 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 8 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[62]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 61:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoPosR8.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 162 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 162 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 8 pos. R");
+                            Com.write(s);
+                            System.out.println("bWrite cv[162]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 62:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed8.getText());
+                            cvWert %= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 63 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 63 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 8 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[63]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        case 63:
+                            SendeZaehler++;
+                            cvWert = Integer.parseInt(jServoSpeed8.getText());
+                            cvWert /= 100;
+                            if(!jPOM.isSelected())
+                            {
+                                s = "XPTWD 163 " + cvWert + "\r";
+                            }
+                            else
+                            {
+                                s = "XPA " + Adr + " 163 " + cvWert + " 10\r";
+                            }
+                            
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 8 speed");
+                            Com.write(s);
+                            System.out.println("bWrite cv[163]:="+cvWert );
+
+                            bWaitAnswerInProgresss = true;
+                            jProgressBar1.setString(null);
+                            retries = KlarTextUI.timerRetries;
+                            resetbArray();
+                            timer.restart();
+                            break;
+                            
+                        default:
+                            SendeZaehler++;
+                            bWrite = false;
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"finished");
+
+                            jProgressBar1.setString(null);
+                            stopIOAction();
+                    }
+                    jProgressBar1.setValue(SendeZaehler);
+                }                
             }
         };
         timer = new javax.swing.Timer(5000, actionListener);
@@ -1985,6 +3642,102 @@ public class MultiDec extends javax.swing.JFrame {
     private void jAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAbbrechenActionPerformed
         bAbbruch = true;
     }//GEN-LAST:event_jAbbrechenActionPerformed
+
+    private void jSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSchreibenActionPerformed
+        Com = KTUI.safelyOpenCom( this, Com );
+        if( Com == null ) {
+            return;
+        }
+        
+        if(!TestValues())
+        {
+            MsgBox messageBox = new MsgBox( (Frame) null , true, null );
+            messageBox.jLabel1.setText("FEHLER");
+            messageBox.jLabel2.setText("Einige CV-Werte wurden korrigiert.");
+            messageBox.jLabel3.setText("Bitte überprüfen, \"(!)\" entfernen und schreiben neu starten.");
+            messageBox.setVisible(true);
+            return;
+        }
+        KTUI.flushReadBuffer(Com);
+        resetbArray();
+        timer.setRepeats(true);
+        retries = KlarTextUI.timerRetries;
+        bWrite = true;
+        SendeZaehler = 0;
+        if(jPOM.isSelected())
+        {
+            timer.setInitialDelay(KlarTextUI.timer1/4);
+            timer.setDelay(KlarTextUI.timer2/4);
+            Com.write((byte)0x60);
+            jUpdateInfo.setText("write: POM");
+            jProgressBar1.setMaximum(CV_Max-3);
+            startIOAction();
+            return;
+        }
+
+        timer.setInitialDelay(KlarTextUI.timer1);
+        timer.setDelay(KlarTextUI.timer2);
+        cvAnfrage = 8;
+        String s = "XPTRD 8\r"; // Hersteller
+        jUpdateInfo.setText("write: verify vendor");
+        System.out.println("write: verify vendor");
+        Com.write(s);
+        jProgressBar1.setMaximum(CV_Max-2);
+        bWaitAnswerInProgresss = true;
+        startIOAction();
+    }//GEN-LAST:event_jSchreibenActionPerformed
+
+    private void jAdresseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAdresseFocusLost
+        int myDecAdr = KTUI.checkTextField( this, jAdresse, 1, c.MAX_MM1_ACCMOD, 1, true );
+        String ss = "-> ";
+        if( KTUI.bSpracheDE ) {
+            ss += "Weiche " ;
+        } else {
+            ss += "point " ;
+        }
+        ss += (myDecAdr*4 - 3) + " - " + myDecAdr*4;
+        jWeichenAdresse.setText(ss);
+    }//GEN-LAST:event_jAdresseFocusLost
+
+    private void jAdresseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAdresseKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String text = jAdresse.getText();
+            int i;
+            try {
+                i = Integer.parseInt(text);
+            } catch (NumberFormatException numberFormatException) {
+                i = 1;
+            }
+            if(i < 1)
+                i = 1;
+            if(i > 255)
+                i = 255;
+            jAdresse.setText("" + i);
+            jAdresseFocusLost(null);
+        }
+    }//GEN-LAST:event_jAdresseKeyReleased
+
+    private void jPOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPOMActionPerformed
+        if(jPOM.isSelected())
+            jAktAddr.setEditable(true);
+        else
+            jAktAddr.setEditable(false);
+    }//GEN-LAST:event_jPOMActionPerformed
+
+    private void jPanel3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel3ComponentShown
+       jAuslesen.setEnabled(false);
+       jSchreiben.setEnabled(false);
+    }//GEN-LAST:event_jPanel3ComponentShown
+
+    private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
+       jAuslesen.setEnabled(false);
+       jSchreiben.setEnabled(false);
+    }//GEN-LAST:event_jPanel2ComponentShown
+
+    private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
+       jAuslesen.setEnabled(true);
+       jSchreiben.setEnabled(true);
+    }//GEN-LAST:event_jPanel1ComponentShown
 
 
     private void stopIOAction() {
@@ -2097,6 +3850,7 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jAbbrechen;
     private javax.swing.JTextField jAdresse;
+    private javax.swing.JTextField jAktAddr;
     private javax.swing.JButton jAuslesen;
     private javax.swing.JLabel jBild;
     private javax.swing.JCheckBox jCH1;
@@ -2139,6 +3893,7 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
@@ -2171,6 +3926,7 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JLabel jOntimeLabel2;
     private javax.swing.JLabel jOntimeLabel3;
     private javax.swing.JLabel jOntimeLabel4;
+    private javax.swing.JCheckBox jPOM;
     private javax.swing.JCheckBox jPaired1;
     private javax.swing.JCheckBox jPaired2;
     private javax.swing.JCheckBox jPaired3;
@@ -2210,4 +3966,782 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JLabel jVersion;
     private javax.swing.JLabel jWeichenAdresse;
     // End of variables declaration//GEN-END:variables
+
+    private boolean TestValues() {
+        boolean bRet = true;
+        int cv_wert;
+        
+        String text = jAdresse.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jAdresse.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 1)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jAdresse.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jAdresse.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime1.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime1.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime2.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime2.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime3.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime3.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime4.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime4.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime5.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime5.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime6.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime6.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime7.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime7.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jOnTime8.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jOnTime8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jOnTime8.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jNachlaufzeit.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jNachlaufzeit.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 1;
+            bRet = false;
+            jNachlaufzeit.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jNachlaufzeit.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL1.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL1.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL2.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL2.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL3.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL3.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL4.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL4.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL5.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL5.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL6.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL6.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL7.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL7.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosL8.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosL8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosL8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosL8.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR1.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR1.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR2.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR2.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR3.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR3.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR4.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR4.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR5.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR5.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR6.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR6.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR7.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR7.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoPosR8.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoPosR8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 400)
+        {
+            cv_wert = 400;
+            bRet = false;
+            jServoPosR8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 3000)
+        {
+            cv_wert = 3000;
+            bRet = false;
+            jServoPosR8.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed1.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed1.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed1.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed2.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed2.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed2.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed3.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed3.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed3.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed4.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed4.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed4.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed5.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed5.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed5.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed6.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed6.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed6.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed7.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed7.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed7.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jServoSpeed8.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jServoSpeed8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jServoSpeed8.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 25599)
+        {
+            cv_wert = 25599;
+            bRet = false;
+            jServoSpeed8.setText("(!) " + cv_wert);
+        }
+        
+        
+        text = jNachlaufzeit.getText();
+        try {
+            cv_wert = Integer.parseInt(text);
+        } catch (NumberFormatException numberFormatException) {
+            cv_wert = 1;
+            bRet = false;
+            jNachlaufzeit.setText("(!) " + cv_wert);
+        }
+        if(cv_wert < 0)
+        {
+            cv_wert = 0;
+            bRet = false;
+            jNachlaufzeit.setText("(!) " + cv_wert);
+        }
+        if(cv_wert > 255)
+        {
+            cv_wert = 255;
+            bRet = false;
+            jNachlaufzeit.setText("(!) " + cv_wert);
+        }
+        
+        
+        
+        return bRet;
+    }
 }
