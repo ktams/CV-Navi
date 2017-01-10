@@ -40,8 +40,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,61 +63,73 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelAdress" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelOnTime1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelOnTime2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelOnTime3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelOnTime4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelRailCom" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelRailComCheck" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelZentraleSendetCoilOff" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jAdresse" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jOnTime1" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jOnTime2" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jOnTime3" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jOnTime4" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jRC_Ein" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRC_Pruefen" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jZentraleSendetCoilOff" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jUpdateInfo" min="-2" pref="328" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jClose" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabelZentraleSendetCoilOff" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jZentraleSendetCoilOff" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelRailComCH2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAdress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelOnTime1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelOnTime2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelOnTime3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelOnTime4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelRailCom" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelRailComCheck" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jAdresse" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="jOnTime1" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="jOnTime2" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="jOnTime3" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="jOnTime4" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="jRC_Ein" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jRC_Pruefen" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jRC_CH2" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jVersion" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="99" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="jBild" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSchreiben" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="jAbbrechen" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="jAuslesen" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jWeichenAdresse" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="jBild" pref="153" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jVersion" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jSchreiben" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="jAbbrechen" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jAuslesen" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jProgressBar1" max="32767" attributes="1"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jUpdateInfo" max="32767" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jClose" min="-2" pref="150" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -131,75 +143,81 @@
                       <Component id="jLabelAdress" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jAdresse" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jWeichenAdresse" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jVersion" alignment="2" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelOnTime1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jOnTime1" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelOnTime2" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jOnTime2" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelOnTime3" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jOnTime3" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelOnTime4" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jOnTime4" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelRailCom" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRC_Ein" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="5" pref="5" max="5" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelRailComCheck" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRC_Pruefen" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabelZentraleSendetCoilOff" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jZentraleSendetCoilOff" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jVersion" alignment="2" min="-2" pref="20" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jBild" max="32767" attributes="0"/>
-                              </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="jAuslesen" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSchreiben" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jAbbrechen" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jBild" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jAbbrechen" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jOnTime1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelOnTime1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jOnTime2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelOnTime2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jOnTime3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelOnTime3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jOnTime4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelOnTime4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jRC_Ein" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelRailCom" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jRC_Pruefen" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jRC_CH2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabelRailComCheck" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jLabelRailComCH2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelZentraleSendetCoilOff" min="-2" max="-2" attributes="0"/>
+                              <Component id="jZentraleSendetCoilOff" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jClose" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jUpdateInfo" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jUpdateInfo" min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="jClose" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -514,6 +532,27 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAbbrechenActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelRailComCH2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="my/KlarText/Bundle.properties" key="WD34.jLabelRailComCH2.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="my/KlarText/Bundle.properties" key="WD34.jLabelRailComCH2.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="jRC_CH2">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="my/KlarText/Bundle.properties" key="WD34.jRC_CH2.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -28,6 +28,7 @@ public class WD34 extends javax.swing.JFrame {
     private TwoWaySerialComm Com = null;
     private int SendeZaehler;
     private boolean bWD34 = true;
+    private boolean b34_2 = true;
     private boolean bRead = false;
     private boolean bWrite = false;
     private int cvAnfrage = -1;
@@ -61,12 +62,28 @@ public class WD34 extends javax.swing.JFrame {
                 II = new ImageIcon(getClass().getResource("/WD-34.gif"));
                 jBild.setIcon(II);
                 bWD34 = true;
+                b34_2 = false;
                 setTitle( KTUI.getMenutext( decoderList.WD_34 ).trim() );
                 break;
             case c.SD_34 :
                 II = new ImageIcon(getClass().getResource("/SD-34.gif"));
                 jBild.setIcon(II);
                 bWD34 = false;
+                b34_2 = false;
+                setTitle( KTUI.getMenutext( decoderList.SD_34 ).trim() );
+                break;
+            case c.WD_34_2 :
+                II = new ImageIcon(getClass().getResource("/WD-34-2.gif"));
+                jBild.setIcon(II);
+                bWD34 = true;
+                b34_2 = true;
+                setTitle( KTUI.getMenutext( decoderList.WD_34 ).trim() );
+                break;
+            case c.SD_34_2 :
+                II = new ImageIcon(getClass().getResource("/SD-34-2.gif"));
+                jBild.setIcon(II);
+                bWD34 = false;
+                b34_2 = true;
                 setTitle( KTUI.getMenutext( decoderList.SD_34 ).trim() );
                 break;
             default:
@@ -115,6 +132,8 @@ public class WD34 extends javax.swing.JFrame {
         jZentraleSendetCoilOff = new javax.swing.JCheckBox();
         jUpdateInfo = new javax.swing.JLabel();
         jAbbrechen = new javax.swing.JButton();
+        jLabelRailComCH2 = new javax.swing.JLabel();
+        jRC_CH2 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -291,55 +310,70 @@ public class WD34 extends javax.swing.JFrame {
             }
         });
 
+        jLabelRailComCH2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelRailComCH2.setText(bundle.getString("WD34.jLabelRailComCH2.text")); // NOI18N
+        jLabelRailComCH2.setToolTipText(bundle.getString("WD34.jLabelRailComCH2.toolTipText")); // NOI18N
+
+        jRC_CH2.setSelected(true);
+        jRC_CH2.setToolTipText(bundle.getString("WD34.jRC_CH2.toolTipText")); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAdress)
-                            .addComponent(jLabelOnTime1)
-                            .addComponent(jLabelOnTime2)
-                            .addComponent(jLabelOnTime3)
-                            .addComponent(jLabelOnTime4)
-                            .addComponent(jLabelRailCom)
-                            .addComponent(jLabelRailComCheck)
-                            .addComponent(jLabelZentraleSendetCoilOff))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jAdresse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jOnTime1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jOnTime2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jOnTime3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jOnTime4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRC_Ein, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRC_Pruefen, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jZentraleSendetCoilOff, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addComponent(jUpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jClose, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelZentraleSendetCoilOff)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jZentraleSendetCoilOff))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelRailComCH2)
+                                    .addComponent(jLabelAdress)
+                                    .addComponent(jLabelOnTime1)
+                                    .addComponent(jLabelOnTime2)
+                                    .addComponent(jLabelOnTime3)
+                                    .addComponent(jLabelOnTime4)
+                                    .addComponent(jLabelRailCom)
+                                    .addComponent(jLabelRailComCheck))
+                                .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jVersion)
-                                        .addGap(0, 99, Short.MAX_VALUE))
-                                    .addComponent(jBild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jSchreiben, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jAbbrechen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jAuslesen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(38, 38, 38)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jAdresse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jOnTime1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jOnTime2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jOnTime3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jOnTime4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jRC_Ein, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(57, 57, 57)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jRC_Pruefen)
+                                            .addComponent(jRC_CH2))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jWeichenAdresse)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jUpdateInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jBild, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jClose, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jVersion)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSchreiben, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jAbbrechen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jAuslesen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -349,59 +383,64 @@ public class WD34 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelAdress)
                     .addComponent(jAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jWeichenAdresse))
+                    .addComponent(jWeichenAdresse)
+                    .addComponent(jVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelOnTime1)
-                            .addComponent(jOnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelOnTime2)
-                            .addComponent(jOnTime2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelOnTime3)
-                            .addComponent(jOnTime3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelOnTime4)
-                            .addComponent(jOnTime4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelRailCom)
-                            .addComponent(jRC_Ein))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelRailComCheck)
-                            .addComponent(jRC_Pruefen))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabelZentraleSendetCoilOff)
-                            .addComponent(jZentraleSendetCoilOff)
-                            .addComponent(jVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jAuslesen)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSchreiben)
-                                .addGap(18, 18, 18)
-                                .addComponent(jAbbrechen)))
-                        .addGap(39, 39, 39)))
+                                .addComponent(jSchreiben))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jAbbrechen)
+                        .addGap(15, 15, 15))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jOnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelOnTime1))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jOnTime2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelOnTime2))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jOnTime3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelOnTime3))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jOnTime4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelOnTime4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRC_Ein)
+                            .addComponent(jLabelRailCom))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jRC_Pruefen)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRC_CH2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelRailComCheck)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelRailComCH2)
+                                .addGap(0, 5, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelZentraleSendetCoilOff)
+                            .addComponent(jZentraleSendetCoilOff))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jClose)
-                    .addComponent(jUpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jUpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jClose))
                 .addContainerGap())
         );
 
@@ -418,8 +457,8 @@ public class WD34 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -476,11 +515,33 @@ public class WD34 extends javax.swing.JFrame {
         TitledBorder b = (TitledBorder)jPanel1.getBorder();
         if(bWD34)
         {
-            b.setTitle("WD-34");
+            if(b34_2)
+            {
+                b.setTitle("WD-34.2");
+                jLabelZentraleSendetCoilOff.setText(bundle.getString("WD34.OperationType"));
+                jLabelRailComCheck.setText(bundle.getString("WD34.CH1"));
+            }
+            else
+            {
+                b.setTitle("WD-34");
+                jPanel1.remove(jLabelRailComCH2);
+                jPanel1.remove(jRC_CH2);
+            }
         }
         else
         {
-            b.setTitle("SD-34");
+            if(b34_2)
+            {
+                b.setTitle("SD-34.2");
+                jLabelZentraleSendetCoilOff.setText(bundle.getString("WD34.OperationType"));
+                jLabelRailComCheck.setText(bundle.getString("WD34.CH1"));
+            }
+            else
+            {
+                b.setTitle("SD-34");
+                jPanel1.remove(jLabelRailComCH2);
+                jPanel1.remove(jRC_CH2);
+            }
             jPanel1.remove(jLabelOnTime1);
             jPanel1.remove(jOnTime1);
             jPanel1.remove(jLabelOnTime2);
@@ -721,9 +782,19 @@ public class WD34 extends javax.swing.JFrame {
 
                         case 8:
                             SendeZaehler++;
-                            cvAnfrage = 33;
-                            s = "XPTRD 33\r"; // Konfig 2
-                            jUpdateInfo.setText(bundle.getString("WD34.read")+"config CV33");
+                            if(b34_2)
+                            {
+                                cvAnfrage = 28;
+                                s = "XPTRD 28\r"; // Konfig 2
+                                jUpdateInfo.setText(bundle.getString("WD34.read")+"RC-config CV28");
+                                jZentraleSendetCoilOff.setSelected((cvWert&0x80)==0x80);
+                            }
+                            else
+                            {
+                                cvAnfrage = 33;
+                                s = "XPTRD 33\r"; // Konfig 2
+                                jUpdateInfo.setText(bundle.getString("WD34.read")+"config CV33");
+                            }
                             Com.write(s);
 
                             // check Bidi/Railcom bit of CV29
@@ -740,8 +811,16 @@ public class WD34 extends javax.swing.JFrame {
                             SendeZaehler++;
                             jUpdateInfo.setText(bundle.getString("WD34.read")+"finished");
 
-                            jRC_Pruefen.setSelected( ! ( (cvWert & 0x01) == 0x01));
-                            jZentraleSendetCoilOff.setSelected((cvWert&0x02)==0x02);
+                            if(b34_2)
+                            {
+                                jRC_Pruefen.setSelected(( (cvWert & 0x01) == 0x01));
+                                jRC_CH2.setSelected((cvWert&0x02)==0x02);
+                            }
+                            else
+                            {
+                                jRC_Pruefen.setSelected( ! ( (cvWert & 0x01) == 0x01));
+                                jZentraleSendetCoilOff.setSelected((cvWert&0x02)==0x02);
+                            }
                             bRead = false;
 
                             jProgressBar1.setString(null);
@@ -868,10 +947,20 @@ public class WD34 extends javax.swing.JFrame {
 
                         case 6:
                             SendeZaehler++;
-                            if(jRC_Ein.isSelected())
-                                cvWert = 136;
+                            if(b34_2)
+                            {
+                                if(jZentraleSendetCoilOff.isSelected())
+                                    cvWert = 128;
+                                else
+                                    cvWert = 0;
+                            }
                             else
+                            {
                                 cvWert = 128;
+                            }
+                            if(jRC_Ein.isSelected())
+                                cvWert += 8;
+                            
                             s = "XPTWD 29 " + cvWert + "\r";
                             jUpdateInfo.setText(bundle.getString("WD34.write")+"config CV29");
                             Com.write(s);
@@ -887,14 +976,25 @@ public class WD34 extends javax.swing.JFrame {
                         case 7:
                             SendeZaehler++;
                             cvWert = 0;
-                            if( ! jRC_Pruefen.isSelected())
+                            if(jRC_Pruefen.isSelected())
                                 cvWert += 0x01;
-                            if(jZentraleSendetCoilOff.isSelected())
-                                cvWert += 0x02;
-                            s = "XPTWD 33 " + cvWert + "\r";
-                            jUpdateInfo.setText(bundle.getString("WD34.write")+"config CV33");
+                            if(b34_2)
+                            {
+                                if(jRC_CH2.isSelected())
+                                    cvWert += 0x02;
+                                s = "XPTWD 28 " + cvWert + "\r";
+                                jUpdateInfo.setText(bundle.getString("WD34.write")+"RC-config CV28");
+                                System.out.println("bWrite cv[28]:="+cvWert );
+                            }
+                            else
+                            {
+                                if(jZentraleSendetCoilOff.isSelected())
+                                    cvWert += 0x02;
+                                s = "XPTWD 33 " + cvWert + "\r";
+                                jUpdateInfo.setText(bundle.getString("WD34.write")+"config CV33");
+                                System.out.println("bWrite cv[33]:="+cvWert );
+                            }
                             Com.write(s);
-                            System.out.println("bWrite cv[33]:="+cvWert );
 
                             bWaitAnswerInProgresss = true;
                             jProgressBar1.setString(null);
@@ -1086,6 +1186,7 @@ public class WD34 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelOnTime3;
     private javax.swing.JLabel jLabelOnTime4;
     private javax.swing.JLabel jLabelRailCom;
+    private javax.swing.JLabel jLabelRailComCH2;
     private javax.swing.JLabel jLabelRailComCheck;
     private javax.swing.JLabel jLabelZentraleSendetCoilOff;
     private javax.swing.JTextField jOnTime1;
@@ -1094,6 +1195,7 @@ public class WD34 extends javax.swing.JFrame {
     private javax.swing.JTextField jOnTime4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JCheckBox jRC_CH2;
     private javax.swing.JCheckBox jRC_Ein;
     private javax.swing.JCheckBox jRC_Pruefen;
     private javax.swing.JButton jSchreiben;

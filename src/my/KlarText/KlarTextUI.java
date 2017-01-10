@@ -72,14 +72,16 @@ interface c {
     public static final int LINE_2 = 22;
     public static final int tZUB   = 23;
     public static final int WD_34  = 24;
-    public static final int SD_34  = 25;
-    public static final int MultiDecoder = 26;
-    public static final int LINE_3 = 27;
-    public static final int tOTHER = 28;
-    public static final int MC     = 29; // MasterControl/RedBox
-    public static final int B_4    = 30;
-    public static final int BiDi_B = 31;
-    public static final int WIB_30 = 32;
+    public static final int WD_34_2  = 25;
+    public static final int SD_34  = 26;
+    public static final int SD_34_2  = 27;
+    public static final int MultiDecoder = 28;
+    public static final int LINE_3 = 29;
+    public static final int tOTHER = 30;
+    public static final int MC     = 31; // MasterControl/RedBox
+    public static final int B_4    = 32;
+    public static final int BiDi_B = 33;
+    public static final int WIB_30 = 34;
 
     // special numbers (used in SaveOpenDialog)
     public static final int MC_WR  = 196; // special handling of MC config writes
@@ -156,7 +158,9 @@ enum decoderList {
     line_2  (c.LINE_2, false, "____________",""),
     tZUB    (c.tZUB,   false, "Zubehör-Decoder","Accessory-Decoder"),
     WD_34   (c.WD_34,  true,  "   WD-34",""),
+    WD_34_2   (c.WD_34_2,  true,  "   WD-34.2",""),
     SD_34   (c.SD_34,  true,  "   SD-34",""),
+    SD_34_2   (c.SD_34_2,  true,  "   SD-34.2",""),
     MultiDecoder   (c.MultiDecoder,  true,  "   MultiDecoder",""),
     line_3  (c.LINE_3, false, "____________",""),
     tOTHER  (c.tOTHER, false, "Sonstiges","Other"),
@@ -2336,6 +2340,8 @@ public class KlarTextUI extends javax.swing.JFrame {
 */
             case c.WD_34: // WD-34
             case c.SD_34: // SD-34
+            case c.WD_34_2: // WD-34
+            case c.SD_34_2: // SD-34
                 WD34 wD34 = new WD34(this);
                 break;
 
