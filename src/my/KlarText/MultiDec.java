@@ -106,15 +106,15 @@ public class MultiDec extends javax.swing.JFrame {
         jAktAddr = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jOnTimeBorderLabel = new javax.swing.JLabel();
         jOntimeLabel1 = new javax.swing.JLabel();
         jOntimeLabel2 = new javax.swing.JLabel();
         jOntimeLabel3 = new javax.swing.JLabel();
         jOntimeLabel4 = new javax.swing.JLabel();
-        jOnTime4 = new javax.swing.JTextField();
         jOnTime1 = new javax.swing.JTextField();
         jOnTime2 = new javax.swing.JTextField();
         jOnTime3 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jOnTime4 = new javax.swing.JTextField();
         jOnTime5 = new javax.swing.JTextField();
         jOnTime6 = new javax.swing.JTextField();
         jOnTime7 = new javax.swing.JTextField();
@@ -127,12 +127,12 @@ public class MultiDec extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jSwitchModeBorderLabel = new javax.swing.JLabel();
         jLimitStop1 = new javax.swing.JCheckBox();
         jLimitStop2 = new javax.swing.JCheckBox();
         jLimitStop3 = new javax.swing.JCheckBox();
         jLimitStop4 = new javax.swing.JCheckBox();
-        jLabel8 = new javax.swing.JLabel();
+        jLimitStopBorderLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -374,6 +374,9 @@ public class MultiDec extends javax.swing.JFrame {
         });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jOnTimeBorderLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MultiDec.jOnTimeBorderLabel.border.title"))); // NOI18N
+        jPanel2.add(jOnTimeBorderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 280, 110));
+
         jOntimeLabel1.setText(bundle.getString("MultiDec.jOntimeLabel1.text")); // NOI18N
         jPanel2.add(jOntimeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
@@ -386,40 +389,37 @@ public class MultiDec extends javax.swing.JFrame {
         jOntimeLabel4.setText(bundle.getString("MultiDec.jOntimeLabel4.text")); // NOI18N
         jPanel2.add(jOntimeLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        jOnTime4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jOnTime4.setText(bundle.getString("MultiDec.jOnTime4.text")); // NOI18N
-        jPanel2.add(jOnTime4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 40, -1));
-
         jOnTime1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime1.setText(bundle.getString("MultiDec.jOnTime1.text")); // NOI18N
-        jPanel2.add(jOnTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 40, -1));
+        jPanel2.add(jOnTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 40, -1));
 
         jOnTime2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime2.setText(bundle.getString("MultiDec.jOnTime2.text")); // NOI18N
-        jPanel2.add(jOnTime2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 40, -1));
+        jPanel2.add(jOnTime2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 40, -1));
 
         jOnTime3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime3.setText(bundle.getString("MultiDec.jOnTime3.text")); // NOI18N
-        jPanel2.add(jOnTime3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 40, -1));
+        jPanel2.add(jOnTime3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 40, -1));
 
-        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MultiDec.jLabel1.border.title"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 280, 110));
+        jOnTime4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jOnTime4.setText(bundle.getString("MultiDec.jOnTime4.text")); // NOI18N
+        jPanel2.add(jOnTime4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 40, -1));
 
         jOnTime5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime5.setText(bundle.getString("MultiDec.jOnTime5.text")); // NOI18N
-        jPanel2.add(jOnTime5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 40, -1));
+        jPanel2.add(jOnTime5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 40, -1));
 
         jOnTime6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime6.setText(bundle.getString("MultiDec.jOnTime6.text")); // NOI18N
-        jPanel2.add(jOnTime6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 40, -1));
+        jPanel2.add(jOnTime6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 40, -1));
 
         jOnTime7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime7.setText(bundle.getString("MultiDec.jOnTime7.text")); // NOI18N
-        jPanel2.add(jOnTime7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 40, -1));
+        jPanel2.add(jOnTime7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 40, -1));
 
         jOnTime8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jOnTime8.setText(bundle.getString("MultiDec.jOnTime8.text")); // NOI18N
-        jPanel2.add(jOnTime8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 40, -1));
+        jPanel2.add(jOnTime8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 40, -1));
 
         jPaired1.setSelected(true);
         jPaired1.setText(bundle.getString("MultiDec.jPaired1.text")); // NOI18N
@@ -449,8 +449,8 @@ public class MultiDec extends javax.swing.JFrame {
         jLabel6.setText(bundle.getString("MultiDec.jLabel6.text")); // NOI18N
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
-        jLabel7.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MultiDec.jLabel7.border.title"))); // NOI18N
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 140, 110));
+        jSwitchModeBorderLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MultiDec.jSwitchModeBorderLabel.border.title"))); // NOI18N
+        jPanel2.add(jSwitchModeBorderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 140, 110));
 
         jLimitStop1.setText(bundle.getString("MultiDec.jLimitStop1.text")); // NOI18N
         jPanel2.add(jLimitStop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, -1));
@@ -464,8 +464,8 @@ public class MultiDec extends javax.swing.JFrame {
         jLimitStop4.setText(bundle.getString("MultiDec.jLimitStop4.text")); // NOI18N
         jPanel2.add(jLimitStop4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
-        jLabel8.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MultiDec.jLabel8.border.title"))); // NOI18N
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 130, 110));
+        jLimitStopBorderLabel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MultiDec.jLimitStopBorderLabel.border.title"))); // NOI18N
+        jPanel2.add(jLimitStopBorderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 130, 110));
 
         jLabel9.setText(bundle.getString("MultiDec.jLabel9.text")); // NOI18N
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, 20));
@@ -516,7 +516,7 @@ public class MultiDec extends javax.swing.JFrame {
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
         jLabel22.setText(bundle.getString("MultiDec.jLabel22.text")); // NOI18N
-        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
 
         jLabel23.setText(bundle.getString("MultiDec.jLabel23.text")); // NOI18N
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
@@ -600,27 +600,27 @@ public class MultiDec extends javax.swing.JFrame {
 
         jServoPosR7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jServoPosR7.setText(bundle.getString("MultiDec.jServoPosR7.text")); // NOI18N
-        jPanel3.add(jServoPosR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 60, -1));
+        jPanel3.add(jServoPosR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 60, -1));
 
         jServoSpeed7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jServoSpeed7.setText(bundle.getString("MultiDec.jServoSpeed7.text")); // NOI18N
-        jPanel3.add(jServoSpeed7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 60, -1));
+        jPanel3.add(jServoSpeed7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 60, -1));
 
         jServoPosR8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jServoPosR8.setText(bundle.getString("MultiDec.jServoPosR8.text")); // NOI18N
-        jPanel3.add(jServoPosR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 60, -1));
+        jPanel3.add(jServoPosR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 60, -1));
 
         jServoPosL7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jServoPosL7.setText(bundle.getString("MultiDec.jServoPosL7.text")); // NOI18N
-        jPanel3.add(jServoPosL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 60, -1));
+        jPanel3.add(jServoPosL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 60, -1));
 
         jServoSpeed8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jServoSpeed8.setText(bundle.getString("MultiDec.jServoSpeed8.text")); // NOI18N
-        jPanel3.add(jServoSpeed8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 60, -1));
+        jPanel3.add(jServoSpeed8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 60, -1));
 
         jServoPosL8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jServoPosL8.setText(bundle.getString("MultiDec.jServoPosL8.text")); // NOI18N
-        jPanel3.add(jServoPosL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 60, -1));
+        jPanel3.add(jServoPosL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 60, -1));
 
         jLabel24.setText(bundle.getString("MultiDec.jLabel24.text")); // NOI18N
         jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
@@ -638,16 +638,16 @@ public class MultiDec extends javax.swing.JFrame {
         jPanel3.add(jControlOff4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, -1));
 
         jControlOff5.setText(bundle.getString("MultiDec.jControlOff5.text")); // NOI18N
-        jPanel3.add(jControlOff5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, 20));
+        jPanel3.add(jControlOff5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, 20));
 
         jControlOff6.setText(bundle.getString("MultiDec.jControlOff6.text")); // NOI18N
-        jPanel3.add(jControlOff6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, 20));
+        jPanel3.add(jControlOff6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 20));
 
         jControlOff7.setText(bundle.getString("MultiDec.jControlOff7.text")); // NOI18N
-        jPanel3.add(jControlOff7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 20));
+        jPanel3.add(jControlOff7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, 20));
 
         jControlOff8.setText(bundle.getString("MultiDec.jControlOff8.text")); // NOI18N
-        jPanel3.add(jControlOff8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, 20));
+        jPanel3.add(jControlOff8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, 20));
 
         jLabel25.setText(bundle.getString("MultiDec.jLabel25.text")); // NOI18N
         jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, 20));
@@ -660,35 +660,35 @@ public class MultiDec extends javax.swing.JFrame {
         jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, 20));
 
         jLP1.setText(bundle.getString("MultiDec.jLP1.text")); // NOI18N
-        jPanel3.add(jLP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 10, 20));
+        jPanel3.add(jLP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 10, 20));
 
         jLabel30.setText(bundle.getString("MultiDec.jLabel30.text")); // NOI18N
         jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
 
         jLP2.setText(bundle.getString("MultiDec.jLP2.text")); // NOI18N
-        jPanel3.add(jLP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 10, 20));
+        jPanel3.add(jLP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 10, 20));
 
         jLP3.setText(bundle.getString("MultiDec.jLP3.text")); // NOI18N
-        jPanel3.add(jLP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 10, 20));
+        jPanel3.add(jLP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 10, 20));
 
         jLP4.setText(bundle.getString("MultiDec.jLP4.text")); // NOI18N
-        jPanel3.add(jLP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 10, 20));
+        jPanel3.add(jLP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 10, 20));
 
         jLP5.setText(bundle.getString("MultiDec.jLP5.text")); // NOI18N
-        jPanel3.add(jLP5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 10, 20));
+        jPanel3.add(jLP5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 10, 20));
 
         jLP6.setText(bundle.getString("MultiDec.jLP6.text")); // NOI18N
-        jPanel3.add(jLP6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 10, 20));
+        jPanel3.add(jLP6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 10, 20));
 
         jLP7.setText(bundle.getString("MultiDec.jLP7.text")); // NOI18N
-        jPanel3.add(jLP7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 10, 20));
+        jPanel3.add(jLP7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 10, 20));
 
         jLP8.setText(bundle.getString("MultiDec.jLP8.text")); // NOI18N
-        jPanel3.add(jLP8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 10, 20));
+        jPanel3.add(jLP8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 10, 20));
 
         jTabbedPane1.addTab(bundle.getString("MultiDec.jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 490, 290));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 550, 290));
         getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 270, -1));
 
         jUpdateInfo.setText(bundle.getString("MultiDec.jUpdateInfo.text")); // NOI18N
@@ -2668,7 +2668,7 @@ public class MultiDec extends javax.swing.JFrame {
                                 s = "XPA " + Adr + " 144 " + cvWert + " 10\r";
                             }
                             
-                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 21 pos. R");
+                            jUpdateInfo.setText(bundle.getString("WD34.write")+"Servo 2 pos. R");
                             Com.write(s);
                             System.out.println("bWrite cv[144]:="+cvWert );
 
@@ -3873,7 +3873,6 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JLabel jLP6;
     private javax.swing.JLabel jLP7;
     private javax.swing.JLabel jLP8;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -3900,13 +3899,12 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JCheckBox jLimitStop1;
     private javax.swing.JCheckBox jLimitStop2;
     private javax.swing.JCheckBox jLimitStop3;
     private javax.swing.JCheckBox jLimitStop4;
+    private javax.swing.JLabel jLimitStopBorderLabel;
     private javax.swing.JRadioButton jMode1;
     private javax.swing.JRadioButton jMode2;
     private javax.swing.JRadioButton jMode3;
@@ -3923,6 +3921,7 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JTextField jOnTime6;
     private javax.swing.JTextField jOnTime7;
     private javax.swing.JTextField jOnTime8;
+    private javax.swing.JLabel jOnTimeBorderLabel;
     private javax.swing.JLabel jOntimeLabel1;
     private javax.swing.JLabel jOntimeLabel2;
     private javax.swing.JLabel jOntimeLabel3;
@@ -3962,6 +3961,7 @@ public class MultiDec extends javax.swing.JFrame {
     private javax.swing.JTextField jServoSpeed6;
     private javax.swing.JTextField jServoSpeed7;
     private javax.swing.JTextField jServoSpeed8;
+    private javax.swing.JLabel jSwitchModeBorderLabel;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jUpdateInfo;
     private javax.swing.JLabel jVersion;
