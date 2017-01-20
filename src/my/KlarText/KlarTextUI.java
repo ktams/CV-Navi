@@ -564,6 +564,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         messageBox.jLabel1.setText(bundle.getString("Hinweis"));
         messageBox.jLabel2.setText(bundle.getString("successful"));
         messageBox.jLabel3.setText("" + block + " " +bundle.getString("transferred"));
+        messageBox.setCountdown(5);
         messageBox.setVisible(true);
     }
     public void mbUpdateWriteError( Container cont, char c ) {
