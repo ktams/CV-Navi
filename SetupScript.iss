@@ -4,7 +4,7 @@
 ;#pragma verboselevel 9
 
 #define myAppName "CV-Navi"
-#define myAppVersion "2.5"
+#define myAppVersion "2.6"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.

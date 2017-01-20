@@ -1,4 +1,4 @@
-CV-Navi Version 2.5
+CV-Navi Version 2.6
 
 English version after german section.
 
@@ -11,6 +11,9 @@ Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
+
+Aenderungen in V2.6
+- 
 
 Aenderungen in V2.5
 - Multidecoder hinzugefuegt
