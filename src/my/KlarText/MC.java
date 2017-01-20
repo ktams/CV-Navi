@@ -763,8 +763,8 @@ public class MC extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
-        jCBformat = new javax.swing.JComboBox<>();
-        jCBspeed = new javax.swing.JComboBox<>();
+        jCBformat = new javax.swing.JComboBox<String>();
+        jCBspeed = new javax.swing.JComboBox<String>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jSystem = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -818,7 +818,7 @@ public class MC extends javax.swing.JFrame {
         jBoostOptNoAccBreak = new javax.swing.JCheckBox();
         jBild2 = new javax.swing.JLabel();
         jMRST = new javax.swing.JButton();
-        jBaud = new javax.swing.JComboBox<>();
+        jBaud = new javax.swing.JComboBox<String>();
         jLoks = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLoco = new javax.swing.JTable();
@@ -980,11 +980,11 @@ public class MC extends javax.swing.JFrame {
         jUSB2 = new javax.swing.JRadioButton();
         jLabel18 = new javax.swing.JLabel();
 
-        jCBformat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DCC", "MM1", "MM2", "m3" }));
+        jCBformat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DCC", "MM1", "MM2", "m3" }));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
         jCBformat.setToolTipText(bundle.getString("MC.jCBformat.toolTipText")); // NOI18N
 
-        jCBspeed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "14", "27a", "27b", "28", "126" }));
+        jCBspeed.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14", "27a", "27b", "28", "126" }));
         jCBspeed.setToolTipText(bundle.getString("MC.jCBspeed.toolTipText")); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1330,7 +1330,7 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
-        jBaud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2400", "4800", "9600", "14400", "19200", "38400", "57600" }));
+        jBaud.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2400", "4800", "9600", "14400", "19200", "38400", "57600" }));
         jBaud.setToolTipText(bundle.getString("MC.jLabelBaudrate.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout jSystemLayout = new javax.swing.GroupLayout(jSystem);
@@ -1411,7 +1411,7 @@ public class MC extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jWRmag))
                             .addComponent(jCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                             .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfSichern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfLaden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1813,10 +1813,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1895,10 +1895,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2968,10 +2968,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jGeschwindigkeit.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jGeschwindigkeitCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 180, -1));
