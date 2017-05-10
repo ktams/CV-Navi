@@ -2735,7 +2735,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         if( lenAntwort > lenIn ) {
             System.out.println("May be a TamsMC waiting for a software update...");
             // meist zwischen 8 und 12 Bytes
-            if( lenIn >= 4 ) {
+            if( lenIn >= 5 ) {
                 // 0x4C235423542354235423 T#L#T#T#T# // 10 MasterControl
                 // 0x4C235423542354235423 L#T#T#T#T# T#L#T#T#T#T# // MC als HC  T#T#T#T#T#T#
                 // 0x54234323542354235423 C#T#T#T#T# T#C#T#T#T# // 10 HandControl / PhoneControl 
@@ -2746,7 +2746,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                 // 0x4C = 76 = 'L' Length Error
                 // 0x54 = 84 = 'T' Time out Error
                 String s = new String( bIn );
-                String cs = s.substring(0, 4);
+                String cs = s.substring(1, 5);
                 if( debugLevel > 0 ) {
                     System.out.println("bIN as String="+s+" len="+s.length()+" cs="+cs );
                 }

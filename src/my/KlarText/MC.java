@@ -100,7 +100,7 @@ public class MC extends javax.swing.JFrame {
     private int[] Funktionen;
     private int AktLokAdr;
     private Color DefBackground;
-    private enum Parser { INIT, INFO, LOCO, TRAKTIONS, ACCFMT, SYSTEM, END };
+    private enum Parser { INIT, INFO, LOCO, TRAKTIONS, FUNCMAPS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
     private int traIdx = 0;
@@ -112,6 +112,7 @@ public class MC extends javax.swing.JFrame {
     public S88monitor S88mon = null;
 
     public String M3liste[][] = null;
+    public String FuncIcons[] = null;
     public int M3used = 0;
 
     public int modulNr = 1;
@@ -500,6 +501,8 @@ public class MC extends javax.swing.JFrame {
         if( str1 != null && str1.length() > 0 ) {
             int locTabIdx = 0;
             int traTabIdx = 0;
+            int funcIconIdx = 0;
+            String str = "";
             rcValue = -1;
             updateRailComCheckboxes( 0 );
             so999Value = -1;
@@ -539,6 +542,9 @@ public class MC extends javax.swing.JFrame {
                             continue;
                         case "[TRAKTIONS]":
                             mode = Parser.TRAKTIONS;
+                            continue;
+                        case "[FUNCMAPS]":
+                            mode = Parser.FUNCMAPS;
                             continue;
                         case "[ACCFMT]":
                             mode = Parser.ACCFMT;
@@ -650,7 +656,12 @@ public class MC extends javax.swing.JFrame {
                                 traTabIdx++;
                             }
                             break;
+                        case FUNCMAPS:
+                            str += strArr[j];
+                            str += ";";
+                            break;
                         case ACCFMT:
+                            FuncIcons = str.split(";");
                             // re-split with "," and " "
                             strArr1 = strArr[j].split("[, ]+");
                             if (strArr1.length >= 2) {
@@ -839,6 +850,7 @@ public class MC extends javax.swing.JFrame {
         jLoc2System = new javax.swing.JButton();
         jLocM3sidWriteList = new javax.swing.JButton();
         jM3count = new javax.swing.JLabel();
+        jFuncIcon = new javax.swing.JButton();
         jTraktionen = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTraction = new javax.swing.JTable();
@@ -1812,6 +1824,11 @@ public class MC extends javax.swing.JFrame {
                 jTableLocoFocusLost(evt);
             }
         });
+        jTableLoco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableLocoMouseClicked(evt);
+            }
+        });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
@@ -1987,13 +2004,20 @@ public class MC extends javax.swing.JFrame {
         jM3count.setRequestFocusEnabled(false);
         jM3count.setVerifyInputWhenFocusTarget(false);
 
+        jFuncIcon.setText(bundle.getString("MC.jFuncIcon.text")); // NOI18N
+        jFuncIcon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFuncIconActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jLoksLayout = new javax.swing.GroupLayout(jLoks);
         jLoks.setLayout(jLoksLayout);
         jLoksLayout.setHorizontalGroup(
             jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLoksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLocDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2001,7 +2025,7 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jLocRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocM3sidWrite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLoksLayout.createSequentialGroup()
-                        .addGap(0, 156, Short.MAX_VALUE)
+                        .addGap(0, 192, Short.MAX_VALUE)
                         .addComponent(jLabelM3UID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextM3UID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2017,7 +2041,8 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jLocM3sidWriteList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocM3cfgEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLocM3cfgSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jM3count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jM3count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jFuncIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jLoksLayout.setVerticalGroup(
@@ -2057,7 +2082,9 @@ public class MC extends javax.swing.JFrame {
                         .addComponent(jLocM3cfgSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jM3count)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jFuncIcon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                         .addComponent(jLoc2System, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE))
@@ -5420,6 +5447,22 @@ public class MC extends javax.swing.JFrame {
                                 break;
 
                             default:
+                                if(n > 1)
+                                {
+                                    if(bArray[n-2] == 'F')
+                                    {
+                                        KTUI.mbUpdateWriteSuccess( outerThis, BlockNr*4);
+                                        Com = KTUI.safelyCloseCom( outerThis, Com );
+                                        KTUI.gsBaudRate = gsBaudRateSaved;
+                                        bUpdate = false;
+                                        timer.stop();
+                                        count = 0;
+                                        BlockNr = 0;
+                                        jMcUpdInfo.setText(bundle.getString("MC.Updateerfolg"));
+                                        stopIOAction();
+                                        return;
+                                    }
+                                }
                                 BlockNrTemp = BlockNr * 4;
                                 jUpdLastError.setText(bundle.getString("MC.UnbekannterFehler_1") + BlockNrTemp + bundle.getString("MC.UnbekannterFehler_2"));
                                 System.out.println("mbUpdateWriteError: numBytes from MC="+n+" Content:");
@@ -5548,6 +5591,7 @@ public class MC extends javax.swing.JFrame {
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
+        jFuncIcon.setEnabled(false);
         int selIdx = jTabbedPane1.getSelectedIndex();
         if( debugLevel >= 2 ) {
             System.out.println("jTabbedPane1StateChanged selIdx="+selIdx);
@@ -6030,6 +6074,7 @@ public class MC extends javax.swing.JFrame {
         }
         int edRow = jTableLoco.getEditingRow();
         int edCol = jTableLoco.getEditingColumn();
+        jFuncIcon.setEnabled(true);
         String str;
         if( edRow >= 0 && edCol >= 0 ) {
             switch( edCol ) {
@@ -7968,6 +8013,30 @@ public class MC extends javax.swing.JFrame {
         Com.write(s);
     }//GEN-LAST:event_jVorActionPerformed
 
+    private void jFuncIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFuncIconActionPerformed
+        int edRow = jTableLoco.getSelectedRow();
+        if( edRow >= 0)
+        {
+            String valueAt = (String)jTableLoco.getValueAt(edRow, 0);
+            if(valueAt.length() > 0)
+            {
+                try {
+                    int parseInt = Integer.parseInt(valueAt);
+                    FunktionsIcons FI = new FunktionsIcons(this);
+                    FI.DecAdress = parseInt;
+                    FI.DecName = (String)jTableLoco.getValueAt(edRow, 3);
+                    FI.DecIcons = FuncIcons;
+                } catch (NumberFormatException numberFormatException) {
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jFuncIconActionPerformed
+
+    private void jTableLocoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLocoMouseClicked
+        jFuncIcon.setEnabled(true);
+    }//GEN-LAST:event_jTableLocoMouseClicked
+
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
             return false;
@@ -9310,6 +9379,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton jDirektSchreiben;
     private javax.swing.JTextArea jDisplay;
     private javax.swing.JButton jEasyNetUpdate;
+    private javax.swing.JButton jFuncIcon;
     private javax.swing.JButton jGO;
     private javax.swing.JSlider jGeschwindigkeit;
     private javax.swing.JTextField jHardWare;
