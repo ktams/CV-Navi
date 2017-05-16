@@ -6,6 +6,7 @@
 
 package my.KlarText;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -27,6 +28,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
     public MC KTUI;
     
     private String IconString;
+    private String[] OriginalIconString;
     private String IconNames[];
     
     public FunktionsIcons() {
@@ -111,10 +113,13 @@ public class FunktionsIcons extends javax.swing.JFrame {
             "Hilfsluftpresser",
             "Vorschmieren",
             "Sifa-Meldung",
-            "Schaltstufe (E-Lok)"
+            "Schaltstufe (E-Lok)",
+            "Beleuchtung allgemein",
+            "stromleitende Kupplung"
         };
         initComponents();
         KTUI = aThis;
+        setTitle( "Function Icons" );
         setLocationRelativeTo(aThis);
         setVisible(true);
     }
@@ -128,13 +133,15 @@ public class FunktionsIcons extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jIconNames = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jDecAdr = new javax.swing.JLabel();
         jName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jIconTable = new javax.swing.JTable();
+
+        jIconNames.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "            Stirnbeleuchtung", "            Innenraumbeleuchtung", "            Führerstandsbeleuchtung", "            Fahrgeräusch (Motorgeräusch)", "            Allgemeines Geräusch", "            Bahnhofsdurchsage", "            Rangiergang", "            ABV (Anfahr/Bremszeit aus)", "            Automatische Kupplung", "            Rauchgenerator", "            Panthograph", "            Fernlicht", "            Glocke", "            Horn (Hupe)", "            Pfeife", "            Türen auf/zu", "            Lüfter", "            Kohle Schaufeln", "            Erweiterungstaste (Shift)", "            Zugzielanzeige", "            Bremsenquitschen", "            Kranarm heben/senken", "            Kranhaken heben/senken", "            Triebwerksbeleuchtung", "            Kran drehen", "            Dampf ablassen (Zylinderdampf)", "            Betriebsfunk", "            Kupplungsgeräusch", "            Schienenstoß", "            Diesel Fahrstufe Auf", "            Diesel Fahrstufe Ab", "            Schaffnerpfiff", "            Pufferstoß", "            Führerstandsbeleuchtung 2", "            Wasser fassen (Dampflok)", "            Kurvengeräusch", "            Weichengeräusch", "            Sicherheitsventil", "            Ölbrenner", "            Stoker", "            Dynamische Bremse", "            Kompressor", "            Pressluft ablassen", "            Handbremse", "            Luftpumpe (Dampflok)", "            Wasserpumpe (Dampflok)", "            Hauptschalter (E-Lok)", "            Ditchlight", "            Marslight", "            Gyralight", "            Rule 17", "            Rotary Beacon", "            Feuerbüchse", "            Ölkühler", "            Sanden", "            Abschlammen", "            Bremse setzen (Lösen automatisch)", "            Rangierbeleuchtung", "            Führerpultbeleuchtung", "            Injektor", "            Hilfsdiesel", "            Rücklicht rot", "            Dopplereffekt", "            Kurzpfiff", "            Ölpumpe (Dampflok)", "            Heizung", "            Lichtmaschine (Dampflok)", "            Dieselpumpe", "            Fahrtrichtungsumschalter", "            Hilfsluftpresser", "            Vorschmieren", "            Sifa-Meldung", "            Schaltstufe (E-Lok)" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -146,27 +153,21 @@ public class FunktionsIcons extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("OK");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
+        jButton1.setText(bundle.getString("FunktionsIcons.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Funktions-Icons");
+        jLabel1.setText(bundle.getString("FunktionsIcons.jLabel1.text")); // NOI18N
 
-        jDecAdr.setText("Decoder Adress: ");
+        jDecAdr.setText(bundle.getString("FunktionsIcons.jDecAdr.text")); // NOI18N
 
-        jName.setText("Name:");
+        jName.setText(bundle.getString("FunktionsIcons.jName.text")); // NOI18N
 
         jIconTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,7 +213,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -225,9 +226,16 @@ public class FunktionsIcons extends javax.swing.JFrame {
         });
         jIconTable.setRowHeight(20);
         jIconTable.getTableHeader().setReorderingAllowed(false);
+        jIconTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jIconTablePropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(jIconTable);
         if (jIconTable.getColumnModel().getColumnCount() > 0) {
             jIconTable.getColumnModel().getColumn(0).setResizable(false);
+            jIconTable.getColumnModel().getColumn(1).setResizable(false);
+            jIconTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jIconNames));
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,18 +244,18 @@ public class FunktionsIcons extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDecAdr)
-                        .addGap(59, 59, 59)
-                        .addComponent(jName)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jDecAdr)
+                                .addGap(59, 59, 59)
+                                .addComponent(jName))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -262,10 +270,8 @@ public class FunktionsIcons extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -274,10 +280,6 @@ public class FunktionsIcons extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         
     }//GEN-LAST:event_formWindowClosed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
@@ -296,19 +298,23 @@ public class FunktionsIcons extends javax.swing.JFrame {
         jIconTable.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         jIconTable.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
 
-        for( int i = 0; i < DecIcons.length; i++)
+        IconString = "";
+        if(DecIcons[0].indexOf(" ") != -1)
         {
-            IconString = null;
-            String s = DecIcons[i].substring(0, DecIcons[i].indexOf(" "));
-            try {
-                int n = Integer.parseInt(s);
-                if(n == DecAdress)
-                {
-                    IconString = DecIcons[i];
-                    break;
+            for (String DecIcon : DecIcons) {
+                String s = DecIcon.substring(0, DecIcon.indexOf(" "));
+                try {
+                    int n = Integer.parseInt(s);
+                    if (n == DecAdress) {
+                        IconString += DecIcon.substring(DecIcon.indexOf(" ") + 1, DecIcon.length()) + " ";
+                    }
+                }catch (NumberFormatException numberFormatException) {
                 }
-            } catch (NumberFormatException numberFormatException) {
             }
+            OriginalIconString = new String[DecIcons.length + 1];
+            for(int i = 0; i < DecIcons.length; i++)
+                OriginalIconString[i] = DecIcons[i];
+            OriginalIconString[DecIcons.length] = "";
         }
         for(int i = 0; i < 33; i++)
         {
@@ -316,7 +322,6 @@ public class FunktionsIcons extends javax.swing.JFrame {
         }
         if(IconString != null)
         {
-            IconString = IconString.substring(IconString.indexOf(" ") + 1, IconString.length());
             while (IconString.length() > 2)
             {
                 String s = IconString.substring(0, IconString.indexOf(","));
@@ -335,8 +340,14 @@ public class FunktionsIcons extends javax.swing.JFrame {
                     {
                         parseInt1 = Integer.parseInt(IconString);
                     }
+                    if(parseInt1 == 0)
+                    {
+                        jIconTable.setValueAt("---", parseInt, 1);
+                        jIconTable.setValueAt("", parseInt, 2);
+                        continue;
+                    }
                     jIconTable.setValueAt(""+parseInt1, parseInt, 1);
-                    jIconTable.setValueAt(IconNames[parseInt1], parseInt, 2);
+                    jIconTable.setValueAt(IconNames[parseInt1 - 1], parseInt, 2);
                     IconString = IconString.substring(IconString.indexOf(" ")+1, IconString.length());
                 } catch (NumberFormatException numberFormatException) {
                 }
@@ -345,6 +356,25 @@ public class FunktionsIcons extends javax.swing.JFrame {
         jDecAdr.setText("Decoder Adr: " + DecAdress);
         jName.setText("Decoder Name: " + DecName);
     }//GEN-LAST:event_formWindowOpened
+
+    private void jIconTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jIconTablePropertyChange
+        int edRow = jIconTable.getEditingRow();
+        if( edRow >= 0)
+        {
+            int selectedIndex = jIconNames.getSelectedIndex();
+            if(selectedIndex > 0)
+            {
+                jIconTable.setValueAt(selectedIndex+2, edRow, 1);
+                OriginalIconString[DecIcons.length] += ("" + DecAdress + " " + edRow + "," + (selectedIndex + 2));
+            }
+            else
+            {
+                jIconTable.setValueAt("---", edRow, 1);
+                OriginalIconString[DecIcons.length] += ("" + DecAdress + " " + edRow + "," + selectedIndex);
+            }
+            KTUI.FuncIcons = OriginalIconString;
+        }
+    }//GEN-LAST:event_jIconTablePropertyChange
 
     /**
      * @param args the command line arguments
@@ -383,8 +413,8 @@ public class FunktionsIcons extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jDecAdr;
+    private javax.swing.JComboBox jIconNames;
     private javax.swing.JTable jIconTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jName;

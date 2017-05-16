@@ -100,6 +100,7 @@ public class MC extends javax.swing.JFrame {
     private int[] Funktionen;
     private int AktLokAdr;
     private Color DefBackground;
+    private boolean bReadDevices;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, FUNCMAPS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -107,6 +108,8 @@ public class MC extends javax.swing.JFrame {
     private int magIdx = 0;
     private int locoTableSelRow = -1;
     private int locoTableSelCol = -1;
+    private int WriteLokInDB = 0;
+    private int LokNummerFuerDB = 0;
     private Boolean checkM3uidValidActive = false;
     private M3_Liste M3L = null;
     public S88monitor S88mon = null;
@@ -135,6 +138,8 @@ public class MC extends javax.swing.JFrame {
     public JDialog frameInstanceHelpXNC = null;
     public JDialog frameInstanceHelpWIW = null;
     public JDialog frameInstanceHelpMC = null;
+    
+    private ConnectedDevices connectedDevices = null;
 
 
 
@@ -830,6 +835,7 @@ public class MC extends javax.swing.JFrame {
         jBild2 = new javax.swing.JLabel();
         jMRST = new javax.swing.JButton();
         jBaud = new javax.swing.JComboBox<String>();
+        jconDevs = new javax.swing.JButton();
         jLoks = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLoco = new javax.swing.JTable();
@@ -1345,6 +1351,14 @@ public class MC extends javax.swing.JFrame {
         jBaud.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2400", "4800", "9600", "14400", "19200", "38400", "57600" }));
         jBaud.setToolTipText(bundle.getString("MC.jLabelBaudrate.toolTipText")); // NOI18N
 
+        jconDevs.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jconDevs.setText(bundle.getString("MC.jconDevs.text")); // NOI18N
+        jconDevs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jconDevsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jSystemLayout = new javax.swing.GroupLayout(jSystem);
         jSystem.setLayout(jSystemLayout);
         jSystemLayout.setHorizontalGroup(
@@ -1361,7 +1375,7 @@ public class MC extends javax.swing.JFrame {
                     .addGroup(jSystemLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jClose, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jSystemLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRailcomTailbits, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jRailcomAccessory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1380,7 +1394,7 @@ public class MC extends javax.swing.JFrame {
                                     .addComponent(jBoosterOpts)
                                     .addComponent(jBoostOptNoAccDrive)
                                     .addComponent(jBoostOptNoAccBreak))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1409,7 +1423,7 @@ public class MC extends javax.swing.JFrame {
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel17)
                                     .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                                 .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(74, 74, 74)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1426,7 +1440,8 @@ public class MC extends javax.swing.JFrame {
                             .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                             .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfSichern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jKonfLaden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jKonfLaden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jconDevs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -1476,7 +1491,9 @@ public class MC extends javax.swing.JFrame {
                             .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jBaud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel14)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(jconDevs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jSystemLayout.createSequentialGroup()
                         .addComponent(jKonfLesen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2087,7 +2104,7 @@ public class MC extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                         .addComponent(jLoc2System, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -2747,7 +2764,7 @@ public class MC extends javax.swing.JFrame {
                 .addGroup(jMagnetartikelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jMagnetartikelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
                     .addGroup(jMagnetartikelLayout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(jMMM)
@@ -3844,7 +3861,7 @@ public class MC extends javax.swing.JFrame {
                             .addComponent(jUpdLastError)
                             .addComponent(jUpdLastErrorLabel))
                         .addGap(11, 11, 11)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jUpdateLayout.createSequentialGroup()
@@ -4149,6 +4166,21 @@ public class MC extends javax.swing.JFrame {
                     // ist ein vollständiger Datensatz angekommen ?
                     bArray[bytesRead] = 0;
 
+                    if(bReadDevices)
+                    {
+                        if(connectedDevices != null)
+                        {
+                            String s = new String(bArray);
+                            s = s.substring(0, bytesRead);
+                            connectedDevices.strDevs = s.split("\r");
+                            connectedDevices.SetDevs();
+                        }
+                        else
+                        {
+                            bReadDevices = false;
+                        }
+                        stopIOAction();
+                    }
                     if(bAskLokState)
                     {
                         if( ! KTUI.checkReadComplete(bArray) ) {
@@ -5135,43 +5167,74 @@ public class MC extends javax.swing.JFrame {
                                 locIdx = c.MAX_LOCS;
                                 break;
                             }
-                            while( (bWaitAnswerInProgress == false) && (locIdx < c.MAX_LOCS) )
+                            while( bWaitAnswerInProgress == false)
                             {
                                 // assumption jTableLoco was checked successfully (or automatically repaired)
                                 // -> all jTableLoco entries are OK and we can skip most validation checks here
 
                                 // send only valid loco addresses
-                                Object oAdr = jTableLoco.getValueAt(locIdx, 0);
-                                String sAdr = "" + oAdr;
-                                if( sAdr.trim().length() > 0) {
-                                    String sFormat = "" + jTableLoco.getValueAt( locIdx, 1);
-                                    String sFS     = "" + jTableLoco.getValueAt( locIdx, 2);
-                                    String sName = null;
+                                if(locIdx < c.MAX_LOCS) 
+                                {
+                                    WriteLokInDB = 0;
+                                    Object oAdr = jTableLoco.getValueAt(locIdx, 0);
+                                    String sAdr = "" + oAdr;
+                                    if( sAdr.trim().length() > 0) {
+                                        String sFormat = "" + jTableLoco.getValueAt( locIdx, 1);
+                                        String sFS     = "" + jTableLoco.getValueAt( locIdx, 2);
+                                        String sName = null;
 
-                                    Object oName = jTableLoco.getValueAt( locIdx, 3);
-                                    if( oName != null )
-                                        sName = "" + oName;
+                                        Object oName = jTableLoco.getValueAt( locIdx, 3);
+                                        if( oName != null )
+                                            sName = "" + oName;
 
-                                    if( (sName != null) && (sName.length() >  0) )
-                                        lastCmd = "XLOCADD " + oAdr + ", " + sFS + ", " + sFormat + ", \"" + sName + "\"\r";
+                                        if( (sName != null) && (sName.length() >  0) )
+                                            lastCmd = "XLOCADD " + oAdr + ", " + sFS + ", " + sFormat + ", \"" + sName + "\"\r";
+                                        else
+                                            lastCmd = "XLOCADD " + oAdr + ", " + sFS + ", " + sFormat + "\r";
+                                        System.out.println("write: loco s["+lastCmd+"]" );
+                                        Com.write(lastCmd);
+                                        resetbArray();
+                                        retries = KlarTextUI.timerRetries;
+                                        jMcRwProgress.setString(null);
+                                        bWaitAnswerInProgress = true;
+                                        jMcRwInfo.setText("write: loco ("+(locIdx+1)+"/"+c.MAX_LOCS+")");
+                                        if( debugLevel >= 2 ) {
+                                            System.out.println("write: loco ("+locIdx+"/"+c.MAX_LOCS+") ["+lastCmd+"]" );
+                                        }
+                                    }
+                                    locIdx++;
+                                }
+
+                                if( locIdx >= c.MAX_LOCS ) {
+                                    if(WriteLokInDB < FuncIcons.length)
+                                    {
+                                        if(FuncIcons[WriteLokInDB].length() > 1)
+                                        {
+                                            lastCmd = "XFM " + FuncIcons[WriteLokInDB] + "\r";
+                                            Com.write(lastCmd);
+                                            resetbArray();
+                                            retries = KlarTextUI.timerRetries;
+                                            jMcRwProgress.setString(null);
+                                            bWaitAnswerInProgress = true;
+                                            jMcRwInfo.setText("write: FM for locos");
+                                            WriteLokInDB++;
+                                        }
+                                        else
+                                        {
+                                            WriteLokInDB = 0;
+                                            // end of loco list
+                                            nextWriteJob++;
+                                            break;
+                                        }
+                                    }
                                     else
-                                        lastCmd = "XLOCADD " + oAdr + ", " + sFS + ", " + sFormat + "\r";
-                                    System.out.println("write: loco s["+lastCmd+"]" );
-                                    Com.write(lastCmd);
-                                    resetbArray();
-                                    retries = KlarTextUI.timerRetries;
-                                    jMcRwProgress.setString(null);
-                                    bWaitAnswerInProgress = true;
-                                    jMcRwInfo.setText("write: loco ("+(locIdx+1)+"/"+c.MAX_LOCS+")");
-                                    if( debugLevel >= 2 ) {
-                                        System.out.println("write: loco ("+locIdx+"/"+c.MAX_LOCS+") ["+lastCmd+"]" );
+                                    {
+                                        WriteLokInDB = 0;
+                                        // end of loco list
+                                        nextWriteJob++;
+                                        break;
                                     }
                                 }
-                                locIdx++;
-                            }
-                            if( locIdx >= c.MAX_LOCS ) {
-                                // end of loco list
-                                nextWriteJob++;
                             }
                             timer.start();
                             break;
@@ -6179,7 +6242,12 @@ public class MC extends javax.swing.JFrame {
                 str += "\r\n";
             }
         }
-        this.jMcRwProgress.setValue(35);
+        this.jMcRwProgress.setValue(30);
+        str += "[FUNCMAPS]\r\n";
+        for(int i = 0; i < FuncIcons.length; i++)
+        {
+            str += FuncIcons[i] + "\r\n";
+        }
         str += "[TRAKTIONS]\r\n";
         if( debugLevel > 0 ) {
             System.out.println("jKonfSichernActionPerformed TRAKTIONS");
@@ -6196,7 +6264,7 @@ public class MC extends javax.swing.JFrame {
                 break;
             }
         }
-        this.jMcRwProgress.setValue(55);
+        this.jMcRwProgress.setValue(60);
         if( debugLevel > 0 ) {
             System.out.println("jKonfSichernActionPerformed ACCFMT");
         }
@@ -6221,7 +6289,7 @@ public class MC extends javax.swing.JFrame {
                 break;
             }
         }
-        this.jMcRwProgress.setValue(75);
+        this.jMcRwProgress.setValue(80);
         str += "[SYSTEM]\r\nLONGPAUSE ";
         if(jLangePause.isSelected()) {
             str += "yes\r\n";
@@ -8037,6 +8105,29 @@ public class MC extends javax.swing.JFrame {
         jFuncIcon.setEnabled(true);
     }//GEN-LAST:event_jTableLocoMouseClicked
 
+    private void jconDevsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jconDevsActionPerformed
+        connectedDevices = new ConnectedDevices(this);
+        Com = KTUI.safelyOpenCom( this, Com );
+        if( Com == null ){
+            return;
+        }
+        KTUI.flushReadBuffer(Com);
+        String s = "XCVER\r";
+        Com.write(s);
+        resetbArray();
+        retries = KlarTextUI.timerRetries;
+        jMcRwProgress.setString(null);
+        bWaitAnswerInProgress = true;
+        bReadDevices = true;
+        readWriteProgress = 0;
+        jMcRwProgress.setMaximum(64);
+        jMcRwProgress.setValue(0);
+        timer.setInitialDelay(KlarTextUI.MCtimer1);
+        timer.setDelay(KlarTextUI.MCtimer2);
+        startIOAction();
+        jMcRwInfo.setText("read: MC config read in progress");
+    }//GEN-LAST:event_jconDevsActionPerformed
+
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
             return false;
@@ -9524,6 +9615,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JCheckBox jWRsys;
     private javax.swing.JCheckBox jWRtra;
     private javax.swing.JTextField jWertDirekt;
+    private javax.swing.JButton jconDevs;
     private javax.swing.JButton jf0;
     private javax.swing.JButton jf1;
     private javax.swing.JButton jf10;
