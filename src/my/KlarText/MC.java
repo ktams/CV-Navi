@@ -4171,15 +4171,20 @@ public class MC extends javax.swing.JFrame {
                         if(connectedDevices != null)
                         {
                             String s = new String(bArray);
-                            s = s.substring(0, bytesRead);
-                            connectedDevices.strDevs = s.split("\r");
-                            connectedDevices.SetDevs();
+                            if(s.contains("END"))
+                            {
+                                s = s.substring(0, bytesRead);
+                                connectedDevices.strDevs = s.split("\r");
+                                connectedDevices.SetDevs();
+                                stopIOAction();
+                                bReadDevices = false;
+                            }
                         }
                         else
                         {
                             bReadDevices = false;
+                            stopIOAction();
                         }
-                        stopIOAction();
                     }
                     if(bAskLokState)
                     {

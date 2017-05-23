@@ -35,7 +35,10 @@ public class ConnectedDevices extends javax.swing.JFrame {
         String Version = "";
         for(int i = 0; i < strDevs.length; i++)
         {
-            String str = strDevs[i].substring(0, strDevs[i].indexOf(" "));
+            int m = strDevs[i].indexOf(" ");
+            if(m == -1)
+                continue;
+            String str = strDevs[i].substring(0, m);
             if(str.contains("C"))
             {
                 jDevices.append("Central unit  |  ");
@@ -51,21 +54,31 @@ public class ConnectedDevices extends javax.swing.JFrame {
                 }
             }
             str = strDevs[i].substring(strDevs[i].indexOf(" ") + 1, strDevs[i].length());
-            jDevices.append("Hardware: " + Integer.parseInt(str.substring(0,str.indexOf(" "))) + "  |  Version: ");
-            str = str.substring(str.indexOf(" ") + 1, str.length());
-            if(i == 0)
-            {
-                Version = str;
-                jDevices.append(str + "\r\n");
-            }
-            else
-            {
-                jDevices.append(str);
-                if(Version.compareTo(str) != 0)
+            try {
+                m = str.indexOf(" ");
+                if(m != -1)
                 {
-                    jDevices.append("   Version != Version central unit -> Update!");
+                    jDevices.append("Hardware: " + Integer.parseInt(str.substring(0, m)) + "  |  Version: ");
+                    str = str.substring(str.indexOf(" ") + 1, str.length());
+                    if(i == 0)
+                    {
+                        Version = str;
+                        jDevices.append(str + "\r\n");
+                    }
+                    else
+                    {
+                        jDevices.append(str);
+                        if(Version.compareTo(str) != 0)
+                        {
+                            jDevices.append("   Version != Version central unit -> Update!");
+                        }
+                        jDevices.append("\r\n");
+                    }
                 }
-                jDevices.append("\r\n");
+                else
+                    jDevices.append(" unknown    -> Update!\r\n");
+            } catch (NumberFormatException numberFormatException) {
+                jDevices.append(" unknown    -> Update!\r\n");
             }
         }
     }
