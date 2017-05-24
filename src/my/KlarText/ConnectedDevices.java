@@ -24,6 +24,7 @@ public class ConnectedDevices extends javax.swing.JFrame {
         KTUI = aThis;
         setLocationRelativeTo(aThis);
         setVisible(true);
+        KTUI.bconnectedDevicesIsActiv = true;
     }
 
     private ConnectedDevices() {
@@ -98,7 +99,11 @@ public class ConnectedDevices extends javax.swing.JFrame {
         jDevices = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -161,6 +166,10 @@ public class ConnectedDevices extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jDevices.setText("\r\n");
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        KTUI.bconnectedDevicesIsActiv = false;
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

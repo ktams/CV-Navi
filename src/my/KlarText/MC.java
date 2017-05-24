@@ -101,6 +101,7 @@ public class MC extends javax.swing.JFrame {
     private int AktLokAdr;
     private Color DefBackground;
     private boolean bReadDevices;
+    public boolean bconnectedDevicesIsActiv;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, FUNCMAPS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -8111,11 +8112,15 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableLocoMouseClicked
 
     private void jconDevsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jconDevsActionPerformed
-        connectedDevices = new ConnectedDevices(this);
         Com = KTUI.safelyOpenCom( this, Com );
         if( Com == null ){
             return;
         }
+        if(bconnectedDevicesIsActiv)
+        {
+            return;
+        }
+        connectedDevices = new ConnectedDevices(this);
         KTUI.flushReadBuffer(Com);
         String s = "XCVER\r";
         Com.write(s);
