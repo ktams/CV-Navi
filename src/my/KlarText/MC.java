@@ -101,7 +101,8 @@ public class MC extends javax.swing.JFrame {
     private int AktLokAdr;
     private Color DefBackground;
     private boolean bReadDevices;
-    public boolean bconnectedDevicesIsActiv;
+    public boolean bconnectedDevicesIsActiv = false;
+    public boolean bFunktionsIconsIsActiv = false;
     private enum Parser { INIT, INFO, LOCO, TRAKTIONS, FUNCMAPS, ACCFMT, SYSTEM, END };
     private int sysIdx = 0;
     private int locIdx = 0;
@@ -8088,6 +8089,8 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jVorActionPerformed
 
     private void jFuncIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFuncIconActionPerformed
+        if(bFunktionsIconsIsActiv)
+            return;
         int edRow = jTableLoco.getSelectedRow();
         if( edRow >= 0)
         {
@@ -8254,6 +8257,7 @@ public class MC extends javax.swing.JFrame {
         jWRmag.setEnabled(false);
         jKonfLaden.setEnabled(false);
         jKonfSichern.setEnabled(false);
+        jconDevs.setEnabled(false);
         // loco tab (while writing m3sid/uid
         jLocDel.setEnabled(false);
         jLocDelAll.setEnabled(false);
@@ -8379,6 +8383,7 @@ public class MC extends javax.swing.JFrame {
         jKonfSichern.setEnabled(true);
         jCancel.setEnabled(false);
         jUpdCancel.setEnabled(false);
+        jconDevs.setEnabled(true);
 
         // (re-)enable some editable fields
         jLangePause.setEnabled(true);

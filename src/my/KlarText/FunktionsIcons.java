@@ -6,6 +6,8 @@
 
 package my.KlarText;
 
+import java.awt.Point;
+import java.awt.Rectangle;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -40,7 +42,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
     FunktionsIcons(MC aThis) {
         this.IconNames = new String[]{
             "",
-            "",
+            "---",
             "Stirnbeleuchtung",
             "Innenraumbeleuchtung",
             "Führerstandsbeleuchtung",
@@ -122,6 +124,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
         setTitle( "Function Icons" );
         setLocationRelativeTo(aThis);
         setVisible(true);
+        KTUI.bFunktionsIconsIsActiv = true;
     }
 
     /**
@@ -141,9 +144,10 @@ public class FunktionsIcons extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jIconTable = new javax.swing.JTable();
 
-        jIconNames.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "            Stirnbeleuchtung", "            Innenraumbeleuchtung", "            Führerstandsbeleuchtung", "            Fahrgeräusch (Motorgeräusch)", "            Allgemeines Geräusch", "            Bahnhofsdurchsage", "            Rangiergang", "            ABV (Anfahr/Bremszeit aus)", "            Automatische Kupplung", "            Rauchgenerator", "            Panthograph", "            Fernlicht", "            Glocke", "            Horn (Hupe)", "            Pfeife", "            Türen auf/zu", "            Lüfter", "            Kohle Schaufeln", "            Erweiterungstaste (Shift)", "            Zugzielanzeige", "            Bremsenquitschen", "            Kranarm heben/senken", "            Kranhaken heben/senken", "            Triebwerksbeleuchtung", "            Kran drehen", "            Dampf ablassen (Zylinderdampf)", "            Betriebsfunk", "            Kupplungsgeräusch", "            Schienenstoß", "            Diesel Fahrstufe Auf", "            Diesel Fahrstufe Ab", "            Schaffnerpfiff", "            Pufferstoß", "            Führerstandsbeleuchtung 2", "            Wasser fassen (Dampflok)", "            Kurvengeräusch", "            Weichengeräusch", "            Sicherheitsventil", "            Ölbrenner", "            Stoker", "            Dynamische Bremse", "            Kompressor", "            Pressluft ablassen", "            Handbremse", "            Luftpumpe (Dampflok)", "            Wasserpumpe (Dampflok)", "            Hauptschalter (E-Lok)", "            Ditchlight", "            Marslight", "            Gyralight", "            Rule 17", "            Rotary Beacon", "            Feuerbüchse", "            Ölkühler", "            Sanden", "            Abschlammen", "            Bremse setzen (Lösen automatisch)", "            Rangierbeleuchtung", "            Führerpultbeleuchtung", "            Injektor", "            Hilfsdiesel", "            Rücklicht rot", "            Dopplereffekt", "            Kurzpfiff", "            Ölpumpe (Dampflok)", "            Heizung", "            Lichtmaschine (Dampflok)", "            Dieselpumpe", "            Fahrtrichtungsumschalter", "            Hilfsluftpresser", "            Vorschmieren", "            Sifa-Meldung", "            Schaltstufe (E-Lok)" }));
+        jIconNames.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "            ---", "            Stirnbeleuchtung", "            Innenraumbeleuchtung", "            Führerstandsbeleuchtung", "            Fahrgeräusch (Motorgeräusch)", "            Allgemeines Geräusch", "            Bahnhofsdurchsage", "            Rangiergang", "            ABV (Anfahr/Bremszeit aus)", "            Automatische Kupplung", "            Rauchgenerator", "            Panthograph", "            Fernlicht", "            Glocke", "            Horn (Hupe)", "            Pfeife", "            Türen auf/zu", "            Lüfter", "            Kohle Schaufeln", "            Erweiterungstaste (Shift)", "            Zugzielanzeige", "            Bremsenquitschen", "            Kranarm heben/senken", "            Kranhaken heben/senken", "            Triebwerksbeleuchtung", "            Kran drehen", "            Dampf ablassen (Zylinderdampf)", "            Betriebsfunk", "            Kupplungsgeräusch", "            Schienenstoß", "            Diesel Fahrstufe Auf", "            Diesel Fahrstufe Ab", "            Schaffnerpfiff", "            Pufferstoß", "            Führerstandsbeleuchtung 2", "            Wasser fassen (Dampflok)", "            Kurvengeräusch", "            Weichengeräusch", "            Sicherheitsventil", "            Ölbrenner", "            Stoker", "            Dynamische Bremse", "            Kompressor", "            Pressluft ablassen", "            Handbremse", "            Luftpumpe (Dampflok)", "            Wasserpumpe (Dampflok)", "            Hauptschalter (E-Lok)", "            Ditchlight", "            Marslight", "            Gyralight", "            Rule 17", "            Rotary Beacon", "            Feuerbüchse", "            Ölkühler", "            Sanden", "            Abschlammen", "            Bremse setzen (Lösen automatisch)", "            Rangierbeleuchtung", "            Führerpultbeleuchtung", "            Injektor", "            Hilfsdiesel", "            Rücklicht rot", "            Dopplereffekt", "            Kurzpfiff", "            Ölpumpe (Dampflok)", "            Heizung", "            Lichtmaschine (Dampflok)", "            Dieselpumpe", "            Fahrtrichtungsumschalter", "            Hilfsluftpresser", "            Vorschmieren", "            Sifa-Meldung", "            Schaltstufe (E-Lok)", "            Beleuchtung allgemein", "            stromleitende Kupplung" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -203,14 +207,16 @@ public class FunktionsIcons extends javax.swing.JFrame {
                 { new Integer(29), null, null},
                 { new Integer(30), null, null},
                 { new Integer(31), null, null},
-                { new Integer(32), null, null}
+                { new Integer(32), null, null},
+                { new Integer(33), null, null},
+                { new Integer(34), null, null}
             },
             new String [] {
                 "Funktion", "Icon-No", "Beschreibung"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, true, true
@@ -226,6 +232,11 @@ public class FunktionsIcons extends javax.swing.JFrame {
         });
         jIconTable.setRowHeight(20);
         jIconTable.getTableHeader().setReorderingAllowed(false);
+        jIconTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jIconTableMouseClicked(evt);
+            }
+        });
         jIconTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jIconTablePropertyChange(evt);
@@ -234,7 +245,10 @@ public class FunktionsIcons extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jIconTable);
         if (jIconTable.getColumnModel().getColumnCount() > 0) {
             jIconTable.getColumnModel().getColumn(0).setResizable(false);
+            jIconTable.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("FunktionsIcons.jIconTable.columnModel.title0")); // NOI18N
             jIconTable.getColumnModel().getColumn(1).setResizable(false);
+            jIconTable.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("FunktionsIcons.jIconTable.columnModel.title1")); // NOI18N
+            jIconTable.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("FunktionsIcons.jIconTable.columnModel.title2")); // NOI18N
             jIconTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jIconNames));
         }
 
@@ -278,7 +292,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
+        KTUI.bFunktionsIconsIsActiv = false;
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -314,7 +328,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
             OriginalIconString = new String[DecIcons.length + 1];
             for(int i = 0; i < DecIcons.length; i++)
                 OriginalIconString[i] = DecIcons[i];
-            OriginalIconString[DecIcons.length] = "";
+            OriginalIconString[DecIcons.length] = "" + DecAdress;
         }
         for(int i = 0; i < 33; i++)
         {
@@ -364,17 +378,38 @@ public class FunktionsIcons extends javax.swing.JFrame {
             int selectedIndex = jIconNames.getSelectedIndex();
             if(selectedIndex > 0)
             {
-                jIconTable.setValueAt(selectedIndex+2, edRow, 1);
-                OriginalIconString[DecIcons.length] += ("" + DecAdress + " " + edRow + "," + (selectedIndex + 2));
+                jIconTable.setValueAt("" + (selectedIndex+2), edRow, 1);
+                OriginalIconString[DecIcons.length] += (" " + edRow + "," + (selectedIndex + 2));
             }
             else
             {
                 jIconTable.setValueAt("---", edRow, 1);
-                OriginalIconString[DecIcons.length] += ("" + DecAdress + " " + edRow + "," + selectedIndex);
+                OriginalIconString[DecIcons.length] += (" " + edRow + "," + selectedIndex);
             }
             KTUI.FuncIcons = OriginalIconString;
         }
+        else
+        {
+            Rectangle bounds = jIconNames.getBounds();
+            if(bounds.x > 0)
+            {
+                int n = bounds.y / bounds.height;
+                if(n < jIconNames.getItemCount())
+                {
+                    Object valueAt = jIconTable.getValueAt(n, 1);
+                    int i = 0;
+                    try {
+                        i = Integer.parseInt((String) valueAt);
+                        jIconNames.setSelectedIndex(i-2);
+                    } catch (NumberFormatException numberFormatException) {
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_jIconTablePropertyChange
+
+    private void jIconTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jIconTableMouseClicked
+    }//GEN-LAST:event_jIconTableMouseClicked
 
     /**
      * @param args the command line arguments
