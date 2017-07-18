@@ -1439,7 +1439,7 @@ public class MC extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jWRmag))
                             .addComponent(jCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfSichern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfLaden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -4148,10 +4148,9 @@ public class MC extends javax.swing.JFrame {
                                     Com.write((byte)MM_Adr);
                                     break;
 
-                                case 12:
-                                    Com.write((byte)0);
-                                    Com.write((byte)80);
-                                    break;
+                                case 13:
+//                                    Com.write("XTPM 80\r");
+                                   break;
                             }
                         }
                         if( retries == 0 ) {
@@ -5044,7 +5043,7 @@ public class MC extends javax.swing.JFrame {
                                     lastCmd += "DCC, ";
                                 else
                                     lastCmd += "MM, ";
-                                int KSE = 0;
+                                int KSE;
                                 try {
                                     KSE = Integer.parseInt(jKurzEmpf.getText());
                                     KSE /= 5;
@@ -7138,8 +7137,9 @@ public class MC extends javax.swing.JFrame {
         timer.setDelay(KlarTextUI.timer2);
         timer.setRepeats(true);
         bWaitAnswerInProgress = true;
-        retries = 14; // LRLRLR Warum genau 14 ?
+        retries = 14; // LRLRLR Warum genau 14 ? KTKTKT Zeit für den Einstieg geben...
         startIOAction();
+        Com.write("XTPM 80\r");
     }//GEN-LAST:event_jStartMMProgActionPerformed
 
     private void j1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j1ActionPerformed
