@@ -1,6 +1,6 @@
 CV-Navi Version 2.6
 
-English version after german section.
+English and french version after german section.
 
 Dies Programm ist Freeware und kann uneingeschraenkt weiter gegeben werden.
 Der Gebrauch geschieht auf eigenes Risiko.
@@ -13,7 +13,7 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
 Aenderungen in V2.6
-- 
+- Französische Übersetzung (Release Infos von Jean-Jacques)
 
 Aenderungen in V2.5
 - Multidecoder hinzugefuegt
@@ -118,6 +118,116 @@ Ihr Tams Elektronik Team.
 
 ___________________________________________________
 
+Ce programme est freeware et peut être entièrement distribué.
+L’utilisation est faite à vos propres risques.
+Merci de signaler les erreurs à l’adresse : info@tams-online.de.
+
+Problèmes dans l’interaction PC <-> Centrale
+Vérifier que vous avez sélectionné la centrale appropriée , la bonne interface (com x) et une vitesse correcte (57600)
+Si vous utilisez le IB, l’interface doit être réglée sur « 6051 + IB ».
+
+Historique des évolutions :
+
+Changement dans la version V 2.6
+- Traduction FR (Merci a Jean-Jacques)
+
+Changement dans la version V2.5
+- Multi decodeur supplémentaire
+- WD-34.2 et SD-34.2 ajouté
+
+Changement dans la version in V2.4
+- LD-W-32.2 et LD-G-32.2 ajouté
+- Débit en bauds pour RS-232 sur MC/RB ou RB à nouveau commutable USB-2
+
+Changement dans la version V2.3
+- MC/BO : locomotive table : conversion des mesures/protocole de format et de la vitesse de zone de liste déroulante
+- Correction d’un bug lors de la lecture d’un décodeur CVS à l’aide de 256 (y compris les FD-R basic 2)
+- Corrigé base 2 après la lecture de tous les CV dans FD R basic 2
+
+Changement dans la version V2.2
+- Correction d’un bug dans tableau Loco DCC vitesse étapes
+
+Changement dans la version V2.1
+- MC/RedBox : Vérification/réparation des entrées dans la table locomotive
+
+Changement dans la version in V2.00
+- Chemin de gentoo dans le script de démarrage
+- Informations de système d’exploitation sur la page d’aperçu
+- Information de mise à jour du firmware adaptée
+- Support pour le firmware V2. 00
+- Ajout d’onglets pour programmation/LokControl
+
+Changement dans la version V1.11
+- instructions détaillées pour les mises à jour de progiciels intégrés (Merci à Peter Mueller)
+- Soutien Raspbian sur BananaPi
+- Prise en charge Mac OS X
+- S88-Monitor
+- Fichier de m3 chargé automatiquement au démarrage
+- Ajout du support pour RedBox
+- MC/RedBox : booster Advanced options 1.4. 8c
+
+Changement dans la version V1.10
+- Révision de l’interface
+- FD-LED ajouté
+- BiDi-Booster ajouté
+- Ajout du support pour m3sid/uid
+- MC : Fixe en lecture/écriture et sauvegarder/charger la configuration RailCom
+- lecture/charge sécurisée configurations décodeur
+- quelques changements mineurs /améliorations internes
+- Ajout du support pour B-4 avec toutes les caractéristiques (y compris les FW Rev 1.6)
+- Ajout du support Raspbian et RaspberryPi
+
+Merci aux bêta testeurs : Claus, Dirk et Thomas
+
+Changement dans la version in V1.9
+- LD-G33 plus, LD-G34 plus und LD-G36 plus ajoutés
+
+Changement dans la version in V1.8
+- FD-R extended ajouté
+- Linux est désormais pris en charge
+- de nombreuses améliorations internes mineures
+
+Changement dans la version V1.6
+- WIB-30er ajouté
+- Dans le module "modifier la liste de CV / print « quelques erreurs ont été corrigées.
+
+Changement dans la version in V1.51
+- Le plus récemment sous la direction périphérique / décodeur se trouve après un redémarrage à nouveau.
+- Pour certains modules et boîtes de dialogue, vous pouvez définir l’anglais comme langue.
+- Dans le module "modifier la liste de CV / print « les descriptions de CV pour FD-M et FD-R ont été corrigées.
+
+Changement dans la version V1.5
+- LD-G-31 ajouté
+- Lire le CV s’affichent dans la boîte de dialogue « CVS en lecture/écriture » lors de la lecture. Démolition de l’opération de lecture/écriture est désormais possible.
+- Vous pouvez maintenant modifier le CV dans la liste. Les valeurs, ainsi que les CV doivent être programmées à tous, puis ajustées.
+- La liste de CV peut être imprimée maintenant.
+
+Changement dans la version V1.41
+- Module MC : noms de locomotives sont transférés avec espaces et autres caractères spéciaux.
+- Le répertoire de travail est utilisé dans l’installation
+
+Changement dans la version V1.4
+- Quand le LD-G-30, « Ouvert » et « Enregistrer » fonctionne à nouveau.
+- FD-M ajouté.
+- -L’affichage sur la voie de programmation mieux sécurisé et accéléré.
+
+Changement dans la version V1.3
+- Bug dans l’établissement des valeurs bauds.
+- Composants de LD-W-33, LD-G-33 et LD-G-34 comme la version 1.0.
+- les programmes sont maintenant dans le répertoire de l’utilisateur dans le dossier CV-Navi sauvé.
+
+Changement dans la version V1.2
+- Divers bugs d’affichage corrigés.
+- Composants LD-W-33, LD-G-33 et LD-G-34 ajoutés.
+- Dans la boîte de dialogue « Ouvrir fichier » historique du chemin utilisé.
+Les 10 derniers fichiers peuvent être choisies dans une liste
+
+Changement dans la version V1.1
+- WD/SD-34 et MasterControl composants ajoutés.
+
+Equipe électronique TAMS.
+___________________________________________________
+
 This program is freeware.
 Use it on your own risk.
 Please send bug reports with a short description to: info@tams-online.de
@@ -129,4 +239,4 @@ if you have chosen the right control unit, interface and baud rate.
 
 If you use the IB you must switch the interface settings to "6051 + IB".
 
-Change log only in german, sorry.
+Change log only in german/french, sorry.
