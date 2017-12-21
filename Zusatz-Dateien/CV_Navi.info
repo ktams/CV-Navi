@@ -13,11 +13,12 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
 Aenderungen in V2.6
-- Französische Übersetzung (Release Infos von Jean-Jacques)
+- Unterstuetzung fuer HC-2
+- Franzoesische Uebersetzung (Release Infos von Jean-Jacques)
 
 Aenderungen in V2.5
 - Multidecoder hinzugefuegt
-- WD-34.2 und SD-34.2 ergänzt
+- WD-34.2 und SD-34.2 ergaenzt
 
 Aenderungen in V2.4
 - LD-W-32.2 und LD-G-32.2 hinzugefuegt
@@ -129,6 +130,7 @@ Si vous utilisez le IB, l’interface doit être réglée sur « 6051 + IB ».
 Historique des évolutions :
 
 Changement dans la version V 2.6
+- Support pour HC-2
 - Traduction FR (Merci a Jean-Jacques)
 
 Changement dans la version V2.5
