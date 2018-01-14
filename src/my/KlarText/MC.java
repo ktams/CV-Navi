@@ -119,6 +119,7 @@ public class MC extends javax.swing.JFrame {
     public String M3liste[][] = null;
     public String FuncIcons[] = null;
     public int M3used = 0;
+    public Boolean M3changed = false;
 
     public int modulNr = 1;
     public int moduleValue = 0;
@@ -907,6 +908,7 @@ public class MC extends javax.swing.JFrame {
         jm3Schreiben = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
+        jm3GotoList = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jMMRegister = new javax.swing.JTextField();
@@ -2944,11 +2946,11 @@ public class MC extends javax.swing.JFrame {
         jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 80, -1, -1));
 
         jm3Addr.setText(bundle.getString("MC.jm3Addr.text")); // NOI18N
-        jPanel4.add(jm3Addr, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 78, 96, -1));
+        jPanel4.add(jm3Addr, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 96, -1));
 
         jmfxUID.setEditable(false);
         jmfxUID.setText(bundle.getString("MC.jmfxUID.text")); // NOI18N
-        jPanel4.add(jmfxUID, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 78, 90, -1));
+        jPanel4.add(jmfxUID, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 90, -1));
 
         jm3Schreiben.setText(bundle.getString("MC.jm3Schreiben.text")); // NOI18N
         jm3Schreiben.addActionListener(new java.awt.event.ActionListener() {
@@ -2956,7 +2958,7 @@ public class MC extends javax.swing.JFrame {
                 jm3SchreibenActionPerformed(evt);
             }
         });
-        jPanel4.add(jm3Schreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 110, -1));
+        jPanel4.add(jm3Schreiben, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 110, -1));
 
         jLabel27.setText(bundle.getString("MC.jLabel27.text")); // NOI18N
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 28, -1, -1));
@@ -2964,16 +2966,26 @@ public class MC extends javax.swing.JFrame {
         jLabel32.setText(bundle.getString("MC.jLabel32.text")); // NOI18N
         jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 361, 510, 110));
+        jm3GotoList.setText(bundle.getString("MC.jm3GotoList.text")); // NOI18N
+        jm3GotoList.setToolTipText(bundle.getString("MC.jm3GotoList.toolTipText")); // NOI18N
+        jm3GotoList.setEnabled(false);
+        jm3GotoList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm3GotoListActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jm3GotoList, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 361, 510, 150));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MC.jPanel5.border.title"))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setText(bundle.getString("MC.jLabel21.text")); // NOI18N
-        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 81, -1, -1));
+        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jMMRegister.setText(bundle.getString("MC.jMMRegister.text")); // NOI18N
-        jPanel5.add(jMMRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 79, 90, -1));
+        jPanel5.add(jMMRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 90, -1));
 
         jMMWert.setText(bundle.getString("MC.jMMWert.text")); // NOI18N
         jMMWert.addActionListener(new java.awt.event.ActionListener() {
@@ -2981,10 +2993,10 @@ public class MC extends javax.swing.JFrame {
                 jMMWertActionPerformed(evt);
             }
         });
-        jPanel5.add(jMMWert, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 70, -1));
+        jPanel5.add(jMMWert, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 70, -1));
 
         jLabel22.setText(bundle.getString("MC.jLabel22.text")); // NOI18N
-        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
 
         jStartMMProg.setText(bundle.getString("MC.jStartMMProg.text")); // NOI18N
         jStartMMProg.addActionListener(new java.awt.event.ActionListener() {
@@ -2992,7 +3004,7 @@ public class MC extends javax.swing.JFrame {
                 jStartMMProgActionPerformed(evt);
             }
         });
-        jPanel5.add(jStartMMProg, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 111, -1));
+        jPanel5.add(jStartMMProg, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 111, -1));
 
         jLabel23.setText(bundle.getString("MC.jLabel23.text")); // NOI18N
         jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 28, -1, -1));
@@ -3000,7 +3012,8 @@ public class MC extends javax.swing.JFrame {
         jLabel24.setText(bundle.getString("MC.jLabel24.text")); // NOI18N
         jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 49, -1, -1));
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 510, 110));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 510, 110));
+        jPanel5.getAccessibleContext().setAccessibleName(bundle.getString("MC.jPanel5.AccessibleContext.accessibleName")); // NOI18N
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("MC.jPanel6.border.title"))); // NOI18N
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -3527,7 +3540,7 @@ public class MC extends javax.swing.JFrame {
                 .addGap(57, 57, 57))
         );
 
-        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 562));
+        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 620));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -3581,7 +3594,7 @@ public class MC extends javax.swing.JFrame {
         jMC_OK.setText(bundle.getString("MC.jMC_OK.text")); // NOI18N
         jPanel6.add(jMC_OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, -1));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 570, 590));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 570, 640));
 
         jTabbedPane1.addTab(bundle.getString("MC.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
 
@@ -3900,6 +3913,15 @@ public class MC extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // falls Schnittstelle offen und verbunden -> schliessen
+        // LRLRLR
+        if( this.M3changed ) {
+            int answer = KTUI.yesNoM3listSave();
+            System.out.println("formWindowClosed: answer="+answer );
+            if( answer == 0 ) {
+                jLocM3cfgSaveActionPerformed(null);
+            }
+        }
+
         if( debugLevel > 0 ) {
             System.out.println("formWindowClosed");
         }
@@ -4661,8 +4683,16 @@ public class MC extends javax.swing.JFrame {
                             return;
                         }
                         bWaitAnswerInProgress = false;
+                        System.out.println();
                         String s = new String(bArray);
-                        s = "0x" + s.substring(0, 8);
+                        if( s.startsWith("ERROR") ) {
+                            s = "ERROR" ;
+                        }
+                        else
+                        {
+                            s = "0x" + s.substring(0, 8);
+                            jm3GotoList.setEnabled(true);
+                        }
                         jmfxUID.setText(s);
                         bProg_m3 = false;
                         jm3Schreiben.setEnabled(true);
@@ -5659,7 +5689,6 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        // TODO add your handling code here:
         jFuncIcon.setEnabled(false);
         int selIdx = jTabbedPane1.getSelectedIndex();
         if( debugLevel >= 2 ) {
@@ -6544,17 +6573,21 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextM3UIDInputMethodTextChanged
 
     private void jLocM3cfgLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLocM3cfgLoadActionPerformed
-        // TODO add your handling code here:
         SaveOpenDialog od = new SaveOpenDialog( this, true, true, null, this, "m3", c.M3);
+        if( KTUI.lastSaveOpenDialogWasCancel ) {
+            return;
+        }
+
+        M3changed = false;
+        updateM3uid();
+        updateM3count();
     }//GEN-LAST:event_jLocM3cfgLoadActionPerformed
 
     private void jLocM3cfgEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLocM3cfgEditActionPerformed
-        // TODO add your handling code here:
         M3L = new M3_Liste( this, true );
     }//GEN-LAST:event_jLocM3cfgEditActionPerformed
 
     private void jLocM3cfgSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLocM3cfgSaveActionPerformed
-        // TODO add your handling code here:
         String str = "[M3UID]\r\n";
 
         System.out.println("M3 [<MAC>][<SID>][<Beschreibung>]");
@@ -6563,7 +6596,15 @@ public class MC extends javax.swing.JFrame {
             System.out.println("M3 ["+M3liste[0][i]+"]["+M3liste[1][i]+"]["+M3liste[2][i]+"]");
         }
 
+        System.out.println("jLocM3cfgSaveActionPerformed: SaveOpenDialog CALL");
         SaveOpenDialog od = new SaveOpenDialog( this, true, false, str, this, "m3", c.M3);
+        System.out.println("jLocM3cfgSaveActionPerformed: SaveOpenDialog RETURN : KTUI.lastSaveOpenDialogwasCancel="+KTUI.lastSaveOpenDialogWasCancel);
+        if( KTUI.lastSaveOpenDialogWasCancel ) {
+            return;
+        }
+        M3changed = false;
+        updateM3uid();
+        updateM3count();
     }//GEN-LAST:event_jLocM3cfgSaveActionPerformed
 
     private void jLocDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLocDelActionPerformed
@@ -7099,6 +7140,7 @@ public class MC extends javax.swing.JFrame {
             return;
         }
         bProg_m3 = true;
+        jm3GotoList.setEnabled(false);
         KTUI.flushReadBuffer( Com );
         resetbArray();
 
@@ -7205,7 +7247,6 @@ public class MC extends javax.swing.JFrame {
 
         text = new String(ba);
         jDisplay.setText(text);
-        // TODO add your handling code here:
     }//GEN-LAST:event_j3ActionPerformed
 
     private void j4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j4ActionPerformed
@@ -8140,6 +8181,24 @@ public class MC extends javax.swing.JFrame {
         startIOAction();
         jMcRwInfo.setText("read: MC config read in progress");
     }//GEN-LAST:event_jconDevsActionPerformed
+
+    private void jm3GotoListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm3GotoListActionPerformed
+        System.out.println("jm3GotoListActionPerformed: CALL");
+        M3L = new M3_Liste( this, true );
+        System.out.println("jm3GotoListActionPerformed: RETURN");
+    }//GEN-LAST:event_jm3GotoListActionPerformed
+
+    public Boolean m3dataAvaliable() {
+        return jm3GotoList.isEnabled();
+    }
+
+    public String m3dataGetSid() {
+        return jm3Addr.getText();
+    }
+
+    public String m3dataGetUid() {
+        return jmfxUID.getText();
+    }
 
     private Boolean checkM3uidValid() {
         if( checkM3uidValidActive )
@@ -9154,6 +9213,7 @@ public class MC extends javax.swing.JFrame {
             System.out.println("INFO: Read M3 data from file failed FileNotFound: "+filenameM3 );
             return false;
         }
+        M3changed = false;
         updateM3uid();
         return true;
     }
@@ -9251,6 +9311,10 @@ public class MC extends javax.swing.JFrame {
     }
 
     public void updateM3count() {
+        jM3count.setForeground(Color.black); ;
+        if( M3changed ) {
+            jM3count.setForeground(Color.red);
+        }
         jM3count.setText("( "+M3used+" )");
         return;
     }
@@ -9661,6 +9725,7 @@ public class MC extends javax.swing.JFrame {
     private javax.swing.JButton jf8;
     private javax.swing.JButton jf9;
     private javax.swing.JTextField jm3Addr;
+    private javax.swing.JButton jm3GotoList;
     private javax.swing.JButton jm3Schreiben;
     private javax.swing.JTextField jmfxUID;
     private javax.swing.JTextField js88;

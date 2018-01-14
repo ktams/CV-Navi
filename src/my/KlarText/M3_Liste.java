@@ -34,6 +34,9 @@ public class M3_Liste extends javax.swing.JDialog {
         initComponents();
 
         mc = (MC) parent;
+        if( ! mc.m3dataAvaliable() ) {
+            jImport.setEnabled(false);
+        }
 
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
@@ -173,6 +176,7 @@ public class M3_Liste extends javax.swing.JDialog {
         jDel = new javax.swing.JButton();
         jDelAll = new javax.swing.JButton();
         jClose = new javax.swing.JButton();
+        jImport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/KlarText/Bundle"); // NOI18N
@@ -250,19 +254,29 @@ public class M3_Liste extends javax.swing.JDialog {
             }
         });
 
+        jImport.setText(bundle.getString("M3_Liste.jImport.text")); // NOI18N
+        jImport.setToolTipText(bundle.getString("M3_Liste.jImport.toolTipText")); // NOI18N
+        jImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jImportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jDel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jImport, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -270,13 +284,15 @@ public class M3_Liste extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addGap(25, 25, 25)
+                        .addComponent(jImport)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jDelAll)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
                         .addComponent(jClose))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -288,12 +304,10 @@ public class M3_Liste extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCloseActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jCloseActionPerformed
 
     private void jAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddActionPerformed
-        // TODO add your handling code here:
         if( jTableM3.isEditing() ) {
             jTableM3.getCellEditor().stopCellEditing();
         }
@@ -311,6 +325,7 @@ public class M3_Liste extends javax.swing.JDialog {
         mc.M3liste[1][mc.M3used] = "";
         mc.M3liste[2][mc.M3used] = "";
         mc.M3used++;
+        mc.M3changed = true;
         mc.updateM3count();
 
         rows = this.jTableM3.getRowCount();
@@ -321,7 +336,6 @@ public class M3_Liste extends javax.swing.JDialog {
     }//GEN-LAST:event_jAddActionPerformed
 
     private void jDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDelActionPerformed
-        // TODO add your handling code here:
         if( jTableM3.isEditing() ) {
             jTableM3.getCellEditor().stopCellEditing();
         }
@@ -358,6 +372,7 @@ public class M3_Liste extends javax.swing.JDialog {
             }
             model.removeRow(viewRow);
             mc.M3used--;
+            mc.M3changed = true;
 
             if( selMultiLength == 1 ) {
                 // set a selected row only if we had a single selection
@@ -382,7 +397,6 @@ public class M3_Liste extends javax.swing.JDialog {
     }//GEN-LAST:event_jDelActionPerformed
 
     private void jDelAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDelAllActionPerformed
-        // TODO add your handling code here:
         if( jTableM3.isEditing() ) {
             jTableM3.getCellEditor().stopCellEditing();
         }
@@ -397,6 +411,7 @@ public class M3_Liste extends javax.swing.JDialog {
         for( int i = 0 ; i < rows ; i++ ) {
             model.removeRow(0);
             mc.M3used = 0;
+            mc.M3changed = true;
         }
         mc.updateM3count();
 
@@ -409,11 +424,9 @@ public class M3_Liste extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
 
-
     }//GEN-LAST:event_formWindowOpened
 
     private void jTableM3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableM3PropertyChange
-        // TODO add your handling code here:
         if( debugLevel >= 1 ) {
             System.out.println("jTableM3PropertyChange col="+jTableM3.getEditingColumn()+" row="+jTableM3.getEditingRow());
         }
@@ -427,6 +440,7 @@ public class M3_Liste extends javax.swing.JDialog {
                     str = mc.checkM3uidValid( str );
                     if( str != null ) {
                         jTableM3.setValueAt(str, edRow, edCol);
+                        mc.M3changed = true;
                     } else {
                         // TODO Editor setzen , aber wie ??? ZZZ
                         System.out.println("jTableM3PropertyChange M3UID ERROR");
@@ -436,6 +450,7 @@ public class M3_Liste extends javax.swing.JDialog {
                     str = (""+jTableM3.getValueAt(edRow, edCol)).trim().toLowerCase().replaceAll("\\s","");
                     if( mc.KTUI.checkNumRange(str, 1, c.MAX_M3_SID) ) {
                         jTableM3.setValueAt(str, edRow, edCol);
+                        mc.M3changed = true;
                     } else {
                         // TODO Editor setzen , aber wie ??? ZZZ
                         System.out.println("jTableM3PropertyChange M3SID ERROR");
@@ -445,6 +460,7 @@ public class M3_Liste extends javax.swing.JDialog {
                     str = (""+jTableM3.getValueAt(edRow, edCol)).trim();
                     if( str.length() > 30 ) {
                         str = str.substring(0, 30);
+                        mc.M3changed = true;
                     }
                     jTableM3.setValueAt(str, edRow, edCol);
                     break;
@@ -454,7 +470,6 @@ public class M3_Liste extends javax.swing.JDialog {
     }//GEN-LAST:event_jTableM3PropertyChange
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
         int rows = this.jTableM3.getRowCount();
 
         if( debugLevel >= 1 ) {
@@ -472,11 +487,28 @@ public class M3_Liste extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowClosed
 
+    private void jImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jImportActionPerformed
+        this.jAddActionPerformed(null);
+
+        //internal table
+        mc.M3liste[0][mc.M3used-1] = mc.m3dataGetUid();
+        mc.M3liste[1][mc.M3used-1] = mc.m3dataGetSid();
+        mc.M3liste[2][mc.M3used-1] = "";
+
+        //viewable table
+        TableModel tm = jTableM3.getModel();
+        DefaultTableModel model=(DefaultTableModel) tm;
+        model.setValueAt( mc.M3liste[0][mc.M3used-1], mc.M3used-1, 0);
+        model.setValueAt( mc.M3liste[1][mc.M3used-1], mc.M3used-1, 1);
+
+    }//GEN-LAST:event_jImportActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAdd;
     private javax.swing.JButton jClose;
     private javax.swing.JButton jDel;
     private javax.swing.JButton jDelAll;
+    private javax.swing.JButton jImport;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableM3;
     // End of variables declaration//GEN-END:variables

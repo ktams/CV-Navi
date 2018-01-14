@@ -258,6 +258,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     public String  gsOpenFirmwareDirectory ;
     public String  gsOpenFirmwareFilename ;
     // public String  gsReadBuffer;
+    public Boolean lastSaveOpenDialogWasCancel;
     public Dimension SODlocalSize ;
     public Point   mainWindowLocation;
     public boolean bGotoUpdate;
@@ -269,6 +270,7 @@ public class KlarTextUI extends javax.swing.JFrame {
     private int numS88 = 0;
 
     public KlarTextUI() {
+        this.lastSaveOpenDialogWasCancel = false;
         mainWindowLocation = new Point();
         ImageIcon i = new ImageIcon(getClass().getResource("/main.gif"));
         this.setIconImage(i.getImage());
@@ -1359,8 +1361,37 @@ public class KlarTextUI extends javax.swing.JFrame {
         }
         return dialogResult;
     }
-    // Checks
 
+    public int yesNoM3listSave() {
+        int dialogResult = -1;
+        if(bSpracheDE)
+        {
+            Object[] options = { "Ja", "Nein" };
+            dialogResult = JOptionPane.showOptionDialog(
+                    this,
+                    "M3 UID/SID-Liste wurde geändert.\n\nSoll die Liste gesichert werden?",
+                    "Warnung",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0] );
+        } else {
+            Object[] options = { "Yes", "No" };
+            dialogResult = JOptionPane.showOptionDialog(
+                    this,
+                    "M3 UID/SID list changed.\n\nDo you want to save?",
+                    "Warning",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0] );
+        }
+        return dialogResult;
+    }
+
+    // Checks
     public int checkTextFieldUnit( Container cont, JTextField textField, int minValue, int maxValue, int defValue, int unit, boolean show ) {
         int i = checkTextField( cont, textField, minValue, maxValue, defValue, show );
         int j = (i/unit)*unit;

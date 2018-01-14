@@ -13,7 +13,8 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
 Aenderungen in V2.7
-- 
+- MC/RB: m3-Daten aus dem Programmier-Tab koennen in die UID/SID-Liste importiert werden
+- MC/RB: geaenderte und nicht gesicherte UID/SID-Liste erzeugt beim beenden eine Nachfrage
 
 Aenderungen in V2.6
 - Unterstuetzung fuer HC-2

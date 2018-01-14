@@ -345,7 +345,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLastFiles = new javax.swing.JComboBox<String>();
+        jLastFiles = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jFileChooser1 = new javax.swing.JFileChooser();
@@ -357,11 +357,14 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -437,6 +440,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                 System.out.println("bCancel = false;" );
             }
             bCancel = false;
+            KTUI.lastSaveOpenDialogWasCancel = false;
 
             File f = jFileChooser1.getSelectedFile();
             str_temp = null;
@@ -919,6 +923,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         else
         {
             bCancel = true;
+            KTUI.lastSaveOpenDialogWasCancel = true;
             if( debugLevel >= 1 ) {
                 System.out.println("bCancel = true;");
             }
@@ -946,14 +951,18 @@ public class SaveOpenDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
         if( debugLevel >= 1 ) {
+            System.out.println("SaveOpenDialog: formWindowClosed: param="+evt.paramString());
             System.out.println("formWindowClosed bCancel["+bCancel+"] bOpen["+bLesen+"]");
         }
         KTUI.SODlocalSize = this.getSize();
         // KTUI.SODlocalSize = this.jFileChooser1.getSize();
+        KTUI.lastSaveOpenDialogWasCancel = bCancel;
         if( bCancel == true ) {
             return;
         }
+
         switch(Decoder)
         {
             case c.LD_G30:
@@ -1594,6 +1603,15 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             jLabel1.setVisible(false);
         }
     }//GEN-LAST:event_formComponentShown
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // window closing by pressing X or Alt+F4
+        if( debugLevel >= 1 ) {
+            System.out.println("SaveOpenDialog: formWindowClosing: param="+evt.paramString());
+        }
+        bCancel = true;
+        KTUI.lastSaveOpenDialogWasCancel = true;
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser jFileChooser1;
