@@ -5189,7 +5189,8 @@ public class MC extends javax.swing.JFrame {
                                 System.out.println("write: clear loco list s["+lastCmd+"]" );
                                 Com.write(lastCmd);
                                 resetbArray();
-                                retries = Math.max(KlarTextUI.timerRetries, 50);
+                                // 1 second per loco + 50 reserve
+                                retries = Math.max(KlarTextUI.timerRetries, c.MAX_LOCS+50);
                                 jMcRwProgress.setString(null);
                                 bWaitAnswerInProgress = true;
                             }
@@ -5286,7 +5287,8 @@ public class MC extends javax.swing.JFrame {
                                 System.out.println("write: traction s["+lastCmd+"]" );
                                 Com.write(lastCmd);
                                 resetbArray();
-                                retries = Math.max(KlarTextUI.timerRetries, 30);
+                                // 1 second per traction + 50 reserve
+                                retries = Math.max(KlarTextUI.timerRetries, c.MAX_TRACTIONS+50);
                                 jMcRwProgress.setString(null);
                                 bWaitAnswerInProgress = true;
                             }

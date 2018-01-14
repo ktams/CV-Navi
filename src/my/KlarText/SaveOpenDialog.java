@@ -443,6 +443,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             KTUI.lastSaveOpenDialogWasCancel = false;
 
             File f = jFileChooser1.getSelectedFile();
+            int filesize = (int) f.length() ;
             str_temp = null;
             if(bLesen)
             {
@@ -451,7 +452,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                 }
                 //Datei lesen
                 String s = "";
-                char ac[] = new char[5000];
+                char ac[] = new char[filesize];
                 if(f.isFile())
                 {
                     FileReader inputStream = null;
@@ -462,7 +463,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                             inputStream = new FileReader(f);
                             try {
 
-                                int n = inputStream.read(ac, 0, 5000);
+                                int n = inputStream.read(ac, 0, filesize);
                                 if(n == -1)
                                 {
                                     MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
