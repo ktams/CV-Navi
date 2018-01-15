@@ -440,7 +440,9 @@ public class M3_Liste extends javax.swing.JDialog {
                     str = mc.checkM3uidValid( str );
                     if( str != null ) {
                         jTableM3.setValueAt(str, edRow, edCol);
-                        mc.M3changed = true;
+                        if( ! str.equals(mc.M3liste[edCol][edRow])) { 
+                            mc.M3changed = true;
+                        }
                     } else {
                         // TODO Editor setzen , aber wie ??? ZZZ
                         System.out.println("jTableM3PropertyChange M3UID ERROR");
@@ -450,7 +452,9 @@ public class M3_Liste extends javax.swing.JDialog {
                     str = (""+jTableM3.getValueAt(edRow, edCol)).trim().toLowerCase().replaceAll("\\s","");
                     if( mc.KTUI.checkNumRange(str, 1, c.MAX_M3_SID) ) {
                         jTableM3.setValueAt(str, edRow, edCol);
-                        mc.M3changed = true;
+                        if( ! str.equals(mc.M3liste[edCol][edRow])) { 
+                            mc.M3changed = true;
+                        }
                     } else {
                         // TODO Editor setzen , aber wie ??? ZZZ
                         System.out.println("jTableM3PropertyChange M3SID ERROR");
@@ -463,6 +467,12 @@ public class M3_Liste extends javax.swing.JDialog {
                         mc.M3changed = true;
                     }
                     jTableM3.setValueAt(str, edRow, edCol);
+                    if( debugLevel >= 2 ) {
+                        System.out.println("jTableM3PropertyChange: str:\""+str+"\" liste:\""+mc.M3liste[edCol][edRow]+"\"");
+                    }
+                    if( ! str.equals(mc.M3liste[edCol][edRow])) { 
+                        mc.M3changed = true;
+                    }
                     break;
             }
             System.out.println("nach PC: edRow="+edRow+" edCol="+edCol+" m3TableSelRow="+m3TableSelRow+" m3TableSelCol="+m3TableSelCol );
@@ -477,9 +487,9 @@ public class M3_Liste extends javax.swing.JDialog {
         }
 
         for( int row = 0 ; row < rows ; row++ ) {
-            mc.M3liste[0][row] = ""+jTableM3.getValueAt(row, 0);
-            mc.M3liste[1][row] = ""+jTableM3.getValueAt(row, 1);
-            mc.M3liste[2][row] = ""+jTableM3.getValueAt(row, 2);
+            for( int col = 0 ; col <= 2 ; col ++ ) {
+                mc.M3liste[col][row] = ""+jTableM3.getValueAt(row, col);
+            }
         }
 
         if( debugLevel >= 1 ) {
