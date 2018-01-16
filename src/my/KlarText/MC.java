@@ -3913,7 +3913,6 @@ public class MC extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // falls Schnittstelle offen und verbunden -> schliessen
-        // LRLRLR
         if( this.M3changed ) {
             int answer = KTUI.yesNoM3listSave();
             System.out.println("formWindowClosed: answer="+answer );
@@ -8700,7 +8699,57 @@ public class MC extends javax.swing.JFrame {
         return false;
     }
 
-    private boolean checkTableLoco( boolean repair, boolean show ) {
+    public String getLocoName( int locAddr, Boolean forceM3 ) {
+        return getLocoName( Integer.toString( locAddr ), forceM3 );
+    }
+
+    public String getLocoName( String locAddr, Boolean forceM3 ) {
+        // get name for loco with given address
+        // with forceM3 set protocol to M3 and speed steps to 126
+        System.out.println( "getLocoName( "+locAddr+" , " + forceM3 + ")" );
+
+        for( int localLocIdx = 0 ; localLocIdx < c.MAX_LOCS; localLocIdx++) {
+            String sAdr = "";
+            String sFormat = "";
+            String sName = "";
+
+            Object oAdr = jTableLoco.getValueAt(localLocIdx, 0);
+            if( oAdr != null ) {
+                sAdr += oAdr;
+                if( sAdr.trim().length() > 0 ) {
+                    // valid addr
+                    if( sAdr.equals( locAddr )) {
+                        // matching addr
+                        System.out.println( "getLocoName: matching addr at localLocIdx="+localLocIdx );
+                        Object oFormat = jTableLoco.getValueAt( localLocIdx, 1);
+                        if( oFormat != null ) {
+                            sFormat += oFormat;
+                            sFormat = sFormat.trim().toUpperCase();
+                            Object oName = jTableLoco.getValueAt( localLocIdx, 3);
+                            if(oName != null) {
+                                sName += oName;
+                            }
+                            System.out.println( "getLocoName: sFormat="+sFormat+" sName="+sName );
+                            if( forceM3 && ! sFormat.equals("M3") ) {
+                                // adjust format and speedsteps
+                                jTableLoco.setValueAt("M3", localLocIdx, 1);
+                                jTableLoco.setValueAt("126", localLocIdx, 2);
+                                KTUI.mbGeneric(this, "Hinweis", "Protokoll von Lok "+sAdr+" ("+sName+") wurde auf M3 mit 126 Fahrstufen angepasst", 9, true);
+                            }
+                            System.out.println( "getLocoName: return( "+sName.trim()+" )");
+                            return sName.trim();
+                        }
+                    }
+                }
+            }
+        }
+
+        // no loco with same addr found
+        System.out.println( "getLocoName: return( empty )") ;
+        return "";
+    }
+
+private boolean checkTableLoco( boolean repair, boolean show ) {
         boolean retVal = true;
         String errorIdxList = "";
         bFalscheEingabe = false;

@@ -498,19 +498,23 @@ public class M3_Liste extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void jImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jImportActionPerformed
-        this.jAddActionPerformed(null);
+        System.out.println( "jImportActionPerformed BEGIN" );
 
-        //internal table
+        // add an empty line to the internal table
+        jAddActionPerformed(null);
+        // fill with data
         mc.M3liste[0][mc.M3used-1] = mc.m3dataGetUid();
         mc.M3liste[1][mc.M3used-1] = mc.m3dataGetSid();
-        mc.M3liste[2][mc.M3used-1] = "";
+        mc.M3liste[2][mc.M3used-1] = mc.getLocoName( mc.m3dataGetSid(), true);
 
         //viewable table
         TableModel tm = jTableM3.getModel();
         DefaultTableModel model=(DefaultTableModel) tm;
         model.setValueAt( mc.M3liste[0][mc.M3used-1], mc.M3used-1, 0);
         model.setValueAt( mc.M3liste[1][mc.M3used-1], mc.M3used-1, 1);
+        model.setValueAt( mc.M3liste[2][mc.M3used-1], mc.M3used-1, 2);
 
+        System.out.println( "jImportActionPerformed END" );
     }//GEN-LAST:event_jImportActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
