@@ -1,4 +1,4 @@
-CV-Navi Version 2.6
+CV-Navi Version 2.7
 
 English and french version after german section.
 
@@ -14,7 +14,7 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 Aenderungen in V2.7
 - MC/RB: m3-Daten aus dem Programmier-Tab koennen in die UID/SID-Liste importiert werden
-- MC/RB: geaenderte und nicht gesicherte UID/SID-Liste erzeugt beim beenden eine Nachfrage
+- MC/RB: geaenderte und nicht gesicherte UID/SID-Liste erzeugt beim Beenden eine Nachfrage
 - MC/RB: fix fuer grosse Konfigurationsdateien
 - MC/RB: mehr Wartezeit beim Loeschen von grossen Lok-/Traktionslisten (ca. 1 Sekunde je Lok)
 
