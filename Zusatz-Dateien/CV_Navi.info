@@ -1,4 +1,4 @@
-CV-Navi Version 2.7
+CV-Navi Version 2.8
 
 English and french version after german section.
 
@@ -11,6 +11,9 @@ Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
+
+Aenderungen in V2.8
+- 
 
 Aenderungen in V2.7
 - MC/RB: m3-Daten aus dem Programmier-Tab koennen in die UID/SID-Liste importiert werden
