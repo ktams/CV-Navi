@@ -1485,7 +1485,9 @@ public class BiDi_B extends javax.swing.JFrame {
 
                     case 1013:
                         Wert = KTUI.checkTextField( outerThis, jAdr73, 1, 2040, 2040, false);
+                        System.out.println("set switch: "+Wert+" true" );
                         KTUI.setSwitch( Com, Wert, false, true );
+                        System.out.println("set switch: "+Wert+" false" );
                         KTUI.setSwitch( Com, Wert, false, false );
                         timer.setInitialDelay(2000);
                         SendeZaehler++;
@@ -1801,7 +1803,9 @@ public class BiDi_B extends javax.swing.JFrame {
 
                     case 70:
                         Wert = KTUI.checkTextField( outerThis, jAdr73, 1, 2040, 2040, false);
+                        System.out.println("set switch: "+Wert+" true" );
                         KTUI.setSwitch( Com, Wert, false, true );
+                        System.out.println("set switch: "+Wert+" false" );
                         KTUI.setSwitch( Com, Wert, false, false );
                         SendeZaehler = 4242;
                         timer.setInitialDelay(2000);
@@ -2060,6 +2064,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 100;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2114,6 +2119,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 110;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2132,6 +2138,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 120;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2150,6 +2157,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 53;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2192,6 +2200,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 76;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2291,6 +2300,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 34;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2309,6 +2319,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 51;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2327,6 +2338,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 42;
         timer.setInitialDelay(400);
         startIOAction();
@@ -2345,6 +2357,7 @@ public class BiDi_B extends javax.swing.JFrame {
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
+        System.out.println("BiDiB actionPerformed: "+ s );
         SendeZaehler = 10;
         timer.setInitialDelay(400);
         startIOAction();
