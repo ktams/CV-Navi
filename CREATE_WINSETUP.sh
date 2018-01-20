@@ -15,8 +15,8 @@ fi
 
 # Mal sehen, ob sich die Version im Quelltext geaendert hat und dann ggf. nachfragen
 # Versionsteile aus dem Quelltext auslesen...
-V_MAJOR=`cat src/my/KlarText/KlarTextUI.java | grep public | grep gsVersionMayor | sed -e 's/;//' | awk '{print $NF}'`
-V_MINOR=`cat src/my/KlarText/KlarTextUI.java | grep public | grep gsVersionMinor | sed -e 's/;//' | awk '{print $NF}'`
+V_MAJOR=`cat src/my/KlarText/KlarTextUI.java | grep public | grep gsVersionMayor | sed -e 's/;//' -e 's#//.*$##' | awk '{print $NF}'`
+V_MINOR=`cat src/my/KlarText/KlarTextUI.java | grep public | grep gsVersionMinor | sed -e 's/;//' -e 's#//.*$##' | awk '{print $NF}'`
 V_STATUS=`cat src/my/KlarText/KlarTextUI.java | grep "String gsBuild" | sed -e 's#"# #g' | awk '{print $4}'`
 
 ISODATE=`date +'%Y%m%d'`
