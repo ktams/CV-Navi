@@ -4195,13 +4195,24 @@ public class MC extends javax.swing.JFrame {
                             String s = new String(bArray);
                             if(s.contains("END"))
                             {
+                                bReadDevices = false;
+                                stopIOAction();
                                 s = s.substring(0, bytesRead);
                                 connectedDevices.strDevs = s.split("\r");
                                 connectedDevices.SetDevs();
-                                stopIOAction();
-                                bReadDevices = false;
                             }
-                        }
+                            // firmware pre 2.1.0 :
+                            // ERROR: unknown command
+                            // ]
+                            if(s.contains("ERROR: unknown command") && s.contains("]"))
+                            {
+                                bReadDevices = false;
+                                stopIOAction();
+                                s = s.substring(0, bytesRead);
+                                connectedDevices.strDevs = s.split("\r");
+                                connectedDevices.SetDevs();
+                            }
+                       }
                         else
                         {
                             bReadDevices = false;
