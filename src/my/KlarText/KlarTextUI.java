@@ -2552,10 +2552,11 @@ public class KlarTextUI extends javax.swing.JFrame {
         String osName = System.getProperty("os.name");
         String osArch = System.getProperty("os.arch");
         String dataModel = System.getProperty("sun.arch.data.model");
-        String osInfo = "( "+osName+"["+osArch+"] , java "+dataModel+"bit )";
+        String javaversion = System.getProperty("java.version");
+        String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20180118b"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20180529a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -3134,10 +3135,11 @@ public class KlarTextUI extends javax.swing.JFrame {
     public static void main(final String args[]) {
 
         int argc = args.length;
-        String sunModel = System.getProperty("sun.arch.data.model");
+        String dataModel = System.getProperty("sun.arch.data.model");
         String osName = System.getProperty("os.name");
         String osArch = System.getProperty("os.arch");
-        System.out.println("model["+sunModel+"] osName["+osName+"] osArch["+osArch+"]");
+        String javaversion = System.getProperty("java.version");
+        System.out.println(""+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit]");
 
         System.out.println("argc="+ argc );
         int n = 0;

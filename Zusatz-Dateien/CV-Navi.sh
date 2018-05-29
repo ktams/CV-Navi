@@ -222,6 +222,7 @@ if [ ${LIB_FOUND} == 0 ] ; then
 fi
 	
 if [ $DEBUG == 1 ] ; then
+	java -version
 	echo $JAVA -Djava.library.path=${JAVA_LIBRARY_PATH}  ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
 fi
 
