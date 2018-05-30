@@ -110,17 +110,24 @@ public class jInfo extends javax.swing.JFrame {
         BufferedReader br = null;
         int bytesRead = 0 ;
         try {
-            char ac[] = new char[10000];
             int n;
             Class c = getClass();
             is = c.getResourceAsStream ("/CV_Navi.info");
+            int size = -2;
+            try {
+                size = is.available();
+            } catch (IOException ex) {
+                Logger.getLogger(jInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("jInfo size="+size);
+            char ac[] = new char[size+1];
 
-            if( is != null) {
+            if( is != null && size > 0 ) {
                 br = new BufferedReader(new InputStreamReader(is));
                 try {
-                    // n = inputStream.read(ac, 0, 10000);
-                    n = br.read(ac, 0, 10000);
-                    ac[n+1] = 0;
+                    n = br.read(ac, 0, size);
+                    System.out.println("jInfo after TRY n="+n+" size="+size);
+                    ac[n] = 0;
                     bytesRead += n;
                 } catch (IOException ex) {
                     jInfoText.setText("Info-Datei \"CV_Navi.info\" nicht gefunden.\nA\n"+ex);
