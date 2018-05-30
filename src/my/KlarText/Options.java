@@ -11,7 +11,7 @@
 
 package my.KlarText;
 
-import gnu.io.RXTXVersion;
+import purejavacomm.*;
 import java.awt.Frame;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +21,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -78,7 +77,8 @@ public class Options extends javax.swing.JFrame {
             for (String port : ports) {
                 System.out.println("\t"+port);
             }
-            System.out.println("RXTXVersion=" + RXTXVersion.getVersion());
+            // show comm version
+            System.out.println("comm version=" + PureJavaComm.getVersion());
         }
         else
             System.out.println("no serial ports found");

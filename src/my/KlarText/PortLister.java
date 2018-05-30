@@ -6,7 +6,7 @@
 
 package my.KlarText;
 
-import gnu.io.CommPortIdentifier;
+import purejavacomm.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import static my.KlarText.KlarTextUI.debugLevel;

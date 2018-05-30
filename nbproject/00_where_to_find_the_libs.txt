@@ -1,0 +1,19 @@
+purejavacomm :
+http://central.maven.org/maven2/com/github/purejavacomm/purejavacomm/1.0.2.RELEASE/
+
+jna :
+http://central.maven.org/maven2/net/java/dev/jna/jna/4.5.1/
+
+
+# the following are alternatives to the libraries found at jdk and/or netbeans
+
+beansbinding :
+http://central.maven.org/maven2/org/jdesktop/beansbinding/1.2.1/
+
+absolutelayout 701:
+http://repo.spring.io/plugins-release/org/netbeans/external/AbsoluteLayout/RELEASE701/
+http://repo.spring.io/plugins-release/org/netbeans/external/AbsoluteLayout/RELEASE701/AbsoluteLayout-RELEASE701.jar
+
+absolutelayout 802:
+http://bits.netbeans.org/nexus/content/groups/netbeans/org/netbeans/external/AbsoluteLayout/RELEASE802/
+http://bits.netbeans.org/nexus/content/groups/netbeans/org/netbeans/external/AbsoluteLayout/RELEASE802/AbsoluteLayout-RELEASE802.jar

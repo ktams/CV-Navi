@@ -4,7 +4,6 @@
 #
 # Installation:
 # - java muss installiert sein
-# - die rxtx-Bibliothek der Distribution muss installiert sein (s.u.)
 # - der angemeldete Benutzer muss Zugriffsberechtigung 
 #   auf die seriellen bzw. USB-Devices haben (s.u.)
 # - ggf auch die Berechtigung fuer "lock" im Verzeichnis /var/lock zu setzen (s.u.)
@@ -12,6 +11,8 @@
 #     chmod +x CV-Navi.sh
 
 
+# V 0.12 20180522 Lothar
+# - wegen Umstellung von rxtx auf purejavacomm Pfadsuche entfernt
 
 # V 0.11 20160726 Lothar
 # - Pfad fuer rxtx-Bibliothek unter gentoo hinzugefuegt (von Markus F.)
@@ -151,9 +152,6 @@ done
 PROG_DIR=${SELF_PATH}
 [ $DEBUG == 1 ]&& echo "PROG_DIR=$PROG_DIR"
 
-DIRLISTE_x86_64="/usr/lib64/rxtx /usr/lib64/rxtx-2 /usr/lib64 /usr/lib/jni  ${PROG_DIR}/lib  ${PROG_DIR}"
-DIRLISTE_i386="  /usr/lib/rxtx   /usr/lib/rxtx-2   /usr/lib   /usr/lib/jni  ${PROG_DIR}/lib  ${PROG_DIR}"
-
 SYSTEMTYPE=`uname -m`
 if [ $DEBUG == 1 ]; then
   echo "SYSTEMTYPE=$SYSTEMTYPE"
@@ -171,56 +169,6 @@ if [ -z ${JAVA_LIBRARY_PATH} ] ; then
 	JAVA_LIBRARY_PATH="."
 fi
 
-case "$SYSTEMTYPE" in
-	x86_64)
-		SEARCH_LIST="${DIRLISTE_x86_64}"
-		ARCH_EXTENSION=64
-	;;
-	i386|i686|armv6l|armv7l)
-		SEARCH_LIST="${DIRLISTE_i386}"
-		ARCH_EXTENSION=""
-	;;
-	*)
-		echo "currently unsupported system type $SYSTEMTYPE"
-		# try all paths (instead of exiting)
-		SEARCH_LIST="${DIRLISTE_x86_64} ${DIRLISTE_i386}"	
-		# return 1
-esac
-
-# echo SEARCH_LIST="${SEARCH_LIST}"
-
-for d in ${SEARCH_LIST} ; do
-	[ $DEBUG == 1 ]&& echo "Suche Bibliothek in: " ${d}/${LIB_NAME}
-	if [ -f ${d}/${LIB_NAME} ] ; then
-		[ $DEBUG == 1 ] && echo "Bibliothek gefunden:  ${d}/${LIB_NAME}"
-		JAVA_LIBRARY_PATH="${d}:${JAVA_LIBRARY_PATH}"
-		LIB_FOUND=1
-		break;
-	fi
-done
-
-if [ ${LIB_FOUND} == 0 ] ; then
-	for d in ${SEARCH_LIST} ; do
-		[ $DEBUG == 1 ]&& echo "Suche Bibliothek in: " ${d}/${LIB_JNINAME}
-		if [ -f ${d}/${LIB_JNINAME} ] ; then
-			[ $DEBUG == 1 ] && echo "Bibliothek gefunden:  ${d}/${LIB_JNINAME}"
-			JAVA_LIBRARY_PATH="${d}:${JAVA_LIBRARY_PATH}"
-			LIB_FOUND=1
-			break;
-		fi
-	done
-fi
-
-if [ ${LIB_FOUND} == 0 ] ; then
-	echo "Bibliothek ${LIB_NAME} nicht gefunden"
-	if [ $DEBUG == 1 ] ; then
-		echo "Versuche trotzdem zu starten..."
-	else
-		echo "Bitte lesen Sie die Hinweise am Beginn von $0"
-		exit 1
-	fi
-fi
-	
 if [ $DEBUG == 1 ] ; then
 	java -version
 	echo $JAVA -Djava.library.path=${JAVA_LIBRARY_PATH}  ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*

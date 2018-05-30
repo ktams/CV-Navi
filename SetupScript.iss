@@ -48,10 +48,6 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: "dist\KlarText.jar"; DestDir: "{app}"; Flags: ignoreversion
-Source: "dist\rxtxSerial.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "dist\rxtxSerial64.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "dist\librxtxSerial.jnilib"; DestDir: "{app}"; Flags: ignoreversion
-Source: "dist\librxtxSerial64.jnilib"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\LiesMich.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "dist\CV-Navi.sh"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs createallsubdirs

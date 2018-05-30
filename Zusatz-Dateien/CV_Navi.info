@@ -13,7 +13,9 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
 Aenderungen in V2.8
-- 
+- notwendige Aenderungen fuer Java 10 Kompatibilitaet
+- fuer Java10: Umstellung der Bibliotheken für Zugriff auf USB/Seriell (rxtx -> purejavacomm)
+- MC/RB: Abfrage "Angeschlossene Geraete" mit Firmware vor 2.1.0 blockiert nicht mehr
 
 Aenderungen in V2.7
 - MC/RB: m3-Daten aus dem Programmier-Tab koennen in die UID/SID-Liste importiert werden

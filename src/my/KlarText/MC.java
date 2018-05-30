@@ -44,7 +44,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import static javax.xml.bind.DatatypeConverter.printHexBinary;
 import my.KlarText.KlarTextUI.MZ;
 import static my.KlarText.KlarTextUI.debugLevel;
 import static my.KlarText.KlarTextUI.rs232_or_rb_usb_2;
@@ -4758,7 +4757,7 @@ public class MC extends javax.swing.JFrame {
                             KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
                         }
                         if( debugLevel > 0 ) {
-                            System.out.println("mYbArray("+bytesRead+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
+                            System.out.println("mYbArray("+bytesRead+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
                             System.out.println("readProgress="+readWriteProgress);
                         }
                         if( ok && ( bytesRead == 1 ) ) {
@@ -4795,7 +4794,7 @@ public class MC extends javax.swing.JFrame {
                                 KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
                             }
                             if( debugLevel > 0 ) {
-                                System.out.println("mYbArray("+bytesRead+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
+                                System.out.println("mYbArray("+bytesRead+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
                                 System.out.println("readProgress="+readWriteProgress);
                             }
                             bWriteSo999 = false;
@@ -4846,7 +4845,7 @@ public class MC extends javax.swing.JFrame {
                     System.arraycopy(bArray, 0, mYbArray, 0, nBytes);
                     Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
                     if( debugLevel > 0 ) {
-                        System.out.println("mYbArray("+nBytes+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
+                        System.out.println("mYbArray("+nBytes+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
                         System.out.println("readProgress="+readWriteProgress);
                     }
 
@@ -4873,7 +4872,7 @@ public class MC extends javax.swing.JFrame {
                     System.arraycopy(bArray, 0, mYbArray, 0, nBytes);
                     Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
                     if( debugLevel > 0 ) {
-                        System.out.println("mYbArray("+nBytes+")=0x"+printHexBinary(mYbArray)+ " OK="+ok);
+                        System.out.println("mYbArray("+nBytes+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
                         System.out.println("readProgress="+readWriteProgress+" M3used="+M3used);
                     }
 
@@ -4917,7 +4916,7 @@ public class MC extends javax.swing.JFrame {
                     Com.write(wArray);
 
                     if( debugLevel > 0 ) {
-                        System.out.println("written to MC wArray=0x"+printHexBinary(wArray));
+                        System.out.println("written to MC wArray=0x"+KTUI.byteArrayToHex(wArray));
                     }
                     jMcM3Info.setText("Xm3Sid: write list in progress");
                     jMcM3Progress.setValue(++readWriteProgress);
@@ -6130,11 +6129,11 @@ public class MC extends javax.swing.JFrame {
         KTUI.flushReadBuffer(Com);
         if( debugLevel > 0 ) {
             // TODO evtl this durch this.getContentPane() ersetzen
-            KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+sM3UID, "writing to MC wArray=0x"+printHexBinary(wArray), 10, false );
+            KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+sM3UID, "writing to MC wArray=0x"+KTUI.byteArrayToHex(wArray), 10, false );
         }
         Com.write(wArray);
         if( debugLevel > 0 ) {
-            System.out.println("written to MC wArray=0x"+printHexBinary(wArray));
+            System.out.println("written to MC wArray=0x"+KTUI.byteArrayToHex(wArray));
         }
         bWriteM3sid = true;
         readWriteProgress = 0;
@@ -6701,11 +6700,11 @@ public class MC extends javax.swing.JFrame {
         KTUI.flushReadBuffer(Com);
         if( debugLevel > 0 ) {
             // TODO evtl this durch this.getContentPane() ersetzen
-            KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+lM3UID, "writing to MC wArray=0x"+printHexBinary(wArray), 10, false );
+            KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+lM3UID, "writing to MC wArray=0x"+KTUI.byteArrayToHex(wArray), 10, false );
         }
         Com.write(wArray);
         if( debugLevel > 0 ) {
-            System.out.println("written to MC wArray=0x"+printHexBinary(wArray));
+            System.out.println("written to MC wArray=0x"+KTUI.byteArrayToHex(wArray));
         }
         bWriteM3sidList = true;
         readWriteProgress = 0;

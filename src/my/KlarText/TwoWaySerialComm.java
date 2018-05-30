@@ -9,13 +9,12 @@ package my.KlarText;
  *
  * @author ktams 
  */
-import gnu.io.CommPort;
-import gnu.io.CommPortIdentifier;
-import gnu.io.NoSuchPortException;
-import gnu.io.SerialPort;
+import purejavacomm.*;
 import java.io.IOException; 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static my.KlarText.KlarTextUI.debugLevel;
 
 
@@ -172,20 +171,43 @@ public class TwoWaySerialComm {
                         tw_serialPort.setSerialPortParams(KTUI.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
                         break;
                 }
+                showRTSDTR( "connect: ", tw_serialPort, " pre  set flowcontrol");
                 if (KTUI.gsRtsCts) {
-                    tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN);
-                    tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT);
+                    // tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN);
+                    // tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT);
+                    // OR ???
+                    tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN | SerialPort.FLOWCONTROL_RTSCTS_OUT);
                 }
                 tw_serialPort.enableReceiveTimeout(500);
                 tw_connected = true;
                 tw_dev = KTUI.gsSchnittstelle;
                 tw_baud = KTUI.gsBaudRate;
                 tw_rtscts = KTUI.gsRtsCts;
+
+                showRTSDTR( "connect: ", tw_serialPort, " pre  optional set" );
+                if( ! tw_serialPort.isRTS() ) {
+                    System.out.println("connect: set RTS");
+                    tw_serialPort.setRTS(true);
+                }
+                if( ! tw_serialPort.isDTR() ) {
+                    System.out.println("connect: set DTR");
+                    tw_serialPort.setDTR(true);
+                }
+                showRTSDTR( "connect: ", tw_serialPort, " post optional set" );
             }
             else
             {
                 System.out.println("Error: Only serial or USB ports are handled.");
             }
+        }
+    }
+
+    void showRTSDTR( SerialPort sp ) {
+        showRTSDTR( "", sp, "" );
+    }
+    void showRTSDTR( String s1, SerialPort sp, String s2 ) {
+        if( debugLevel > 0 ) {
+            System.out.println(s1+"RTS="+sp.isRTS()+" DTR="+sp.isDTR()+s2);
         }
     }
 
@@ -197,7 +219,7 @@ public class TwoWaySerialComm {
             return n;
         } catch (IOException | NullPointerException ex) {
             // TODO darf das deaktiviert sein ? KTUI.mbDeviceReadProblem();
-            //Logger.getLogger(TwoWaySerialComm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TwoWaySerialComm.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
    }

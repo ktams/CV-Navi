@@ -33,10 +33,6 @@ CV-Navi.sh
 "
 
 FILE_LIST_BIBS="
-rxtxSerial.dll
-rxtxSerial64.dll
-librxtxSerial.jnilib
-librxtxSerial64.jnilib
 "
 
 

@@ -31,7 +31,6 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import static javax.xml.bind.DatatypeConverter.printHexBinary;
 
 /**
  *
@@ -485,6 +484,13 @@ public class KlarTextUI extends javax.swing.JFrame {
         messageBox.pack();
         messageBox.setLocationRelativeTo(cont);
         messageBox.setVisible(true);
+    }
+
+    public static String byteArrayToHex(byte[] a) {
+       StringBuilder sb = new StringBuilder(a.length * 2);
+       for(byte b: a)
+          sb.append(String.format("%02x", b));
+       return sb.toString();
     }
 
     public void mbVerifyXVer(Container cont, String verInfo, Boolean mismatch) {
@@ -2556,7 +2562,7 @@ public class KlarTextUI extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20180529a"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20180530b"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -2750,7 +2756,7 @@ public class KlarTextUI extends javax.swing.JFrame {
          */
         /* First in byte tells how much bytes are in next answer. */
         if( debugLevel > 0 ) {
-            System.out.println("bIn("+lenIn+")=0x"+printHexBinary(bIn));
+            System.out.println("bIn("+lenIn+")=0x"+byteArrayToHex(bIn));
         }
 
         if( lenIn <= 0 ) {
@@ -2919,7 +2925,7 @@ public class KlarTextUI extends javax.swing.JFrame {
                 mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuMasterControl );
                 break;
             default:
-                System.out.println("Unbekannte Zentrale ausgelesen: Daten["+lenIn+" Bytes] = 0x"+printHexBinary(bIn));
+                System.out.println("Unbekannte Zentrale ausgelesen: Daten["+lenIn+" Bytes] = 0x"+byteArrayToHex(bIn));
                 return false;
         }
 
@@ -2962,6 +2968,9 @@ public class KlarTextUI extends javax.swing.JFrame {
             timer.setDelay(2000);
             if( userTimer1 > 2000 ) timer.setInitialDelay(userTimer1);
             if( userTimer2 > 2000 ) timer.setDelay(userTimer2);
+            if( debugLevel > 0 ) {
+                System.out.println("verifyZentrale: initialdelay="+timer.getInitialDelay()+" delay="+timer.getDelay());
+            }
 
             startIOAction();
         }
