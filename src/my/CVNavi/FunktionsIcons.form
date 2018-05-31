@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JComboBox" name="jIconNames">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="76">
+            <StringItem index="0" value="            ---"/>
+            <StringItem index="1" value="            Stirnbeleuchtung"/>
+            <StringItem index="2" value="            Innenraumbeleuchtung"/>
+            <StringItem index="3" value="            F&#xfc;hrerstandsbeleuchtung"/>
+            <StringItem index="4" value="            Fahrger&#xe4;usch (Motorger&#xe4;usch)"/>
+            <StringItem index="5" value="            Allgemeines Ger&#xe4;usch"/>
+            <StringItem index="6" value="            Bahnhofsdurchsage"/>
+            <StringItem index="7" value="            Rangiergang"/>
+            <StringItem index="8" value="            ABV (Anfahr/Bremszeit aus)"/>
+            <StringItem index="9" value="            Automatische Kupplung"/>
+            <StringItem index="10" value="            Rauchgenerator"/>
+            <StringItem index="11" value="            Panthograph"/>
+            <StringItem index="12" value="            Fernlicht"/>
+            <StringItem index="13" value="            Glocke"/>
+            <StringItem index="14" value="            Horn (Hupe)"/>
+            <StringItem index="15" value="            Pfeife"/>
+            <StringItem index="16" value="            T&#xfc;ren auf/zu"/>
+            <StringItem index="17" value="            L&#xfc;fter"/>
+            <StringItem index="18" value="            Kohle Schaufeln"/>
+            <StringItem index="19" value="            Erweiterungstaste (Shift)"/>
+            <StringItem index="20" value="            Zugzielanzeige"/>
+            <StringItem index="21" value="            Bremsenquitschen"/>
+            <StringItem index="22" value="            Kranarm heben/senken"/>
+            <StringItem index="23" value="            Kranhaken heben/senken"/>
+            <StringItem index="24" value="            Triebwerksbeleuchtung"/>
+            <StringItem index="25" value="            Kran drehen"/>
+            <StringItem index="26" value="            Dampf ablassen (Zylinderdampf)"/>
+            <StringItem index="27" value="            Betriebsfunk"/>
+            <StringItem index="28" value="            Kupplungsger&#xe4;usch"/>
+            <StringItem index="29" value="            Schienensto&#xdf;"/>
+            <StringItem index="30" value="            Diesel Fahrstufe Auf"/>
+            <StringItem index="31" value="            Diesel Fahrstufe Ab"/>
+            <StringItem index="32" value="            Schaffnerpfiff"/>
+            <StringItem index="33" value="            Puffersto&#xdf;"/>
+            <StringItem index="34" value="            F&#xfc;hrerstandsbeleuchtung 2"/>
+            <StringItem index="35" value="            Wasser fassen (Dampflok)"/>
+            <StringItem index="36" value="            Kurvenger&#xe4;usch"/>
+            <StringItem index="37" value="            Weichenger&#xe4;usch"/>
+            <StringItem index="38" value="            Sicherheitsventil"/>
+            <StringItem index="39" value="            &#xd6;lbrenner"/>
+            <StringItem index="40" value="            Stoker"/>
+            <StringItem index="41" value="            Dynamische Bremse"/>
+            <StringItem index="42" value="            Kompressor"/>
+            <StringItem index="43" value="            Pressluft ablassen"/>
+            <StringItem index="44" value="            Handbremse"/>
+            <StringItem index="45" value="            Luftpumpe (Dampflok)"/>
+            <StringItem index="46" value="            Wasserpumpe (Dampflok)"/>
+            <StringItem index="47" value="            Hauptschalter (E-Lok)"/>
+            <StringItem index="48" value="            Ditchlight"/>
+            <StringItem index="49" value="            Marslight"/>
+            <StringItem index="50" value="            Gyralight"/>
+            <StringItem index="51" value="            Rule 17"/>
+            <StringItem index="52" value="            Rotary Beacon"/>
+            <StringItem index="53" value="            Feuerb&#xfc;chse"/>
+            <StringItem index="54" value="            &#xd6;lk&#xfc;hler"/>
+            <StringItem index="55" value="            Sanden"/>
+            <StringItem index="56" value="            Abschlammen"/>
+            <StringItem index="57" value="            Bremse setzen (L&#xf6;sen automatisch)"/>
+            <StringItem index="58" value="            Rangierbeleuchtung"/>
+            <StringItem index="59" value="            F&#xfc;hrerpultbeleuchtung"/>
+            <StringItem index="60" value="            Injektor"/>
+            <StringItem index="61" value="            Hilfsdiesel"/>
+            <StringItem index="62" value="            R&#xfc;cklicht rot"/>
+            <StringItem index="63" value="            Dopplereffekt"/>
+            <StringItem index="64" value="            Kurzpfiff"/>
+            <StringItem index="65" value="            &#xd6;lpumpe (Dampflok)"/>
+            <StringItem index="66" value="            Heizung"/>
+            <StringItem index="67" value="            Lichtmaschine (Dampflok)"/>
+            <StringItem index="68" value="            Dieselpumpe"/>
+            <StringItem index="69" value="            Fahrtrichtungsumschalter"/>
+            <StringItem index="70" value="            Hilfsluftpresser"/>
+            <StringItem index="71" value="            Vorschmieren"/>
+            <StringItem index="72" value="            Sifa-Meldung"/>
+            <StringItem index="73" value="            Schaltstufe (E-Lok)"/>
+            <StringItem index="74" value="            Beleuchtung allgemein"/>
+            <StringItem index="75" value="            stromleitende Kupplung"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="alwaysOnTop" type="boolean" value="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jDecAdr" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <Component id="jName" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="121" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jDecAdr" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="my/CVNavi/Bundle.properties" key="FunktionsIcons.jButton1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="my/CVNavi/Bundle.properties" key="FunktionsIcons.jLabel1.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jDecAdr">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="my/CVNavi/Bundle.properties" key="FunktionsIcons.jDecAdr.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jName">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="my/CVNavi/Bundle.properties" key="FunktionsIcons.jName.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jIconTable">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="3" rowCount="35">
+                <Column editable="false" title="Funktion" type="java.lang.Integer">
+                  <Data value="0"/>
+                  <Data value="1"/>
+                  <Data value="2"/>
+                  <Data value="3"/>
+                  <Data value="4"/>
+                  <Data value="5"/>
+                  <Data value="6"/>
+                  <Data value="7"/>
+                  <Data value="8"/>
+                  <Data value="9"/>
+                  <Data value="10"/>
+                  <Data value="11"/>
+                  <Data value="12"/>
+                  <Data value="13"/>
+                  <Data value="14"/>
+                  <Data value="15"/>
+                  <Data value="16"/>
+                  <Data value="17"/>
+                  <Data value="18"/>
+                  <Data value="19"/>
+                  <Data value="20"/>
+                  <Data value="21"/>
+                  <Data value="22"/>
+                  <Data value="23"/>
+                  <Data value="24"/>
+                  <Data value="25"/>
+                  <Data value="26"/>
+                  <Data value="27"/>
+                  <Data value="28"/>
+                  <Data value="29"/>
+                  <Data value="30"/>
+                  <Data value="31"/>
+                  <Data value="32"/>
+                  <Data value="33"/>
+                  <Data value="34"/>
+                </Column>
+                <Column editable="true" title="Icon-No" type="java.lang.String"/>
+                <Column editable="true" title="Beschreibung" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                    <ResourceString bundle="my/CVNavi/Bundle.properties" key="FunktionsIcons.jIconTable.columnModel.title0" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  </Title>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                    <ResourceString bundle="my/CVNavi/Bundle.properties" key="FunktionsIcons.jIconTable.columnModel.title1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  </Title>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                    <ResourceString bundle="my/CVNavi/Bundle.properties" key="FunktionsIcons.jIconTable.columnModel.title2" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  </Title>
+                  <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                    <Connection code="new DefaultCellEditor(jIconNames)" type="code"/>
+                  </Editor>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="rowHeight" type="int" value="20"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jIconTableMouseClicked"/>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jIconTablePropertyChange"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

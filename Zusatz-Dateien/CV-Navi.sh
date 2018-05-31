@@ -98,7 +98,7 @@ DEBUG=${1-0}
 [ $DEBUG == 1 ]&& shift
 
 
-PROG_NAME="KlarText.jar"
+PROG_NAME="CV-Navi.jar"
 PROG_DIR="."
 
 LIB_NAME="librxtxSerial.so"

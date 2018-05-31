@@ -1,5 +1,5 @@
 Dies ist CV-Navi; die Programmiersoftware fuer die neueren Decoder (ab LD-30er) und andere Geraete der Firma Tams Elektronik.
-Um das Programm zu starten reicht es, KlarText.jar zu starten (Doppel-Klick mit der Maus).
+Um das Programm zu starten reicht es, CV-Navi.jar zu starten (Doppel-Klick mit der Maus).
 Bei Linux muss das Startscript CV-Navi.sh gestartet werden.
 Wenn beim Setup angegeben, kann das Programm auch aus dem Start-Menue oder der Schnellstartleiste gestartet werden (Windows).
 Das Programm ist eine Java-Anwendung. Es muss also zwingend Java auf dem PC installiert sein.

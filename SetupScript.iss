@@ -4,7 +4,7 @@
 ;#pragma verboselevel 9
 
 #define myAppName "CV-Navi"
-#define myAppVersion "2.8"
+#define myAppVersion "3.0"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -47,7 +47,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "dist\KlarText.jar"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\CV-Navi.jar"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\LiesMich.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "dist\CV-Navi.sh"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -57,10 +57,10 @@ Source: "dist\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs 
 ;Source: "dist\LiesMich.txt"; DestDir: "{app}"; DestName: "Install_user_{username}"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\CV-Navi"; Filename: "{app}\KlarText.jar"; WorkingDir: {app}
+Name: "{group}\CV-Navi"; Filename: "{app}\CV-Navi.jar"; WorkingDir: {app}
 Name: "{group}\{cm:UninstallProgram,CV-Navi}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\CV-Navi"; Filename: "{app}\KlarText.jar"; Tasks: desktopicon; WorkingDir: {app}
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\CV-Navi"; Filename: "{app}\KlarText.jar"; Tasks: quicklaunchicon; WorkingDir: {app}
+Name: "{commondesktop}\CV-Navi"; Filename: "{app}\CV-Navi.jar"; Tasks: desktopicon; WorkingDir: {app}
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\CV-Navi"; Filename: "{app}\CV-Navi.jar"; Tasks: quicklaunchicon; WorkingDir: {app}
 
 [Run]
-Filename: "{app}\KlarText.jar"; Description: "{cm:LaunchProgram,CV-Navi}"; Flags: shellexec postinstall skipifsilent
+Filename: "{app}\CV-Navi.jar"; Description: "{cm:LaunchProgram,CV-Navi}"; Flags: shellexec postinstall skipifsilent
