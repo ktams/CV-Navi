@@ -790,6 +790,12 @@ public class CVNavi extends javax.swing.JFrame {
         mbGeneric( cont, "Problem", bundle.getString("UIDSIDPaare"), bundle.getString("MaxAnz")+c.MAX_M3_ENTRIES, 0, true);
         return;
     }
+
+    public void mbM3duplicateUid( Container cont ) {
+        mbGeneric( cont, "Information", bundle.getString("M3.duplicateUID"), 0, true);
+        return;
+    }
+
     public void mbTableCheckOK( Container cont, boolean repair, int seconds) {
         MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, cont);
         messageBox.jLabel1.setText("Information");

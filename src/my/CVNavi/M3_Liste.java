@@ -503,6 +503,17 @@ public class M3_Liste extends javax.swing.JDialog {
     private void jImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jImportActionPerformed
         System.out.println( "jImportActionPerformed BEGIN" );
 
+        // check if uid already exists
+        String uid = mc.m3dataGetUid();
+        for(int row=0 ; row<mc.M3used ; row++) {
+            if( uid.equalsIgnoreCase(mc.M3liste[0][row]) ) {
+                // uid already exists , jump to  row and inform user
+                jTableM3.setRowSelectionInterval(row, row);
+                mc.KTUI.mbM3duplicateUid(this);
+                System.out.println( "jImportActionPerformed END without import" );
+                return;
+            }
+        }
         // add an empty line to the internal table
         jAddActionPerformed(null);
         // fill with data
