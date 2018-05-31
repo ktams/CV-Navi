@@ -208,6 +208,7 @@ public class BiDi_B extends javax.swing.JFrame {
         jClose = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jSchreiben = new javax.swing.JButton();
+        jButtonCalibrate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -1171,6 +1172,15 @@ public class BiDi_B extends javax.swing.JFrame {
             }
         });
 
+        jButtonCalibrate.setForeground(new java.awt.Color(255, 0, 0));
+        jButtonCalibrate.setText(bundle.getString("BiDi_B.jButtonCalibrate.text")); // NOI18N
+        jButtonCalibrate.setToolTipText(bundle.getString("BiDi_B.jButtonCalibrate.toolTipText")); // NOI18N
+        jButtonCalibrate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalibrateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBiDiBLayout = new javax.swing.GroupLayout(jPanelBiDiB);
         jPanelBiDiB.setLayout(jPanelBiDiBLayout);
         jPanelBiDiBLayout.setHorizontalGroup(
@@ -1189,16 +1199,19 @@ public class BiDi_B extends javax.swing.JFrame {
             .addGroup(jPanelBiDiBLayout.createSequentialGroup()
                 .addComponent(jTabbedPane1BiDiB, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
-            .addGroup(jPanelBiDiBLayout.createSequentialGroup()
-                .addComponent(jLabelReset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonReset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jClose, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBiDiBLayout.createSequentialGroup()
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelBiDiBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelBiDiBLayout.createSequentialGroup()
+                        .addComponent(jLabelReset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonReset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCalibrate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSchreiben))
+                .addGroup(jPanelBiDiBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSchreiben, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanelBiDiBLayout.setVerticalGroup(
             jPanelBiDiBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1213,7 +1226,7 @@ public class BiDi_B extends javax.swing.JFrame {
                             .addComponent(jAdrLok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jBild, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1BiDiB, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1BiDiB, javax.swing.GroupLayout.PREFERRED_SIZE, 525, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelBiDiBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSchreiben)
@@ -1222,7 +1235,8 @@ public class BiDi_B extends javax.swing.JFrame {
                 .addGroup(jPanelBiDiBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelReset)
                     .addComponent(jButtonReset)
-                    .addComponent(jClose)))
+                    .addComponent(jClose)
+                    .addComponent(jButtonCalibrate)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1951,6 +1965,16 @@ public class BiDi_B extends javax.swing.JFrame {
                         timer.start();
                         break;
 
+                    case 255:
+                        Wert = 255;
+                        s = "XPD "+lokAdr+" 7 " + Wert + "\r";
+                        Com.write(s);
+                        System.out.println("BiDiB actionPerformed: "+ s );
+                        SendeZaehler = 4242;
+                        timer.setInitialDelay(2000);
+                        timer.start();
+                        break;
+
                     case 4242:
                         stopIOAction();
                         break;
@@ -2367,6 +2391,32 @@ public class BiDi_B extends javax.swing.JFrame {
         startIOAction();
     }//GEN-LAST:event_jWriteVActionPerformed
 
+    private void jButtonCalibrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalibrateActionPerformed
+        int dialogResult = KTUI.yesNoCalibrateBiDiBooster();
+        if(dialogResult == JOptionPane.YES_OPTION){
+            System.out.println("jButtonCalibrate: YES" );
+
+            Com = KTUI.safelyOpenCom( this, Com );
+            if( Com == null ) {
+                return;
+            }
+            if( KTUI.getTrackStatus() != c.cuPowerOn ) {
+                KTUI.mbEnablePower(this);
+                return;
+            }
+            KTUI.flushReadBuffer( Com );
+
+            String s = "XPD "+lokAdr+" 7 62\r";
+            Com.write(s);
+            System.out.println("BiDiB actionPerformed: "+ s );
+            SendeZaehler = 255;
+            timer.setInitialDelay(400);
+            startIOAction();
+        } else {
+            System.out.println("jButtonCalibrate: NO ("+dialogResult+")" );
+        }
+    }//GEN-LAST:event_jButtonCalibrateActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Abschalten;
     private javax.swing.ButtonGroup AnsprechenKurschluss;
@@ -2402,6 +2452,7 @@ public class BiDi_B extends javax.swing.JFrame {
     private javax.swing.JButton jButton73r;
     private javax.swing.JButton jButton76g;
     private javax.swing.JButton jButton76r;
+    private javax.swing.JButton jButtonCalibrate;
     private javax.swing.JButton jButtonReset;
     private javax.swing.JCheckBox jCbStatus;
     private javax.swing.JButton jClose;

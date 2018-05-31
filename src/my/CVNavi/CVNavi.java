@@ -1378,6 +1378,35 @@ public class CVNavi extends javax.swing.JFrame {
         return dialogResult;
     }
 
+    public int yesNoCalibrateBiDiBooster() {
+        int dialogResult = -1;
+        if(bSpracheDE)
+        {
+            Object[] options = { "Ja", "Nein" };
+            dialogResult = JOptionPane.showOptionDialog(
+                    this,
+                    "Am Boosterausgang sollte kein Verbraucher angeschlossen sein.\n\nJetzt kalibrieren?",
+                    "Warnung",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[1] );
+        } else {
+            Object[] options = { "Yes", "No" };
+            dialogResult = JOptionPane.showOptionDialog(
+                    this,
+                    "No load should be connected to the booster output.\n\nCalibrate now?",
+                    "Warning",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[1] );
+        }
+        return dialogResult;
+    }
+
     public int yesNoM3listSave() {
         int dialogResult = -1;
         if(bSpracheDE)
@@ -2572,7 +2601,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20180531a"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20180531b"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);

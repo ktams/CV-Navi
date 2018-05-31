@@ -70,7 +70,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="&lt;BiDi_B.jPanelBiDiB.border.title&gt;">
+            <TitledBorder title="BiDi-Booster: while programming, the address 9999 (DCC) is used.">
               <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="BiDi_B.jPanelBiDiB.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
               <Font PropertyName="font" name="Tahoma" size="12" style="0"/>
             </TitledBorder>
@@ -99,17 +99,22 @@
                   <Component id="jTabbedPane1BiDiB" min="-2" pref="608" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jLabelReset" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonReset" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jClose" min="-2" pref="120" max="-2" attributes="2"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="jProgressBar1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLabelReset" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButtonReset" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jButtonCalibrate" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jProgressBar1" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSchreiben" min="-2" max="-2" attributes="2"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSchreiben" alignment="1" min="-2" max="-2" attributes="2"/>
+                      <Component id="jClose" alignment="1" min="-2" pref="120" max="-2" attributes="2"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,6 +145,7 @@
                       <Component id="jLabelReset" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonReset" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jClose" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonCalibrate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -158,7 +164,7 @@
             <Container class="javax.swing.JPanel" name="jPanelBiDiB_1">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&lt;BiDi_B.jPanelBiDiB_1.TabConstraints.tabTitle&gt;">
+                  <JTabbedPaneConstraints tabName="BiDiB (Part 1)">
                     <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="my/CVNavi/Bundle.properties" key="BiDi_B.jPanelBiDiB_1.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -1031,7 +1037,7 @@
             <Container class="javax.swing.JPanel" name="jPanelBidiB_2">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="&lt;BiDi_B.jPanelBidiB_2.TabConstraints.tabTitle&gt;">
+                  <JTabbedPaneConstraints tabName="BiDiB (Part 2)">
                     <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="my/CVNavi/Bundle.properties" key="BiDi_B.jPanelBidiB_2.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
@@ -1988,6 +1994,22 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSchreibenActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonCalibrate">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="my/CVNavi/Bundle.properties" key="BiDi_B.jButtonCalibrate.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="my/CVNavi/Bundle.properties" key="BiDi_B.jButtonCalibrate.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCalibrateActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
