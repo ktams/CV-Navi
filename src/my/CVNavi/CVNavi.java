@@ -42,7 +42,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 // Konstanten definieren, die auch in switch-Anweisungen funktionieren !
 // Etwas umständlich, aber sonst müssen alle switch-Anweisungen,
-// die KTUI.Decoder verwenden auf "if-then-else-if..." umgeschrieben werden :(
+// die CVNavi.Decoder verwenden auf "if-then-else-if..." umgeschrieben werden :(
 //
 // Zuerst die Definition der Konstanten (nur hier stehen Zahlen für Menu und switch-Anweisungen !!!)
 // Erster Block ist für das Auswahlmenü: 
@@ -234,7 +234,7 @@ public class CVNavi extends javax.swing.JFrame {
 
     public String  gsZentrale = "MasterControl";
     private int    lcZentrale = 2;
-    private TwoWaySerialComm KTUICom = null;
+    private TwoWaySerialComm CVNaviCom = null;
     private TwoWaySerialComm ExternalCom = null;
     private Boolean bVerifyZentraleInProgress = false;
     private Timer  timer = null;
@@ -2451,11 +2451,11 @@ public class CVNavi extends javax.swing.JFrame {
         Options options = new Options(this);
     }//GEN-LAST:event_jButtonOptionsActionPerformed
 
-    enum KTUImenuEvt {
+    enum CVNavimenuEvt {
         VK_UP, VK_DOWN
     }
 
-    private void KTUImenuEvalKey(KTUImenuEvt key) {
+    private void CVNavimenuEvalKey(CVNavimenuEvt key) {
         Boolean checkAgain = true;
         decoderList[] DLval = decoderList.values();
         while( checkAgain ) {
@@ -2466,7 +2466,7 @@ public class CVNavi extends javax.swing.JFrame {
                 // entry is selectable -> OK
                 return;
             }
-            if( key == KTUImenuEvt.VK_DOWN) {
+            if( key == CVNavimenuEvt.VK_DOWN) {
                 if( n < ( DLval.length - 1 )) {
                     jDecoderChooser.setSelectedIndex(n+1);
                     checkAgain = true;
@@ -2482,7 +2482,7 @@ public class CVNavi extends javax.swing.JFrame {
                     }
                 }
             }
-            if( key == KTUImenuEvt.VK_UP) {
+            if( key == CVNavimenuEvt.VK_UP) {
                 if( n > 0 ) {
                     jDecoderChooser.setSelectedIndex(n-1);
                     checkAgain = true;
@@ -2503,15 +2503,15 @@ public class CVNavi extends javax.swing.JFrame {
 
     private void jDecoderChooserMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDecoderChooserMouseReleased
         // mouse event is treated like VK_DOWN
-        KTUImenuEvalKey(KTUImenuEvt.VK_DOWN);
+        CVNavimenuEvalKey(CVNavimenuEvt.VK_DOWN);
     }//GEN-LAST:event_jDecoderChooserMouseReleased
 
     private void jDecoderChooserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDecoderChooserKeyReleased
         if(evt.getKeyCode()== KeyEvent.VK_DOWN) {
-            KTUImenuEvalKey(KTUImenuEvt.VK_DOWN);
+            CVNavimenuEvalKey(CVNavimenuEvt.VK_DOWN);
         }
         if(evt.getKeyCode()== KeyEvent.VK_UP) {
-            KTUImenuEvalKey(KTUImenuEvt.VK_UP);
+            CVNavimenuEvalKey(CVNavimenuEvt.VK_UP);
         }
     }//GEN-LAST:event_jDecoderChooserKeyReleased
 
@@ -2649,8 +2649,8 @@ public class CVNavi extends javax.swing.JFrame {
                     bVerifyZentraleInProgress = false;
                     stopIOAction();
 
-                    int nBytes = KTUICom.read(bArray);
-                    KTUICom = safelyCloseCom( outerThis, KTUICom );
+                    int nBytes = CVNaviCom.read(bArray);
+                    CVNaviCom = safelyCloseCom( outerThis, CVNaviCom );
 
                     if( debugDummyData == 1 ) {
                         // DUMMY - Werte zum DEBUGGEN : Tams MC
@@ -2992,15 +2992,15 @@ public class CVNavi extends javax.swing.JFrame {
         bUseXfuncs = false;
         bUseXm3sid = false;
 
-        KTUICom = safelyOpenCom( this, KTUICom );
-        if( (KTUICom != null) && KTUICom.isconnected() ) {
-            flushReadBuffer( KTUICom );
+        CVNaviCom = safelyOpenCom( this, CVNaviCom );
+        if( (CVNaviCom != null) && CVNaviCom.isconnected() ) {
+            flushReadBuffer( CVNaviCom );
 
             byte[] wArray = new byte[2];
             wArray[0] = (byte) 0x78; // x
             wArray[1] = (byte) 0xA0; // XVer
 
-            KTUICom.write(wArray);
+            CVNaviCom.write(wArray);
             bVerifyZentraleInProgress = true;
 
             timer.setInitialDelay(2000);

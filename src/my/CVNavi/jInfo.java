@@ -24,23 +24,23 @@ import static my.CVNavi.CVNavi.debugLevel;
  */
 public class jInfo extends javax.swing.JFrame {
 
-    public CVNavi KTUI;
+    public CVNavi CVNavi;
 
     /** Creates new form jInfo */
-    public jInfo( CVNavi ktuiThis ) {
-        if( ktuiThis == null ) {
+    public jInfo( CVNavi cvnaviThis ) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceINFO != null ) {
-            KTUI.frameInstanceINFO.toFront();
-            KTUI.frameInstanceINFO.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceINFO != null ) {
+            CVNavi.frameInstanceINFO.toFront();
+            CVNavi.frameInstanceINFO.repaint();
             return;
         }
-        KTUI.frameInstanceINFO = this;
+        CVNavi.frameInstanceINFO = this;
 
         initComponents();
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
     }
 
@@ -105,7 +105,7 @@ public class jInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOKActionPerformed
-        KTUI.frameInstanceINFO = null;
+        CVNavi.frameInstanceINFO = null;
         this.dispose();
     }//GEN-LAST:event_jOKActionPerformed
 
@@ -182,8 +182,8 @@ public class jInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        KTUI.frameInstanceINFO = null;
-        KTUI.setFocus();
+        CVNavi.frameInstanceINFO = null;
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

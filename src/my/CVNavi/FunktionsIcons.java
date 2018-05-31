@@ -29,7 +29,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
     public int DecAdress;
     public String DecName;
     public String DecIcons[];
-    public MC KTUI;
+    public MC CVNavi;
     
     private String IconString;
     private String[] OriginalIconString;
@@ -122,11 +122,11 @@ public class FunktionsIcons extends javax.swing.JFrame {
             "stromleitende Kupplung"
         };
         initComponents();
-        KTUI = aThis;
+        CVNavi = aThis;
         setTitle( "Function Icons" );
         setLocationRelativeTo(aThis);
         setVisible(true);
-        KTUI.bFunktionsIconsIsActiv = true;
+        CVNavi.bFunktionsIconsIsActiv = true;
     }
 
     /**
@@ -294,7 +294,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        KTUI.bFunktionsIconsIsActiv = false;
+        CVNavi.bFunktionsIconsIsActiv = false;
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -388,7 +388,7 @@ public class FunktionsIcons extends javax.swing.JFrame {
                 jIconTable.setValueAt("---", edRow, 1);
                 OriginalIconString[DecIcons.length] += (" " + edRow + "," + selectedIndex);
             }
-            KTUI.FuncIcons = OriginalIconString;
+            CVNavi.FuncIcons = OriginalIconString;
         }
         else
         {

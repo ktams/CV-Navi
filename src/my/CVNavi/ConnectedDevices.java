@@ -18,15 +18,15 @@ public class ConnectedDevices extends javax.swing.JFrame {
      * Creates new form ConnectedDevices
      */
     
-    public MC KTUI;
+    public MC CVNavi;
     String[] strDevs;
     
     public ConnectedDevices(MC aThis) {
         initComponents();
-        KTUI = aThis;
+        CVNavi = aThis;
         setLocationRelativeTo(aThis);
         setVisible(true);
-        KTUI.bconnectedDevicesIsActiv = true;
+        CVNavi.bconnectedDevicesIsActiv = true;
     }
 
     private ConnectedDevices() {
@@ -170,7 +170,7 @@ public class ConnectedDevices extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        KTUI.bconnectedDevicesIsActiv = false;
+        CVNavi.bconnectedDevicesIsActiv = false;
     }//GEN-LAST:event_formWindowClosed
 
     /**

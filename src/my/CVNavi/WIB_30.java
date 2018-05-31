@@ -25,18 +25,18 @@ public class WIB_30 extends javax.swing.JFrame {
 
     private String CVs;
     private int CV[][] = new int[2][131];
-    public CVNavi KTUI;
+    public CVNavi CVNavi;
     public String ReturnString = "Tams Elektronik";
     private ResourceBundle bundle;
 
-    public WIB_30(CVNavi ktuiThis) {
-        if( ktuiThis == null ) {
+    public WIB_30(CVNavi cvnaviThis) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceDEVICE != null ) {
+            CVNavi.frameInstanceDEVICE.toFront();
+            CVNavi.frameInstanceDEVICE.repaint();
             return;
         }
 
@@ -108,10 +108,10 @@ public class WIB_30 extends javax.swing.JFrame {
         initCV( 129, 71 );
         initCV( 130, 255 ); // Voreinstellungen laden [0..3]
 
-        setTitle( KTUI.getMenutext( decoderList.WIB_30 ).trim() );
-        setLocationRelativeTo(ktuiThis);
+        setTitle( CVNavi.getMenutext( decoderList.WIB_30 ).trim() );
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
+        CVNavi.frameInstanceDEVICE = this;
     }
 
     private Boolean initCV( int cv, int value ) {
@@ -121,10 +121,10 @@ public class WIB_30 extends javax.swing.JFrame {
         }
         if( value == -1 ) {
             jCV_Anzeige.removeItem("CV#"+cv);
-            return( KTUI.unsetCVvalue(CV, cv) );
+            return( CVNavi.unsetCVvalue(CV, cv) );
         }
         jCV_Anzeige.addItem("CV#"+cv);
-        return( KTUI.setCVvalue(CV, cv, value) );
+        return( CVNavi.setCVvalue(CV, cv, value) );
     }
 
 
@@ -3482,9 +3482,9 @@ public class WIB_30 extends javax.swing.JFrame {
     private void jCV_LesenSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCV_LesenSchreibenActionPerformed
         try {
             // Hier wird die Schnittstelle geöffnet und die CVs werden zur Zentrale gesendet
-            ReadWriteCV cvwr = new ReadWriteCV(this, true, KTUI, CV);
+            ReadWriteCV cvwr = new ReadWriteCV(this, true, CVNavi, CV);
         } catch (IOException ex) {
-            KTUI.mbDeviceReadProblem( this );
+            CVNavi.mbDeviceReadProblem( this );
         }
 }//GEN-LAST:event_jCV_LesenSchreibenActionPerformed
 
@@ -3517,8 +3517,8 @@ public class WIB_30 extends javax.swing.JFrame {
         int oldValue;
         int currCV = getCVfromIndexString(jCV_Anzeige, "CV#");
         String oriEingabe = jCV_Inhalt.getText();
-        // int cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 255, 22222, false);
-        int cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 255, -1, false);
+        // int cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 0, 255, 22222, false);
+        int cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 0, 255, -1, false);
         if( cvValue == -1 ) {
             System.out.println("jCV_InhaltFocusLost CV="+currCV+" Wert=\""+oriEingabe+"\" IGNORIERT");
             jCV_Inhalt.setText(oriEingabe);
@@ -3529,10 +3529,10 @@ public class WIB_30 extends javax.swing.JFrame {
         String s = jCV_Inhalt.getText();
         switch(currCV) {
             case 1: //CV#1
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 1, 255, 3, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 1, 255, 3, true );
                 s = jCV_Inhalt.getText();
                 if( cvValue > 127 ) {
-                    KTUI.mbAdr128MMonly( this );
+                    CVNavi.mbAdr128MMonly( this );
                 }
                 jDecoderAdresse.setText(s);
                 jKurzeAdr.setSelected(true);
@@ -3558,9 +3558,9 @@ public class WIB_30 extends javax.swing.JFrame {
                 break;
                 
             case 17: //CV#17 erweiterte Adresse (high)
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 192, 255, 192, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 192, 255, 192, true );
                 if (cvValue < 192) {
-                    KTUI.mbValueNaNcv( this, 192, 255, 17, true);
+                    CVNavi.mbValueNaNcv( this, 192, 255, 17, true);
                     cvValue = 192;
                     jCV_Inhalt.setText("192");
                 }
@@ -3580,7 +3580,7 @@ public class WIB_30 extends javax.swing.JFrame {
             case 19: //CV#19 Consistadresse
                 if (cvValue > 127)
                 {
-                    KTUI.mbValueConsist( this, 0, 127 );
+                    CVNavi.mbValueConsist( this, 0, 127 );
                     cvValue = 127;
                     s = "127";
                     jCV_Inhalt.setText(s);
@@ -4028,25 +4028,25 @@ public class WIB_30 extends javax.swing.JFrame {
 }//GEN-LAST:event_jDirekteingabeActionPerformed
 
     private void jDecoderAdresseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDecoderAdresseFocusLost
-        int j = KTUI.checkTextField( this, jDecoderAdresse, 1, 10239, 3, true );
+        int j = CVNavi.checkTextField( this, jDecoderAdresse, 1, 10239, 3, true );
         String s = jDecoderAdresse.getText();
         if (jKurzeAdr.isSelected()) {
             if( j < 1 ||  j > 255 )
             {
-                KTUI.mbValueNaN( this, 1, 255, true);
+                CVNavi.mbValueNaN( this, 1, 255, true);
                 j = 1;
                 jDecoderAdresse.setText("3");
             }
             else if (j > 127)
             {
-                KTUI.mbAdr128MMonly( this );
+                CVNavi.mbAdr128MMonly( this );
             }
             CV[1][1] = j;
             CV[1][29] &= ~32;
             jCV_Anzeige.setSelectedItem( "CV#"+1 );
         } else { // lange Adresse
             if (j < 128 || j > 10239) {
-                KTUI.mbValueNaN( this, 128, 10239, true);
+                CVNavi.mbValueNaN( this, 128, 10239, true);
                 j = 128;
                 jDecoderAdresse.setText("128");
             }
@@ -4110,7 +4110,7 @@ public class WIB_30 extends javax.swing.JFrame {
 }//GEN-LAST:event_jLongAddrActionPerformed
 
     private void jMM_Addr_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMM_Addr_2FocusLost
-        CV[1][114] = KTUI.checkTextField( this, jMM_Addr_2, 1, 255, 4, true );
+        CV[1][114] = CVNavi.checkTextField( this, jMM_Addr_2, 1, 255, 4, true );
         jCV_Anzeige.setSelectedItem( "CV#"+114 );
 }//GEN-LAST:event_jMM_Addr_2FocusLost
 
@@ -5636,7 +5636,7 @@ public class WIB_30 extends javax.swing.JFrame {
 }//GEN-LAST:event_jKommentarComponentShown
 
     private void jDecoderAdresse1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDecoderAdresse1FocusLost
-        CV[1][19] = KTUI.checkTextField( this, jDecoderAdresse1, 0, 127, 0, true);
+        CV[1][19] = CVNavi.checkTextField( this, jDecoderAdresse1, 0, 127, 0, true);
         jCV_Anzeige.setSelectedItem( "CV#"+19 );
 }//GEN-LAST:event_jDecoderAdresse1FocusLost
 
@@ -5644,12 +5644,12 @@ public class WIB_30 extends javax.swing.JFrame {
         int j = CV[1][1];
         if( j < 1 || j > 255 )
         {
-            KTUI.mbValueNaN( this, 1, 255, true);
+            CVNavi.mbValueNaN( this, 1, 255, true);
             j = 1;
         }
         else if (j > 127)
         {
-            KTUI.mbAdr128MMonly( this );
+            CVNavi.mbAdr128MMonly( this );
         }
         CV[1][1] = j;
         jLongAddr.setSelected(false);
@@ -5662,7 +5662,7 @@ public class WIB_30 extends javax.swing.JFrame {
         int j = (CV[1][17] - 192)*256 + CV[1][18];
         if (j < 128 || j > 10239)
         {
-            KTUI.mbValueNaN( this, 128, 10239, true);
+            CVNavi.mbValueNaN( this, 128, 10239, true);
             j = 128;
         }
         CV[1][29] |= 32;
@@ -5675,7 +5675,7 @@ public class WIB_30 extends javax.swing.JFrame {
 }//GEN-LAST:event_jlangeAdrActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DecTest dt = new DecTest(this, true, KTUI);
+        DecTest dt = new DecTest(this, true, CVNavi);
         dt.jDecType.setText("Decoder: WIB-31/32/33");
         if(jKurzeAdr.isSelected()) {
             dt.DecAddr = CV[1][1];
@@ -5692,8 +5692,8 @@ public class WIB_30 extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        KTUI.frameInstanceDEVICE = null;
-        KTUI.setFocus();
+        CVNavi.frameInstanceDEVICE = null;
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     private void jBroadCasstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBroadCasstActionPerformed
@@ -7746,155 +7746,155 @@ public class WIB_30 extends javax.swing.JFrame {
     }//GEN-LAST:event_jCV_InhaltKeyReleased
 
     private void jDimmen1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen1FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimmen1, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimmen1, 0, 15, 15, true);
         CV[1][63] &= 0xF0;
         CV[1][63] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+63 );
     }//GEN-LAST:event_jDimmen1FocusLost
 
     private void jDimmen2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen2FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimmen2, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimmen2, 0, 15, 15, true);
         CV[1][63] &= 0x0F;
         CV[1][63] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+63 );
     }//GEN-LAST:event_jDimmen2FocusLost
 
     private void jDimmen3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen3FocusLost
-        CV[1][64] = KTUI.checkTextField( this, jDimmen3, 0, 15, 15, true);
+        CV[1][64] = CVNavi.checkTextField( this, jDimmen3, 0, 15, 15, true);
         jCV_Anzeige.setSelectedItem( "CV#"+64 );
     }//GEN-LAST:event_jDimmen3FocusLost
 
     private void jKick1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jKick1FocusLost
-        int cvValue = KTUI.checkTextField( this, jKick1, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jKick1, 0, 15, 15, true);
         CV[1][124] &= 0xF0;
         CV[1][124] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+124 );
     }//GEN-LAST:event_jKick1FocusLost
 
     private void jKick3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jKick3FocusLost
-        int cvValue = KTUI.checkTextField( this, jKick3, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jKick3, 0, 15, 15, true);
         CV[1][124] &= 0x0F;
         CV[1][124] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+124 );
     }//GEN-LAST:event_jKick3FocusLost
 
     private void jDS_EmpfindlichFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDS_EmpfindlichFocusLost
-        CV[1][113] = KTUI.checkTextField( this, jDS_Empfindlich, 1, 255, 176, true);
+        CV[1][113] = CVNavi.checkTextField( this, jDS_Empfindlich, 1, 255, 176, true);
         jCV_Anzeige.setSelectedItem( "CV#"+113 );
     }//GEN-LAST:event_jDS_EmpfindlichFocusLost
 
     private void jOL_HelligkeitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jOL_HelligkeitFocusLost
-        CV[1][119] = KTUI.checkTextField( this, jOL_Helligkeit, 1, 255, 16, true);
+        CV[1][119] = CVNavi.checkTextField( this, jOL_Helligkeit, 1, 255, 16, true);
         jCV_Anzeige.setSelectedItem( "CV#"+119 );
     }//GEN-LAST:event_jOL_HelligkeitFocusLost
 
     private void jDimm_LED_1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_1FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_1, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_1, 0, 15, 15, true);
         CV[1][59] &= 0xF0;
         CV[1][59] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+59 );
     }//GEN-LAST:event_jDimm_LED_1FocusLost
 
     private void jDimm_LED_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_2FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_2, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_2, 0, 15, 15, true);
         CV[1][59] &= 0x0F;
         CV[1][59] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+59 );
     }//GEN-LAST:event_jDimm_LED_2FocusLost
 
     private void jDimm_LED_3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_3FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_3, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_3, 0, 15, 15, true);
         CV[1][60] &= 0xF0;
         CV[1][60] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+60 );
     }//GEN-LAST:event_jDimm_LED_3FocusLost
 
     private void jDimm_LED_4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_4FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_4, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_4, 0, 15, 15, true);
         CV[1][60] &= 0x0F;
         CV[1][60] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+60 );
     }//GEN-LAST:event_jDimm_LED_4FocusLost
 
     private void jDimm_LED_5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_5FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_5, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_5, 0, 15, 15, true);
         CV[1][61] &= 0xF0;
         CV[1][61] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+61 );
     }//GEN-LAST:event_jDimm_LED_5FocusLost
 
     private void jDimm_LED_6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_6FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_6, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_6, 0, 15, 15, true);
         CV[1][61] &= 0x0F;
         CV[1][61] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+61 );
     }//GEN-LAST:event_jDimm_LED_6FocusLost
 
     private void jDimm_LED_7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_7FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_7, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_7, 0, 15, 15, true);
         CV[1][62] &= 0xF0;
         CV[1][62] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+62 );
     }//GEN-LAST:event_jDimm_LED_7FocusLost
 
     private void jDimm_LED_8FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimm_LED_8FocusLost
-        int cvValue = KTUI.checkTextField( this, jDimm_LED_8, 0, 15, 15, true);
+        int cvValue = CVNavi.checkTextField( this, jDimm_LED_8, 0, 15, 15, true);
         CV[1][62] &= 0x0F;
         CV[1][62] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+62 );
     }//GEN-LAST:event_jDimm_LED_8FocusLost
 
     private void jLED_LS_Einschaltzeit_1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_1FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_1, 0, 15, 4, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_1, 0, 15, 4, true);
         CV[1][126] &= 0xF0;
         CV[1][126] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+126 );
     }//GEN-LAST:event_jLED_LS_Einschaltzeit_1FocusLost
 
     private void jLED_LS_Einschaltzeit_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_2FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_2, 0, 15, 3, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_2, 0, 15, 3, true);
         CV[1][126] &= 0x0F;
         CV[1][126] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+126 );
     }//GEN-LAST:event_jLED_LS_Einschaltzeit_2FocusLost
 
     private void jLED_LS_Einschaltzeit_3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_3FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_3, 0, 15, 3, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_3, 0, 15, 3, true);
         CV[1][127] &= 0xF0;
         CV[1][127] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+127 );
     }//GEN-LAST:event_jLED_LS_Einschaltzeit_3FocusLost
 
     private void jLED_LS_Einschaltzeit_4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_4FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_4, 0, 15, 2, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_4, 0, 15, 2, true);
         CV[1][127] &= 0x0F;
         CV[1][127] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+127 );
     }//GEN-LAST:event_jLED_LS_Einschaltzeit_4FocusLost
 
     private void jLED_LS_Einschaltzeit_5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_5FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_5, 0, 15, 3, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_5, 0, 15, 3, true);
         CV[1][128] &= 0xF0;
         CV[1][128] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+128 );
     }//GEN-LAST:event_jLED_LS_Einschaltzeit_5FocusLost
 
     private void jLED_LS_Einschaltzeit_6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_6FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_6, 0, 15, 5, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_6, 0, 15, 5, true);
         CV[1][128] &= 0x0F;
         CV[1][128] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+128 );
     }//GEN-LAST:event_jLED_LS_Einschaltzeit_6FocusLost
 
     private void jLED_LS_Einschaltzeit_7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_7FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_7, 0, 15, 7, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_7, 0, 15, 7, true);
         CV[1][129] &= 0xF0;
         CV[1][129] |= cvValue;
         jCV_Anzeige.setSelectedItem( "CV#"+129 );
     }//GEN-LAST:event_jLED_LS_Einschaltzeit_7FocusLost
 
     private void jLED_LS_Einschaltzeit_8FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLED_LS_Einschaltzeit_8FocusLost
-        int cvValue = KTUI.checkTextField( this, jLED_LS_Einschaltzeit_8, 0, 15, 4, true);
+        int cvValue = CVNavi.checkTextField( this, jLED_LS_Einschaltzeit_8, 0, 15, 4, true);
         CV[1][129] &= 0x0F;
         CV[1][129] |= cvValue*16;
         jCV_Anzeige.setSelectedItem( "CV#"+129 );
@@ -8015,7 +8015,7 @@ public class WIB_30 extends javax.swing.JFrame {
     public void filfilCVs() {
         Boolean b ;
         String[] keys = { "WIB-30" };
-        b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, KTUI );
+        b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, CVNavi );
     }
 
     void updateTabs() {

@@ -37,7 +37,7 @@ public class parseString2CVs {
         return -1;
     }
 
-    public static Boolean convertString2CV( String str, String[] keys, int CV[][], JTextArea jComment, CVNavi KTUI ) {
+    public static Boolean convertString2CV( String str, String[] keys, int CV[][], JTextArea jComment, CVNavi CVNavi ) {
         int strLen = str.length();
         int keyLen = 0;
         int dimKey = keys.length;
@@ -73,7 +73,7 @@ public class parseString2CVs {
                 return false;
             }
             System.out.println("ERROR: Config file not starting with "+ allKeys );
-            KTUI.mbFileReadBeginError( null, allKeys );
+            CVNavi.mbFileReadBeginError( null, allKeys );
             return false;
         }
         else {
@@ -157,7 +157,7 @@ public class parseString2CVs {
         }
     }
 
-    public static Boolean convertString2Kennlinie( String str, String[] keys, int CV[][], int fs1offset, CVNavi KTUI ) {
+    public static Boolean convertString2Kennlinie( String str, String[] keys, int CV[][], int fs1offset, CVNavi CVNavi ) {
         int strLen = str.length();
         int keyLen = 0;
         int dimKey = keys.length;
@@ -189,7 +189,7 @@ public class parseString2CVs {
                 return false;
             }
             System.out.println("ERROR: Config file not starting with "+allKeys.toString() );
-            KTUI.mbFileReadBeginError( null, allKeys );
+            CVNavi.mbFileReadBeginError( null, allKeys );
             return false;
         }
         else {
@@ -219,9 +219,9 @@ public class parseString2CVs {
                     sFS = sFS.trim();
                     sVAL = sVAL.trim();
                     System.out.println("convertString2Kennlinie sFS["+sFS+"] sVAL["+sVAL+"]" );
-                    if( KTUI.checkNumRange(sFS, 1, 28 ) && KTUI.checkNumRange(sVAL, 0, 255) ) {
-                        nFS = KTUI.checkAndGetStrNumRangeDef( null, sFS, 1, 28, 0, false);
-                        nVAL = KTUI.checkAndGetStrNumRangeDef( null, sVAL, 0, 255, 0, false);
+                    if( CVNavi.checkNumRange(sFS, 1, 28 ) && CVNavi.checkNumRange(sVAL, 0, 255) ) {
+                        nFS = CVNavi.checkAndGetStrNumRangeDef( null, sFS, 1, 28, 0, false);
+                        nVAL = CVNavi.checkAndGetStrNumRangeDef( null, sVAL, 0, 255, 0, false);
                         System.out.println("convertString2Kennlinie nFS["+nFS+"] nVAL["+nVAL+"]" );
                         int offsetCV;
                         offsetCV = getOffsetForCV(nFS+fs1offset-1, CV);

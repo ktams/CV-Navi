@@ -24,7 +24,7 @@ import static my.CVNavi.CVNavi.debugLevel;
  * @author ktams
  */
 public class B_4 extends javax.swing.JFrame {
-    public CVNavi KTUI;
+    public CVNavi CVNavi;
     private TwoWaySerialComm Com = null;
     private javax.swing.Timer timer = null;
     private int SendeZaehler;
@@ -35,15 +35,15 @@ public class B_4 extends javax.swing.JFrame {
 
     /** Creates new form B_4 */
 
-    public B_4(CVNavi ktuiThis) {
+    public B_4(CVNavi cvnaviThis) {
         this.bAbbruch = false;
-        if( ktuiThis == null ) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceDEVICE != null ) {
+            CVNavi.frameInstanceDEVICE.toFront();
+            CVNavi.frameInstanceDEVICE.repaint();
             return;
         }
 
@@ -51,15 +51,15 @@ public class B_4 extends javax.swing.JFrame {
         this.setIconImage(II.getImage());
         initComponents();
         jBild.setIcon(II);
-        setTitle( KTUI.getMenutext( decoderList.B_4 ).trim() );
-        setStatus( KTUI.getTrackStatus() );
+        setTitle( CVNavi.getMenutext( decoderList.B_4 ).trim() );
+        setStatus( CVNavi.getTrackStatus() );
         jAdrLok.setText(""+lokAdr);
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
         setBorder();
 
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
+        CVNavi.frameInstanceDEVICE = this;
     }
 
     private void setBorder() {
@@ -1267,15 +1267,15 @@ public class B_4 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSchreibenActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1288,20 +1288,20 @@ public class B_4 extends javax.swing.JFrame {
 
     private void jClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jClose1ActionPerformed
         if ((Com != null) && Com.isconnected()) {
-            // KTUI.trackPowerOff(Com);
-            Com = KTUI.safelyCloseCom( this, Com );
+            // CVNavi.trackPowerOff(Com);
+            Com = CVNavi.safelyCloseCom( this, Com );
         }
         timer.stop();
         this.dispose();
 }//GEN-LAST:event_jClose1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        KTUI.frameInstanceDEVICE = null;
+        CVNavi.frameInstanceDEVICE = null;
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Com = KTUI.safelyOpenCom( this, Com );
-        KTUI.checkTrackStatus( Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
+        CVNavi.checkTrackStatus( Com );
 
         // store pointer to instance in a final variable -> useable inside ActionListener
         final B_4 outerThis = this;
@@ -1310,12 +1310,12 @@ public class B_4 extends javax.swing.JFrame {
 
             public void actionPerformed(ActionEvent e) {
                 // Auswertung der Antwort der Zentrale ?
-                KTUI.flushReadBuffer( Com );
+                CVNavi.flushReadBuffer( Com );
 
                 if( bAbbruch ) {
                     System.out.println("Abbruch durch Benutzer" );
                     stopIOAction();
-                    KTUI.mbRWCancelled(outerThis, 5);
+                    CVNavi.mbRWCancelled(outerThis, 5);
                     return;
                 }
 
@@ -1440,7 +1440,7 @@ public class B_4 extends javax.swing.JFrame {
 
                     case 7:
                         stopIOAction();
-                        KTUI.mbConfigWriteSuccess( outerThis, 5 );
+                        CVNavi.mbConfigWriteSuccess( outerThis, 5 );
                         break;
 
                     case 8:
@@ -1567,9 +1567,9 @@ public class B_4 extends javax.swing.JFrame {
                         break;
 
                     case 70:
-                        Wert = KTUI.checkTextField( outerThis, jAdr73, 1, 2040, 2040, false);
-                        KTUI.setSwitch( Com, Wert, false, true );
-                        KTUI.setSwitch( Com, Wert, false, false );
+                        Wert = CVNavi.checkTextField( outerThis, jAdr73, 1, 2040, 2040, false);
+                        CVNavi.setSwitch( Com, Wert, false, true );
+                        CVNavi.setSwitch( Com, Wert, false, false );
                         SendeZaehler = 4242;
                         timer.setInitialDelay(2000);
                         timer.start();
@@ -1598,9 +1598,9 @@ public class B_4 extends javax.swing.JFrame {
                         break;
 
                     case 77:
-                        Wert = KTUI.checkTextField( outerThis, jAdr76, 1, 2040, 2040, false);
-                        KTUI.setSwitch( Com, Wert, false, true );
-                        KTUI.setSwitch( Com, Wert, false, false );
+                        Wert = CVNavi.checkTextField( outerThis, jAdr76, 1, 2040, 2040, false);
+                        CVNavi.setSwitch( Com, Wert, false, true );
+                        CVNavi.setSwitch( Com, Wert, false, false );
                         SendeZaehler = 4242;
                         timer.setInitialDelay(2000);
                         timer.start();
@@ -1679,7 +1679,7 @@ public class B_4 extends javax.swing.JFrame {
 
                     default:
                         stopIOAction();
-                        KTUI.mbConfigWriteSuccess( outerThis, 5 );
+                        CVNavi.mbConfigWriteSuccess( outerThis, 5 );
                 }
             }
         };
@@ -1772,15 +1772,15 @@ public class B_4 extends javax.swing.JFrame {
     }
 
     private void jShowVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowVerActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1790,15 +1790,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowVerActionPerformed
 
     private void jShowShortOn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowShortOn1ActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1808,15 +1808,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowShortOn1ActionPerformed
 
     private void jShowRailcomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowRailcomActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1826,15 +1826,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowRailcomActionPerformed
 
     private void jShowVoltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowVoltActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1844,15 +1844,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowVoltActionPerformed
 
     private void jShowAmpereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowAmpereActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1862,15 +1862,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowAmpereActionPerformed
 
     private void jShowShortOn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowShortOn5ActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1880,15 +1880,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowShortOn5ActionPerformed
 
     private void jShowShortWarnMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowShortWarnMaxActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1898,15 +1898,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowShortWarnMaxActionPerformed
 
     private void jShowReactWatchdogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowReactWatchdogActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1916,15 +1916,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowReactWatchdogActionPerformed
 
     private void jShowReactSwitchCmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowReactSwitchCmdActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1942,7 +1942,7 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jClose3ActionPerformed
 
     private void jCbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbStatusActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
@@ -1950,27 +1950,27 @@ public class B_4 extends javax.swing.JFrame {
             if( debugLevel >= 1 ) {
                 System.out.println( "EINSCHALTEN" );
             }
-            KTUI.trackPowerOn( Com );
+            CVNavi.trackPowerOn( Com );
         } else {
             if( debugLevel >= 1 ) {
                 System.out.println( "AUSSCHALTEN" );
             }
-            KTUI.trackPowerOff( Com );
+            CVNavi.trackPowerOff( Com );
         }
     }//GEN-LAST:event_jCbStatusActionPerformed
 
     private void jWrite73ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWrite73ActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        int Wert = KTUI.checkTextField( this, jAdr73, 1, 2040, 2040, true);
+        int Wert = CVNavi.checkTextField( this, jAdr73, 1, 2040, 2040, true);
 
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -1981,17 +1981,17 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWrite73ActionPerformed
 
     private void jWrite76ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWrite76ActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        int Wert = KTUI.checkTextField( this, jAdr76, 1, 2040, 2040, true);
+        int Wert = CVNavi.checkTextField( this, jAdr76, 1, 2040, 2040, true);
 
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2001,15 +2001,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWrite76ActionPerformed
 
     private void jWriteWarnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWriteWarnActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2019,15 +2019,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWriteWarnActionPerformed
 
     private void jWrite5ZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWrite5ZActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2037,7 +2037,7 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWrite5ZActionPerformed
 
     private void jAdr73FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAdr73FocusLost
-        int Wert = KTUI.checkTextField( this, jAdr73, 1, 2040, 2040, true);
+        int Wert = CVNavi.checkTextField( this, jAdr73, 1, 2040, 2040, true);
         jAdr73copy.setText(""+Wert);
     }//GEN-LAST:event_jAdr73FocusLost
 
@@ -2048,7 +2048,7 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jAdr73KeyReleased
 
     private void jAdr76FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAdr76FocusLost
-        int Wert = KTUI.checkTextField( this, jAdr76, 1, 2040, 2039, true);
+        int Wert = CVNavi.checkTextField( this, jAdr76, 1, 2040, 2039, true);
         jAdr76copy.setText(""+Wert);
     }//GEN-LAST:event_jAdr76FocusLost
 
@@ -2059,15 +2059,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jAdr76KeyReleased
 
     private void jWriteVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWriteVActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2077,15 +2077,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWriteVActionPerformed
 
     private void jWriteAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWriteAActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2095,15 +2095,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWriteAActionPerformed
 
     private void jWriteRCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWriteRCActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2113,15 +2113,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWriteRCActionPerformed
 
     private void jWriteZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWriteZActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2131,15 +2131,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWriteZActionPerformed
 
     private void jWrite71_72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWrite71_72ActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2150,15 +2150,15 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWrite71_72ActionPerformed
 
     private void jWrite74_75ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWrite74_75ActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
-        if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-            KTUI.mbEnablePower(this);
+        if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+            CVNavi.mbEnablePower(this);
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String s = "XPD "+lokAdr+" 7 62\r";
         Com.write(s);
@@ -2169,18 +2169,18 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jWrite74_75ActionPerformed
 
     private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
-        int dialogResult = KTUI.yesNoResetFactoryDefault();
+        int dialogResult = CVNavi.yesNoResetFactoryDefault();
         if(dialogResult == JOptionPane.YES_OPTION){
             System.out.println("jButtonReset: YES" );
-            Com = KTUI.safelyOpenCom( this, Com );
+            Com = CVNavi.safelyOpenCom( this, Com );
             if( Com == null ) {
                 return;
             }
-            if( KTUI.getTrackStatus() != c.cuPowerOn ) {
-                KTUI.mbEnablePower(this);
+            if( CVNavi.getTrackStatus() != c.cuPowerOn ) {
+                CVNavi.mbEnablePower(this);
                 return;
             }
-            KTUI.flushReadBuffer( Com );
+            CVNavi.flushReadBuffer( Com );
 
             String s = "XPD "+lokAdr+" 7 62\r";
             Com.write(s);
@@ -2194,7 +2194,7 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonResetActionPerformed
 
     private void jAdrLokFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAdrLokFocusLost
-        lokAdr = KTUI.checkTextField( this, jAdrLok, 1, 10239, 9999, true);
+        lokAdr = CVNavi.checkTextField( this, jAdrLok, 1, 10239, 9999, true);
         setBorder();
     }//GEN-LAST:event_jAdrLokFocusLost
 
@@ -2205,27 +2205,27 @@ public class B_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jAdrLokKeyReleased
 
     private void jButton73gActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton73gActionPerformed
-        int Wert = KTUI.checkTextField( this, jAdr73, 1, 2040, 2040, false);
-        KTUI.setSwitch( Com, Wert, true, true );
-        KTUI.setSwitch( Com, Wert, true, false );
+        int Wert = CVNavi.checkTextField( this, jAdr73, 1, 2040, 2040, false);
+        CVNavi.setSwitch( Com, Wert, true, true );
+        CVNavi.setSwitch( Com, Wert, true, false );
     }//GEN-LAST:event_jButton73gActionPerformed
 
     private void jButton73rActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton73rActionPerformed
-        int Wert = KTUI.checkTextField( this, jAdr73, 1, 2040, 2040, false);
-        KTUI.setSwitch( Com, Wert, false, true );
-        KTUI.setSwitch( Com, Wert, false, false );
+        int Wert = CVNavi.checkTextField( this, jAdr73, 1, 2040, 2040, false);
+        CVNavi.setSwitch( Com, Wert, false, true );
+        CVNavi.setSwitch( Com, Wert, false, false );
     }//GEN-LAST:event_jButton73rActionPerformed
 
     private void jButton76gActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton76gActionPerformed
-        int Wert = KTUI.checkTextField( this, jAdr76, 1, 2040, 2040, false);
-        KTUI.setSwitch( Com, Wert, true, true );
-        KTUI.setSwitch( Com, Wert, true, false );
+        int Wert = CVNavi.checkTextField( this, jAdr76, 1, 2040, 2040, false);
+        CVNavi.setSwitch( Com, Wert, true, true );
+        CVNavi.setSwitch( Com, Wert, true, false );
     }//GEN-LAST:event_jButton76gActionPerformed
 
     private void jButton76rActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton76rActionPerformed
-        int Wert = KTUI.checkTextField( this, jAdr76, 1, 2040, 2040, false);
-        KTUI.setSwitch( Com, Wert, false, true );
-        KTUI.setSwitch( Com, Wert, false, false );
+        int Wert = CVNavi.checkTextField( this, jAdr76, 1, 2040, 2040, false);
+        CVNavi.setSwitch( Com, Wert, false, true );
+        CVNavi.setSwitch( Com, Wert, false, false );
     }//GEN-LAST:event_jButton76rActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

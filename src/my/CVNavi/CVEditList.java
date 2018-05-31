@@ -32,14 +32,14 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
     public int Decoder = 1;
     public boolean bPrint = false;
     public ReadWriteCV rwcv = null;
-    private CVNavi KTUI = null;
+    private CVNavi CVNavi = null;
     private ResourceBundle bundle;
 
-    public CVEditList(Dialog parent, boolean modal, CVNavi ktui, int[][] CV, byte[] CV_To_Edit, boolean bPrint) {
+    public CVEditList(Dialog parent, boolean modal, CVNavi cvnavi, int[][] CV, byte[] CV_To_Edit, boolean bPrint) {
         super(parent, modal);
-        this.KTUI = ktui;
-        if( KTUI != null ) {
-            this.Decoder = KTUI.Decoder;
+        this.CVNavi = cvnavi;
+        if( CVNavi != null ) {
+            this.Decoder = CVNavi.Decoder;
             this.CV = CV;
             this.CV_To_Edit = CV_To_Edit;
             this.bPrint = bPrint;
@@ -575,15 +575,15 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
             cvNr = CV[0][i];
             if( cvNr == 0 )
             continue;
-            if( KTUI.checkNumRange(cvNr, 33, 46) )
+            if( CVNavi.checkNumRange(cvNr, 33, 46) )
             {
                 CV_To_Edit[cvNr-1] = 1;
             }
-            if( KTUI.checkNumRange(cvNr, 53, 58) )
+            if( CVNavi.checkNumRange(cvNr, 53, 58) )
             {
                 CV_To_Edit[cvNr-1] = 1;
             }
-            if( KTUI.checkNumRange(cvNr, 62, 64) )
+            if( CVNavi.checkNumRange(cvNr, 62, 64) )
             {
                 CV_To_Edit[cvNr-1] = 1;
             }
@@ -603,11 +603,11 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
             cvNr = CV[0][i];
             if( cvNr == 0 )
                 continue;
-            if( KTUI.checkNumRange(cvNr, 1, 5) )
+            if( CVNavi.checkNumRange(cvNr, 1, 5) )
             {
                 CV_To_Edit[cvNr-1] = 1;
             }
-            if( KTUI.checkNumRange(cvNr, 17, 19) )
+            if( CVNavi.checkNumRange(cvNr, 17, 19) )
             {
                 CV_To_Edit[cvNr-1] = 1;
             }
@@ -615,7 +615,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
             {
                 CV_To_Edit[cvNr-1] = 1;
             }
-            if( KTUI.checkNumRange(cvNr, 49, 52) )
+            if( CVNavi.checkNumRange(cvNr, 49, 52) )
             {
                 CV_To_Edit[cvNr-1] = 1;
             }

@@ -21,17 +21,17 @@ import static my.CVNavi.CVNavi.debugLevel;
 
 public class PortLister {
 
-    public static String[] listSerialPorts(CVNavi KTUI) {
+    public static String[] listSerialPorts(CVNavi CVNavi) {
         Enumeration<CommPortIdentifier> ports;
         try {
             ports = CommPortIdentifier.getPortIdentifiers();
         } catch (UnsatisfiedLinkError e) {
             System.out.println("listSerialPorts: UnsatisfiedLinkError: "+ e);
-            KTUI.mbGeneric( KTUI, "PROBLEM: Library may be missing or does not fit.", "rxtxSerial.dll", e.getMessage() );
+            CVNavi.mbGeneric( CVNavi, "PROBLEM: Library may be missing or does not fit.", "rxtxSerial.dll", e.getMessage() );
             return null;
         } catch (Exception | Error e) {
             System.out.println("listSerialPorts Exception/Error: "+ e);
-            KTUI.mbGeneric( KTUI, "PROBLEM", "reading serial/USB ports failed", e.getMessage() );
+            CVNavi.mbGeneric( CVNavi, "PROBLEM", "reading serial/USB ports failed", e.getMessage() );
             return null;
         }
         ArrayList portList = new ArrayList();

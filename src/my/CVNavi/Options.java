@@ -27,29 +27,29 @@ import java.util.logging.Logger;
  */
 public class Options extends javax.swing.JFrame {
 
-    public CVNavi KTUI;
+    public CVNavi CVNavi;
     private boolean bSpracheNeu;
     private ResourceBundle bundle;
 
     /** Creates new form Options */
-    public Options(CVNavi ktuiThis) {
-        if( ktuiThis == null ) {
+    public Options(CVNavi cvnaviThis) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceOPTIONS != null ) {
-            KTUI.frameInstanceOPTIONS.toFront();
-            KTUI.frameInstanceOPTIONS.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceOPTIONS != null ) {
+            CVNavi.frameInstanceOPTIONS.toFront();
+            CVNavi.frameInstanceOPTIONS.repaint();
             return;
         }
-        KTUI.frameInstanceOPTIONS = this;
+        CVNavi.frameInstanceOPTIONS = this;
 
         initComponents();
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
-        bSpracheNeu = KTUI.bSpracheDE;
+        bSpracheNeu = CVNavi.bSpracheDE;
         //Datei lesen
 
-        jZentrale.setSelectedIndex(KTUI.getZentrale());
+        jZentrale.setSelectedIndex(CVNavi.getZentrale());
         // Schnittstellen bestimmen (evtl. doch nur unter Windows ?)
 
         Logger lg = Logger.getGlobal();
@@ -70,7 +70,7 @@ public class Options extends javax.swing.JFrame {
         }
         System.out.println("Logger["+sl+"] lvPre["+s1+"] lvPost["+s2+"]");
 
-        String ports[] = PortLister.listSerialPorts(KTUI);
+        String ports[] = PortLister.listSerialPorts(CVNavi);
         if( ports != null ) {
             System.out.println(""+ports.length+" serial ports found");
             for (String port : ports) {
@@ -84,10 +84,10 @@ public class Options extends javax.swing.JFrame {
         
         // Schnittstellenliste aufbauen
         // SchnitsstellenVorauswahl setzen
-        jSchnittstelle.setSelectedItem(KTUI.gsSchnittstelle);
-        jBaudRate.setSelectedItem(Integer.toString(KTUI.gsBaudRate));
+        jSchnittstelle.setSelectedItem(CVNavi.gsSchnittstelle);
+        jBaudRate.setSelectedItem(Integer.toString(CVNavi.gsBaudRate));
         jMetal.setSelected(false);
-        switch (KTUI.gsLookAndFeel) {
+        switch (CVNavi.gsLookAndFeel) {
             case "Metal":
                 jMetal.setSelected(true);
                 break;
@@ -104,7 +104,7 @@ public class Options extends javax.swing.JFrame {
                 jMetal.setSelected(true);
         }
 
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
     }
 
@@ -271,7 +271,7 @@ public class Options extends javax.swing.JFrame {
 
     private void jButtonSaveAndCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveAndCloseActionPerformed
         Properties prop = new Properties();
-        KTUI.bSpracheDE = bSpracheNeu;
+        CVNavi.bSpracheDE = bSpracheNeu;
         Boolean localChanges = false;
 
 
@@ -280,28 +280,28 @@ public class Options extends javax.swing.JFrame {
             prop.loadFromXML(new FileInputStream(CVNavi.gsConfigFilename));
 
 
-            int oldZentrale = KTUI.getZentrale();
+            int oldZentrale = CVNavi.getZentrale();
             int newZentrale = jZentrale.getSelectedIndex();
             if( oldZentrale != newZentrale ) {
-                KTUI.setZentrale(newZentrale);
+                CVNavi.setZentrale(newZentrale);
                 localChanges = true;
             }
-            if( ! KTUI.gsSchnittstelle.equalsIgnoreCase(""+jSchnittstelle.getSelectedItem()) ) {
+            if( ! CVNavi.gsSchnittstelle.equalsIgnoreCase(""+jSchnittstelle.getSelectedItem()) ) {
                 // Schnittstelle 
-                KTUI.gsSchnittstelle = (String) jSchnittstelle.getSelectedItem();
+                CVNavi.gsSchnittstelle = (String) jSchnittstelle.getSelectedItem();
                 localChanges = true;
             }
             int newBaudRate = Integer.parseInt( (String) jBaudRate.getSelectedItem() );
-            if( KTUI.gsBaudRate != newBaudRate ) {
-                KTUI.gsBaudRate = newBaudRate;
+            if( CVNavi.gsBaudRate != newBaudRate ) {
+                CVNavi.gsBaudRate = newBaudRate;
                 localChanges = true;
             }
             
-            KTUI.fillMenuSelection();
+            CVNavi.fillMenuSelection();
             //set the properties value
-            prop.setProperty("Zentrale", KTUI.gsZentrale );
-            prop.setProperty("Schnittstelle", KTUI.gsSchnittstelle );
-            prop.setProperty("BaudRate", Integer.toString( KTUI.gsBaudRate )) ;
+            prop.setProperty("Zentrale", CVNavi.gsZentrale );
+            prop.setProperty("Schnittstelle", CVNavi.gsSchnittstelle );
+            prop.setProperty("BaudRate", Integer.toString( CVNavi.gsBaudRate )) ;
 
             if(     jMetal.isSelected())   prop.setProperty("LookAndFeel","Metal");
             else if(jMotif.isSelected())   prop.setProperty("LookAndFeel","Motif");
@@ -309,8 +309,8 @@ public class Options extends javax.swing.JFrame {
             else if(jWindows.isSelected()) prop.setProperty("LookAndFeel","Windows");
             else prop.setProperty("LookAndFeel","Metal");
 
-            if( ! prop.getProperty("LookAndFeel").equals( KTUI.gsLookAndFeel )) {
-                KTUI.gsLookAndFeel = prop.getProperty("LookAndFeel");
+            if( ! prop.getProperty("LookAndFeel").equals( CVNavi.gsLookAndFeel )) {
+                CVNavi.gsLookAndFeel = prop.getProperty("LookAndFeel");
                 MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
                 messageBox.jLabel1.setText(bundle.getString("Hinweis"));
                 messageBox.jLabel2.setText(bundle.getString("Options.newLook"));
@@ -320,7 +320,7 @@ public class Options extends javax.swing.JFrame {
             }
 
             //save properties to project root folder
-            prop.storeToXML(new FileOutputStream(KTUI.gsConfigFilename), KTUI.gsConfigComment);
+            prop.storeToXML(new FileOutputStream(CVNavi.gsConfigFilename), CVNavi.gsConfigComment);
         } catch (FileNotFoundException ex) {
             // Die XML-Config-Datei wird bei Bedarf beim Start des Programms in main() angelegt
             // deshalb hier keine weitere Behandlung
@@ -330,23 +330,23 @@ public class Options extends javax.swing.JFrame {
         }
 
         if( localChanges ) {
-            KTUI.verifyZentrale(true);
+            CVNavi.verifyZentrale(true);
         }
 
         this.dispose();
     }//GEN-LAST:event_jButtonSaveAndCloseActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        if( bSpracheNeu != KTUI.bSpracheDE) {
-            int n = KTUI.getDecoderChooser();
-            bSpracheNeu = KTUI.bSpracheDE;
-            KTUI.fillMenuSelection();
+        if( bSpracheNeu != CVNavi.bSpracheDE) {
+            int n = CVNavi.getDecoderChooser();
+            bSpracheNeu = CVNavi.bSpracheDE;
+            CVNavi.fillMenuSelection();
             formWindowOpened(null);
             repaint();
-            KTUI.setDecoderChooser(n);
+            CVNavi.setDecoderChooser(n);
         }
-        KTUI.frameInstanceOPTIONS = null;
-        KTUI.setFocus();
+        CVNavi.frameInstanceOPTIONS = null;
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     private void jNimbusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNimbusActionPerformed

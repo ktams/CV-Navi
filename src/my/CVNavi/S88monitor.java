@@ -39,8 +39,8 @@ public class S88monitor extends javax.swing.JDialog {
         if( debugLevel > 0 ) {
             System.out.println("NEW S88MONITOR");
         }
-        if( mc.KTUI.getNumS88() <= 0 ) {
-            mc.KTUI.mbNoS88modules( mc );
+        if( mc.CVNavi.getNumS88() <= 0 ) {
+            mc.CVNavi.mbNoS88modules( mc );
             return;            
         }
 
@@ -654,9 +654,9 @@ public class S88monitor extends javax.swing.JDialog {
             currNr = 1;
             this.jSpinnerS88monitor.setValue((Object) currNr);
         }
-        if( currNr > mc.KTUI.getNumS88() ) {
+        if( currNr > mc.CVNavi.getNumS88() ) {
             // upper bound
-            currNr = mc.KTUI.getNumS88();
+            currNr = mc.CVNavi.getNumS88();
             this.jSpinnerS88monitor.setValue((Object) currNr);
         }
 

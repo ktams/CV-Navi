@@ -23,7 +23,7 @@ import javax.swing.border.TitledBorder;
  * @author ktams
  */
 public class WD34 extends javax.swing.JFrame {
-    public CVNavi KTUI;
+    public CVNavi CVNavi;
     private TwoWaySerialComm Com = null;
     private int SendeZaehler;
     private boolean bWD34 = true;
@@ -42,58 +42,58 @@ public class WD34 extends javax.swing.JFrame {
     private ResourceBundle bundle;
 
     /** Creates new form WD34 */
-    WD34(CVNavi ktuiThis) {
-        if( ktuiThis == null ) {
+    WD34(CVNavi cvnaviThis) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceDEVICE != null ) {
+            CVNavi.frameInstanceDEVICE.toFront();
+            CVNavi.frameInstanceDEVICE.repaint();
             return;
         }
 
         ImageIcon II = null;
         initComponents();
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
-        switch( KTUI.Decoder ) {
+        switch( CVNavi.Decoder ) {
             case c.WD_34 :
                 II = new ImageIcon(getClass().getResource("/WD-34.gif"));
                 jBild.setIcon(II);
                 bWD34 = true;
                 b34_2 = false;
-                setTitle( KTUI.getMenutext( decoderList.WD_34 ).trim() );
+                setTitle( CVNavi.getMenutext( decoderList.WD_34 ).trim() );
                 break;
             case c.SD_34 :
                 II = new ImageIcon(getClass().getResource("/SD-34.gif"));
                 jBild.setIcon(II);
                 bWD34 = false;
                 b34_2 = false;
-                setTitle( KTUI.getMenutext( decoderList.SD_34 ).trim() );
+                setTitle( CVNavi.getMenutext( decoderList.SD_34 ).trim() );
                 break;
             case c.WD_34_2 :
                 II = new ImageIcon(getClass().getResource("/WD-34-2.gif"));
                 jBild.setIcon(II);
                 bWD34 = true;
                 b34_2 = true;
-                setTitle( KTUI.getMenutext( decoderList.WD_34 ).trim() );
+                setTitle( CVNavi.getMenutext( decoderList.WD_34 ).trim() );
                 break;
             case c.SD_34_2 :
                 II = new ImageIcon(getClass().getResource("/SD-34-2.gif"));
                 jBild.setIcon(II);
                 bWD34 = false;
                 b34_2 = true;
-                setTitle( KTUI.getMenutext( decoderList.SD_34 ).trim() );
+                setTitle( CVNavi.getMenutext( decoderList.SD_34 ).trim() );
                 break;
             default:
-                System.out.println("WD34 unsupported deocder type "+KTUI.Decoder);
+                System.out.println("WD34 unsupported deocder type "+CVNavi.Decoder);
                 return;
         }
         this.setIconImage(II.getImage());
 
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
+        CVNavi.frameInstanceDEVICE = this;
     }
 
     /** This method is called from within the constructor to
@@ -470,17 +470,17 @@ public class WD34 extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         stopIOAction();
-        KTUI.frameInstanceDEVICE = null;
-        KTUI.setFocus();
+        CVNavi.frameInstanceDEVICE = null;
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     private void jSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSchreibenActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         // Com.write((byte)0x60);
 
         cvAnfrage = 8;
@@ -501,7 +501,7 @@ public class WD34 extends javax.swing.JFrame {
     }//GEN-LAST:event_jSchreibenActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-    /*    if( ! KTUI.bSpracheDE ) {
+    /*    if( ! CVNavi.bSpracheDE ) {
             jLabelAdress.setText("Address:");
             jLabelRailComCheck.setText("RailCom check");
             jLabelZentraleSendetCoilOff.setText("Control unit sends coil off");
@@ -566,7 +566,7 @@ public class WD34 extends javax.swing.JFrame {
                     System.out.println("Abbruch durch Benutzer" );
                     if( bRead || bWrite ) {
                         jProgressBar1.setString(bundle.getString("WD34.BenutzerAbbruch"));
-                        KTUI.mbRWCancelled(outerThis, 5);
+                        CVNavi.mbRWCancelled(outerThis, 5);
                     }
                     stopIOAction();
                     bAbbruch = false;
@@ -587,7 +587,7 @@ public class WD34 extends javax.swing.JFrame {
                         bArray[bytesRead] = 0;
                         if( CVNavi.debugLevel > 2 ) {
                             System.out.println("529 aktueller Stand: bytesRead="+bytesRead );
-                            KTUI.dumpbArray(bArray);
+                            CVNavi.dumpbArray(bArray);
                         }
                     }
 
@@ -598,7 +598,7 @@ public class WD34 extends javax.swing.JFrame {
                             jProgressBar1.setString("Timeout");
                             System.out.println(" -> retries ende bytesRead="+bytesRead );
                             stopIOAction();
-                            KTUI.mbDeviceReadProblem( outerThis );
+                            CVNavi.mbDeviceReadProblem( outerThis );
                             return;
                         }
                         jProgressBar1.setString(bundle.getString("ReadWriteCV.Warte")+retries);
@@ -608,7 +608,7 @@ public class WD34 extends javax.swing.JFrame {
                     // es ist ein vollständiger Datensatz angekommen ?
                     bArray[bytesRead] = 0; // zur Sicherheit ;)
 
-                    if( ! KTUI.checkReadComplete(bArray) ) {
+                    if( ! CVNavi.checkReadComplete(bArray) ) {
                         // incomplete -> wait for more
                         return;
                     }
@@ -618,7 +618,7 @@ public class WD34 extends javax.swing.JFrame {
 
                 if(bRead) {
                     // check for a valid PTRD answer
-                    cvWert = KTUI.checkPTRDAnswer( bArray );
+                    cvWert = CVNavi.checkPTRDAnswer( bArray );
                     if( CVNavi.debugLevel >= 0 ) {
                         System.out.println("bRead cv["+cvAnfrage+"]="+cvWert );
                     }
@@ -634,7 +634,7 @@ public class WD34 extends javax.swing.JFrame {
                                 bRead = false;
                                 stopIOAction();
                                 jUpdateInfo.setText(bundle.getString("WD34.wrongvendor"));
-                                KTUI.mbNoTams( outerThis, c.mbRDcancel );
+                                CVNavi.mbNoTams( outerThis, c.mbRDcancel );
                                 return;
                             }
 
@@ -684,7 +684,7 @@ public class WD34 extends javax.swing.JFrame {
                             decAdr += cvWert*64;
                             jAdresse.setText("" + decAdr);
                             String ss = "-> ";
-                            if( KTUI.bSpracheDE ) {
+                            if( CVNavi.bSpracheDE ) {
                                 ss += "Weiche " ;
                             } else {
                                 ss += "Switch " ;
@@ -832,7 +832,7 @@ public class WD34 extends javax.swing.JFrame {
                     switch (SendeZaehler) {
                         case 0:
                             // check for a valid PTRD answer
-                            cvWert = KTUI.checkPTRDAnswer( bArray );
+                            cvWert = CVNavi.checkPTRDAnswer( bArray );
                             if( CVNavi.debugLevel >= 0 ) {
                                 System.out.println("bWrite read cv["+cvAnfrage+"]="+cvWert );
                             }
@@ -847,12 +847,12 @@ public class WD34 extends javax.swing.JFrame {
                                bWrite = false;
                                stopIOAction();
                                jUpdateInfo.setText(bundle.getString("WD34.write")+"wrong vendor");
-                               KTUI.mbNoTams( outerThis, c.mbWRcancel );
+                               CVNavi.mbNoTams( outerThis, c.mbWRcancel );
                                return;
                             }
 
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, false);
                             s = "XPTWD " + " 1 " + cvWert%64 + "\r";
                             jUpdateInfo.setText(bundle.getString("WD34.write")+"address low");
                             Com.write(s);
@@ -871,7 +871,7 @@ public class WD34 extends javax.swing.JFrame {
                                 // Skip writing OnTIme for SD34
                                 SendeZaehler += 4;
                             }
-                            cvWert = KTUI.checkTextField( outerThis, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, false);
                             s = "XPTWD 9 " + cvWert/64 + "\r";
                             jUpdateInfo.setText(bundle.getString("WD34.write")+"address high");
                             Com.write(s);
@@ -886,7 +886,7 @@ public class WD34 extends javax.swing.JFrame {
 
                         case 2:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime1, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime1, 0, 255, 0, false);
                             s = "XPTWD 3 " + cvWert + "\r";
                             jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 1");
                             Com.write(s);
@@ -901,7 +901,7 @@ public class WD34 extends javax.swing.JFrame {
 
                         case 3:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime2, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime2, 0, 255, 0, false);
                             s = "XPTWD 4 " + cvWert + "\r";
                             jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 2");
                             Com.write(s);
@@ -916,7 +916,7 @@ public class WD34 extends javax.swing.JFrame {
 
                         case 4:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime3, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime3, 0, 255, 0, false);
                             s = "XPTWD 5 " + cvWert + "\r";
                             jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 3");
                             Com.write(s);
@@ -931,7 +931,7 @@ public class WD34 extends javax.swing.JFrame {
 
                         case 5:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime4, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime4, 0, 255, 0, false);
                             s = "XPTWD 6 " + cvWert + "\r";
                             jUpdateInfo.setText(bundle.getString("WD34.write")+"On Time 4");
                             Com.write(s);
@@ -1019,12 +1019,12 @@ public class WD34 extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jAuslesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuslesenActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         SendeZaehler = 0;
         cvAnfrage = 8;
         String s = "XPTRD 8\r"; // Hersteller
@@ -1099,7 +1099,7 @@ public class WD34 extends javax.swing.JFrame {
         setCursor(c);
 
         // close interface
-        Com = KTUI.safelyCloseCom( this, Com );
+        Com = CVNavi.safelyCloseCom( this, Com );
     }
 
     private void jAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAbbrechenActionPerformed
@@ -1107,9 +1107,9 @@ public class WD34 extends javax.swing.JFrame {
     }//GEN-LAST:event_jAbbrechenActionPerformed
 
     private void jAdresseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAdresseFocusLost
-        int myDecAdr = KTUI.checkTextField( this, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, true );
+        int myDecAdr = CVNavi.checkTextField( this, jAdresse, 1, c.MAX_DCC_ACCMOD, 1, true );
         String ss = "-> ";
-        if( KTUI.bSpracheDE ) {
+        if( CVNavi.bSpracheDE ) {
             ss += "Weiche " ;
         } else {
             ss += "point " ;
@@ -1119,19 +1119,19 @@ public class WD34 extends javax.swing.JFrame {
     }//GEN-LAST:event_jAdresseFocusLost
 
     private void jOnTime1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jOnTime1FocusLost
-        KTUI.checkTextField( this, jOnTime1, 0, 255, 5, true );
+        CVNavi.checkTextField( this, jOnTime1, 0, 255, 5, true );
     }//GEN-LAST:event_jOnTime1FocusLost
 
     private void jOnTime2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jOnTime2FocusLost
-        KTUI.checkTextField( this, jOnTime2, 0, 255, 5, true );
+        CVNavi.checkTextField( this, jOnTime2, 0, 255, 5, true );
     }//GEN-LAST:event_jOnTime2FocusLost
 
     private void jOnTime3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jOnTime3FocusLost
-        KTUI.checkTextField( this, jOnTime3, 0, 255, 5, true );
+        CVNavi.checkTextField( this, jOnTime3, 0, 255, 5, true );
     }//GEN-LAST:event_jOnTime3FocusLost
 
     private void jOnTime4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jOnTime4FocusLost
-        KTUI.checkTextField( this, jOnTime4, 0, 255, 5, true );
+        CVNavi.checkTextField( this, jOnTime4, 0, 255, 5, true );
     }//GEN-LAST:event_jOnTime4FocusLost
 
     private void jAdresseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAdresseKeyReleased

@@ -57,7 +57,7 @@ import static my.CVNavi.CVNavi.rs232_or_rb_usb_2;
  *
  */
 public class MC extends javax.swing.JFrame {
-    public CVNavi KTUI = null;
+    public CVNavi CVNavi = null;
     public String ReturnString = "Tams Elektronik";
     private TwoWaySerialComm Com = null;
     private int gsBaudRateSaved = 0;
@@ -195,16 +195,16 @@ public class MC extends javax.swing.JFrame {
 
 
     /** Creates new form MC */
-    public MC(CVNavi ktuiThis) {
+    public MC(CVNavi cvnaviThis) {
         this.LokName = "";
         this.Fahrstufen = 28;
-        if( ktuiThis == null ) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceDEVICE != null ) {
+            CVNavi.frameInstanceDEVICE.toFront();
+            CVNavi.frameInstanceDEVICE.repaint();
             return;
         }
         retries = CVNavi.timerRetries;
@@ -217,7 +217,7 @@ public class MC extends javax.swing.JFrame {
         ImageIcon II2 = null;
         II = new ImageIcon(getClass().getResource("/MasterControl.gif"));
         II2 = new ImageIcon(getClass().getResource("/RedBox.gif")); // replace with final version
-        setTitle( KTUI.getMenutext( decoderList.MC ).trim() );
+        setTitle( CVNavi.getMenutext( decoderList.MC ).trim() );
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
         if( II != null ) {
             setIconImage(II.getImage());
@@ -228,7 +228,7 @@ public class MC extends javax.swing.JFrame {
             jBild2.setIcon(II2);
         }
 
-        jDatenQuelle.setText(KTUI.gsSchnittstelle);
+        jDatenQuelle.setText(CVNavi.gsSchnittstelle);
 
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
@@ -277,8 +277,8 @@ public class MC extends javax.swing.JFrame {
                 if( s2.endsWith("!") ) {
                     s2 = s2.replaceAll("!", "");
                 }
-                int n1 = KTUI.checkAndGetStrNumRangeDef( null, s1, 1, c.MAX_M3_SID, 0, false);
-                int n2 = KTUI.checkAndGetStrNumRangeDef( null, s2, 1, c.MAX_M3_SID, 0, false);
+                int n1 = CVNavi.checkAndGetStrNumRangeDef( null, s1, 1, c.MAX_M3_SID, 0, false);
+                int n2 = CVNavi.checkAndGetStrNumRangeDef( null, s2, 1, c.MAX_M3_SID, 0, false);
                 return n1 - n2 ;
             }
         };
@@ -315,8 +315,8 @@ public class MC extends javax.swing.JFrame {
                         return 1;
                     }
                 }
-                int n1 = KTUI.checkAndGetStrNumRangeDef( null, o1, 1, c.MAX_M3_SID, 0, false);
-                int n2 = KTUI.checkAndGetStrNumRangeDef( null, o2, 1, c.MAX_M3_SID, 0, false);
+                int n1 = CVNavi.checkAndGetStrNumRangeDef( null, o1, 1, c.MAX_M3_SID, 0, false);
+                int n2 = CVNavi.checkAndGetStrNumRangeDef( null, o2, 1, c.MAX_M3_SID, 0, false);
                 return n1 - n2 ;
             }
         });
@@ -372,8 +372,8 @@ public class MC extends javax.swing.JFrame {
                     }
                 }
                 // Vergleiche Fahrstufen numerisch ( hier 27 ohne [aAbB] )
-                int n1 = KTUI.checkAndGetStrNumRangeDef( null, s1.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
-                int n2 = KTUI.checkAndGetStrNumRangeDef( null, s2.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
+                int n1 = CVNavi.checkAndGetStrNumRangeDef( null, s1.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
+                int n2 = CVNavi.checkAndGetStrNumRangeDef( null, s2.replaceAll("[aAbB]", ""), 0, Integer.MAX_VALUE, 0, false);
                 return n1 - n2;
             }
         });
@@ -393,9 +393,9 @@ public class MC extends javax.swing.JFrame {
         // set to top to avoid scrolling to bottom
         this.jTextPane1.setCaretPosition(0);
 
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
+        CVNavi.frameInstanceDEVICE = this;
     }
 
     private int crc16(int s, int count,int[] data) {
@@ -3915,7 +3915,7 @@ public class MC extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // falls Schnittstelle offen und verbunden -> schliessen
         if( this.M3changed ) {
-            int answer = KTUI.yesNoM3listSave();
+            int answer = CVNavi.yesNoM3listSave();
             System.out.println("formWindowClosed: answer="+answer );
             if( answer == 0 ) {
                 jLocM3cfgSaveActionPerformed(null);
@@ -3925,11 +3925,11 @@ public class MC extends javax.swing.JFrame {
         if( debugLevel > 0 ) {
             System.out.println("formWindowClosed");
         }
-        KTUI.frameInstanceDEVICE = null;
+        CVNavi.frameInstanceDEVICE = null;
         stopIOAction();
-        Com = KTUI.safelyCloseCom( this, Com );
-        KTUI.setNumS88(0);
-        KTUI.setFocus();
+        Com = CVNavi.safelyCloseCom( this, Com );
+        CVNavi.setNumS88(0);
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     private void initLocoTable(){
@@ -4011,15 +4011,15 @@ public class MC extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         // Ist die TamsMC auch eingestellt ?
-        if ( KTUI.getZentrale() != c.cuMasterControl ) {
-            KTUI.mbNoTamsMC( this );
+        if ( CVNavi.getZentrale() != c.cuMasterControl ) {
+            CVNavi.mbNoTamsMC( this );
             this.dispose();
             return;
         }
 
-        gsBaudRateSaved = KTUI.gsBaudRate;
-        jLabel18.setText(jLabel18.getText().replace("COMx", KTUI.gsSchnittstelle));
-        if( KTUI.rs232_or_rb_usb_2 ) {
+        gsBaudRateSaved = CVNavi.gsBaudRate;
+        jLabel18.setText(jLabel18.getText().replace("COMx", CVNavi.gsSchnittstelle));
+        if( CVNavi.rs232_or_rb_usb_2 ) {
             jUSB1.setSelected(false);
             jUSB2.setSelected(true);
         } else {
@@ -4028,7 +4028,7 @@ public class MC extends javax.swing.JFrame {
         }
         setFocusUpdStart();
         setFocusDateiAuswahl();
-        Com = KTUI.safelyOpenCom( this, Com, false );
+        Com = CVNavi.safelyOpenCom( this, Com, false );
         System.out.println("call Com.connect OUT: Com "+((Com == null)?"==":"!=")+" NULL" );
         System.out.println("call Com.connect OUT: isopen["+((Com == null)?"Com is undefined":Com.isconnected())+"]" );
         if( (Com == null) || (! Com.isconnected()) ) {
@@ -4039,16 +4039,16 @@ public class MC extends javax.swing.JFrame {
             jWRloc.setEnabled(false);
             jWRtra.setEnabled(false);
             jWRmag.setEnabled(false);
-            if( KTUI.updateAlwaysVisible == false ) {
+            if( CVNavi.updateAlwaysVisible == false ) {
                 jTabbedPane1.remove(this.jUpdate);
             }
             //jDatenQuelle.setText("invalid");
             jDatenQuelle.setForeground(Color.red);
             jBaud.setSelectedItem("0");
             Com = null;
-            KTUI.mbDeviceConnectProblemOffline( this );
+            CVNavi.mbDeviceConnectProblemOffline( this );
         } else {
-            Com = KTUI.safelyCloseCom( this, Com );
+            Com = CVNavi.safelyCloseCom( this, Com );
         }
         jCancel.setEnabled(false);
         jUpdCancel.setEnabled(false);
@@ -4080,7 +4080,7 @@ public class MC extends javax.swing.JFrame {
                         bArray[bytesRead] = 0;
                         if( CVNavi.debugLevel > 2 ) {
                             System.out.println("2880 current: bytesRead="+bytesRead );
-                            KTUI.dumpbArray(bArray);
+                            CVNavi.dumpbArray(bArray);
                         }
                     }
 
@@ -4123,7 +4123,7 @@ public class MC extends javax.swing.JFrame {
                                         jMMRegister.setEnabled(true);
                                         jMMWert.setEnabled(true);
                                         jMcRwProgress.setString(null);
-                                         KTUI.mbGeneric(null, "Eingabe falsch: Wert");
+                                         CVNavi.mbGeneric(null, "Eingabe falsch: Wert");
                                         return;
                                     }
                                     if(MM_Wert > 255 || MM_Wert == 0)
@@ -4158,7 +4158,7 @@ public class MC extends javax.swing.JFrame {
                                         jMMRegister.setEnabled(true);
                                         jMMWert.setEnabled(true);
                                         jMcRwProgress.setString(null);
-                                         KTUI.mbGeneric(null, "Eingabe falsch: Register");
+                                         CVNavi.mbGeneric(null, "Eingabe falsch: Register");
                                         return;
                                     }
                                     if(MM_Adr > 255 || MM_Adr == 0)
@@ -4222,7 +4222,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if(bAskLokState)
                     {
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4316,7 +4316,7 @@ public class MC extends javax.swing.JFrame {
                             if(bMustAskStatus)
                             {
                                 s = "XLC " + AskedLokAdr + "\r";
-                                KTUI.flushReadBuffer( Com );
+                                CVNavi.flushReadBuffer( Com );
                                 resetbArray();
                                 bMustAskStatus = false;
                                 Com.write(s);
@@ -4336,7 +4336,7 @@ public class MC extends javax.swing.JFrame {
                         else if(s.contains("unused"))
                         {
                             s = "XL " + AskedLokAdr + " 0 0 f 0 0 0 0\r";
-                            KTUI.flushReadBuffer( Com );
+                            CVNavi.flushReadBuffer( Com );
                             resetbArray();
                             bMustAskStatus = true;
                             Com.write(s);
@@ -4532,7 +4532,7 @@ public class MC extends javax.swing.JFrame {
                                 jDisplay.setText(text.substring(0, 7) + str + text.substring(12, 17) + "           " + text.substring(29));
                             }
                             s = "XL " + AskedLokAdr + "\r";
-                            KTUI.flushReadBuffer( Com );
+                            CVNavi.flushReadBuffer( Com );
                             resetbArray();
                             Com.write(s);
                             timer.setInitialDelay(CVNavi.timer1);
@@ -4545,7 +4545,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if(bReadPTdirekt)
                     {
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4568,7 +4568,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if(bReadPTList)
                     {
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4605,7 +4605,7 @@ public class MC extends javax.swing.JFrame {
                             int j = dlm.getSize();
                             if(j > Index)
                             {
-                                KTUI.flushReadBuffer( Com );
+                                CVNavi.flushReadBuffer( Com );
                                 resetbArray();
                                 jCVListe.setSelectedIndex(Index + 1);
                                 s = (String)jCVListe.getSelectedValue();
@@ -4632,7 +4632,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if(bWriteList)
                     {
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4648,7 +4648,7 @@ public class MC extends javax.swing.JFrame {
                                 int j = model.getSize();
                                 if(j != Index + 1)
                                 {
-                                    KTUI.flushReadBuffer( Com );
+                                    CVNavi.flushReadBuffer( Com );
                                     resetbArray();
                                     jCVListe.setSelectedIndex(Index + 1);
                                     s = (String)jCVListe.getSelectedValue();
@@ -4689,7 +4689,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if(bProg_m3)
                     {
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4711,7 +4711,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if(bReadStatus){
                         System.out.println("2903 PRE  checkCfgReadComplete: bytesRead="+bytesRead );
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             System.out.println("2775 POST checkCfgReadComplete: INCOMPLETE");
                             return;
@@ -4723,7 +4723,7 @@ public class MC extends javax.swing.JFrame {
                     }
                     if(bReadCfg) {
                         jMcRwInfo.setText("read: MC config read in progress ("+bytesRead+")");
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4735,7 +4735,7 @@ public class MC extends javax.swing.JFrame {
                     if(bReadRC) {
                         jMcRwInfo.setText("read: MC RailCom option read in progress ("+bytesRead+")");
 
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4754,12 +4754,12 @@ public class MC extends javax.swing.JFrame {
                         // check 1st byte for error code
                         byte[] mYbArray = new byte[1];
                         System.arraycopy(bArray, 0, mYbArray, 0, 1);
-                        Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
+                        Boolean ok = CVNavi.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
                         if( ( ! ok) && ( debugLevel == 0 ) ) {
-                            KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
+                            CVNavi.checkMCAnswerByte( outerThis, mYbArray, true);
                         }
                         if( debugLevel > 0 ) {
-                            System.out.println("mYbArray("+bytesRead+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
+                            System.out.println("mYbArray("+bytesRead+")=0x"+CVNavi.byteArrayToHex(mYbArray)+ " OK="+ok);
                             System.out.println("readProgress="+readWriteProgress);
                         }
                         if( ok && ( bytesRead == 1 ) ) {
@@ -4791,17 +4791,17 @@ public class MC extends javax.swing.JFrame {
                             }
                             byte[] mYbArray = new byte[bytesRead];
                             System.arraycopy(bArray, 0, mYbArray, 0, bytesRead);
-                            Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
+                            Boolean ok = CVNavi.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
                             if( ( ! ok ) && ( debugLevel == 0 ) ) {
-                                KTUI.checkMCAnswerByte( outerThis, mYbArray, true);
+                                CVNavi.checkMCAnswerByte( outerThis, mYbArray, true);
                             }
                             if( debugLevel > 0 ) {
-                                System.out.println("mYbArray("+bytesRead+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
+                                System.out.println("mYbArray("+bytesRead+")=0x"+CVNavi.byteArrayToHex(mYbArray)+ " OK="+ok);
                                 System.out.println("readProgress="+readWriteProgress);
                             }
                             bWriteSo999 = false;
                         }
-                        else if( ! KTUI.checkReadComplete(bArray) ) {
+                        else if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4811,7 +4811,7 @@ public class MC extends javax.swing.JFrame {
                         // Datensatz vollständig -> Teste/Analysiere Antwort
                     }
                     if(bReadS88num) {
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4821,7 +4821,7 @@ public class MC extends javax.swing.JFrame {
                         checkS88num(bArray, bytesRead);
                     }
                     if(bReadS88value) {
-                        if( ! KTUI.checkReadComplete(bArray) ) {
+                        if( ! CVNavi.checkReadComplete(bArray) ) {
                             // incomplete -> wait for more
                             return;
                         }
@@ -4845,15 +4845,15 @@ public class MC extends javax.swing.JFrame {
                     jMcM3Progress.setValue(++readWriteProgress);
                     byte[] mYbArray = new byte[nBytes];
                     System.arraycopy(bArray, 0, mYbArray, 0, nBytes);
-                    Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
+                    Boolean ok = CVNavi.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
                     if( debugLevel > 0 ) {
-                        System.out.println("mYbArray("+nBytes+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
+                        System.out.println("mYbArray("+nBytes+")=0x"+CVNavi.byteArrayToHex(mYbArray)+ " OK="+ok);
                         System.out.println("readProgress="+readWriteProgress);
                     }
 
                     if(nBytes < 1)
                     {
-                        KTUI.mbTimeout( outerThis, c.mbMCRDcommitErr );
+                        CVNavi.mbTimeout( outerThis, c.mbMCRDcommitErr );
                         jMcM3Info.setText("Xm3Sid: write finished with error");
                     } else {
                         jMcM3Info.setText("Xm3Sid: write finished");
@@ -4872,15 +4872,15 @@ public class MC extends javax.swing.JFrame {
                     jMcM3Progress.setValue(++readWriteProgress);
                     byte[] mYbArray = new byte[nBytes];
                     System.arraycopy(bArray, 0, mYbArray, 0, nBytes);
-                    Boolean ok = KTUI.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
+                    Boolean ok = CVNavi.checkMCAnswerByte( outerThis, mYbArray, (debugLevel > 0));
                     if( debugLevel > 0 ) {
-                        System.out.println("mYbArray("+nBytes+")=0x"+KTUI.byteArrayToHex(mYbArray)+ " OK="+ok);
+                        System.out.println("mYbArray("+nBytes+")=0x"+CVNavi.byteArrayToHex(mYbArray)+ " OK="+ok);
                         System.out.println("readProgress="+readWriteProgress+" M3used="+M3used);
                     }
 
                     if(nBytes < 1)
                     {
-                        KTUI.mbTimeout( outerThis, c.mbMCRDcommitErr );
+                        CVNavi.mbTimeout( outerThis, c.mbMCRDcommitErr );
                         jMcM3Info.setText("Xm3Sid: write list commit missing");
                         bWriteM3sidList = false;
                         stopIOAction();
@@ -4918,7 +4918,7 @@ public class MC extends javax.swing.JFrame {
                     Com.write(wArray);
 
                     if( debugLevel > 0 ) {
-                        System.out.println("written to MC wArray=0x"+KTUI.byteArrayToHex(wArray));
+                        System.out.println("written to MC wArray=0x"+CVNavi.byteArrayToHex(wArray));
                     }
                     jMcM3Info.setText("Xm3Sid: write list in progress");
                     jMcM3Progress.setValue(++readWriteProgress);
@@ -4935,12 +4935,12 @@ public class MC extends javax.swing.JFrame {
                     stopIOAction();
                     resetbArray();
 
-                    MZ pre = KTUI.getMZ();
+                    MZ pre = CVNavi.getMZ();
                     if( debugLevel > 0 ) {
                         System.out.println("bReadStatus="+strArr[0]+ " MZ pre="+pre.toString() );
                     }
 
-                    KTUI.setModeZentrale(strArr[0]);
+                    CVNavi.setModeZentrale(strArr[0]);
                     return;
                 }
 
@@ -4954,13 +4954,13 @@ public class MC extends javax.swing.JFrame {
                         System.out.println("Parser 1 nBytes="+bytesRead+" str.length="+str.length() );
                     }
                     int tmpMcRwMax = jMcRwProgress.getMaximum();
-                    validMcData = parseInputArray( KTUI.gsSchnittstelle, str );
+                    validMcData = parseInputArray( CVNavi.gsSchnittstelle, str );
                     if( validMcData ) {
                         reCheckVersionInfo();
                     }
                     jMcRwProgress.setMaximum(tmpMcRwMax);
 
-                    jDatenQuelle.setText(KTUI.gsSchnittstelle);
+                    jDatenQuelle.setText(CVNavi.gsSchnittstelle);
                     jMcRwInfo.setText("read: MC config read finished");
                     jMcRwProgress.setValue(++readWriteProgress);
 
@@ -4994,11 +4994,11 @@ public class MC extends javax.swing.JFrame {
                         } catch ( Exception ex ) {
                             System.out.println("readRC EXCEPTION="+ex.toString() );                            
                             System.out.println("readRC bArray=" );
-                            KTUI.dumpbArray(bArray);
+                            CVNavi.dumpbArray(bArray);
                         }
                         if( debugLevel > 0 ) {
                             System.out.println("readRC bArray=" );
-                            KTUI.dumpbArray(bArray);
+                            CVNavi.dumpbArray(bArray);
                         }
                         jMcRwInfo.setText("read: MC read finished");
                     } else {
@@ -5066,7 +5066,7 @@ public class MC extends javax.swing.JFrame {
                         }
                         if( strArr[0].toUpperCase().startsWith("ERROR: ")) {
                             System.out.println("ERROR detected : "+strArr[0] );
-                            KTUI.mbConfigWriteError(KTUI, strArr[0] );
+                            CVNavi.mbConfigWriteError(CVNavi, strArr[0] );
                         }
                     }
 
@@ -5358,7 +5358,7 @@ public class MC extends javax.swing.JFrame {
                                 String sFmt = (""+jTableAccessory.getValueAt(magIdx, 1)).trim().toUpperCase();
                                 if( (sIdx.length() > 0) && (sFmt.length() > 0 ) ) {
                                     String[] sIdxArr = sIdx.split(" ");
-                                    int n = KTUI.checkAndGetStrNumRangeDef( null, sIdxArr[0], 1, c.MAX_MM1_ACCMOD, 0, false);
+                                    int n = CVNavi.checkAndGetStrNumRangeDef( null, sIdxArr[0], 1, c.MAX_MM1_ACCMOD, 0, false);
 
                                     // module# is 1 less than displayed in table
                                     lastCmd = "XCFGACC " + (n-1) + ", " + sFmt + "\r";
@@ -5436,11 +5436,11 @@ public class MC extends javax.swing.JFrame {
                         if( TimeOut > 20 ) {
                             bUpdate = false;
                             stopIOAction();
-                            Com = KTUI.safelyCloseCom( outerThis, Com );
-                            KTUI.gsBaudRate = gsBaudRateSaved;
+                            Com = CVNavi.safelyCloseCom( outerThis, Com );
+                            CVNavi.gsBaudRate = gsBaudRateSaved;
                             jUpdLastError.setText(bundle.getString("MC.Protokollfehler"));
                             System.out.println("update: read 0 bytes" );
-                            KTUI.mbUpdateReadAnswerError( outerThis );
+                            CVNavi.mbUpdateReadAnswerError( outerThis );
                         }
                         return;
                     }
@@ -5525,9 +5525,9 @@ public class MC extends javax.swing.JFrame {
                                 break;
 
                             case 'F':       //Fertich
-                                KTUI.mbUpdateWriteSuccess( outerThis, BlockNr*4);
-                                Com = KTUI.safelyCloseCom( outerThis, Com );
-                                KTUI.gsBaudRate = gsBaudRateSaved;
+                                CVNavi.mbUpdateWriteSuccess( outerThis, BlockNr*4);
+                                Com = CVNavi.safelyCloseCom( outerThis, Com );
+                                CVNavi.gsBaudRate = gsBaudRateSaved;
                                 bUpdate = false;
                                 timer.stop();
                                 count = 0;
@@ -5563,9 +5563,9 @@ public class MC extends javax.swing.JFrame {
                                 {
                                     if(bArray[n-2] == 'F')
                                     {
-                                        KTUI.mbUpdateWriteSuccess( outerThis, BlockNr*4);
-                                        Com = KTUI.safelyCloseCom( outerThis, Com );
-                                        KTUI.gsBaudRate = gsBaudRateSaved;
+                                        CVNavi.mbUpdateWriteSuccess( outerThis, BlockNr*4);
+                                        Com = CVNavi.safelyCloseCom( outerThis, Com );
+                                        CVNavi.gsBaudRate = gsBaudRateSaved;
                                         bUpdate = false;
                                         timer.stop();
                                         count = 0;
@@ -5578,21 +5578,21 @@ public class MC extends javax.swing.JFrame {
                                 BlockNrTemp = BlockNr * 4;
                                 jUpdLastError.setText(bundle.getString("MC.UnbekannterFehler_1") + BlockNrTemp + bundle.getString("MC.UnbekannterFehler_2"));
                                 System.out.println("mbUpdateWriteError: numBytes from MC="+n+" Content:");
-                                KTUI.dumpbArrayBIN( bArray, n );
+                                CVNavi.dumpbArrayBIN( bArray, n );
                                 if( debugLevel == 0 ) {
                                     stopIOAction();
-                                    Com = KTUI.safelyCloseCom( outerThis, Com );
-                                    KTUI.mbUpdateWriteError( outerThis, (char)bArray[0]);
+                                    Com = CVNavi.safelyCloseCom( outerThis, Com );
+                                    CVNavi.mbUpdateWriteError( outerThis, (char)bArray[0]);
                                     count = 0;
                                     BlockNr = 0;
                                 }
                                 else {
                                     String strOut;
                                     if( debugLevel == 1 ) {
-                                        strOut = KTUI.dumpbArrayHexAsString( bArray );
-                                        KTUI.mbUpdateWriteError( outerThis, strOut );
+                                        strOut = CVNavi.dumpbArrayHexAsString( bArray );
+                                        CVNavi.mbUpdateWriteError( outerThis, strOut );
                                         stopIOAction();
-                                        Com = KTUI.safelyCloseCom( outerThis, Com );
+                                        Com = CVNavi.safelyCloseCom( outerThis, Com );
                                         count = 0;
                                         BlockNr = 0;
                                     }
@@ -5613,14 +5613,14 @@ public class MC extends javax.swing.JFrame {
                             TimeOut++;
                             jMcUpdProgress.setValue(TimeOut * 5);
                             if (TimeOut > 20) {
-                                Com = KTUI.safelyCloseCom( outerThis, Com );
-                                KTUI.gsBaudRate = gsBaudRateSaved;
+                                Com = CVNavi.safelyCloseCom( outerThis, Com );
+                                CVNavi.gsBaudRate = gsBaudRateSaved;
                                 bUpdate = false;
                                 TimeOut = 0;
                                 jMcUpdProgress.setValue(0);
                                 stopIOAction();
                                 jUpdLastError.setText(bundle.getString("MC.keineVerbindung"));
-                                KTUI.mbTimeoutMcUpdStart( outerThis );
+                                CVNavi.mbTimeoutMcUpdStart( outerThis );
                                 bArray[0] = 0;
                             }
                         }
@@ -5632,14 +5632,14 @@ public class MC extends javax.swing.JFrame {
         timer.setRepeats(true);
         actionListener.actionPerformed(null);
 
-        if( KTUI.bGotoUpdate ) {
+        if( CVNavi.bGotoUpdate ) {
             // jump immediately to the update page
-            KTUI.bGotoUpdate = false;
+            CVNavi.bGotoUpdate = false;
             jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount()-1);
             jUpdDateiAuswahl.grabFocus();
         } else {
             // is there a valid number of s88 modules ?
-            if( KTUI.getNumS88() == 0 ) {
+            if( CVNavi.getNumS88() == 0 ) {
                 // no -> start reading number from command station
                 readS88num();
             }
@@ -5698,7 +5698,7 @@ public class MC extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         stopIOAction();
-        KTUI.frameInstanceDEVICE = null;
+        CVNavi.frameInstanceDEVICE = null;
     }//GEN-LAST:event_formWindowClosing
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
@@ -5720,7 +5720,7 @@ public class MC extends javax.swing.JFrame {
 
     private void jUpdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdCancelActionPerformed
         stopIOAction();
-        Com = KTUI.safelyCloseCom( this, Com );
+        Com = CVNavi.safelyCloseCom( this, Com );
         jMcUpdInfo.setText(bundle.getString("MC.Updatecancelled"));
     }//GEN-LAST:event_jUpdCancelActionPerformed
 
@@ -5741,7 +5741,7 @@ public class MC extends javax.swing.JFrame {
         try {
             inputStream = new RandomAccessFile(f, "r");
         } catch (FileNotFoundException ex) {
-            KTUI.mbFileOpenError( this, jUpdDatei.getText());
+            CVNavi.mbFileOpenError( this, jUpdDatei.getText());
             stopIOAction();
             return;
         }
@@ -5770,7 +5770,7 @@ public class MC extends javax.swing.JFrame {
 
             if(ac[0] != ':')
             {
-                KTUI.mbFileHexFormatError( null );
+                CVNavi.mbFileHexFormatError( null );
                 return;
             }
             int Anzahl = 0;
@@ -5807,7 +5807,7 @@ public class MC extends javax.swing.JFrame {
                     inputStream.seek(lSeek);
                     n = inputStream.read(ac);
                 } catch (IOException iOException) {
-                    KTUI.mbFileReadError( this );
+                    CVNavi.mbFileReadError( this );
                     stopIOAction();
                     return;
                 }
@@ -5857,7 +5857,7 @@ public class MC extends javax.swing.JFrame {
                         inputStream.seek(lSeek);
                         n = inputStream.read(ac);
                     } catch (IOException iOException) {
-                        KTUI.mbFileReadError( this );
+                        CVNavi.mbFileReadError( this );
                         stopIOAction();
                         return;
                     }
@@ -5908,7 +5908,7 @@ public class MC extends javax.swing.JFrame {
                             inputStream.seek(lSeek);
                             n = inputStream.read(ac);
                         } catch (IOException iOException) {
-                            KTUI.mbFileReadError( this );
+                            CVNavi.mbFileReadError( this );
                             stopIOAction();
                             return;
                         }
@@ -5960,17 +5960,17 @@ public class MC extends javax.swing.JFrame {
             inputStream.close();
 
             // force 38400 baud for firmware updates for RS232 on MC and USB-2 (!) on RedBox
-            if( KTUI.rs232_or_rb_usb_2 ) {
-                int oldBaudRate = KTUI.gsBaudRate;
-                if( KTUI.gsBaudRate != 38400 ) {
+            if( CVNavi.rs232_or_rb_usb_2 ) {
+                int oldBaudRate = CVNavi.gsBaudRate;
+                if( CVNavi.gsBaudRate != 38400 ) {
                     System.out.println("forcing baud rate for updates to 38400");
-                    Com = KTUI.safelyCloseCom( this, Com);
-                    KTUI.gsBaudRate = 38400;
-                    Com = KTUI.safelyOpenCom( this, Com );
+                    Com = CVNavi.safelyCloseCom( this, Com);
+                    CVNavi.gsBaudRate = 38400;
+                    Com = CVNavi.safelyOpenCom( this, Com );
                     if( Com == null ){
                         // Umstellung auf 38400 schlägt fehl, also wieder zurück auf alte BaudRate
-                        KTUI.gsBaudRate = oldBaudRate;
-                        Com = KTUI.safelyOpenCom( this, Com );
+                        CVNavi.gsBaudRate = oldBaudRate;
+                        Com = CVNavi.safelyOpenCom( this, Com );
                         if( Com == null ){
                             // geht nicht -> Abbruch
                             stopIOAction();
@@ -5979,9 +5979,9 @@ public class MC extends javax.swing.JFrame {
                         }
                     }
                 }
-                KTUI.gsBaudRate = oldBaudRate;
+                CVNavi.gsBaudRate = oldBaudRate;
             }
-            KTUI.flushReadBuffer(Com);
+            CVNavi.flushReadBuffer(Com);
             bUpdate = true;
             timer.setInitialDelay(CVNavi.userTimerFwUp);
             timer.setDelay(CVNavi.userTimerFwUp);
@@ -5993,7 +5993,7 @@ public class MC extends javax.swing.JFrame {
 
 
         } catch (IOException ex) {
-            KTUI.mbFileReadError( this );
+            CVNavi.mbFileReadError( this );
             stopIOAction();
             return;
         }
@@ -6090,15 +6090,15 @@ public class MC extends javax.swing.JFrame {
         if( ! checkM3uidValid() ) {
             return;
         }
-        if( ! KTUI.bUseXm3sid ) {
-            String sFW = KTUI.fwVersion;
+        if( ! CVNavi.bUseXm3sid ) {
+            String sFW = CVNavi.fwVersion;
             if( (sFW == null) || ( sFW.length() == 0) ) {
                 sFW = bundle.getString("MC.unbekannt");
             }
-            if( KTUI.bSpracheDE) {
-                KTUI.mbGeneric( this, "HINWEIS", "Tams MC mit Firmware ab Version \"1.4.7b\" notwendig", "Diese Zentrale hat Firmware \""+sFW+"\"", 5, true );
+            if( CVNavi.bSpracheDE) {
+                CVNavi.mbGeneric( this, "HINWEIS", "Tams MC mit Firmware ab Version \"1.4.7b\" notwendig", "Diese Zentrale hat Firmware \""+sFW+"\"", 5, true );
             } else {
-                KTUI.mbGeneric( this, "NOTE", "Tams MC with firmware version \"1.4.7b\" or newer necessary", "This MC has firmware \""+sFW+"\"", 5, true );
+                CVNavi.mbGeneric( this, "NOTE", "Tams MC with firmware version \"1.4.7b\" or newer necessary", "This MC has firmware \""+sFW+"\"", 5, true );
             }
             return;
         }
@@ -6110,7 +6110,7 @@ public class MC extends javax.swing.JFrame {
             System.out.println("lM3UID="+String.format("%8s", Long.toHexString( lM3UID )).replace(' ', '0'));
         }
 
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ){
             return;
         }
@@ -6126,16 +6126,16 @@ public class MC extends javax.swing.JFrame {
         wArray[6] = (byte) ( ( lM3UID >> 16 ) & 0xFF );
         wArray[7] = (byte) ( ( lM3UID >> 24 ) & 0xFF );
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         Com.write((byte)0x60); // GO
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         if( debugLevel > 0 ) {
             // TODO evtl this durch this.getContentPane() ersetzen
-            KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+sM3UID, "writing to MC wArray=0x"+KTUI.byteArrayToHex(wArray), 10, false );
+            CVNavi.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+sM3UID, "writing to MC wArray=0x"+CVNavi.byteArrayToHex(wArray), 10, false );
         }
         Com.write(wArray);
         if( debugLevel > 0 ) {
-            System.out.println("written to MC wArray=0x"+KTUI.byteArrayToHex(wArray));
+            System.out.println("written to MC wArray=0x"+CVNavi.byteArrayToHex(wArray));
         }
         bWriteM3sid = true;
         readWriteProgress = 0;
@@ -6410,7 +6410,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jKonfLadenActionPerformed
 
     private void jKonfSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jKonfSchreibenActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
@@ -6421,10 +6421,10 @@ public class MC extends javax.swing.JFrame {
 
         if( jWRsys.isSelected()) {
             // check all critical fields for reasonable values OR init with defaults
-            KTUI.checkTextFieldUnit( this, jKurzEmpf, 0, 1000, 100, 5, false);
-            KTUI.checkTextField( this, js88, 0, 52, 52, false);
-            KTUI.checkTextFieldUnit( this, jMinMag, 0, 1000, 100, 50, false);
-            KTUI.checkTextFieldUnit( this, jMaxMag, 100, 25500, 300, 100, false);
+            CVNavi.checkTextFieldUnit( this, jKurzEmpf, 0, 1000, 100, 5, false);
+            CVNavi.checkTextField( this, js88, 0, 52, 52, false);
+            CVNavi.checkTextFieldUnit( this, jMinMag, 0, 1000, 100, 50, false);
+            CVNavi.checkTextFieldUnit( this, jMaxMag, 100, 25500, 300, 100, false);
         }
 
         if( jWRloc.isSelected() ) {
@@ -6435,7 +6435,7 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("KonfSchreiben chkLoc=["+chkLocOK+"]" );
             }
             if( chkLocOK == false ) {
-                // KTUI.mbTableCheck( FehlerArt, false );
+                // CVNavi.mbTableCheck( FehlerArt, false );
                 if( debugLevel > 0 ) {
                     System.out.println("KonfSchreiben chkLoc=["+chkLocOK+"] RETURN");
                 }
@@ -6455,7 +6455,7 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("KonfSchreiben chkTra=["+chkTraOK+"]" );
             }
             if( chkTraOK == false ) {
-                // KTUI.mbTableCheck( FehlerArt, false );
+                // CVNavi.mbTableCheck( FehlerArt, false );
                 if( debugLevel > 0 ) {
                     System.out.println("KonfSchreiben chkTra=["+chkTraOK+"] RETURN" );
                 }
@@ -6475,7 +6475,7 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("KonfSchreiben chkAcc=["+chkAccOK+"]" );
             }
             if( chkAccOK == false ) {
-                // KTUI.mbTableCheck( FehlerArt, false );
+                // CVNavi.mbTableCheck( FehlerArt, false );
                 if( debugLevel > 0 ) {
                     System.out.println("KonfSchreiben chkAcc=["+chkAccOK+"] RETURN" );
                 }
@@ -6496,7 +6496,7 @@ public class MC extends javax.swing.JFrame {
         }
         bFalscheEingabe = false;
         FehlerArt = 0;
-        int nR = KTUI.flushReadBuffer(Com);
+        int nR = CVNavi.flushReadBuffer(Com);
         if( debugLevel > 0 ) {
             System.out.println("KonfSchreiben clean buffer pre 0x61 write read "+nR+" bytes" );
         }
@@ -6516,12 +6516,12 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jKonfSchreibenActionPerformed
 
     private void jKonfLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jKonfLesenActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ){
             return;
         }
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         String s = "xcfgdump\r";
         Com.write(s);
         resetbArray();
@@ -6540,15 +6540,15 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jKonfLesenActionPerformed
 
     private void jMaxMagFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMaxMagFocusLost
-        KTUI.checkTextFieldUnit( this, jMaxMag, 100, 25500, 300, 100, true);
+        CVNavi.checkTextFieldUnit( this, jMaxMag, 100, 25500, 300, 100, true);
     }//GEN-LAST:event_jMaxMagFocusLost
 
     private void jMinMagFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMinMagFocusLost
-        KTUI.checkTextFieldUnit( this, jMinMag, 0, 1000, 100, 50, true);
+        CVNavi.checkTextFieldUnit( this, jMinMag, 0, 1000, 100, 50, true);
     }//GEN-LAST:event_jMinMagFocusLost
 
     private void js88FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_js88FocusLost
-        KTUI.checkTextField( this, js88, 0, 52, 52, true);
+        CVNavi.checkTextField( this, js88, 0, 52, 52, true);
         updateS88field(Integer.parseInt(js88.getText()));
     }//GEN-LAST:event_js88FocusLost
 
@@ -6557,7 +6557,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_js88ActionPerformed
 
     private void jKurzEmpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jKurzEmpfFocusLost
-        KTUI.checkTextFieldUnit( this, jKurzEmpf, 0, 1000, 100, 5, true);
+        CVNavi.checkTextFieldUnit( this, jKurzEmpf, 0, 1000, 100, 5, true);
     }//GEN-LAST:event_jKurzEmpfFocusLost
 
     private void jTextM3UIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextM3UIDFocusGained
@@ -6567,7 +6567,7 @@ public class MC extends javax.swing.JFrame {
 
     private void jTextM3UIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextM3UIDFocusLost
         System.out.println("jTextM3UIDFocusLost");
-        if( KTUI.frameInstanceDEVICE == null ) {
+        if( CVNavi.frameInstanceDEVICE == null ) {
             return;
         }
         if( ! checkM3uidValidActive ) {
@@ -6587,7 +6587,7 @@ public class MC extends javax.swing.JFrame {
 
     private void jLocM3cfgLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLocM3cfgLoadActionPerformed
         SaveOpenDialog od = new SaveOpenDialog( this, true, true, null, this, "m3", c.M3);
-        if( KTUI.lastSaveOpenDialogWasCancel ) {
+        if( CVNavi.lastSaveOpenDialogWasCancel ) {
             return;
         }
 
@@ -6611,8 +6611,8 @@ public class MC extends javax.swing.JFrame {
 
         System.out.println("jLocM3cfgSaveActionPerformed: SaveOpenDialog CALL");
         SaveOpenDialog od = new SaveOpenDialog( this, true, false, str, this, "m3", c.M3);
-        System.out.println("jLocM3cfgSaveActionPerformed: SaveOpenDialog RETURN : KTUI.lastSaveOpenDialogwasCancel="+KTUI.lastSaveOpenDialogWasCancel);
-        if( KTUI.lastSaveOpenDialogWasCancel ) {
+        System.out.println("jLocM3cfgSaveActionPerformed: SaveOpenDialog RETURN : CVNavi.lastSaveOpenDialogwasCancel="+CVNavi.lastSaveOpenDialogWasCancel);
+        if( CVNavi.lastSaveOpenDialogWasCancel ) {
             return;
         }
         M3changed = false;
@@ -6652,19 +6652,19 @@ public class MC extends javax.swing.JFrame {
             return;
         }
 
-        if( ! KTUI.bUseXm3sid ) {
-            String sFW = KTUI.fwVersion;
+        if( ! CVNavi.bUseXm3sid ) {
+            String sFW = CVNavi.fwVersion;
             if( (sFW == null) || ( sFW.length() == 0) ) {
-                if( KTUI.bSpracheDE) {
+                if( CVNavi.bSpracheDE) {
                     sFW = "unbekannt"; 
                 } else {
                     sFW = "unknown"; 
                 }
             }
-            if( KTUI.bSpracheDE) {
-                KTUI.mbGeneric( this, "HINWEIS", "Tams MC mit Firmware ab Version \"1.4.7b\" notwendig", "Diese Zentrale hat Firmware \""+sFW+"\"", 5, true );
+            if( CVNavi.bSpracheDE) {
+                CVNavi.mbGeneric( this, "HINWEIS", "Tams MC mit Firmware ab Version \"1.4.7b\" notwendig", "Diese Zentrale hat Firmware \""+sFW+"\"", 5, true );
             } else {
-                KTUI.mbGeneric( this, "NOTE", "Tams MC with firmware version \"1.4.7b\" or newer necessary", "This MC has firmware \""+sFW+"\"", 5, true );
+                CVNavi.mbGeneric( this, "NOTE", "Tams MC with firmware version \"1.4.7b\" or newer necessary", "This MC has firmware \""+sFW+"\"", 5, true );
             }
             return;
         }
@@ -6682,7 +6682,7 @@ public class MC extends javax.swing.JFrame {
             System.out.println("lM3UID="+String.format("%8s", Long.toHexString( lM3UID )).replace(' ', '0') + " iAdr="+iAdr);
         }
 
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ){
             return;
         }
@@ -6697,16 +6697,16 @@ public class MC extends javax.swing.JFrame {
         wArray[6] = (byte) ( ( lM3UID >> 16 ) & 0xFF );
         wArray[7] = (byte) ( ( lM3UID >> 24 ) & 0xFF );
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         Com.write((byte)0x60); // GO
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         if( debugLevel > 0 ) {
             // TODO evtl this durch this.getContentPane() ersetzen
-            KTUI.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+lM3UID, "writing to MC wArray=0x"+KTUI.byteArrayToHex(wArray), 10, false );
+            CVNavi.mbGeneric( this, "MC", "Xm3Sid adr(sid)="+iAdr+" MAC(uid)="+lM3UID, "writing to MC wArray=0x"+CVNavi.byteArrayToHex(wArray), 10, false );
         }
         Com.write(wArray);
         if( debugLevel > 0 ) {
-            System.out.println("written to MC wArray=0x"+KTUI.byteArrayToHex(wArray));
+            System.out.println("written to MC wArray=0x"+CVNavi.byteArrayToHex(wArray));
         }
         bWriteM3sidList = true;
         readWriteProgress = 0;
@@ -6756,7 +6756,7 @@ public class MC extends javax.swing.JFrame {
 
     private void helpMCasLCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMCasLCActionPerformed
         // Knopf noch nicht benutuzt -> für Debugging nutzen ;-)
-        System.out.println("KTUI.rs232_or_rb_usb_2="+KTUI.rs232_or_rb_usb_2+"  KTUI.rs232_mode_was_forced="+KTUI.rs232_mode_was_forced);
+        System.out.println("CVNavi.rs232_or_rb_usb_2="+CVNavi.rs232_or_rb_usb_2+"  CVNavi.rs232_mode_was_forced="+CVNavi.rs232_mode_was_forced);
     }//GEN-LAST:event_helpMCasLCActionPerformed
 
     private void FirmwareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirmwareActionPerformed
@@ -6775,8 +6775,8 @@ public class MC extends javax.swing.JFrame {
         if( debugLevel > 0 ) {
             System.out.println("jSysS88monitorActionPerformed pre NEW");
         }
-        if( KTUI.getNumS88() <= 0 ) {
-            KTUI.mbNoS88modules( this );
+        if( CVNavi.getNumS88() <= 0 ) {
+            CVNavi.mbNoS88modules( this );
             return;            
         }
         S88mon = new S88monitor( this, false );
@@ -6787,13 +6787,13 @@ public class MC extends javax.swing.JFrame {
 
     private void jEasyNetUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEasyNetUpdateActionPerformed
 
-        if( KTUI.debugOffline == false ) {
-            Com = KTUI.safelyOpenCom( this, Com );
+        if( CVNavi.debugOffline == false ) {
+            Com = CVNavi.safelyOpenCom( this, Com );
             if( Com == null ){
                 return;
             }
 
-            KTUI.flushReadBuffer(Com);
+            CVNavi.flushReadBuffer(Com);
             String s = "xSWUPDATE\r";
             Com.write(s);
         }
@@ -6817,20 +6817,20 @@ public class MC extends javax.swing.JFrame {
     private void jMRSTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMRSTActionPerformed
         // MRST MasterReset / Zurücksetzen auf Werkseinstellung
         // Sicherheitsabfrage
-        int YNresult = KTUI.yesNoResetFactoryDefault();
+        int YNresult = CVNavi.yesNoResetFactoryDefault();
         System.out.println("yesNoResetFactoryDefault() : YNresult="+YNresult);
         // 0 = JA , 1 = NEIN
         if( YNresult != 0 ) {
             System.out.println("yesNoResetFactoryDefault() : YNresult="+YNresult+" NO -> SKIP");
             return;
         }
-        if( KTUI.debugOffline == false ) {
-            Com = KTUI.safelyOpenCom( this, Com );
+        if( CVNavi.debugOffline == false ) {
+            Com = CVNavi.safelyOpenCom( this, Com );
             if( Com == null ){
                 return;
             }
 
-            KTUI.flushReadBuffer(Com);
+            CVNavi.flushReadBuffer(Com);
             String s = "xMRST\r";
             Com.write(s);
         }
@@ -6844,13 +6844,13 @@ public class MC extends javax.swing.JFrame {
     private void jUSB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUSB1ActionPerformed
         rs232_or_rb_usb_2 = false;
         jUSB2.setSelected(false);
-        KTUI.rs232_mode_was_forced = false;
+        CVNavi.rs232_mode_was_forced = false;
     }//GEN-LAST:event_jUSB1ActionPerformed
 
     private void jUSB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUSB2ActionPerformed
         rs232_or_rb_usb_2 = true;
         jUSB1.setSelected(false);
-        KTUI.rs232_mode_was_forced = false;
+        CVNavi.rs232_mode_was_forced = false;
     }//GEN-LAST:event_jUSB2ActionPerformed
 
     private void jf10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf10ActionPerformed
@@ -6876,9 +6876,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf10ActionPerformed
@@ -6910,9 +6910,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf12ActionPerformed
@@ -6930,7 +6930,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf28ActionPerformed
 
     private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null) {
             // LRLRLR: Todo Message-Box and return
             return;
@@ -6974,7 +6974,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2ComponentShown
 
     private void jDirektSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektSchreibenActionPerformed
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
             // LRLRLR: Todo Message-Box and return
@@ -6997,10 +6997,10 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("505 jCVSchreibenActionPerformed not POM : XPTWD " + CV + " " + Wert );
                 retries = CVNavi.timerRetries;
             }
-            KTUI.flushReadBuffer( Com );
+            CVNavi.flushReadBuffer( Com );
             Com.write(s);
         } catch (NumberFormatException numberFormatException) {
-            KTUI.mbGeneric( this, "Eingabefehler");
+            CVNavi.mbGeneric( this, "Eingabefehler");
         }
     }//GEN-LAST:event_jDirektSchreibenActionPerformed
 
@@ -7010,7 +7010,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jProgGleisActionPerformed
 
     private void jHauptGleisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHauptGleisActionPerformed
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
             // LRLRLR: Todo Message-Box and return
@@ -7022,7 +7022,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jHauptGleisActionPerformed
 
     private void jDirektLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDirektLesenActionPerformed
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
             // LRLRLR: Todo Message-Box and return
@@ -7030,9 +7030,9 @@ public class MC extends javax.swing.JFrame {
         }
         bReadPTdirekt = true;
         bAskLokState = false;
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         resetbArray();
-        int cvAnfrage = KTUI.checkTextField( this, jCV_Direkt, 1, 1024, 8, false);
+        int cvAnfrage = CVNavi.checkTextField( this, jCV_Direkt, 1, 1024, 8, false);
         System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
         String s = "XPTRD " + cvAnfrage + "\r";
         Com.write(s);
@@ -7045,14 +7045,14 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jDirektLesenActionPerformed
 
     private void jListeLesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeLesenActionPerformed
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
             // LRLRLR: Todo Message-Box and return
             return;
         }
         bReadPTList = true;
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         resetbArray();
         jCVListe.clearSelection();
         jCVListe.setSelectedIndex(0);
@@ -7108,14 +7108,14 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jListeBearbeitenActionPerformed
 
     private void jListeSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeSchreibenActionPerformed
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
             // LRLRLR: Todo Message-Box and return
             return;
         }
         bWriteList = true;
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         resetbArray();
         jCVListe.clearSelection();
         jCVListe.setSelectedIndex(0);
@@ -7146,7 +7146,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jListeSchreibenActionPerformed
 
     private void jm3SchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm3SchreibenActionPerformed
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
             // LRLRLR: Todo Message-Box and return
@@ -7154,7 +7154,7 @@ public class MC extends javax.swing.JFrame {
         }
         bProg_m3 = true;
         jm3GotoList.setEnabled(false);
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         resetbArray();
 
         String s = "xMFX " + jm3Addr.getText() + "\r";
@@ -7176,7 +7176,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jHerstellerInfoActionPerformed
 
     private void jStartMMProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartMMProgActionPerformed
-        Com = KTUI.safelyOpenCom(this, Com);
+        Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
             // LRLRLR: Todo Message-Box and return
@@ -7184,10 +7184,10 @@ public class MC extends javax.swing.JFrame {
         }
         bProg_MM = true;
         Com.write((byte)0x61); // STOP
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         resetbArray();
 
-        KTUI.mbGeneric(this, "Hinweis", "Für die Lokadressen " + jMMRegister.getText() + " und " + jMMWert.getText() + " muss das MM Protokoll eingestellt werde.", "Bitte stellen Sie an Ihrer MM-Lok nun den Programmiermodus ein.");
+        CVNavi.mbGeneric(this, "Hinweis", "Für die Lokadressen " + jMMRegister.getText() + " und " + jMMWert.getText() + " muss das MM Protokoll eingestellt werde.", "Bitte stellen Sie an Ihrer MM-Lok nun den Programmiermodus ein.");
         timer.setInitialDelay(CVNavi.timer1);
         timer.setDelay(CVNavi.timer2);
         timer.setRepeats(true);
@@ -7417,9 +7417,9 @@ public class MC extends javax.swing.JFrame {
             bAskLokState = true;
             if(Com == null)
             {
-                Com = KTUI.safelyOpenCom(this, Com);
+                Com = CVNavi.safelyOpenCom(this, Com);
             }
-            KTUI.flushReadBuffer( Com );
+            CVNavi.flushReadBuffer( Com );
             resetbArray();
 
             System.out.print("LokAnfrage Adr.: "+parseInt);
@@ -7454,7 +7454,7 @@ public class MC extends javax.swing.JFrame {
             s = "XL " + s + " " + v + "\r"; 
             if(Com == null)
             {
-                Com = KTUI.safelyOpenCom(this, Com);
+                Com = CVNavi.safelyOpenCom(this, Com);
             }
             Com.write(s);
             s = jDisplay.getText();
@@ -7495,7 +7495,7 @@ public class MC extends javax.swing.JFrame {
     private void jGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGOActionPerformed
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
         Com.write((byte)0x60); // GO
         String s = jDisplay.getText().substring(0, 7) + AktLokFormat + jDisplay.getText().substring(11);
@@ -7505,7 +7505,7 @@ public class MC extends javax.swing.JFrame {
     private void jSTOPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSTOPActionPerformed
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
         Com.write((byte)0x61); // STOP
         String s = jDisplay.getText().substring(0, 7) + "STOP" + jDisplay.getText().substring(11);
@@ -7537,9 +7537,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jf0ActionPerformed
@@ -7561,9 +7561,9 @@ public class MC extends javax.swing.JFrame {
             DisplayState = -1;
             if(Com == null)
             {
-                Com = KTUI.safelyOpenCom(this, Com);
+                Com = CVNavi.safelyOpenCom(this, Com);
             }
-            KTUI.flushReadBuffer( Com );
+            CVNavi.flushReadBuffer( Com );
             resetbArray();
 
             System.out.print("Weiche: "+parseInt + "gerade");
@@ -7613,9 +7613,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jf1ActionPerformed
@@ -7637,9 +7637,9 @@ public class MC extends javax.swing.JFrame {
             DisplayState = -1;
             if(Com == null)
             {
-                Com = KTUI.safelyOpenCom(this, Com);
+                Com = CVNavi.safelyOpenCom(this, Com);
             }
-            KTUI.flushReadBuffer( Com );
+            CVNavi.flushReadBuffer( Com );
             resetbArray();
 
             System.out.print("Weiche: "+parseInt + "Abzweig");
@@ -7690,9 +7690,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jf2ActionPerformed
@@ -7742,9 +7742,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jf3ActionPerformed
@@ -7787,9 +7787,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jf4ActionPerformed
@@ -7817,9 +7817,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf5ActionPerformed
@@ -7847,9 +7847,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf6ActionPerformed
@@ -7877,9 +7877,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf7ActionPerformed
@@ -7907,9 +7907,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf8ActionPerformed
@@ -7937,9 +7937,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf9ActionPerformed
@@ -7967,9 +7967,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf11ActionPerformed
@@ -7997,9 +7997,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf13ActionPerformed
@@ -8027,9 +8027,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf14ActionPerformed
@@ -8057,9 +8057,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf15ActionPerformed
@@ -8087,9 +8087,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s += "\r";
         Com.write(s);
     }//GEN-LAST:event_jf16ActionPerformed
@@ -8111,9 +8111,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jRueckActionPerformed
@@ -8135,9 +8135,9 @@ public class MC extends javax.swing.JFrame {
         }
         if(Com == null)
         {
-            Com = KTUI.safelyOpenCom(this, Com);
+            Com = CVNavi.safelyOpenCom(this, Com);
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
         Com.write(s);
     }//GEN-LAST:event_jVorActionPerformed
@@ -8169,7 +8169,7 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableLocoMouseClicked
 
     private void jconDevsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jconDevsActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ){
             return;
         }
@@ -8178,7 +8178,7 @@ public class MC extends javax.swing.JFrame {
             return;
         }
         connectedDevices = new ConnectedDevices(this);
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         String s = "XCVER\r";
         Com.write(s);
         resetbArray();
@@ -8225,7 +8225,7 @@ public class MC extends javax.swing.JFrame {
             jTextM3UID.setText(sM3UID);
             // jTextM3UID.requestFocus();
             checkM3uidValidActive = false;
-            KTUI.mbGeneric( this, "Eingabefehler", "M3 UID ungültig", sM3UID, 9, true );
+            CVNavi.mbGeneric( this, "Eingabefehler", "M3 UID ungültig", sM3UID, 9, true );
             return false;
         }
 
@@ -8243,7 +8243,7 @@ public class MC extends javax.swing.JFrame {
         } catch (NumberFormatException ex) {
             System.out.println("checkM3uidValid NumberFormatException (LONG)" );
             jTextM3UID.setText(sM3UID);
-            KTUI.mbGeneric( this, "Eingabefehler", "M3 UID ungültig", sM3UID, 9, true );
+            CVNavi.mbGeneric( this, "Eingabefehler", "M3 UID ungültig", sM3UID, 9, true );
             jTextM3UID.requestFocus();
             checkM3uidValidActive = false;
             return false;
@@ -8259,7 +8259,7 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("checkM3uidValid NumberFormatException (INTEGER)" );
             }
             jTextM3UID.setText(sM3UID);
-            KTUI.mbGeneric( this, "Eingabefehler", "M3 UID ungültig (zu groß)", sM3UID, 9, true );
+            CVNavi.mbGeneric( this, "Eingabefehler", "M3 UID ungültig (zu groß)", sM3UID, 9, true );
             jTextM3UID.requestFocus();
             checkM3uidValidActive = false;
             return false;
@@ -8308,7 +8308,7 @@ public class MC extends javax.swing.JFrame {
     }
 
     private void startIOAction() {
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             stopIOAction();
             return;
@@ -8394,17 +8394,17 @@ public class MC extends javax.swing.JFrame {
         if( bReadCfg ) {
             bReadCfg = false;
             jMcRwInfo.setText("read config cancelled");
-            KTUI.mbConfigReadCancelled( this, 5 );
+            CVNavi.mbConfigReadCancelled( this, 5 );
         }
         if( bReadRC ) {
             bReadRC = false;
             jMcRwInfo.setText("read RC cancelled");
-            KTUI.mbConfigReadCancelled( this, 5 );
+            CVNavi.mbConfigReadCancelled( this, 5 );
         }
         if( bWriteCfg ) {
             bWriteCfg = false;
             jMcRwInfo.setText("write config cancelled");
-            KTUI.mbConfigWriteCancelled( this, 5 );
+            CVNavi.mbConfigWriteCancelled( this, 5 );
         }
         if( bWriteM3sid ) {
             bWriteM3sid = false;
@@ -8418,8 +8418,8 @@ public class MC extends javax.swing.JFrame {
         }
         if( bUpdate ) {
             bUpdate = false;
-            KTUI.gsBaudRate = gsBaudRateSaved;
-            if( KTUI.bSpracheDE )
+            CVNavi.gsBaudRate = gsBaudRateSaved;
+            if( CVNavi.bSpracheDE )
                 jMcUpdInfo.setText("Aktualisierung abgebrochen");
             else
                 jMcUpdInfo.setText("update cancelled");
@@ -8514,11 +8514,11 @@ public class MC extends javax.swing.JFrame {
 
         // close interface
         /* TODO auch hier ??? */
-        Com = KTUI.safelyCloseCom( this, Com);
+        Com = CVNavi.safelyCloseCom( this, Com);
     }
 
     private void updateS88field( int num ) {
-        KTUI.setNumS88(num);
+        CVNavi.setNumS88(num);
         js88.setText(""+num);
         jSysS88monitor.setEnabled(num > 0);
     }
@@ -8527,13 +8527,13 @@ public class MC extends javax.swing.JFrame {
         if( debugLevel > 0 ) {
             System.out.println("readS88num()" );
         }
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ){
             System.out.println("readS88num() Com == null" );
             return;
         }
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         String s = "XSE\r";
         Com.write(s);
         timer.setInitialDelay(CVNavi.MCtimer1);
@@ -8548,13 +8548,13 @@ public class MC extends javax.swing.JFrame {
         if( debugLevel > 0 ) {
             System.out.println("initS88read()" );
         }
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ){
             System.out.println("initS88read() Com == null" );
             return;
         }
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         String s = "XSR 0\r";
         Com.write(s);
         timer.setInitialDelay(CVNavi.MCtimer1);
@@ -8746,7 +8746,7 @@ public class MC extends javax.swing.JFrame {
                                 // adjust format and speedsteps
                                 jTableLoco.setValueAt("M3", localLocIdx, 1);
                                 jTableLoco.setValueAt("126", localLocIdx, 2);
-                                KTUI.mbGeneric(this, "Hinweis", "Protokoll von Lok "+sAdr+" ("+sName+") wurde auf M3 mit 126 Fahrstufen angepasst", 9, true);
+                                CVNavi.mbGeneric(this, "Hinweis", "Protokoll von Lok "+sAdr+" ("+sName+") wurde auf M3 mit 126 Fahrstufen angepasst", 9, true);
                             }
                             System.out.println( "getLocoName: return( "+sName.trim()+" )");
                             return sName.trim();
@@ -8799,7 +8799,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                 jTableLoco.setValueAt( sFormat, localLocIdx, 1);
                 switch( sFormat ) {
                     case "DCC":
-                        if( ! KTUI.checkNumRange( sAdr, 1, 10239 ) ) {
+                        if( ! CVNavi.checkNumRange( sAdr, 1, 10239 ) ) {
                             if( repair ) {
                                 oAdr = 3;
                                 jTableLoco.setValueAt( ""+oAdr, localLocIdx, 0);
@@ -8812,7 +8812,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                         break;
                     case "MM1":
                     case "MM2":
-                        if( ! KTUI.checkNumRange( sAdr, 1, 255 ) ) {
+                        if( ! CVNavi.checkNumRange( sAdr, 1, 255 ) ) {
                             if( repair ) {
                                 oAdr = 3;
                                 jTableLoco.setValueAt( ""+oAdr, localLocIdx, 0);
@@ -8824,7 +8824,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                         }
                         break;
                     case "M3":
-                        if( ! KTUI.checkNumRange( sAdr, 1, c.MAX_M3_SID ) ) {
+                        if( ! CVNavi.checkNumRange( sAdr, 1, c.MAX_M3_SID ) ) {
                             if( repair ) {
                                 oAdr = 3;
                                 jTableLoco.setValueAt( ""+oAdr, localLocIdx, 0);
@@ -8868,7 +8868,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                         FehlerArt |= 0x0008;
                         errorIdxList += " " + (localLocIdx+1);
 
-                        if( ! KTUI.checkNumRange( sAdr, 1, 10239 ) ) {
+                        if( ! CVNavi.checkNumRange( sAdr, 1, 10239 ) ) {
                             if( repair ) {
                                 oAdr = 3;
                                 jTableLoco.setValueAt( ""+oAdr, localLocIdx, 0);
@@ -9002,10 +9002,10 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
 
         if( retVal ) {
             if( show ) {
-                KTUI.mbTableCheckOK( this, repair, 3 );
+                CVNavi.mbTableCheckOK( this, repair, 3 );
             }
         } else {
-            KTUI.mbTableCheck( this, FehlerArt, repair, errorIdxList );
+            CVNavi.mbTableCheck( this, FehlerArt, repair, errorIdxList );
         }
         if( debugLevel >= 2 ) {
             System.out.println("checkTableLoco returns["+(retVal?"true":"false")+"]");
@@ -9058,7 +9058,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                 if( sAdr1.substring(sAdr1.length()-1, sAdr1.length()).matches("!") ) {
                     sAdr1 = sAdr1.substring(0, sAdr1.length()-1);
                 }
-                if( ! KTUI.checkNumRange( sAdr1, 1, c.MAX_M3_SID ) ) {
+                if( ! CVNavi.checkNumRange( sAdr1, 1, c.MAX_M3_SID ) ) {
                     jTableTraction.setValueAt(c.ERR_PROBLEM_LEFT, localTraIdx, 1);
                     retVal = false;
                     bFalscheEingabe = true;
@@ -9077,7 +9077,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                 if( sAdr2.substring(sAdr2.length()-1, sAdr2.length()).matches("!") ) {
                     sAdr2 = sAdr2.substring(0, sAdr2.length()-1);
                 }
-                if( ! KTUI.checkNumRange( sAdr2, 1, c.MAX_M3_SID ) ) {
+                if( ! CVNavi.checkNumRange( sAdr2, 1, c.MAX_M3_SID ) ) {
                     jTableTraction.setValueAt(c.ERR_PROBLEM_LEFT, localTraIdx, 3);
                     retVal = false;
                     bFalscheEingabe = true;
@@ -9123,10 +9123,10 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
         }
 
         if( bFalscheEingabe ) {
-            KTUI.mbTableCheck( this, FehlerArt, false, errorIdxList );
+            CVNavi.mbTableCheck( this, FehlerArt, false, errorIdxList );
         } else {
             if( show ) {
-                KTUI.mbTableCheckOK( this, repair, 3 );
+                CVNavi.mbTableCheckOK( this, repair, 3 );
             }
         }
         if( debugLevel >= 2 ) {
@@ -9151,8 +9151,8 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
             if( (sIdx.length() > 0) && (sFmt.length() > 0) ) {
                 int n = -1;
                 String[] sArr = sIdx.split(" ");
-                if( KTUI.checkNumRange(sArr[0], 1, c.MAX_MM1_ACCMOD)) {
-                    n = KTUI.checkAndGetStrNumRangeDef( null, sArr[0], 1, c.MAX_MM1_ACCMOD, 0, false);
+                if( CVNavi.checkNumRange(sArr[0], 1, c.MAX_MM1_ACCMOD)) {
+                    n = CVNavi.checkAndGetStrNumRangeDef( null, sArr[0], 1, c.MAX_MM1_ACCMOD, 0, false);
                 }
                 else {
                     if( repair ) {
@@ -9205,10 +9205,10 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
 
         if( retVal ) {
             if( show ) {
-                KTUI.mbTableCheckOK( this, repair, 3 );
+                CVNavi.mbTableCheckOK( this, repair, 3 );
             }
         } else {
-            KTUI.mbTableCheck( this, FehlerArt, repair, errorIdxList );
+            CVNavi.mbTableCheck( this, FehlerArt, repair, errorIdxList );
         }
         if( debugLevel >= 2 ) {
             System.out.println("checkTableAccessory returns["+retVal+"]" );
@@ -9218,13 +9218,13 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
 
     private Boolean readM3() {
         if( debugLevel > 0 ) {
-            System.out.println("Read M3 data from DIR: "+KTUI.gsSaveOpenM3Directory+" NAME: \""+KTUI.gsSaveOpenM3Filename+"\"" );
+            System.out.println("Read M3 data from DIR: "+CVNavi.gsSaveOpenM3Directory+" NAME: \""+CVNavi.gsSaveOpenM3Filename+"\"" );
         }
-        if( (KTUI.gsSaveOpenM3Filename.length() <= 1) && (KTUI.gsSaveOpenM3Filename.contentEquals(" ")) ) {
-            System.out.println("Read M3 data from DIR: "+KTUI.gsSaveOpenM3Directory+" NAME is empty :\""+KTUI.gsSaveOpenM3Filename+"\"" );
+        if( (CVNavi.gsSaveOpenM3Filename.length() <= 1) && (CVNavi.gsSaveOpenM3Filename.contentEquals(" ")) ) {
+            System.out.println("Read M3 data from DIR: "+CVNavi.gsSaveOpenM3Directory+" NAME is empty :\""+CVNavi.gsSaveOpenM3Filename+"\"" );
             return false;
         }
-        String filenameM3 = KTUI.gsSaveOpenM3Directory+"/"+KTUI.gsSaveOpenM3Filename;
+        String filenameM3 = CVNavi.gsSaveOpenM3Directory+"/"+CVNavi.gsSaveOpenM3Filename;
         File f = new File( filenameM3 );
         long filelen = f.length();
 
@@ -9246,7 +9246,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                         int n = inputStream.read(ac, 0, (int) filelen);
                         if(n == -1)
                         {
-                            KTUI.mbFileReadError(this);
+                            CVNavi.mbFileReadError(this);
                             return false;
                         }
                         String str1 = new String(ac);
@@ -9272,7 +9272,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
         }
         else
         {
-            // KTUI.mbFileNotFound( this, filenameM3 );
+            // CVNavi.mbFileNotFound( this, filenameM3 );
             System.out.println("INFO: Read M3 data from file failed FileNotFound: "+filenameM3 );
             return false;
         }
@@ -9314,7 +9314,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                 // nächste Sektion -> Parsing abbrechen
                 System.out.println("updateM3uid: Ende nach "+M3used+" Datensätzen");
                 if( debugLevel > 0 ) {
-                    KTUI.mbConfigReadSuccess( this, 3 );
+                    CVNavi.mbConfigReadSuccess( this, 3 );
                 }
                 ReturnString = "";
                 jLocM3sidWriteList.setEnabled(true);
@@ -9333,7 +9333,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
             // check for data
             String sM3UID = checkM3uidValid(zeilenArr[0]);
 
-            if( (sM3UID != null) && KTUI.checkNumRange(zeilenArr[1].trim(), 1, c.MAX_M3_SID) ) {
+            if( (sM3UID != null) && CVNavi.checkNumRange(zeilenArr[1].trim(), 1, c.MAX_M3_SID) ) {
 
                 M3liste[0][M3used] = sM3UID;
                 M3liste[1][M3used] = ""+Integer.parseInt(zeilenArr[1].trim());
@@ -9351,8 +9351,8 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
             updateM3count();
 
             if( M3used == c.MAX_M3_ENTRIES) {
-                KTUI.mbM3TooMany(this);
-                KTUI.mbConfigReadAbort( this, 5 );
+                CVNavi.mbM3TooMany(this);
+                CVNavi.mbConfigReadAbort( this, 5 );
                 ReturnString = "";
                 return;
             }
@@ -9360,7 +9360,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
         System.out.println("updateM3uid: Ende nach "+M3used+" Datensätzen");
         updateM3count();
         if( debugLevel > 0 ) {
-            KTUI.mbConfigReadSuccess( this, 3 );
+            CVNavi.mbConfigReadSuccess( this, 3 );
         }
         jLocM3cfgSave.setEnabled(true);
         ReturnString = "";
@@ -9508,7 +9508,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
     }
 
     void setFocusUpdStart() {
-        if( KTUI.bSpracheDE ) {
+        if( CVNavi.bSpracheDE ) {
             jMcUpdInfo.setText("Aktualisierung kann gestartet werden");
         } else {
             jMcUpdInfo.setText("you may start the update");
@@ -9517,7 +9517,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
     }
 
     void setFocusDateiAuswahl() {
-        if( KTUI.bSpracheDE ) {
+        if( CVNavi.bSpracheDE ) {
             jMcUpdInfo.setText("Bitte Datei auswählen");
         } else {
             jMcUpdInfo.setText("please select file");
@@ -9548,14 +9548,14 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
         jBoostOptNoAccDrive.setEnabled(CVNavi.bUseSo999);
         jBoostOptNoAccBreak.setEnabled(CVNavi.bUseSo999);
 
-        KTUI.fwVersion = jVer;
-        String sSwVersion = "MasterControl Version "+KTUI.fwVersion;
+        CVNavi.fwVersion = jVer;
+        String sSwVersion = "MasterControl Version "+CVNavi.fwVersion;
         System.out.println("--- "+sSwVersion+" --- bUseXfuncs="+CVNavi.bUseXfuncs+" bUseXm3sid="+CVNavi.bUseXm3sid);
         if( lSwVersion > 0 ) {
             System.out.println("lSwVersion="+lSwVersion+" in HEX="+String.format("0x%16s", Long.toHexString(lSwVersion)).replace(' ', '0') );
             System.out.println("bUseXfuncs="+CVNavi.bUseXfuncs+" bUseXm3sid="+CVNavi.bUseXm3sid+" bUseSo999="+CVNavi.bUseSo999);
         }
-        KTUI.fillMenuSelection();
+        CVNavi.fillMenuSelection();
     }
 
     void updateTabs() {

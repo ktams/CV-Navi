@@ -43,7 +43,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
     private boolean bListeSchreiben; // Liste von CVs
     private boolean bWaitAnswerInProgresss;
     private Timer timer;
-    private CVNavi KTUI;
+    private CVNavi CVNavi;
     private int retries;
     private int cvAnfrage;
     private int cvSchreiben;
@@ -52,8 +52,9 @@ public class ReadWriteCV extends javax.swing.JDialog {
 
     /**
      * Creates new form ReadWriteCV
+     * @throws java.io.IOException
      */
-    public ReadWriteCV(Frame parent, boolean modal, CVNavi ktui, int[][] CV ) throws IOException {
+    public ReadWriteCV(Frame parent, boolean modal, CVNavi cvnavi, int[][] CV ) throws IOException {
         super(parent, modal);
         this.bArray = new byte[c.MAX_CV+1];
         this.DecAdr = 3;
@@ -69,14 +70,14 @@ public class ReadWriteCV extends javax.swing.JDialog {
         this.bLeseCV = false;
         this.bSchreibeCV = false;
         this.timer = null;
-        this.KTUI = ktui;
+        this.CVNavi = cvnavi;
         this.cvAnfrage = -1;
         this.cvSchreiben = -1;
         this.cvWert = -1;
         this.bWaitAnswerInProgresss = false;
 
-        if( KTUI != null ) {
-            this.Decoder = KTUI.Decoder;
+        if( CVNavi != null ) {
+            this.Decoder = CVNavi.Decoder;
             initComponents();
             pack();
             bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
@@ -391,7 +392,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         {
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         System.out.println("389 jLesenSchreibenActionPerformed: bLesen CV[1][0.."+CV[0].length+"] auf 0");
         // invalidate all values
@@ -413,7 +414,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         cvAnfrage = CV[0][currCV];
         String s = "XPTRD " + cvAnfrage + "\r";
         System.out.println("408 jLesenSchreibenActionPerformed: CV="+currCV+" Com.isconnected["+(Com.isconnected()?1:0)+"]" );
-        if( KTUI.debugLevel > 2 ) {
+        if( CVNavi.debugLevel > 2 ) {
             System.out.println("410 written \"XPTRD "+ cvAnfrage + "\"" );
         }
         System.out.print("W  "+s);
@@ -470,15 +471,15 @@ public class ReadWriteCV extends javax.swing.JDialog {
         {
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
-        cvSchreiben = KTUI.checkTextField( this, jCVnr, 1, c.MAX_CV, 0, false);
-        if( ! KTUI.checkNumRange(jCVwert.getText(), 0, 255) ) {
-            KTUI.mbValueNaN(this, 0, 255, false);
+        cvSchreiben = CVNavi.checkTextField( this, jCVnr, 1, c.MAX_CV, 0, false);
+        if( ! CVNavi.checkNumRange(jCVwert.getText(), 0, 255) ) {
+            CVNavi.mbValueNaN(this, 0, 255, false);
             jCVwert.grabFocus();
             return;
         }
-        cvWert = KTUI.checkTextField( this, jCVwert, 0, 255, 0, false);
+        cvWert = CVNavi.checkTextField( this, jCVwert, 0, 255, 0, false);
         if(jPOM.isSelected())
         {
             if( cvSchreiben > 0 ) {
@@ -508,9 +509,9 @@ public class ReadWriteCV extends javax.swing.JDialog {
         {
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
-        cvAnfrage = KTUI.checkTextField( this, jCVnr, 1, c.MAX_CV, 8, false);
+        cvAnfrage = CVNavi.checkTextField( this, jCVnr, 1, c.MAX_CV, 8, false);
         System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
         String s = "XPTRD " + cvAnfrage + "\r";
         Com.write(s);
@@ -525,21 +526,21 @@ public class ReadWriteCV extends javax.swing.JDialog {
     }//GEN-LAST:event_jCVLesenActionPerformed
 
     private void jCV_ListeBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCV_ListeBearbeitenActionPerformed
-        CVEditList EdList = new CVEditList(this, true, KTUI, CV, CV_To_Edit, false);
+        CVEditList EdList = new CVEditList(this, true, CVNavi, CV, CV_To_Edit, false);
     }//GEN-LAST:event_jCV_ListeBearbeitenActionPerformed
 
     private void jCV_ListeDruckenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCV_ListeDruckenActionPerformed
-        CVEditList EdList = new CVEditList(this, true, KTUI, CV, CV_To_Edit, true);
+        CVEditList EdList = new CVEditList(this, true, CVNavi, CV, CV_To_Edit, true);
     }//GEN-LAST:event_jCV_ListeDruckenActionPerformed
 
     private void jCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCloseActionPerformed
-        Com = KTUI.safelyCloseCom( this, Com);
+        Com = CVNavi.safelyCloseCom( this, Com);
         stopIOAction();
         this.dispose();
     }//GEN-LAST:event_jCloseActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-/*        if( ! KTUI.bSpracheDE) {
+/*        if( ! CVNavi.bSpracheDE) {
             TitledBorder TB = (TitledBorder)jPanel1.getBorder();
             TB.setTitle("read or write CVs");
             jControlUnitOn.setText("switch on control unit");
@@ -554,7 +555,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
             jCV_ListeDrucken.setText("print CV list");
         }*/
 
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             this.dispose();
             return;
@@ -602,7 +603,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                 if( bAbbruch ) {
                     System.out.println("Abbruch durch Benutzer" );
                     stopIOAction();
-                    KTUI.mbRWCancelled(outerThis, 5);
+                    CVNavi.mbRWCancelled(outerThis, 5);
                     return;
                 }
 
@@ -620,7 +621,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                         bArray[bytesRead] = 0;
                         if( CVNavi.debugLevel > 2 ) {
                             System.out.println("633 aktueller Stand: bytesRead="+bytesRead );
-                            KTUI.dumpbArray(bArray);
+                            CVNavi.dumpbArray(bArray);
                         }
                     }
 
@@ -631,9 +632,9 @@ public class ReadWriteCV extends javax.swing.JDialog {
                             jProgressBar1.setString(null);
                             System.out.println(" -> retries ende bytesRead="+bytesRead );
                             stopIOAction();
-                            KTUI.mbDeviceReadProblem( outerThis );
+                            CVNavi.mbDeviceReadProblem( outerThis );
                             //String tmp  = new String(bArray);
-                            //KTUI.mbGeneric(KTUI, "ZUSATZINFO", " -> retries ende bytesRead="+bytesRead, tmp, true);
+                            //CVNavi.mbGeneric(CVNavi, "ZUSATZINFO", " -> retries ende bytesRead="+bytesRead, tmp, true);
                             return;
                         }
                         jProgressBar1.setString(bundle.getString("ReadWriteCV.Warte")+retries);
@@ -643,7 +644,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                     // es ist ein vollständiger Datensatz angekommen ?
                     bArray[bytesRead] = 0; // zur Sicherheit ;)
 
-                    if( ! KTUI.checkReadComplete(bArray) ) {
+                    if( ! CVNavi.checkReadComplete(bArray) ) {
                         // incomplete -> wait for more
                         return;
                     }
@@ -654,12 +655,12 @@ public class ReadWriteCV extends javax.swing.JDialog {
 
                 if( bLeseCV ) {
                     // read single CV
-                    cvWert = KTUI.checkPTRDAnswer( bArray );
+                    cvWert = CVNavi.checkPTRDAnswer( bArray );
                     if( CVNavi.debugLevel >= 2 ) {
                         System.out.println("674 checkPTRDAnswer liefert cvWert="+cvWert );
                     }
 
-                    if( KTUI.checkNumRange(cvWert, 0, 255) ) {
+                    if( CVNavi.checkNumRange(cvWert, 0, 255) ) {
                         // alles OK
                         CV[1][cvAnfrage] = cvWert;
                         // jCVnr.setText("" + cvAnfrage); // steht doch schon da ?
@@ -676,16 +677,16 @@ public class ReadWriteCV extends javax.swing.JDialog {
                 if(bSchreibeCV) {
                     // write single CV
 
-                    if( KTUI.checkAnswerOK( bArray ) ) {
+                    if( CVNavi.checkAnswerOK( bArray ) ) {
                         // answer was OK
                         System.out.println("Answer for writing CV"+cvSchreiben+" was OK" );
                     } else { // problem with answer
                         System.out.println("Answer for writing CV"+cvSchreiben+" was NOT OK" );
-                        KTUI.dumpbArray(bArray);
-                        if( KTUI.checkAnswerNoAck(bArray)) {
-                            KTUI.mbTimeout( outerThis, c.mbRDtimeout);
+                        CVNavi.dumpbArray(bArray);
+                        if( CVNavi.checkAnswerNoAck(bArray)) {
+                            CVNavi.mbTimeout( outerThis, c.mbRDtimeout);
                         } else {
-                            KTUI.mbTimeout( outerThis );
+                            CVNavi.mbTimeout( outerThis );
                         }
                     }
                     bSchreibeCV = false;
@@ -698,12 +699,12 @@ public class ReadWriteCV extends javax.swing.JDialog {
                         System.out.println("713 bListeLesen: CV="+currCV+" Com.isconnected["+Com.isconnected()+"] retries["+retries+"] bAbbruch["+bAbbruch+"]"+" tINIT="+timer.getInitialDelay()+" tIntervall="+timer.getDelay() );
                     }
                     if( (cvAnfrage > 0) && !bAbbruch ) {
-                        cvWert = KTUI.checkPTRDAnswer( bArray );
+                        cvWert = CVNavi.checkPTRDAnswer( bArray );
                         if( CVNavi.debugLevel >= 2 ) {
                             System.out.println("718 checkPTRDAnswer liefert cvWert="+cvWert );
                         }
 
-                        if( KTUI.checkNumRange(cvWert, 0, 255) ) {
+                        if( CVNavi.checkNumRange(cvWert, 0, 255) ) {
                             // alles OK
                             CV[1][cvAnfrage] = cvWert;
                             jCVnr.setText("" + cvAnfrage);
@@ -728,11 +729,11 @@ public class ReadWriteCV extends javax.swing.JDialog {
                         currCV++;
                         while(currCV < CV[0].length-1) {
                             if(CV[0][currCV] != 0) {
-                                if( KTUI.skipCV17 && (currCV == 17) ) {
+                                if( CVNavi.skipCV17 && (currCV == 17) ) {
                                     currCV++;
                                     continue;
                                 }
-                                if( KTUI.skipCV18 && (currCV == 18) ) {
+                                if( CVNavi.skipCV18 && (currCV == 18) ) {
                                     currCV++;
                                     continue;
                                 }
@@ -757,7 +758,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                             }
 
                             s = "XPTRD " + cvAnfrage + "\r";
-                            if( KTUI.debugLevel > 2 ) {
+                            if( CVNavi.debugLevel > 2 ) {
                                 System.out.println("776 written \"XPTRD "+ cvAnfrage + "\"" );
                             }
                             System.out.print("W  "+s);
@@ -776,7 +777,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                         System.out.println("791 bLesen LAST ACTION" );
                         stopIOAction();
                         if( ! bAbbruch ) {
-                            KTUI.mbConfigReadSuccess( outerThis, 5);
+                            CVNavi.mbConfigReadSuccess( outerThis, 5);
                         }
                         bAbbruch = false;
                     }
@@ -789,18 +790,18 @@ public class ReadWriteCV extends javax.swing.JDialog {
                     }
                     if( (cvSchreiben > 0) && !bAbbruch ) // waiting for a commit (OK) 
                     {
-                        if( KTUI.checkAnswerOK( bArray ) ) {
+                        if( CVNavi.checkAnswerOK( bArray ) ) {
                             // answer was OK
                             System.out.println("Answer for writing CV"+cvSchreiben+" was OK" );
                             cvSchreiben = 0;
                             nTimeOut = 0;
                         } else { // problem with answer
                             System.out.println("Answer for writing CV"+cvSchreiben+" was NOT OK" );
-                            KTUI.dumpbArray(bArray);
-                            if( KTUI.checkAnswerNoAck(bArray)) {
-                                KTUI.mbTimeout( outerThis, c.mbRDtimeout);
+                            CVNavi.dumpbArray(bArray);
+                            if( CVNavi.checkAnswerNoAck(bArray)) {
+                                CVNavi.mbTimeout( outerThis, c.mbRDtimeout);
                             } else {
-                                KTUI.mbTimeout( outerThis );
+                                CVNavi.mbTimeout( outerThis );
                             }
                             stopIOAction();
                             return;
@@ -857,7 +858,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                                 System.out.println("872 bListeSchreiben CV["+CV[0][currCV]+"]="+CV[1][currCV] );
                             }
                             stopIOAction();
-                            KTUI.mbConfigWriteSuccess( outerThis, 5 );
+                            CVNavi.mbConfigWriteSuccess( outerThis, 5 );
                         }
                     }
                 }
@@ -870,7 +871,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
      }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        Com = KTUI.safelyCloseCom( this, Com);
+        Com = CVNavi.safelyCloseCom( this, Com);
         stopIOAction();
     }//GEN-LAST:event_formWindowClosed
 
@@ -879,7 +880,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         {
             return;
         }
-        KTUI.flushReadBuffer( Com );
+        CVNavi.flushReadBuffer( Com );
 
         String str;
         if(jPOM.isSelected())

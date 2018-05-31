@@ -98,8 +98,8 @@ public class M3_Liste extends javax.swing.JDialog {
             @Override
             public int compare(String o1, String o2)
             {
-                int n1 = mc.KTUI.checkAndGetStrNumRangeDef( null, o1, 1, c.MAX_M3_SID, 0, false);
-                int n2 = mc.KTUI.checkAndGetStrNumRangeDef( null, o2, 1, c.MAX_M3_SID, 0, false);
+                int n1 = mc.CVNavi.checkAndGetStrNumRangeDef( null, o1, 1, c.MAX_M3_SID, 0, false);
+                int n2 = mc.CVNavi.checkAndGetStrNumRangeDef( null, o2, 1, c.MAX_M3_SID, 0, false);
                 if( ( n1 == 0 ) && ( n2 == 0 ) ) {
                     return 0;
                 }
@@ -453,7 +453,7 @@ public class M3_Liste extends javax.swing.JDialog {
                     break;
                 case 1: // SID
                     str = (""+jTableM3.getValueAt(edRow, edCol)).trim().toLowerCase().replaceAll("\\s","");
-                    if( mc.KTUI.checkNumRange(str, 1, c.MAX_M3_SID) ) {
+                    if( mc.CVNavi.checkNumRange(str, 1, c.MAX_M3_SID) ) {
                         jTableM3.setValueAt(str, edRow, edCol);
                         if( ! str.equals(mc.M3liste[edCol][edRow])) { 
                             mc.M3changed = true;
@@ -509,7 +509,7 @@ public class M3_Liste extends javax.swing.JDialog {
             if( uid.equalsIgnoreCase(mc.M3liste[0][row]) ) {
                 // uid already exists , jump to  row and inform user
                 jTableM3.setRowSelectionInterval(row, row);
-                mc.KTUI.mbM3duplicateUid(this);
+                mc.CVNavi.mbM3duplicateUid(this);
                 System.out.println( "jImportActionPerformed END without import" );
                 return;
             }

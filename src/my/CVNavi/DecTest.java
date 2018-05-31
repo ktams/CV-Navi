@@ -29,14 +29,14 @@ public class DecTest extends javax.swing.JDialog {
     // public String dt_Port = "" ;
     // public int dt_baud = -1;
     private TwoWaySerialComm Com = null;
-    private CVNavi KTUI = null;
+    private CVNavi CVNavi = null;
 
 
-    public DecTest(java.awt.Frame parent, boolean modal, CVNavi ktui) {
+    public DecTest(java.awt.Frame parent, boolean modal, CVNavi cvnavi) {
         super(parent, modal);
         initComponents();
-        if( KTUI == null && ktui != null )
-            KTUI = ktui;
+        if( CVNavi == null && cvnavi != null )
+            CVNavi = cvnavi;
         pack();
         setLocationRelativeTo(parent);
     }
@@ -649,7 +649,7 @@ public class DecTest extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonProgActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
@@ -662,7 +662,7 @@ public class DecTest extends javax.swing.JDialog {
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
         Com.read(bArray);
-        switch(KTUI.getZentrale())
+        switch(CVNavi.getZentrale())
         {
             case c.cuOpenDCC: // OpenDCC
             case c.cuMasterControl: // TamsMC
@@ -686,7 +686,7 @@ public class DecTest extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        Com = KTUI.safelyCloseCom( this, Com );
+        Com = CVNavi.safelyCloseCom( this, Com );
     }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

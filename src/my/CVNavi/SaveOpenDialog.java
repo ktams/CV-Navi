@@ -47,7 +47,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
     private String str;
     private String filter;
     private int Decoder;
-    private CVNavi KTUI;
+    private CVNavi CVNavi;
 
 
     private void commonDialogSettings() {
@@ -57,19 +57,19 @@ public class SaveOpenDialog extends javax.swing.JDialog {
 
         switch( Decoder ) {
             case c.KENN:
-                jFileChooser1.setSelectedFile(new File(KTUI.gsSaveOpenKennDirectory + "/" + KTUI.gsSaveOpenKennFilename));
+                jFileChooser1.setSelectedFile(new File(CVNavi.gsSaveOpenKennDirectory + "/" + CVNavi.gsSaveOpenKennFilename));
                 break;
             case c.M3:
-                jFileChooser1.setSelectedFile(new File(KTUI.gsSaveOpenM3Directory+"/"+KTUI.gsSaveOpenM3Filename));
+                jFileChooser1.setSelectedFile(new File(CVNavi.gsSaveOpenM3Directory+"/"+CVNavi.gsSaveOpenM3Filename));
                 break;
             case c.MC:
-                jFileChooser1.setSelectedFile(new File(KTUI.gsSaveOpenMcDirectory+"/"+KTUI.gsSaveOpenMcFilename));
+                jFileChooser1.setSelectedFile(new File(CVNavi.gsSaveOpenMcDirectory+"/"+CVNavi.gsSaveOpenMcFilename));
                 break;
             case c.HEX:
-                jFileChooser1.setSelectedFile(new File(KTUI.gsOpenFirmwareDirectory+"/"+KTUI.gsOpenFirmwareFilename));
+                jFileChooser1.setSelectedFile(new File(CVNavi.gsOpenFirmwareDirectory+"/"+CVNavi.gsOpenFirmwareFilename));
                 break;
             default: // all decoders
-                jFileChooser1.setSelectedFile(new File(KTUI.gsSaveOpenDirectory+"/"+KTUI.gsSaveOpenFilename));
+                jFileChooser1.setSelectedFile(new File(CVNavi.gsSaveOpenDirectory+"/"+CVNavi.gsSaveOpenFilename));
         }
 
         if (!bLesen) {
@@ -84,8 +84,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         jFileChooser1.addChoosableFileFilter(ff);
         jFileChooser1.setFileFilter(ff);
 
-        if( KTUI.SODlocalSize.width > 0 ) {
-            setPreferredSize(KTUI.SODlocalSize);
+        if( CVNavi.SODlocalSize.width > 0 ) {
+            setPreferredSize(CVNavi.SODlocalSize);
         }
         pack();
         setLocationRelativeTo(parentFrame);
@@ -110,8 +110,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.myFDRex = decoderThis;
         this.filter = filter;
 
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -128,8 +128,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myLDG30erPlus = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -146,8 +146,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myFDR = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -164,8 +164,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myWIB = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -182,8 +182,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myFDM = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -200,8 +200,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myFDLED = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -218,8 +218,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myLD30 = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -236,8 +236,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myLD33 = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -254,8 +254,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myLD31 = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = decoderThis.KTUI.Decoder;
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = decoderThis.CVNavi.Decoder;
 
         commonDialogSettings();
 
@@ -272,8 +272,8 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myMC = decoderThis;
         this.filter = filter;
-        this.KTUI = decoderThis.KTUI ;
-        this.Decoder = mcSubType; // different here NOT decoderThis.KTUI.Decoder !
+        this.CVNavi = decoderThis.CVNavi ;
+        this.Decoder = mcSubType; // different here NOT decoderThis.CVNavi.Decoder !
 
         commonDialogSettings();
 
@@ -291,7 +291,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myLD30 = decoderThis;
         this.filter = "kenn";
-        this.KTUI = decoderThis.KTUI;
+        this.CVNavi = decoderThis.CVNavi;
         this.Decoder = c.KENN; // Kennlinie
 
         commonDialogSettings();
@@ -310,7 +310,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myLD31 = decoderThis;
         this.filter = "kenn";
-        this.KTUI = decoderThis.KTUI;
+        this.CVNavi = decoderThis.CVNavi;
         this.Decoder = c.KENN; // Kennlinie
 
         commonDialogSettings();
@@ -329,7 +329,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         this.str = wStr;
         this.myLD33 = decoderThis;
         this.filter = "kenn";
-        this.KTUI = decoderThis.KTUI;
+        this.CVNavi = decoderThis.CVNavi;
         this.Decoder = c.KENN; // Kennlinie
 
         commonDialogSettings();
@@ -443,7 +443,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                 System.out.println("bCancel = false;" );
             }
             bCancel = false;
-            KTUI.lastSaveOpenDialogWasCancel = false;
+            CVNavi.lastSaveOpenDialogWasCancel = false;
 
             File f = jFileChooser1.getSelectedFile();
             int filesize = (int) f.length() ;
@@ -470,7 +470,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                                 if(n == -1)
                                 {
                                     MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
-                                    if(KTUI.bSpracheDE)
+                                    if(CVNavi.bSpracheDE)
                                     {
                                         messageBox.jLabel1.setText("Fehler!");
                                         messageBox.jLabel2.setText("");
@@ -827,13 +827,13 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                 }
                 else
                 {
-                    if (KTUI.bSpracheDE) {
+                    if (CVNavi.bSpracheDE) {
                         str_temp = "Datei \"" + f.getPath() + "\" nicht gefunden.";
                     } else {
                         str_temp = "File not found: \"" + f.getPath() + "\".";
                     }
                     MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this );
-                    if (KTUI.bSpracheDE) {
+                    if (CVNavi.bSpracheDE) {
                         messageBox.jLabel1.setText("Fehler!");
                     } else {
                         messageBox.jLabel1.setText("Error!");
@@ -888,7 +888,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             }
             /*
             try {
-                KTUI.gsLastMcConfSave = f.getPath();
+                CVNavi.gsLastMcConfSave = f.getPath();
                 prop.setProperty("LastConfigSaveFile", f.getName()) ;
                 prop.setProperty("LastConfigSaveDirectory", f.getParent()) ;
                 prop.storeToXML(new FileOutputStream(CVNavi.gsConfigFilename), CVNavi.gsConfigComment);
@@ -899,35 +899,35 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             // Save this selection
             switch( Decoder ) {
                 case c.KENN:
-                KTUI.gsSaveOpenKennDirectory = f.getParent();
-                KTUI.gsSaveOpenKennFilename  = f.getName();
+                CVNavi.gsSaveOpenKennDirectory = f.getParent();
+                CVNavi.gsSaveOpenKennFilename  = f.getName();
                 break;
 
                 case c.M3:
-                KTUI.gsSaveOpenM3Directory = f.getParent();
-                KTUI.gsSaveOpenM3Filename  = f.getName();
+                CVNavi.gsSaveOpenM3Directory = f.getParent();
+                CVNavi.gsSaveOpenM3Filename  = f.getName();
                 break;
 
                 case c.MC:
-                KTUI.gsSaveOpenMcDirectory = f.getParent();
-                KTUI.gsSaveOpenMcFilename  = f.getName();
+                CVNavi.gsSaveOpenMcDirectory = f.getParent();
+                CVNavi.gsSaveOpenMcFilename  = f.getName();
                 break;
 
                 case c.HEX:
-                KTUI.gsOpenFirmwareDirectory = f.getParent();
-                KTUI.gsOpenFirmwareFilename  = f.getName();
+                CVNavi.gsOpenFirmwareDirectory = f.getParent();
+                CVNavi.gsOpenFirmwareFilename  = f.getName();
                 break;
 
                 default:
                 // alle Dekoder und Kennlinie
-                KTUI.gsSaveOpenDirectory = f.getParent();
-                KTUI.gsSaveOpenFilename  = f.getName();
+                CVNavi.gsSaveOpenDirectory = f.getParent();
+                CVNavi.gsSaveOpenFilename  = f.getName();
             }
         }
         else
         {
             bCancel = true;
-            KTUI.lastSaveOpenDialogWasCancel = true;
+            CVNavi.lastSaveOpenDialogWasCancel = true;
             if( debugLevel >= 1 ) {
                 System.out.println("bCancel = true;");
             }
@@ -948,7 +948,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if(!KTUI.bSpracheDE)
+        if(!CVNavi.bSpracheDE)
         {
             jLabel1.setText("last opened:");
         }
@@ -960,9 +960,9 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             System.out.println("SaveOpenDialog: formWindowClosed: param="+evt.paramString());
             System.out.println("formWindowClosed bCancel["+bCancel+"] bOpen["+bLesen+"]");
         }
-        KTUI.SODlocalSize = this.getSize();
-        // KTUI.SODlocalSize = this.jFileChooser1.getSize();
-        KTUI.lastSaveOpenDialogWasCancel = bCancel;
+        CVNavi.SODlocalSize = this.getSize();
+        // CVNavi.SODlocalSize = this.jFileChooser1.getSize();
+        CVNavi.lastSaveOpenDialogWasCancel = bCancel;
         if( bCancel == true ) {
             return;
         }
@@ -1085,7 +1085,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
         String s = null;
         if(bLesen)
         {
-            if (KTUI.bSpracheDE) {
+            if (CVNavi.bSpracheDE) {
                 switch (Decoder) {
                     case c.LD_G30:
                         jTextField1.setText("Einstellungen für LD-G-30 laden...");
@@ -1354,13 +1354,13 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             } catch (FileNotFoundException ex) {
                 System.out.println("SOD file not found filename=["+s+"]" );
                 // Logger.getLogger(SaveOpenDialog.class.getName()).log(Level.SEVERE, null, ex);
-                // jFileChooser1.setSelectedFile(new File(decoderThis.KTUI.gsSaveOpenDirectory + "/" + decoderThis.KTUI.gsSaveOpenFilename));
+                // jFileChooser1.setSelectedFile(new File(decoderThis.CVNavi.gsSaveOpenDirectory + "/" + decoderThis.CVNavi.gsSaveOpenFilename));
                 jFileChooser1.setSelectedFile(new File(""));
             }
         }
         else
         {
-            if (KTUI.bSpracheDE) {
+            if (CVNavi.bSpracheDE) {
                 switch (Decoder) {
                     case c.LD_G30:
                         s = CVNavi.gsConfigDirectory + "LastFiles30.lfs";
@@ -1428,7 +1428,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                         break;
 
                     case c.LD_G34Plus:
-                        s = KTUI.gsConfigDirectory + "LastFiles34plus.lfs";
+                        s = CVNavi.gsConfigDirectory + "LastFiles34plus.lfs";
                         jTextField1.setText("Einstellungen für LD-G-34plus speichern...");
                         break;
 
@@ -1614,7 +1614,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             System.out.println("SaveOpenDialog: formWindowClosing: param="+evt.paramString());
         }
         bCancel = true;
-        KTUI.lastSaveOpenDialogWasCancel = true;
+        CVNavi.lastSaveOpenDialogWasCancel = true;
     }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

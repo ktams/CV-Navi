@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
  */
 public class MultiDec extends javax.swing.JFrame {
 
-    public CVNavi KTUI;
+    public CVNavi CVNavi;
     private TwoWaySerialComm Com = null;
     private javax.swing.Timer timer = null;
     private boolean bAbbruch = false;
@@ -48,14 +48,14 @@ public class MultiDec extends javax.swing.JFrame {
         initComponents();
     }
 
-    MultiDec(CVNavi ktuiThis) {
-        if( ktuiThis == null ) {
+    MultiDec(CVNavi cvnaviThis) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceDEVICE != null ) {
+            CVNavi.frameInstanceDEVICE.toFront();
+            CVNavi.frameInstanceDEVICE.repaint();
             return;
         }
         initComponents();
@@ -63,12 +63,12 @@ public class MultiDec extends javax.swing.JFrame {
         ImageIcon II = null;
         II = new ImageIcon(getClass().getResource("/WD-34.gif"));
         jBild.setIcon(II);
-        setTitle( KTUI.getMenutext( decoderList.MultiDecoder ).trim() );
+        setTitle( CVNavi.getMenutext( decoderList.MultiDecoder ).trim() );
         this.setIconImage(II.getImage());
 
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
+        CVNavi.frameInstanceDEVICE = this;
     }
 
     /**
@@ -739,7 +739,7 @@ public class MultiDec extends javax.swing.JFrame {
                     System.out.println("Abbruch durch Benutzer" );
                     if( bRead || bWrite ) {
                         jProgressBar1.setString(bundle.getString("WD34.BenutzerAbbruch"));
-                        KTUI.mbRWCancelled(outerThis, 5);
+                        CVNavi.mbRWCancelled(outerThis, 5);
                     }
                     stopIOAction();
                     bAbbruch = false;
@@ -760,7 +760,7 @@ public class MultiDec extends javax.swing.JFrame {
                         bArray[bytesRead] = 0;
                         if( CVNavi.debugLevel > 2 ) {
                             System.out.println("529 aktueller Stand: bytesRead="+bytesRead );
-                            KTUI.dumpbArray(bArray);
+                            CVNavi.dumpbArray(bArray);
                         }
                     }
 
@@ -771,7 +771,7 @@ public class MultiDec extends javax.swing.JFrame {
                             jProgressBar1.setString("Timeout");
                             System.out.println(" -> retries ende bytesRead="+bytesRead );
                             stopIOAction();
-                            KTUI.mbDeviceReadProblem( outerThis );
+                            CVNavi.mbDeviceReadProblem( outerThis );
                             return;
                         }
                         jProgressBar1.setString(bundle.getString("ReadWriteCV.Warte")+retries);
@@ -781,7 +781,7 @@ public class MultiDec extends javax.swing.JFrame {
                     // es ist ein vollständiger Datensatz angekommen ?
                     bArray[bytesRead] = 0; // zur Sicherheit ;)
 
-                    if( ! KTUI.checkReadComplete(bArray) ) {
+                    if( ! CVNavi.checkReadComplete(bArray) ) {
                         // incomplete -> wait for more
                         return;
                     }
@@ -791,7 +791,7 @@ public class MultiDec extends javax.swing.JFrame {
 
                 if(bRead) {
                     // check for a valid PTRD answer
-                    cvWert = KTUI.checkPTRDAnswer( bArray );
+                    cvWert = CVNavi.checkPTRDAnswer( bArray );
                     if( CVNavi.debugLevel >= 0 ) {
                         System.out.println("bRead cv["+cvAnfrage+"]="+cvWert );
                     }
@@ -807,7 +807,7 @@ public class MultiDec extends javax.swing.JFrame {
                                 bRead = false;
                                 stopIOAction();
                                 jUpdateInfo.setText(bundle.getString("WD34.wrongvendor"));
-                                KTUI.mbNoTams( outerThis, c.mbRDcancel );
+                                CVNavi.mbNoTams( outerThis, c.mbRDcancel );
                                 return;
                             }
 
@@ -857,7 +857,7 @@ public class MultiDec extends javax.swing.JFrame {
 //                            decAdr += cvWert*64;
                             jAdresse.setText("" + decAdr);
                             String ss = "-> ";
-                            if( KTUI.bSpracheDE ) {
+                            if( CVNavi.bSpracheDE ) {
                                 ss += "Weiche " ;
                             } else {
                                 ss += "Switch " ;
@@ -2005,7 +2005,7 @@ public class MultiDec extends javax.swing.JFrame {
                             if(!jPOM.isSelected())
                             {
                                 // check for a valid PTRD answer
-                                cvWert = KTUI.checkPTRDAnswer( bArray );
+                                cvWert = CVNavi.checkPTRDAnswer( bArray );
                                 if( CVNavi.debugLevel >= 0 ) {
                                     System.out.println("bWrite read cv["+cvAnfrage+"]="+cvWert );
                                 }
@@ -2020,14 +2020,14 @@ public class MultiDec extends javax.swing.JFrame {
                                    bWrite = false;
                                    stopIOAction();
                                    jUpdateInfo.setText(bundle.getString("WD34.write")+"wrong vendor");
-                                   KTUI.mbNoTams( outerThis, c.mbWRcancel );
+                                   CVNavi.mbNoTams( outerThis, c.mbWRcancel );
                                    return;
                                 }
                             }
 
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jAdresse, 1, c.MAX_MM1_ACCMOD, 1, false);
-                            Adr = KTUI.checkTextField( outerThis, jAktAddr, 1, c.MAX_MM1_ACCMOD, 1, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jAdresse, 1, c.MAX_MM1_ACCMOD, 1, false);
+                            Adr = CVNavi.checkTextField( outerThis, jAktAddr, 1, c.MAX_MM1_ACCMOD, 1, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD " + " 1 " + cvWert + "\r";
@@ -2049,7 +2049,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 1:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime1, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime1, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 3 " + cvWert + "\r";
@@ -2072,7 +2072,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 2:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime5, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime5, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 33 " + cvWert + "\r";
@@ -2095,7 +2095,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 3:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime2, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime2, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 4 " + cvWert + "\r";
@@ -2118,7 +2118,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 4:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime6, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime6, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 34 " + cvWert + "\r";
@@ -2141,7 +2141,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 5:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime3, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime3, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 5 " + cvWert + "\r";
@@ -2164,7 +2164,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 6:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime7, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime7, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 35 " + cvWert + "\r";
@@ -2187,7 +2187,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 7:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime4, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime4, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 6 " + cvWert + "\r";
@@ -2210,7 +2210,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 8:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jOnTime8, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jOnTime8, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 36 " + cvWert + "\r";
@@ -2420,7 +2420,7 @@ public class MultiDec extends javax.swing.JFrame {
                             
                         case 15:
                             SendeZaehler++;
-                            cvWert = KTUI.checkTextField( outerThis, jNachlaufzeit, 0, 255, 0, false);
+                            cvWert = CVNavi.checkTextField( outerThis, jNachlaufzeit, 0, 255, 0, false);
                             if(!jPOM.isSelected())
                             {
                                 s = "XPTWD 67 " + cvWert + "\r";
@@ -3611,17 +3611,17 @@ public class MultiDec extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         stopIOAction();
-        KTUI.frameInstanceDEVICE = null;
-        KTUI.setFocus();
+        CVNavi.frameInstanceDEVICE = null;
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     private void jAuslesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuslesenActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
 
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         SendeZaehler = 0;
         cvAnfrage = 8;
         String s = "XPTRD 8\r"; // Hersteller
@@ -3647,7 +3647,7 @@ public class MultiDec extends javax.swing.JFrame {
     }//GEN-LAST:event_jAbbrechenActionPerformed
 
     private void jSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSchreibenActionPerformed
-        Com = KTUI.safelyOpenCom( this, Com );
+        Com = CVNavi.safelyOpenCom( this, Com );
         if( Com == null ) {
             return;
         }
@@ -3661,7 +3661,7 @@ public class MultiDec extends javax.swing.JFrame {
             messageBox.setVisible(true);
             return;
         }
-        KTUI.flushReadBuffer(Com);
+        CVNavi.flushReadBuffer(Com);
         resetbArray();
         timer.setRepeats(true);
         retries = CVNavi.timerRetries;
@@ -3691,9 +3691,9 @@ public class MultiDec extends javax.swing.JFrame {
     }//GEN-LAST:event_jSchreibenActionPerformed
 
     private void jAdresseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jAdresseFocusLost
-        int myDecAdr = KTUI.checkTextField( this, jAdresse, 1, c.MAX_MM1_ACCMOD, 1, true );
+        int myDecAdr = CVNavi.checkTextField( this, jAdresse, 1, c.MAX_MM1_ACCMOD, 1, true );
         String ss = "-> ";
-        if( KTUI.bSpracheDE ) {
+        if( CVNavi.bSpracheDE ) {
             ss += "Weiche " ;
         } else {
             ss += "point " ;
@@ -3776,7 +3776,7 @@ public class MultiDec extends javax.swing.JFrame {
         setCursor(c);
 
         // close interface
-        Com = KTUI.safelyCloseCom( this, Com );
+        Com = CVNavi.safelyCloseCom( this, Com );
     }
     
         private void resetbArray() {

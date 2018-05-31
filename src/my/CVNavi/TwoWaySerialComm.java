@@ -26,7 +26,7 @@ public class TwoWaySerialComm {
     
     private SerialPort tw_serialPort = null;
     private boolean    tw_connected = false;
-    private CVNavi KTUI = null;
+    private CVNavi CVNavi = null;
     private String     tw_dev = null;
     private int        tw_baud = -1;
     private boolean    tw_rtscts = false;
@@ -64,7 +64,7 @@ public class TwoWaySerialComm {
         tw_rtscts = false;
     }
 
-    void connect( CVNavi ktui) throws Exception
+    void connect( CVNavi cvnavi) throws Exception
     {
         if( debugLevel > 1 ) {
             String sunModel = System.getProperty("sun.arch.data.model");
@@ -75,22 +75,22 @@ public class TwoWaySerialComm {
             }
         }
         if( debugLevel > 2 ) {
-            System.out.println("NEW CONNECT ktui["+ktui+"] KTUI["+KTUI+"]");
+            System.out.println("NEW CONNECT cvnavi["+cvnavi+"] CVNavi["+CVNavi+"]");
         }
-        if( KTUI == null && ktui != null )
-            KTUI = ktui;
-        if( KTUI != null ) {
+        if( CVNavi == null && cvnavi != null )
+            CVNavi = cvnavi;
+        if( CVNavi != null ) {
             if( debugLevel >= 1 ) {
-                System.out.println("NEW CONNECT dev["+KTUI.gsSchnittstelle+"] baud["+KTUI.gsBaudRate+"] rtscts["+KTUI.gsRtsCts+"]");
+                System.out.println("NEW CONNECT dev["+CVNavi.gsSchnittstelle+"] baud["+CVNavi.gsBaudRate+"] rtscts["+CVNavi.gsRtsCts+"]");
             }
         } else {
             if( debugLevel >= 1 ) {
-                System.out.println("NEW CONNECT without valid KTUI -> ABORT CONNECT" );
+                System.out.println("NEW CONNECT without valid CVNavi -> ABORT CONNECT" );
             }
             return;
         }
         if( tw_connected ) {
-            if( tw_dev.equalsIgnoreCase(KTUI.gsSchnittstelle) && tw_baud == KTUI.gsBaudRate && tw_rtscts == KTUI.gsRtsCts) {
+            if( tw_dev.equalsIgnoreCase(CVNavi.gsSchnittstelle) && tw_baud == CVNavi.gsBaudRate && tw_rtscts == CVNavi.gsRtsCts) {
                 if( debugLevel >= 1 ) {
                     System.out.println("CONNECT but already OPENED with identical parameters" );
                 }
@@ -99,7 +99,7 @@ public class TwoWaySerialComm {
             else {
                 if( debugLevel >= 1 ) {
                     System.out.println("CONNECT but already OPENED with other parameters OLD dev["+tw_dev+"] baud["+tw_baud+"] rtscts["+tw_rtscts+"] "
-                            +"NEW dev["+KTUI.gsSchnittstelle+"] baud["+KTUI.gsBaudRate+"] rtscts["+KTUI.gsRtsCts+"]");
+                            +"NEW dev["+CVNavi.gsSchnittstelle+"] baud["+CVNavi.gsBaudRate+"] rtscts["+CVNavi.gsRtsCts+"]");
                 }
                 disconnect();
             }
@@ -109,7 +109,7 @@ public class TwoWaySerialComm {
 
         CommPortIdentifier portIdentifier = null;
         try {
-            portIdentifier = CommPortIdentifier.getPortIdentifier(KTUI.gsSchnittstelle);
+            portIdentifier = CommPortIdentifier.getPortIdentifier(CVNavi.gsSchnittstelle);
         }
         catch (NoSuchPortException e) {
             System.out.println("NoSuchPortException EXCEPTION in CONNECT");
@@ -121,7 +121,7 @@ public class TwoWaySerialComm {
         }
         catch (UnsatisfiedLinkError e) {
             System.out.println("connect: UnsatisfiedLinkError: "+ e);
-            KTUI.mbGeneric( KTUI, "INFO: Library may be missing or does not fit.", "rxtxSerial.dll", e.getMessage() );
+            CVNavi.mbGeneric( CVNavi, "INFO: Library may be missing or does not fit.", "rxtxSerial.dll", e.getMessage() );
             return;
         }
         catch (NoClassDefFoundError e) {
@@ -146,7 +146,7 @@ public class TwoWaySerialComm {
 
         if ( portIdentifier.isCurrentlyOwned() )
         {
-            KTUI.mbDeviceOwned( null );
+            CVNavi.mbDeviceOwned( null );
         }
         else
         {
@@ -161,22 +161,22 @@ public class TwoWaySerialComm {
             if( commPort instanceof SerialPort )
             {
                 tw_serialPort = (SerialPort) commPort;
-                switch(KTUI.getZentrale())
+                switch(CVNavi.getZentrale())
                 {
                     case c.cuOpenDCC: // OpenDCC
-                        tw_serialPort.setSerialPortParams(KTUI.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
+                        tw_serialPort.setSerialPortParams(CVNavi.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
                        break;
 
                     case c.cuIntellibox1: // Intellibox
-                        tw_serialPort.setSerialPortParams(KTUI.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
+                        tw_serialPort.setSerialPortParams(CVNavi.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
                         break;
 
                     case c.cuMasterControl: // MasterControl
-                        tw_serialPort.setSerialPortParams(KTUI.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
+                        tw_serialPort.setSerialPortParams(CVNavi.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
                         break;
                 }
                 showRTSDTR( "connect: ", tw_serialPort, " pre  set flowcontrol");
-                if (KTUI.gsRtsCts) {
+                if (CVNavi.gsRtsCts) {
                     // tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN);
                     // tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT);
                     // OR ???
@@ -184,9 +184,9 @@ public class TwoWaySerialComm {
                 }
                 tw_serialPort.enableReceiveTimeout(500);
                 tw_connected = true;
-                tw_dev = KTUI.gsSchnittstelle;
-                tw_baud = KTUI.gsBaudRate;
-                tw_rtscts = KTUI.gsRtsCts;
+                tw_dev = CVNavi.gsSchnittstelle;
+                tw_baud = CVNavi.gsBaudRate;
+                tw_rtscts = CVNavi.gsRtsCts;
 
                 showRTSDTR( "connect: ", tw_serialPort, " pre  optional set" );
                 if( ! tw_serialPort.isRTS() ) {
@@ -222,7 +222,7 @@ public class TwoWaySerialComm {
             n = in.read(bArray);
             return n;
         } catch (IOException | NullPointerException ex) {
-            // TODO darf das deaktiviert sein ? KTUI.mbDeviceReadProblem();
+            // TODO darf das deaktiviert sein ? CVNavi.mbDeviceReadProblem();
             Logger.getLogger(TwoWaySerialComm.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
@@ -239,7 +239,7 @@ public class TwoWaySerialComm {
             }
             out.write(bArray);
         } catch (IOException ex) {
-            KTUI.mbDeviceWriteProblem( null );
+            CVNavi.mbDeviceWriteProblem( null );
         }
     }
 
@@ -248,7 +248,7 @@ public class TwoWaySerialComm {
             OutputStream out = tw_serialPort.getOutputStream();
             out.write(b);
         } catch (IOException ex) {
-            KTUI.mbDeviceWriteProblem( null );
+            CVNavi.mbDeviceWriteProblem( null );
         }
     }
 
@@ -259,7 +259,7 @@ public class TwoWaySerialComm {
                 out.write(bArr[i]);
             }
         } catch (IOException ex) {
-            KTUI.mbDeviceWriteProblem( null );
+            CVNavi.mbDeviceWriteProblem( null );
         }
     }
 
@@ -275,7 +275,7 @@ public class TwoWaySerialComm {
             }
             // out.write(bArray);
         } catch (IOException ex) {
-            KTUI.mbDeviceWriteProblem( null );
+            CVNavi.mbDeviceWriteProblem( null );
         }        
     }
 }

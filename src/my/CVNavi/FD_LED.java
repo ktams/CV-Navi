@@ -21,7 +21,7 @@ import static my.CVNavi.CVNavi.debugLevel;
  * @author ktams
  */
 public class FD_LED extends javax.swing.JFrame {
-    public  CVNavi KTUI=null;
+    public  CVNavi CVNavi = null;
     private String CVs;
     private int CV[][] = new int[2][63]; // CV [0..62]
     public String ReturnString = "Tams Elektronik";
@@ -29,14 +29,14 @@ public class FD_LED extends javax.swing.JFrame {
     private int nextCVsel = 0;
 
     /** Creates new form FD_LED */
-    public FD_LED(CVNavi ktuiThis) {
-        if( ktuiThis == null ) {
+    public FD_LED(CVNavi cvnaviThis) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
+        CVNavi = cvnaviThis;
+        if( CVNavi.frameInstanceDEVICE != null ) {
+            CVNavi.frameInstanceDEVICE.toFront();
+            CVNavi.frameInstanceDEVICE.repaint();
             return;
         }
 
@@ -44,7 +44,7 @@ public class FD_LED extends javax.swing.JFrame {
         ImageIcon II = new ImageIcon(getClass().getResource("/FD-LED.gif"));
         this.setIconImage(II.getImage());
         jBild1.setIcon(II);
-        setTitle( KTUI.getMenutext( decoderList.FD_LED ).trim() );
+        setTitle( CVNavi.getMenutext( decoderList.FD_LED ).trim() );
 
         //---- CV-default-Werte -----
         // Vom Decoder verwendete CVs markieren und mit Default-Werten besetzen
@@ -68,9 +68,9 @@ public class FD_LED extends javax.swing.JFrame {
         }
   
         //---------------------------
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
+        CVNavi.frameInstanceDEVICE = this;
     }
 
     private Boolean initCV( int cv, int value ) {
@@ -80,10 +80,10 @@ public class FD_LED extends javax.swing.JFrame {
         }
         if( value == -1 ) {
             jCV_Anzeige.removeItem("CV#"+cv);
-            return( KTUI.unsetCVvalue(CV, cv) );
+            return( CVNavi.unsetCVvalue(CV, cv) );
         }
         jCV_Anzeige.addItem("CV#"+cv);
-        return( KTUI.setCVvalue(CV, cv, value) );
+        return( CVNavi.setCVvalue(CV, cv, value) );
     }
 
     /** This method is called from within the constructor to
@@ -1639,7 +1639,7 @@ public class FD_LED extends javax.swing.JFrame {
         Boolean tabChange = false;
         int currCV = getCVfromIndexString(jCV_Anzeige, "CV#");
         jCV_Inhalt.setText("" + CV[1][currCV]);
-        if( KTUI.checkNumRange( currCV, 5, 6 )) {
+        if( CVNavi.checkNumRange( currCV, 5, 6 )) {
             if( currentTab != 2 )
                 tabChange = true;
             currentTab = 2;
@@ -1649,7 +1649,7 @@ public class FD_LED extends javax.swing.JFrame {
                 tabChange = true;
             currentTab = 0;
         }
-        else if( KTUI.checkNumRange( currCV, 33, 62 )) {
+        else if( CVNavi.checkNumRange( currCV, 33, 62 )) {
             if( currentTab != 1 )
                 tabChange = true;
             currentTab = 1;
@@ -1678,9 +1678,9 @@ public class FD_LED extends javax.swing.JFrame {
     private void jCV_LesenSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCV_LesenSchreibenActionPerformed
         try {
             // Hier wird die Schnittstelle geöffnet und die CVs werden zur Zentrale gesendet
-            ReadWriteCV cvwr = new ReadWriteCV(this, true, KTUI, CV);
+            ReadWriteCV cvwr = new ReadWriteCV(this, true, CVNavi, CV);
         } catch (IOException ex) {
-            KTUI.mbDeviceReadProblem( this );
+            CVNavi.mbDeviceReadProblem( this );
         }
     }//GEN-LAST:event_jCV_LesenSchreibenActionPerformed
 
@@ -1745,12 +1745,12 @@ public class FD_LED extends javax.swing.JFrame {
         int j = CV[1][1];
         if( j < 1 || j > 255 )
         {
-            KTUI.mbValueNaN( this, 1, 255, true);
+            CVNavi.mbValueNaN( this, 1, 255, true);
             j = 1;
         }
         else if (j > 127)
         {
-            KTUI.mbAdr128MMonly( this );
+            CVNavi.mbAdr128MMonly( this );
         }
         CV[1][1] = j;
         jLongAddr.setSelected(false);
@@ -1763,7 +1763,7 @@ public class FD_LED extends javax.swing.JFrame {
         int j = (CV[1][17] - 192)*256 + CV[1][18];
         if (j < 128 || j > 10239)
         {
-            KTUI.mbValueNaN( this, 128, 10239, true);
+            CVNavi.mbValueNaN( this, 128, 10239, true);
             j = 128;
         }
         CV[1][29] |= 32;
@@ -1776,7 +1776,7 @@ public class FD_LED extends javax.swing.JFrame {
     }//GEN-LAST:event_jlangeAdrActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DecTest dt = new DecTest(this, true, KTUI);
+        DecTest dt = new DecTest(this, true, CVNavi);
         dt.jDecType.setText("Decoder: FD-LED");
         if(jKurzeAdr.isSelected()) {
             dt.DecAddr = CV[1][1];
@@ -1789,8 +1789,8 @@ public class FD_LED extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        KTUI.frameInstanceDEVICE = null;
-        KTUI.setFocus();
+        CVNavi.frameInstanceDEVICE = null;
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -1808,25 +1808,25 @@ public class FD_LED extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jDecoderAdresseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDecoderAdresseFocusLost
-        int j = KTUI.checkTextField( this, jDecoderAdresse, 1, 10239, 3, true );
+        int j = CVNavi.checkTextField( this, jDecoderAdresse, 1, 10239, 3, true );
         String s = jDecoderAdresse.getText();
         if (jKurzeAdr.isSelected()) {
             if( j < 1 ||  j > 255 )
             {
-                KTUI.mbValueNaN( this, 1, 255, true);
+                CVNavi.mbValueNaN( this, 1, 255, true);
                 j = 1;
                 jDecoderAdresse.setText("3");
             }
             else if (j > 127)
             {
-                KTUI.mbAdr128MMonly( this );
+                CVNavi.mbAdr128MMonly( this );
             }
             CV[1][1] = j;
             CV[1][29] &= ~32;
             jCV_Anzeige.setSelectedItem( "CV#"+1 );
         } else { // lange Adresse
             if (j < 128 || j > 10239) {
-                KTUI.mbValueNaN( this, 128, 10239, true);
+                CVNavi.mbValueNaN( this, 128, 10239, true);
                 j = 128;
                 jDecoderAdresse.setText("128");
             }
@@ -1871,15 +1871,15 @@ public class FD_LED extends javax.swing.JFrame {
         int currCV = getCVfromIndexString(jCV_Anzeige, "CV#");
         String s = jCV_Inhalt.getText();
         int cvValue = 0;
-        if( ! KTUI.checkNumRange(s, 0, 255) ) {
-            KTUI.mbValueNaN( this );
+        if( ! CVNavi.checkNumRange(s, 0, 255) ) {
+            CVNavi.mbValueNaN( this );
             int prevValue = CV[1][currCV];
             jCV_Inhalt.setText(""+prevValue);
             jCV_Anzeige.setSelectedItem( "CV#"+currCV );
             nextCVsel = currCV;
             return;
         }
-        cvValue = KTUI.checkAndGetStrNumRangeDef( this, s, 0, 255, 255, false );
+        cvValue = CVNavi.checkAndGetStrNumRangeDef( this, s, 0, 255, 255, false );
 
         if( cvValue > 255) {
             jCV_Inhalt.setText("255");
@@ -1891,10 +1891,10 @@ public class FD_LED extends javax.swing.JFrame {
         }
         switch(currCV) {
             case 1: //CV#1 DCC [1..127], MM[1..255]
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 1, 255, 3, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 1, 255, 3, true );
                 s = jCV_Inhalt.getText();
                 if( cvValue > 127 ) {
-                    KTUI.mbAdr128MMonly( this );
+                    CVNavi.mbAdr128MMonly( this );
                 }
                 jDecoderAdresse.setText(s);
                 jKurzeAdr.setSelected(true);
@@ -1913,9 +1913,9 @@ public class FD_LED extends javax.swing.JFrame {
                 break;
 
             case 17: //CV#17 [192..255]
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 192, 255, 192, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 192, 255, 192, true );
                 if (cvValue < 192) {
-                    KTUI.mbValueNaNcv( this, 192, 255, 17, true);
+                    CVNavi.mbValueNaNcv( this, 192, 255, 17, true);
                     cvValue = 192;
                     jCV_Inhalt.setText("192");
                 }
@@ -1935,7 +1935,7 @@ public class FD_LED extends javax.swing.JFrame {
                 break;
 
             case 19: //CV#19 [0..127] consist adar
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 127, 0, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 0, 127, 0, true );
                 CV[1][currCV] = cvValue;
                 jConsistAdresse.setText(""+cvValue);
                 break;
@@ -2523,7 +2523,7 @@ public class FD_LED extends javax.swing.JFrame {
                 break;
 
             default:
-                KTUI.mbGeneric( this, "Problem", "Unknown CV "+cvValue+" from selection", "s = "+s);
+                CVNavi.mbGeneric( this, "Problem", "Unknown CV "+cvValue+" from selection", "s = "+s);
         }
         jCV_Inhalt.setText("" + cvValue);
     }//GEN-LAST:event_jCV_InhaltFocusLost
@@ -3930,12 +3930,12 @@ public class FD_LED extends javax.swing.JFrame {
     }//GEN-LAST:event_jEffekteComponentShown
 
     private void jDimmen1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen1FocusLost
-        CV[1][5] = KTUI.checkTextField( this, jDimmen1, 1, 63, 63, true );
+        CV[1][5] = CVNavi.checkTextField( this, jDimmen1, 1, 63, 63, true );
         jDecodereigenschaften.setSelectedIndex(currentTab);
     }//GEN-LAST:event_jDimmen1FocusLost
 
     private void jDimmen2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen2FocusLost
-        int value = KTUI.checkTextField( this, jDimmen2, 1, 63, 63, true );
+        int value = CVNavi.checkTextField( this, jDimmen2, 1, 63, 63, true );
         CV[1][6] = value;
         jDecodereigenschaften.setSelectedIndex(currentTab);
     }//GEN-LAST:event_jDimmen2FocusLost
@@ -3997,7 +3997,7 @@ public class FD_LED extends javax.swing.JFrame {
     public void filfilCVs() {
         Boolean b ;
         String[] keys = { "FD-LED" };
-        b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, KTUI );
+        b = parseString2CVs.convertString2CV( ReturnString, keys, CV, jComment, CVNavi );
     }
 
     void updateTabs() {

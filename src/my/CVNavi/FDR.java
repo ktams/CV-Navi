@@ -14,8 +14,6 @@ import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
@@ -29,7 +27,7 @@ public class FDR extends javax.swing.JFrame {
     /** Creates new form FDR */
     private String CVs;
     private int CV[][];
-    public CVNavi KTUI;
+    public CVNavi CVNavi;
     public String ReturnString;
     ResourceBundle bundle;
     private boolean bFD_R_basic2;   // fals FD-R basic ; true FD-R basic 2
@@ -37,16 +35,16 @@ public class FDR extends javax.swing.JFrame {
     private static final int CVMAX = 888;
     private String fileNameExtension = null;
 
-    public FDR(CVNavi ktuiThis) {
-        if( ktuiThis == null ) {
+    public FDR(CVNavi cvnaviThis) {
+        if( cvnaviThis == null ) {
             return;
         }
-        KTUI = ktuiThis;
-        bFD_R_basic2 = ( KTUI.Decoder == c.FD_R2 );
+        CVNavi = cvnaviThis;
+        bFD_R_basic2 = ( CVNavi.Decoder == c.FD_R2 );
         bFunktionsweise = false;
-        if( KTUI.frameInstanceDEVICE != null ) {
-            KTUI.frameInstanceDEVICE.toFront();
-            KTUI.frameInstanceDEVICE.repaint();
+        if( CVNavi.frameInstanceDEVICE != null ) {
+            CVNavi.frameInstanceDEVICE.toFront();
+            CVNavi.frameInstanceDEVICE.repaint();
             return;
         }
 
@@ -55,15 +53,15 @@ public class FDR extends javax.swing.JFrame {
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
         ReturnString = java.util.ResourceBundle.getBundle("my/CVNavi/Bundle").getString("FDR.jLabelDC1.text");
         ImageIcon II = null;
-        switch( KTUI.Decoder ) {
+        switch( CVNavi.Decoder ) {
             case c.FD_R:
                 II = new ImageIcon(getClass().getResource("/FD-R.gif"));
-                setTitle( KTUI.getMenutext( decoderList.FD_R ).trim() );
+                setTitle( CVNavi.getMenutext( decoderList.FD_R ).trim() );
                 fileNameExtension = "fdr";
                 break;
             case c.FD_R2:
                 II = new ImageIcon(getClass().getResource("/FD-R2.gif"));
-                setTitle( KTUI.getMenutext( decoderList.FD_R2 ).trim() );
+                setTitle( CVNavi.getMenutext( decoderList.FD_R2 ).trim() );
                 fileNameExtension = "fdr2";
                 break;
             default:
@@ -82,20 +80,20 @@ public class FDR extends javax.swing.JFrame {
         initCV( 1, 3 );
         initCV( 7, 10 );
         initCV( 8, 62 );
-        if( KTUI.Decoder == c.FD_R2 ) initCV( 9, 0 );
-        if( KTUI.Decoder == c.FD_R ) initCV( 13, 0 );
+        if( CVNavi.Decoder == c.FD_R2 ) initCV( 9, 0 );
+        if( CVNavi.Decoder == c.FD_R ) initCV( 13, 0 );
         initCV( 17, 192 );
         initCV( 18, 255 );
         initCV( 19, 0 );
-        if( KTUI.Decoder == c.FD_R2 ) initCV( 21, 0 );
-        if( KTUI.Decoder == c.FD_R2 ) initCV( 28, 3 );
+        if( CVNavi.Decoder == c.FD_R2 ) initCV( 21, 0 );
+        if( CVNavi.Decoder == c.FD_R2 ) initCV( 28, 3 );
         initCV( 29, 14 );
-        if( KTUI.Decoder == c.FD_R ) {
+        if( CVNavi.Decoder == c.FD_R ) {
             initCV( 33, 1 );
             initCV( 34, 2 );
             initCV( 35, 0 );
         }
-        if( KTUI.Decoder == c.FD_R2 ) {
+        if( CVNavi.Decoder == c.FD_R2 ) {
             initCV( 33, 2 );
             initCV( 34, 4 );
             initCV( 35, 1 );
@@ -105,10 +103,10 @@ public class FDR extends javax.swing.JFrame {
         }
         initCV( 49, 64 );
         initCV( 50, 64 );
-        if( KTUI.Decoder == c.FD_R2 ) initCV( 51, 64 );
+        if( CVNavi.Decoder == c.FD_R2 ) initCV( 51, 64 );
         initCV( 53, 0 );
         initCV( 54, 0 );
-        if( KTUI.Decoder == c.FD_R2 ) {
+        if( CVNavi.Decoder == c.FD_R2 ) {
             initCV( 55, 0 );
 
             initCV( 58, 0 );
@@ -117,20 +115,20 @@ public class FDR extends javax.swing.JFrame {
         }
         initCV( 61, 255 );
         initCV( 62, 255 );
-        if( KTUI.Decoder == c.FD_R2 ) {
+        if( CVNavi.Decoder == c.FD_R2 ) {
             initCV( 63, 255 );
 
             for( int i = 64; i<= 79; i++ ) { // [64..79]=0 F13-F28
                 initCV( i, 0 );
             }
         }
-        if( KTUI.Decoder == c.FD_R ) {
+        if( CVNavi.Decoder == c.FD_R ) {
             initCV( 112, 48 );
             initCV( 114, 4 );
         }
-        if( KTUI.Decoder == c.FD_R2 ) initCV( 888, 0 );
+        if( CVNavi.Decoder == c.FD_R2 ) initCV( 888, 0 );
 
-        if( KTUI.Decoder == c.FD_R ) {
+        if( CVNavi.Decoder == c.FD_R ) {
             // FD-R-basic2 Elemente ausblenden
             jLabelRcChannels.setVisible(false);
             jRcChannel1.setVisible(false);
@@ -254,7 +252,7 @@ public class FDR extends javax.swing.JFrame {
             jRueck3.setVisible(false);
         }
 
-        if( KTUI.Decoder == c.FD_R2 ) {
+        if( CVNavi.Decoder == c.FD_R2 ) {
             //FD-R-basic Elemente ausblenden
             jMM_Addr_2.setVisible(false);
             jDecodereigenschaften.remove(jAnalog);
@@ -268,9 +266,9 @@ public class FDR extends javax.swing.JFrame {
             jLabel_effects_BOT.setText("AUX 2");
         }
 
-        setLocationRelativeTo(ktuiThis);
+        setLocationRelativeTo(cvnaviThis);
         setVisible(true);
-        KTUI.frameInstanceDEVICE = this;
+        CVNavi.frameInstanceDEVICE = this;
     }
 
     private Boolean initCV( int cv, int value ) {
@@ -280,22 +278,22 @@ public class FDR extends javax.swing.JFrame {
         }
         if( value == -1 ) {
             jCV_Anzeige.removeItem("CV#"+cv);
-            return( KTUI.unsetCVvalue(CV, cv) );
+            return( CVNavi.unsetCVvalue(CV, cv) );
         }
         jCV_Anzeige.addItem("CV#"+cv);
-        return( KTUI.setCVvalue(CV, cv, value) );
+        return( CVNavi.setCVvalue(CV, cv, value) );
     }
 
     public void filfilCVs() {
         Boolean b ;
-        switch(KTUI.Decoder) {
+        switch(CVNavi.Decoder) {
             case c.FD_R:
                 String[] keys1 = { "FD-R basic" };
-                b = parseString2CVs.convertString2CV( ReturnString, keys1, CV, jComment, KTUI );
+                b = parseString2CVs.convertString2CV( ReturnString, keys1, CV, jComment, CVNavi );
                 break;
             case c.FD_R2:
                 String[] keys2 = { "FD-R basic 2" };
-                b = parseString2CVs.convertString2CV( ReturnString, keys2, CV, jComment, KTUI );
+                b = parseString2CVs.convertString2CV( ReturnString, keys2, CV, jComment, CVNavi );
                 break;
         }
     }
@@ -2799,7 +2797,7 @@ public class FDR extends javax.swing.JFrame {
 
     private void jSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveActionPerformed
         // Alle CVs werden in einer Datei gespeichert
-        switch( KTUI.Decoder ) {
+        switch( CVNavi.Decoder ) {
             case c.FD_R:
                 CVs = "FD-R basic\r\n";
                 CVs += "Version 1.1\r\n";
@@ -2848,9 +2846,9 @@ public class FDR extends javax.swing.JFrame {
     private void jCV_LesenSchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCV_LesenSchreibenActionPerformed
         try {
             // Hier wird die Schnittstelle geöffnet und die CVs werden zur Zentrale gesendet
-            ReadWriteCV cvwr = new ReadWriteCV(this, true, KTUI, CV);
+            ReadWriteCV cvwr = new ReadWriteCV(this, true, CVNavi, CV);
         } catch (IOException ex) {
-            KTUI.mbDeviceReadProblem( this );
+            CVNavi.mbDeviceReadProblem( this );
         }
     }//GEN-LAST:event_jCV_LesenSchreibenActionPerformed
 
@@ -2999,7 +2997,7 @@ public class FDR extends javax.swing.JFrame {
             jlangeAdr.setSelected(false);
             jDecoderAdresse.setText("" + CV[1][1]);
         }
-        switch( KTUI.Decoder ) {
+        switch( CVNavi.Decoder ) {
             case c.FD_R:
                 jBlinkFrequenz.setText("" + CV[1][112]);
                 break;
@@ -3665,7 +3663,7 @@ public class FDR extends javax.swing.JFrame {
         int j = (CV[1][17] - 192)*256 + CV[1][18];
         if (j < 128 || j > 10239)
         {
-            KTUI.mbValueNaN( this, 128, 10239, true);
+            CVNavi.mbValueNaN( this, 128, 10239, true);
             j = 128;
         }
         CV[1][29] |= 32;
@@ -3681,12 +3679,12 @@ public class FDR extends javax.swing.JFrame {
         int j = CV[1][1];
         if( j < 1 || j > 255 )
         {
-            KTUI.mbValueNaN( this, 1, 255, true);
+            CVNavi.mbValueNaN( this, 1, 255, true);
             j = 1;
         }
         else if (j > 127)
         {
-            KTUI.mbAdr128MMonly( this );
+            CVNavi.mbAdr128MMonly( this );
         }
         CV[1][1] = j;
         jLongAddr.setSelected(false);
@@ -3696,7 +3694,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jKurzeAdrActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DecTest dt = new DecTest(this, true, KTUI);
+        DecTest dt = new DecTest(this, true, CVNavi);
         dt.jDecType.setText("Decoder: FD-R basic");
         if(jKurzeAdr.isSelected()) {
             dt.DecAddr = CV[1][1];
@@ -3710,29 +3708,29 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        KTUI.frameInstanceDEVICE = null;
-        KTUI.setFocus();
+        CVNavi.frameInstanceDEVICE = null;
+        CVNavi.setFocus();
     }//GEN-LAST:event_formWindowClosed
 
     private void jDecoderAdresseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDecoderAdresseFocusLost
-        int j = KTUI.checkTextField( this, jDecoderAdresse, 1, 10239, 3, true );
+        int j = CVNavi.checkTextField( this, jDecoderAdresse, 1, 10239, 3, true );
         if (jKurzeAdr.isSelected()) {
             if( j < 1 ||  j > 255 )
             {
-                KTUI.mbValueNaN( this, 1, 255, true);
+                CVNavi.mbValueNaN( this, 1, 255, true);
                 j = 1;
                 jDecoderAdresse.setText("3");
             }
             else if (j > 127)
             {
-                KTUI.mbAdr128MMonly( this );
+                CVNavi.mbAdr128MMonly( this );
             }
             CV[1][1] = j;
             CV[1][29] &= ~32;
             jCV_Anzeige.setSelectedItem( "CV#"+1 );
         } else { // lange Adresse
             if (j < 128 || j > 10239) {
-                KTUI.mbValueNaN( this, 128, 10239, true);
+                CVNavi.mbValueNaN( this, 128, 10239, true);
                 j = 128;
                 jDecoderAdresse.setText("128");
             }
@@ -3744,7 +3742,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jDecoderAdresseFocusLost
 
     private void jDecoderAdresse1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDecoderAdresse1FocusLost
-        CV[1][19] = KTUI.checkTextField( this, jDecoderAdresse1, 0, 127, 0, true);
+        CV[1][19] = CVNavi.checkTextField( this, jDecoderAdresse1, 0, 127, 0, true);
         jCV_Anzeige.setSelectedItem( "CV#"+19 );
     }//GEN-LAST:event_jDecoderAdresse1FocusLost
 
@@ -3752,12 +3750,12 @@ public class FDR extends javax.swing.JFrame {
         int adr;
         int currCV = getCVfromIndexString(jCV_Anzeige, "CV#");
         String oriEingabe = jCV_Inhalt.getText();
-        int cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 255, 22222, false);
+        int cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 0, 255, 22222, false);
         String s = jCV_Inhalt.getText();
 
         if (cvValue < 0 || cvValue > 255)
         {
-            KTUI.mbValueNaN( this, 0, 255, true);
+            CVNavi.mbValueNaN( this, 0, 255, true);
             jCV_Inhalt.setText("255");
             CV[1][currCV] = 255;
             return;
@@ -3765,10 +3763,10 @@ public class FDR extends javax.swing.JFrame {
         switch(currCV)
         {
             case 1:
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 1, 255, 3, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 1, 255, 3, true );
                 s = jCV_Inhalt.getText();
                 if( cvValue > 127 ) {
-                    KTUI.mbAdr128MMonly( this );
+                    CVNavi.mbAdr128MMonly( this );
                 }
                 jDecoderAdresse.setText(s);
                 jKurzeAdr.setSelected(true);
@@ -3794,9 +3792,9 @@ public class FDR extends javax.swing.JFrame {
                 break;
 
             case 17: //CV#17 [192..255]
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 192, 255, 192, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 192, 255, 192, true );
                 if (cvValue < 192) {
-                    KTUI.mbValueNaNcv( this, 192, 255, 17, true);
+                    CVNavi.mbValueNaNcv( this, 192, 255, 17, true);
                     cvValue = 192;
                     jCV_Inhalt.setText("192");
                 }
@@ -3818,7 +3816,7 @@ public class FDR extends javax.swing.JFrame {
             case 19: //CV#19
                 if (cvValue > 127)
                 {
-                    KTUI.mbValueConsist( this, 0, 127 );
+                    CVNavi.mbValueConsist( this, 0, 127 );
                     cvValue = 127;
                     s = "127";
                     jCV_Inhalt.setText(s);
@@ -3841,7 +3839,7 @@ public class FDR extends javax.swing.JFrame {
             case 28: // [0..3] RC channel options
                 if (cvValue > 3)
                 {
-                    KTUI.mbValueNaNcv( this, 0, 3, 3, true);
+                    CVNavi.mbValueNaNcv( this, 0, 3, 3, true);
                     cvValue = 3;
                     jCV_Inhalt.setText("3");
                 }
@@ -3956,13 +3954,13 @@ public class FDR extends javax.swing.JFrame {
             case 55: // [0..63]
                 if( currCV < 53 && ( cvValue < 1 || cvValue > 64 ) )
                 {
-                    KTUI.mbValueNaNcv( this, 1, 64, currCV, true);
+                    CVNavi.mbValueNaNcv( this, 1, 64, currCV, true);
                     cvValue = 64;
                     jCV_Inhalt.setText("64");
                 }
                 if( currCV >= 53 && ( cvValue < 0 || cvValue > 63 ) )
                 {
-                    KTUI.mbValueNaNcv( this, 0, 63, currCV, true);
+                    CVNavi.mbValueNaNcv( this, 0, 63, currCV, true);
                     cvValue = 0;
                     jCV_Inhalt.setText("0");
                 }
@@ -4104,7 +4102,7 @@ public class FDR extends javax.swing.JFrame {
             case 112: //CV#112
                 if (cvValue < 10)
                 {
-                    KTUI.mbValueNaNcv( this, 10, 255, 112, true);
+                    CVNavi.mbValueNaNcv( this, 10, 255, 112, true);
                     cvValue = 10;
                     jCV_Inhalt.setText("10");
                 }
@@ -4117,7 +4115,7 @@ public class FDR extends javax.swing.JFrame {
                 break;
 
             case 888: // mode
-                cvValue = KTUI.checkTextField( this, jCV_Inhalt, 0, 1, 0, true );
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 0, 1, 0, true );
                 s = jCV_Inhalt.getText();
                 this.jFD.setSelected(cvValue == 0);
                 this.jRC_Sender.setSelected(cvValue == 1);
@@ -4125,12 +4123,12 @@ public class FDR extends javax.swing.JFrame {
                 break;
 
             default:
-                KTUI.mbGeneric( this, "Problem", "Unknown CV "+currCV+" with value "+cvValue+" from selection", "s = "+s);
+                CVNavi.mbGeneric( this, "Problem", "Unknown CV "+currCV+" with value "+cvValue+" from selection", "s = "+s);
         }
 
         // filter unused bits from function assignments
         if( (currCV >= 33 && currCV <= 46) || (currCV >= 64 && currCV <= 79) ) {
-            switch( KTUI.Decoder ) {
+            switch( CVNavi.Decoder ) {
                 case c.FD_R:
                     cvValue &= 0x3;
                     break;
@@ -4152,20 +4150,20 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jCV_InhaltFocusLost
 
     private void jBlinkFrequenzFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBlinkFrequenzFocusLost
-        switch( KTUI.Decoder ) {
+        switch( CVNavi.Decoder ) {
             case c.FD_R:
-                CV[1][112] = KTUI.checkTextField( this, jBlinkFrequenz, 10, 255, 48, true );
+                CV[1][112] = CVNavi.checkTextField( this, jBlinkFrequenz, 10, 255, 48, true );
                 jCV_Anzeige.setSelectedItem( "CV#"+112 );
                 break;
             case c.FD_R2:
-                CV[1][9] = KTUI.checkTextField( this, jBlinkFrequenz, 0, 255, 0, true );
+                CV[1][9] = CVNavi.checkTextField( this, jBlinkFrequenz, 0, 255, 0, true );
                 jCV_Anzeige.setSelectedItem( "CV#"+9 );
                 break;
         }
     }//GEN-LAST:event_jBlinkFrequenzFocusLost
 
     private void jMM_Addr_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMM_Addr_2FocusLost
-        CV[1][114] = KTUI.checkTextField( this, jMM_Addr_2, 1, 255, 4, true );
+        CV[1][114] = CVNavi.checkTextField( this, jMM_Addr_2, 1, 255, 4, true );
         jCV_Anzeige.setSelectedItem( "CV#"+114 );
     }//GEN-LAST:event_jMM_Addr_2FocusLost
 
@@ -4179,12 +4177,12 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jAbbrechenActionPerformed
 
     private void jDimmen1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen1FocusLost
-        CV[1][49] = KTUI.checkTextField( this, jDimmen1, 1, 64, 64, true );
+        CV[1][49] = CVNavi.checkTextField( this, jDimmen1, 1, 64, 64, true );
         jCV_Inhalt.setText(""+CV[1][49]);
     }//GEN-LAST:event_jDimmen1FocusLost
 
     private void jDimmen2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen2FocusLost
-        CV[1][50] = KTUI.checkTextField( this, jDimmen2, 1, 64, 64, true );
+        CV[1][50] = CVNavi.checkTextField( this, jDimmen2, 1, 64, 64, true );
         jCV_Inhalt.setText(""+CV[1][50]);
     }//GEN-LAST:event_jDimmen2FocusLost
 
@@ -4201,7 +4199,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jTast1FocusGained
 
     private void jTast1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast1FocusLost
-        CV[1][61] = KTUI.checkTextField( this, jTast1, 0, 255, 255, true );
+        CV[1][61] = CVNavi.checkTextField( this, jTast1, 0, 255, 255, true );
         CV[1][61] = Math.min(CV[1][61], 255-CV[1][58]);
         jCV_Inhalt.setText(""+CV[1][61]);
         jTast1.setText( "" + CV[1][61]);
@@ -4212,7 +4210,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jTast2FocusGained
 
     private void jTast2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast2FocusLost
-        CV[1][62] = KTUI.checkTextField( this, jTast2, 0, 255, 255, true );
+        CV[1][62] = CVNavi.checkTextField( this, jTast2, 0, 255, 255, true );
         CV[1][62] = Math.min(CV[1][62], 255-CV[1][59]);
         jCV_Inhalt.setText(""+CV[1][62]);
         jTast2.setText( "" + CV[1][62]);
@@ -4227,7 +4225,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jDecoderAdresse1FocusGained
 
     private void jBlinkFrequenzFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBlinkFrequenzFocusGained
-        switch( KTUI.Decoder ) {
+        switch( CVNavi.Decoder ) {
             case c.FD_R:
                 jCV_Anzeige.setSelectedItem( "CV#"+112 );
                 break;
@@ -5096,7 +5094,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jDimmen3FocusGained
 
     private void jDimmen3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDimmen3FocusLost
-        CV[1][51] = KTUI.checkTextField( this, jDimmen3, 1, 64, 64, true );
+        CV[1][51] = CVNavi.checkTextField( this, jDimmen3, 1, 64, 64, true );
         jCV_Inhalt.setText(""+CV[1][51]);
     }//GEN-LAST:event_jDimmen3FocusLost
 
@@ -5111,7 +5109,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jTast3FocusGained
 
     private void jTast3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTast3FocusLost
-        CV[1][63] = KTUI.checkTextField( this, jTast3, 0, 255, 255, true );
+        CV[1][63] = CVNavi.checkTextField( this, jTast3, 0, 255, 255, true );
         CV[1][63] = Math.min(CV[1][63], 255-CV[1][60]);
         jCV_Inhalt.setText(""+CV[1][63]);
         jTast3.setText( "" + CV[1][63]);
@@ -5211,7 +5209,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jInitPause1FocusGained
 
     private void jInitPause1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause1FocusLost
-        CV[1][58] = KTUI.checkTextField( this, jInitPause1, 0, 255, 255, true );
+        CV[1][58] = CVNavi.checkTextField( this, jInitPause1, 0, 255, 255, true );
         jCV_Inhalt.setText(""+CV[1][58]);
         CV[1][61] = Math.min(CV[1][61], 255-CV[1][58]);
         jTast1.setText( "" + CV[1][61]);
@@ -5228,7 +5226,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jInitPause2FocusGained
 
     private void jInitPause2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause2FocusLost
-        CV[1][59] = KTUI.checkTextField( this, jInitPause2, 0, 255, 255, true );
+        CV[1][59] = CVNavi.checkTextField( this, jInitPause2, 0, 255, 255, true );
         jCV_Inhalt.setText(""+CV[1][59]);
         CV[1][62] = Math.min(CV[1][62], 255-CV[1][59]);
         jTast2.setText( "" + CV[1][62]);
@@ -5245,7 +5243,7 @@ public class FDR extends javax.swing.JFrame {
     }//GEN-LAST:event_jInitPause3FocusGained
 
     private void jInitPause3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInitPause3FocusLost
-        CV[1][60] = KTUI.checkTextField( this, jInitPause3, 0, 255, 255, true );
+        CV[1][60] = CVNavi.checkTextField( this, jInitPause3, 0, 255, 255, true );
         jCV_Inhalt.setText(""+CV[1][60]);
         CV[1][63] = Math.min(CV[1][63], 255-CV[1][60]);
         jTast3.setText( "" + CV[1][63]);
