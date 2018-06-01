@@ -49,6 +49,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import my.CVNavi.CVNavi.MZ;
+import static my.CVNavi.CVNavi.debugDummyData;
 import static my.CVNavi.CVNavi.debugLevel;
 import static my.CVNavi.CVNavi.rs232_or_rb_usb_2;
 
@@ -396,6 +397,26 @@ public class MC extends javax.swing.JFrame {
         setLocationRelativeTo(cvnaviThis);
         setVisible(true);
         CVNavi.frameInstanceDEVICE = this;
+        // special Debug-Section
+        if( debugDummyData > 0 ) {
+            String s;
+            switch( debugDummyData ) {
+                case 11:
+                    s = "0x" + "000000aa";
+                    break;
+                case 12:
+                    s = "0x" + "000000Aa";
+                    break;
+                case 13:
+                    s = "0x" + "000000Aa";
+                    break;
+                default:
+                    s = "";
+            }
+            jm3GotoList.setEnabled(true);
+            jmfxUID.setText(s); // debug entry without forcing lowercase
+        }
+
     }
 
     private int crc16(int s, int count,int[] data) {
@@ -4019,13 +4040,7 @@ public class MC extends javax.swing.JFrame {
 
         gsBaudRateSaved = CVNavi.gsBaudRate;
         jLabel18.setText(jLabel18.getText().replace("COMx", CVNavi.gsSchnittstelle));
-        if( CVNavi.rs232_or_rb_usb_2 ) {
-            jUSB1.setSelected(false);
-            jUSB2.setSelected(true);
-        } else {
-            jUSB1.setSelected(true);
-            jUSB2.setSelected(false);
-        }
+        setDeviceSelection();
         setFocusUpdStart();
         setFocusDateiAuswahl();
         Com = CVNavi.safelyOpenCom( this, Com, false );
@@ -4701,7 +4716,7 @@ public class MC extends javax.swing.JFrame {
                         }
                         else
                         {
-                            s = "0x" + s.substring(0, 8);
+                            s = "0x" + s.substring(0, 8).toLowerCase();
                             jm3GotoList.setEnabled(true);
                         }
                         jmfxUID.setText(s);
@@ -6000,10 +6015,28 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jUpdStartUpdateActionPerformed
 
     private void jUpdDateiAuswahlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdDateiAuswahlActionPerformed
+        System.out.println("jUpdDateiAuswahlActionPerformed: enter");
         SaveOpenDialog od = new SaveOpenDialog( this, true, true, null, this, "hex", c.HEX);
+        System.out.println("jUpdDateiAuswahlActionPerformed: set jSerNr to ???");
         jSerNr.setText("???");
+        System.out.println("jUpdDateiAuswahlActionPerformed: set device selection");
+        setDeviceSelection();
+        System.out.println("jUpdDateiAuswahlActionPerformed: leave");
         return;
     }//GEN-LAST:event_jUpdDateiAuswahlActionPerformed
+
+
+    public void setDeviceSelection() {
+        if( CVNavi.rs232_or_rb_usb_2 ) {
+            System.out.println("setDeviceSelection: USB2");
+            jUSB1.setSelected(false);
+            jUSB2.setSelected(true);
+        } else {
+            jUSB1.setSelected(true);
+            jUSB2.setSelected(false);
+            System.out.println("setDeviceSelection: USB1");
+        }
+    }
 
     public void setUpdDatei( String fileName ) {
         jUpdDatei.setText( fileName );
@@ -6845,12 +6878,14 @@ public class MC extends javax.swing.JFrame {
         rs232_or_rb_usb_2 = false;
         jUSB2.setSelected(false);
         CVNavi.rs232_mode_was_forced = false;
+        setDeviceSelection();
     }//GEN-LAST:event_jUSB1ActionPerformed
 
     private void jUSB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUSB2ActionPerformed
         rs232_or_rb_usb_2 = true;
         jUSB1.setSelected(false);
         CVNavi.rs232_mode_was_forced = false;
+        setDeviceSelection();
     }//GEN-LAST:event_jUSB2ActionPerformed
 
     private void jf10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf10ActionPerformed
@@ -8233,7 +8268,7 @@ public class MC extends javax.swing.JFrame {
         long lM3UID = 0;
 
         // if not present add a hex prefix
-        if( ! sM3UID.toUpperCase().startsWith("0X") ) {
+        if( ! sM3UID.toLowerCase().startsWith("0x") ) {
             sM3UID = "0x"+sM3UID;
         }
 
@@ -8274,7 +8309,7 @@ public class MC extends javax.swing.JFrame {
     public String checkM3uidValid( String sIn ) {
         if( (sIn == null)  || (sIn.length() == 0) )
             return null;
-        String sM3UID = sIn.trim();
+        String sM3UID = sIn.trim().toLowerCase();
         if( debugLevel > 2 ) {
             System.out.println("checkM3uidValid sM3UID="+sM3UID);
         }
@@ -8283,7 +8318,7 @@ public class MC extends javax.swing.JFrame {
         long lM3UID = 0;
 
         // if not present add a hex prefix
-        if( ! sM3UID.toUpperCase().startsWith("0X") ) {
+        if( ! sM3UID.toLowerCase().startsWith("0x") ) {
             sM3UID = "0x"+sM3UID;
         }
 
@@ -8298,7 +8333,7 @@ public class MC extends javax.swing.JFrame {
             System.out.println("checkM3uidValid l3UID=0x"+String.format("%8s", Long.toHexString( lM3UID )).replace(' ', '0'));
         }
 
-        sM3UID = String.format("0x%8s", Long.toHexString( lM3UID )).replace(' ', '0');
+        sM3UID = String.format("0x%8s", Long.toHexString( lM3UID )).replace(' ', '0').toLowerCase();
         if( sM3UID.length() > 10 ) {
             System.out.println("checkM3uidValid too long after conversion" );
             return null;
@@ -9564,6 +9599,7 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
         for( int i = 0 ; i < jTabbedPane1.getComponentCount() ; i ++ ) {
             jTabbedPane1.setSelectedIndex(i);
         }
+        setDeviceSelection();
 
         jTabbedPane1.setSelectedIndex(idx);
     }

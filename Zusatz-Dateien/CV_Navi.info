@@ -14,6 +14,8 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 Aenderungen in V3.0
 - interne Umstrukturierung des Java-Projekts
+- Bidi-Booster: Kalibrierung ergaenzt
+- m3-Liste: Duplikate bei UIDs vermeiden
 
 Aenderungen in V2.8
 - notwendige Aenderungen fuer Java 10 Kompatibilitaet

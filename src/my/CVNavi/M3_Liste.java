@@ -441,6 +441,16 @@ public class M3_Liste extends javax.swing.JDialog {
                 case 0: // UID
                     str = (""+jTableM3.getValueAt(edRow, edCol)).trim().toLowerCase().replaceAll("\\s","");
                     str = mc.checkM3uidValid( str );
+                    // check for duplicates
+                    for(int row=0 ; row<mc.M3used ; row++) {
+                        if( str.equalsIgnoreCase(mc.M3liste[0][row]) ) {
+                            // uid already exists , jump to  row and inform user
+                            jTableM3.setRowSelectionInterval(row, row);
+                            mc.CVNavi.mbM3duplicateUid(this);
+                            System.out.println( "jTableM3PropertyChange duplicate UID detected" );
+                            return;
+                        }
+                    }
                     if( str != null ) {
                         jTableM3.setValueAt(str, edRow, edCol);
                         if( ! str.equals(mc.M3liste[edCol][edRow])) { 
@@ -517,7 +527,7 @@ public class M3_Liste extends javax.swing.JDialog {
         // add an empty line to the internal table
         jAddActionPerformed(null);
         // fill with data
-        mc.M3liste[0][mc.M3used-1] = mc.m3dataGetUid();
+        mc.M3liste[0][mc.M3used-1] = mc.m3dataGetUid().toLowerCase();
         mc.M3liste[1][mc.M3used-1] = mc.m3dataGetSid();
         mc.M3liste[2][mc.M3used-1] = mc.getLocoName( mc.m3dataGetSid(), true);
 

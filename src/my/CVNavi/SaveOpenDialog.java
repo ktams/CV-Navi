@@ -1073,6 +1073,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                         myMC.setFocusDateiAuswahl();
                     } else {
                         myMC.setFocusUpdStart();
+                        myMC.setDeviceSelection();
                     }
                 }
                 break;
