@@ -53,5 +53,6 @@ fi
 # Kommandozeilengenerator
 wine "c:\\Program Files\\Inno Setup 5\\ISCC.exe" SetupScript.iss
 if [ -f package/setup_CV-Navi_${V_MAJOR}.${V_MINOR}.exe ] ; then
+	chmod -x package/setup_CV-Navi_${V_MAJOR}.${V_MINOR}.exe
 	cp -p package/setup_CV-Navi_${V_MAJOR}.${V_MINOR}.exe package/setup_CV-Navi_${V_MAJOR}.${V_MINOR}_${V_STATUS}_${ISODATE}${1}.exe
 fi

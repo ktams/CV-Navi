@@ -18,8 +18,8 @@ CREATE_PKG=CV-Navi
 
 ISODATE=`date +'%Y%m%d'`
 
-V_MAJOR=`cat src/my/CVNavi/CVNavi.java | grep public | grep gsVersionMayor | sed -e 's/;//' | awk '{print $NF}'`
-V_MINOR=`cat src/my/CVNavi/CVNavi.java | grep public | grep gsVersionMinor | sed -e 's/;//' | awk '{print $NF}'`
+V_MAJOR=`cat src/my/CVNavi/CVNavi.java | grep public | grep gsVersionMayor | sed -e 's/;//' -e 's#//.*$##' | awk '{print $NF}'`
+V_MINOR=`cat src/my/CVNavi/CVNavi.java | grep public | grep gsVersionMinor | sed -e 's/;//' -e 's#//.*$##' | awk '{print $NF}'`
 V_STATUS=`cat src/my/CVNavi/CVNavi.java | grep "String gsBuild" | sed -e 's#"# #g' | awk '{print $4}'`
 
 if [ -d ${CREATE_PKG} ] ; then

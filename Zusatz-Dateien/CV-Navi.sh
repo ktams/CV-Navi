@@ -11,6 +11,10 @@
 #     chmod +x CV-Navi.sh
 
 
+# V 0.13 20180601 Lothar
+# - Hinwiese auf rxtx-Installationspakete entfernt
+# - Hinweise zu OS-X hinzugefuegt
+
 # V 0.12 20180522 Lothar
 # - wegen Umstellung von rxtx auf purejavacomm Pfadsuche entfernt
 
@@ -52,36 +56,32 @@
 
 # Distributionspezifische Dinge zur Einrichtung
 #
-#
 # Jeweils als root oder mit root-Rechten (sudo) ausfuehren:
 #
-# Fedora:
+# Fedora, Redhat-Server, CentOS:
 #
-#   yum install rxtx
 #   usermod -a -G dialout <user>
 #   usermod -a -G lock    <user>
 #
-# Redhat-Server, CentOS:
 #
-#   die rxtx-Biblothek muss ueber externe (inoffizielle) Repositories (-> epel) installiert werden
-#   -> Benutzerrechte: siehe Fedora
+# Debian, Ubuntu, Raspbian, Bananian (RaspberryPi, BananaPi):
 #
-#
-# Debian, Ubuntu, Raspbian (RaspberryPi, BananaPi):
-#
-#   apt-get install librxtx-java
 #   usermod -a -G dialout <user>
 #
 #
 # SuSe (ohne Gewaehr, getestet mit 11.3 und 12.1):
 #
-#   Das Paket "rxtx-java" ist nicht direkt in der Distribution !
-#   Es kann aber ueber zypper hinzuegfuegt werden
-#  als root:
-#   zypper addrepo http://download.opensuse.org/repositories/Application:/Geo/openSUSE_11.3/Application:Geo.repo
-#   zypper install rxtx-java
 #   usermod -A dialout <user>
 #   usermod -A lock    <user>
+#
+# Mac OS-X
+#
+# Um Java via Kommandozeile zu nutzen muss JAVA_HOME korrekt gesetzt sein
+# z.B. Java10 auf OS-X:
+#   export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
+# oder bei aelteren Java-Versionen (z.B. 1.8):
+#   export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+#
 #
 #  Falls Dateisystemrechte fuer das Verzeichnis /var/lock bei
 #   ls -la /var | grep lock
@@ -101,16 +101,13 @@ DEBUG=${1-0}
 PROG_NAME="CV-Navi.jar"
 PROG_DIR="."
 
-LIB_NAME="librxtxSerial.so"
-LIB_JNINAME="librxtxSerial.jnilib"
 LIB_DIR="."
-LIB_FOUND=0
 
 
 if test "x$JAVA_HOME" = "x"; then
     JAVA=java
 else
-    JAVA=$JAVA_HOME/bin/java
+    JAVA="$JAVA_HOME/bin/java"
 fi
 
 if [ -z "${JAVA_OPTS=}" ] ; then
@@ -171,7 +168,6 @@ fi
 
 if [ $DEBUG == 1 ] ; then
 	java -version
-	echo $JAVA -Djava.library.path=${JAVA_LIBRARY_PATH}  ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
+	echo "${JAVA}" -Djava.library.path="${JAVA_LIBRARY_PATH}" ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
 fi
-
-$JAVA -Djava.library.path=${JAVA_LIBRARY_PATH} ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
+"${JAVA}" -Djava.library.path="${JAVA_LIBRARY_PATH}" ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
