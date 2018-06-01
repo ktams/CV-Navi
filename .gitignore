@@ -27,3 +27,6 @@ hs_err_pid*
 
 # temporary files created by editor joe
 *~
+# local archives
+*.zip
+*.tar.gz
