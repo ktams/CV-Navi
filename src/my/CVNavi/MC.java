@@ -1453,7 +1453,7 @@ public class MC extends javax.swing.JFrame {
                                 .addComponent(jSysS88monitor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(74, 74, 74)))
                         .addGroup(jSystemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jMRST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jMRST)
                             .addGroup(jSystemLayout.createSequentialGroup()
                                 .addComponent(jWRsys)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -2391,7 +2391,7 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jTraktionenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTraDelAll, javax.swing.GroupLayout.PREFERRED_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(jTraDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(jTraDel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTraCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTraRepair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2929,7 +2929,7 @@ public class MC extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jDirektLesen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDirektSchreiben, javax.swing.GroupLayout.PREFERRED_SIZE, 110, Short.MAX_VALUE))
+                    .addComponent(jDirektSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -2965,9 +2965,11 @@ public class MC extends javax.swing.JFrame {
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 80, -1, -1));
 
         jLabel20.setText(bundle.getString("MC.jLabel20.text")); // NOI18N
+        jLabel20.setToolTipText(bundle.getString("MC.jLabel20.toolTipText")); // NOI18N
         jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 80, -1, -1));
 
         jm3Addr.setText(bundle.getString("MC.jm3Addr.text")); // NOI18N
+        jm3Addr.setToolTipText(bundle.getString("MC.jm3Addr.toolTipText")); // NOI18N
         jPanel4.add(jm3Addr, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 96, -1));
 
         jmfxUID.setEditable(false);
@@ -3848,12 +3850,12 @@ public class MC extends javax.swing.JFrame {
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                 .addGap(15, 15, 15)))
                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jUpd2System, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(jUpd2System, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                             .addComponent(jUpdClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jUpdDateiAuswahl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jUpdCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jUpdStartUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(helpWasIstWas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(helpWasIstWas))))
                 .addContainerGap())
         );
         jUpdateLayout.setVerticalGroup(
@@ -3867,7 +3869,7 @@ public class MC extends javax.swing.JFrame {
                 .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jUSB1)
                     .addComponent(jUSB2)
-                    .addComponent(helpWasIstWas)
+                    .addComponent(helpWasIstWas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jMcUpdInfo)
@@ -3891,7 +3893,7 @@ public class MC extends javax.swing.JFrame {
                             .addComponent(jUpdClose)
                             .addComponent(helpPC)
                             .addComponent(helpMC)
-                            .addComponent(helpMCasLC))
+                            .addComponent(helpMCasLC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(jUpdateLayout.createSequentialGroup()
                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -7181,6 +7183,12 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jListeSchreibenActionPerformed
 
     private void jm3SchreibenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm3SchreibenActionPerformed
+        Boolean sidOK = CVNavi.checkNumRange( jm3Addr.getText(), 1, c.MAX_M3_SID );
+        if( ! sidOK ) {
+            CVNavi.mbValueNaN( this, 1, c.MAX_M3_SID, true );
+            jm3Addr.grabFocus();
+            return;
+        }
         Com = CVNavi.safelyOpenCom(this, Com);
         if(Com == null)
         {
