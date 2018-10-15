@@ -12,8 +12,8 @@
 
 
 # V 0.13 20180601 Lothar
-# - Hinwiese auf rxtx-Installationspakete entfernt
-# - Hinweise zu OS-X hinzugefuegt
+# - Hinweise auf rxtx-Installationspakete entfernt
+# - Hinweise zu OS-X hinzugefuegt (OS-X ist noch nicht vollstaendig getestet)
 
 # V 0.12 20180522 Lothar
 # - wegen Umstellung von rxtx auf purejavacomm Pfadsuche entfernt
