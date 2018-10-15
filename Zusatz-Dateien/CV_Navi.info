@@ -1,4 +1,4 @@
-CV-Navi Version 3.0
+CV-Navi Version 3.1
 
 English and french version after german section.
 
@@ -11,6 +11,9 @@ Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
+
+Aenderungen in V3.0
+- 
 
 Aenderungen in V3.0
 - interne Umstrukturierung des Java-Projekts
