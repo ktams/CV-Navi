@@ -19,35 +19,7 @@ if [ -z ${BASEDIR} ] ; then
 	exit 1
 fi
 
-PROG_DIR="${BASEDIR}/dist"
 PACKAGE_DIR="${BASEDIR}/package"
-OTHER_LIBDIR="${BASEDIR}/Zusatz-Dateien"
-BIBS_DIR="${BASEDIR}/Zusatz_Bibs"
-
-## ALT: alle Dateien kopieren
-# cp -pr ${OTHER_LIBDIR}/* ${PROG_DIR}
-# NEU: nur noch wenige Dateien notwendig
-FILE_LIST_OL_DIR="
-LiesMich.txt
-CV-Navi.sh
-"
-
-FILE_LIST_BIBS="
-"
-
-
-
-[ ! -d ${PROG_DIR} ] && mkdir -p ${PROG_DIR}
-
-for f in ${FILE_LIST_OL_DIR}; do
-	echo "copying ${f}"
-	[ -f ${OTHER_LIBDIR}/$f ] && cp -p ${OTHER_LIBDIR}/$f ${PROG_DIR}
-done
-
-for f in ${FILE_LIST_BIBS}; do
-	echo "copying ${f}"
-	[ -f ${BIBS_DIR}/$f ] && cp -p ${BIBS_DIR}/$f ${PROG_DIR}
-done
 
 # Update Changelog.txt in Package directory
 # first check if we have a git changelog available
