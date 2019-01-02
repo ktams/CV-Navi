@@ -121,7 +121,6 @@ else
 	which java >/dev/null
 	RET=$?
 	[ $DEBUG == 1 ] && echo "RET which java = $RET"
-	RET=1
 	if [ ${RET} -eq 0 ] ; then
 		JAVA=java
 	else
