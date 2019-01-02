@@ -11,6 +11,9 @@
 #     chmod +x CV-Navi.sh
 
 
+# V 0.14 20190101 Lothar
+# - Falls java nicht im Pfad gefunden wird automatische Suche in bekannten Installationspfaden (auch mit Leerzeichen -> OS-X)
+
 # V 0.13 20180601 Lothar
 # - Hinweise auf rxtx-Installationspakete entfernt
 # - Hinweise zu OS-X hinzugefuegt (OS-X ist noch nicht vollstaendig getestet)
@@ -97,18 +100,43 @@ DEBUG=${1-0}
 # skip 1st parameter if it was "1"
 [ $DEBUG == 1 ]&& shift
 
+JAVA_SEARCH_PATHS="
+/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
+/opt/java
+/opt/jre
+/opt/jdk
+/usr/local/bin
+${USER}/bin
+"
 
 PROG_NAME="CV-Navi.jar"
 PROG_DIR="."
 
-LIB_DIR="."
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
 
-
-if test "x$JAVA_HOME" = "x"; then
-    JAVA=java
+if [ "x$JAVA_HOME" != "x" ] ; then
+	JAVA="$JAVA_HOME/bin/java"
 else
-    JAVA="$JAVA_HOME/bin/java"
+	which java >/dev/null
+	RET=$?
+	[ $DEBUG == 1 ] && echo "RET which java = $RET"
+	RET=1
+	if [ ${RET} -eq 0 ] ; then
+		JAVA=java
+	else
+		for p in ${JAVA_SEARCH_PATHS} ; do
+			if [ -x "$p/bin/java" ] ; then
+				JAVA="$p/bin/java"
+				[ $DEBUG == 1 ] && echo "JAVA=${JAVA}"
+				break
+			fi
+		done
+	fi
 fi
+IFS=$SAVEIFS
+
+[ $DEBUG == 1 ] && echo "JAVA=${JAVA}"
 
 if [ -z "${JAVA_OPTS=}" ] ; then
 	[ $DEBUG == 1 ] && echo "INIT JAVA_OPTS"
@@ -167,7 +195,7 @@ if [ -z ${JAVA_LIBRARY_PATH} ] ; then
 fi
 
 if [ $DEBUG == 1 ] ; then
-	java -version
+	"${JAVA}" -version
 	echo "${JAVA}" -Djava.library.path="${JAVA_LIBRARY_PATH}" ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
 fi
 "${JAVA}" -Djava.library.path="${JAVA_LIBRARY_PATH}" ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
