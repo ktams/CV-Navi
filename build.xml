@@ -11,12 +11,19 @@
     <description>Builds, tests, and runs the project CV-Navi.</description>
     <import file="nbproject/build-impl.xml"/>
 		<target name="-post-jar" >
-			<copy todir="${dist.dir}">
+			<!-- copy additional files to dist directory (x-bit is lost) -->
+			<copy todir="${dist.dir}" preservelastmodified="true" verbose="true">
 				<fileset dir="Zusatz-Dateien">
 					<include name="LiesMich.txt"/>
 					<include name="CV-Navi.sh"/>
 				</fileset>
 			</copy>
+			<!-- make CV-Navi.sh readable and executable for everyone -->
+			<chmod perm="ugo+rx" verbose="true">
+				<fileset dir="${dist.dir}">
+					<include name="CV-Navi.sh"/>
+				</fileset>
+			</chmod>
 		</target>
     <!--
 
