@@ -122,12 +122,15 @@ else
 	RET=$?
 	[ $DEBUG == 1 ] && echo "RET which java = $RET"
 	if [ ${RET} -eq 0 ] ; then
+		# java is in path
 		JAVA=java
 	else
+		# if we cannot find a well known path default is java
+		JAVA=java
 		for p in ${JAVA_SEARCH_PATHS} ; do
 			if [ -x "$p/bin/java" ] ; then
 				JAVA="$p/bin/java"
-				[ $DEBUG == 1 ] && echo "JAVA=${JAVA}"
+				[ $DEBUG == 1 ] && echo "JAVA with path=\"${JAVA}\""
 				break
 			fi
 		done
