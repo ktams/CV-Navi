@@ -3,8 +3,8 @@
  *
  * Created on 20.01.2009, 17:34:06
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
+ * @author Kersten Tams Copyright 2009-2019
+ * @author Lothar Roth  Copyright 2012-2019
  *
  */
 
@@ -194,7 +194,7 @@ enum decoderList {
 
 public class CVNavi extends javax.swing.JFrame {
     /** Creates new form CVNavi */
-    public int     gsVersionMayor = 3;  // Version 3.1
+    public int     gsVersionMajor = 3;  // Version 3.1
     public int     gsVersionMinor = 1;  // Version 3.1
     public JFrame  frameInstanceDEVICE = null;
     public JFrame  frameInstanceOPTIONS = null;
@@ -279,7 +279,7 @@ public class CVNavi extends javax.swing.JFrame {
         this.setIconImage(i.getImage());
         initComponents();
         jDecoderChooser.setSelectedIndex(c.MC);
-        jLabelProgVersion.setText("Version " + gsVersionMayor + "." + gsVersionMinor);
+        jLabelProgVersion.setText("Version " + gsVersionMajor + "." + gsVersionMinor);
         setLocationRelativeTo(null);
 
         fillMenuSelection();
@@ -2601,7 +2601,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20181015b"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20190317a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
