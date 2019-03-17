@@ -200,7 +200,12 @@ public class LDG30 extends javax.swing.JFrame {
         initCV( 29, 14 );
         initCV( 33, 1 );
         initCV( 34, 2 );
-        for( int cv = 35; cv <= 46 ; cv++) {
+        if((CVNavi.Decoder == c.LD_G32_2) || (CVNavi.Decoder == c.LD_W32_2)) {
+            initCV( 35, 4 );
+        } else {
+            initCV( 35, 0 );
+        }
+        for( int cv = 36; cv <= 46 ; cv++) {
             initCV( cv, 0 );
         }
         initCV( 49, 73 );
