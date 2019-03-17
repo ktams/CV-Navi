@@ -122,8 +122,6 @@ public class LDG30erPlus extends javax.swing.JFrame {
         initCV( 30, 0 ); // Hilfsregister ; Seite 58 // TODO  deaktivieren ?
         initCV( 31, 0 );   // Index für höhere CV-PAges ; Seite 58 // TODO  deaktivieren ?
         initCV( 32, 255 ); // Index für höhere CV-PAges ; Seite 58 // TODO  deaktivieren ?
-        initCV( 33, 1 );
-        initCV( 34, 2 );
         if(CVNavi.Decoder != c.LD_G36Plus)
         {
             // 33p/34p
