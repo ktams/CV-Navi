@@ -699,6 +699,7 @@ public class LDG33 extends javax.swing.JFrame {
         jF8 = new javax.swing.JCheckBox();
         jAnaSpannung_G = new javax.swing.JRadioButton();
         jAnaSpannung_W = new javax.swing.JRadioButton();
+        jLabel92 = new javax.swing.JLabel();
         jKommentar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jComment = new javax.swing.JTextArea();
@@ -3781,7 +3782,7 @@ public class LDG33 extends javax.swing.JFrame {
                                                     .addComponent(jKd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jKi, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jKp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)))
+                                            .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)))
                                     .addComponent(jVMax, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jAnfahrKick, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFahreigenschaftenLayout.createSequentialGroup()
@@ -4363,6 +4364,9 @@ public class LDG33 extends javax.swing.JFrame {
             }
         });
 
+        jLabel92.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel92.setText(bundle.getString("LDG33.jLabel92.text")); // NOI18N
+
         javax.swing.GroupLayout jAnalogLayout = new javax.swing.GroupLayout(jAnalog);
         jAnalog.setLayout(jAnalogLayout);
         jAnalogLayout.setHorizontalGroup(
@@ -4370,8 +4374,6 @@ public class LDG33 extends javax.swing.JFrame {
             .addGroup(jAnalogLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jAnalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jAnaSpannung_G)
-                    .addComponent(jAnaSpannung_W)
                     .addComponent(jLabel2)
                     .addGroup(jAnalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jAnalogLayout.createSequentialGroup()
@@ -4387,8 +4389,14 @@ public class LDG33 extends javax.swing.JFrame {
                         .addGroup(jAnalogLayout.createSequentialGroup()
                             .addComponent(jF1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jF5))))
-                .addContainerGap(325, Short.MAX_VALUE))
+                            .addComponent(jF5)))
+                    .addGroup(jAnalogLayout.createSequentialGroup()
+                        .addComponent(jLabel92, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addGroup(jAnalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jAnaSpannung_G)
+                            .addComponent(jAnaSpannung_W))))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
         jAnalogLayout.setVerticalGroup(
             jAnalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4412,13 +4420,15 @@ public class LDG33 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jF4))
                     .addComponent(jF8))
-                .addGap(32, 32, 32)
+                .addGap(40, 40, 40)
                 .addGroup(jAnalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jAnalogLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jAnaSpannung_G))
-                    .addComponent(jAnaSpannung_W))
-                .addContainerGap(133, Short.MAX_VALUE))
+                    .addGroup(jAnalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jAnaSpannung_W)
+                        .addComponent(jLabel92)))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         jDecodereigenschaften.addTab(bundle.getString("LDG33.jAnalog.TabConstraints.tabTitle"), jAnalog); // NOI18N
@@ -8320,6 +8330,8 @@ public class LDG33 extends javax.swing.JFrame {
                 break;
 
             case 12: //CV#12
+                int oldValue = CV[1][12];
+                cvValue = CVNavi.checkTextField( this, jCV_Inhalt, 0, 1, oldValue, true );
                 CV[1][currCV] = cvValue;
                 if((CV[1][12] & 1) == 1)
                 {
@@ -10913,6 +10925,7 @@ public class LDG33 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
     private javax.swing.JCheckBox jLongAddr;
     private javax.swing.JCheckBox jLongAddr1;
     private javax.swing.JCheckBox jLongAddr2;
