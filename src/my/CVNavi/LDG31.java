@@ -3471,7 +3471,6 @@ public class LDG31 extends javax.swing.JFrame {
         buttonGroup7.add(jAnaSpannung_W);
         jAnaSpannung_W.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAnaSpannung_W.setText(bundle.getString("LDG31.jAnaSpannung_W.text")); // NOI18N
-        jAnaSpannung_W.setLabel(bundle.getString("LDG31.jAnaSpannung_W.label")); // NOI18N
         jAnaSpannung_W.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAnaSpannung_WActionPerformed(evt);
