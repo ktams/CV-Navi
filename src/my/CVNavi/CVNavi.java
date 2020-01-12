@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -203,6 +204,8 @@ public class CVNavi extends javax.swing.JFrame {
     public int     currSelection = 0;
     public boolean bSpracheDE = true;         //true -> deutsch, false -> englisch
     public static int debugLevel = 0;
+    public static String debugFileName = "CVNavi.log.txt";
+    public static boolean debug2file = false;
     public static boolean debugOffline = false;
     public static boolean forceTrackPowerOn = false;
     public static int debugDummyData = 0;
@@ -244,7 +247,8 @@ public class CVNavi extends javax.swing.JFrame {
     public static Boolean bUseXfuncs = false; // MC >= 1.4.6f ; OpenDCC >= 23.08 ; IB >= 2.000
     public static Boolean bUseXm3sid = false; // MC >= 1.4.7b
     public static Boolean bUseSo999  = false; // MC >= 1.4.8c
-    public String  gsSchnittstelle = "noCom";
+    public static String  gsSchnittstelle = "noCom";
+    public static boolean gsSchnittstelle_was_forced = false;
     public int     gsBaudRate = -1 ;
     public boolean gsRtsCts = true;
     public String  gsLastMcConfLoad = "NoData" ;
@@ -274,6 +278,14 @@ public class CVNavi extends javax.swing.JFrame {
     private int numS88 = 0;
 
     public CVNavi() {
+        if( debug2file ) {
+            try {
+                System.out.println("set output to file: "+debugFileName);
+                System.setOut(new PrintStream(new File(debugFileName)));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CVNavi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         this.lastSaveOpenDialogWasCancel = false;
         mainWindowLocation = new Point();
         ImageIcon i = new ImageIcon(getClass().getResource("/main.gif"));
@@ -2554,7 +2566,9 @@ public class CVNavi extends javax.swing.JFrame {
 
         // Werte auslesen bzw. mit Defaults initialisieren
         setZentrale(prop.getProperty("Zentrale", "MasterControl"));
-        gsSchnittstelle = prop.getProperty("Schnittstelle", "COM1");
+        if( ! gsSchnittstelle_was_forced ) {
+            gsSchnittstelle = prop.getProperty("Schnittstelle", "COM1");
+        }
         gsBaudRate = Integer.parseInt( prop.getProperty("BaudRate","9600"));
         gsDecoderIndex = Integer.parseInt( prop.getProperty("DecoderIndex", Integer.toString(c.MC)));
         if(bundle.getString("Sprache").equals("Deutsch"))
@@ -2602,7 +2616,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20190317b"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20200112a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -3158,26 +3172,28 @@ public class CVNavi extends javax.swing.JFrame {
     }
 
     private static void helpCommandLine() {
-        System.out.println("CV-Navi [-d [<num>]] [-c] [-c Xfuncs] [-c Xm3sid ] [-b <num>] [-o]");
-        System.out.println("\t-d [<num>] \tdebuglevel (without num: increment by 1)" );
-        System.out.println("\t-c         \tforce configured control unit (no check)");
-        System.out.println("\t-c Xfuncs  \tforce enable XFuncs");
-        System.out.println("\t-c Xm3sid  \tforce enable Xm3sid");
-        System.out.println("\t-b <num>   \tuse preconfigured dummy datasets for debugging");
-        System.out.println("\t-o         \tforce offline mode");
-        System.out.println("\t-p         \tforce track power reported as on");
-        System.out.println("\t-t1 <num>  \tread/write CVs: initial timeout [ms] (default: 2000)");
-        System.out.println("\t-t2 <num>  \tread/write CVs: delay timeout [ms] (default: 500)");
-        System.out.println("\t-t3 <num>  \tread/write CVs: extra pause [ms] between CV requests (default: 0)");
-        System.out.println("\t-tr <num>  \tread/write CVs: number of retries with delay timeout (default: 9)");
-        System.out.println("\t-tfu <num> \ttimer interval during firmware updates (default: 250)");
-        System.out.println("\t-u         \tupdate window always visible");
-        System.out.println("\t-usb1      \tuse USB-1 in RedBox/MasterControl -> no BaudRate changes on firmware updates (default: on)");
-        System.out.println("\t-usb2      \tuse USB-2 in RedBox -> BaudRate change to 38400 on firmware-updates (default: off)");
-        System.out.println("\t-rs232     \tuse RS232 in RedBox/MasterControl -> BaudRate change to 38400 on firmware-updates (default: off)");
-        System.out.println("\t-no17      \tdo not read CV17");
-        System.out.println("\t-no18      \tdo not read CV18");
-        System.out.println("\t-lnm       \tset max length of loco name manually (default=11)");
+        System.out.println("Usage: CV-Navi [options from below]");
+        System.out.println("\t-d   [<num>]  \tdebuglevel (without num: increment by 1)" );
+        System.out.println("\t-df  [<name>] \tdebug into file <name> (without name: CV-Navi.log.txt)" );
+        System.out.println("\t-dev [<name>] \tforce usage of device <name>" );
+        System.out.println("\t-c            \tforce configured control unit (no check during init)");
+        System.out.println("\t-c Xfuncs     \tforce enable XFuncs");
+        System.out.println("\t-c Xm3sid     \tforce enable Xm3sid");
+        System.out.println("\t-b <num>      \tuse preconfigured dummy datasets for debugging");
+        System.out.println("\t-o            \tforce offline mode");
+        System.out.println("\t-p            \tforce track power reported as on");
+        System.out.println("\t-t1 <num>     \tread/write CVs: initial timeout [ms] (default: 2000)");
+        System.out.println("\t-t2 <num>     \tread/write CVs: delay timeout [ms] (default: 500)");
+        System.out.println("\t-t3 <num>     \tread/write CVs: extra pause [ms] between CV requests (default: 0)");
+        System.out.println("\t-tr <num>     \tread/write CVs: number of retries with delay timeout (default: 9)");
+        System.out.println("\t-tfu <num>    \ttimer interval during firmware updates (default: 250)");
+        System.out.println("\t-u            \tupdate window always visible");
+        System.out.println("\t-usb1         \tuse USB-1 in RedBox/MasterControl -> no BaudRate changes on firmware updates (default: on)");
+        System.out.println("\t-usb2         \tuse USB-2 in RedBox -> BaudRate change to 38400 on firmware-updates (default: off)");
+        System.out.println("\t-rs232        \tuse RS232 in RedBox/MasterControl -> BaudRate change to 38400 on firmware-updates (default: off)");
+        System.out.println("\t-no17         \tdo not read CV17");
+        System.out.println("\t-no18         \tdo not read CV18");
+        System.out.println("\t-lnm          \tset max length of loco name manually (default=11)");
     }
     /**
     * @param args the command line arguments
@@ -3205,6 +3221,26 @@ public class CVNavi extends javax.swing.JFrame {
                         n++;
                         debugLevel = Integer.parseInt(args[n]);
                         System.out.println("debugLevel set to "+debugLevel);
+                        break;
+                    case "-df":
+                        debug2file = true;
+                        if( n == (argc-1) || args[n+1].startsWith("-") ){
+                            System.out.println("debugFileName is default: "+debugFileName);
+                            break;
+                        }
+                        n++;
+                        debugFileName = args[n];
+                        System.out.println("debugFileName set to "+debugFileName);
+                        break;
+                    case "-dev":
+                        if( n == (argc-1) || args[n+1].startsWith("-") ){
+                            System.out.println("debugFileName is default");
+                            break;
+                        }
+                        n++;
+                        gsSchnittstelle_was_forced = true;
+                        gsSchnittstelle = args[n];
+                        System.out.println("gsSchnittstelle set to "+gsSchnittstelle);
                         break;
                     case "-c":
                         if( n == (argc-1) || args[n+1].startsWith("-") ){

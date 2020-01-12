@@ -290,6 +290,7 @@ public class Options extends javax.swing.JFrame {
                 // Schnittstelle 
                 CVNavi.gsSchnittstelle = (String) jSchnittstelle.getSelectedItem();
                 localChanges = true;
+                CVNavi.gsSchnittstelle_was_forced = false;
             }
             int newBaudRate = Integer.parseInt( (String) jBaudRate.getSelectedItem() );
             if( CVNavi.gsBaudRate != newBaudRate ) {
