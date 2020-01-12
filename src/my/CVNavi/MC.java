@@ -5083,6 +5083,9 @@ public class MC extends javax.swing.JFrame {
                         }
                         if( strArr[0].toUpperCase().startsWith("ERROR: ")) {
                             System.out.println("ERROR detected : "+strArr[0] );
+                            if( debugLevel > 0 ) {
+                                System.out.println("bWriteCfg : DBGtmp nextWriteJob="+nextWriteJob+" locIdx="+locIdx+" lastCmd=### "+lastCmd+" ###" );
+                            }
                             CVNavi.mbConfigWriteError(CVNavi, strArr[0] );
                         }
                     }
@@ -5249,13 +5252,18 @@ public class MC extends javax.swing.JFrame {
                                         String sName = null;
 
                                         Object oName = jTableLoco.getValueAt( locIdx, 3);
-                                        if( oName != null )
+                                        if( oName != null ) {
                                             sName = "" + oName;
+                                            if ( sName.length() > CVNavi.userLocoNameMax ) {
+                                                System.out.println(" MC nextWriteJob : ### sName.length("+sName+")="+sName.length()+" ### shorten to length "+CVNavi.userLocoNameMax+" . " );
+                                                sName = sName.substring(0, CVNavi.userLocoNameMax);
+                                            }
+                                        }
 
                                         if( (sName != null) && (sName.length() >  0) )
-                                            lastCmd = "XLOCADD " + oAdr + ", " + sFS + ", " + sFormat + ", \"" + sName + "\"\r";
+                                            lastCmd = "XLOCADD " + sAdr + ", " + sFS + ", " + sFormat + ", \"" + sName + "\"\r";
                                         else
-                                            lastCmd = "XLOCADD " + oAdr + ", " + sFS + ", " + sFormat + "\r";
+                                            lastCmd = "XLOCADD " + sAdr + ", " + sFS + ", " + sFormat + "\r";
                                         System.out.println("write: loco s["+lastCmd+"]" );
                                         Com.write(lastCmd);
                                         resetbArray();

@@ -224,6 +224,7 @@ public class CVNavi extends javax.swing.JFrame {
     private boolean bReadStatusBin = false;
     public static boolean rs232_or_rb_usb_2 = false;
     public static boolean rs232_mode_was_forced = false;
+    public static int userLocoNameMax = 11;
 
     // Globale Variablen, die nur einmal eingelesen werden sollten
     // gs = GlobalSetting
@@ -3176,6 +3177,7 @@ public class CVNavi extends javax.swing.JFrame {
         System.out.println("\t-rs232     \tuse RS232 in RedBox/MasterControl -> BaudRate change to 38400 on firmware-updates (default: off)");
         System.out.println("\t-no17      \tdo not read CV17");
         System.out.println("\t-no18      \tdo not read CV18");
+        System.out.println("\t-lnm       \tset max length of loco name manually (default=11)");
     }
     /**
     * @param args the command line arguments
@@ -3306,6 +3308,15 @@ public class CVNavi extends javax.swing.JFrame {
                     case "-no18":
                         skipCV18 = true;
                         System.out.println("skipCV18 set to "+skipCV18);
+                        break;
+                    case "-lnm":
+                        if( n == (argc-1) || args[n+1].startsWith("-") ) {
+                            // ohne Parameter -> Zahl fehlt => ignorieren
+                            break;
+                        }
+                        n++;
+                        userLocoNameMax = Integer.parseInt(args[n]);
+                        System.out.println("userLocoNameMax set to "+userLocoNameMax);
                         break;
                     case "-h":
                         helpCommandLine();
