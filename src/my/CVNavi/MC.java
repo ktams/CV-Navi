@@ -557,7 +557,7 @@ public class MC extends javax.swing.JFrame {
                     // special handling of "]" needed, because prompt from MC has no correct string termination !
                     if( strArr[j].startsWith("]")) {
                         if( debugLevel > 0 ) {
-                            System.out.println("inside parseInputArray SKIP BRACKET j["+j+"] strArr[0]=\""+strArr1[0]+"\" len["+strArr1[0].length()+"]");
+                            System.out.println("inside parseInputArray SKIP BRACKET j["+j+"] strArr1[0] length="+strArr1[0].length()+"");
                         }
                         mode = Parser.END;
                         continue;
