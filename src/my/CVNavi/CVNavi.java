@@ -25,6 +25,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -279,13 +281,24 @@ public class CVNavi extends javax.swing.JFrame {
 
     public CVNavi() {
         if( debug2file ) {
+            Path fullPath = FileSystems.getDefault().getPath(debugFileName).toAbsolutePath();
+
             try {
-                System.out.println("set output to file: "+debugFileName);
+                System.out.println("set output to file: "+fullPath);
                 System.setOut(new PrintStream(new File(debugFileName)));
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(CVNavi.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            if( debugLevel > 2 ) {
+                // Show all we can find abaout java on this system at the beginning of the logfile
+                System.out.println("Following are the JVM information of your OS :");
+                Properties jvm = System.getProperties();
+                jvm.list(System.out);
+                System.out.println("-- end of listing properties --\n");
+            }
         }
+
         this.lastSaveOpenDialogWasCancel = false;
         mainWindowLocation = new Point();
         ImageIcon i = new ImageIcon(getClass().getResource("/main.gif"));
@@ -1972,6 +1985,7 @@ public class CVNavi extends javax.swing.JFrame {
         jBaudRate = new javax.swing.JTextField();
         jLabelBuild = new javax.swing.JLabel();
         jLabelOS = new javax.swing.JLabel();
+        jLabelVmName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/CVNavi/Bundle"); // NOI18N
@@ -2116,6 +2130,10 @@ public class CVNavi extends javax.swing.JFrame {
         jLabelOS.setText("os info");
         jLabelOS.setIconTextGap(0);
 
+        jLabelVmName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelVmName.setText(bundle.getString("CVNavi.jLabelVmName.text")); // NOI18N
+        jLabelVmName.setIconTextGap(0);
+
         javax.swing.GroupLayout CVNaviMainPanelLayout = new javax.swing.GroupLayout(CVNaviMainPanel);
         CVNaviMainPanel.setLayout(CVNaviMainPanelLayout);
         CVNaviMainPanelLayout.setHorizontalGroup(
@@ -2134,8 +2152,8 @@ public class CVNavi extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
                                 .addComponent(jLabelProgName)
@@ -2153,10 +2171,12 @@ public class CVNavi extends javax.swing.JFrame {
                             .addComponent(jZentraleTitle, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
                                 .addGap(41, 41, 41)
-                                .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelBuild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabelProgVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelOS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                    .addComponent(jLabelOS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelVmName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         CVNaviMainPanelLayout.setVerticalGroup(
             CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2171,10 +2191,12 @@ public class CVNavi extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelProgVersion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelOS, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelOS, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelVmName)
+                        .addGap(38, 38, 38)
                         .addComponent(jLabelBuild, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                         .addComponent(jButtonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(jButtonOptions)
@@ -2613,10 +2635,12 @@ public class CVNavi extends javax.swing.JFrame {
         String osArch = System.getProperty("os.arch");
         String dataModel = System.getProperty("sun.arch.data.model");
         String javaversion = System.getProperty("java.version");
+        String javavmname = System.getProperty("java.vm.name");
+        jLabelVmName.setText("("+javavmname+")");
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20200112a"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20200115a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -3194,6 +3218,9 @@ public class CVNavi extends javax.swing.JFrame {
         System.out.println("\t-no17         \tdo not read CV17");
         System.out.println("\t-no18         \tdo not read CV18");
         System.out.println("\t-lnm          \tset max length of loco name manually (default=11)");
+        System.out.println("");
+        System.out.println("\t-dj           \tshow java system environment and exit");
+        System.out.println("\t-h            \tshow help and exit");
     }
     /**
     * @param args the command line arguments
@@ -3204,8 +3231,9 @@ public class CVNavi extends javax.swing.JFrame {
         String dataModel = System.getProperty("sun.arch.data.model");
         String osName = System.getProperty("os.name");
         String osArch = System.getProperty("os.arch");
-        String javaversion = System.getProperty("java.version");
-        System.out.println(""+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit]");
+        // String javaversion = System.getProperty("java.version");
+        String javaversion = System.getProperty("java.vm.name")+" "+System.getProperty("java.vm.version");
+        System.out.println(""+osName+"["+osArch+"] , "+javaversion+"["+dataModel+"bit]");
 
         System.out.println("argc="+ argc );
         int n = 0;
@@ -3242,6 +3270,12 @@ public class CVNavi extends javax.swing.JFrame {
                         gsSchnittstelle = args[n];
                         System.out.println("gsSchnittstelle set to "+gsSchnittstelle);
                         break;
+                    case "-dj": // debug java environment
+                        // Show all we can find abaout java on this system
+                        System.out.println("Following are the JVM information of your OS :");
+                        Properties jvm = System.getProperties();
+                        jvm.list(System.out);
+                        return;
                     case "-c":
                         if( n == (argc-1) || args[n+1].startsWith("-") ){
                             bZentraleVerified = true;
@@ -3449,6 +3483,7 @@ public class CVNavi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelOS;
     private javax.swing.JLabel jLabelProgName;
     private javax.swing.JLabel jLabelProgVersion;
+    private javax.swing.JLabel jLabelVmName;
     private javax.swing.JTextField jSchnittstelle;
     private javax.swing.JTextField jSchnittstelleTitle;
     private javax.swing.JScrollPane jScrollPane1;
