@@ -1874,7 +1874,7 @@ public class CVNavi extends javax.swing.JFrame {
         String str_bArr = new String(bArray);
         // Split string into parts
         String[] strParts = str_bArr.split(" = |\r|\\000");
-        if( debugLevel >= 3 ) {
+        if( debugLevel >= 4 ) {
             dumpbArray( strParts );
         }
         if( strParts.length > 0) {
@@ -2640,7 +2640,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20200115a"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20200116a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -3091,7 +3091,9 @@ public class CVNavi extends javax.swing.JFrame {
             numBytes = Com.read(bArray);
             if( debugLevel > 0 ) {
                 System.out.println("2982 flushReadBuffer : "+numBytes+" Bytes" );
-                dumpbArray(bArray);
+                if( debugLevel >= 4 ) {
+                    dumpbArray(bArray);
+                }
             }
         }
         return numBytes;

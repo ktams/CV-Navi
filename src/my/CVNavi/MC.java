@@ -4095,7 +4095,7 @@ public class MC extends javax.swing.JFrame {
                         }
                         bytesRead += tmpBytesRead;
                         bArray[bytesRead] = 0;
-                        if( CVNavi.debugLevel > 2 ) {
+                        if( CVNavi.debugLevel > 3 ) {
                             System.out.println("2880 current: bytesRead="+bytesRead );
                             CVNavi.dumpbArray(bArray);
                         }
@@ -4245,12 +4245,21 @@ public class MC extends javax.swing.JFrame {
                         }
                         bWaitAnswerInProgress = false;
                         String s = new String(bArray);
+                        if( debugLevel >= 4 ) {
+                            System.out.println("bAskLokState: s=\n"+s);
+                        }
 
                         String str;
                         if(s.contains("L "))
                         {
+                            if( debugLevel >= 2 ) {
+                                System.out.println("bAskLokState: s contains L");
+                            }
                             s = s.substring(2);
                             AktLokState = s.substring(0, s.indexOf("]")-1);
+                            if( debugLevel >= 2 ) {
+                                System.out.println("bAskLokState: s contains L: AktLokState=\""+AktLokState+"\"");
+                            }
                             String text = jDisplay.getText();
                             s = s.substring(s.indexOf(" ")+1);
                             str = s.substring(0, s.indexOf(" "));
@@ -4329,10 +4338,16 @@ public class MC extends javax.swing.JFrame {
                                 text += "-";
                                 Funktionen[3] = 0;
                             }
+                            if( debugLevel >= 3 ) {
+                                System.out.println("bAskLokState: Display.setText:"+text);
+                            }
                             jDisplay.setText(text);
                             if(bMustAskStatus)
                             {
                                 s = "XLC " + AskedLokAdr + "\r";
+                                if( debugLevel >= 2 ) {
+                                    System.out.println("bAskLokState: bMustAskStatus "+s);
+                                }
                                 CVNavi.flushReadBuffer( Com );
                                 resetbArray();
                                 bMustAskStatus = false;
@@ -4353,6 +4368,9 @@ public class MC extends javax.swing.JFrame {
                         else if(s.contains("unused"))
                         {
                             s = "XL " + AskedLokAdr + " 0 0 f 0 0 0 0\r";
+                            if( debugLevel >= 2 ) {
+                                System.out.println("bAskLokState: contains \"unused\" bMustAskStatus -> send: "+s );
+                            }
                             CVNavi.flushReadBuffer( Com );
                             resetbArray();
                             bMustAskStatus = true;
@@ -4549,6 +4567,10 @@ public class MC extends javax.swing.JFrame {
                                 jDisplay.setText(text.substring(0, 7) + str + text.substring(12, 17) + "           " + text.substring(29));
                             }
                             s = "XL " + AskedLokAdr + "\r";
+                            if( debugLevel >= 2 ) {
+                                System.out.println("bAskLokState: near end -> send: "+s );
+                                System.out.println("bAskLokState: near end END" );
+                            }
                             CVNavi.flushReadBuffer( Com );
                             resetbArray();
                             Com.write(s);
@@ -5013,7 +5035,7 @@ public class MC extends javax.swing.JFrame {
                             System.out.println("readRC bArray=" );
                             CVNavi.dumpbArray(bArray);
                         }
-                        if( debugLevel > 0 ) {
+                        if( debugLevel >= 4 ) {
                             System.out.println("readRC bArray=" );
                             CVNavi.dumpbArray(bArray);
                         }
@@ -5669,6 +5691,9 @@ public class MC extends javax.swing.JFrame {
                 readS88num();
             }
         }
+        if( debugLevel >= 1 ) {
+            System.out.println("MC formWindowOpened: AktLokAdr="+AktLokAdr);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void resetbArray() {
@@ -5731,6 +5756,9 @@ public class MC extends javax.swing.JFrame {
         int selIdx = jTabbedPane1.getSelectedIndex();
         if( debugLevel >= 2 ) {
             System.out.println("jTabbedPane1StateChanged selIdx="+selIdx);
+        }
+        if( debugLevel >= 1 ) {
+            System.out.println("jTabbedPane1StateChanged AktLokAdr="+AktLokAdr+" AktLokState="+AktLokState+" AktLokFormat="+AktLokFormat);
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -6923,8 +6951,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf10ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf10ActionPerformed
 
@@ -6957,8 +6988,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf10ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf12ActionPerformed
 
@@ -7473,10 +7507,14 @@ public class MC extends javax.swing.JFrame {
             CVNavi.flushReadBuffer( Com );
             resetbArray();
 
-            System.out.print("LokAnfrage Adr.: "+parseInt);
+            System.out.println("LokAnfrage Adr.: "+parseInt);
             String s = "XLC " + parseInt + "\r";
             AskedLokAdr = parseInt;
             AktLokAdr = 0;
+            if( debugLevel >= 2 ) {
+                System.out.println("jRauteActionPerformed: -> send: "+s );
+                System.out.println("jRauteActionPerformed: END" );
+            }
             Com.write(s);
             timer.setInitialDelay(CVNavi.timer1);
             timer.setDelay(CVNavi.timer2);
@@ -7506,6 +7544,10 @@ public class MC extends javax.swing.JFrame {
             if(Com == null)
             {
                 Com = CVNavi.safelyOpenCom(this, Com);
+            }
+            if( debugLevel >= 2 ) {
+                System.out.println("jGeschwindigkeitStateChanged: -> send: "+s );
+                System.out.println("jGeschwindigkeitStateChanged: END" );
             }
             Com.write(s);
             s = jDisplay.getText();
@@ -7590,8 +7632,12 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf0ActionPerformed: -> send: "+s );
+            System.out.println("jf0ActionPerformed: END" );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf0ActionPerformed
 
@@ -7619,6 +7665,10 @@ public class MC extends javax.swing.JFrame {
 
             System.out.print("Weiche: "+parseInt + "gerade");
             String s = "XT " + parseInt + " g 1\r";
+            if( debugLevel >= 2 ) {
+                System.out.println("jf1ActionPerformed: DisplayState==0 -> send: "+s );
+                System.out.println("jf1ActionPerformed: DisplayState==0 END" );
+            }
             Com.write(s);
             return;
         }
@@ -7666,8 +7716,14 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf1ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
+        if( debugLevel >= 2 ) {
+            System.out.println("jf1ActionPerformed: -> send: "+s );
+        }
         Com.write(s);
     }//GEN-LAST:event_jf1ActionPerformed
 
@@ -7690,11 +7746,14 @@ public class MC extends javax.swing.JFrame {
             {
                 Com = CVNavi.safelyOpenCom(this, Com);
             }
-            CVNavi.flushReadBuffer( Com );
-            resetbArray();
-
             System.out.print("Weiche: "+parseInt + "Abzweig");
             String s = "XT " + parseInt + " r 1\r";
+            if( debugLevel >= 2 ) {
+                System.out.println("jf2ActionPerformed: DisplayState==0 -> send: "+s );
+                System.out.println("jf2ActionPerformed: DisplayState==0 END" );
+            }
+            CVNavi.flushReadBuffer( Com );
+            resetbArray();
             Com.write(s);
             return;
         }
@@ -7743,8 +7802,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf2ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf2ActionPerformed
 
@@ -7795,8 +7857,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf3ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf3ActionPerformed
 
@@ -7840,8 +7905,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf4ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf4ActionPerformed
 
@@ -7870,8 +7938,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf5ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf5ActionPerformed
 
@@ -7900,8 +7971,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf6ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf6ActionPerformed
 
@@ -7930,8 +8004,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf7ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf7ActionPerformed
 
@@ -7960,8 +8037,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf8ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf8ActionPerformed
 
@@ -7990,8 +8070,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf9ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf9ActionPerformed
 
@@ -8020,8 +8103,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf11ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf11ActionPerformed
 
@@ -8050,8 +8136,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf13ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf13ActionPerformed
 
@@ -8080,8 +8169,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf14ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf14ActionPerformed
 
@@ -8110,8 +8202,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf15ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf15ActionPerformed
 
@@ -8140,8 +8235,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s += "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jf16ActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf16ActionPerformed
 
@@ -8164,8 +8262,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jRueckActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jRueckActionPerformed
 
@@ -8188,8 +8289,11 @@ public class MC extends javax.swing.JFrame {
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        CVNavi.flushReadBuffer( Com );
         s = "XL " + AktLokState + "\r";
+        if( debugLevel >= 2 ) {
+            System.out.println("jVorActionPerformed: -> send: "+s );
+        }
+        CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jVorActionPerformed
 
@@ -8212,7 +8316,6 @@ public class MC extends javax.swing.JFrame {
                 }
             }
         }
-
     }//GEN-LAST:event_jFuncIconActionPerformed
 
     private void jTableLocoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLocoMouseClicked
