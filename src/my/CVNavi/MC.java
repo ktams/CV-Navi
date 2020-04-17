@@ -47,6 +47,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import my.CVNavi.CVNavi.MZ;
 import static my.CVNavi.CVNavi.debugDummyData;
@@ -211,6 +212,30 @@ public class MC extends javax.swing.JFrame {
         retries = CVNavi.timerRetries;
 
         initComponents();
+
+        if( debugLevel >= 2 ) {
+            System.out.println("jTableLoco A1 MAX_LOCS="+c.MAX_LOCS+" rows="+this.jTableLoco.getRowCount());
+        }
+        /* extend jTableLoco if necessary */
+        /* TODO: make list dynamic like jTableM3 */
+        if( this.jTableLoco.getRowCount() < c.MAX_LOCS ) {
+            if( debugLevel >= 1 ) {
+                System.out.println("jTableLoco B1 MAX_LOCS="+c.MAX_LOCS+" rows="+this.jTableLoco.getRowCount());
+            }
+            TableModel tm = jTableLoco.getModel();
+            DefaultTableModel model=(DefaultTableModel) tm;
+            Object[] os = { "", "", "",""};
+            for( int i = this.jTableLoco.getRowCount(); i < c.MAX_LOCS ; i++ ) {
+                model.addRow(os);
+            }
+            if( debugLevel >= 1 ) {
+                System.out.println("jTableLoco B2 MAX_LOCS="+c.MAX_LOCS+" rows="+this.jTableLoco.getRowCount());
+            }
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println("jTableLoco A2 MAX_LOCS="+c.MAX_LOCS+" rows="+this.jTableLoco.getRowCount());
+        }
+
         Funktionen = new int[28];
         for(int i = 0; i < 28; i++)
             Funktionen[i] = 0;
@@ -527,12 +552,13 @@ public class MC extends javax.swing.JFrame {
     }
 
     private boolean parseInputArray( String quelle, String str1 ) {
-        boolean ret = false;
+        boolean ret = true;
+        boolean notifyTooManyLocos = false;
+        boolean notifyTooManyTractions = false;
 
         if( str1 != null && str1.length() > 0 ) {
             int locTabIdx = 0;
             int traTabIdx = 0;
-            int funcIconIdx = 0;
             String str = "";
             rcValue = -1;
             updateRailComCheckboxes( 0 );
@@ -585,7 +611,6 @@ public class MC extends javax.swing.JFrame {
                             continue;
                         case "*END*":
                             mode = Parser.END;
-                            ret = true;
                             if( debugLevel > 0 ) {
                                 System.out.println("inside parseInputArray search section found *END* SKIP j["+j+"] strArr[j]=["+strArr[j]+"]" );
                             }
@@ -619,9 +644,15 @@ public class MC extends javax.swing.JFrame {
                         case LOCO:
                             // re-split with "," and " "
                             strArr1 = strArr[j].split("[, ]+");
-                            if( locTabIdx > c.MAX_LOCS) {
+                            if( locTabIdx >= c.MAX_LOCS) {
                                 System.out.println("inside parseInputArray [LOCO] -> UNKNOWN ENTRY strArr["+j+"]=["+strArr[j]+"]");
                                 System.out.println("inside parseInputArray [LOCO] locTabIdx=["+locTabIdx+"] out of bound -> skip/continue");
+                                jMcRwInfo.setText("parse config: too many locos");
+                                if( notifyTooManyLocos == false ) {
+                                    notifyTooManyLocos = true;
+                                    CVNavi.mbRWCancelled(this);
+                                }
+                                ret = false;
                                 continue;
                             }
                             if (strArr1.length >= 3) {
@@ -653,9 +684,15 @@ public class MC extends javax.swing.JFrame {
                         case TRAKTIONS:
                             // re-split with "," and " "
                             strArr1 = strArr[j].split("[, ]+");
-                            if( traTabIdx > c.MAX_TRACTIONS) {
+                            if( traTabIdx >= c.MAX_TRACTIONS) {
                                 System.out.println("inside parseInputArray [TRAKTIONS] -> UNKNOWN ENTRY strArr["+j+"]=["+strArr[j]+"]");
                                 System.out.println("inside parseInputArray [TRAKTIONS] traction["+traTabIdx+"] out of bound -> skip/continue" );
+                                jMcRwInfo.setText("parse config: too many tractions");
+                                if( notifyTooManyTractions == false ) {
+                                    notifyTooManyTractions = true;
+                                    CVNavi.mbRWCancelled(this);
+                                }
+                                ret = false;
                                 continue;
                             }
                             if( strArr1.length >= 2 ) {
@@ -773,8 +810,7 @@ public class MC extends javax.swing.JFrame {
                 }
 
             }
-            System.out.println("parseInputArray progess at end is "+jMcRwProgress.getValue() );
-            jMcRwInfo.setText("parse config finished");
+            System.out.println("parseInputArray progress at end is "+jMcRwProgress.getValue() );
             Font f = jDatenQuelle.getFont();
             Font f2 = new Font( f.getFontName(), Font.BOLD, f.getSize() );
             jDatenQuelle.setFont(f2);
@@ -789,6 +825,15 @@ public class MC extends javax.swing.JFrame {
             sorter.setSortKeys(sortKeys);
             sorter.sort();
         }
+        String infoText = "parse config finished ";
+        if( ret == false ) {
+            infoText += "with problems";
+            if( notifyTooManyLocos ) infoText += " [locos]";
+            if( notifyTooManyTractions ) infoText += " [tractions]";
+        } else {
+            infoText += "OK";
+        }
+        jMcRwInfo.setText(infoText);
         return ret;
     }
 
@@ -6456,7 +6501,7 @@ public class MC extends javax.swing.JFrame {
         SaveOpenDialog od = new SaveOpenDialog( this, true, false, str, this, "mc", c.MC);
     }//GEN-LAST:event_jKonfSichernActionPerformed
 
-    public void setMcRwProgess( int i ) {
+    public void setMcRwProgress( int i ) {
         this.jMcRwProgress.setValue( i );
     }
 
@@ -6476,7 +6521,7 @@ public class MC extends javax.swing.JFrame {
 
     private void jKonfLadenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jKonfLadenActionPerformed
         setMcRwInfo("read from file: select filename");
-        setMcRwProgess( 0 );
+        setMcRwProgress( 0 );
         SaveOpenDialog od = new SaveOpenDialog( this, true, true, null, this, "m3 conf txt", c.MC);
     }//GEN-LAST:event_jKonfLadenActionPerformed
 

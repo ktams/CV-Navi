@@ -935,10 +935,10 @@ public class SaveOpenDialog extends javax.swing.JDialog {
             {
                 case c.MC:
                     if( bLesen ) {
-                        myMC.setMcRwProgess( 0 );
+                        myMC.setMcRwProgress( 0 );
                         myMC.setMcRwInfo("read from file: cancelled by user");
                     } else { // schreiben
-                        myMC.setMcRwProgess( 0 );
+                        myMC.setMcRwProgress( 0 );
                         myMC.setMcRwInfo("write to file: cancelled by user");
                     }
                     break;
@@ -1059,7 +1059,7 @@ public class SaveOpenDialog extends javax.swing.JDialog {
                     myMC.callParser( jFileChooser1.getSelectedFile().getName() );
                     myMC.updateTabs();
                 } else { // schreiben
-                    myMC.setMcRwProgess( 100 );
+                    myMC.setMcRwProgress( 100 );
                     myMC.setMcRwInfo("write to file: finished");
                 }
                 break;

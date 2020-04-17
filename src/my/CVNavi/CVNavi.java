@@ -98,7 +98,7 @@ interface c {
 
     // MC-Konstanten:
     public static final int MAX_SYSWRITES = 11; // #zu schreibende Variablen für ein Restore der Basiseinstellungen (ohne Listen)
-    public static final int MAX_LOCS = 250; // Lokliste [0-249]
+    public static final int MAX_LOCS = 1008; // Lokliste [0-1007]
     public static final int MAX_TRACTIONS = 150; // Tracktionsliste [0..149]
     public static final int MAX_M3_ENTRIES = 512; // M3UID-SID-Pairs [0..511]
     public static final int MAX_LOC_NAME_LENGTH = 11; // maximum length of loco name
@@ -2640,7 +2640,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20200116a"; // use keyword "beta" or "release"
+        String gsBuild ="release 20200417a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);

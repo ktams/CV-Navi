@@ -16,6 +16,7 @@
 				<fileset dir="Zusatz-Dateien">
 					<include name="LiesMich.txt"/>
 					<include name="CV-Navi.sh"/>
+					<include name="CV-Navi.bat"/>
 				</fileset>
 			</copy>
 			<!-- make CV-Navi.sh readable and executable for everyone -->

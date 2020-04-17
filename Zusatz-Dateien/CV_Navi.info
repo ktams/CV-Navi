@@ -12,10 +12,12 @@ Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen 
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
-Aenderungen in V3.1 (beta)
+Aenderungen in V3.1
 - kleine Bugfixes bei diversen Decodern
 - Startskript fuer Linux erweitert
 - weitere Parameter fuer erweitertes Debugging hunzugefuegt
+- BatchDatei für Start unter Windows hinzugefuegt
+- Lokliste erweitert
 
 Aenderungen in V3.0
 - interne Umstrukturierung des Java-Projekts
