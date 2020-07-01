@@ -28,6 +28,7 @@ import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -77,6 +78,7 @@ public class MC extends javax.swing.JFrame {
     private boolean bReadPTList;
     private boolean bUpdate;
     private int TimeOut;
+    private int locListWriteErrors = 0;
     private int BlockNr = 0;
     private int MaxBlocks = 0;
     private int UpdateData[][] = new int[2][0x10000];
@@ -236,6 +238,7 @@ public class MC extends javax.swing.JFrame {
             System.out.println("jTableLoco A2 MAX_LOCS="+c.MAX_LOCS+" rows="+this.jTableLoco.getRowCount());
         }
 
+        AktLokState="";
         Funktionen = new int[28];
         for(int i = 0; i < 28; i++)
             Funktionen[i] = 0;
@@ -1079,14 +1082,14 @@ public class MC extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -1918,10 +1921,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2000,10 +2003,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTextM3UID.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextM3UIDInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextM3UID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -3096,10 +3099,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jGeschwindigkeit.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jGeschwindigkeitCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel6.add(jGeschwindigkeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 180, -1));
@@ -4488,7 +4491,7 @@ public class MC extends javax.swing.JFrame {
                                 jf27.setEnabled(false);
                                 jf28.setEnabled(false);
                                 Fahrstufen = 126;
-                           }
+                            }
                             else if(s.contains("Old"))
                             {
                                 str = "MM1  ";
@@ -4604,7 +4607,7 @@ public class MC extends javax.swing.JFrame {
                             if(LokName.length() > 0)
                             {
                                 s = LokName + "          ";
-                                s = s.substring(0, 11);
+                                s = s.substring(0, 11); // c.MAX_LOC_NAME_LENGTH
                                 jDisplay.setText(text.substring(0, 7) + str + text.substring(12, 17) + s + text.substring(29));
                             }
                             else
@@ -5148,7 +5151,20 @@ public class MC extends javax.swing.JFrame {
                                 }
                             }
                         }
-                        if( strArr[0].toUpperCase().startsWith("ERROR: ")) {
+                        if( strArr[0].toUpperCase().startsWith("ERROR: UNKNOWN COMMAND") && locListWriteErrors < CVNavi.maxLocListWriteErrors) {
+                            locListWriteErrors++;
+                            locIdx--;
+                            System.out.println("write loco list problem ("+locListWriteErrors+"/"+CVNavi.maxLocListWriteErrors+") locIdx decreased by 1  locIdx="+locIdx+" resend command\""+lastCmd+"\"");
+                            try {
+                                if( locListWriteErrors < 10 ) {
+                                    Thread.sleep(250);
+                                } else {
+                                    Thread.sleep(1000);
+                                }
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(MC.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else if( strArr[0].toUpperCase().startsWith("ERROR: ")) {
                             System.out.println("ERROR detected : "+strArr[0] );
                             if( debugLevel > 0 ) {
                                 System.out.println("bWriteCfg : DBGtmp nextWriteJob="+nextWriteJob+" locIdx="+locIdx+" lastCmd=### "+lastCmd+" ###" );
@@ -5483,9 +5499,14 @@ public class MC extends javax.swing.JFrame {
                             timer.start();
                             break;
                         default:
+                            String out = "write: finished";
+                            if( ( debugLevel > 0 ) || (locListWriteErrors > 0 ) ) {
+                                out += " with "+locListWriteErrors+" of max "+CVNavi.maxLocListWriteErrors+" loco list write errors";
+                            }
+                            jMcRwInfo.setText(out);
+                            System.out.println(out);
                             System.out.println("write: sysIdx["+sysIdx+"] locIdx["+locIdx+"] traIdx["+traIdx+"] magIdx["+magIdx+"]" );
                             jMcRwProgress.setValue(c.MAX_SYSWRITES+c.MAX_LOCS+c.MAX_TRACTIONS+c.MAX_MM1_ACCMOD);
-                            jMcRwInfo.setText("write: finished");
                             bWriteCfg = false;
                             stopIOAction();
                             return;
@@ -5797,13 +5818,28 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        jFuncIcon.setEnabled(false);
         int selIdx = jTabbedPane1.getSelectedIndex();
         if( debugLevel >= 2 ) {
             System.out.println("jTabbedPane1StateChanged selIdx="+selIdx);
         }
         if( debugLevel >= 1 ) {
             System.out.println("jTabbedPane1StateChanged AktLokAdr="+AktLokAdr+" AktLokState="+AktLokState+" AktLokFormat="+AktLokFormat);
+        }
+        if( selIdx == 4 ) { // Prog-/lok-Control
+            String text = jDisplay.getText();
+            if(LokName.length() > 0)
+            {
+                String lokName = LokName + "          ";
+                lokName = lokName.substring(0, 11); // c.MAX_LOC_NAME_LENGTH
+                String lokFormat = "     ";
+                if( AktLokFormat.length() > 0 ) {
+                    lokFormat = AktLokFormat + "     ";
+                    lokFormat = lokFormat.substring(0, 5);
+                }
+                String newText = text.substring(0, 7) + lokFormat + text.substring(12, 17) + lokName + text.substring(28);
+                jDisplay.setText(text.substring(0, 7) + lokFormat + text.substring(12, 17) + lokName + text.substring(28));
+            }
+            jFuncIcon.setEnabled(false);
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -6621,6 +6657,7 @@ public class MC extends javax.swing.JFrame {
         retries = CVNavi.timerRetries;
         jMcRwProgress.setString(null);
         bWaitAnswerInProgress = false; // STOP as 0x61 byte does not return a prompt "]" -> start writing in loop !
+        locListWriteErrors = 0;
         nextWriteJob = 0;
         bWriteCfg = true;
         count = 0; // used for FW-Upadate
@@ -7062,6 +7099,7 @@ public class MC extends javax.swing.JFrame {
         Com.write((byte)0x60); // GO
 
         jDisplay.setAutoscrolls(false);
+      if( AktLokState.length() == 0 ) {
         jDisplay.setText("----          0 \n           -----");
         DisplayCursor = 0;
         DisplayState = -1;
@@ -7093,6 +7131,7 @@ public class MC extends javax.swing.JFrame {
         jf26.setEnabled(false);
         jf27.setEnabled(false);
         jf28.setEnabled(false);
+      }
         if(jSerNr.getText().contains("-"))
             this.jKonfLesenActionPerformed(null);
     }//GEN-LAST:event_jPanel2ComponentShown
@@ -7580,7 +7619,12 @@ public class MC extends javax.swing.JFrame {
         int v = jGeschwindigkeit.getValue();
         String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
         s = s.substring(0, s.indexOf(" "));
-        int Vrb = Integer.parseInt(s);
+        int Vrb = 0;
+        try {
+            Vrb = Integer.parseInt(s);
+        } catch (NumberFormatException numberFormatException) {
+            Vrb = 0;
+        }
         if(Vrb != v)
         {
             //neue Geschwindigkeit senden
@@ -7652,9 +7696,16 @@ public class MC extends javax.swing.JFrame {
 
     private void jf0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf0ActionPerformed
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
-        String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
-        s = s.substring(s.indexOf(" ")+1);
-        s = s.substring(0, s.indexOf(" "));
+        if( AktLokState.length() == 0 ) {
+            // state not initialized
+            return;
+        }
+        String[] ary = AktLokState.split(" ");
+        if( ary.length < 3 ) {
+            // not enough elements
+            return;
+        }
+        String s = ary[2];
         if(s.contains("0"))
         {
             s = jDisplay.getText();
@@ -7662,7 +7713,7 @@ public class MC extends javax.swing.JFrame {
             s += "*";
             s += jDisplay.getText().substring(29);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+1)) + " 1" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+3));
+            ary[2] = "1";
         }
         else
         {
@@ -7671,12 +7722,24 @@ public class MC extends javax.swing.JFrame {
             s += "-";
             s += jDisplay.getText().substring(29);
             jDisplay.setText(s);
-            AktLokState = AktLokState.substring(0, AktLokState.indexOf(" ", AktLokState.indexOf(" ")+1)) + " 0" + AktLokState.substring(AktLokState.indexOf(" ", AktLokState.indexOf(" ")+3));
+            ary[2] = "0";
         }
         if(Com == null)
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
+        AktLokState = Arrays.toString(ary);
+        AktLokState = Arrays.toString(ary)
+                .replace(",", "")  //remove the commas
+                .replace("[", "")  //remove the right bracket
+                .replace("]", "")  //remove the left bracket
+                .trim();           //remove trailing spaces from partially initialized arrays;
+        AktLokState = String.join(" ", ary) ;
+        AktLokState = "";
+        for (String item : ary) {
+            AktLokState += item+" ";
+        }
+        AktLokState = AktLokState.trim();
         s = "XL " + AktLokState + "\r";
         if( debugLevel >= 2 ) {
             System.out.println("jf0ActionPerformed: -> send: "+s );
@@ -7687,6 +7750,10 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf0ActionPerformed
 
     private void jf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf1ActionPerformed
+        if( AktLokState.length() == 0 ) {
+            // state not initialized
+            return;
+        }
         if(DisplayState == 0)
         {
             String text = jDisplay.getText();
@@ -7773,6 +7840,10 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf1ActionPerformed
 
     private void jf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf2ActionPerformed
+        if( AktLokState.length() == 0 ) {
+            // state not initialized
+            return;
+        }
         if(DisplayState == 0)
         {
             String text = jDisplay.getText();
@@ -7856,6 +7927,10 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf2ActionPerformed
 
     private void jf3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf3ActionPerformed
+        if( AktLokState.length() == 0 ) {
+            // state not initialized
+            return;
+        }
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
         String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
         s = s.substring(s.indexOf(" ")+1);
@@ -7911,6 +7986,10 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf3ActionPerformed
 
     private void jf4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf4ActionPerformed
+        if( AktLokState.length() == 0 ) {
+            // state not initialized
+            return;
+        }
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
         String s = AktLokState.substring(AktLokState.indexOf(" ")+1);
         s = s.substring(s.lastIndexOf(" ")+1);

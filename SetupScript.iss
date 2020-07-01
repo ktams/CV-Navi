@@ -4,7 +4,7 @@
 ;#pragma verboselevel 9
 
 #define myAppName "CV-Navi"
-#define myAppVersion "3.1"
+#define myAppVersion "3.2"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -50,8 +50,9 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Source: "dist\CV-Navi.jar"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\LiesMich.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "dist\CV-Navi.sh"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\CV-Navi.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recursesubdirs createallsubdirs
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+; NOTE: Do not use "Flags: ignoreversion" on any shared system files
 
 ;tests
 ;Source: "dist\LiesMich.txt"; DestDir: "{app}"; DestName: "Install_user_{username}"; Flags: ignoreversion

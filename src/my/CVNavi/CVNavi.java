@@ -197,8 +197,8 @@ enum decoderList {
 
 public class CVNavi extends javax.swing.JFrame {
     /** Creates new form CVNavi */
-    public int     gsVersionMajor = 3;  // Version 3.1
-    public int     gsVersionMinor = 1;  // Version 3.1
+    public int     gsVersionMajor = 3;  // Version 3.2
+    public int     gsVersionMinor = 2;  // Version 3.2
     public JFrame  frameInstanceDEVICE = null;
     public JFrame  frameInstanceOPTIONS = null;
     public JFrame  frameInstanceINFO = null;
@@ -222,6 +222,7 @@ public class CVNavi extends javax.swing.JFrame {
     public static int timer2 = -1;
     public static int timer3 = -1;
     public static int timerRetries = -1;
+    public static int maxLocListWriteErrors = 250;
     public static boolean updateAlwaysVisible = false;
     public static boolean skipCV17 = false;
     public static boolean skipCV18 = false;
@@ -2640,7 +2641,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="release 20200417a"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20200630b"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -3220,6 +3221,7 @@ public class CVNavi extends javax.swing.JFrame {
         System.out.println("\t-no17         \tdo not read CV17");
         System.out.println("\t-no18         \tdo not read CV18");
         System.out.println("\t-lnm          \tset max length of loco name manually (default=11)");
+        System.out.println("\t-lle          \tset max loco list write errors (default=250)");
         System.out.println("");
         System.out.println("\t-dj           \tshow java system environment and exit");
         System.out.println("\t-h            \tshow help and exit");
@@ -3389,6 +3391,15 @@ public class CVNavi extends javax.swing.JFrame {
                         n++;
                         userLocoNameMax = Integer.parseInt(args[n]);
                         System.out.println("userLocoNameMax set to "+userLocoNameMax);
+                        break;
+                    case "-lle":
+                        if( n == (argc-1) || args[n+1].startsWith("-") ) {
+                            // ohne Parameter -> Zahl fehlt => ignorieren
+                            break;
+                        }
+                        n++;
+                        maxLocListWriteErrors = Integer.parseInt(args[n]);
+                        System.out.println("maxLocListWriteErrors set to "+maxLocListWriteErrors);
                         break;
                     case "-h":
                         helpCommandLine();

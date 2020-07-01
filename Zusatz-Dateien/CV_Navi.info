@@ -12,6 +12,10 @@ Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen 
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
+Aenderungen in V3.2
+- LocControl: Funktionen F0 bis F15
+- XLOCADD und Antwort "ERROR: unknown command" dann Befehl wiederholen
+
 Aenderungen in V3.1
 - kleine Bugfixes bei diversen Decodern
 - Startskript fuer Linux erweitert
