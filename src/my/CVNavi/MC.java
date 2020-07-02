@@ -3,8 +3,8 @@
  *
  * Created on 07.03.2009, 17:53:15
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
+ * @author Kersten Tams Copyright 2009-2020
+ * @author Lothar Roth  Copyright 2012-2020
  *
  */
 
@@ -114,6 +114,7 @@ public class MC extends javax.swing.JFrame {
     private int locIdx = 0;
     private int traIdx = 0;
     private int magIdx = 0;
+    private int locosConfigured = 0;
     private int locoTableSelRow = -1;
     private int locoTableSelCol = -1;
     private int WriteLokInDB = 0;
@@ -5154,7 +5155,7 @@ public class MC extends javax.swing.JFrame {
                         if( strArr[0].toUpperCase().startsWith("ERROR: UNKNOWN COMMAND") && locListWriteErrors < CVNavi.maxLocListWriteErrors) {
                             locListWriteErrors++;
                             locIdx--;
-                            System.out.println("write loco list problem ("+locListWriteErrors+"/"+CVNavi.maxLocListWriteErrors+") locIdx decreased by 1  locIdx="+locIdx+" resend command\""+lastCmd+"\"");
+                            System.out.println(" write loco list problem ("+locListWriteErrors+"/"+CVNavi.maxLocListWriteErrors+") locIdx decreased by 1  locIdx="+locIdx+" resend command \""+lastCmd+"\"");
                             try {
                                 if( locListWriteErrors < 10 ) {
                                     Thread.sleep(250);
@@ -5347,16 +5348,17 @@ public class MC extends javax.swing.JFrame {
                                             lastCmd = "XLOCADD " + sAdr + ", " + sFS + ", " + sFormat + ", \"" + sName + "\"\r";
                                         else
                                             lastCmd = "XLOCADD " + sAdr + ", " + sFS + ", " + sFormat + "\r";
-                                        System.out.println("write: loco s["+lastCmd+"]" );
+                                        if( 2 < debugLevel ) {
+                                            System.out.println("write: loco["+locIdx+"] ( "+locIdx+" / "+locosConfigured+" ) ["+lastCmd+"]" );
+                                        } else {
+                                            System.out.println(" write: loco["+locIdx+"] s["+lastCmd+"]" );
+                                        }
                                         Com.write(lastCmd);
                                         resetbArray();
                                         retries = CVNavi.timerRetries;
                                         jMcRwProgress.setString(null);
                                         bWaitAnswerInProgress = true;
-                                        jMcRwInfo.setText("write: loco ("+(locIdx+1)+"/"+c.MAX_LOCS+")");
-                                        if( debugLevel >= 2 ) {
-                                            System.out.println("write: loco ("+locIdx+"/"+c.MAX_LOCS+") ["+lastCmd+"]" );
-                                        }
+                                        jMcRwInfo.setText("write: loco ( "+(locIdx+1)+" / "+locosConfigured+" )");
                                     }
                                     locIdx++;
                                 }
@@ -6555,6 +6557,22 @@ public class MC extends javax.swing.JFrame {
         }
     }
 
+    private int getLocosConfigured() {
+        int ret = 0;
+        for (int i = 0; i < c.MAX_LOCS; i++) {
+            Object oAdr = jTableLoco.getValueAt(i, 0);
+            String sAdr = "" + oAdr;
+            if( sAdr.trim().length() > 0) {
+                ret++;
+                if( debugLevel > 2 ) {
+                    System.out.println(" getLocosConfigured=\""+sAdr+"\" ret="+ret);
+                }
+            }
+        }
+        System.out.println("getLocosConfigured="+ret);
+        return ret;
+    }
+
     private void jKonfLadenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jKonfLadenActionPerformed
         setMcRwInfo("read from file: select filename");
         setMcRwProgress( 0 );
@@ -6597,6 +6615,7 @@ public class MC extends javax.swing.JFrame {
             }
             // check loco table with "repair"-Option in silent mode (no show) using defaults
             checkTableLoco( true, false );
+            locosConfigured = getLocosConfigured();
        }
 
         if( jWRtra.isSelected() ) {
@@ -9263,6 +9282,33 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
             }
         }
 
+        // 4th check duplicate address
+        for( int localLocIdxA = 0 ; localLocIdxA < c.MAX_LOCS; localLocIdxA++) {
+            for( int localLocIdxB = (localLocIdxA+1) ; localLocIdxB < c.MAX_LOCS; localLocIdxB++) {
+                if( localLocIdxA != localLocIdxB ) {
+                    String sAdrA = "";
+                    String sAdrB = "";
+                    Object oAdrA = jTableLoco.getValueAt(localLocIdxA, 0);
+                    Object oAdrB = jTableLoco.getValueAt(localLocIdxB, 0);
+                    if( oAdrA != null )
+                      sAdrA += oAdrA;
+                    if( oAdrB != null )
+                      sAdrB += oAdrB;
+                    if( ( sAdrA.trim().length() > 0 ) && ( sAdrB.trim().length() > 0 ) ) {
+                        if( sAdrA.trim().equals(sAdrB.trim())) {
+                            FehlerArt |= 0x0100;
+                            String errList = " " + (localLocIdxA+1) + " " + (localLocIdxB+1);
+                            System.out.println("jTableLoco loco addresses ["+oAdrA+"] equal in lines ["+localLocIdxA+"] ["+localLocIdxB+"]");
+                            CVNavi.mbTableCheck( this, FehlerArt, false, errList );
+                            retVal = false;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
         if( errorIdxList.trim().length() > 0 ) {
             String[] szArr = errorIdxList.trim().split(" ");
             System.out.println("jTableLoco errorIdxList=["+errorIdxList+"]");
@@ -9283,7 +9329,9 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                 CVNavi.mbTableCheckOK( this, repair, 3 );
             }
         } else {
-            CVNavi.mbTableCheck( this, FehlerArt, repair, errorIdxList );
+            if( ( FehlerArt & 0x0100 ) != 0x0100 ) {
+                CVNavi.mbTableCheck( this, FehlerArt, repair, errorIdxList );
+            }
         }
         if( debugLevel >= 2 ) {
             System.out.println("checkTableLoco returns["+(retVal?"true":"false")+"]");

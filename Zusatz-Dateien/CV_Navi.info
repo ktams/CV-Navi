@@ -1,4 +1,4 @@
-CV-Navi Version 3.1
+CV-Navi Version 3.2
 
 English and french version after german section.
 
@@ -15,6 +15,8 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 Aenderungen in V3.2
 - LocControl: Funktionen F0 bis F15
 - XLOCADD und Antwort "ERROR: unknown command" dann Befehl wiederholen
+- Lokliste auf doppelte Adressen testen
+- zwei interne Bibliotheken aktualisieren
 
 Aenderungen in V3.1
 - kleine Bugfixes bei diversen Decodern

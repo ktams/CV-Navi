@@ -3,14 +3,13 @@
  *
  * Created on 24.01.2009, 18:34:06
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
+ * @author Kersten Tams Copyright 2009-2020
+ * @author Lothar Roth  Copyright 2012-2020
  *
  */
 
 package my.CVNavi;
 
-import purejavacomm.*;
 import java.awt.Frame;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -70,18 +69,6 @@ public class Options extends javax.swing.JFrame {
         }
         System.out.println("Logger["+sl+"] lvPre["+s1+"] lvPost["+s2+"]");
 
-        String ports[] = PortLister.listSerialPorts(CVNavi);
-        if( ports != null ) {
-            System.out.println(""+ports.length+" serial ports found");
-            for (String port : ports) {
-                System.out.println("\t"+port);
-            }
-            // show comm version
-            System.out.println("comm version=" + PureJavaComm.getVersion());
-        }
-        else
-            System.out.println("no serial ports found");
-        
         // Schnittstellenliste aufbauen
         // SchnitsstellenVorauswahl setzen
         jSchnittstelle.setSelectedItem(CVNavi.gsSchnittstelle);

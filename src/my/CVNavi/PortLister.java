@@ -2,8 +2,8 @@
  * PortLister.java
  *
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
+ * @author Kersten Tams Copyright 2009-2020
+ * @author Lothar Roth  Copyright 2012-2020
  *
  */
 
@@ -38,8 +38,13 @@ public class PortLister {
         String portArray[] = null;
         while (ports.hasMoreElements()) {
             CommPortIdentifier port = (CommPortIdentifier) ports.nextElement();
-            if( debugLevel >= 1 ) {
-                System.out.println("found port type["+port.getPortType()+"] for name["+port.getName()+"]" );
+            if( debugLevel > 0 ) {
+                System.out.println(" PortLister");
+                System.out.println(" found port type["+port.getPortType()+"] for name["+port.getName()+"]" );
+                if( debugLevel > 1 ) {
+                    System.out.println( "  port.toString()="+port.toString()+"" ) ;
+                    System.out.println( "  port.getCurrentOwner()="+port.getCurrentOwner()+"" ) ;
+                }
             }
             if (port.getPortType() == CommPortIdentifier.PORT_SERIAL) {
                 portList.add(port.getName());

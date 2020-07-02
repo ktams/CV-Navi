@@ -2,7 +2,10 @@ purejavacomm :
 http://central.maven.org/maven2/com/github/purejavacomm/purejavacomm/1.0.2.RELEASE/
 
 jna :
-http://central.maven.org/maven2/net/java/dev/jna/jna/4.5.1/
+# from https://github.com/java-native-access/jna#download
+https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.5.0/jna-5.5.0.jar
+https://repo1.maven.org/maven2/net/java/dev/jna/jna-platform/5.5.0/jna-platform-5.5.0.jar
+
 
 
 # the following are alternatives to the libraries found at jdk and/or netbeans

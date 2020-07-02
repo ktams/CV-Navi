@@ -223,7 +223,7 @@
                                       <Component id="jWRmag" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jCancel" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="jKonfLesen" alignment="1" max="32767" attributes="1"/>
+                                  <Component id="jKonfLesen" alignment="1" pref="220" max="32767" attributes="1"/>
                                   <Component id="jKonfSchreiben" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jKonfSichern" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jKonfLaden" alignment="0" max="32767" attributes="1"/>

@@ -3,8 +3,8 @@
  *
  * Created on 20.01.2009, 17:34:06
  *
- * @author Kersten Tams Copyright 2009-2019
- * @author Lothar Roth  Copyright 2012-2019
+ * @author Kersten Tams Copyright 2009-2020
+ * @author Lothar Roth  Copyright 2012-2020
  *
  */
 
@@ -38,6 +38,7 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import purejavacomm.PureJavaComm;
 
 /**
  *
@@ -709,7 +710,7 @@ public class CVNavi extends javax.swing.JFrame {
             messageBox.jLabel1.setText("Schreiben erfolgreich.");
             messageBox.jLabel2.setText("ACHTUNG! Einige Eingaben waren falsch und wurden korrigiert:");
             String sFehler = "(";
-            if((errBits & 0x0007) != 0 )
+            if((errBits & 0x0107) != 0 )
                 sFehler += "Adressfehler: ";
             if((errBits & 0x0001) == 0x0001 ){
                 sFehler += "DCC";
@@ -745,13 +746,15 @@ public class CVNavi extends javax.swing.JFrame {
                 sFehler += " ; ";
             if((errBits & 0x0080) == 0x0080 )
                 sFehler += "Formatfehler Acc-Decoder";
+            if((errBits & 0x0100) == 0x0100 )
+                sFehler += "doppelte Adressen";
             sFehler += ")";
             messageBox.jLabel3.setText(sFehler);
           } else {
             messageBox.jLabel1.setText("Configuration data successfully sent.");
             messageBox.jLabel2.setText("ATTENTION! Some data was corrected while writing:");
             String sFehler = "(";
-            if((errBits & 0x0007) != 0)
+            if((errBits & 0x0107) != 0)
                 sFehler += "loco address error: ";
             if((errBits & 0x0001) == 0x0001 ) {
                 sFehler += "DCC";
@@ -787,6 +790,8 @@ public class CVNavi extends javax.swing.JFrame {
                 sFehler += " ; ";
             if((errBits & 0x0080) == 0x0080 )
                 sFehler += "accessory format error";
+            if((errBits & 0x0100) == 0x0100 )
+                sFehler += "duplicate addresses";
             sFehler += ")";
             messageBox.jLabel3.setText(sFehler);
         }
@@ -856,7 +861,7 @@ public class CVNavi extends javax.swing.JFrame {
             else
                 messageBox.jLabel2.setText("ACHTUNG! Einige Eingaben sind falsch:");
             String sFehler = "(";
-            if((errBits & 0x0007) != 0 )
+            if((errBits & 0x0107) != 0 )
                 sFehler += "Adressfehler: ";
             if((errBits & 0x0001) == 0x0001 ){
                 sFehler += "DCC";
@@ -896,6 +901,8 @@ public class CVNavi extends javax.swing.JFrame {
                     sFehler += " ; ";
                 sFehler += "Formatfehler Acc-Decoder";
             }
+            if((errBits & 0x0100) == 0x0100 )
+                sFehler += "doppelte Adressen";
             sFehler += ")";
             messageBox.jLabel3.setText(sFehler);
           } else {
@@ -909,7 +916,7 @@ public class CVNavi extends javax.swing.JFrame {
             else
                 messageBox.jLabel2.setText("ATTENTION! Some data is wrong:");
             String sFehler = "(";
-            if((errBits & 0x0007) != 0)
+            if((errBits & 0x0107) != 0)
                 sFehler += "loco address error: ";
             if((errBits & 0x0001) == 0x0001 ) {
                 sFehler += "DCC";
@@ -945,6 +952,8 @@ public class CVNavi extends javax.swing.JFrame {
                 sFehler += " ; ";
             if((errBits & 0x0080) == 0x0080 )
                 sFehler += "accessory format error";
+            if((errBits & 0x0100) == 0x0100 )
+                sFehler += "duplicate addresses";
             sFehler += ")";
             messageBox.jLabel3.setText(sFehler);
         }
@@ -2641,7 +2650,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20200630b"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20200702a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -2649,6 +2658,18 @@ public class CVNavi extends javax.swing.JFrame {
         else {
             jLabelBuild.setText("");
         }
+
+        String ports[] = PortLister.listSerialPorts(this);
+        // show comm version
+        System.out.println(" PureJavaComm version=" + PureJavaComm.getVersion());
+        if( ports != null ) {
+            System.out.println(" "+ports.length+" serial ports found");
+            for (String port : ports) {
+                System.out.println("  "+port);
+            }
+        }
+        else
+            System.out.println(" no serial ports found");
 
         // store pointer to instance in a final variable -> useable inside ActionListener
         final CVNavi outerThis = this;
