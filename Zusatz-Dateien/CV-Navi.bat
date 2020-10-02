@@ -1,16 +1,39 @@
 @ECHO OFF
 REM Starte CV-Navi von Komandozeile
 REM
+REM V0.03 20200703 Lothar
+REM - temporaer das Arbeitsverzeichnis ins Verzeichnis der Batchdatei legen
+REM   (auch ueber Laufwerksgrenzen)
+REM
+REM V0.02 20200102 Lothar
+REM - weitere Suchpfade
+REM
 REM V0.01 20190614 Lothar
 REM - erste Testversion
 REM - Suchpfade zu Java sind noch fix auf ein Kundensystem und Testsystem bei Lothar
 REM - CV-Navi-Installationsverzeichnis wird in den Standard-Systempfaden gesucht
 REM
-REM V0.02 20200102 Lothar
-REM - weitere Suchpfade
 
 
-SET CURDIR=%CD%
+REM save caller drive and directory
+set cdDrive=%CD:~0,2%
+set cdDir=%CD:~2%
+REM save this scripts drive and directory
+set batDrive=%~d0
+set batDir=%~p0
+
+REM wechsle in das Verzeichnis der Skriptdatei (da ist auch CV-Navi.jar
+%batDrive%
+cd %batDir%
+
+SET CVNAVIJAR="CV-Navi.jar"
+SET CVNAVIDIR=.
+IF EXIST %CVNAVIDIR%\%CVNAVIJAR% (
+  ECHO "  CVNAVIDIR=%CVNAVIDIR%  "
+) ELSE (
+  ECHO "%CVNAVIJAR% nicht gefunden"
+)
+
 
 REM JAVAEXE suchen
 SET P1="C:\Program Files (x86)\Java\jre1.8.0_211\bin\java.exe"
@@ -23,7 +46,6 @@ SET JAVAEXE="  ECHO KEIN_JAVA_EXE  "
 REM ist java vielleicht schon im Pfad...
 java.exe -version
 SET LAST_ERROR=%ERRORLEVEL%
-echo weiter
 IF "%LAST_ERROR%" == "0" (
   SET JAVAEXE=java.exe
   ECHO "  JAVA im Pfad"
@@ -62,64 +84,8 @@ IF "%LAST_ERROR%" == "0" (
 )
 ECHO "  JAVAEXE=%JAVAEXE%  "
 
-
-SET CVNAVIJAR="CV-Navi.jar"
-
-SET V0="."
-SET V1="c:\Programme\CV-Navi"
-SET V2="C:\Programme (x86)\CV-Navi"
-SET V3="c:\Program Files\CV-Navi"
-SET V4="c:\Program Files (x86)\CV-Navi"
-SET V5="%ProgramW6432%\CV-Navi"
-SET V6="%ProgramFiles%\CV-Navi"
-SET V7="%ProgramFiles(x86)%\CV-Navi"
-
-SET CVNAVIDIR="  kein_CV-Navi_DIR  "
-IF EXIST %V0%\%CVNAVIJAR% (
-  SET CVNAVIDIR=%V0%
-  ECHO "  CV-Navi in V0"
-) ELSE (
-  IF EXIST %V1%\%CVNAVIJAR% (
-    SET CVNAVIDIR=%V1%
-    ECHO "  CV-Navi in V1"
-  ) ELSE (
-    IF EXIST %V2%\%CVNAVIJAR% (
-      SET CVNAVIDIR=%V2%
-	  ECHO "  CV-Navi in V2"
-    ) ELSE (
-      IF EXIST %V3%\%CVNAVIJAR% (
-        SET CVNAVIDIR=%V3%
-	    ECHO "  CV-Navi in V3"
-      ) ELSE (
-        IF EXIST %V4%\%CVNAVIJAR% (
-          SET CVNAVIDIR=%V4%
-		  ECHO "  CV-Navi in V4"
-        ) ELSE (
-		  IF EXIST %V5%\%CVNAVIJAR% (
-		    SET CVNAVIDIR=%V5%
-		    ECHO "  CV-Navi in V5"
-		  ) ELSE (
-		    IF EXIST %V6%\%CVNAVIJAR% (
-		      SET CVNAVIDIR=%V6%
-		      ECHO "  CV-Navi in V6"
-		    ) ELSE (
-		      IF EXIST %V7%\%CVNAVIJAR% (
-		        SET CVNAVIDIR=%V7%
-		        ECHO "  CV-Navi in V7"
-		      ) ELSE (
-                ECHO "PROBLEM: kein CVNAVIDIR gefunden"
-              )
-            )
-		  )
-        )
-      )
-    )
-  )
-)
-echo "  CVNAVIDIR=%CVNAVIDIR%  "
-
-cd %CVNAVIDIR%
-REM echo "  %JAVAEXE% -jar %CVNAVIJAR%  "
+REM echo "  %JAVAEXE% -jar %CVNAVIJAR% %*"
 %JAVAEXE% -jar %CVNAVIJAR% %*
 
-cd %CURDIR%
+%cdDrive%
+cd "%cdDir%"

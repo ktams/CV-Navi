@@ -9,6 +9,9 @@
 
 package my.CVNavi;
 
+import static java.util.ResourceBundle.getBundle;
+import static my.CVNavi.CVNavi.debugLevel;
+
 /**
  *
  */
@@ -20,6 +23,8 @@ public class ConnectedDevices extends javax.swing.JFrame {
     
     public MC CVNavi;
     String[] strDevs;
+    String sMasterVersion = "";
+    String outFormat = "%-13s %-7s %8s   %s\r\n";
     
     public ConnectedDevices(MC aThis) {
         initComponents();
@@ -33,55 +38,74 @@ public class ConnectedDevices extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void ShowDevs( String nam, String num, String ver, String rem) {
+        String sRemark = rem;
+        switch(nam) {
+            case "C":
+                String out = String.format( outFormat, getBundle("my/CVNavi/Bundle").getString("remarkHeader"), "Version", "Hardware", getBundle("my/CVNavi/Bundle").getString("remarkHeader") );
+                jDevices.append( out );
+                nam = "Central unit";
+                sRemark = "RedBox or MC";
+                sMasterVersion = ver;
+                break;
+            default:
+                nam = "Control["+nam+"]";
+                switch(num) {
+                    case "13":
+                        sRemark = "control (LC/SNC/HC1/PC/MCasLC)";
+                        break;
+                    case "15":
+                        sRemark = "Hand control 2";
+                        break;
+                    case "110":
+                        sRemark = "XN control";
+                        break;
+                }
+                if( ! sMasterVersion.equals(ver)) {
+                    sRemark += "    -> check version";
+                }
+        }
+        String out = String.format( outFormat, nam, ver, num, sRemark );
+        jDevices.append( out );
+    }
+
     public void SetDevs()
     {
-        String Version = "";
+        System.out.println("ConnectedDevices: strDevs.length="+strDevs.length);
+
         for(int i = 0; i < strDevs.length; i++)
         {
-            int m = strDevs[i].indexOf(" ");
-            if(m == -1)
-                continue;
-            String str = strDevs[i].substring(0, m);
-            if(str.contains("C"))
-            {
-                jDevices.append("Central unit  |  ");
+            if( 2 < debugLevel ) {
+                System.out.println( "ConnectedDevices: strDevs["+i+"]=\""+strDevs[i]+"\"" );
             }
-            else
-            {
-                int n;
-                try {
-                    n = Integer.parseInt(str);
-                    jDevices.append("Control No.: " + n + "  |  ");
-                } catch (NumberFormatException numberFormatException) {
-                    jDevices.append("Control No.: unknown    -> Update!");
-                }
-            }
-            str = strDevs[i].substring(strDevs[i].indexOf(" ") + 1, strDevs[i].length());
-            try {
-                m = str.indexOf(" ");
-                if(m != -1)
-                {
-                    jDevices.append("Hardware: " + Integer.parseInt(str.substring(0, m)) + "  |  Version: ");
-                    str = str.substring(str.indexOf(" ") + 1, str.length());
-                    if(i == 0)
-                    {
-                        Version = str;
-                        jDevices.append(str + "\r\n");
-                    }
-                    else
-                    {
-                        jDevices.append(str);
-                        if(Version.compareTo(str) != 0)
-                        {
-                            jDevices.append("   Version != Version central unit -> Update!");
+            String sDevIdx = "";
+            String sDevNum = "";
+            String sDevVer = "";
+            String out = "";
+            String sArr[] = strDevs[i].split(" ");
+            if( sArr.length == 3 ) {
+                sDevIdx = sArr[0];
+                sDevNum = sArr[1];
+                sDevVer = sArr[2];
+                ShowDevs(sDevIdx, sDevNum, sDevVer, "" );
+            } else {
+                switch(strDevs[i]) {
+                    case "*END*":
+                        // ignore
+                        break;
+                    case "]":
+                        // ignore
+                        break;
+                    default:
+                        String errout = String.format( outFormat, "->", "->", "->", "unknown device \""+strDevs[i]+"\"" );
+                        jDevices.append( errout );
+                        if( 1 < debugLevel ) {
+                            out = "ConnectedDevices: problem because not 3 parts in \""+strDevs[i]+"\"";
                         }
-                        jDevices.append("\r\n");
-                    }
                 }
-                else
-                    jDevices.append(" unknown    -> Update!\r\n");
-            } catch (NumberFormatException numberFormatException) {
-                jDevices.append(" unknown    -> Update!\r\n");
+            }
+            if( out.length() > 0 ) {
+                System.out.println(out);
             }
         }
     }
@@ -133,18 +157,15 @@ public class ConnectedDevices extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(215, 215, 215)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jOK, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(253, 253, 253))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +174,7 @@ public class ConnectedDevices extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jOK)
                 .addContainerGap())
         );

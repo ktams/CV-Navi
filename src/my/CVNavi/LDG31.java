@@ -1047,59 +1047,45 @@ public class LDG31 extends javax.swing.JFrame {
         });
         jFunctionMapping.add(jF9_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel6.setText(bundle.getString("LDG31.jLabel6.text")); // NOI18N
         jFunctionMapping.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel7.setText(bundle.getString("LDG31.jLabel7.text")); // NOI18N
         jFunctionMapping.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel8.setText(bundle.getString("LDG31.jLabel8.text")); // NOI18N
         jFunctionMapping.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel9.setText(bundle.getString("LDG31.jLabel9.text")); // NOI18N
         jFunctionMapping.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel10.setText(bundle.getString("LDG31.jLabel10.text")); // NOI18N
         jFunctionMapping.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel11.setText(bundle.getString("LDG31.jLabel11.text")); // NOI18N
         jFunctionMapping.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 20, -1));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel12.setText(bundle.getString("LDG31.jLabel12.text")); // NOI18N
         jFunctionMapping.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel13.setText(bundle.getString("LDG31.jLabel13.text")); // NOI18N
         jFunctionMapping.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel14.setText(bundle.getString("LDG31.jLabel14.text")); // NOI18N
         jFunctionMapping.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel15.setText(bundle.getString("LDG31.jLabel15.text")); // NOI18N
         jFunctionMapping.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel16.setText(bundle.getString("LDG31.jLabel16.text")); // NOI18N
         jFunctionMapping.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, -1, -1));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel17.setText(bundle.getString("LDG31.jLabel17.text")); // NOI18N
         jFunctionMapping.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, -1, -1));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel18.setText(bundle.getString("LDG31.jLabel18.text")); // NOI18N
         jFunctionMapping.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, -1, -1));
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel19.setText(bundle.getString("LDG31.jLabel19.text")); // NOI18N
         jFunctionMapping.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
@@ -3006,7 +2992,6 @@ public class LDG31 extends javax.swing.JFrame {
         });
         jKennlinie.add(jFS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 10, 250));
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel34.setText(bundle.getString("LDG31.jLabel34.text")); // NOI18N
         jKennlinie.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
 
@@ -3298,7 +3283,6 @@ public class LDG31 extends javax.swing.JFrame {
         });
         jKennlinie.add(jFS27, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 10, 250));
 
-        jFS28.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jFS28.setMaximum(255);
         jFS28.setOrientation(javax.swing.JSlider.VERTICAL);
         jFS28.setValue(244);
@@ -3309,7 +3293,6 @@ public class LDG31 extends javax.swing.JFrame {
         });
         jKennlinie.add(jFS28, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 10, 250));
 
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel35.setText(bundle.getString("LDG31.jLabel35.text")); // NOI18N
         jKennlinie.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 

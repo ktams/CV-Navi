@@ -13,7 +13,7 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 
 Aenderungen in V3.2
-- LocControl: Funktionen F0 bis F15
+- LocControl: Funktionen F0 bis F28
 - XLOCADD und Antwort "ERROR: unknown command" dann Befehl wiederholen
 - Lokliste auf doppelte Adressen testen
 - zwei interne Bibliotheken aktualisieren

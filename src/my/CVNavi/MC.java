@@ -51,6 +51,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import my.CVNavi.CVNavi.MZ;
+import static my.CVNavi.CVNavi.byteArrayToHex;
 import static my.CVNavi.CVNavi.debugDummyData;
 import static my.CVNavi.CVNavi.debugLevel;
 import static my.CVNavi.CVNavi.rs232_or_rb_usb_2;
@@ -240,8 +241,8 @@ public class MC extends javax.swing.JFrame {
         }
 
         AktLokState="";
-        Funktionen = new int[28];
-        for(int i = 0; i < 28; i++)
+        Funktionen = new int[33];
+        for(int i = 0; i < 33; i++)
             Funktionen[i] = 0;
         ImageIcon II = null;
         ImageIcon II2 = null;
@@ -3425,6 +3426,11 @@ public class MC extends javax.swing.JFrame {
 
         jf17.setText(bundle.getString("MC.jf17.text")); // NOI18N
         jf17.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf17ActionPerformed(evt);
+            }
+        });
 
         jf14.setText(bundle.getString("MC.jf14.text")); // NOI18N
         jf14.setPreferredSize(new java.awt.Dimension(55, 39));
@@ -3436,6 +3442,11 @@ public class MC extends javax.swing.JFrame {
 
         jf19.setText(bundle.getString("MC.jf19.text")); // NOI18N
         jf19.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf19ActionPerformed(evt);
+            }
+        });
 
         jf15.setText(bundle.getString("MC.jf15.text")); // NOI18N
         jf15.setPreferredSize(new java.awt.Dimension(55, 39));
@@ -3456,15 +3467,35 @@ public class MC extends javax.swing.JFrame {
 
         jf20.setText(bundle.getString("MC.jf20.text")); // NOI18N
         jf20.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf20ActionPerformed(evt);
+            }
+        });
 
         jf22.setText(bundle.getString("MC.jf22.text")); // NOI18N
         jf22.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf22ActionPerformed(evt);
+            }
+        });
 
         jf21.setText(bundle.getString("MC.jf21.text")); // NOI18N
         jf21.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf21ActionPerformed(evt);
+            }
+        });
 
         jf23.setText(bundle.getString("MC.jf23.text")); // NOI18N
         jf23.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf23ActionPerformed(evt);
+            }
+        });
 
         jf24.setText(bundle.getString("MC.jf24.text")); // NOI18N
         jf24.setPreferredSize(new java.awt.Dimension(55, 39));
@@ -3484,9 +3515,19 @@ public class MC extends javax.swing.JFrame {
 
         jf25.setText(bundle.getString("MC.jf25.text")); // NOI18N
         jf25.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf25ActionPerformed(evt);
+            }
+        });
 
         jf27.setText(bundle.getString("MC.jf27.text")); // NOI18N
         jf27.setPreferredSize(new java.awt.Dimension(55, 39));
+        jf27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jf27ActionPerformed(evt);
+            }
+        });
 
         jf28.setText(bundle.getString("MC.jf28.text")); // NOI18N
         jf28.setPreferredSize(new java.awt.Dimension(55, 39));
@@ -7060,10 +7101,6 @@ public class MC extends javax.swing.JFrame {
         Com.write(s);
     }//GEN-LAST:event_jf10ActionPerformed
 
-    private void jf18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jf18ActionPerformed
-
     private void jf12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf12ActionPerformed
         if(AktLokAdr == 0)
             return;
@@ -7096,18 +7133,6 @@ public class MC extends javax.swing.JFrame {
         CVNavi.flushReadBuffer( Com );
         Com.write(s);
     }//GEN-LAST:event_jf12ActionPerformed
-
-    private void jf24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf24ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jf24ActionPerformed
-
-    private void jf26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf26ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jf26ActionPerformed
-
-    private void jf28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf28ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jf28ActionPerformed
 
     private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
         Com = CVNavi.safelyOpenCom(this, Com);
@@ -7769,10 +7794,6 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf0ActionPerformed
 
     private void jf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf1ActionPerformed
-        if( AktLokState.length() == 0 ) {
-            // state not initialized
-            return;
-        }
         if(DisplayState == 0)
         {
             String text = jDisplay.getText();
@@ -7801,6 +7822,10 @@ public class MC extends javax.swing.JFrame {
                 System.out.println("jf1ActionPerformed: DisplayState==0 END" );
             }
             Com.write(s);
+            return;
+        }
+        if( AktLokState.length() == 0 ) {
+            // state not initialized
             return;
         }
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
@@ -7859,10 +7884,6 @@ public class MC extends javax.swing.JFrame {
     }//GEN-LAST:event_jf1ActionPerformed
 
     private void jf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf2ActionPerformed
-        if( AktLokState.length() == 0 ) {
-            // state not initialized
-            return;
-        }
         if(DisplayState == 0)
         {
             String text = jDisplay.getText();
@@ -7890,6 +7911,10 @@ public class MC extends javax.swing.JFrame {
             CVNavi.flushReadBuffer( Com );
             resetbArray();
             Com.write(s);
+            return;
+        }
+        if( AktLokState.length() == 0 ) {
+            // state not initialized
             return;
         }
         //AktLokState = z.B. 3 20 0 r 1 0 0 1
@@ -8327,30 +8352,33 @@ public class MC extends javax.swing.JFrame {
         {
             Funktionen[14] = 1;
             jf15.setBackground(Color.yellow);
-        }
-        else
-        {
+        } else {
             Funktionen[14] = 0;
             jf15.setBackground(DefBackground);
         }
-        String s = "XFX " + AktLokAdr;
+
+        byte bBefehl[] = new byte[5] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x89; // XFuncX
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
         for(int i = 8; i < 16; i++)
         {
-            if(Funktionen[i] == 0)
-                s += " 0";
-            else
-                s += " 1";
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-8) ;
         }
         if(Com == null)
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        s += "\r";
         if( debugLevel >= 2 ) {
-            System.out.println("jf15ActionPerformed: -> send: "+s );
+            System.out.println("jf15ActionPerformed: -> send: "+bBefehl.toString() );
         }
         CVNavi.flushReadBuffer( Com );
-        Com.write(s);
+        // Com.write(s);
+        Com.write(bBefehl);
+
     }//GEN-LAST:event_jf15ActionPerformed
 
     private void jf16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf16ActionPerformed
@@ -8366,24 +8394,26 @@ public class MC extends javax.swing.JFrame {
             Funktionen[15] = 0;
             jf16.setBackground(DefBackground);
         }
-        String s = "XFX " + AktLokAdr;
+        byte bBefehl[] = new byte[5] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x89; // XFuncX
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
         for(int i = 8; i < 16; i++)
         {
-            if(Funktionen[i] == 0)
-                s += " 0";
-            else
-                s += " 1";
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-8) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf16ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
         }
         if(Com == null)
         {
             Com = CVNavi.safelyOpenCom(this, Com);
         }
-        s += "\r";
-        if( debugLevel >= 2 ) {
-            System.out.println("jf16ActionPerformed: -> send: "+s );
-        }
         CVNavi.flushReadBuffer( Com );
-        Com.write(s);
+        Com.write(bBefehl);
     }//GEN-LAST:event_jf16ActionPerformed
 
     private void jRueckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueckActionPerformed
@@ -8497,6 +8527,498 @@ public class MC extends javax.swing.JFrame {
         M3L = new M3_Liste( this, true );
         System.out.println("jm3GotoListActionPerformed: RETURN");
     }//GEN-LAST:event_jm3GotoListActionPerformed
+
+    private void jf17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf17ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[16] == 0)
+        {
+            Funktionen[16] = 1;
+            jf17.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[16] = 0;
+            jf17.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf17ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf17ActionPerformed
+
+    private void jf18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf18ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[17] == 0)
+        {
+            Funktionen[17] = 1;
+            jf18.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[17] = 0;
+            jf18.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf18ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf18ActionPerformed
+
+    private void jf19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf19ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[18] == 0)
+        {
+            Funktionen[18] = 1;
+            jf19.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[18] = 0;
+            jf19.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf19ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf19ActionPerformed
+
+    private void jf20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf20ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[19] == 0)
+        {
+            Funktionen[19] = 1;
+            jf20.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[19] = 0;
+            jf20.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf20ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf20ActionPerformed
+
+    private void jf21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf21ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[20] == 0)
+        {
+            Funktionen[20] = 1;
+            jf21.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[20] = 0;
+            jf21.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf21ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf21ActionPerformed
+
+    private void jf22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf22ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[21] == 0)
+        {
+            Funktionen[21] = 1;
+            jf22.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[21] = 0;
+            jf22.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf22ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf22ActionPerformed
+
+    private void jf23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf23ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[22] == 0)
+        {
+            Funktionen[22] = 1;
+            jf23.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[22] = 0;
+            jf23.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf23ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf23ActionPerformed
+
+    private void jf24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf24ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[23] == 0)
+        {
+            Funktionen[23] = 1;
+            jf24.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[23] = 0;
+            jf24.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf24ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf24ActionPerformed
+
+    private void jf25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf25ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[24] == 0)
+        {
+            Funktionen[24] = 1;
+            jf25.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[24] = 0;
+            jf25.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf25ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf25ActionPerformed
+
+    private void jf26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf26ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[25] == 0)
+        {
+            Funktionen[25] = 1;
+            jf26.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[25] = 0;
+            jf26.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf26ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf26ActionPerformed
+
+    private void jf27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf27ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[26] == 0)
+        {
+            Funktionen[26] = 1;
+            jf27.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[26] = 0;
+            jf27.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf27ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf27ActionPerformed
+
+    private void jf28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jf28ActionPerformed
+        if(AktLokAdr == 0)
+            return;
+        if(Funktionen[27] == 0)
+        {
+            Funktionen[27] = 1;
+            jf28.setBackground(Color.yellow);
+        }
+        else
+        {
+            Funktionen[27] = 0;
+            jf28.setBackground(DefBackground);
+        }
+        byte bBefehl[] = new byte[6] ;
+        bBefehl[0] = (byte) 'X';
+        bBefehl[1] = (byte) 0x8A; // XFunc34
+        bBefehl[2] = (byte) (AktLokAdr & 0x00FF);
+        bBefehl[3] = (byte) ((AktLokAdr & 0xFF00) >> 8 );
+        bBefehl[4] = (byte) 0x00;
+        bBefehl[5] = (byte) 0x00;
+        for(int i = 16; i < 24; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[4] |= (byte) 0x01 << (i-16) ;
+        }
+        for(int i = 24; i < 31; i++)
+        {
+            if(Funktionen[i] == 1)
+                bBefehl[5] |= (byte) 0x01 << (i-24) ;
+        }
+        if( debugLevel >= 2 ) {
+            System.out.println(" jf28ActionPerformed: -> send: \""+byteArrayToHex(bBefehl)+"\" len="+bBefehl.length );
+        }
+        if(Com == null)
+        {
+            Com = CVNavi.safelyOpenCom(this, Com);
+        }
+        CVNavi.flushReadBuffer( Com );
+        Com.write(bBefehl);
+    }//GEN-LAST:event_jf28ActionPerformed
 
     public Boolean m3dataAvaliable() {
         return jm3GotoList.isEnabled();
