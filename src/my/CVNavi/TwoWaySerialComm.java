@@ -109,10 +109,13 @@ public class TwoWaySerialComm {
 
         CommPortIdentifier portIdentifier = null;
         try {
+            if( debugLevel > 3 ) {
+                System.out.println("CommPortIdentifier.getPortIdentifier("+CVNavi.gsSchnittstelle+")");
+            }
             portIdentifier = CommPortIdentifier.getPortIdentifier(CVNavi.gsSchnittstelle);
         }
         catch (NoSuchPortException e) {
-            System.out.println("NoSuchPortException EXCEPTION in CONNECT");
+            System.out.println("NoSuchPortException EXCEPTION in CONNECT for "+CVNavi.gsSchnittstelle);
             return;
         }
         catch (Exception e) {
@@ -147,20 +150,27 @@ public class TwoWaySerialComm {
         if ( portIdentifier.isCurrentlyOwned() )
         {
             CVNavi.mbDeviceOwned( null );
+            System.out.println("mbDeviceOwned by["+portIdentifier.getCurrentOwner()+"] name["+portIdentifier.getName()+"] type["+portIdentifier.getPortType()+"]");
         }
         else
         {
-            if( debugLevel > 0 ) {
+            if( debugLevel > 3 ) {
                 System.out.println("call portIdentifier.open PRE");
             }
             CommPort commPort = portIdentifier.open(this.getClass().getName(),2000);
-            if( debugLevel > 0 ) {
+            if( debugLevel > 3 ) {
                 System.out.println("call portIdentifier.open POST");
             }
 
             if( commPort instanceof SerialPort )
             {
+                if( debugLevel > 3 ) {
+                    System.out.println("commPort instanceof SerialPort A");
+                }
                 tw_serialPort = (SerialPort) commPort;
+                if( debugLevel > 3 ) {
+                    System.out.println("commPort instanceof SerialPort B");
+                }
                 switch(CVNavi.getZentrale())
                 {
                     case c.cuOpenDCC: // OpenDCC
@@ -175,7 +185,7 @@ public class TwoWaySerialComm {
                         tw_serialPort.setSerialPortParams(CVNavi.gsBaudRate,SerialPort.DATABITS_8,SerialPort.STOPBITS_2,SerialPort.PARITY_NONE);
                         break;
                 }
-                showRTSDTR( "connect: ", tw_serialPort, " pre  set flowcontrol");
+                System.out.println("FlowControlMode is ["+tw_serialPort.getFlowControlMode()+"]" );
                 if (CVNavi.gsRtsCts) {
                     // tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN);
                     // tw_serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT);
@@ -188,20 +198,25 @@ public class TwoWaySerialComm {
                 tw_baud = CVNavi.gsBaudRate;
                 tw_rtscts = CVNavi.gsRtsCts;
 
-                showRTSDTR( "connect: ", tw_serialPort, " pre  optional set" );
-                if( ! tw_serialPort.isRTS() ) {
-                    System.out.println("connect: set RTS");
-                    tw_serialPort.setRTS(true);
+                if( CVNavi.gsUse_RTSDTR == true ) {
+                    showRTSDTR( "connect: ", tw_serialPort, " pre  optional set" );
+                    if( ! tw_serialPort.isRTS() ) {
+                        System.out.println("connect: set RTS");
+                        tw_serialPort.setRTS(true);
+                    }
+                    if( ! tw_serialPort.isDTR() ) {
+                        System.out.println("connect: set DTR");
+                        tw_serialPort.setDTR(true);
+                    }
+                    showRTSDTR( "connect: ", tw_serialPort, " post optional set" );
                 }
-                if( ! tw_serialPort.isDTR() ) {
-                    System.out.println("connect: set DTR");
-                    tw_serialPort.setDTR(true);
-                }
-                showRTSDTR( "connect: ", tw_serialPort, " post optional set" );
             }
             else
             {
                 System.out.println("Error: Only serial or USB ports are handled.");
+                if( debugLevel > 3 ) {
+                    System.out.println("commPort NOT instanceof SerialPort commPort"+commPort.toString());
+                }
             }
         }
     }
@@ -210,8 +225,10 @@ public class TwoWaySerialComm {
         showRTSDTR( "", sp, "" );
     }
     void showRTSDTR( String s1, SerialPort sp, String s2 ) {
-        if( debugLevel > 0 ) {
-            System.out.println(s1+"RTS="+sp.isRTS()+" DTR="+sp.isDTR()+s2);
+        if( CVNavi.gsUse_RTSDTR == true ) {
+            if( debugLevel > 4 ) {
+                System.out.println(s1+"RTS="+sp.isRTS()+" DTR="+sp.isDTR()+s2);
+            }
         }
     }
 

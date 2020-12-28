@@ -1,6 +1,6 @@
 CV-Navi Version 3.2
 
-English and french version after german section.
+Version française (non à jour) après l'allemand.
 
 Dies Programm ist Freeware und kann uneingeschraenkt weiter gegeben werden.
 Der Gebrauch geschieht auf eigenes Risiko.
@@ -14,9 +14,10 @@ Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
 Aenderungen in V3.2
 - LocControl: Funktionen F0 bis F28
-- XLOCADD und Antwort "ERROR: unknown command" dann Befehl wiederholen
+- Lokliste schreiben (XLOCADD) und Antwort "ERROR: unknown command" dann Befehl wiederholen
 - Lokliste auf doppelte Adressen testen
-- zwei interne Bibliotheken aktualisieren
+- interne Bibliotheken aktualisieren
+- Vorbereitung fuer virtuelle Schnittstellen
 
 Aenderungen in V3.1
 - kleine Bugfixes bei diversen Decodern

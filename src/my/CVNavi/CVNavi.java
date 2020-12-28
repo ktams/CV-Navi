@@ -253,6 +253,7 @@ public class CVNavi extends javax.swing.JFrame {
     public static Boolean bUseSo999  = false; // MC >= 1.4.8c
     public static String  gsSchnittstelle = "noCom";
     public static boolean gsSchnittstelle_was_forced = false;
+    public static boolean gsUse_RTSDTR = true;
     public int     gsBaudRate = -1 ;
     public boolean gsRtsCts = true;
     public String  gsLastMcConfLoad = "NoData" ;
@@ -2650,7 +2651,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20201002a"; // use keyword "beta" or "release"
+        String gsBuild ="release 20201228a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -3224,6 +3225,7 @@ public class CVNavi extends javax.swing.JFrame {
         System.out.println("\t-d   [<num>]  \tdebuglevel (without num: increment by 1)" );
         System.out.println("\t-df  [<name>] \tdebug into file <name> (without name: CV-Navi.log.txt)" );
         System.out.println("\t-dev [<name>] \tforce usage of device <name>" );
+        System.out.println("\t-noRTSDTR     \tdo not use RTS or DTR operations for (virtual) device" );
         System.out.println("\t-c            \tforce configured control unit (no check during init)");
         System.out.println("\t-c Xfuncs     \tforce enable XFuncs");
         System.out.println("\t-c Xm3sid     \tforce enable Xm3sid");
@@ -3294,6 +3296,10 @@ public class CVNavi extends javax.swing.JFrame {
                         gsSchnittstelle_was_forced = true;
                         gsSchnittstelle = args[n];
                         System.out.println("gsSchnittstelle set to "+gsSchnittstelle);
+                        break;
+                    case "-nortsdtr":
+                        gsUse_RTSDTR = false;
+                        System.out.println("gsUse_RTSDTR set to false");
                         break;
                     case "-dj": // debug java environment
                         // Show all we can find abaout java on this system
