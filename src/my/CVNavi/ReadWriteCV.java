@@ -484,7 +484,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         {
             if( cvSchreiben > 0 ) {
                 String s = "XPD " + DecAdr + " " + cvSchreiben + " " + cvWert + "\r";
-                System.out.println("497 jCVSchreibenActionPerformed POM : XPD " + DecAdr + " " + cvSchreiben + " " + cvWert );
+                System.out.println("497 jCVSchreibenActionPerformed POM : XPD " + DecAdr + " " + cvSchreiben + " " + cvWert + s );
                 Com.write(s);
                 bWaitAnswerInProgresss = true;
             }
@@ -492,7 +492,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
         else
         {
             String s = "XPTWD " + " " + cvSchreiben + " " + cvWert + "\r";
-            System.out.println("505 jCVSchreibenActionPerformed not POM : XPTWD " + cvSchreiben + " " + cvWert );
+            System.out.println("505 jCVSchreibenActionPerformed not POM : XPTWD " + cvSchreiben + " " + cvWert + s );
             Com.write(s);
             bWaitAnswerInProgresss = true;
         }
@@ -512,8 +512,8 @@ public class ReadWriteCV extends javax.swing.JDialog {
         CVNavi.flushReadBuffer( Com );
 
         cvAnfrage = CVNavi.checkTextField( this, jCVnr, 1, c.MAX_CV, 8, false);
-        System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
         String s = "XPTRD " + cvAnfrage + "\r";
+        System.out.print("516 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]"+" : "+s);
         Com.write(s);
         bWaitAnswerInProgresss = true;
 
@@ -584,11 +584,14 @@ public class ReadWriteCV extends javax.swing.JDialog {
                     if(CV[0][i] > 0) 
                     {
                         CV_To_Edit[CV[0][i] - 1] = 1;
-                        if( debugLevel >= 1 ) {
-                            System.out.println("CV_To_Edit["+(CV[0][i] - 1)+"]=1 val=["+(CV[1][i])+"]" );
-                        }
+    //PF                    if( debugLevel >= 1 ) {
+    //PF                        System.out.println("CV_To_Edit["+(CV[0][i] - 1)+"]=1 val=["+(CV[1][i])+"]" );
+    //PF                   }
                     }
                 }
+            }
+            if( debugLevel >= 1 ) {
+                System.out.println("CV_To_Edit["+(CV[0][i] - 1)+"]="+CV_To_Edit[CV[0][i]]+"] val=["+(CV[1][i])+"]" );
             }
         }
 
@@ -759,7 +762,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
 
                             s = "XPTRD " + cvAnfrage + "\r";
                             if( CVNavi.debugLevel > 2 ) {
-                                System.out.println("776 written \"XPTRD "+ cvAnfrage + "\"" );
+                                System.out.println("776 written \"XPTRD "+ cvAnfrage + "\"" + s );
                             }
                             System.out.print("W  "+s);
                             Com.write(s);
@@ -832,7 +835,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                                         System.out.println("846 bListeSchreiben: POM: XPD "+DecAdr+" "+cvSchreiben+" "+cvWert );
                                     } else {
                                         s = "XPTWD " + cvSchreiben + " " + cvWert + "\r";
-                                        System.out.println("849 bListeSchreiben !POM: XPTWD "+cvSchreiben+" "+cvWert );
+                                        System.out.println("849 bListeSchreiben !POM: XPTWD "+cvSchreiben+" "+cvWert + s);
                                     }
                                     System.out.print("W  "+s);
                                     Com.write(s);
@@ -914,7 +917,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                 str = "XPD " + DecAdr + " " + cvSchreiben + " " + cvWert + "\r";
                 Com.write(str);
                 bWaitAnswerInProgresss = true;
-                System.out.println("931 jLesenSchreibenActionPerformed: !bLesen POM CV29: XPD " + DecAdr + " " + cvSchreiben + " " + cvWert );
+                System.out.println("931 jLesenSchreibenActionPerformed: !bLesen POM CV29: XPD " + DecAdr + " " + cvSchreiben + " " + cvWert + str);
             }
             timer.setInitialDelay(CVNavi.timer1);
             timer.setDelay(CVNavi.timer2);
@@ -936,7 +939,7 @@ public class ReadWriteCV extends javax.swing.JDialog {
                 if( cvSchreiben != 7 && cvSchreiben != 8) {
                     cvWert = CV[1][currCV] ;
                     str = "XPTWD " + cvSchreiben + " " + cvWert + "\r";
-                    System.out.println("953 !bLesen !POM : XPTWD "+cvSchreiben+" "+cvWert);
+                    System.out.println("953 !bLesen !POM : XPTWD "+cvSchreiben+" "+cvWert+str);
                     Com.write(str);
                     bWaitAnswerInProgresss = true;
                 } else {

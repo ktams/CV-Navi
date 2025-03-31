@@ -91,6 +91,17 @@ public class DecoderFilter extends FileFilter {
                     if (ext.equals("36p"))
                         return true;
                     break;
+               
+                case c.LD_G41:
+                case c.LD_G42:
+                case c.LD_W42:
+                case c.LD_G42_2: 
+                case c.LD_W42_2:
+                case c.LD_G43:
+                case c.LD_G44:
+                    if (ext.equals("ld4x"))
+                        return true;
+                    break;
 
                 case c.FD_M:
                     if (ext.equals("fdm"))
@@ -205,7 +216,28 @@ public class DecoderFilter extends FileFilter {
             case c.LD_G36Plus:
                 return "LD-G-36plus (*.36p)";
 
-            case c.FD_M:
+             case c.LD_G41:
+                return "LD-G-41 (*.ld4x)";
+                
+             case c.LD_G42:
+                return "LD-G-42 (*.ld4x)";
+
+             case c.LD_W42:
+                return "LD-W-42 (*.ld4x)";
+ 
+             case c.LD_G42_2:
+                return "LD-G-42.2 (*.ld4x)";
+
+             case c.LD_W42_2:
+                return "LD-W-42 (*.ld4x)";
+                
+              case c.LD_G43:
+                return "LD-G-43 (*.ld4x)";
+
+             case c.LD_G44:
+                return "LD-G-44 (*.ld4x)";
+               
+           case c.FD_M:
                 return "FD-M (*.fdm)";
 
             case c.FD_R_ex:

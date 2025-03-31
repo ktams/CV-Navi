@@ -84,39 +84,46 @@
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonInfo" min="-2" pref="105" max="-2" attributes="1"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButtonEnd" max="32767" attributes="1"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane1" pref="295" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jLabelProgName" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jButtonStart" max="32767" attributes="1"/>
-                              <Component id="jButtonOptions" max="32767" attributes="1"/>
-                              <Component id="jBaudrateTitle" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jBaudRate" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jSchnittstelle" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jSchnittstelleTitle" max="32767" attributes="0"/>
-                              <Component id="jZentrale" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jZentraleTitle" alignment="1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="41" pref="41" max="41" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelBuild" max="32767" attributes="1"/>
-                                      <Component id="jLabelProgVersion" max="32767" attributes="1"/>
-                                      <Component id="jLabelOS" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="jLabelVmName" alignment="1" max="32767" attributes="1"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabelProgName" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jButtonStart" max="32767" attributes="1"/>
+                                      <Component id="jButtonOptions" max="32767" attributes="1"/>
+                                      <Component id="jBaudrateTitle" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jBaudRate" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jSchnittstelle" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jSchnittstelleTitle" max="32767" attributes="0"/>
+                                      <Component id="jZentrale" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jZentraleTitle" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="41" pref="41" max="41" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelBuild" max="32767" attributes="1"/>
+                                              <Component id="jLabelProgVersion" max="32767" attributes="1"/>
+                                              <Component id="jLabelOS" alignment="1" max="32767" attributes="1"/>
+                                              <Component id="jLabelVmName" alignment="1" max="32767" attributes="1"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="jButtonDebug" alignment="1" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -141,11 +148,11 @@
                           <Component id="jLabelVmName" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="jLabelBuild" min="-2" pref="29" max="-2" attributes="0"/>
-                          <EmptySpace pref="139" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                           <Component id="jButtonStart" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="jButtonOptions" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jZentraleTitle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jZentrale" min="-2" max="-2" attributes="0"/>
@@ -153,10 +160,12 @@
                           <Component id="jSchnittstelleTitle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSchnittstelle" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jBaudrateTitle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jBaudRate" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="20" max="32767" attributes="0"/>
+                          <Component id="jButtonDebug" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
@@ -200,7 +209,7 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="27">
+                  <StringArray count="34">
                     <StringItem index="0" value="Lok-Decoder"/>
                     <StringItem index="1" value=".   LD-G-30"/>
                     <StringItem index="2" value=".   LD-G-31"/>
@@ -213,21 +222,28 @@
                     <StringItem index="9" value=".   LD-G-33Plus"/>
                     <StringItem index="10" value=".   LD-G-34Plus"/>
                     <StringItem index="11" value=".   LD-G-36Plus"/>
-                    <StringItem index="12" value="____________"/>
-                    <StringItem index="13" value="Funktions-Decoder"/>
-                    <StringItem index="14" value=".   FD-R basic"/>
-                    <StringItem index="15" value=".   FD-R extended"/>
-                    <StringItem index="16" value=".   FD-M"/>
-                    <StringItem index="17" value=".   FD-XL"/>
-                    <StringItem index="18" value="____________"/>
-                    <StringItem index="19" value="Zubeh&#xf6;r-Decoder"/>
-                    <StringItem index="20" value=".   WD-34"/>
-                    <StringItem index="21" value=".   SD-34"/>
-                    <StringItem index="22" value="____________"/>
-                    <StringItem index="23" value="Sonstiges"/>
-                    <StringItem index="24" value=".   MasterControl"/>
-                    <StringItem index="25" value=".   B-4"/>
-                    <StringItem index="26" value=".   WIB-30er"/>
+                    <StringItem index="12" value=".   LD-G-41"/>
+                    <StringItem index="13" value=".   LD-G-42"/>
+                    <StringItem index="14" value=".   LD-W-42"/>
+                    <StringItem index="15" value=".   LD_G-42.2"/>
+                    <StringItem index="16" value=".   LD-W-42.2"/>
+                    <StringItem index="17" value=".   LD-G-43"/>
+                    <StringItem index="18" value=".   LD-G-44"/>
+                    <StringItem index="19" value="____________"/>
+                    <StringItem index="20" value="Funktions-Decoder"/>
+                    <StringItem index="21" value=".   FD-R basic"/>
+                    <StringItem index="22" value=".   FD-R extended"/>
+                    <StringItem index="23" value=".   FD-M"/>
+                    <StringItem index="24" value=".   FD-XL"/>
+                    <StringItem index="25" value="____________"/>
+                    <StringItem index="26" value="Zubeh&#xf6;r-Decoder"/>
+                    <StringItem index="27" value=".   WD-34"/>
+                    <StringItem index="28" value=".   SD-34"/>
+                    <StringItem index="29" value="____________"/>
+                    <StringItem index="30" value="Sonstiges"/>
+                    <StringItem index="31" value=".   MasterControl"/>
+                    <StringItem index="32" value=".   B-4"/>
+                    <StringItem index="33" value=".   WIB-30er"/>
                   </StringArray>
                 </Property>
                 <Property name="selectionMode" type="int" value="0"/>
@@ -235,6 +251,7 @@
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jDecoderChooserMouseReleased"/>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jDecoderChooserMouseClicked"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jDecoderChooserMouseReleased"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jDecoderChooserKeyReleased"/>
               </Events>
               <AuxValues>
@@ -475,6 +492,19 @@
             </Property>
             <Property name="iconTextGap" type="int" value="0"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonDebug">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="my/CVNavi/Bundle.properties" key="CVNavi.jButtonDebug.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDebugActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

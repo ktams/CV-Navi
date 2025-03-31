@@ -55,7 +55,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="&lt;Options.jPanelOptions.border.title&gt;">
+            <TitledBorder title="Options">
               <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="Options.jPanelOptions.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
               <Font PropertyName="font" name="Tahoma" size="12" style="0"/>
             </TitledBorder>
@@ -127,15 +127,17 @@
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="5">
                 <StringItem index="0" value="OpenDCC"/>
                 <StringItem index="1" value="Intellibox"/>
-                <StringItem index="2" value="MasterControl"/>
+                <StringItem index="2" value="MC1/RedBox"/>
+                <StringItem index="3" value="MC2"/>
+                <StringItem index="4" value=" "/>
               </StringArray>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="&lt;Options.jZentrale.border.title&gt;">
+                <TitledBorder title="control unit">
                   <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="Options.jZentrale.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -179,12 +181,15 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="&lt;Options.jSchnittstelle.border.title&gt;">
+                <TitledBorder title="Interface">
                   <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="Options.jSchnittstelle.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSchnittstelleActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jBaudRate">
           <Properties>
@@ -209,7 +214,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="&lt;Options.jBaudRate.border.title&gt;">
+                <TitledBorder title="Baudrate (serial)">
                   <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="Options.jBaudRate.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </TitledBorder>
               </Border>

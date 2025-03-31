@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -216,6 +216,18 @@ public class MC extends javax.swing.JFrame {
         retries = CVNavi.timerRetries;
 
         initComponents();
+
+        if( CVNavi.getZentrale() == c.cuMasterControl2 ) {
+            if( debugLevel >= 0 ) {
+                System.out.println( "LRLRLR MC started with cuMasterControl2 " );
+            }
+            // jKonfSchreiben.setEnabled(false);
+
+            // remove update tab
+            jTabbedPane1.removeTabAt( 5 );
+            // remove acessory tab
+            jTabbedPane1.removeTabAt( 3 );
+        }
 
         if( debugLevel >= 2 ) {
             System.out.println("jTableLoco A1 MAX_LOCS="+c.MAX_LOCS+" rows="+this.jTableLoco.getRowCount());
@@ -674,11 +686,37 @@ public class MC extends javax.swing.JFrame {
                                 jTableLoco.setValueAt(strArr1[1], thisAdrIdx, 2);
                                 jTableLoco.setValueAt(strArr1[2], thisAdrIdx, 1);
                                 if (strArr1.length >= 4) {
+                                    String name = "";
+                                    for( int i = 3 ; i < strArr1.length ; i++) {
+                                        name += strArr1[i];
+                                        if( (i+1) < strArr1.length ) {
+                                            name += ",";
+                                        }
+                                    }
+                                    jTableLoco.setValueAt(name, thisAdrIdx, 3);
+                                }
+                                // LRLRLR TODO New Parser for name. It may contain commas or blanks
+                                /*
+                                    [LOCO]
+                                    1, 28, DCC, A,9.,#/B
+                                    2, 14, DCC, 12345678901
+                                    3, 126, DCC, äöü
+                                */
+                                // name starts at location of 3rd comma
+                                if (strArr1.length >= 4) {
+                                    String s = strArr[j];
+                                    int idxComma = s.indexOf(",", 0);
+                                    idxComma = s.indexOf(",", idxComma+1);
+                                    idxComma = s.indexOf(",", idxComma+1);
+                                    String name = s.substring(idxComma+1);
+                                    jTableLoco.setValueAt(name.trim(), thisAdrIdx, 3);
+                                    /*
                                     // re-split with "," to get real name (may be with more than 1 consecutive space inside !)
                                     String[] strArrName = strArr[j].split(",");
                                     if( strArrName.length == 4 ) {
                                         jTableLoco.setValueAt(strArrName[3].trim(), thisAdrIdx, 3);
                                     }
+                                    */
                                 }
                                 if( thisAdrIdx == locTabIdx ) {
                                     // neuer Eintrag erstellt -> Zaehler erhöhen
@@ -815,7 +853,9 @@ public class MC extends javax.swing.JFrame {
                 }
 
             }
-            System.out.println("parseInputArray progress at end is "+jMcRwProgress.getValue() );
+            if( debugLevel > 0 ) {
+                System.out.println("parseInputArray progress at end is "+jMcRwProgress.getValue() );
+            }
             Font f = jDatenQuelle.getFont();
             Font f2 = new Font( f.getFontName(), Font.BOLD, f.getSize() );
             jDatenQuelle.setFont(f2);
@@ -1217,11 +1257,6 @@ public class MC extends javax.swing.JFrame {
         js88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         js88.setText(bundle.getString("MC.js88.text")); // NOI18N
         js88.setToolTipText(bundle.getString("MC.jLabel17.toolTipText")); // NOI18N
-        js88.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                js88ActionPerformed(evt);
-            }
-        });
         js88.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 js88FocusLost(evt);
@@ -1923,10 +1958,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2975,7 +3010,7 @@ public class MC extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jCV_Direkt)
-                    .addComponent(jWertDirekt, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                    .addComponent(jWertDirekt, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jDirektLesen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -3228,20 +3263,19 @@ public class MC extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(j6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jStern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(j7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(j7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jStern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(j8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(j9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(j0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRaute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jRaute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(j8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(j9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -3259,18 +3293,18 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(j6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(j7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(j7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(j8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(j9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jStern, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jStern, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(j0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRaute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 214, -1, -1));
+        jPanel6.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 208, 190, 250));
 
         jf0.setBackground(new java.awt.Color(255, 255, 0));
         jf0.setText(bundle.getString("MC.jf0.text")); // NOI18N
@@ -3708,7 +3742,7 @@ public class MC extends javax.swing.JFrame {
         jMC_OK.setText(bundle.getString("MC.jMC_OK.text")); // NOI18N
         jPanel6.add(jMC_OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, -1));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, 570, 640));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 560, 640));
 
         jTabbedPane1.addTab(bundle.getString("MC.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
 
@@ -3925,7 +3959,7 @@ public class MC extends javax.swing.JFrame {
                                             .addComponent(helpHC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(helpLC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(helpPC, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                                            .addComponent(helpPC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(helpXNC, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4124,7 +4158,7 @@ public class MC extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         // Ist die TamsMC auch eingestellt ?
-        if ( CVNavi.getZentrale() != c.cuMasterControl ) {
+        if ( ( CVNavi.getZentrale() != c.cuMasterControl1 ) && (CVNavi.getZentrale() != c.cuMasterControl2 ) ) {
             CVNavi.mbNoTamsMC( this );
             this.dispose();
             return;
@@ -4136,8 +4170,10 @@ public class MC extends javax.swing.JFrame {
         setFocusUpdStart();
         setFocusDateiAuswahl();
         Com = CVNavi.safelyOpenCom( this, Com, false );
-        System.out.println("call Com.connect OUT: Com "+((Com == null)?"==":"!=")+" NULL" );
-        System.out.println("call Com.connect OUT: isopen["+((Com == null)?"Com is undefined":Com.isconnected())+"]" );
+        if( debugLevel > 0 ) {
+            System.out.println("call Com.connect OUT: Com "+((Com == null)?"==":"!=")+" NULL" );
+            System.out.println("call Com.connect OUT: isopen["+((Com == null)?"Com is undefined":Com.isconnected())+"]" );
+        }
         if( (Com == null) || (! Com.isconnected()) ) {
             // continue -> prepare offline use with default values
             jKonfLesen.setEnabled(false);
@@ -4177,6 +4213,13 @@ public class MC extends javax.swing.JFrame {
                         System.out.println("bWaitAnswerInProgress");
                     }
                     tmpBytesRead = Com.read(bArrayTmp); // was gibts Neues ?
+                    if( tmpBytesRead < 0 ) {
+                        if(bReadS88num) {
+                            System.out.println(" MC tmpBytesRead == "+tmpBytesRead+" ZZZ bReadS88num" );
+                        } else {
+                            System.out.println(" MC tmpBytesRead == "+tmpBytesRead+" ZZZ" );
+                        }
+                    }
                     if( tmpBytesRead > 0 ) {
                         //wenn ja, an bisher empfangene Daten anhängen
                         System.arraycopy(bArrayTmp, 0, bArray, bytesRead, tmpBytesRead);
@@ -4288,16 +4331,37 @@ public class MC extends javax.swing.JFrame {
                             stopIOAction();
                             return;
                         }
+                        if( CVNavi.iComType == c.TCP_IP ) {
+                            int duration = 100 ;
+                            if( retries > 10 ) {
+                                duration = 1000;
+                            } else {
+                        //        duration = retries * 1000 ;
+                            }
+                            if( duration < 100) {
+                                duration = 100;
+                            }
+                            CVNavi.sleep( duration );
+                        }
                         jMcRwProgress.setString(bundle.getString("ReadWriteCV.Warte")+retries);
                         return;
                     }
-                    tmpBytesRead = 0;
 
                     // ist ein vollständiger Datensatz angekommen ?
                     bArray[bytesRead] = 0;
 
                     if(bReadDevices)
                     {
+                        if( tmpBytesRead == -1 ) {
+                            System.out.println(" MC tmpBytesRead == -1 bReadDevices A1" );
+                            stopIOAction();
+                            bWaitAnswerInProgress = false;
+                            bReadDevices = false;
+                            jMcRwInfo.setText("read: MC read MC/RB devices failed.");
+                            CVNavi.mbDeviceReadProblem(CVNavi);
+                            System.out.println(" MC tmpBytesRead == -1 bReadDevices A2" );
+                            return;
+                        }
                         if(connectedDevices != null)
                         {
                             String s = new String(bArray);
@@ -4312,7 +4376,12 @@ public class MC extends javax.swing.JFrame {
                             // firmware pre 2.1.0 :
                             // ERROR: unknown command
                             // ]
-                            if(s.contains("ERROR: unknown command") && s.contains("]"))
+                            if  (   (  s.contains("ERROR: unknown command")
+                                    || s.contains("ERROR: not implemented")
+                                    )
+                                &&
+                                    s.contains("]")
+                                )
                             {
                                 bReadDevices = false;
                                 stopIOAction();
@@ -4320,9 +4389,10 @@ public class MC extends javax.swing.JFrame {
                                 connectedDevices.strDevs = s.split("\r");
                                 connectedDevices.SetDevs();
                             }
-                       }
+                        }
                         else
                         {
+                            bWaitAnswerInProgress = false;
                             bReadDevices = false;
                             stopIOAction();
                         }
@@ -4502,7 +4572,7 @@ public class MC extends javax.swing.JFrame {
                                 jf26.setEnabled(true);
                                 jf27.setEnabled(true);
                                 jf28.setEnabled(true);
-                                Fahrstufen = 28;
+                                Fahrstufen = 126;
                             }
                             else if(s.contains("m3"))
                             {
@@ -4680,13 +4750,22 @@ public class MC extends javax.swing.JFrame {
                         }
                         bWaitAnswerInProgress = false;
                         String s = new String(bArray);
-                        int indexOf = s.indexOf(" ");
-                        s = s.substring(0, indexOf);
+                        System.out.println("LRLRLR Strings=\""+s+"\"" );
                         int cvWert = 0;
-                        try {
-                            cvWert = Integer.parseInt(s);
-                        } catch (NumberFormatException numberFormatException) {
-                            cvWert = 255;
+                        if( s.startsWith( "Error" ) ) {
+                            cvWert = -1;
+                        }
+                        else
+                        {
+                            int indexOf = s.indexOf(" ");
+                            if( indexOf >= 0 ) {
+                                s = s.substring(0, indexOf);
+                            }
+                            try {
+                                cvWert = Integer.parseInt(s);
+                            } catch (NumberFormatException numberFormatException) {
+                                cvWert = 255;
+                            }
                         }
                         jWertDirekt.setText("" + cvWert);
                         bReadPTdirekt = false;
@@ -4704,7 +4783,9 @@ public class MC extends javax.swing.JFrame {
                         bWaitAnswerInProgress = false;
                         String s = new String(bArray);
                         int indexOf = s.indexOf(" ");
-                        s = s.substring(0, indexOf);
+                        if( indexOf >= 0 ) {
+                            s = s.substring(0, indexOf);
+                        }
                         int cvWert = 0;
                         try {
                             cvWert = Integer.parseInt(s);
@@ -4940,14 +5021,26 @@ public class MC extends javax.swing.JFrame {
                         // Datensatz vollständig -> Teste/Analysiere Antwort
                     }
                     if(bReadS88num) {
-                        if( ! CVNavi.checkReadComplete(bArray) ) {
-                            // incomplete -> wait for more
-                            return;
+                        if( tmpBytesRead == -1 ) {
+                            System.out.println(" MC tmpBytesRead == -1 bReadS88num A1" );
+                            stopIOAction();
+                            bWaitAnswerInProgress = false;
+                            bReadS88num = false;
+                            jMcRwInfo.setText("read: MC read number of s88 devices failed.");
+                            CVNavi.mbDeviceReadProblem(CVNavi);
+                            System.out.println(" MC tmpBytesRead == -1 bReadS88num A2" );
+                        } else {
+                            if( ! CVNavi.checkReadComplete(bArray) ) {
+                                // incomplete -> wait for more
+                                return;
+                            }
+                            System.out.println(" MC tmpBytesRead == -1 bReadS88num B1" );
+                            stopIOAction();
+                            bWaitAnswerInProgress = false;
+                            bReadS88num = false;
+                            checkS88num(bArray, bytesRead);
+                            System.out.println(" MC tmpBytesRead == -1 bReadS88num B2" );
                         }
-                        stopIOAction();
-                        bWaitAnswerInProgress = false;
-                        bReadS88num = false;
-                        checkS88num(bArray, bytesRead);
                     }
                     if(bReadS88value) {
                         if( ! CVNavi.checkReadComplete(bArray) ) {
@@ -5197,14 +5290,11 @@ public class MC extends javax.swing.JFrame {
                             locListWriteErrors++;
                             locIdx--;
                             System.out.println(" write loco list problem ("+locListWriteErrors+"/"+CVNavi.maxLocListWriteErrors+") locIdx decreased by 1  locIdx="+locIdx+" resend command \""+lastCmd+"\"");
-                            try {
-                                if( locListWriteErrors < 10 ) {
-                                    Thread.sleep(250);
-                                } else {
-                                    Thread.sleep(1000);
-                                }
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(MC.class.getName()).log(Level.SEVERE, null, ex);
+                            if( locListWriteErrors < 10 ) {
+                                CVNavi.sleep(250);
+                                CVNavi.sleep(750);
+                            } else {
+                                CVNavi.sleep(1000);
                             }
                         } else if( strArr[0].toUpperCase().startsWith("ERROR: ")) {
                             System.out.println("ERROR detected : "+strArr[0] );
@@ -5389,7 +5479,7 @@ public class MC extends javax.swing.JFrame {
                                             lastCmd = "XLOCADD " + sAdr + ", " + sFS + ", " + sFormat + ", \"" + sName + "\"\r";
                                         else
                                             lastCmd = "XLOCADD " + sAdr + ", " + sFS + ", " + sFormat + "\r";
-                                        if( 2 < debugLevel ) {
+                                        if( debugLevel > 2 ) {
                                             System.out.println("write: loco["+locIdx+"] ( "+locIdx+" / "+locosConfigured+" ) ["+lastCmd+"]" );
                                         } else {
                                             System.out.println(" write: loco["+locIdx+"] s["+lastCmd+"]" );
@@ -5400,6 +5490,13 @@ public class MC extends javax.swing.JFrame {
                                         jMcRwProgress.setString(null);
                                         bWaitAnswerInProgress = true;
                                         jMcRwInfo.setText("write: loco ( "+(locIdx+1)+" / "+locosConfigured+" )");
+                                        if( CVNavi.iComType == c.TCP_IP ) {
+                                            if( locListWriteErrors < 10 ) {
+                                                CVNavi.sleep(250);
+                                            } else {
+                                                CVNavi.sleep(1000);
+                                            }
+                                        }
                                     }
                                     locIdx++;
                                 }
@@ -5527,6 +5624,7 @@ public class MC extends javax.swing.JFrame {
                                     if( debugLevel >= 3 ) {
                                         System.out.println("write: accessories ("+magIdx+"/"+c.MAX_MM1_ACCMOD+") "+lastCmd);
                                     }
+                                    CVNavi.sleep( 100 );
                                 }
                                 magIdx++;
                             }
@@ -6750,6 +6848,16 @@ public class MC extends javax.swing.JFrame {
         startIOAction();
         jMcRwInfo.setText("read: MC config read in progress");
         jMcRwProgress.setValue(++readWriteProgress);
+        if( CVNavi.iComType == c.TCP_IP ) {
+            int duration = 100 ;
+            if( retries > 8 ) {
+                duration = 1000;
+            }
+            if( duration < 100) {
+                duration = 100;
+            }
+            CVNavi.sleep( duration );
+        }
     }//GEN-LAST:event_jKonfLesenActionPerformed
 
     private void jMaxMagFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMaxMagFocusLost
@@ -6764,10 +6872,6 @@ public class MC extends javax.swing.JFrame {
         CVNavi.checkTextField( this, js88, 0, 52, 52, true);
         updateS88field(Integer.parseInt(js88.getText()));
     }//GEN-LAST:event_js88FocusLost
-
-    private void js88ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_js88ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_js88ActionPerformed
 
     private void jKurzEmpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jKurzEmpfFocusLost
         CVNavi.checkTextFieldUnit( this, jKurzEmpf, 0, 1000, 100, 5, true);
@@ -6976,7 +7080,8 @@ public class MC extends javax.swing.JFrame {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             try {
-                desktop.browse(new URL(c.TamsFirmwareURL).toURI());
+                // desktop.browse(new URL(c.TamsFirmwareURL).toURI());
+                desktop.browse(new URI(c.TamsFirmwareURL));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -7148,7 +7253,10 @@ public class MC extends javax.swing.JFrame {
         DisplayCursor = 0;
         DisplayState = -1;
         jHauptGleis.setSelected(true);
-        jDirektLesen.setEnabled(false);
+        if( CVNavi.getZentrale() == c.cuMasterControl2 )
+            jDirektLesen.setEnabled(true);
+        else
+            jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
         DefBackground = jf5.getBackground();
         jf5.setEnabled(false);
@@ -7224,7 +7332,11 @@ public class MC extends javax.swing.JFrame {
             return;
         }
         Com.write((byte)0x60); // GO
-        jDirektLesen.setEnabled(false);
+        // LRLRLR jDirektLesen.setEnabled(false);
+        if( CVNavi.getZentrale() == c.cuMasterControl2 )
+            jDirektLesen.setEnabled(true);
+        else
+            jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
     }//GEN-LAST:event_jHauptGleisActionPerformed
 
@@ -7240,8 +7352,25 @@ public class MC extends javax.swing.JFrame {
         CVNavi.flushReadBuffer( Com );
         resetbArray();
         int cvAnfrage = CVNavi.checkTextField( this, jCV_Direkt, 1, 1024, 8, false);
-        System.out.print("525 jCVLesenActionPerformed cvAnfrage["+cvAnfrage+"]");
-        String s = "XPTRD " + cvAnfrage + "\r";
+
+        String s = "";
+        if(jHauptGleis.isSelected())
+        {
+            int DecAdr;
+            try {
+                DecAdr = Integer.parseInt(jDecAdr.getText());
+            } catch (NumberFormatException numberFormatException) {
+                DecAdr = 3;
+            }
+            s = "RCR " + DecAdr + " " + cvAnfrage + "\r";
+            System.out.println("7348 jDirektLesenActionPerformed POM : " + s );
+        }
+        else
+        {
+            s = "XPTRD " + cvAnfrage + "\r";
+            System.out.println("7352 jDirektLesenActionPerformed PT : " + s );
+        }
+
         Com.write(s);
         timer.setInitialDelay(CVNavi.timer1);
         timer.setDelay(CVNavi.timer2);
@@ -7264,7 +7393,7 @@ public class MC extends javax.swing.JFrame {
         jCVListe.clearSelection();
         jCVListe.setSelectedIndex(0);
         String s = (String)jCVListe.getSelectedValue();
-        s = "XPTRD" + s + "\r";
+        s = "XPTRD " + s + "\r";
         Com.write(s);
         timer.setInitialDelay(CVNavi.timer1);
         timer.setDelay(CVNavi.timer2);
@@ -7289,7 +7418,7 @@ public class MC extends javax.swing.JFrame {
             {
                 split[i] = split[i].replace("\t", "       ");
             }
-//ToDo   Auf Gültigkeit prüfen
+            //ToDo   Auf Gültigkeit prüfen
             dlm.add(i, split[i]);
         }
         jCVListe.setModel(dlm);
@@ -7335,13 +7464,13 @@ public class MC extends javax.swing.JFrame {
             } catch (NumberFormatException numberFormatException) {
                 DecAdr = 3;
             }
-            s = "XPD" + DecAdr + s + "\r";
-            System.out.println("497 jCVSchreibenActionPerformed POM : " + s );
+            s = "XPD " + DecAdr +" "+ s + "\r";
+            System.out.println("7456 jCVSchreibenActionPerformed POM : " + s );
         }
         else
         {
-            s = "XPTWD" + s + "\r";
-            System.out.println("497 jCVSchreibenActionPerformed PT : " + s );
+            s = "XPTWD " + s + "\r";
+            System.out.println("7461 jCVSchreibenActionPerformed PT : " + s );
         }
         Com.write(s);
         timer.setInitialDelay(CVNavi.timer1);
@@ -7710,11 +7839,7 @@ public class MC extends javax.swing.JFrame {
             String str = AktLokState.substring(AktLokState.indexOf(" ")+1);
             str = str.substring(str.indexOf(" "));
             AktLokState = AktLokState.substring(0, i) + v + str;
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MC.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            CVNavi.sleep( 100 );
         }
     }//GEN-LAST:event_jGeschwindigkeitStateChanged
 
@@ -8470,27 +8595,6 @@ public class MC extends javax.swing.JFrame {
         Com.write(s);
     }//GEN-LAST:event_jVorActionPerformed
 
-    private void jFuncIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFuncIconActionPerformed
-        if(bFunktionsIconsIsActiv)
-            return;
-        int edRow = jTableLoco.getSelectedRow();
-        if( edRow >= 0)
-        {
-            String valueAt = (String)jTableLoco.getValueAt(edRow, 0);
-            if(valueAt.length() > 0)
-            {
-                try {
-                    int parseInt = Integer.parseInt(valueAt);
-                    FunktionsIcons FI = new FunktionsIcons(this);
-                    FI.DecAdress = parseInt;
-                    FI.DecName = (String)jTableLoco.getValueAt(edRow, 3);
-                    FI.DecIcons = FuncIcons;
-                } catch (NumberFormatException numberFormatException) {
-                }
-            }
-        }
-    }//GEN-LAST:event_jFuncIconActionPerformed
-
     private void jTableLocoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLocoMouseClicked
         jFuncIcon.setEnabled(true);
     }//GEN-LAST:event_jTableLocoMouseClicked
@@ -9020,6 +9124,27 @@ public class MC extends javax.swing.JFrame {
         Com.write(bBefehl);
     }//GEN-LAST:event_jf28ActionPerformed
 
+    private void jFuncIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFuncIconActionPerformed
+        if(bFunktionsIconsIsActiv)
+        return;
+        int edRow = jTableLoco.getSelectedRow();
+        if( edRow >= 0)
+        {
+            String valueAt = (String)jTableLoco.getValueAt(edRow, 0);
+            if(valueAt.length() > 0)
+            {
+                try {
+                    int parseInt = Integer.parseInt(valueAt);
+                    FunktionsIcons FI = new FunktionsIcons(this);
+                    FI.DecAdress = parseInt;
+                    FI.DecName = (String)jTableLoco.getValueAt(edRow, 3);
+                    FI.DecIcons = FuncIcons;
+                } catch (NumberFormatException numberFormatException) {
+                }
+            }
+        }
+    }//GEN-LAST:event_jFuncIconActionPerformed
+
     public Boolean m3dataAvaliable() {
         return jm3GotoList.isEnabled();
     }
@@ -9184,7 +9309,10 @@ public class MC extends javax.swing.JFrame {
         jEasyNetUpdate.setEnabled(false);
         jMRST.setEnabled(false);
 
-        jDirektLesen.setEnabled(false);
+        if( CVNavi.getZentrale() == c.cuMasterControl2 )
+            jDirektLesen.setEnabled(true);
+        else
+            jDirektLesen.setEnabled(false);
         jListeLesen.setEnabled(false);
         jListeBearbeiten.setEnabled(false);
         jListeSchreiben.setEnabled(false);
@@ -9262,6 +9390,18 @@ public class MC extends javax.swing.JFrame {
         if( bProg_MM ) {
             bProg_MM = false;
         }
+        if( bReadS88num ) {
+            bReadS88num = false;
+        }
+        if( bReadS88value ) {
+            bReadS88value = false;
+        }
+        if( bReadSo999 ) {
+            bReadSo999 = false;
+        }
+        if( bReadDevices ) {
+            bReadDevices = false;
+        }
 
         // set buttons to normal operation
         jKonfLesen.setEnabled(true);
@@ -9326,6 +9466,12 @@ public class MC extends javax.swing.JFrame {
         jMMRegister.setEnabled(true);
         jMMWert.setEnabled(true);
         jStartMMProg.setEnabled(true);
+
+        // for mc2 disable some options
+        if( CVNavi.getZentrale() == c.cuMasterControl2 ) {
+            jKonfSchreiben.setEnabled(false);
+            jMRST.setEnabled(false);
+        }
 
         // set cursor
         Cursor c = new Cursor(Cursor.DEFAULT_CURSOR );
@@ -9790,9 +9936,9 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
                 }
 
                 // 3rd check name
-                if(sName.length() > c.MAX_LOC_NAME_LENGTH)
+                if(sName.length() > CVNavi.userLocoNameMax)
                 {
-                    sName = sName.substring(0, c.MAX_LOC_NAME_LENGTH);
+                    sName = sName.substring(0, CVNavi.userLocoNameMax);
                     if( repair ) {
                         jTableLoco.setValueAt(sName, localLocIdx, 3);
                     }
@@ -10376,7 +10522,9 @@ private boolean checkTableLoco( boolean repair, boolean show ) {
     void reCheckVersionInfo() {
         String jVer = jVersion.getText();
         byte[] bVersion = jVer.replace(".", "").getBytes();
-        System.out.println("jVer="+jVer+" bVersion.length="+bVersion.length );
+        if( debugLevel > 0 ) {
+            System.out.println("jVer="+jVer+" bVersion.length="+bVersion.length );
+        }
         if( bVersion.length < 3 ) {
             System.out.println("Version too short! jVer="+jVer );
             return;

@@ -1587,7 +1587,7 @@ public class LDG30 extends javax.swing.JFrame {
                                             .addComponent(jAltDimmen1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel47)))
                                     .addComponent(jLabel43))
-                                .addContainerGap(26, Short.MAX_VALUE))
+                                .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDimmenLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addGroup(jDimmenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1919,9 +1919,9 @@ public class LDG30 extends javax.swing.JFrame {
                         .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)
-                            .addComponent(jLabel26)
                             .addGroup(jEffekteLayout.createSequentialGroup()
                                 .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel26)
                                     .addGroup(jEffekteLayout.createSequentialGroup()
                                         .addGroup(jEffekteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel71)
@@ -1961,7 +1961,7 @@ public class LDG30 extends javax.swing.JFrame {
                                                     .addComponent(jVor2)
                                                     .addComponent(jRueck2)
                                                     .addComponent(jLabel32))))))
-                                .addGap(10, 10, 10)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addContainerGap())))
         );
         jEffekteLayout.setVerticalGroup(

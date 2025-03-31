@@ -665,7 +665,8 @@ public class DecTest extends javax.swing.JDialog {
         switch(CVNavi.getZentrale())
         {
             case c.cuOpenDCC: // OpenDCC
-            case c.cuMasterControl: // TamsMC
+            case c.cuMasterControl1: // TamsMC
+            case c.cuMasterControl2: // TamsMC2
                 F1_F8 = "XFX " + DecAddr + " " + F9 + " " + F10 + " " + F11 + " " + F12 + " 0 0\r";
                 Com.write(F1_F8);
                 Com.read(bArray);

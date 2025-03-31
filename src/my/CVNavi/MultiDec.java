@@ -361,7 +361,7 @@ public class MultiDec extends javax.swing.JFrame {
 
         jAktAddr.setEditable(false);
         jAktAddr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jAktAddr.setText(bundle.getString("MultiDec.jAktAddr.text")); // NOI18N
+        jAktAddr.setText("3");
         jPanel1.add(jAktAddr, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 40, -1));
 
         jLabel29.setText(bundle.getString("MultiDec.jLabel29.text")); // NOI18N

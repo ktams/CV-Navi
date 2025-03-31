@@ -1,4 +1,4 @@
-CV-Navi Version 3.2
+CV-Navi Version 3.5 beta
 
 Version française (non à jour) après l'allemand.
 
@@ -11,6 +11,12 @@ Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
 
+Aenderungen in V3.5 beta
+- Unterstützung für MC2
+- Neues Modul LDG4x für die Decoder LD-G-41, LD-G-42, LD-W-42, LD-G-42.2, LD-W-42.2, LD-G-43, LD-G-44
+
+Aenderungen in V3.3
+- Nicht dokumentiert, Version nur als Beta-Version vorhanden, wurde nicht veröffentlicht
 
 Aenderungen in V3.2
 - LocControl: Funktionen F0 bis F28

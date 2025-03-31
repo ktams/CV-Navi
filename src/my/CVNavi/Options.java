@@ -45,6 +45,8 @@ public class Options extends javax.swing.JFrame {
 
         initComponents();
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
+        // this.setTitle("Options");
+        this.setTitle(bundle.getString("Options.jPanelOptions.border.title"));
         bSpracheNeu = CVNavi.bSpracheDE;
         //Datei lesen
 
@@ -133,13 +135,18 @@ public class Options extends javax.swing.JFrame {
         jPanelOptions.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jZentrale.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jZentrale.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OpenDCC", "Intellibox", "MasterControl" }));
+        jZentrale.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OpenDCC", "Intellibox", "MC1/RedBox", "MC2", " " }));
         jZentrale.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Options.jZentrale.border.title"))); // NOI18N
 
         jSchnittstelle.setEditable(true);
         jSchnittstelle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jSchnittstelle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "/dev/ttyS0", "/dev/ttyS1", "/dev/ttyS2", "/dev/ttyS3", "/dev/ttyS4", "/dev/ttyS5", "/dev/ttyS6", "/dev/ttyS7", "/dev/ttyUSB0", "/dev/ttyUSB1", "/dev/ttyUSB2", "/dev/ttyUSB3", "/dev/ttyUSB4", "/dev/ttyUSB5", "/dev/ttyUSB6", "/dev/ttyUSB7" }));
         jSchnittstelle.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("Options.jSchnittstelle.border.title"))); // NOI18N
+        jSchnittstelle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSchnittstelleActionPerformed(evt);
+            }
+        });
 
         jBaudRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBaudRate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1200", "2400", "4800", "9600", "14400", "19200", "38400", "57600" }));
@@ -377,6 +384,10 @@ public class Options extends javax.swing.JFrame {
     private void jButtonAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbbrechenActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonAbbrechenActionPerformed
+
+    private void jSchnittstelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSchnittstelleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSchnittstelleActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

@@ -3,8 +3,9 @@
  *
  * Created on 20.01.2009, 17:34:06
  *
- * @author Kersten Tams Copyright 2009-2020
- * @author Lothar Roth  Copyright 2012-2020
+ * @author Kersten Tams Copyright 2009-2025
+ * @author Lothar Roth  Copyright 2012-2025
+ * @author Peter Fritze Copyright 2025
  *
  */
 
@@ -25,8 +26,21 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.AsynchronousSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -68,27 +82,34 @@ interface c {
     public static final int LD_G33Plus =  11;
     public static final int LD_G34Plus =  12;
     public static final int LD_G36Plus =  13;
-    public static final int LINE_1 =  14;
-    public static final int tFD    =  15;
-    public static final int FD_R   = 16;
-    public static final int FD_R2  = 17;
-    public static final int FD_R_ex = 18;
-    public static final int FD_M   = 19;
-    public static final int FD_XL  = 20;
-    public static final int FD_LED = 21;
-    public static final int LINE_2 = 22;
-    public static final int tZUB   = 23;
-    public static final int WD_34  = 24;
-    public static final int WD_34_2  = 25;
-    public static final int SD_34  = 26;
-    public static final int SD_34_2  = 27;
-    public static final int MultiDecoder = 28;
-    public static final int LINE_3 = 29;
-    public static final int tOTHER = 30;
-    public static final int MC     = 31; // MasterControl/RedBox
-    public static final int B_4    = 32;
-    public static final int BiDi_B = 33;
-    public static final int WIB_30 = 34;
+    public static final int LD_G41 = 14;
+    public static final int LD_G42 =  15;
+    public static final int LD_W42 = 16;
+    public static final int LD_G42_2 =  17;
+    public static final int LD_W42_2 = 18;
+    public static final int LD_G43 =  19;
+    public static final int LD_G44 = 20;
+    public static final int LINE_1 =  21;
+    public static final int tFD    =  22;
+    public static final int FD_R   = 23;
+    public static final int FD_R2  = 24;
+    public static final int FD_R_ex = 25;
+    public static final int FD_M   = 26;
+    public static final int FD_XL  = 27;
+    public static final int FD_LED = 28;
+    public static final int LINE_2 = 29;
+    public static final int tZUB   = 30;
+    public static final int WD_34  = 31;
+    public static final int WD_34_2  = 32;
+    public static final int SD_34  = 33;
+    public static final int SD_34_2  = 34;
+    public static final int MultiDecoder = 35;
+    public static final int LINE_3 = 36;
+    public static final int tOTHER = 37;
+    public static final int MC     = 38; // MasterControl/RedBox
+    public static final int B_4    = 39;
+    public static final int BiDi_B = 40;
+    public static final int WIB_30 = 41;
 
     // special numbers (used in SaveOpenDialog)
     public static final int MC_WR  = 196; // special handling of MC config writes
@@ -102,14 +123,21 @@ interface c {
     public static final int MAX_LOCS = 1008; // Lokliste [0-1007]
     public static final int MAX_TRACTIONS = 150; // Tracktionsliste [0..149]
     public static final int MAX_M3_ENTRIES = 512; // M3UID-SID-Pairs [0..511]
-    public static final int MAX_LOC_NAME_LENGTH = 11; // maximum length of loco name
+    public static final int MAX_LOC_NAME_LENGTH_MC1 = 11; // maximum length of loco name MC1/RB
+    public static final int MAX_LOC_NAME_LENGTH_MC2 = 31; // maximum length of loco name MC2
+
     // Zubehoerdecoder
     public static final int MAX_MM1_ACCMOD = 255; // 255 Module[0..254] =^= addr[1-1020]
     public static final int MAX_DCC_ACCMOD = 510; // 510 Module[0..509] "^° addr[1-2040]
     // Zentralen
     public static final int cuOpenDCC = 0;
     public static final int cuIntellibox1 = 1;
-    public static final int cuMasterControl = 2;
+    public static final int cuMasterControl1 = 2;
+    public static final int cuMasterControl2 = 3;
+    // interface types
+    public static final int SERIAL =  0;
+    public static final int TCP_IP =  1;
+    public static final int DEFAULT_TCP_IP_PORT = 8050;
     // Status
     public static final int cuPowerUnknown = -1;
     public static final int cuPowerOff = 0;
@@ -154,6 +182,13 @@ enum decoderList {
     LD_G33Plus  (c.LD_G33Plus, true,  "   LD-G-33Plus",""),
     LD_G34Plus  (c.LD_G34Plus, true,  "   LD-G-34Plus",""),
     LD_G36Plus  (c.LD_G36Plus, true,  "   LD-G-36Plus",""),
+    LD_G41  (c.LD_G41, true,  "   LD-G-41","" ),
+    LD_G42  (c.LD_G42, true,  "   LD-G-42",""),
+    LD_W42  (c.LD_W42, true,  "   LD-W-42",""),
+    LD_G42_2  (c.LD_G42_2, true,  "   LD-G-42.2",""),
+    LD_W42_2  (c.LD_W42_2, true,  "   LD-W-42.2",""),
+    LD_G43  (c.LD_G43, true,  "   LD-G-43",""),
+    LD_G44  (c.LD_G44, true,  "   LD-G-44",""),
     line_1  (c.LINE_1, false, "____________",""),
     tFD     (c.tFD,    false, "Funktions-Dekoder","Function-Decoder"),
     FD_R    (c.FD_R,   true,  "   FD-R basic",""),
@@ -198,17 +233,21 @@ enum decoderList {
 
 public class CVNavi extends javax.swing.JFrame {
     /** Creates new form CVNavi */
-    public int     gsVersionMajor = 3;  // Version 3.3
-    public int     gsVersionMinor = 3;  // Version 3.3
+    public int     gsVersionMajor = 3;  // Version 3.5
+    public int     gsVersionMinor = 5;  // Version 3.5
+    public static String    argv[] = null;
     public JFrame  frameInstanceDEVICE = null;
     public JFrame  frameInstanceOPTIONS = null;
+    public JFrame  frameInstanceDEBUG = null;
     public JFrame  frameInstanceINFO = null;
     public int     Decoder = 0; // better name would be Device, because MC and B4 are also handled
     public int     currSelection = 0;
     public boolean bSpracheDE = true;         //true -> deutsch, false -> englisch
     public static int debugLevel = 0;
-    public static String debugFileName = "CVNavi.log.txt";
+    public static String debugFileName = "CVNavi.log.txt"; // extended with date_time
     public static boolean debug2file = false;
+    PrintStream originaSystemlOut = System.out;
+    PrintStream originaSystemlErr = System.err;
     public static boolean debugOffline = false;
     public static boolean forceTrackPowerOn = false;
     public static int debugDummyData = 0;
@@ -231,7 +270,8 @@ public class CVNavi extends javax.swing.JFrame {
     private boolean bReadStatusBin = false;
     public static boolean rs232_or_rb_usb_2 = false;
     public static boolean rs232_mode_was_forced = false;
-    public static int userLocoNameMax = 11;
+    public static int userLocoNameMax = c.MAX_LOC_NAME_LENGTH_MC1;
+    public static boolean userLocoNameMax_was_forced = false;
 
     // Globale Variablen, die nur einmal eingelesen werden sollten
     // gs = GlobalSetting
@@ -240,10 +280,15 @@ public class CVNavi extends javax.swing.JFrame {
     static String  gsConfigFilename  = System.getProperty("user.home") + "/.CV-Navi/" + "CV-Navi.xml";
     static String  gsConfigComment = "Tams CV Navi";
 
-    public String  gsZentrale = "MasterControl";
+    public String  gsZentrale = "???";
     private int    lcZentrale = 2;
+    public  static int iComType = c.SERIAL;
     private TwoWaySerialComm CVNaviCom = null;
     private TwoWaySerialComm ExternalCom = null;
+    public SocketChannel clientSocket = null;
+    private AsynchronousSocketChannel sockChannel = null;
+    //public static String host = "127.0.0.1";
+    public static int port = c.DEFAULT_TCP_IP_PORT;
     private Boolean bVerifyZentraleInProgress = false;
     private Timer  timer = null;
     public static Boolean bZentraleVerified = false;
@@ -282,26 +327,81 @@ public class CVNavi extends javax.swing.JFrame {
     private ResourceBundle bundle;
     private int numS88 = 0;
 
-    public CVNavi() {
-        if( debug2file ) {
-            Path fullPath = FileSystems.getDefault().getPath(debugFileName).toAbsolutePath();
 
+    public Boolean handleDebug2FileOption( Boolean active ) {
+        Path fullPath = FileSystems.getDefault().getPath(debugFileName).toAbsolutePath();
+        if( active ) {
+            PrintStream psn = null;
             try {
-                System.out.println("set output to file: "+fullPath);
-                System.setOut(new PrintStream(new File(debugFileName)));
+                psn = new PrintStream(new File(debugFileName));
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(CVNavi.class.getName()).log(Level.SEVERE, null, ex);
+                debug2file = false;
+                return false;
             }
+            System.out.println("std error  set to file: "+fullPath);
+            System.setErr(psn);
+            System.out.println("std output set to file: "+fullPath);
+            System.setOut(psn);
+            debug2file = true;
 
-            if( debugLevel > 2 ) {
-                // Show all we can find abaout java on this system at the beginning of the logfile
-                System.out.println("Following are the JVM information of your OS :");
-                Properties jvm = System.getProperties();
-                jvm.list(System.out);
-                System.out.println("-- end of listing properties --\n");
+            // Show all we can find about java on this system at the beginning of the logfile
+            System.out.println("Following are the JVM informations of your OS :");
+            Properties jvm = System.getProperties();
+            jvm.list(System.out);
+            System.out.println("-- end of listing properties --\n");
+            System.out.println("\ndebugLevel started with["+debugLevel+"]\n");
+
+            // list some interesting data...
+            if( argv != null ) {
+                int argc = argv.length;
+                System.out.printf("argc=%d\n", argc );
+                for( int i = 0 ; i < argc ; i++ ) {
+                    System.out.printf("argv[%d]=\"%s\"\n", i, argv[i]);
+                }
             }
+            System.out.println("");
+            System.out.println("gsZentrale="+gsZentrale);
+            switch( iComType ) {
+                case c.SERIAL:
+                    System.out.println("iComType=c.SERIAL");
+                    System.out.println("device="+gsSchnittstelle);
+                    System.out.println("baudrate="+gsBaudRate);
+                    break;
+                case c.TCP_IP:
+                    System.out.println("iComType=c.TCP_IP");
+                    System.out.println("host="+gsSchnittstelle);
+                    System.out.println("port="+port);
+                    break;
+            }
+            System.out.println("userTimer1="+userTimer1);
+            System.out.println("userTimer2="+userTimer2);
+            System.out.println("userTimer3="+userTimer3);
+            System.out.println("userTimerRetries="+userTimerRetries);
+            System.out.println("userTimerFwUp="+userTimerFwUp);
+            System.out.println("MCtimer1="+MCtimer1);
+            System.out.println("MCtimer2="+MCtimer2);
+            System.out.println("timer1="+timer1);
+            System.out.println("timer2="+timer2);
+            System.out.println("timer3="+timer3);
+            System.out.println("timerRetries="+timerRetries);
+            System.out.println("maxLocListWriteErrors="+maxLocListWriteErrors);
+            System.out.println("userLocoNameMax="+userLocoNameMax);
+            System.out.println("");
+
+            // XXXX
+
+        } else {
+            System.setOut( originaSystemlOut );
+            System.out.println("std output now back to original System.out ");
+            System.setErr( originaSystemlErr );
+            System.out.println("std error  now back to original System.err ");
+            debug2file = false;
         }
+        return true;
+    }
 
+    public CVNavi() {
         this.lastSaveOpenDialogWasCancel = false;
         mainWindowLocation = new Point();
         ImageIcon i = new ImageIcon(getClass().getResource("/main.gif"));
@@ -313,6 +413,12 @@ public class CVNavi extends javax.swing.JFrame {
 
         fillMenuSelection();
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
+
+        if( handleDebug2FileOption( debug2file ) == false ) {
+            Path fullPath = FileSystems.getDefault().getPath(debugFileName).toAbsolutePath();
+            mbFileOpenError( this, fullPath.toString());
+        }
+
         if( debugLevel >= 3 ) {
             for(decoderList co : decoderList.values()) {
                 System.out.printf("decoderList[%2d] [%2d] (%s) %10s Text %-35s %s\n", co.ordinal(), co.getIdx(), co.isSelectable()?"X":" ", co, co.getMenutextGer(), co.getMenutextEng());
@@ -321,18 +427,47 @@ public class CVNavi extends javax.swing.JFrame {
     }
 
     public void setZentrale( int newZentrale ) {
+        if( ! userLocoNameMax_was_forced ) {
+            userLocoNameMax = c.MAX_LOC_NAME_LENGTH_MC1;
+        }
         switch (newZentrale) {
             case c.cuOpenDCC:
                 lcZentrale = newZentrale;
                 gsZentrale = "OpenDCC";
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.SERIAL;
+                }
                 break;
             case c.cuIntellibox1:
                 lcZentrale = newZentrale;
                 gsZentrale = "Intellibox";
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.SERIAL;
+                }
+                break;
+            case c.cuMasterControl1:
+                lcZentrale = newZentrale;
+                gsZentrale = "MC1/RedBox";
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.SERIAL;
+                }
+                break;
+            case c.cuMasterControl2:
+                lcZentrale = newZentrale;
+                gsZentrale = "MC2";
+                if( ! userLocoNameMax_was_forced ) {
+                    userLocoNameMax = c.MAX_LOC_NAME_LENGTH_MC2;
+                }
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.TCP_IP;
+                }
                 break;
             default:
-                lcZentrale = c.cuMasterControl ;
-                gsZentrale = "MasterControl";
+                lcZentrale = c.cuMasterControl1 ;
+                gsZentrale = "MC1/RedBox";
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.SERIAL;
+                }
         }
     }
 
@@ -341,15 +476,31 @@ public class CVNavi extends javax.swing.JFrame {
             case "OpenDCC":
                 lcZentrale = c.cuOpenDCC;
                 gsZentrale = newZentrale;
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.SERIAL;
+                }
                 break;
             case "Intellibox":
                 lcZentrale = c.cuIntellibox1;
                 gsZentrale = newZentrale;
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.SERIAL;
+                }
+                break;
+            case "MC2":
+                lcZentrale = c.cuMasterControl2;
+                gsZentrale = newZentrale;
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.TCP_IP;
+                }
                 break;
             default:
                 // all other cases
-                lcZentrale = c.cuMasterControl ;
-                gsZentrale = "MasterControl";
+                lcZentrale = c.cuMasterControl1 ;
+                gsZentrale = "MC1/RedBox";
+                if( ! gsSchnittstelle_was_forced ) {
+                    iComType = c.SERIAL;
+                }
                 break;
         }
     }
@@ -1997,6 +2148,7 @@ public class CVNavi extends javax.swing.JFrame {
         jLabelBuild = new javax.swing.JLabel();
         jLabelOS = new javax.swing.JLabel();
         jLabelVmName = new javax.swing.JLabel();
+        jButtonDebug = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("my/CVNavi/Bundle"); // NOI18N
@@ -2023,17 +2175,17 @@ public class CVNavi extends javax.swing.JFrame {
 
         jDecoderChooser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jDecoderChooser.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Lok-Decoder", ".   LD-G-30", ".   LD-G-31", ".   LD-W-32", ".   LD-G-32", ".   LD-W-33", ".   LD-G-33", ".   LD-G-34", ".   LD-G-31Plus", ".   LD-G-33Plus", ".   LD-G-34Plus", ".   LD-G-36Plus", "____________", "Funktions-Decoder", ".   FD-R basic", ".   FD-R extended", ".   FD-M", ".   FD-XL", "____________", "Zubehör-Decoder", ".   WD-34", ".   SD-34", "____________", "Sonstiges", ".   MasterControl", ".   B-4", ".   WIB-30er" };
+            String[] strings = { "Lok-Decoder", ".   LD-G-30", ".   LD-G-31", ".   LD-W-32", ".   LD-G-32", ".   LD-W-33", ".   LD-G-33", ".   LD-G-34", ".   LD-G-31Plus", ".   LD-G-33Plus", ".   LD-G-34Plus", ".   LD-G-36Plus", ".   LD-G-41", ".   LD-G-42", ".   LD-W-42", ".   LD_G-42.2", ".   LD-W-42.2", ".   LD-G-43", ".   LD-G-44", "____________", "Funktions-Decoder", ".   FD-R basic", ".   FD-R extended", ".   FD-M", ".   FD-XL", "____________", "Zubehör-Decoder", ".   WD-34", ".   SD-34", "____________", "Sonstiges", ".   MasterControl", ".   B-4", ".   WIB-30er" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         jDecoderChooser.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jDecoderChooser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jDecoderChooserMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jDecoderChooserMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jDecoderChooserMouseReleased(evt);
             }
         });
         jDecoderChooser.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2145,6 +2297,14 @@ public class CVNavi extends javax.swing.JFrame {
         jLabelVmName.setText(bundle.getString("CVNavi.jLabelVmName.text")); // NOI18N
         jLabelVmName.setIconTextGap(0);
 
+        jButtonDebug.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButtonDebug.setText(bundle.getString("CVNavi.jButtonDebug.text")); // NOI18N
+        jButtonDebug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDebugActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CVNaviMainPanelLayout = new javax.swing.GroupLayout(CVNaviMainPanel);
         CVNaviMainPanel.setLayout(CVNaviMainPanelLayout);
         CVNaviMainPanelLayout.setHorizontalGroup(
@@ -2160,34 +2320,39 @@ public class CVNavi extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6))
                     .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
-                                .addComponent(jLabelProgName)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel3))
-                            .addComponent(jButtonStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBaudrateTitle, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBaudRate, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSchnittstelle, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSchnittstelleTitle)
-                            .addComponent(jZentrale, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jZentraleTitle, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelBuild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelProgVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelOS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelVmName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabelProgName)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jLabel2)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jLabel3))
+                                    .addComponent(jButtonStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBaudrateTitle, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jBaudRate, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSchnittstelle, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSchnittstelleTitle)
+                                    .addComponent(jZentrale, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jZentraleTitle, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(CVNaviMainPanelLayout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelBuild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabelProgVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabelOS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabelVmName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jButtonDebug, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         CVNaviMainPanelLayout.setVerticalGroup(
             CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2207,11 +2372,11 @@ public class CVNavi extends javax.swing.JFrame {
                         .addComponent(jLabelVmName)
                         .addGap(38, 38, 38)
                         .addComponent(jLabelBuild, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                        .addGap(83, 83, 83)
                         .addComponent(jButtonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
+                        .addGap(41, 41, 41)
                         .addComponent(jButtonOptions)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jZentraleTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jZentrale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2219,10 +2384,12 @@ public class CVNavi extends javax.swing.JFrame {
                         .addComponent(jSchnittstelleTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSchnittstelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBaudrateTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBaudRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBaudRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jButtonDebug))
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(CVNaviMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -2333,6 +2500,7 @@ public class CVNavi extends javax.swing.JFrame {
             jZentraleTitle.setText("Zentrale:");
             jSchnittstelleTitle.setText("Schnittstelle:");
             jBaudrateTitle.setText("Baudrate (seriell):");
+            jButtonDebug.setText("Fehlerprotokoll");
         }
         else {
             jButtonOptions.setText("Options");
@@ -2340,6 +2508,7 @@ public class CVNavi extends javax.swing.JFrame {
             jZentraleTitle.setText("control unit:");
             jSchnittstelleTitle.setText("interface:");
             jBaudrateTitle.setText("baud rate (serial):");
+            jButtonDebug.setText("error logging");
         }
 
         if( ( fwVersion != null ) && ( fwVersion.length() > 0 ) ) {
@@ -2359,16 +2528,17 @@ public class CVNavi extends javax.swing.JFrame {
         // timer3 is optional and may stay < 0
         switch( lcZentrale ) {
             case c.cuIntellibox1:
-                timerRetries = 20;
+                timerRetries = 35;
                 break;
-            case c.cuMasterControl:
+            case c.cuMasterControl1:
+            case c.cuMasterControl2:
                 timerRetries = 9;
                 break;
             case c.cuOpenDCC:
                 timerRetries = 9;
                 break;
             default:
-                timerRetries = 20;
+                timerRetries = 25;
         }
         // if overridden by command-line, use user's values
         if( userTimer1 > 0 ){
@@ -2436,9 +2606,19 @@ public class CVNavi extends javax.swing.JFrame {
 
             case c.LD_G31Plus: // LD-G-31Plus
             case c.LD_G33Plus: // LD-G-33Plus
-            case c.LD_G34Plus: // LD-G-33Plus
-            case c.LD_G36Plus: // LD-G-33Plus
+            case c.LD_G34Plus: // LD-G-34Plus
+            case c.LD_G36Plus: // LD-G-36Plus
                 LDG30erPlus lDG33Plus = new LDG30erPlus(this);
+                break;
+
+            case c.LD_G41:  // LD-G-41 for Test reasons (not completely supported!!)
+            case c.LD_G42:  // LD-G-42
+            case c.LD_W42:  // LD-W-42
+            case c.LD_G42_2:  // LD-G-42.2 for Test reasons (not completely supported!!)
+            case c.LD_W42_2:  // LD-W-41.2 for Test reasons (not completely supported!!)
+            case c.LD_G43:  // LD-G-43 for Test reasons (not completely supported!!)
+            case c.LD_G44:  // LD-G-44 for Test reasons (not completely supported!!)
+             LDG4x ldG4x = new LDG4x(this);
                 break;
 
             case c.FD_R: // FD-R
@@ -2468,7 +2648,7 @@ public class CVNavi extends javax.swing.JFrame {
                 WD34 wD34 = new WD34(this);
                 break;
 
-            case c.MultiDecoder: // MasterControl/RedBox
+            case c.MultiDecoder: // MultiDecoder
                 MultiDec MD = new MultiDec(this);
                 break;
 
@@ -2598,8 +2778,9 @@ public class CVNavi extends javax.swing.JFrame {
         }
 
         // Werte auslesen bzw. mit Defaults initialisieren
-        setZentrale(prop.getProperty("Zentrale", "MasterControl"));
+        // setZentrale(prop.getProperty("Zentrale", "MasterControl"));
         if( ! gsSchnittstelle_was_forced ) {
+            setZentrale(prop.getProperty("Zentrale", "MC1/RedBox"));
             gsSchnittstelle = prop.getProperty("Schnittstelle", "COM1");
         }
         gsBaudRate = Integer.parseInt( prop.getProperty("BaudRate","9600"));
@@ -2651,7 +2832,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20201229a"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20250331a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);
@@ -2678,7 +2859,7 @@ public class CVNavi extends javax.swing.JFrame {
         final ActionListener actionListener = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                if( debugLevel > 0 ) {
+                if( debugLevel > 1 ) {
                     System.out.println( "actionPerformed" );
                 }
                 byte[] bArray = new byte[0xFFFF];
@@ -2689,7 +2870,7 @@ public class CVNavi extends javax.swing.JFrame {
                     }
                     bReadStatusBin = false;
                     stopIOAction();
-                    int tmpBytesRead = ExternalCom.read(bArray); // Gbts was Neues ?
+                    int tmpBytesRead = ExternalCom.read(bArray); // Gibts was Neues ?
                     ExternalCom = null;
                     if( debugLevel > 0 ) {
                         System.out.println( "actionPerformed bReadStatusBin tmpBytesRead="+tmpBytesRead );
@@ -2714,93 +2895,6 @@ public class CVNavi extends javax.swing.JFrame {
                     int nBytes = CVNaviCom.read(bArray);
                     CVNaviCom = safelyCloseCom( outerThis, CVNaviCom );
 
-                    if( debugDummyData == 1 ) {
-                        // DUMMY - Werte zum DEBUGGEN : Tams MC
-                        bArray[0] = 0x04;
-                        bArray[1] = 0x01;
-                        bArray[2] = 0x04;
-                        bArray[3] = 0x07;
-                        bArray[4] = 'b';
-                        bArray[5] = 0x04;
-                        bArray[6] = 0x00;
-                        bArray[7] = 0x13;
-                        bArray[8] = 0x07;
-                        bArray[9] = 0x56;
-                        bArray[10] = 0x00;
-                        nBytes = 11;
-                    }
-
-                    if( debugDummyData == 2 ) {
-                        // DUMMY - Werte zum DEBUGGEN : OpenDCC neu
-                        bArray[0] = 0x02;
-                        bArray[1] = 0x17;
-                        bArray[2] = 0x08;
-                        bArray[3] = 0x01;
-                        bArray[4] = 0x2a;
-                        bArray[5] = 0x00;
-                        nBytes = 6;
-                    }
-
-                    if( debugDummyData == 3 ) {
-                        // DUMMY - Werte zum DEBUGGEN : IB
-                        /*
-                        For example, the IB replies with:
-                        02h, <SPU version low>, <SPU version high>,
-                        02h, <KPU version low>, <KPU version high>,
-                        01h, <PPU version>, 
-                        01h, <LIPU version>,
-                        01h, <DNG version>,
-                        05h, <IB serial number: 5 bytes (digits 98, 76, 54, 32, 10)>,
-                        00h
-                        A single byte version # is to be interpreted as: H.L
-                        For example: 10h -> version 1.0
-                        A two byte version # (low/high) is to be interpreted as: H.HLL
-                        For example: 23h, 10h -> version 1.023
-                        (the version numbers and the serial number are sent in BCD
-                        notation - Binary Coded Decimal).
-                        The serial number is to be interpreted as: '9876543210' - i.e.
-                        digit '9' is the most significant digit, etc...
-                        SPU = System Processing Unit (the IB 'heart')
-                        KPU = Keypad Processing Unit (user interface)
-                        PPU = Peripheral Processing Unit (digital signal generator)
-                        LIPU = Lokmaus/I2C Processing Unit
-                        DNG = Dispositivo di Nostra Gestione (sorry this is italian language!)
-                        */
-                        bArray[0] = 0x02;
-                        bArray[1] = (byte) 0x92;
-                        bArray[2] = 0x20;
-                        bArray[3] = 0x01;
-                        bArray[4] = 0x02;
-                        bArray[5] = 0x01;
-                        bArray[6] = 0x03;
-                        bArray[7] = 0x01;
-                        bArray[8] = 0x04;
-                        bArray[9] = 0x01;
-                        bArray[10] = 0x05;
-                        bArray[11] = 0x01;
-                        bArray[12] = 0x06;
-                        bArray[13] = 0x00;
-                        nBytes = 14;
-                    }
-                    if( debugDummyData == 4 ) {
-                        // DUMMY - Werte zum DEBUGGEN : IB
-                        bArray[0] = 0x02;
-                        bArray[1] = 0x23;
-                        bArray[2] = 0x10;
-                        bArray[3] = 0x01;
-                        bArray[4] = 0x02;
-                        bArray[5] = 0x01;
-                        bArray[6] = 0x03;
-                        bArray[7] = 0x01;
-                        bArray[8] = 0x04;
-                        bArray[9] = 0x01;
-                        bArray[10] = 0x05;
-                        bArray[11] = 0x01;
-                        bArray[12] = 0x06;
-                        bArray[13] = 0x00;
-                        nBytes = 14;
-                    }
-
                     if(nBytes < 1)
                     {
                         mbTimeout( outerThis, c.mbRDverify );
@@ -2810,7 +2904,16 @@ public class CVNavi extends javax.swing.JFrame {
                         }
                         byte[] mYbArray = new byte[nBytes];
                         System.arraycopy(bArray, 0, mYbArray, 0, nBytes);
-                        Boolean ok = verifyXVer( mYbArray );
+                        if( checkReadComplete(mYbArray) ){
+                            System.out.println("bVerifyZentraleInProgress readComplete TRUE");
+                        } else {
+                            System.out.println("bVerifyZentraleInProgress readComplete FALSE");
+                        }
+                        /*
+                        System.out.println("bArray("+bArray.length+")=0x"+byteArrayToHex(bArray));
+                        System.out.println("mybArray("+mYbArray.length+")=0x"+byteArrayToHex(mYbArray));
+                        */
+                        Boolean ok = verifyXVerASCII( mYbArray );
                         bZentraleVerified = true;
                         fillMenuSelection();
                         if( ok && bGotoUpdate ) {
@@ -2837,57 +2940,23 @@ public class CVNavi extends javax.swing.JFrame {
         jButtonEndActionPerformed( null );
     }//GEN-LAST:event_formWindowClosing
 
-    private Boolean verifyXVer( byte[] bIn ) {
-        int lenIn = bIn.length;
-        int numAnswers = 0;
-        int idx = 0;
-        String sSwVersion = null;
-        long lSwVersion = 0;
-        char b = ' ';
-        char bNum = ' ';
+    private void jButtonDebugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDebugActionPerformed
+        // TODO add your handling code here:
+        Debug debugWindow = new Debug(this);
+    }//GEN-LAST:event_jButtonDebugActionPerformed
 
-        /*
-         * Version Info:
-         * IB      6 answers first is 2 Bytes (BCD)
-         * OpenDCC 1 answer           1 Bytes (BYTE) (until V0.14, only version)
-         * OpenDCC 1 answer           2 Bytes (BYTE) (since V0.15, version+serno combined)
-         * OpenDCC 2 answers first is 2 Bytes (BYTE) (since V0.23.8release)
-         * Tams    2 answers first is 3 Bytes (BCD) or 4 Bytes (3*BCD + ASCII)
-         * MoPi    2 answer           3 Bytes (BYTE) (stores version: major, minor, build)
-         */
-        /* First in byte tells how much bytes are in next answer. */
-        if( debugLevel > 0 ) {
-            System.out.println("bIn("+lenIn+")=0x"+byteArrayToHex(bIn));
-        }
+    public long bytesToLong(byte[] bytes) {
+        ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
+        buffer.put(bytes);
+        buffer.flip();//need flip 
+        return buffer.getLong();
+    }
 
-        if( lenIn <= 0 ) {
-            if( debugLevel > 0 ) {
-                System.out.println("verifyXVer bIn is empty lenIn="+lenIn);
-            }
-            return false;
-        }
-        int lenAntwort = (int) bIn[idx];
-        idx++;
-        if( debugLevel > 0 ) {
-            System.out.println("Antwort["+numAnswers+"] ist "+lenAntwort+" Bytes lang");
-        }
-        if( lenAntwort > lenIn ) {
-            System.out.println("May be a TamsMC waiting for a software update...");
-            // meist zwischen 8 und 12 Bytes
-            if( lenIn >= 5 ) {
-                // 0x4C235423542354235423 T#L#T#T#T# // 10 MasterControl
-                // 0x4C235423542354235423 L#T#T#T#T# T#L#T#T#T#T# // MC als HC  T#T#T#T#T#T#
-                // 0x54234323542354235423 C#T#T#T#T# T#C#T#T#T# // 10 HandControl / PhoneControl 
-                // 0x543F4C3F543F543F543F L?T?T?T?T? // 10 XN-Control / mControl T?C?T?T? C?T?T?T? T?L?T?T?T?T? T?L?T?T?T?T?
-                // 0x23 = 35 = '#' Block wiederholen (256 Bytes)
-                // 0x3F = 63 = '?' Block wiederholen (128 Bytes)
-                // 0x43 = 67 = 'C' CRC Error
-                // 0x4C = 76 = 'L' Length Error
-                // 0x54 = 84 = 'T' Time out Error
-                String s = new String( bIn );
-                String cs = s.substring(1, 5);
+    private Boolean updateMode( String s, Boolean mbOnError ) {
+        if( s.length() >= 5  ) {
+            String cs = s.substring(1, 5);
                 if( debugLevel > 0 ) {
-                    System.out.println("bIN as String="+s+" len="+s.length()+" cs="+cs );
+                    System.out.println("len(s)="+s.length()+" chars from 1 to 5 of s are in cs=\""+cs+"\"" );
                 }
                 // die ersten 4 Zeichen vergleichen
                 switch( cs ) {
@@ -2901,8 +2970,9 @@ public class CVNavi extends javax.swing.JFrame {
                     case "#C#T" :
                     case "#T#C" :
                     case "#T#T" :
-                        System.out.println("Yes a TamsMC with a 256 byte block device (MasterControl, HandControl, PhoneControl, ... ) waiting for a software update");
-                        break;
+                        System.out.println("Detected a TamsMC/RN with a 256 byte block device (MasterControl, HandControl, PhoneControl, ... ) waiting for a software update");
+                        return true;
+                        // break;
                     case "L?T?" :
                     case "T?L?" :
                     case "C?T?" :
@@ -2913,129 +2983,165 @@ public class CVNavi extends javax.swing.JFrame {
                     case "?C?T" :
                     case "?T?C" :
                     case "?T?T" :
-                        System.out.println("Yes a TamsMC with a 128 byte block device (XNControl, mControl, ... ) waiting for a software update");
-                        break;
+                        System.out.println("Detected a TamsMC/RB with a 128 byte block device (XNControl, mControl, ... ) waiting for a software update");
+                        return true;
+                        // break;
                     default:
-                        System.out.println("A TamsMC with an unknown device waiting for a software update");
-                        // TODO Dialog ausgliedern und DE/EN 
-                        mbGeneric(this, "A TamsMC with an unknown device waiting for a software update", "Please report devicename and the following line to Tams", s, 0, true);
-                }
-                bGotoUpdate = (getZentrale() == c.cuMasterControl);
-                mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuMasterControl );
-                if( debugLevel > 0 ) {
-                    System.out.println("bVerifyXVer bGotoUpdate="+bGotoUpdate );
-                }
-                return bGotoUpdate;
-            }
-            return false;
-        }
-        if( lenAntwort < 0 ) {
-            System.out.println("Antwort["+numAnswers+"] : Länge ("+lenAntwort+") ist negativ -> Abbruch bVerifyXVer");
-            return false;
-        }
-        numAnswers++;
-
-        byte[] bVersion = new byte[lenAntwort];
-        int lenVersion = lenAntwort;
-        System.arraycopy(bIn, 1, bVersion, 0, lenAntwort);
-        idx += lenAntwort;
-
-        while( idx < lenIn ) {
-            lenAntwort = (int) bIn[idx];
-            if( debugLevel > 0 ) {
-                System.out.println("2880 Antwort["+numAnswers+"] ist "+lenAntwort+" Bytes lang");
-            }
-            idx++;
-            if( idx + lenAntwort <= lenIn ) {
-                if( lenAntwort > 0 ) {
-                    numAnswers++;
-                } else {
-                    if( debugLevel > 0 ) {
-                        System.out.println("2888 ENDE Xver : idx["+idx+"] + lenAntwort["+lenAntwort+"] <= lenIn["+lenIn+"]");
-                    }
-                }
-            } else {
-                // Ooops
-                if( debugLevel > 0 ) {
-                    System.out.println("2894 Oooops : idx["+idx+"] + lenAntwort["+lenAntwort+"] <= lenIn["+lenIn+"]");
-                }
-            }
-            idx += lenAntwort;
-        }
-        if( debugLevel > 0 ) {
-            System.out.println("numAnswers="+numAnswers);
-        }
-        switch( lenVersion ) {
-            case 1:
-                fwVersion = "0."+(bVersion[0] & 0xFF)+ ".0";
-                sSwVersion = "OpenDCC Version "+fwVersion;
-                System.out.println("--- "+sSwVersion+" ---");
-                mbGeneric( this, "Information", "Detected "+sSwVersion, "(Xfuncs="+bUseXfuncs+")", 5, false );
-                break;
-            case 2:
-                switch( numAnswers ) {
-                    case 1: // OpenDCC V0.15 until V0.23.8beta, (2 bytes version+serno)
-                        fwVersion = "0."+(bVersion[0] & 0xFF)+".0";
-                        sSwVersion = "OpenDCC Version "+fwVersion;
-                        System.out.println("--- "+sSwVersion+" ---");
-                        mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuOpenDCC );
-                        break;
-                    case 2: // OpenDCC since V0.23.8 (2 bytes version + 1 byte serno)
-                        lSwVersion = (long) ((bVersion[0] & 0xFF) << 8 ) + (long) (bVersion[1] & 0xFF);
-                        if( lSwVersion >= 0x1708 ) {
-                            bUseXfuncs = true;
+                        System.out.println("Not a TamsMC/RB waiting for an update");
+                        // TODO Dialog ausgliedern und DE/EN
+                        if( mbOnError ) {
+                            mbGeneric(this, "A TamsMC with an unknown device waiting for a software update", "Please report devicename and the following line to Tams", s, 0, true);
                         }
-                        fwVersion = "0."+ (bVersion[0] & 0xFF) +"."+ (bVersion[1] & 0xFF);
-                        sSwVersion = "OpenDCC Version "+fwVersion;
-                        System.out.println("--- "+sSwVersion+" ---");
-                        mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuOpenDCC );
-                        break;
-                    default: // IB should have 6 answers 
-                        lSwVersion = (long) ((bVersion[1] & 0xFF) << 8 ) + (long) (bVersion[0] & 0xFF);
-                        if( lSwVersion >= 0x2000 ) {
-                            bUseXfuncs = true;
-                        }
-                        fwVersion = String.format("%01x.%01x%02x", (bVersion[1]&0xF0)>>4, bVersion[1]&0x0F, bVersion[0]&0xFF);
-                        sSwVersion = "Intellibox Version "+fwVersion;
-                        System.out.println("--- "+sSwVersion+" ---");
-                        mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuIntellibox1 );
-                        break;
                 }
-                break;
-            case 5: // Tams beta prerelease #
-                bNum = (char) ( bVersion[4] & 0xFF );
-            case 4: // Tams beta release
-                b = (char) ( bVersion[3] & 0xFF );
-                lSwVersion = (long) (bVersion[3] & 0xFF);
-            case 3: // Tams official release
-                lSwVersion += (long)((bVersion[0] & 0xFF) << 24 );
-                lSwVersion += (long)((bVersion[1] & 0xFF) << 16 );
-                lSwVersion += (long)((bVersion[2] & 0xFF) << 8 );
+        }
+        return false;
+    }
 
-                bUseXfuncs = ( lSwVersion >= c.MIN_MC_XFUNCS_VERSION );
-                bUseXm3sid = ( lSwVersion >= c.MIN_MC_XM3SID_VERSION );
-                bUseSo999  = ( lSwVersion >= c.MIN_MC_SO999_VERSION  );
-                fwVersion = ""
-                        + (int) (bVersion[0] & 0xFF) +"."
-                        + (int) (bVersion[1] & 0xFF) +"."
-                        + (int) (bVersion[2] & 0xFF)
-                        + b
-                        + bNum;
-                sSwVersion = "MasterControl Version "+fwVersion;
-                System.out.println("--- "+sSwVersion+" ---");
-                mbVerifyXVer( this, sSwVersion, getZentrale() != c.cuMasterControl );
+    private Boolean verifyXVerASCII( byte[] bIn ) {
+        int lenIn = bIn.length;
+        String sIn;
+        int numAnswers = 0;
+        int idx = 0;
+        String sSwVersion = null;
+        String sSerno =" unknown ";
+        long lSwVersion = 0;
+        char b = ' ';
+        char bNum = ' ';
+
+        if( lenIn <= 0 ) {
+            return true;
+        }
+        if( debugLevel >= 0 ) {
+            System.out.println("verifyXVerASCII A bIn lenIn="+lenIn);
+        }
+
+        sIn = new String(bIn);
+        String lines[] = sIn.split("\r");
+        if( debugDummyData == 1 ) {
+            lines[0] = "OpenDCC V0.14";
+            lines[1] = "";
+        }
+        if( debugDummyData == 2 ) {
+            lines[0] = "IB (SPU) v2.001 (KPU v2.001, PPU v1.5, LIPU v1.0, DNG v1.4)";
+            lines[1] = "S/N: 1000026273";
+        }
+        if( debugDummyData == 3 ) {
+            lines[0] = "MC Revision 2.2.3";
+            lines[1] = "SerNr.      2.2.1";
+        }
+        if( debugDummyData == 4 ) {
+            lines[0] = "MC Revision 1.4.7f";
+            lines[1] = "SerNr.      331";
+        }
+        if( debugDummyData == 5 ) {
+            lines[0] = "MC2 Revision V0.8.9";
+            lines[1] = "SerNr. 103";
+        }
+
+        if( debugLevel >= 0 ) {
+            for( int i = 0 ; i < lines.length ; i++ ) {
+                System.out.println("verifyXVerASCII B line["+i+"]="+lines[i]);
+            }
+        }
+        if( updateMode( sIn, false ) ) {
+            setZentrale (c.cuMasterControl1 );
+            bGotoUpdate = true;
+            return true;
+        }
+        int iVerIdx = -1;
+        String sArrLine1[] = null;
+        String sArrLine2[] = null;
+        try {
+            sArrLine1 = lines[0].split(" ");
+            sArrLine2= lines[1].split(" ");
+            if( debugLevel >= 0 ) {
+                System.out.println("verifyXVerASCII C sArrLine1.length="+sArrLine1.length);
+                System.out.println("verifyXVerASCII D sArrLine2.length="+sArrLine2.length);
+            }
+        } catch(ArrayIndexOutOfBoundsException exception) {
+            // ignore here
+        }
+
+        switch( sArrLine1[0].toUpperCase() ) {
+            case "OPENDCC":
+                setZentrale ( c.cuOpenDCC );
+                iVerIdx = 1;
+                break;
+            case "IB":
+                setZentrale ( c.cuIntellibox1 );
+                iVerIdx = 2;
+                break;
+            case "MC":
+                setZentrale (c.cuMasterControl1 );
+                iVerIdx = 2;
+                // TODO get type and version to enable special functions
+                break;
+            case "MC2":
+                setZentrale ( c.cuMasterControl2 );
+                iVerIdx = 2;
+                bUseXfuncs = true;
+                bUseXm3sid = true;
+                bUseSo999  = false;
                 break;
             default:
-                System.out.println("Unbekannte Zentrale ausgelesen: Daten["+lenIn+" Bytes] = 0x"+byteArrayToHex(bIn));
-                return false;
+                if( updateMode( sIn, true ) == false )
+                    return false;
+        }
+        if( debugLevel >= 0 ) {
+            System.out.println("verifyXVerASCII E iVerIdx="+iVerIdx);
+        }
+        try{
+            sSwVersion = sArrLine1[iVerIdx].replace("v", "").replace("V", "");
+        } catch(ArrayIndexOutOfBoundsException exception) {
+            // ignore here
+        }
+        if( sSwVersion == null ) {
+            System.out.println("verifyXVerASCII E sSwVersion is null" );
+            return true;
+        }
+        System.out.println("verifyXVerASCII E sSwVersion.length="+sSwVersion.length()+" sSwVersion="+sSwVersion);
+        String[] sSwVerParts = sSwVersion.split("\\.");
+        System.out.println("verifyXVerASCII F sSwVerParts.length="+sSwVerParts.length);
+        String sT = "0x";
+        if( sSwVerParts.length == 3 ) {
+            sT += "0"+sSwVerParts[0];
+            sT += "0"+sSwVerParts[1];
+            sT += "0"+sSwVerParts[2].substring(0, 1);
+            if( sSwVerParts[2].length() == 1 ) {
+                sT += "00";
+            }else{
+                String sU = sSwVerParts[2].substring(1, 2);
+                int x = sU.toCharArray()[0] & 0xFF;
+                sT += String.format("%02x", x);
+            }
+            System.out.println("verifyXVerASCII G sT="+sT);
+
+            lSwVersion = Long.decode(sT);
         }
 
-        if( lSwVersion > 0 ) {
-            if( debugLevel > 0 ) {
-                System.out.println("lSwVersion="+lSwVersion+" in HEX="+String.format("0x%16s", Long.toHexString(lSwVersion)).replace(' ', '0') );
-                System.out.println("bUseXfuncs="+bUseXfuncs+" bUseXm3sid="+bUseXm3sid);
-            }
-        }
+        System.out.println("verifyXVerASCII H sSwVersion="+sSwVersion+" sSwVersion.length="+sSwVersion.length());
+
+        byte[] bSwVersion = sSwVersion.getBytes();
+        System.out.println("verifyXVerASCII I bSwVersion.length="+bSwVersion.length );
+
+        sSerno = String.format("%02x%02x%02x%02x", (long)(bSwVersion[0] & 0xFF) /*bSwVersion[0]*/, bSwVersion[1], bSwVersion[2], bSwVersion.length==4?bSwVersion[3]:0x00);
+        System.out.println("verifyXVerASCII sSerno="+sSerno );
+
+        sSerno = sArrLine2[sArrLine2.length-1];
+
+        System.out.println("----- "+sArrLine1[0]+" "+sSwVersion+" ----- ");
+        System.out.println("----- S/N: "+sSerno+" ----- ");
+        System.out.println("----- LONG: "+lSwVersion+" ----- ");
+        System.out.println("----- sT:  "+sT+" ----- ");
+        System.out.println("----- HEX: 0x"+String.format("%08X", lSwVersion)+" ----- ");
+        fwVersion = sSwVersion;
+        fillMenuSelection();
+
+            /*
+    public static final long MIN_MC_XFUNCS_VERSION = 0x01040666; // 1.4.6f
+    public static final long MIN_MC_XM3SID_VERSION = 0x01040762; // 1.4.7b
+    public static final long MIN_MC_SO999_VERSION  = 0x01040863; // 1.4.8c
+            */
 
         return true;
     }
@@ -3055,14 +3161,20 @@ public class CVNavi extends javax.swing.JFrame {
         bUseXm3sid = false;
 
         CVNaviCom = safelyOpenCom( this, CVNaviCom );
+        if( iComType == c.TCP_IP ) {
+            flushReadBuffer( clientSocket );
+        }
         if( (CVNaviCom != null) && CVNaviCom.isconnected() ) {
             flushReadBuffer( CVNaviCom );
 
+            /*
             byte[] wArray = new byte[2];
             wArray[0] = (byte) 0x78; // x
             wArray[1] = (byte) 0xA0; // XVer
 
             CVNaviCom.write(wArray);
+            */
+            CVNaviCom.write("XV\r");
             bVerifyZentraleInProgress = true;
 
             timer.setInitialDelay(2000);
@@ -3070,7 +3182,7 @@ public class CVNavi extends javax.swing.JFrame {
             if( userTimer1 > 2000 ) timer.setInitialDelay(userTimer1);
             if( userTimer2 > 2000 ) timer.setDelay(userTimer2);
             if( debugLevel > 0 ) {
-                System.out.println("verifyZentrale: initialdelay="+timer.getInitialDelay()+" delay="+timer.getDelay());
+                System.out.println("verifyZentrale[XV]: initialdelay="+timer.getInitialDelay()+" delay="+timer.getDelay());
             }
 
             startIOAction();
@@ -3082,6 +3194,7 @@ public class CVNavi extends javax.swing.JFrame {
         jButtonStart.setEnabled(false);
         jButtonOptions.setEnabled(false);
         jDecoderChooser.setEnabled(false);
+        jButtonDebug.setEnabled(false);
 
         // set cursor to WAIT
         Cursor c = new Cursor(Cursor.WAIT_CURSOR);
@@ -3103,6 +3216,7 @@ public class CVNavi extends javax.swing.JFrame {
         jButtonStart.setEnabled(true);
         jButtonOptions.setEnabled(true);
         jDecoderChooser.setEnabled(true);
+        jButtonDebug.setEnabled(true);
     }
 
 
@@ -3120,6 +3234,43 @@ public class CVNavi extends javax.swing.JFrame {
             }
         }
         return numBytes;
+    }
+
+    public int flushReadBuffer( SocketChannel clientSocket ) {
+        int ret = 0;
+        if( iComType == c.TCP_IP ) {
+            if( clientSocket == null ) {
+                System.out.println("inside flushReadBuffer TCP_IP clientSocket == null");
+                return 0;
+            } else if( ! clientSocket.isConnected() ) {
+                System.out.println("inside flushReadBuffer TCP_IP clientSocket not connected");
+                return 0;
+            }
+
+            ByteBuffer buf = ByteBuffer.allocate(0xFFFF);
+            int BytesRead = -1;
+            try {
+                BytesRead = clientSocket.read(buf);
+                if (BytesRead == -1) {
+                    System.out.println("inside flushReadBuffer TCP_IP read returned -1");
+                    // return -1;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(TwoWaySerialComm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if( BytesRead > 0 ) {
+                System.out.println("inside flushReadBuffer TCP_IP BytesRead="+BytesRead);
+                int off = buf.arrayOffset();
+                int pos = buf.position();
+                ret = pos - off;
+                buf.position(0);
+            }
+            if( debugLevel > 0 ) {
+                System.out.println("inside flushReadBuffer TCP_IP end ret["+ret+"]");
+            }
+        }
+        return ret;
     }
 
     public void trackPowerOn( TwoWaySerialComm Com ) {
@@ -3220,11 +3371,61 @@ public class CVNavi extends javax.swing.JFrame {
         return true;
     }
 
+    public static Charset charset = Charset.forName("UTF-8");
+    public static CharsetEncoder encoder = charset.newEncoder();
+    public static CharsetDecoder decoder = charset.newDecoder();
+
+    public static ByteBuffer str_to_bb(String msg){
+      try{
+        return encoder.encode(CharBuffer.wrap(msg));
+      }catch(Exception e){e.printStackTrace();}
+      return null;
+    }
+
+    public static String bb_to_str(ByteBuffer buffer){
+      String data = "";
+      try{
+        int old_position = buffer.position();
+        data = decoder.decode(buffer).toString();
+        // reset buffer's position to its original so it is not altered:
+        buffer.position(old_position);  
+      }catch (Exception e){
+        e.printStackTrace();
+        return "";
+      }
+      return data;
+    }
+
+    public static byte[] bb_to_barr(ByteBuffer byteBuffer) {
+        byte[] bytesArray = new byte[byteBuffer.remaining()];
+        byteBuffer.get(bytesArray, 0, bytesArray.length);
+        return bytesArray;
+        /*
+        byte[] data = new byte[byteBuffer.capacity()];
+        ((ByteBuffer) byteBuffer.duplicate().clear()).get(data);
+        */
+    }
+
+    public static ByteBuffer barr_to_bb(byte[] bArr) {
+        return( ByteBuffer.wrap(bArr) );
+    }
+
+    public static void sleep( int duration ) {
+        try {
+            Thread.sleep( duration );
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private static void helpCommandLine() {
         System.out.println("Usage: CV-Navi [options from below]");
         System.out.println("\t-d   [<num>]  \tdebuglevel (without num: increment by 1)" );
-        System.out.println("\t-df  [<name>] \tdebug into file <name> (without name: CV-Navi.log.txt)" );
-        System.out.println("\t-dev [<name>] \tforce usage of device <name>" );
+        System.out.println("\t-df  [<name>] \tdebug into file <name> (without name: "+debugFileName+" )" );
+        System.out.println("\t-dev  <name>  \tforce usage of device <name>" );
+        System.out.println("\t-tcp          \tuse tcp/ip (for MC2)" );
+        System.out.println("\t-host <host>  \thostname or IP address of MC2 <name>" );
+        System.out.println("\t-port <port>  \tport (default:"+c.DEFAULT_TCP_IP_PORT+")" );
         System.out.println("\t-noRTSDTR     \tdo not use RTS or DTR operations for (virtual) device" );
         System.out.println("\t-c            \tforce configured control unit (no check during init)");
         System.out.println("\t-c Xfuncs     \tforce enable XFuncs");
@@ -3238,13 +3439,13 @@ public class CVNavi extends javax.swing.JFrame {
         System.out.println("\t-tr <num>     \tread/write CVs: number of retries with delay timeout (default: 9)");
         System.out.println("\t-tfu <num>    \ttimer interval during firmware updates (default: 250)");
         System.out.println("\t-u            \tupdate window always visible");
-        System.out.println("\t-usb1         \tuse USB-1 in RedBox/MasterControl -> no BaudRate changes on firmware updates (default: on)");
+        System.out.println("\t-usb1         \tuse USB-1 in RedBox/MasterControl1 -> no BaudRate changes on firmware updates (default: on)");
         System.out.println("\t-usb2         \tuse USB-2 in RedBox -> BaudRate change to 38400 on firmware-updates (default: off)");
-        System.out.println("\t-rs232        \tuse RS232 in RedBox/MasterControl -> BaudRate change to 38400 on firmware-updates (default: off)");
+        System.out.println("\t-rs232        \tuse RS232 in RedBox/MasterControl1 -> BaudRate change to 38400 on firmware-updates (default: off)");
         System.out.println("\t-no17         \tdo not read CV17");
         System.out.println("\t-no18         \tdo not read CV18");
-        System.out.println("\t-lnm          \tset max length of loco name manually (default=11)");
-        System.out.println("\t-lle          \tset max loco list write errors (default=250)");
+        System.out.println("\t-lnm <num>    \tset max length of loco name manually (default=11)");
+        System.out.println("\t-lle <num>    \tset max loco list write errors (default=250)");
         System.out.println("");
         System.out.println("\t-dj           \tshow java system environment and exit");
         System.out.println("\t-h            \tshow help and exit");
@@ -3253,14 +3454,23 @@ public class CVNavi extends javax.swing.JFrame {
     * @param args the command line arguments
     */
     public static void main(final String args[]) {
-
         int argc = args.length;
+        // pass args to argv for debugging inside class
+        argv = args;
         String dataModel = System.getProperty("sun.arch.data.model");
         String osName = System.getProperty("os.name");
         String osArch = System.getProperty("os.arch");
         // String javaversion = System.getProperty("java.version");
         String javaversion = System.getProperty("java.vm.name")+" "+System.getProperty("java.vm.version");
         System.out.println(""+osName+"["+osArch+"] , "+javaversion+"["+dataModel+"bit]");
+
+        // create default debugFileName with date and time
+        String pattern = "yyyyMMdd_HHmmss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        Date today = Calendar.getInstance().getTime();        
+        String todayAsString = df.format(today);
+        System.out.println("Current date_time is: " + todayAsString);
+        debugFileName = "CVNavi.log."+todayAsString+".txt";
 
         System.out.println("argc="+ argc );
         int n = 0;
@@ -3288,14 +3498,36 @@ public class CVNavi extends javax.swing.JFrame {
                         System.out.println("debugFileName set to "+debugFileName);
                         break;
                     case "-dev":
-                        if( n == (argc-1) || args[n+1].startsWith("-") ){
-                            System.out.println("debugFileName is default");
+                        n++;
+                        gsSchnittstelle_was_forced = true;
+                        iComType = c.SERIAL;
+                        gsSchnittstelle = args[n];
+                        System.out.println("gsSchnittstelle set to "+gsSchnittstelle);
+                        break;
+                    case "-tcp":
+                        iComType = c.TCP_IP;
+                        System.out.println("iComType set to TCP_IP");
+                        gsSchnittstelle_was_forced = true;
+                        break;
+                    case "-host":
+                        if( n == (argc-1) || args[n+1].startsWith("-") ) {
+                            // "-b" ohne Parameter -> Zahl fehlt => ignorieren
                             break;
                         }
                         n++;
-                        gsSchnittstelle_was_forced = true;
+                        iComType = c.TCP_IP; // -host forces mode -tcp
                         gsSchnittstelle = args[n];
                         System.out.println("gsSchnittstelle set to "+gsSchnittstelle);
+                        gsSchnittstelle_was_forced = true;
+                        break;
+                    case "-port":
+                        if( n == (argc-1) || args[n+1].startsWith("-") ) {
+                            // "-b" ohne Parameter -> Zahl fehlt => ignorieren
+                            break;
+                        }
+                        n++;
+                        port = Integer.parseInt(args[n]);
+                        System.out.println("port set to "+port);
                         break;
                     case "-nortsdtr":
                         gsUse_RTSDTR = false;
@@ -3417,6 +3649,7 @@ public class CVNavi extends javax.swing.JFrame {
                         }
                         n++;
                         userLocoNameMax = Integer.parseInt(args[n]);
+                        userLocoNameMax_was_forced = true;
                         System.out.println("userLocoNameMax set to "+userLocoNameMax);
                         break;
                     case "-lle":
@@ -3467,11 +3700,7 @@ public class CVNavi extends javax.swing.JFrame {
                 messageBox.setVisible(true);
 
                 Logger.getLogger(CVNavi.class.getName()).log(Level.SEVERE, null, ex1);
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex2) {
-                    Logger.getLogger(CVNavi.class.getName()).log(Level.SEVERE, null, ex2);
-                }
+                CVNavi.sleep(5000);
                 // System.exit(1);
                 // System.exit(1);
             }
@@ -3509,6 +3738,7 @@ public class CVNavi extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField jBaudRate;
     private javax.swing.JTextField jBaudrateTitle;
+    private javax.swing.JButton jButtonDebug;
     private javax.swing.JButton jButtonEnd;
     private javax.swing.JButton jButtonInfo;
     private javax.swing.JButton jButtonOptions;

@@ -49,7 +49,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="&lt;ReadWriteCV.jPanel1.border.title&gt;">
+            <TitledBorder title="Lesen / Schreiben von CVs">
               <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="ReadWriteCV.jPanel1.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
               <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
             </TitledBorder>

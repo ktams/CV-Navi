@@ -4,9 +4,9 @@
  *
  * @author Kersten Tams Copyright 2009-2018
  * @author Lothar Roth  Copyright 2012-2018
+ * @author Peter Fritze  Copyright 2025
  *
  */
-
 package my.CVNavi;
 
 import java.awt.Dialog;
@@ -38,15 +38,15 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
     public CVEditList(Dialog parent, boolean modal, CVNavi cvnavi, int[][] CV, byte[] CV_To_Edit, boolean bPrint) {
         super(parent, modal);
         this.CVNavi = cvnavi;
-        if( CVNavi != null ) {
+        if (CVNavi != null) {
             this.Decoder = CVNavi.Decoder;
             this.CV = CV;
             this.CV_To_Edit = CV_To_Edit;
             this.bPrint = bPrint;
             this.rwcv = (ReadWriteCV) parent;
-            if( debugLevel >= 2 ) {
-                if( CV != null ) {
-                    System.out.println("CVEditList init CV.length="+CV.length+" CV[0].length"+CV[0].length);
+            if (debugLevel >= 2) {
+                if (CV != null) {
+                    System.out.println("CVEditList init CV.length=" + CV.length + " CV[0].length" + CV[0].length);
                 } else {
                     System.out.println("CVEditList init CV == null");
                 }
@@ -66,17 +66,17 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
     }
 
     private int getValueForCV(int cvNum) {
-        for( int i = 0 ; i < CV[0].length ; i++) {
-            if( CV[0][i] == cvNum ) {
-                return( CV[1][i] );
+        for (int i = 0; i < CV[0].length; i++) {
+            if (CV[0][i] == cvNum) {
+                return (CV[1][i]);
             }
         }
         return -1;
     }
 
     private boolean setCVvalue(int cv, int value) {
-        for( int i = 0 ; i < CV[0].length ; i++) {
-            if( CV[0][i] == cv ) {
+        for (int i = 0; i < CV[0].length; i++) {
+            if (CV[0][i] == cv) {
                 CV[1][i] = value;
                 return true;
             }
@@ -250,132 +250,389 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 { Integer.valueOf(127), null, null, null},
                 { Integer.valueOf(128), null, null, null},
                 { Integer.valueOf(129), null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                { Integer.valueOf(130), null, null, null},
+                { Integer.valueOf(131), null, null, null},
+                { Integer.valueOf(132), null, null, null},
+                { Integer.valueOf(133), null, null, null},
+                { Integer.valueOf(134), null, null, null},
+                { Integer.valueOf(135), null, null, null},
+                { Integer.valueOf(136), null, null, null},
+                { Integer.valueOf(137), null, null, null},
+                { Integer.valueOf(138), null, null, null},
+                { Integer.valueOf(139), null, null, null},
+                { Integer.valueOf(140), null, null, null},
+                { Integer.valueOf(141), null, null, null},
+                { Integer.valueOf(142), null, null, null},
+                { Integer.valueOf(143), null, null, null},
+                { Integer.valueOf(144), null, null, null},
+                { Integer.valueOf(145), null, null, null},
+                { Integer.valueOf(146), null, null, null},
+                { Integer.valueOf(147), null, null, null},
+                { Integer.valueOf(148), null, null, null},
+                { Integer.valueOf(149), null, null, null},
+                { Integer.valueOf(150), null, null, null},
+                { Integer.valueOf(151), null, null, null},
+                { Integer.valueOf(152), null, null, null},
+                { Integer.valueOf(153), null, null, null},
+                { Integer.valueOf(154), null, null, null},
+                { Integer.valueOf(155), null, null, null},
+                { Integer.valueOf(156), null, null, null},
+                { Integer.valueOf(157), null, null, null},
+                { Integer.valueOf(158), null, null, null},
+                { Integer.valueOf(159), null, null, null},
+                { Integer.valueOf(160), null, null, null},
+                { Integer.valueOf(161), null, null, null},
+                { Integer.valueOf(162), null, null, null},
+                { Integer.valueOf(163), null, null, null},
+                { Integer.valueOf(164), null, null, null},
+                { Integer.valueOf(165), null, null, null},
+                { Integer.valueOf(166), null, null, null},
+                { Integer.valueOf(167), null, null, null},
+                { Integer.valueOf(168), null, null, null},
+                { Integer.valueOf(169), null, null, null},
+                { Integer.valueOf(170), null, null, null},
+                { Integer.valueOf(171), null, null, null},
+                { Integer.valueOf(172), null, null, null},
+                { Integer.valueOf(173), null, null, null},
+                { Integer.valueOf(174), null, null, null},
+                { Integer.valueOf(175), null, null, null},
+                { Integer.valueOf(176), null, null, null},
+                { Integer.valueOf(177), null, null, null},
+                { Integer.valueOf(178), null, null, Boolean.valueOf(false)},
+                { Integer.valueOf(179), null, null, null},
+                { Integer.valueOf(180), null, null, null},
+                { Integer.valueOf(181), null, null, null},
+                { Integer.valueOf(182), null, null, null},
+                { Integer.valueOf(183), null, null, null},
+                { Integer.valueOf(184), null, null, null},
+                { Integer.valueOf(185), null, null, null},
+                { Integer.valueOf(186), null, null, null},
+                { Integer.valueOf(187), null, null, null},
+                { Integer.valueOf(188), null, null, null},
+                { Integer.valueOf(189), null, null, null},
+                { Integer.valueOf(190), null, null, null},
+                { Integer.valueOf(191), null, null, null},
+                { Integer.valueOf(192), null, null, null},
+                { Integer.valueOf(193), null, null, null},
+                { Integer.valueOf(194), null, null, null},
+                { Integer.valueOf(195), null, null, null},
+                { Integer.valueOf(196), null, null, null},
+                { Integer.valueOf(197), null, null, null},
+                { Integer.valueOf(198), null, null, null},
+                { Integer.valueOf(199), null, null, null},
+                { Integer.valueOf(200), null, null, null},
+                { Integer.valueOf(201), null, null, null},
+                { Integer.valueOf(202), null, null, null},
+                { Integer.valueOf(203), null, null, null},
+                { Integer.valueOf(204), null, null, null},
+                { Integer.valueOf(205), null, null, null},
+                { Integer.valueOf(206), null, null, null},
+                { Integer.valueOf(207), null, null, null},
+                { Integer.valueOf(208), null, null, null},
+                { Integer.valueOf(209), null, null, null},
+                { Integer.valueOf(210), null, null, null},
+                { Integer.valueOf(211), null, null, null},
+                { Integer.valueOf(212), null, null, null},
+                { Integer.valueOf(213), null, null, null},
+                { Integer.valueOf(214), null, null, null},
+                { Integer.valueOf(215), null, null, null},
+                { Integer.valueOf(216), null, null, null},
+                { Integer.valueOf(217), null, null, null},
+                { Integer.valueOf(218), null, null, null},
+                { Integer.valueOf(219), null, null, null},
+                { Integer.valueOf(220), null, null, null},
+                { Integer.valueOf(221), null, null, null},
+                { Integer.valueOf(222), null, null, null},
+                { Integer.valueOf(223), null, null, null},
+                { Integer.valueOf(224), null, null, null},
+                { Integer.valueOf(225), null, null, null},
+                { Integer.valueOf(226), null, null, null},
+                { Integer.valueOf(227), null, null, null},
+                { Integer.valueOf(228), null, null, null},
+                { Integer.valueOf(229), null, null, null},
+                { Integer.valueOf(230), null, null, null},
+                { Integer.valueOf(231), null, null, null},
+                { Integer.valueOf(232), null, null, null},
+                { Integer.valueOf(233), null, null, null},
+                { Integer.valueOf(234), null, null, null},
+                { Integer.valueOf(235), null, null, null},
+                { Integer.valueOf(236), null, null, null},
+                { Integer.valueOf(237), null, null, null},
+                { Integer.valueOf(238), null, null, null},
+                { Integer.valueOf(239), null, null, null},
+                { Integer.valueOf(240), null, null, null},
+                { Integer.valueOf(241), null, null, null},
+                { Integer.valueOf(242), null, null, null},
+                { Integer.valueOf(243), null, null, null},
+                { Integer.valueOf(244), null, null, null},
+                { Integer.valueOf(245), null, null, null},
+                { Integer.valueOf(246), null, null, null},
+                { Integer.valueOf(247), null, null, null},
+                { Integer.valueOf(248), null, null, null},
+                { Integer.valueOf(249), null, null, null},
+                { Integer.valueOf(250), null, null, null},
+                { Integer.valueOf(251), null, null, null},
+                { Integer.valueOf(252), null, null, null},
+                { Integer.valueOf(253), null, null, null},
+                { Integer.valueOf(254), null, null, null},
+                { Integer.valueOf(255), null, null, null},
+                { Integer.valueOf(256), null, null, null},
+                { Integer.valueOf(257), null, null, null},
+                { Integer.valueOf(258), null, null, null},
+                { Integer.valueOf(259), null, "", null},
+                { Integer.valueOf(260), null, "", null},
+                { Integer.valueOf(261), null, "", null},
+                { Integer.valueOf(262), null, null, null},
+                { Integer.valueOf(263), null, "", null},
+                { Integer.valueOf(264), null, "", null},
+                { Integer.valueOf(265), null, "", null},
+                { Integer.valueOf(266), null, null, null},
+                { Integer.valueOf(267), null, "", null},
+                { Integer.valueOf(268), null, null, null},
+                { Integer.valueOf(269), null, null, null},
+                { Integer.valueOf(270), null, null, null},
+                { Integer.valueOf(271), null, null, null},
+                { Integer.valueOf(272), null, null, null},
+                { Integer.valueOf(273), null, null, null},
+                { Integer.valueOf(274), null, null, null},
+                { Integer.valueOf(275), null, null, null},
+                { Integer.valueOf(276), null, null, null},
+                { Integer.valueOf(277), null, null, null},
+                { Integer.valueOf(278), null, null, null},
+                { Integer.valueOf(279), null, null, null},
+                { Integer.valueOf(280), null, null, null},
+                { Integer.valueOf(281), null, null, null},
+                { Integer.valueOf(282), null, null, null},
+                { Integer.valueOf(283), null, null, null},
+                { Integer.valueOf(284), null, null, null},
+                { Integer.valueOf(285), null, null, null},
+                { Integer.valueOf(286), null, null, null},
+                { Integer.valueOf(287), null, null, null},
+                { Integer.valueOf(288), null, null, null},
+                { Integer.valueOf(289), null, null, null},
+                { Integer.valueOf(290), null, null, null},
+                { Integer.valueOf(291), null, null, null},
+                { Integer.valueOf(292), null, null, null},
+                { Integer.valueOf(293), null, null, null},
+                { Integer.valueOf(294), null, null, null},
+                { Integer.valueOf(295), null, null, null},
+                { Integer.valueOf(296), null, null, null},
+                { Integer.valueOf(297), null, null, null},
+                { Integer.valueOf(298), null, null, null},
+                { Integer.valueOf(299), null, null, null},
+                { Integer.valueOf(300), null, null, null},
+                { Integer.valueOf(301), null, null, null},
+                { Integer.valueOf(302), null, null, null},
+                { Integer.valueOf(303), null, null, null},
+                { Integer.valueOf(304), null, null, null},
+                { Integer.valueOf(305), null, null, null},
+                { Integer.valueOf(306), null, null, null},
+                { Integer.valueOf(307), null, null, null},
+                { Integer.valueOf(308), null, null, null},
+                { Integer.valueOf(309), null, null, null},
+                { Integer.valueOf(310), null, null, null},
+                { Integer.valueOf(311), null, null, null},
+                { Integer.valueOf(312), null, null, null},
+                { Integer.valueOf(313), null, null, null},
+                { Integer.valueOf(314), null, null, null},
+                { Integer.valueOf(315), null, null, null},
+                { Integer.valueOf(316), null, null, null},
+                { Integer.valueOf(317), null, null, null},
+                { Integer.valueOf(318), null, null, null},
+                { Integer.valueOf(319), null, null, null},
+                { Integer.valueOf(320), null, null, null},
+                { Integer.valueOf(321), null, null, null},
+                { Integer.valueOf(322), null, null, null},
+                { Integer.valueOf(323), null, null, null},
+                { Integer.valueOf(324), null, null, null},
+                { Integer.valueOf(325), null, null, null},
+                { Integer.valueOf(326), null, null, null},
+                { Integer.valueOf(327), null, null, null},
+                { Integer.valueOf(328), null, null, null},
+                { Integer.valueOf(329), null, null, null},
+                { Integer.valueOf(330), null, null, null},
+                { Integer.valueOf(331), null, null, null},
+                { Integer.valueOf(332), null, null, null},
+                { Integer.valueOf(333), null, null, null},
+                { Integer.valueOf(334), null, null, null},
+                { Integer.valueOf(335), null, null, null},
+                { Integer.valueOf(336), null, null, null},
+                { Integer.valueOf(337), null, null, null},
+                { Integer.valueOf(338), null, null, null},
+                { Integer.valueOf(339), null, null, null},
+                { Integer.valueOf(340), null, null, null},
+                { Integer.valueOf(341), null, null, null},
+                { Integer.valueOf(342), null, null, null},
+                { Integer.valueOf(343), null, null, null},
+                { Integer.valueOf(344), null, null, null},
+                { Integer.valueOf(345), null, null, null},
+                { Integer.valueOf(346), null, null, null},
+                { Integer.valueOf(347), null, null, null},
+                { Integer.valueOf(348), null, null, null},
+                { Integer.valueOf(349), null, null, null},
+                { Integer.valueOf(350), null, null, null},
+                { Integer.valueOf(351), null, null, null},
+                { Integer.valueOf(352), null, null, null},
+                { Integer.valueOf(353), null, null, null},
+                { Integer.valueOf(354), null, null, null},
+                { Integer.valueOf(355), null, null, null},
+                { Integer.valueOf(356), null, null, null},
+                { Integer.valueOf(357), null, null, null},
+                { Integer.valueOf(358), null, null, null},
+                { Integer.valueOf(359), null, null, null},
+                { Integer.valueOf(360), null, null, null},
+                { Integer.valueOf(361), null, null, null},
+                { Integer.valueOf(362), null, null, null},
+                { Integer.valueOf(363), null, null, null},
+                { Integer.valueOf(364), null, null, null},
+                { Integer.valueOf(365), null, null, null},
+                { Integer.valueOf(366), null, null, null},
+                { Integer.valueOf(367), null, null, null},
+                { Integer.valueOf(368), null, null, null},
+                { Integer.valueOf(369), null, null, null},
+                { Integer.valueOf(370), null, null, null},
+                { Integer.valueOf(371), null, null, null},
+                { Integer.valueOf(372), null, null, null},
+                { Integer.valueOf(373), null, null, null},
+                { Integer.valueOf(374), null, null, null},
+                { Integer.valueOf(375), null, null, null},
+                { Integer.valueOf(376), null, null, null},
+                { Integer.valueOf(377), null, null, null},
+                { Integer.valueOf(378), null, null, null},
+                { Integer.valueOf(379), null, null, null},
+                { Integer.valueOf(380), null, null, null},
+                { Integer.valueOf(381), null, null, null},
+                { Integer.valueOf(382), null, null, null},
+                { Integer.valueOf(383), null, null, null},
+                { Integer.valueOf(384), null, null, null},
+                { Integer.valueOf(385), null, null, null},
+                { Integer.valueOf(386), null, null, null},
+                { Integer.valueOf(387), null, null, null},
+                { Integer.valueOf(388), null, null, null},
+                { Integer.valueOf(389), null, null, null},
+                { Integer.valueOf(390), null, null, null},
+                { Integer.valueOf(391), null, null, null},
+                { Integer.valueOf(392), null, null, null},
+                { Integer.valueOf(393), null, null, null},
+                { Integer.valueOf(394), null, null, null},
+                { Integer.valueOf(395), null, null, null},
+                { Integer.valueOf(396), null, null, null},
+                { Integer.valueOf(397), null, null, null},
+                { Integer.valueOf(398), null, null, null},
+                { Integer.valueOf(399), null, null, null},
+                { Integer.valueOf(400), null, null, null},
+                { Integer.valueOf(401), null, null, null},
+                { Integer.valueOf(402), null, null, null},
+                { Integer.valueOf(403), null, null, null},
+                { Integer.valueOf(404), null, null, null},
+                { Integer.valueOf(405), null, null, null},
+                { Integer.valueOf(406), null, null, null},
+                { Integer.valueOf(407), null, null, null},
+                { Integer.valueOf(408), null, null, null},
+                { Integer.valueOf(409), null, null, null},
+                { Integer.valueOf(410), null, null, null},
+                { Integer.valueOf(411), null, null, null},
+                { Integer.valueOf(412), null, null, null},
+                { Integer.valueOf(413), null, null, null},
+                { Integer.valueOf(414), null, null, null},
+                { Integer.valueOf(415), null, null, null},
+                { Integer.valueOf(416), null, null, null},
+                { Integer.valueOf(417), null, null, null},
+                { Integer.valueOf(418), null, null, null},
+                { Integer.valueOf(419), null, null, null},
+                { Integer.valueOf(420), null, null, null},
+                { Integer.valueOf(421), null, null, null},
+                { Integer.valueOf(422), null, null, null},
+                { Integer.valueOf(423), null, null, null},
+                { Integer.valueOf(424), null, null, null},
+                { Integer.valueOf(425), null, null, null},
+                { Integer.valueOf(426), null, null, null},
+                { Integer.valueOf(427), null, null, null},
+                { Integer.valueOf(428), null, null, null},
+                { Integer.valueOf(429), null, null, null},
+                { Integer.valueOf(430), null, null, null},
+                { Integer.valueOf(431), null, null, null},
+                { Integer.valueOf(432), null, null, null},
+                { Integer.valueOf(433), null, null, null},
+                { Integer.valueOf(434), null, null, null},
+                { Integer.valueOf(435), null, null, null},
+                { Integer.valueOf(436), null, null, null},
+                { Integer.valueOf(437), null, null, null},
+                { Integer.valueOf(438), null, null, null},
+                { Integer.valueOf(439), null, null, null},
+                { Integer.valueOf(440), null, null, null},
+                { Integer.valueOf(441), null, null, null},
+                { Integer.valueOf(442), null, null, null},
+                { Integer.valueOf(443), null, null, null},
+                { Integer.valueOf(444), null, null, null},
+                { Integer.valueOf(445), null, null, null},
+                { Integer.valueOf(446), null, null, null},
+                { Integer.valueOf(447), null, null, null},
+                { Integer.valueOf(448), null, null, null},
+                { Integer.valueOf(449), null, null, null},
+                { Integer.valueOf(450), null, null, null},
+                { Integer.valueOf(451), null, null, null},
+                { Integer.valueOf(452), null, null, null},
+                { Integer.valueOf(453), null, null, null},
+                { Integer.valueOf(454), null, null, null},
+                { Integer.valueOf(455), null, null, null},
+                { Integer.valueOf(456), null, null, null},
+                { Integer.valueOf(457), null, null, null},
+                { Integer.valueOf(458), null, null, null},
+                { Integer.valueOf(459), null, null, null},
+                { Integer.valueOf(460), null, null, null},
+                { Integer.valueOf(461), null, null, null},
+                { Integer.valueOf(462), null, null, null},
+                { Integer.valueOf(463), null, null, null},
+                { Integer.valueOf(464), null, null, null},
+                { Integer.valueOf(465), null, null, null},
+                { Integer.valueOf(466), null, null, null},
+                { Integer.valueOf(467), null, null, null},
+                { Integer.valueOf(468), null, null, null},
+                { Integer.valueOf(469), null, null, null},
+                { Integer.valueOf(470), null, null, null},
+                { Integer.valueOf(471), null, null, null},
+                { Integer.valueOf(472), null, null, null},
+                { Integer.valueOf(473), null, null, null},
+                { Integer.valueOf(474), null, null, null},
+                { Integer.valueOf(475), null, null, null},
+                { Integer.valueOf(476), null, null, null},
+                { Integer.valueOf(477), null, null, null},
+                { Integer.valueOf(478), null, null, null},
+                { Integer.valueOf(479), null, null, null},
+                { Integer.valueOf(480), null, null, null},
+                { Integer.valueOf(481), null, null, null},
+                { Integer.valueOf(482), null, null, null},
+                { Integer.valueOf(483), null, null, null},
+                { Integer.valueOf(484), null, null, null},
+                { Integer.valueOf(485), null, null, null},
+                { Integer.valueOf(486), null, null, null},
+                { Integer.valueOf(487), null, null, null},
+                { Integer.valueOf(488), null, null, null},
+                { Integer.valueOf(489), null, null, null},
+                { Integer.valueOf(490), null, null, null},
+                { Integer.valueOf(491), null, null, null},
+                { Integer.valueOf(492), null, null, null},
+                { Integer.valueOf(493), null, null, null},
+                { Integer.valueOf(494), null, null, null},
+                { Integer.valueOf(495), null, null, null},
+                { Integer.valueOf(496), null, null, null},
+                { Integer.valueOf(497), null, null, null},
+                { Integer.valueOf(498), null, null, null},
+                { Integer.valueOf(499), null, null, null},
+                { Integer.valueOf(500), null, null, null},
+                { Integer.valueOf(501), null, null, null},
+                { Integer.valueOf(502), null, null, null},
+                { Integer.valueOf(503), null, null, null},
+                { Integer.valueOf(504), null, null, null},
+                { Integer.valueOf(505), null, null, null},
+                { Integer.valueOf(506), null, null, null},
+                { Integer.valueOf(507), null, null, null},
+                { Integer.valueOf(508), null, null, null},
+                { Integer.valueOf(509), null, null, null},
+                { Integer.valueOf(510), null, null, null},
+                { Integer.valueOf(511), null, null, null},
+                { Integer.valueOf(512), null, null, null}
             },
             new String [] {
                 "CV", "Wert", "Bemerkungen", "prog"
@@ -410,11 +667,15 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(25);
+            jTable1.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("CVEditList.jTable1.columnModel.title0")); // NOI18N
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setPreferredWidth(25);
+            jTable1.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("CVEditList.jTable1.columnModel.title1")); // NOI18N
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(340);
+            jTable1.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("CVEditList.jTable1.columnModel.title2")); // NOI18N
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(35);
+            jTable1.getColumnModel().getColumn(3).setHeaderValue(bundle.getString("CVEditList.jTable1.columnModel.title3")); // NOI18N
         }
 
         jOK.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -473,7 +734,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                             .addComponent(jGruppe_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jGruppe_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jGruppe_an, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jGruppe_aus, javax.swing.GroupLayout.PREFERRED_SIZE, 138, Short.MAX_VALUE))
+                            .addComponent(jGruppe_aus, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
                         .addGap(6, 6, 6))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jAbbruch)
@@ -511,36 +772,34 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
     }//GEN-LAST:event_jAbbruchActionPerformed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
-        for (int i = 0; i < 255; i++) {
-            if(CV_To_Edit_Old[i] == 1)
-            {
+        for (int i = 0; i < CV[0].length; i++) {
+            if (CV_To_Edit_Old[i] == 1) {
                 CV_To_Edit[i] = 1;
                 continue;
+            } else {
+                jTable1.setValueAt(false, i, 3);
             }
-            else
-            jTable1.setValueAt(false, i, 3);
         }
     }//GEN-LAST:event_jTable1MouseReleased
 
     private void jOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOKActionPerformed
         if (!bPrint) {
             int k = 0;
-            for (int i = 0; i < 254; i++) {
+            for (int i = 0; i < CV[0].length; i++) {
                 Object valueAt = jTable1.getValueAt(i, 3);
                 String str = "" + valueAt;
-                if( str.equals("true")) {
+                if (str.equals("true")) {
                     CV_To_Edit[i] = 1;
                     Object n = jTable1.getValueAt(i, 1);
                     int value = 0;
                     try {
-                        value = Integer.parseInt(""+n);
+                        value = Integer.parseInt("" + n);
                         //value = (Integer) n;
-                        setCVvalue( (i+1), value ) ;
+                        setCVvalue((i + 1), value);
                     } catch (Exception ex) {
-                        System.out.println("jOKActionPerformed ex "+ ex.getMessage() );
+                        System.out.println("jOKActionPerformed ex " + ex.getMessage());
                     }
-                }
-                else {
+                } else {
                     CV_To_Edit[i] = 0;
                 }
             }
@@ -548,7 +807,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
             try {
                 jTable1.print();
             } catch (PrinterException ex) {
-                MsgBox messageBox = new MsgBox( (Frame) this.getParent(), true, this);
+                MsgBox messageBox = new MsgBox((Frame) this.getParent(), true, this);
                 messageBox.jLabel1.setText(bundle.getString("Fehler"));
                 messageBox.jLabel2.setText(bundle.getString("DruckProbleme"));
                 messageBox.jLabel3.setText(bundle.getString("AusdruckAbbruch"));
@@ -560,38 +819,34 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
     }//GEN-LAST:event_jOKActionPerformed
 
     private void jGruppe_anActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGruppe_anActionPerformed
-        for (int i = 0; i < 255; i++) {
-            if(CV_To_Edit_Old[i] == 1)
-            {
-                CV_To_Edit[i] = 1 ; // = CV_To_Edit_Old[i];
+        for (int i = 0; i < CV[0].length; i++) {
+            if (CV_To_Edit_Old[i] == 1) {
+                CV_To_Edit[i] = 1; // = CV_To_Edit_Old[i];
                 jTable1.setValueAt(true, i, 3);
             }
         }
     }//GEN-LAST:event_jGruppe_anActionPerformed
 
     private void jGruppe_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGruppe_2ActionPerformed
-        int cvNr ;
+        int cvNr;
         for (int i = 1; i < CV[0].length; i++) {
             cvNr = CV[0][i];
-            if( cvNr == 0 )
-            continue;
-            if( CVNavi.checkNumRange(cvNr, 33, 46) )
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (cvNr == 0) {
+                continue;
             }
-            if( CVNavi.checkNumRange(cvNr, 53, 58) )
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (CVNavi.checkNumRange(cvNr, 33, 46)) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
-            if( CVNavi.checkNumRange(cvNr, 62, 64) )
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (CVNavi.checkNumRange(cvNr, 53, 58)) {
+                CV_To_Edit[cvNr - 1] = 1;
+            }
+            if (CVNavi.checkNumRange(cvNr, 62, 64)) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
         }
         // Update Column 3
-        for (int i = 0; i < 255; i++) {
-            if(CV_To_Edit[i] == 1)
-            {
+        for (int i = 0; i < CV[0].length; i++) {
+            if (CV_To_Edit[i] == 1) {
                 jTable1.setValueAt(true, i, 3);
             }
         }
@@ -601,48 +856,41 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
         int cvNr;
         for (int i = 1; i < CV[0].length; i++) {
             cvNr = CV[0][i];
-            if( cvNr == 0 )
+            if (cvNr == 0) {
                 continue;
-            if( CVNavi.checkNumRange(cvNr, 1, 5) )
-            {
-                CV_To_Edit[cvNr-1] = 1;
             }
-            if( CVNavi.checkNumRange(cvNr, 17, 19) )
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (CVNavi.checkNumRange(cvNr, 1, 5)) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
-            if(cvNr == 29)
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (CVNavi.checkNumRange(cvNr, 17, 19)) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
-            if( CVNavi.checkNumRange(cvNr, 49, 52) )
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (cvNr == 29) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
-            if(cvNr == 65)
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (CVNavi.checkNumRange(cvNr, 49, 52)) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
-            if(cvNr == 114)
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (cvNr == 65) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
-            if(cvNr == 124)
-            {
-                CV_To_Edit[cvNr-1] = 1;
+            if (cvNr == 114) {
+                CV_To_Edit[cvNr - 1] = 1;
+            }
+            if (cvNr == 124) {
+                CV_To_Edit[cvNr - 1] = 1;
             }
         }
         // Update Column 3
-        for (int i = 0; i < 255; i++) {
-            if(CV_To_Edit[i] == 1)
-            {
+        for (int i = 0; i < CV[0].length; i++) {
+            if (CV_To_Edit[i] == 1) {
                 jTable1.setValueAt(true, i, 3);
             }
         }
     }//GEN-LAST:event_jGruppe_1ActionPerformed
 
     private void jGruppe_ausActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGruppe_ausActionPerformed
-        for (int i = 0; i < 255; i++) {
+        for (int i = 0; i < CV[0].length; i++) {
             jTable1.setValueAt(false, i, 3);
             CV_To_Edit[i] = 0;
         }
@@ -650,9 +898,8 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         int k = 0;
-        CV_To_Edit_Old = new byte[256];
-        switch(Decoder)
-        {
+        CV_To_Edit_Old = new byte[512];
+        switch (Decoder) {
             case c.FD_M: //FD-M
                 jTable1.setValueAt(" ", 46, 2);
                 jTable1.setValueAt(" ", 47, 2);
@@ -673,7 +920,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(bundle.getString("Blinken") + " AUX4", 63, 2);
 
                 jTable1.setValueAt(bundle.getString("Umschaltspannung"), 112, 2);
-                for (int i = 114; i < 255; i++) {
+                for (int i = 114; i < CV[0].length; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
                 break;
@@ -698,7 +945,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(" ", 63, 2);
 
                 jTable1.setValueAt(" ", 112, 2);
-                for (int i = 114; i < 255; i++) {
+                for (int i = 114; i < CV[0].length; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
                 break;
@@ -713,7 +960,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
 
                 jTable1.setValueAt(" ", 116, 2);
 
-                for (int i = 124; i < 255; i++) {
+                for (int i = 124; i < CV[0].length; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
                 break;
@@ -734,10 +981,10 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 for (int i = 30; i < 32; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
-                for( int i = 34 ; i <= 61 ; i++ ) { // CV45 -> F1 bis CV62 -> F28
-                    jTable1.setValueAt(bundle.getString("ZuordnungZuF")+(i-33), i, 2);
+                for (int i = 34; i <= 61; i++) { // CV45 -> F1 bis CV62 -> F28
+                    jTable1.setValueAt(bundle.getString("ZuordnungZuF") + (i - 33), i, 2);
                 }
-                for (int i = 62; i < 255; i++) {
+                for (int i = 62; i < CV[0].length; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
                 break;
@@ -785,8 +1032,7 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(bundle.getString("Dimmen") + " LED7+8", 61, 2);
                 jTable1.setValueAt(bundle.getString("Dimmen") + " AUX1+2", 62, 2);
                 jTable1.setValueAt(bundle.getString("Dimmen") + " AUX3", 63, 2);
-                for(int i = 64; i < 111; i++)
-                {
+                for (int i = 64; i < 111; i++) {
                     jTable1.setValueAt(" ", i, 2);
                 }
                 jTable1.setValueAt("F-Tasten für Dämmerungsschalter", 111, 2);
@@ -807,7 +1053,10 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt("Einschaltzeit Leuchtstoffröhre 5+6", 127, 2);
                 jTable1.setValueAt("Einschaltzeit Leuchtstoffröhre 7+8", 128, 2);
                 jTable1.setValueAt(bundle.getString("Default"), 129, 2);
-               break;
+                for (int i = 130; i < CV[0].length; i++) {
+                    jTable1.setValueAt(" ", i, 2);
+                }
+                break;
 
             case c.LD_G31Plus:
             case c.LD_G33Plus:
@@ -928,7 +1177,233 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt(bundle.getString("Einschalten") + " AUX" + bundle.getString("beiFS0"), 173, 2);
                 jTable1.setValueAt(bundle.getString("Ausschalten") + " AUX" + bundle.getString("beiFS0"), 174, 2);
                 jTable1.setValueAt(bundle.getString("Invertieren") + " AUX" + bundle.getString("beiFS0"), 175, 2);
-               break;
+                for (int i = 195; i < CV[0].length; i++) {
+                    jTable1.setValueAt(" ", i, 2);
+                }
+                break;
+
+            case c.LD_G41:
+            case c.LD_G42:
+            case c.LD_W42:
+            case c.LD_G42_2:
+            case c.LD_W42_2:
+            case c.LD_G43:
+            case c.LD_G44:
+
+                jTable1.setValueAt(bundle.getString("RailCom_Statistik"), 9, 2);
+                jTable1.setValueAt(bundle.getString("Betriebsarten"), 11, 2);
+                jTable1.setValueAt("", 19, 2);
+                jTable1.setValueAt("", 22, 2);
+                jTable1.setValueAt("", 23, 2);
+                jTable1.setValueAt("", 24, 2);
+                jTable1.setValueAt("", 25, 2);
+                if (Decoder == c.LD_G42 || Decoder == c.LD_W42) {
+                    jTable1.setValueAt(bundle.getString("RailCom_Kanal"), 27, 2);
+                } else {
+                    jTable1.setValueAt(bundle.getString("RailCom_Einstellungen"), 27, 2);
+                }
+                jTable1.setValueAt("", 32, 2);
+                jTable1.setValueAt("", 33, 2);
+                jTable1.setValueAt("", 34, 2);
+                jTable1.setValueAt("", 35, 2);
+                jTable1.setValueAt("", 36, 2);
+                jTable1.setValueAt("", 37, 2);
+                jTable1.setValueAt("", 38, 2);
+                jTable1.setValueAt("", 39, 2);
+                jTable1.setValueAt("", 40, 2);
+                jTable1.setValueAt("", 41, 2);
+                jTable1.setValueAt("", 42, 2);
+                jTable1.setValueAt("", 43, 2);
+                jTable1.setValueAt("", 44, 2);
+                jTable1.setValueAt("", 45, 2);
+
+                jTable1.setValueAt(bundle.getString("Dimmen_F0f"), 46, 2);
+                jTable1.setValueAt(bundle.getString("Dimmen_F0r"), 47, 2);
+                if (Decoder != c.LD_G42 && Decoder != c.LD_W42) {
+                    jTable1.setValueAt(bundle.getString("Dimmen_AUX1"), 48, 2);
+                    jTable1.setValueAt(bundle.getString("Dimmen_AUX2"), 49, 2);
+                } else {
+                    jTable1.setValueAt("", 48, 2);
+                    jTable1.setValueAt("", 49, 2);
+                }
+                if (Decoder == c.LD_G43 || Decoder == c.LD_G44) {
+                    jTable1.setValueAt(bundle.getString("Dimmen_AUX3"), 50, 2);
+                    jTable1.setValueAt(bundle.getString("Dimmen_AUX4"), 51, 2);
+                    jTable1.setValueAt(bundle.getString("Dimmen_AUX5"), 52, 2);
+                    jTable1.setValueAt(bundle.getString("Dimmen_AUX6"), 53, 2);
+                } else {
+                    jTable1.setValueAt("", 50, 2);
+                    jTable1.setValueAt("", 51, 2);
+                    jTable1.setValueAt("", 52, 2);
+                    jTable1.setValueAt("", 53, 2);
+                }
+                if (Decoder == c.LD_G42 || Decoder == c.LD_W42) {
+                    jTable1.setValueAt("", 54, 2);
+                    jTable1.setValueAt("", 55, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_F0f"), 56, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_F0r"), 57, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX1"), 58, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX2"), 59, 2);
+                } else {
+                    jTable1.setValueAt(bundle.getString("Effekt_F0f"), 54, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_F0r"), 55, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX1"), 56, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX2"), 57, 2);
+                    if (Decoder != c.LD_G42_2 && Decoder != c.LD_W42_2) {
+                        jTable1.setValueAt(bundle.getString("Effekt_AUX3"), 58, 2);
+                        jTable1.setValueAt(bundle.getString("Effekt_AUX4"), 59, 2);
+                    } else {
+                        jTable1.setValueAt("", 58, 2);
+                        jTable1.setValueAt("", 59, 2);
+                    }
+                }
+                if (Decoder == c.LD_G41) {
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX5"), 60, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX6"), 61, 2);
+                    jTable1.setValueAt(bundle.getString("Fahrstufe_Ausgang_aus"), 62, 2);
+                    jTable1.setValueAt("", 63, 2);
+                    jTable1.setValueAt(bundle.getString("Anfahrkick"), 64, 2);
+                }
+                if (Decoder == c.LD_G42 || Decoder == c.LD_W42) {
+                    jTable1.setValueAt("", 60, 2);
+                    jTable1.setValueAt(bundle.getString("Funktionen_Schalteingang"), 61, 2);
+                    jTable1.setValueAt(bundle.getString("Ueberlast_Dauer"), 62, 2);
+                    jTable1.setValueAt(bundle.getString("Ueberlast_Groesse"), 63, 2);
+                    jTable1.setValueAt(bundle.getString("Richtungswechsel_Analog"), 64, 2);
+                }
+                if (Decoder == c.LD_G42_2 || Decoder == c.LD_W42_2) {
+                    jTable1.setValueAt("", 60, 2);
+                    jTable1.setValueAt("", 61, 2);
+                    jTable1.setValueAt(bundle.getString("Fahrstufe_Ausgang_aus"), 62, 2);
+                    jTable1.setValueAt("", 63, 2);
+                    jTable1.setValueAt(bundle.getString("Anfahrkick"), 64, 2);
+                }
+                if (Decoder == c.LD_G43 || Decoder == c.LD_G44) {
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX5"), 60, 2);
+                    jTable1.setValueAt(bundle.getString("Effekt_AUX6"), 61, 2);
+                    jTable1.setValueAt(bundle.getString("Fahrstufe_Ausgang_aus"), 62, 2);
+                    jTable1.setValueAt(bundle.getString("Empfindlichkeit_Umschaltpuls"), 63, 2);
+                    jTable1.setValueAt(bundle.getString("Anfahrkick"), 64, 2);
+                }
+
+                jTable1.setValueAt("", 65, 2);
+
+                jTable1.setValueAt(bundle.getString("Funktionszuordnung"), 95, 2);
+                if (Decoder == c.LD_G41) {
+                    jTable1.setValueAt("", 96, 2);
+                } else {
+                    jTable1.setValueAt(bundle.getString("Dauer_Schalteingang_1"), 96, 2);
+                }
+                if(Decoder == c.LD_G43 || Decoder == c.LD_G44){
+                    jTable1.setValueAt(bundle.getString("Dauer_Schalteingang_2"), 97, 2);
+                }
+                else 
+                {   
+                    jTable1.setValueAt("", 97, 2);                   
+                }
+ 
+                jTable1.setValueAt(bundle.getString("Kickzeit"), 98, 2);
+                if ( Decoder!= c.LD_G42 && Decoder != c.LD_W42){
+                      jTable1.setValueAt(bundle.getString("Dimmzeit"), 99, 2);   
+                }
+                else
+                {
+                    jTable1.setValueAt("", 99, 2);
+                }
+                
+                if ( Decoder == c.LD_G42 || Decoder == c.LD_W42){
+                    jTable1.setValueAt(bundle.getString("Frequenz_F0f"), 100, 2);
+                    jTable1.setValueAt(bundle.getString("Frequenz_F0r"), 101, 2);
+                    jTable1.setValueAt(bundle.getString("Frequenz_AUX1"), 102, 2);
+                    jTable1.setValueAt(bundle.getString("Frequenz_AUX2"), 103, 2);
+                }
+                else
+                {
+                    jTable1.setValueAt(bundle.getString("Frequenz_F0f/F0r"), 100, 2);
+                    jTable1.setValueAt(bundle.getString("Frequenz_AUX1/2"), 101, 2);
+                    if(Decoder != c.LD_G42_2 && Decoder != c.LD_W42_2){
+                        jTable1.setValueAt(bundle.getString("Frequenz_AUX3/4"), 102, 2);
+                        jTable1.setValueAt(bundle.getString("Frequenz_AUX5/6"), 103, 2);  
+                    }
+                    else
+                    {
+                        jTable1.setValueAt("", 102, 2);
+                        jTable1.setValueAt("", 103, 2);
+                    }
+                }
+                if (Decoder == c.LD_G43 || Decoder == c.LD_G44){
+                    jTable1.setValueAt(bundle.getString("FMEingang1_1"), 104, 2);
+                    jTable1.setValueAt(bundle.getString("FMEingang1_2"), 105, 2);
+                    jTable1.setValueAt(bundle.getString("FMEingang2_1"), 106, 2);
+                    jTable1.setValueAt(bundle.getString("FMEingang2_2"), 106, 2);       
+                }
+                else
+                { 
+                    jTable1.setValueAt("", 104, 2);
+                    jTable1.setValueAt("", 105, 2);
+                    jTable1.setValueAt("", 106, 2);
+                    jTable1.setValueAt("", 107, 2);
+                }
+                if(Decoder != c.LD_G42 && Decoder != c.LD_W42){
+                    jTable1.setValueAt(bundle.getString("Schwelle_Ueberlast"), 108, 2);
+                    jTable1.setValueAt(bundle.getString("Fahrstufe_Walzer"), 109, 2);
+                    jTable1.setValueAt(bundle.getString("Austastintervall"), 110, 2);    
+                }
+                else
+                {
+                    jTable1.setValueAt("", 108, 2);
+                    jTable1.setValueAt("", 109, 2);
+                    jTable1.setValueAt("", 110, 2);
+                }
+                jTable1.setValueAt(bundle.getString("Verstaerkung"), 111, 2);
+                jTable1.setValueAt(bundle.getString("Lastregelung_KP"), 112, 2);
+                jTable1.setValueAt(bundle.getString("Lastregelung_KI"), 113, 2);
+                jTable1.setValueAt(bundle.getString("Lastregelung_KD"), 114, 2);
+                jTable1.setValueAt(bundle.getString("Lastregelung_An"), 115, 2);
+                if (Decoder== c.LD_G43 || Decoder == c.LD_G44){
+                    jTable1.setValueAt(bundle.getString("Letzte_Richtung_Analog"), 116, 2);
+                    jTable1.setValueAt(bundle.getString("Ueberlast_Dauer"), 117, 2);                  
+                }
+                else
+                {
+                    jTable1.setValueAt("", 116, 2);
+                    jTable1.setValueAt("", 117, 2);
+                }
+                if(Decoder == c.LD_G41){
+                       jTable1.setValueAt(bundle.getString("Ueberlast_Dauer"), 118, 2);                  
+                }           
+                else
+                {
+                    jTable1.setValueAt("", 118, 2);
+                }
+                jTable1.setValueAt("", 119, 2);               
+                if(Decoder != c.LD_G42 && Decoder != c.LD_W42){
+                    jTable1.setValueAt(bundle.getString("Konfigurationsdaten_2"), 120, 2);
+                    jTable1.setValueAt(bundle.getString("ABC_Empfindlichkeit"), 121, 2);
+                    jTable1.setValueAt(bundle.getString("CID_MSB"), 122, 2);
+                    jTable1.setValueAt(bundle.getString("CID_LSB"), 123, 2);
+                    jTable1.setValueAt(bundle.getString("Session_ID"), 124, 2);
+                    jTable1.setValueAt(bundle.getString("DCC_A_MSB"), 125, 2);
+                    jTable1.setValueAt(bundle.getString("DCC_A_LSB"), 126, 2);
+                }
+ 
+                for (int i = 0; i < 29; i++) {
+                    int j = 256 + i * 8;
+                    String num = Integer.toString(i);
+                    jTable1.setValueAt(bundle.getString("Ausgaenge_Bitweise") + " F" + num + " f", j, 2);
+                    jTable1.setValueAt(bundle.getString("Nicht_Belegt") + " F" + num + " f", j + 1, 2);
+                    jTable1.setValueAt(bundle.getString("Sonderfunktionen") + " F" + num + " f", j + 2, 2);
+                    jTable1.setValueAt(bundle.getString("aus/ein_mit_Funktion") + " F" + num + " f", j + 3, 2);
+                    jTable1.setValueAt(bundle.getString("Ausgaenge_Bitweise") + " F" + num + " r", j + 4, 2);
+                    jTable1.setValueAt(bundle.getString("Nicht_Belegt") + " F" + num + " r", j + 5, 2);
+                    jTable1.setValueAt(bundle.getString("Sonderfunktionen") + " F" + num + " r", j + 6, 2);
+                    jTable1.setValueAt(bundle.getString("aus/ein_mit_Funktion") + " F" + num + " r", j + 7, 2);
+                }
+                for (int i = 488; i < CV[0].length; i++) {
+                    jTable1.setValueAt(" ", i, 2);
+                }
+
+                break;
 
             case c.FD_R_ex: //FD-R extended
                 jTable1.setValueAt(bundle.getString("FDR.jLabelMM_Addr_2.text"), 46, 2);
@@ -1052,25 +1527,26 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
                 jTable1.setValueAt("Funktion mapping F26", 192, 2);
                 jTable1.setValueAt("Funktion mapping F27", 193, 2);
                 jTable1.setValueAt("Funktion mapping F28", 194, 2);
-               break;
+                for (int i = 195; i < CV[0].length; i++) {
+                    jTable1.setValueAt(" ", i, 2);
+                }
+                break;
         }
-        if(bPrint)
-        {
+        if (bPrint) {
             jOK.setText(bundle.getString("Drucken"));
         }
-        for (int i = 0; i < 255; i++) {
+        for (int i = 0; i < CV[0].length; i++) {
             CV_To_Edit_Old[i] = CV_To_Edit[i];
-            jTable1.setValueAt(i+1, i, 0);
-            int cvVal = getValueForCV( i+1 );
-            if( cvVal != -1 ) {
+            jTable1.setValueAt(i + 1, i, 0);
+            int cvVal = getValueForCV(i + 1);
+            if (cvVal != -1) {
                 jTable1.setValueAt(cvVal, i, 1);
             }
-            if(CV_To_Edit[i] == 1)
-            {
+            if (CV_To_Edit[i] == 1) {
                 jTable1.setValueAt(true, i, 3);
-            }
-            else
+            } else {
                 jTable1.setValueAt(false, i, 3);
+            }
         }
     }//GEN-LAST:event_formWindowOpened
 

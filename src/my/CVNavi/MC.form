@@ -223,7 +223,7 @@
                                       <Component id="jWRmag" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jCancel" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="jKonfLesen" alignment="1" pref="220" max="32767" attributes="1"/>
+                                  <Component id="jKonfLesen" alignment="1" max="32767" attributes="1"/>
                                   <Component id="jKonfSchreiben" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jKonfSichern" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jKonfLaden" alignment="0" max="32767" attributes="1"/>
@@ -1069,6 +1069,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jconDevsActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="MC_jconDevs"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -1083,7 +1086,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Locos">
+              <JTabbedPaneConstraints tabName="Loks">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="my/CVNavi/Bundle.properties" key="MC.jLoks.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -1524,7 +1527,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Traktion">
+              <JTabbedPaneConstraints tabName="Traktionen">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="my/CVNavi/Bundle.properties" key="MC.jTraktionen.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -1739,7 +1742,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Accessories">
+              <JTabbedPaneConstraints tabName="Magnetartikel">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="my/CVNavi/Bundle.properties" key="MC.jMagnetartikel.TabConstraints.tabTitle" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
@@ -1953,7 +1956,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="DCC programming">
+                    <TitledBorder title="DCC Programmierung">
                       <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="MC.jPanel3.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
@@ -2133,7 +2136,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Direkt-Input">
+                        <TitledBorder title="Direkt-Eingabe">
                           <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="MC.jPanel8.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                         </TitledBorder>
                       </Border>
@@ -2157,7 +2160,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jCV_Direkt" max="32767" attributes="0"/>
-                                  <Component id="jWertDirekt" pref="54" max="32767" attributes="0"/>
+                                  <Component id="jWertDirekt" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -2269,7 +2272,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="m3 programming">
+                    <TitledBorder title="m3 Programmierung">
                       <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="MC.jPanel4.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
@@ -2404,7 +2407,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="MM programming">
+                    <TitledBorder title="MM Programmierung">
                       <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="MC.jPanel5.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </TitledBorder>
                   </Border>
@@ -2529,7 +2532,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="530" y="12" width="570" height="640"/>
+                  <AbsoluteConstraints x="540" y="10" width="560" height="640"/>
                 </Constraint>
               </Constraints>
 
@@ -2565,7 +2568,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="26" y="214" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="26" y="208" width="190" height="250"/>
                     </Constraint>
                   </Constraints>
 
@@ -2590,22 +2593,21 @@
                                       <Component id="j6" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jStern" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="j7" max="32767" attributes="0"/>
+                                          <Component id="jStern" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="j8" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="j9" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
                                               <Component id="j0" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="jRaute" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="j8" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="j9" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -2631,13 +2633,13 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="j7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="j7" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                                   <Component id="j8" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="j9" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jStern" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="jStern" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="j0" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jRaute" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -3655,7 +3657,7 @@
                                                   <Component id="helpHC" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="helpLC" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="helpPC" pref="153" max="32767" attributes="0"/>
+                                                  <Component id="helpPC" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
