@@ -6,17 +6,26 @@ Dies Programm ist Freeware und kann uneingeschraenkt weiter gegeben werden.
 Der Gebrauch geschieht auf eigenes Risiko.
 Wir bitten um Meldung von Fehlern an die Mailadresse: info@tams-online.de. 
 
+MC oder MC1 = MasterControl/EasyControl
+RB = RedBox (Firmware identisch mit MC1)
+MC2 = MasterControl2 von Tams
+
+
 Bei Problemen mit dem Zusammenspiel PC <-> Zentrale pruefen Sie zuerst, ob die richtige Zentrale und die passende Schnittstelle im Programm eingestellt sind. 
-Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. (Bei der TamsMC ist bei Nutzung der USB-Schnittstelle immer 57600 Baud auszuwaehlen.)
-Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig.
-Bei der IB muss das Interface auf "6051 + IB" eingestellt sein.
+Weiterhin muss die Baudrate bei Zentrale und Programm uebereinstimmen. 
+Bei der MC1 ist bei Nutzung der USB-Schnittstelle immer 57600 Baud auszuwaehlen. 
+Bei der MC1 ist bei Nutzung der seriellen (RS232)-Schnittstelle die in der MC1 konfigurierte Baudrate auszuwaehlen. 
+Bei der RB ist bei Nutzung der USB1-Schnittstelle immer 57600 Baud auszuwaehlen. 
+Bei der RB ist bei Nutzung der USB2-Schnittstelle immer die in der RB konfigurierte Baudrate auszuwaehlen. 
+Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig. 
+Bei der IB muss das Interface auf "6051 + IB" eingestellt sein. 
 
 Aenderungen in V3.5 beta
-- Unterstützung für MC2
-- Neues Modul LDG4x für die Decoder LD-G-41, LD-G-42, LD-W-42, LD-G-42.2, LD-W-42.2, LD-G-43, LD-G-44
+- Unterstuetzung fuer MC2 (Lothar)
+- Neues Modul LDG4x fuer die Decoder LD-G-41, LD-G-42, LD-W-42, LD-G-42.2, LD-W-42.2, LD-G-43, LD-G-44 (Peter)
 
 Aenderungen in V3.3
-- Nicht dokumentiert, Version nur als Beta-Version vorhanden, wurde nicht veröffentlicht
+- Nicht dokumentiert, Version nur als Beta-Version vorhanden, wurde nicht veroeffentlicht
 
 Aenderungen in V3.2
 - LocControl: Funktionen F0 bis F28
@@ -28,8 +37,8 @@ Aenderungen in V3.2
 Aenderungen in V3.1
 - kleine Bugfixes bei diversen Decodern
 - Startskript fuer Linux erweitert
-- weitere Parameter fuer erweitertes Debugging hunzugefuegt
-- BatchDatei für Start unter Windows hinzugefuegt
+- weitere Parameter fuer erweitertes Debugging hinzugefuegt
+- BatchDatei fuer Start unter Windows hinzugefuegt
 - Lokliste erweitert
 
 Aenderungen in V3.0
@@ -39,7 +48,7 @@ Aenderungen in V3.0
 
 Aenderungen in V2.8
 - notwendige Aenderungen fuer Java 10 Kompatibilitaet
-- fuer Java10: Umstellung der Bibliotheken für Zugriff auf USB/Seriell (rxtx -> purejavacomm)
+- fuer Java10: Umstellung der Bibliotheken fuer Zugriff auf USB/Seriell (rxtx -> purejavacomm)
 - MC/RB: Abfrage "Angeschlossene Geraete" mit Firmware vor 2.1.0 blockiert nicht mehr
 
 Aenderungen in V2.7

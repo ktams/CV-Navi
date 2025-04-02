@@ -81,6 +81,11 @@ public class ReadWriteCV extends javax.swing.JDialog {
             initComponents();
             pack();
             bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
+            if( CVNavi.getZentrale() == c.cuIntellibox1 ) {
+                System.out.println("ReadWriteCV IB1 : disable POM");
+                jPOM.setSelected(false);
+                jPOM.setEnabled(false);
+            }
             setLocationRelativeTo(parent);
             setVisible(true);
         } else {
@@ -143,7 +148,12 @@ public class ReadWriteCV extends javax.swing.JDialog {
         jCVListeSchreiben.setEnabled(true);
         jCVLesen.setEnabled(true);
         jCVSchreiben.setEnabled(true);
-        jPOM.setEnabled(true);
+        if( CVNavi.getZentrale() == c.cuIntellibox1 ) {
+            jPOM.setSelected(false);
+            jPOM.setEnabled(false);
+        } else {
+            jPOM.setEnabled(true);
+        }
         jControlUnitOn.setEnabled(true);
 
         // set cursor

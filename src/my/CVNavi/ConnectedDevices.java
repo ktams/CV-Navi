@@ -9,6 +9,7 @@
 
 package my.CVNavi;
 
+import java.awt.Font;
 import static java.util.ResourceBundle.getBundle;
 import static my.CVNavi.CVNavi.debugLevel;
 
@@ -39,11 +40,13 @@ public class ConnectedDevices extends javax.swing.JFrame {
     }
     
     public void ShowDevs( String nam, String num, String ver, String rem) {
+        this.jDevices.setFont(new Font("FreeMono", Font.PLAIN, 14));
         String sRemark = rem;
         switch(nam) {
             case "C":
-                String out = String.format( outFormat, getBundle("my/CVNavi/Bundle").getString("remarkHeader"), "Version", "Hardware", getBundle("my/CVNavi/Bundle").getString("remarkHeader") );
+                String out = String.format( outFormat, getBundle("my/CVNavi/Bundle").getString("typeHeader"), "Version", "Hardware", getBundle("my/CVNavi/Bundle").getString("remarkHeader") );
                 jDevices.append( out );
+                System.out.print("ConnectedDevices: "+out);
                 nam = "Central unit";
                 sRemark = "RedBox or MC";
                 sMasterVersion = ver;
@@ -67,6 +70,7 @@ public class ConnectedDevices extends javax.swing.JFrame {
         }
         String out = String.format( outFormat, nam, ver, num, sRemark );
         jDevices.append( out );
+        System.out.print("ConnectedDevices: "+out);
     }
 
     public void SetDevs()
@@ -75,7 +79,7 @@ public class ConnectedDevices extends javax.swing.JFrame {
 
         for(int i = 0; i < strDevs.length; i++)
         {
-            if( 2 < debugLevel ) {
+            if( debugLevel > 2 ) {
                 System.out.println( "ConnectedDevices: strDevs["+i+"]=\""+strDevs[i]+"\"" );
             }
             String sDevIdx = "";
@@ -96,10 +100,13 @@ public class ConnectedDevices extends javax.swing.JFrame {
                     case "]":
                         // ignore
                         break;
+                    case "ERROR: not implemented (yet)":
+                        jDevices.append( "not yet implemented" );
+                        break;
                     default:
                         String errout = String.format( outFormat, "->", "->", "->", "unknown device \""+strDevs[i]+"\"" );
                         jDevices.append( errout );
-                        if( 1 < debugLevel ) {
+                        if( debugLevel > 1 ) {
                             out = "ConnectedDevices: problem because not 3 parts in \""+strDevs[i]+"\"";
                         }
                 }

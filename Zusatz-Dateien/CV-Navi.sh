@@ -10,6 +10,8 @@
 # - diese Datei muss ausfuehrbar sein, damit sie korrekt funktioniert:
 #     chmod +x CV-Navi.sh
 
+# V 0.15 20201231 Lothar
+# - experimentelle Unterstuetzung fuer IPv6
 
 # V 0.14 20190101 Lothar
 # - Falls java nicht im Pfad gefunden wird automatische Suche in bekannten Installationspfaden (auch mit Leerzeichen -> OS-X)
@@ -100,6 +102,13 @@ DEBUG=${1-0}
 # skip 1st parameter if it was "1"
 [ $DEBUG == 1 ]&& shift
 
+FORCE_IPv6=${1-0}
+# skip 1st parameter if it was "6"
+if( [ $FORCE_IPv6 == 6 ] ) ; then
+       shift
+       JAVA_OPTS="${JAVA_OPTS} -Djava.net.preferIPv6Addresses=true"
+fi
+
 JAVA_SEARCH_PATHS="
 /Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 /opt/java
@@ -140,7 +149,7 @@ IFS=$SAVEIFS
 
 [ $DEBUG == 1 ] && echo "JAVA=${JAVA}"
 
-if [ -z "${JAVA_OPTS=}" ] ; then
+if [ -z "${JAVA_OPTS}" ] ; then
 	[ $DEBUG == 1 ] && echo "INIT JAVA_OPTS"
 	JAVA_OPTS=""
 else
@@ -200,4 +209,5 @@ if [ $DEBUG == 1 ] ; then
 	"${JAVA}" -version
 	echo "${JAVA}" -Djava.library.path="${JAVA_LIBRARY_PATH}" ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*
 fi
+set -x
 "${JAVA}" -Djava.library.path="${JAVA_LIBRARY_PATH}" ${JAVA_OPTS} -jar "$PROG_DIR/$PROG_NAME" $*

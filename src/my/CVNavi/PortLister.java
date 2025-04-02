@@ -27,7 +27,7 @@ public class PortLister {
             ports = CommPortIdentifier.getPortIdentifiers();
         } catch (UnsatisfiedLinkError e) {
             System.out.println("listSerialPorts: UnsatisfiedLinkError: "+ e);
-            CVNavi.mbGeneric( CVNavi, "PROBLEM: Library may be missing or does not fit.", "rxtxSerial.dll", e.getMessage() );
+            CVNavi.mbGeneric( CVNavi, "PROBLEM: Library may be missing or does not fit.", "serial port loader", e.getMessage() );
             return null;
         } catch (Exception | Error e) {
             System.out.println("listSerialPorts Exception/Error: "+ e);
@@ -40,7 +40,7 @@ public class PortLister {
             CommPortIdentifier port = (CommPortIdentifier) ports.nextElement();
             if( debugLevel > 0 ) {
                 System.out.println(" PortLister");
-                System.out.println(" found port type["+port.getPortType()+"] for name["+port.getName()+"]" );
+                System.out.println(" found port type["+port.getPortType()+"] name["+port.getName()+"]" );
                 if( debugLevel > 1 ) {
                     System.out.println( "  port.toString()="+port.toString()+"" ) ;
                     System.out.println( "  port.getCurrentOwner()="+port.getCurrentOwner()+"" ) ;
