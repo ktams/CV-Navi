@@ -10,7 +10,6 @@
  */
 package my.CVNavi;
 
-import java.awt.Color;
 import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -121,6 +120,7 @@ public class LDG4x extends javax.swing.JFrame {
                 initCV(3, 16);
                 break;
         }
+        initCV(7, 10);
         initCV(8, 62);
         initCV(10, 0);
         initCV(11, 16);
@@ -1187,6 +1187,7 @@ public class LDG4x extends javax.swing.JFrame {
         jChannel2 = new javax.swing.JCheckBox();
         jLabel56 = new javax.swing.JLabel();
         jRCplus = new javax.swing.JCheckBox();
+        jChan1Dynamic = new javax.swing.JCheckBox();
         jFunctionMapping = new javax.swing.JPanel();
         jF1_1 = new javax.swing.JCheckBox();
         jF16_6 = new javax.swing.JCheckBox();
@@ -1602,50 +1603,6 @@ public class LDG4x extends javax.swing.JFrame {
         jUeberlastSchwelle = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jUeberlastDauer = new javax.swing.JTextField();
-        jEffekte_3 = new javax.swing.JPanel();
-        jLabel134 = new javax.swing.JLabel();
-        jLabel135 = new javax.swing.JLabel();
-        jLabel136 = new javax.swing.JLabel();
-        jLabel137 = new javax.swing.JLabel();
-        jLabel138 = new javax.swing.JLabel();
-        jLabel139 = new javax.swing.JLabel();
-        jLabel140 = new javax.swing.JLabel();
-        jLabel141 = new javax.swing.JLabel();
-        jLabel142 = new javax.swing.JLabel();
-        jLabel143 = new javax.swing.JLabel();
-        jLabel148 = new javax.swing.JLabel();
-        jLabel150 = new javax.swing.JLabel();
-        jLabel132 = new javax.swing.JLabel();
-        jSeparator8 = new javax.swing.JSeparator();
-        jLabel133 = new javax.swing.JLabel();
-        jSeparator9 = new javax.swing.JSeparator();
-        jLabel208 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jConsF0 = new javax.swing.JCheckBox();
-        jConsF1 = new javax.swing.JCheckBox();
-        jConsF2 = new javax.swing.JCheckBox();
-        jConsF3 = new javax.swing.JCheckBox();
-        jConsF4 = new javax.swing.JCheckBox();
-        jConsF5 = new javax.swing.JCheckBox();
-        jConsF6 = new javax.swing.JCheckBox();
-        jConsF7 = new javax.swing.JCheckBox();
-        jConsF8 = new javax.swing.JCheckBox();
-        jConsF9 = new javax.swing.JCheckBox();
-        jConsF10 = new javax.swing.JCheckBox();
-        jConsF11 = new javax.swing.JCheckBox();
-        jConsF12 = new javax.swing.JCheckBox();
-        jLabel13 = new javax.swing.JLabel();
-        jConsAdr = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLastregEin = new javax.swing.JCheckBox();
-        jLabel15 = new javax.swing.JLabel();
-        jVerstaerk = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jKP = new javax.swing.JTextField();
-        jKI = new javax.swing.JTextField();
-        jKD = new javax.swing.JTextField();
         jAnalog = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jF1 = new javax.swing.JCheckBox();
@@ -1672,6 +1629,52 @@ public class LDG4x extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jComment = new javax.swing.JTextArea();
         jLabel36 = new javax.swing.JLabel();
+        jEffekte_3 = new javax.swing.JPanel();
+        jLabel134 = new javax.swing.JLabel();
+        jLabel135 = new javax.swing.JLabel();
+        jLabel136 = new javax.swing.JLabel();
+        jLabel137 = new javax.swing.JLabel();
+        jLabel138 = new javax.swing.JLabel();
+        jLabel139 = new javax.swing.JLabel();
+        jLabel140 = new javax.swing.JLabel();
+        jLabel141 = new javax.swing.JLabel();
+        jLabel142 = new javax.swing.JLabel();
+        jLabel143 = new javax.swing.JLabel();
+        jLabel148 = new javax.swing.JLabel();
+        jLabel150 = new javax.swing.JLabel();
+        jLabel132 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        jLabel133 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        jLabel208 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jConsF0f = new javax.swing.JCheckBox();
+        jConsF1 = new javax.swing.JCheckBox();
+        jConsF2 = new javax.swing.JCheckBox();
+        jConsF3 = new javax.swing.JCheckBox();
+        jConsF4 = new javax.swing.JCheckBox();
+        jConsF5 = new javax.swing.JCheckBox();
+        jConsF6 = new javax.swing.JCheckBox();
+        jConsF7 = new javax.swing.JCheckBox();
+        jConsF8 = new javax.swing.JCheckBox();
+        jConsF9 = new javax.swing.JCheckBox();
+        jConsF10 = new javax.swing.JCheckBox();
+        jConsF11 = new javax.swing.JCheckBox();
+        jConsF12 = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
+        jConsAdr = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLastregEin = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
+        jVerstaerk = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jKP = new javax.swing.JTextField();
+        jKI = new javax.swing.JTextField();
+        jKD = new javax.swing.JTextField();
+        jConsF0r = new javax.swing.JCheckBox();
+        jLabel20 = new javax.swing.JLabel();
         jCV_LesenSchreiben = new javax.swing.JButton();
         jDirekteingabe = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
@@ -1798,7 +1801,7 @@ public class LDG4x extends javax.swing.JFrame {
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel41.setText(bundle.getString("LDG30erPlus.jLabel41.text")); // NOI18N
-        jCV29.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
+        jCV29.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
 
         jMM_Addr_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jMM_Addr_2.setText(bundle.getString("LDG30erPlus.jMM_Addr_2.text")); // NOI18N
@@ -1837,7 +1840,7 @@ public class LDG4x extends javax.swing.JFrame {
                 jBroadCasstActionPerformed(evt);
             }
         });
-        jCV29.add(jBroadCasst, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
+        jCV29.add(jBroadCasst, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
         jChannel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jChannel2.setSelected(true);
@@ -1847,7 +1850,7 @@ public class LDG4x extends javax.swing.JFrame {
                 jChannel2ActionPerformed(evt);
             }
         });
-        jCV29.add(jChannel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+        jCV29.add(jChannel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
 
         jLabel56.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel56.setText(bundle.getString("LDG30erPlus.jLabel56.text")); // NOI18N
@@ -1855,13 +1858,24 @@ public class LDG4x extends javax.swing.JFrame {
 
         jRCplus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jRCplus.setSelected(true);
-        jRCplus.setText(bundle.getString("LDG30erPlus.jRCplus.text")); // NOI18N
+        jRCplus.setText(bundle.getString("LDG4x.jRCplus.text")); // NOI18N
+        jRCplus.setActionCommand(bundle.getString("LDG4x.jRCplus.actionCommand")); // NOI18N
         jRCplus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRCplusActionPerformed(evt);
             }
         });
-        jCV29.add(jRCplus, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        jCV29.add(jRCplus, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
+
+        jChan1Dynamic.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jChan1Dynamic.setSelected(true);
+        jChan1Dynamic.setText(bundle.getString("LDG4x.jChan1Dynamic.text")); // NOI18N
+        jChan1Dynamic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChan1DynamicActionPerformed(evt);
+            }
+        });
+        jCV29.add(jChan1Dynamic, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, -1, -1));
 
         jDecodereigenschaften.addTab(bundle.getString("LDG4x.jCV29.TabConstraints.tabTitle"), jCV29); // NOI18N
 
@@ -4281,6 +4295,19 @@ public class LDG4x extends javax.swing.JFrame {
 
         jVSchalt.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
         jVSchalt.setText("0");
+        jVSchalt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jVSchaltFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jVSchaltFocusLost(evt);
+            }
+        });
+        jVSchalt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jVSchaltKeyReleased(evt);
+            }
+        });
         jEffekte_1.add(jVSchalt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 30, -1));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
@@ -4440,7 +4467,7 @@ public class LDG4x extends javax.swing.JFrame {
                 jMindestSchlt1KeyReleased(evt);
             }
         });
-        jEffekte_2.add(jMindestSchlt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 30, 20));
+        jEffekte_2.add(jMindestSchlt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 30, 20));
 
         jMindestSchlt2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMindestSchlt2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -4524,7 +4551,7 @@ public class LDG4x extends javax.swing.JFrame {
         jLabel109.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel109.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel109.setText(bundle.getString("LDG4x.jLabel109.text")); // NOI18N
-        jEffekte_2.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 50, 20));
+        jEffekte_2.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 50, 20));
 
         jLabel111.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel111.setText(bundle.getString("LDG30erPlus.jLabel111.text")); // NOI18N
@@ -5005,318 +5032,6 @@ public class LDG4x extends javax.swing.JFrame {
 
         jDecodereigenschaften.addTab(bundle.getString("LDG4x.jEffekte_2.TabConstraints.tabTitle"), jEffekte_2); // NOI18N
 
-        jEffekte_3.setToolTipText(bundle.getString("LDG4x.jEffekte_3toolTipText")); // NOI18N
-        jEffekte_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jEffekte_3.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jEffekte_3ComponentShown(evt);
-            }
-        });
-        jEffekte_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel134.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel134.setText(bundle.getString("LDG30erPlus.jLabel134.text")); // NOI18N
-        jEffekte_3.add(jLabel134, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
-
-        jLabel135.setFont(new java.awt.Font("Noto Sans", 0, 10)); // NOI18N
-        jLabel135.setText(bundle.getString("LDG30erPlus.jLabel135.text")); // NOI18N
-        jEffekte_3.add(jLabel135, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
-
-        jLabel136.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel136.setText(bundle.getString("LDG30erPlus.jLabel136.text")); // NOI18N
-        jEffekte_3.add(jLabel136, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
-
-        jLabel137.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel137.setText(bundle.getString("LDG30erPlus.jLabel137.text")); // NOI18N
-        jEffekte_3.add(jLabel137, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
-
-        jLabel138.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel138.setText(bundle.getString("LDG30erPlus.jLabel138.text")); // NOI18N
-        jEffekte_3.add(jLabel138, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
-
-        jLabel139.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel139.setText(bundle.getString("LDG30erPlus.jLabel139.text")); // NOI18N
-        jEffekte_3.add(jLabel139, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
-
-        jLabel140.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel140.setText(bundle.getString("LDG30erPlus.jLabel140.text")); // NOI18N
-        jEffekte_3.add(jLabel140, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
-
-        jLabel141.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel141.setText(bundle.getString("LDG30erPlus.jLabel141.text")); // NOI18N
-        jEffekte_3.add(jLabel141, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
-
-        jLabel142.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel142.setText(bundle.getString("LDG30erPlus.jLabel142.text")); // NOI18N
-        jEffekte_3.add(jLabel142, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
-
-        jLabel143.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel143.setText(bundle.getString("LDG30erPlus.jLabel143.text")); // NOI18N
-        jEffekte_3.add(jLabel143, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
-
-        jLabel148.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel148.setText(bundle.getString("LDG30erPlus.jLabel148.text")); // NOI18N
-        jEffekte_3.add(jLabel148, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
-
-        jLabel150.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel150.setText(bundle.getString("LDG30erPlus.jLabel150.text")); // NOI18N
-        jEffekte_3.add(jLabel150, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
-
-        jLabel132.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel132.setText(bundle.getString("LDG4x.jLabel132.text")); // NOI18N
-        jEffekte_3.add(jLabel132, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, 20));
-        jEffekte_3.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 122, 410, 10));
-
-        jLabel133.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel133.setText(bundle.getString("LDG4x.jLabel133.text")); // NOI18N
-        jEffekte_3.add(jLabel133, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 6, 210, 20));
-        jEffekte_3.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 410, 10));
-
-        jLabel208.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel208.setText(bundle.getString("LDG4x.jLabel208.text")); // NOI18N
-        jEffekte_3.add(jLabel208, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 131, 80, 20));
-
-        jLabel12.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
-        jLabel12.setText(bundle.getString("LDG4x.jF0.text")); // NOI18N
-        jEffekte_3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-
-        jConsF0.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF0.setText(bundle.getString("LDG4x.jConsF0.text")); // NOI18N
-        jConsF0.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF0ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF0, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
-
-        jConsF1.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF1.setText(bundle.getString("LDG4x.jConsF1.text")); // NOI18N
-        jConsF1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF1ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
-
-        jConsF2.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF2.setText(bundle.getString("LDG4x.jConsF2.text")); // NOI18N
-        jConsF2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF2ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
-
-        jConsF3.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF3.setText(bundle.getString("LDG4x.jConsF3.text")); // NOI18N
-        jConsF3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF3ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
-
-        jConsF4.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF4.setText(bundle.getString("LDG4x.jConsF4.text")); // NOI18N
-        jConsF4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF4ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
-
-        jConsF5.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF5.setText(bundle.getString("LDG4x.jConsF5.text")); // NOI18N
-        jConsF5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF5ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
-
-        jConsF6.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF6.setText(bundle.getString("LDG4x.jConsF6.text")); // NOI18N
-        jConsF6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF6ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
-
-        jConsF7.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF7.setText(bundle.getString("LDG4x.jConsF7.text")); // NOI18N
-        jConsF7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF7ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
-
-        jConsF8.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF8.setText(bundle.getString("LDG4x.jConsF8.text")); // NOI18N
-        jConsF8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF8ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
-
-        jConsF9.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF9.setText(bundle.getString("LDG4x.jConsF9.text")); // NOI18N
-        jConsF9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF9ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
-
-        jConsF10.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF10.setText(bundle.getString("LDG4x.jConsF10.text")); // NOI18N
-        jConsF10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF10ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
-
-        jConsF11.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF11.setText(bundle.getString("LDG4x.jConsF11.text")); // NOI18N
-        jConsF11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF11ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
-
-        jConsF12.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsF12.setText(bundle.getString("LDG4x.jConsF12.text")); // NOI18N
-        jConsF12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsF12ActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jConsF12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jLabel13.setText(bundle.getString("LDG4x.jLabel13.text")); // NOI18N
-        jEffekte_3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, 20));
-
-        jConsAdr.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jConsAdr.setText("0");
-        jConsAdr.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jConsAdrFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jConsAdrFocusLost(evt);
-            }
-        });
-        jConsAdr.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jConsAdrKeyReleased(evt);
-            }
-        });
-        jEffekte_3.add(jConsAdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 30, 20));
-
-        jLabel14.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jLabel14.setText(bundle.getString("LDG4x.jLabel14.text")); // NOI18N
-        jEffekte_3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 110, -1));
-
-        jLastregEin.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jLastregEin.setText(bundle.getString("LDG4x.jLastregEin.text")); // NOI18N
-        jLastregEin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jLastregEinActionPerformed(evt);
-            }
-        });
-        jEffekte_3.add(jLastregEin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jLabel15.setText(bundle.getString("LDG4x.jLabel15.text")); // NOI18N
-        jEffekte_3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 110, 20));
-
-        jVerstaerk.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jVerstaerk.setText("5");
-        jVerstaerk.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jVerstaerkFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jVerstaerkFocusLost(evt);
-            }
-        });
-        jVerstaerk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jVerstaerkKeyReleased(evt);
-            }
-        });
-        jEffekte_3.add(jVerstaerk, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 30, 20));
-
-        jLabel16.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jLabel16.setText(bundle.getString("LDG4x.jLabel16.text")); // NOI18N
-        jEffekte_3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
-
-        jLabel18.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jLabel18.setText(bundle.getString("LDG4x.jLabel18.text")); // NOI18N
-        jEffekte_3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
-
-        jLabel19.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jLabel19.setText(bundle.getString("LDG4x.jLabel19.text")); // NOI18N
-        jEffekte_3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
-
-        jKP.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jKP.setText("32");
-        jKP.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jKPFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jKPFocusLost(evt);
-            }
-        });
-        jKP.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jKPKeyReleased(evt);
-            }
-        });
-        jEffekte_3.add(jKP, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 30, 20));
-
-        jKI.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jKI.setText("5");
-        jKI.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jKIFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jKIFocusLost(evt);
-            }
-        });
-        jKI.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jKIKeyReleased(evt);
-            }
-        });
-        jEffekte_3.add(jKI, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 30, 20));
-
-        jKD.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jKD.setText("4");
-        jKD.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jKDFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jKDFocusLost(evt);
-            }
-        });
-        jKD.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jKDKeyReleased(evt);
-            }
-        });
-        jEffekte_3.add(jKD, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 30, 20));
-
-        jDecodereigenschaften.addTab(bundle.getString("LDG4x.jSound.TabConstraints.tabTitle"), jEffekte_3); // NOI18N
-
         jAnalog.setToolTipText(bundle.getString("LDG30erPlus.jAnalog.toolTipText")); // NOI18N
         jAnalog.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jAnalog.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -5555,6 +5270,329 @@ public class LDG4x extends javax.swing.JFrame {
         );
 
         jDecodereigenschaften.addTab(bundle.getString("LDG4x.jPanel3.TabConstraints.tabTitle"), jKommentar); // NOI18N
+
+        jEffekte_3.setToolTipText(bundle.getString("LDG4x.jEffekte_3toolTipText")); // NOI18N
+        jEffekte_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jEffekte_3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jEffekte_3ComponentShown(evt);
+            }
+        });
+        jEffekte_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel134.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel134.setText(bundle.getString("LDG30erPlus.jLabel134.text")); // NOI18N
+        jEffekte_3.add(jLabel134, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 20, -1));
+
+        jLabel135.setFont(new java.awt.Font("Noto Sans", 0, 10)); // NOI18N
+        jLabel135.setText(bundle.getString("LDG30erPlus.jLabel135.text")); // NOI18N
+        jEffekte_3.add(jLabel135, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 30, -1));
+
+        jLabel136.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel136.setText(bundle.getString("LDG30erPlus.jLabel136.text")); // NOI18N
+        jEffekte_3.add(jLabel136, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 20, -1));
+
+        jLabel137.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel137.setText(bundle.getString("LDG30erPlus.jLabel137.text")); // NOI18N
+        jEffekte_3.add(jLabel137, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
+
+        jLabel138.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel138.setText(bundle.getString("LDG30erPlus.jLabel138.text")); // NOI18N
+        jEffekte_3.add(jLabel138, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 20, -1));
+
+        jLabel139.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel139.setText(bundle.getString("LDG30erPlus.jLabel139.text")); // NOI18N
+        jEffekte_3.add(jLabel139, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 20, -1));
+
+        jLabel140.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel140.setText(bundle.getString("LDG30erPlus.jLabel140.text")); // NOI18N
+        jEffekte_3.add(jLabel140, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 20, -1));
+
+        jLabel141.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel141.setText(bundle.getString("LDG30erPlus.jLabel141.text")); // NOI18N
+        jEffekte_3.add(jLabel141, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
+
+        jLabel142.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel142.setText(bundle.getString("LDG30erPlus.jLabel142.text")); // NOI18N
+        jEffekte_3.add(jLabel142, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 20, -1));
+
+        jLabel143.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel143.setText(bundle.getString("LDG30erPlus.jLabel143.text")); // NOI18N
+        jEffekte_3.add(jLabel143, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
+
+        jLabel148.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel148.setText(bundle.getString("LDG30erPlus.jLabel148.text")); // NOI18N
+        jEffekte_3.add(jLabel148, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, -1, -1));
+
+        jLabel150.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel150.setText(bundle.getString("LDG30erPlus.jLabel150.text")); // NOI18N
+        jEffekte_3.add(jLabel150, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
+
+        jLabel132.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel132.setText(bundle.getString("LDG4x.jLabel132.text")); // NOI18N
+        jEffekte_3.add(jLabel132, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, 20));
+        jEffekte_3.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 122, 410, 10));
+
+        jLabel133.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel133.setText(bundle.getString("LDG4x.jLabel133.text")); // NOI18N
+        jEffekte_3.add(jLabel133, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 6, 210, 20));
+        jEffekte_3.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 410, 10));
+
+        jLabel208.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel208.setText(bundle.getString("LDG4x.jLabel208.text")); // NOI18N
+        jEffekte_3.add(jLabel208, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 131, 80, 20));
+
+        jLabel12.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        jLabel12.setText(bundle.getString("LDG4x.jF0r.text")); // NOI18N
+        jEffekte_3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+
+        jConsF0f.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF0f.setText(bundle.getString("LDG4x.jConsF0f.text")); // NOI18N
+        jConsF0f.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF0fActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF0f, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+
+        jConsF1.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF1.setText(bundle.getString("LDG4x.jConsF1.text")); // NOI18N
+        jConsF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF1ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+
+        jConsF2.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF2.setText(bundle.getString("LDG4x.jConsF2.text")); // NOI18N
+        jConsF2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF2ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+
+        jConsF3.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF3.setText(bundle.getString("LDG4x.jConsF3.text")); // NOI18N
+        jConsF3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF3ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+
+        jConsF4.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF4.setText(bundle.getString("LDG4x.jConsF4.text")); // NOI18N
+        jConsF4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF4ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
+
+        jConsF5.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF5.setText(bundle.getString("LDG4x.jConsF5.text")); // NOI18N
+        jConsF5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF5ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
+
+        jConsF6.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF6.setText(bundle.getString("LDG4x.jConsF6.text")); // NOI18N
+        jConsF6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF6ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+
+        jConsF7.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF7.setText(bundle.getString("LDG4x.jConsF7.text")); // NOI18N
+        jConsF7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF7ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+
+        jConsF8.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF8.setText(bundle.getString("LDG4x.jConsF8.text")); // NOI18N
+        jConsF8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF8ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
+
+        jConsF9.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF9.setText(bundle.getString("LDG4x.jConsF9.text")); // NOI18N
+        jConsF9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF9ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
+
+        jConsF10.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF10.setText(bundle.getString("LDG4x.jConsF10.text")); // NOI18N
+        jConsF10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF10ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, -1, -1));
+
+        jConsF11.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF11.setText(bundle.getString("LDG4x.jConsF11.text")); // NOI18N
+        jConsF11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF11ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+
+        jConsF12.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsF12.setText(bundle.getString("LDG4x.jConsF12.text")); // NOI18N
+        jConsF12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF12ActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLabel13.setText(bundle.getString("LDG4x.jLabel13.text")); // NOI18N
+        jEffekte_3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, 20));
+
+        jConsAdr.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jConsAdr.setText("0");
+        jConsAdr.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jConsAdrFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jConsAdrFocusLost(evt);
+            }
+        });
+        jConsAdr.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jConsAdrKeyReleased(evt);
+            }
+        });
+        jEffekte_3.add(jConsAdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 30, 20));
+
+        jLabel14.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLabel14.setText(bundle.getString("LDG4x.jLabel14.text")); // NOI18N
+        jEffekte_3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 110, -1));
+
+        jLastregEin.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLastregEin.setText(bundle.getString("LDG4x.jLastregEin.text")); // NOI18N
+        jLastregEin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLastregEinActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jLastregEin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLabel15.setText(bundle.getString("LDG4x.jLabel15.text")); // NOI18N
+        jEffekte_3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 110, 20));
+
+        jVerstaerk.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jVerstaerk.setText("5");
+        jVerstaerk.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jVerstaerkFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jVerstaerkFocusLost(evt);
+            }
+        });
+        jVerstaerk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jVerstaerkKeyReleased(evt);
+            }
+        });
+        jEffekte_3.add(jVerstaerk, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 30, 20));
+
+        jLabel16.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLabel16.setText(bundle.getString("LDG4x.jLabel16.text")); // NOI18N
+        jEffekte_3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLabel18.setText(bundle.getString("LDG4x.jLabel18.text")); // NOI18N
+        jEffekte_3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jLabel19.setText(bundle.getString("LDG4x.jLabel19.text")); // NOI18N
+        jEffekte_3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+
+        jKP.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jKP.setText("32");
+        jKP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jKPFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jKPFocusLost(evt);
+            }
+        });
+        jKP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jKPKeyReleased(evt);
+            }
+        });
+        jEffekte_3.add(jKP, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 30, 20));
+
+        jKI.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jKI.setText("5");
+        jKI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jKIFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jKIFocusLost(evt);
+            }
+        });
+        jKI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jKIKeyReleased(evt);
+            }
+        });
+        jEffekte_3.add(jKI, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 30, 20));
+
+        jKD.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jKD.setText("4");
+        jKD.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jKDFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jKDFocusLost(evt);
+            }
+        });
+        jKD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jKDKeyReleased(evt);
+            }
+        });
+        jEffekte_3.add(jKD, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 30, 20));
+
+        jConsF0r.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsF0rActionPerformed(evt);
+            }
+        });
+        jEffekte_3.add(jConsF0r, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        jLabel20.setText(bundle.getString("LDG4x.jF0f.text")); // NOI18N
+        jEffekte_3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
+
+        jDecodereigenschaften.addTab(bundle.getString("LDG4x.jSound.TabConstraints.tabTitle"), jEffekte_3); // NOI18N
 
         jCV_LesenSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCV_LesenSchreiben.setText(bundle.getString("LDG30erPlus.jCV_LesenSchreiben.text")); // NOI18N
@@ -6568,6 +6606,7 @@ public class LDG4x extends javax.swing.JFrame {
 
         jBroadCasst.setSelected((CV[1][28] & 1) == 1);
         jChannel2.setSelected((CV[1][28] & 2) == 2);
+        jChan1Dynamic.setSelected((CV[1][28] & 4) == 4);
         jRCplus.setSelected((CV[1][28] & 128) == 128);
 
         jRichtung.setSelected((CV[1][29] & 1) == 1);
@@ -6984,309 +7023,513 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jFunctionMappingComponentShown
 
     private void jAuxInv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInv1ActionPerformed
-        if (!jAuxInv1.isSelected()) {
-            CV[1][55] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 59;
         } else {
-            CV[1][55] &= ~2;
+            CVNr = 57;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 55);
+        if (jAuxInv1.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInv1ActionPerformed
 
     private void jAuxBlink1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlink1ActionPerformed
-        if (!jAuxBlink1.isSelected()) {
-            CV[1][55] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 59;
         } else {
-            CV[1][55] &= ~1;
+            CVNr = 57;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 55);
+        if (jAuxBlink1.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlink1ActionPerformed
 
     private void jAuxBlink2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlink2ActionPerformed
-        if (!jAuxBlink2.isSelected()) {
-            CV[1][56] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 60;
         } else {
-            CV[1][56] &= ~1;
+            CVNr = 58;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 56);
+        if (jAuxBlink2.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlink2ActionPerformed
 
     private void jAuxInv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInv2ActionPerformed
-        if (!jAuxInv2.isSelected()) {
-            CV[1][56] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 60;
         } else {
-            CV[1][56] &= ~2;
+            CVNr = 58;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 56);
+        if (jAuxInv2.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInv2ActionPerformed
 
     private void jAuxInv3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInv3ActionPerformed
-        if (!jAuxInv3.isSelected()) {
-            CV[1][57] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 61;
         } else {
-            CV[1][57] &= ~2;
+            CVNr = 59;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 57);
+        if (jAuxInv3.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInv3ActionPerformed
 
     private void jAuxBlink3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlink3ActionPerformed
-        if (!jAuxBlink3.isSelected()) {
-            CV[1][57] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 61;
         } else {
-            CV[1][57] &= ~1;
+            CVNr = 59;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 57);
+        if (jAuxBlink3.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlink3ActionPerformed
 
     private void jAuxFeuer6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuer6ActionPerformed
-        if (jAuxFeuer6.isSelected()) {
-            CV[1][60] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 64;
         } else {
-            CV[1][60] &= ~16;
+            CVNr = 62;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 60);
+        if (jAuxFeuer6.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuer6ActionPerformed
 
     private void jAuxDim2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDim2ActionPerformed
-        if (jAuxDim2.isSelected()) {
-            CV[1][56] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 60;
         } else {
-            CV[1][56] &= ~32;
+            CVNr = 58;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 56);
+        if (jAuxDim2.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDim2ActionPerformed
 
     private void jAuxDim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDim1ActionPerformed
-        if (jAuxDim1.isSelected()) {
-            CV[1][55] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 59;
         } else {
-            CV[1][55] &= ~32;
+            CVNr = 57;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 55);
+        if (jAuxDim1.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDim1ActionPerformed
 
     private void jAuxDim3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDim3ActionPerformed
-        if (jAuxDim3.isSelected()) {
-            CV[1][57] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 61;
         } else {
-            CV[1][57] &= ~32;
+            CVNr = 59;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 57);
+        if (jAuxDim3.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDim3ActionPerformed
 
     private void jAuxInv4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInv4ActionPerformed
-        if (!jAuxInv4.isSelected()) {
-            CV[1][58] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 62;
         } else {
-            CV[1][58] &= ~2;
+            CVNr = 60;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 58);
+        if (jAuxInv4.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInv4ActionPerformed
 
     private void jAuxInv5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInv5ActionPerformed
-        if (!jAuxInv5.isSelected()) {
-            CV[1][59] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 63;
         } else {
-            CV[1][59] &= ~2;
+            CVNr = 61;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 59);
+        if (jAuxInv5.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInv5ActionPerformed
 
     private void jAuxInv6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInv6ActionPerformed
-        if (!jAuxInv6.isSelected()) {
-            CV[1][60] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 64;
         } else {
-            CV[1][60] &= ~2;
+            CVNr = 62;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 60);
+        if (jAuxInv6.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInv6ActionPerformed
 
     private void jAuxDim4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDim4ActionPerformed
-        if (jAuxDim4.isSelected()) {
-            CV[1][58] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 62;
         } else {
-            CV[1][58] &= ~32;
+            CVNr = 60;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 58);
+        if (jAuxDim4.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDim4ActionPerformed
 
     private void jAuxFeuer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuer1ActionPerformed
-        if (jAuxFeuer1.isSelected()) {
-            CV[1][57] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 59;
         } else {
-            CV[1][57] &= ~16;
+            CVNr = 57;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 57);
+        if (jAuxFeuer1.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuer1ActionPerformed
 
     private void jAuxFeuer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuer2ActionPerformed
-        if (jAuxFeuer2.isSelected()) {
-            CV[1][56] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 60;
         } else {
-            CV[1][56] &= ~16;
+            CVNr = 58;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 56);
+        if (jAuxFeuer2.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuer2ActionPerformed
 
     private void jAuxFeuer3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuer3ActionPerformed
-        if (jAuxFeuer3.isSelected()) {
-            CV[1][57] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 61;
         } else {
-            CV[1][57] &= ~16;
+            CVNr = 59;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 58);
+        if (jAuxFeuer3.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuer3ActionPerformed
 
     private void jAuxBlink4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlink4ActionPerformed
-        if (!jAuxBlink4.isSelected()) {
-            CV[1][58] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 62;
         } else {
-            CV[1][58] &= ~1;
+            CVNr = 60;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 58);
+        if (jAuxBlink4.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlink4ActionPerformed
 
     private void jAuxBlink5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlink5ActionPerformed
-        if (!jAuxBlink5.isSelected()) {
-            CV[1][59] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 63;
         } else {
-            CV[1][59] &= ~1;
+            CVNr = 61;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 59);
+        if (jAuxBlink5.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlink5ActionPerformed
 
     private void jAuxBlink6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlink6ActionPerformed
-        if (!jAuxBlink6.isSelected()) {
-            CV[1][60] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 64;
         } else {
-            CV[1][60] &= ~1;
+            CVNr = 62;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 60);
+        if (jAuxBlink6.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlink6ActionPerformed
 
     private void jAuxFeuer4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuer4ActionPerformed
-        if (jAuxFeuer4.isSelected()) {
-            CV[1][58] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 62;
         } else {
-            CV[1][58] &= ~16;
+            CVNr = 60;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 58);
+        if (jAuxFeuer4.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuer4ActionPerformed
 
     private void jAuxFeuer5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuer5ActionPerformed
-        if (jAuxFeuer5.isSelected()) {
-            CV[1][59] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 63;
         } else {
-            CV[1][59] &= ~16;
+            CVNr = 61;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 59);
+        if (jAuxFeuer5.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuer5ActionPerformed
 
     private void jAuxSpSch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSch1ActionPerformed
-        if (jAuxSpSch1.isSelected()) {
-            CV[1][55] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 59;
         } else {
-            CV[1][55] &= ~64;
+            CVNr = 57;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 55);
+        if (jAuxSpSch1.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSch1ActionPerformed
 
     private void jAuxSpSch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSch2ActionPerformed
-        if (jAuxSpSch2.isSelected()) {
-            CV[1][56] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 60;
         } else {
-            CV[1][56] &= ~64;
+            CVNr = 58;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 56);
+        if (jAuxSpSch2.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSch2ActionPerformed
 
     private void jAuxSpSch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSch3ActionPerformed
-        if (jAuxSpSch3.isSelected()) {
-            CV[1][57] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 61;
         } else {
-            CV[1][57] &= ~64;
+            CVNr = 59;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 57);
+        if (jAuxSpSch3.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSch3ActionPerformed
 
     private void jAuxSpSch4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSch4ActionPerformed
-        if (jAuxSpSch4.isSelected()) {
-            CV[1][58] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 62;
         } else {
-            CV[1][58] &= ~64;
+            CVNr = 60;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 58);
+        if (jAuxSpSch4.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSch4ActionPerformed
 
     private void jAuxSpSch5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSch5ActionPerformed
-        if (jAuxSpSch5.isSelected()) {
-            CV[1][59] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 63;
         } else {
-            CV[1][59] &= ~64;
+            CVNr = 61;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 59);
+        if (jAuxSpSch5.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSch5ActionPerformed
 
     private void jAuxSpSch6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSch6ActionPerformed
-        if (jAuxSpSch6.isSelected()) {
-            CV[1][60] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 64;
         } else {
-            CV[1][60] &= ~64;
+            CVNr = 62;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 60);
+        if (jAuxSpSch6.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSch6ActionPerformed
 
     private void jAuxKick6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKick6ActionPerformed
-        if (jAuxKick6.isSelected()) {
-            CV[1][60] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 64;
         } else {
-            CV[1][60] &= ~4;
+            CVNr = 62;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 60);
+        if (jAuxKick6.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKick6ActionPerformed
 
     private void jAuxKick2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKick2ActionPerformed
-        if (jAuxKick2.isSelected()) {
-            CV[1][56] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 60;
         } else {
-            CV[1][56] &= ~4;
+            CVNr = 58;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 56);
+        if (jAuxKick2.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKick2ActionPerformed
 
     private void jAuxKick1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKick1ActionPerformed
-        if (jAuxKick1.isSelected()) {
-            CV[1][55] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 59;
         } else {
-            CV[1][55] &= ~4;
+            CVNr = 57;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 55);
+        if (jAuxKick1.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKick1ActionPerformed
 
     private void jAuxKick3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKick3ActionPerformed
-        if (jAuxKick3.isSelected()) {
-            CV[1][57] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 61;
         } else {
-            CV[1][57] &= ~4;
+            CVNr = 59;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 57);
+        if (jAuxKick3.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKick3ActionPerformed
 
     private void jAuxKick4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKick4ActionPerformed
-        if (jAuxKick4.isSelected()) {
-            CV[1][58] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 62;
         } else {
-            CV[1][58] &= ~4;
+            CVNr = 60;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 58);
+        if (jAuxKick4.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKick4ActionPerformed
 
     private void jAuxKick5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKick5ActionPerformed
-        if (jAuxKick5.isSelected()) {
-            CV[1][59] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 63;
         } else {
-            CV[1][59] &= ~4;
+            CVNr = 61;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 59);
+        if (jAuxKick5.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKick5ActionPerformed
 
     private void jBlinkfrequenz1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBlinkfrequenz1FocusLost
@@ -7342,6 +7585,9 @@ public class LDG4x extends javax.swing.JFrame {
                 jLabel70.setVisible(false);
                 jLabel71.setVisible(false);
                 jLabel69.setVisible(false);
+                jLabel54.setVisible(false);
+                jLabel55.setVisible(false);
+                jLabel57.setVisible(false);
 
                 jAuxInv3.setVisible(false);
                 jAuxInv4.setVisible(false);
@@ -7358,16 +7604,28 @@ public class LDG4x extends javax.swing.JFrame {
                 jAuxKick5.setVisible(false);
                 jAuxKick6.setVisible(false);
 
+                jAuxDimf.setVisible(false);
+                jAuxDimr.setVisible(false);
+                jAuxDim1.setVisible(false);
+                jAuxDim2.setVisible(false);
                 jAuxDim3.setVisible(false);
                 jAuxDim4.setVisible(false);
                 jAuxDim5.setVisible(false);
                 jAuxDim6.setVisible(false);
 
+                jAuxFeuerf.setVisible(false);
+                jAuxFeuerr.setVisible(false);
+                jAuxFeuer1.setVisible(false);
+                jAuxFeuer2.setVisible(false);
                 jAuxFeuer3.setVisible(false);
                 jAuxFeuer4.setVisible(false);
                 jAuxFeuer5.setVisible(false);
                 jAuxFeuer6.setVisible(false);
 
+                jAuxSpSchf.setVisible(false);
+                jAuxSpSchr.setVisible(false);
+                jAuxSpSch1.setVisible(false);
+                jAuxSpSch2.setVisible(false);
                 jAuxSpSch3.setVisible(false);
                 jAuxSpSch4.setVisible(false);
                 jAuxSpSch5.setVisible(false);
@@ -7376,11 +7634,19 @@ public class LDG4x extends javax.swing.JFrame {
                 break;
 
         }
+        if (CVNavi.Decoder == c.LD_G42_2 || CVNavi.Decoder == c.LD_W42_2) {
+            jLabel66.setVisible(false);
+            jLabel97.setVisible(false);
+            jBlinkfrequenz1.setVisible(false);
+            jBlinkfrequenz2.setVisible(false);
+        }
         if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
             jLabel180.setText(bundle.getString("LDG4x.jLabel180a.text"));
             jLabel181.setText(bundle.getString("LDG4x.jLabel181a.text"));
             jLabel66.setText(bundle.getString("LDG4x.jLabel66a.text"));
             jLabel97.setText(bundle.getString("LDG4x.jLabel97a.text"));
+            jLabel6.setVisible(false);
+            jVSchalt.setVisible(false);
         } else {
             jLabel180.setText(bundle.getString("LDG4x.jLabel180b.text"));
             jLabel181.setText(bundle.getString("LDG4x.jLabel181b.text"));
@@ -7388,76 +7654,99 @@ public class LDG4x extends javax.swing.JFrame {
             jLabel97.setText(bundle.getString("LDG4x.jLabel97b.text"));
         }
 
-        jCV_Anzeige.setSelectedItem("CV#" + 53);
-
         //AUX...
         int cvValue;
-        cvValue = CV[1][53];
-        jAuxBlinkf.setSelected(!((cvValue & 1) == 1));
-        jAuxInvf.setSelected(!((cvValue & 2) == 2));
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            cvValue = CV[1][57];
+            jCV_Anzeige.setSelectedItem("CV#" + 57);
+        } else {
+            cvValue = CV[1][55];
+            jCV_Anzeige.setSelectedItem("CV#" + 55);
+        }
+        jAuxBlinkf.setSelected((cvValue & 2) == 2);
+        jAuxInvf.setSelected((cvValue & 1) == 1);
         jAuxKickf.setSelected((cvValue & 4) == 4);
         jAuxFeuerf.setSelected((cvValue & 16) == 16);
-        jAuxDimf.setSelected((cvValue & 32) == 32);
-        jAuxSpSchf.setSelected((cvValue & 64) == 64);
+        jAuxDimf.setSelected((cvValue & 8) == 8);
+        jAuxSpSchf.setSelected((cvValue & 32) == 32);
 
-        cvValue = CV[1][54];
-        jAuxBlinkr.setSelected(!((cvValue & 1) == 1));
-        jAuxInvr.setSelected(!((cvValue & 2) == 2));
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            cvValue = CV[1][58];
+        } else {
+            cvValue = CV[1][56];
+        }
+        jAuxBlinkr.setSelected((cvValue & 2) == 2);
+        jAuxInvr.setSelected((cvValue & 1) == 1);
         jAuxKickr.setSelected((cvValue & 4) == 4);
         jAuxFeuerr.setSelected((cvValue & 16) == 16);
-        jAuxDimr.setSelected((cvValue & 32) == 32);
-        jAuxSpSchr.setSelected((cvValue & 64) == 64);
+        jAuxDimr.setSelected((cvValue & 8) == 8);
+        jAuxSpSchr.setSelected((cvValue & 32) == 32);
 
-        cvValue = CV[1][55];
-        jAuxBlink1.setSelected(!((cvValue & 1) == 1));
-        jAuxInv1.setSelected(!((cvValue & 2) == 2));
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            cvValue = CV[1][59];
+        } else {
+            cvValue = CV[1][57];
+        }
+        jAuxBlink1.setSelected((cvValue & 2) == 2);
+        jAuxInv1.setSelected((cvValue & 1) == 1);
         jAuxKick1.setSelected((cvValue & 4) == 4);
         jAuxFeuer1.setSelected((cvValue & 16) == 16);
-        jAuxDim1.setSelected((cvValue & 32) == 32);
-        jAuxSpSch1.setSelected((cvValue & 64) == 64);
+        jAuxDim1.setSelected((cvValue & 8) == 8);
+        jAuxSpSch1.setSelected((cvValue & 32) == 32);
 
-        cvValue = CV[1][56];
-        jAuxBlink2.setSelected(!((cvValue & 1) == 1));
-        jAuxInv2.setSelected(!((cvValue & 2) == 2));
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            cvValue = CV[1][60];
+        } else {
+            cvValue = CV[1][58];
+        }
+        jAuxBlink2.setSelected((cvValue & 2) == 2);
+        jAuxInv2.setSelected((cvValue & 1) == 1);
         jAuxKick2.setSelected((cvValue & 4) == 4);
         jAuxFeuer2.setSelected((cvValue & 16) == 16);
-        jAuxDim2.setSelected((cvValue & 32) == 32);
-        jAuxSpSch2.setSelected((cvValue & 64) == 64);
+        jAuxDim2.setSelected((cvValue & 8) == 8);
+        jAuxSpSch2.setSelected((cvValue & 32) == 32);
 
-        cvValue = CV[1][57];
-        jAuxBlink3.setSelected(!((cvValue & 1) == 1));
-        jAuxInv3.setSelected(!((cvValue & 2) == 2));
-        jAuxKick3.setSelected((cvValue & 4) == 4);
-        jAuxFeuer3.setSelected((cvValue & 16) == 16);
-        jAuxDim3.setSelected((cvValue & 32) == 32);
-        jAuxSpSch3.setSelected((cvValue & 64) == 64);
+        if (CVNavi.Decoder != c.LD_G42 && CVNavi.Decoder != c.LD_W42) {
 
-        cvValue = CV[1][58];
-        jAuxBlink4.setSelected(!((cvValue & 1) == 1));
-        jAuxInv4.setSelected(!((cvValue & 2) == 2));
-        jAuxKick4.setSelected((cvValue & 4) == 4);
-        jAuxFeuer4.setSelected((cvValue & 16) == 16);
-        jAuxDim4.setSelected((cvValue & 32) == 32);
-        jAuxSpSch4.setSelected((cvValue & 64) == 64);
+            cvValue = CV[1][59];
+            jAuxBlink3.setSelected((cvValue & 2) == 2);
+            jAuxInv3.setSelected((cvValue & 1) == 1);
+            jAuxKick3.setSelected((cvValue & 4) == 4);
+            jAuxFeuer3.setSelected((cvValue & 16) == 16);
+            jAuxDim3.setSelected((cvValue & 8) == 8);
+            jAuxSpSch3.setSelected((cvValue & 32) == 32);
 
-        cvValue = CV[1][59];
-        jAuxBlink5.setSelected(!((cvValue & 1) == 1));
-        jAuxInv5.setSelected(!((cvValue & 2) == 2));
-        jAuxKick5.setSelected((cvValue & 4) == 4);
-        jAuxFeuer5.setSelected((cvValue & 16) == 16);
-        jAuxSpSch5.setSelected((cvValue & 64) == 64);
+            cvValue = CV[1][60];
+            jAuxBlink4.setSelected((cvValue & 2) == 2);
+            jAuxInv4.setSelected((cvValue & 1) == 1);
+            jAuxKick4.setSelected((cvValue & 4) == 4);
+            jAuxFeuer4.setSelected((cvValue & 16) == 16);
+            jAuxDim4.setSelected((cvValue & 8) == 8);
+            jAuxSpSch4.setSelected((cvValue & 32) == 32);
 
-        cvValue = CV[1][60];
-        jAuxBlink6.setSelected(!((cvValue & 1) == 1));
-        jAuxInv6.setSelected(!((cvValue & 2) == 2));
-        jAuxKick6.setSelected((cvValue & 4) == 4);
-        jAuxFeuer6.setSelected((cvValue & 16) == 16);
-        jAuxSpSch6.setSelected((cvValue & 64) == 64);
+            cvValue = CV[1][61];
+            jAuxBlink5.setSelected((cvValue & 2) == 2);
+            jAuxInv5.setSelected((cvValue & 1) == 1);
+            jAuxKick5.setSelected((cvValue & 4) == 4);
+            jAuxFeuer5.setSelected((cvValue & 16) == 16);
+            jAuxDim5.setSelected((cvValue & 8) == 8);
+            jAuxSpSch5.setSelected((cvValue & 32) == 32);
 
+            cvValue = CV[1][62];
+            jAuxBlink6.setSelected((cvValue & 2) == 2);
+            jAuxInv6.setSelected((cvValue & 1) == 1);
+            jAuxKick6.setSelected((cvValue & 4) == 4);
+            jAuxFeuer6.setSelected((cvValue & 16) == 16);
+            jAuxDim6.setSelected((cvValue & 8) == 8);
+            jAuxSpSch6.setSelected((cvValue & 32) == 32);
+        }
         //----------------
+        jVSchalt.setText("" + CV[1][63]);
         jKickZeit.setText("" + CV[1][99]);
-        jBlinkfrequenz1.setText("" + CV[1][106]);
-        jBlinkfrequenz2.setText("" + CV[1][107]);
+        jBlinkfrequenzf.setText("" + CV[1][101]);
+        jBlinkfrequenzr.setText("" + CV[1][102]);
+        jBlinkfrequenz1.setText("" + CV[1][103]);
+        jBlinkfrequenz2.setText("" + CV[1][104]);
         //----------------
 
 
@@ -7465,31 +7754,30 @@ public class LDG4x extends javax.swing.JFrame {
 
     private void jEffekte_3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jEffekte_3ComponentShown
         jCV_Anzeige.setSelectedItem("CV#" + 22);
-        jConsF0.setSelected((CV[1][22] & 1) == 1);
         jConsF1.setSelected((CV[1][21] & 1) == 1);
-        jConsF2.setSelected((CV[1][21] & 2) == 1);
-        jConsF3.setSelected((CV[1][21] & 4) == 1);
-        jConsF4.setSelected((CV[1][21] & 8) == 1);
-        jConsF5.setSelected((CV[1][21] & 16) == 1);
-        jConsF6.setSelected((CV[1][22] & 32) == 1);
-        jConsF7.setSelected((CV[1][21] & 64) == 1);
-        jConsF8.setSelected((CV[1][21] & 128) == 1);
-        jConsF9.setSelected((CV[1][22] & 2) == 1);
-        jConsF10.setSelected((CV[1][22] & 4) == 1);
-        jConsF11.setSelected((CV[1][22] & 8) == 1);
-        jConsF12.setSelected((CV[1][22] & 16) == 1);
+        jConsF2.setSelected((CV[1][21] & 2) == 2);
+        jConsF3.setSelected((CV[1][21] & 4) == 4);
+        jConsF4.setSelected((CV[1][21] & 8) == 8);
+        jConsF5.setSelected((CV[1][21] & 16) == 16);
+        jConsF6.setSelected((CV[1][21] & 32) == 32);
+        jConsF7.setSelected((CV[1][21] & 64) == 64);
+        jConsF8.setSelected((CV[1][21] & 128) == 128);
+        jConsF0f.setSelected((CV[1][22] & 1) == 1);
+        jConsF0r.setSelected((CV[1][22] & 2) == 2);
+        jConsF9.setSelected((CV[1][22] & 4) == 4);
+        jConsF10.setSelected((CV[1][22] & 8) == 8);
+        jConsF11.setSelected((CV[1][22] & 16) == 16);
+        jConsF12.setSelected((CV[1][22] & 32) == 32);
         jConsAdr.setText("" + CV[1][19]);
-        
+
         jLastregEin.setSelected((CV[1][116] & 1) == 1);
-        if(CVNavi.Decoder != c.LD_W42 && CVNavi.Decoder != c.LD_W42_2){
+        if (CVNavi.Decoder != c.LD_W42 && CVNavi.Decoder != c.LD_W42_2) {
             jLastregEin.setSelected((CV[1][116] & 1) == 1);
             jVerstaerk.setText("" + CV[1][112]);
             jKP.setText("" + CV[1][113]);
             jKI.setText("" + CV[1][114]);
             jKD.setText("" + CV[1][115]);
-        }
-        else
-        {
+        } else {
             jLastregEin.setVisible(false);
             jKP.setVisible(false);
             jKI.setVisible(false);
@@ -7499,7 +7787,7 @@ public class LDG4x extends javax.swing.JFrame {
             jLabel18.setVisible(false);
             jLabel19.setVisible(false);
         }
- 
+
     }//GEN-LAST:event_jEffekte_3ComponentShown
 
     private void jF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF1ActionPerformed
@@ -7933,129 +8221,213 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jBlinkfrequenzrKeyReleased
 
     private void jAuxInvfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInvfActionPerformed
-        if (!jAuxInv1.isSelected()) {
-            CV[1][53] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 57;
         } else {
-            CV[1][53] &= ~2;
+            CVNr = 55;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 53);
+        if (jAuxInvf.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInvfActionPerformed
 
     private void jAuxBlinkfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlinkfActionPerformed
-        if (!jAuxBlink1.isSelected()) {
-            CV[1][55] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 57;
         } else {
-            CV[1][55] &= ~1;
+            CVNr = 55;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 55);
+        if (jAuxBlinkf.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlinkfActionPerformed
 
     private void jAuxBlinkrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxBlinkrActionPerformed
-        if (!jAuxBlink2.isSelected()) {
-            CV[1][54] |= 1;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 58;
         } else {
-            CV[1][54] &= ~1;
+            CVNr = 56;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 54);
+        if (jAuxBlinkr.isSelected()) {
+            CV[1][CVNr] |= 2;
+        } else {
+            CV[1][CVNr] &= ~2;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxBlinkrActionPerformed
 
     private void jAuxInvrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxInvrActionPerformed
-        if (!jAuxInv2.isSelected()) {
-            CV[1][54] |= 2;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 58;
         } else {
-            CV[1][54] &= ~2;
+            CVNr = 56;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 54);
+        if (jAuxInvr.isSelected()) {
+            CV[1][CVNr] |= 1;
+        } else {
+            CV[1][CVNr] &= ~1;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxInvrActionPerformed
 
     private void jAuxKickrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKickrActionPerformed
-        if (jAuxKick2.isSelected()) {
-            CV[1][54] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 58;
         } else {
-            CV[1][54] &= ~4;
+            CVNr = 56;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 54);
+        if (jAuxKickr.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKickrActionPerformed
 
     private void jAuxKickfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxKickfActionPerformed
-        if (jAuxKick1.isSelected()) {
-            CV[1][53] |= 4;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 57;
         } else {
-            CV[1][53] &= ~4;
+            CVNr = 55;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 53);
+        if (jAuxKickf.isSelected()) {
+            CV[1][CVNr] |= 4;
+        } else {
+            CV[1][CVNr] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxKickfActionPerformed
 
     private void jAuxDim5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDim5ActionPerformed
-        if (jAuxDim5.isSelected()) {
-            CV[1][59] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 59;
         } else {
-            CV[1][59] &= ~32;
+            CVNr = 61;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 59);
+        if (jAuxDim5.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDim5ActionPerformed
 
     private void jAuxDim6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDim6ActionPerformed
-        if (jAuxDim6.isSelected()) {
-            CV[1][60] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 60;
         } else {
-            CV[1][60] &= ~32;
+            CVNr = 62;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 60);
+        if (jAuxDim6.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDim6ActionPerformed
 
     private void jAuxDimfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDimfActionPerformed
-        if (jAuxDim1.isSelected()) {
-            CV[1][53] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 57;
         } else {
-            CV[1][53] &= ~32;
+            CVNr = 55;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 53);
+        if (jAuxDimf.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDimfActionPerformed
 
     private void jAuxDimrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxDimrActionPerformed
-        if (jAuxDim2.isSelected()) {
-            CV[1][54] |= 32;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 58;
         } else {
-            CV[1][54] &= ~32;
+            CVNr = 56;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 54);
+        if (jAuxDimr.isSelected()) {
+            CV[1][CVNr] |= 8;
+        } else {
+            CV[1][CVNr] &= ~8;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxDimrActionPerformed
 
     private void jAuxFeuerfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuerfActionPerformed
-        if (jAuxFeuer1.isSelected()) {
-            CV[1][53] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 57;
         } else {
-            CV[1][53] &= ~16;
+            CVNr = 55;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 53);
+        if (jAuxFeuerf.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuerfActionPerformed
 
     private void jAuxFeuerrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxFeuerrActionPerformed
-        if (jAuxFeuer2.isSelected()) {
-            CV[1][54] |= 16;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 58;
         } else {
-            CV[1][54] &= ~16;
+            CVNr = 56;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 54);
+        if (jAuxFeuerr.isSelected()) {
+            CV[1][CVNr] |= 16;
+        } else {
+            CV[1][CVNr] &= ~16;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxFeuerrActionPerformed
 
     private void jAuxSpSchfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSchfActionPerformed
-        if (jAuxSpSch1.isSelected()) {
-            CV[1][53] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 57;
         } else {
-            CV[1][53] &= ~64;
+            CVNr = 55;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 53);
+        if (jAuxSpSchf.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSchfActionPerformed
 
     private void jAuxSpSchrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuxSpSchrActionPerformed
-        if (jAuxSpSch2.isSelected()) {
-            CV[1][54] |= 64;
+        int CVNr = 0;
+        if (CVNavi.Decoder == c.LD_G42 || CVNavi.Decoder == c.LD_W42) {
+            CVNr = 58;
         } else {
-            CV[1][54] &= ~64;
+            CVNr = 56;
         }
-        jCV_Anzeige.setSelectedItem("CV#" + 54);
+        if (jAuxSpSchr.isSelected()) {
+            CV[1][CVNr] |= 32;
+        } else {
+            CV[1][CVNr] &= ~32;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + CVNr);
     }//GEN-LAST:event_jAuxSpSchrActionPerformed
 
     private void jAnalogRW_WActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnalogRW_WActionPerformed
@@ -9013,12 +9385,12 @@ public class LDG4x extends javax.swing.JFrame {
 
         if (CVNavi.Decoder != c.LD_G42_2 && CVNavi.Decoder != c.LD_W42_2) {
         }
- 
+
         switch (CVNavi.Decoder) {
             case c.LD_G41:
                 jUeberlastSchwelle.setText("" + CV[1][109]);
                 jDimmPeriode.setText("" + CV[1][100]);
- 
+
                 break;
 
             case c.LD_G42:
@@ -9035,7 +9407,7 @@ public class LDG4x extends javax.swing.JFrame {
                 jUeberlastSchwelle.setText("" + CV[1][64]);
                 jUeberlastDauer.setText("" + CV[1][63]);
                 jDimmPeriode.setText("" + CV[1][100]);
- 
+
                 break;
 
             case c.LD_G42_2:
@@ -9099,7 +9471,7 @@ public class LDG4x extends javax.swing.JFrame {
                 jIn2Func13.setSelected((CV[1][108] & 32) == 32);
                 jIn2Func14.setSelected((CV[1][108] & 64) == 64);
                 jIn2Func15.setSelected((CV[1][108] & 128) == 128);
-           
+
                 jDimmen3.setText("" + CV[1][51]);
                 jDimmen4.setText("" + CV[1][52]);
                 jDimmen5.setText("" + CV[1][53]);
@@ -9191,7 +9563,7 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jIn1Func8ActionPerformed
 
     private void jIn2Func15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIn2Func15ActionPerformed
-        CVFktBitsDir(108, 1128, jIn2Func15.isSelected());
+        CVFktBitsDir(108, 128, jIn2Func15.isSelected());
     }//GEN-LAST:event_jIn2Func15ActionPerformed
 
     private void jIn2Func14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIn2Func14ActionPerformed
@@ -9509,56 +9881,69 @@ public class LDG4x extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jUeberlastDauerKeyReleased
 
-    private void jConsF0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF0ActionPerformed
-        CVFktBitsDir(22, 1, jConsF0.isSelected());
-    }//GEN-LAST:event_jConsF0ActionPerformed
+    private void jConsF0fActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF0fActionPerformed
+        CVFktBitsDir(22, 1, jConsF0f.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 22);
+    }//GEN-LAST:event_jConsF0fActionPerformed
 
     private void jConsF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF1ActionPerformed
         CVFktBitsDir(21, 1, jConsF1.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF1ActionPerformed
 
     private void jConsF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF2ActionPerformed
         CVFktBitsDir(21, 2, jConsF2.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF2ActionPerformed
 
     private void jConsF4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF4ActionPerformed
         CVFktBitsDir(21, 8, jConsF4.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF4ActionPerformed
 
     private void jConsF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF3ActionPerformed
         CVFktBitsDir(21, 4, jConsF3.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF3ActionPerformed
 
     private void jConsF5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF5ActionPerformed
         CVFktBitsDir(21, 16, jConsF5.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF5ActionPerformed
 
     private void jConsF6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF6ActionPerformed
         CVFktBitsDir(21, 32, jConsF6.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF6ActionPerformed
 
     private void jConsF7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF7ActionPerformed
         CVFktBitsDir(21, 64, jConsF7.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF7ActionPerformed
 
     private void jConsF8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF8ActionPerformed
         CVFktBitsDir(21, 128, jConsF8.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 21);
     }//GEN-LAST:event_jConsF8ActionPerformed
 
     private void jConsF9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF9ActionPerformed
-        CVFktBitsDir(22, 2, jConsF9.isSelected());
+        CVFktBitsDir(22, 4, jConsF9.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 22);
     }//GEN-LAST:event_jConsF9ActionPerformed
 
     private void jConsF10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF10ActionPerformed
-        CVFktBitsDir(22, 4, jConsF10.isSelected());
+        CVFktBitsDir(22, 8, jConsF10.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 22);
     }//GEN-LAST:event_jConsF10ActionPerformed
 
     private void jConsF11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF11ActionPerformed
-        CVFktBitsDir(22, 8, jConsF11.isSelected());
+        CVFktBitsDir(22, 16, jConsF11.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 22);
     }//GEN-LAST:event_jConsF11ActionPerformed
 
     private void jConsF12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF12ActionPerformed
-        CVFktBitsDir(22, 16, jConsF12.isSelected());
+        CVFktBitsDir(22, 32, jConsF12.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 22);
     }//GEN-LAST:event_jConsF12ActionPerformed
 
     private void jConsAdrFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jConsAdrFocusGained
@@ -9571,7 +9956,7 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jConsAdrFocusLost
 
     private void jConsAdrKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jConsAdrKeyReleased
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             transferFocus();
         }
     }//GEN-LAST:event_jConsAdrKeyReleased
@@ -9585,7 +9970,7 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jVerstaerkFocusGained
 
     private void jVerstaerkFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jVerstaerkFocusLost
-       CV[1][112] = CVNavi.checkTextField(this, jVerstaerk, 1, 15, 1, true);
+        CV[1][112] = CVNavi.checkTextField(this, jVerstaerk, 1, 15, 1, true);
         jCV_Anzeige.setSelectedItem("CV#" + 112);
     }//GEN-LAST:event_jVerstaerkFocusLost
 
@@ -9600,12 +9985,12 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jKPFocusGained
 
     private void jKPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jKPFocusLost
-       CV[1][113] = CVNavi.checkTextField(this, jKP, 0, 255, 0, true);
+        CV[1][113] = CVNavi.checkTextField(this, jKP, 0, 255, 0, true);
         jCV_Anzeige.setSelectedItem("CV#" + 113);
     }//GEN-LAST:event_jKPFocusLost
 
     private void jKPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jKPKeyReleased
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             transferFocus();
         }
     }//GEN-LAST:event_jKPKeyReleased
@@ -9615,12 +10000,12 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jKIFocusGained
 
     private void jKIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jKIFocusLost
-       CV[1][114] = CVNavi.checkTextField(this, jKI, 0, 255, 0, true);
+        CV[1][114] = CVNavi.checkTextField(this, jKI, 0, 255, 0, true);
         jCV_Anzeige.setSelectedItem("CV#" + 114);
     }//GEN-LAST:event_jKIFocusLost
 
     private void jKIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jKIKeyReleased
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             transferFocus();
         }
     }//GEN-LAST:event_jKIKeyReleased
@@ -9630,65 +10015,89 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jKDFocusGained
 
     private void jKDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jKDFocusLost
-       CV[1][115] = CVNavi.checkTextField(this, jKD, 0, 255, 0, true);
+        CV[1][115] = CVNavi.checkTextField(this, jKD, 0, 255, 0, true);
         jCV_Anzeige.setSelectedItem("CV#" + 115);
     }//GEN-LAST:event_jKDFocusLost
 
     private void jKDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jKDKeyReleased
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             transferFocus();
         }
     }//GEN-LAST:event_jKDKeyReleased
 
-        void filfilCVs
-        
-            () {
-        String[] keys = null;
-            switch (CVNavi.Decoder) {
-                case c.LD_G41:
-                    keys = new String[]{"LD-G-41"};
-                    break;
+    private void jVSchaltFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jVSchaltFocusGained
+        jCV_Anzeige.setSelectedItem("CV#" + 63);
+    }//GEN-LAST:event_jVSchaltFocusGained
 
-                case c.LD_G42:
-                    keys = new String[]{"LD-G-42"};
-                    break;
+    private void jVSchaltFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jVSchaltFocusLost
+        CV[1][63] = CVNavi.checkTextField(this, jKD, 0, 255, 0, true);
+        jCV_Anzeige.setSelectedItem("CV#" + 63);
+    }//GEN-LAST:event_jVSchaltFocusLost
 
-                case c.LD_W42:
-                    keys = new String[]{"LD-W-42"};
-                    break;
-
-                case c.LD_G42_2:
-                    keys = new String[]{"LD-G-42.2"};
-                    break;
-
-                case c.LD_W42_2:
-                    keys = new String[]{"LD-W-42.2"};
-                    break;
-
-                case c.LD_G43:
-                    keys = new String[]{"LD-G-43"};
-                    break;
-
-                case c.LD_G44:
-                    keys = new String[]{"LD-G-44"};
-                    break;
-            }
-            Boolean b = parseString2CVs.convertString2CV(ReturnString, keys, CV, jComment, CVNavi);
+    private void jVSchaltKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jVSchaltKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            transferFocus();
         }
+    }//GEN-LAST:event_jVSchaltKeyReleased
 
-        void updateTabs
-        
-            () {
+    private void jChan1DynamicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChan1DynamicActionPerformed
+        if (jChan1Dynamic.isSelected()) {
+            CV[1][28] |= 4;
+        } else {
+            CV[1][28] &= ~4;
+        }
+        jCV_Anzeige.setSelectedItem("CV#" + 28);
+
+    }//GEN-LAST:event_jChan1DynamicActionPerformed
+
+    private void jConsF0rActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsF0rActionPerformed
+        CVFktBitsDir(22, 2, jConsF0r.isSelected());
+        jCV_Anzeige.setSelectedItem("CV#" + 22);
+    }//GEN-LAST:event_jConsF0rActionPerformed
+
+    void filfilCVs() {
+        String[] keys = null;
+        switch (CVNavi.Decoder) {
+            case c.LD_G41:
+                keys = new String[]{"LD-G-41"};
+                break;
+
+            case c.LD_G42:
+                keys = new String[]{"LD-G-42"};
+                break;
+
+            case c.LD_W42:
+                keys = new String[]{"LD-W-42"};
+                break;
+
+            case c.LD_G42_2:
+                keys = new String[]{"LD-G-42.2"};
+                break;
+
+            case c.LD_W42_2:
+                keys = new String[]{"LD-W-42.2"};
+                break;
+
+            case c.LD_G43:
+                keys = new String[]{"LD-G-43"};
+                break;
+
+            case c.LD_G44:
+                keys = new String[]{"LD-G-44"};
+                break;
+        }
+        Boolean b = parseString2CVs.convertString2CV(ReturnString, keys, CV, jComment, CVNavi);
+    }
+
+    void updateTabs() {
         int idx = jDecodereigenschaften.getSelectedIndex();
 
-            for (int i = 0; i < jDecodereigenschaften.getComponentCount(); i++) {
-                jDecodereigenschaften.setSelectedIndex(i);
-            }
-
-            jDecodereigenschaften.setSelectedIndex(idx);
+        for (int i = 0; i < jDecodereigenschaften.getComponentCount(); i++) {
+            jDecodereigenschaften.setSelectedIndex(i);
         }
 
-    
+        jDecodereigenschaften.setSelectedIndex(idx);
+    }
 
     private int getCVfromIndexString(JComboBox jCB, String prefix) {
         int CV = 0;
@@ -9775,10 +10184,12 @@ public class LDG4x extends javax.swing.JFrame {
     private javax.swing.JComboBox jCV_Anzeige;
     private javax.swing.JTextField jCV_Inhalt;
     private javax.swing.JButton jCV_LesenSchreiben;
+    private javax.swing.JCheckBox jChan1Dynamic;
     private javax.swing.JCheckBox jChannel2;
     private javax.swing.JTextArea jComment;
     private javax.swing.JTextField jConsAdr;
-    private javax.swing.JCheckBox jConsF0;
+    private javax.swing.JCheckBox jConsF0f;
+    private javax.swing.JCheckBox jConsF0r;
     private javax.swing.JCheckBox jConsF1;
     private javax.swing.JCheckBox jConsF10;
     private javax.swing.JCheckBox jConsF11;
@@ -10147,6 +10558,7 @@ public class LDG4x extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel188;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel206;
     private javax.swing.JLabel jLabel208;
     private javax.swing.JLabel jLabel238;
