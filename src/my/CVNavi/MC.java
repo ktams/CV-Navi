@@ -258,8 +258,15 @@ public class MC extends javax.swing.JFrame {
             Funktionen[i] = 0;
         ImageIcon II = null;
         ImageIcon II2 = null;
-        II = new ImageIcon(getClass().getResource("/MasterControl.gif"));
-        II2 = new ImageIcon(getClass().getResource("/RedBox.gif")); // replace with final version
+        if( CVNavi.getZentrale() == c.cuMasterControl2 ) {
+            II2 = new ImageIcon(getClass().getResource("/MC2_Foto.jpg"));
+            jLabelBaudrate.setVisible(false);
+            jBaud.setVisible(false);
+            jLabel14.setVisible(false);
+        } else {
+            II = new ImageIcon(getClass().getResource("/MasterControl.gif"));
+            II2 = new ImageIcon(getClass().getResource("/RedBox.gif")); // replace with final version
+        }
         setTitle( CVNavi.getMenutext( decoderList.MC ).trim() );
         bundle = java.util.ResourceBundle.getBundle("my.CVNavi/Bundle");
         if( II != null ) {
