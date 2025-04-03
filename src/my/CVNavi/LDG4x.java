@@ -283,14 +283,9 @@ public class LDG4x extends javax.swing.JFrame {
         if (CVNavi.Decoder != c.LD_G42 && CVNavi.Decoder != c.LD_W42) {
             initCV(100, 10);
         }
-
-        for (int cv = 101; cv <= 104; cv++) { // Seite 51 Einstellung der Blinkfrequenz
-            initCV(cv, 20);
-        }
         initCV(101, 20);
         initCV(102, 20);
-
-        if (CVNavi.Decoder == c.LD_G42_2 || CVNavi.Decoder == c.LD_W42_2) {
+         if (CVNavi.Decoder == c.LD_G42_2 || CVNavi.Decoder == c.LD_W42_2) {
             initCV(103, 255);
             initCV(104, 255);
         } else {
@@ -1603,32 +1598,6 @@ public class LDG4x extends javax.swing.JFrame {
         jUeberlastSchwelle = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jUeberlastDauer = new javax.swing.JTextField();
-        jAnalog = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jF1 = new javax.swing.JCheckBox();
-        jF2 = new javax.swing.JCheckBox();
-        jF3 = new javax.swing.JCheckBox();
-        jF4 = new javax.swing.JCheckBox();
-        jF5 = new javax.swing.JCheckBox();
-        jF6 = new javax.swing.JCheckBox();
-        jF7 = new javax.swing.JCheckBox();
-        jF8 = new javax.swing.JCheckBox();
-        jLabel17 = new javax.swing.JLabel();
-        jPacketTimeOut = new javax.swing.JTextField();
-        jAnalogRW_W = new javax.swing.JRadioButton();
-        jAnalogRW_G = new javax.swing.JRadioButton();
-        jLabel238 = new javax.swing.JLabel();
-        jUmschaltEmpf = new javax.swing.JTextField();
-        jLabel239 = new javax.swing.JLabel();
-        jF0 = new javax.swing.JCheckBox();
-        jF9 = new javax.swing.JCheckBox();
-        jF10 = new javax.swing.JCheckBox();
-        jF11 = new javax.swing.JCheckBox();
-        jF12 = new javax.swing.JCheckBox();
-        jKommentar = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jComment = new javax.swing.JTextArea();
-        jLabel36 = new javax.swing.JLabel();
         jEffekte_3 = new javax.swing.JPanel();
         jLabel134 = new javax.swing.JLabel();
         jLabel135 = new javax.swing.JLabel();
@@ -1675,6 +1644,32 @@ public class LDG4x extends javax.swing.JFrame {
         jKD = new javax.swing.JTextField();
         jConsF0r = new javax.swing.JCheckBox();
         jLabel20 = new javax.swing.JLabel();
+        jAnalog = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jF1 = new javax.swing.JCheckBox();
+        jF2 = new javax.swing.JCheckBox();
+        jF3 = new javax.swing.JCheckBox();
+        jF4 = new javax.swing.JCheckBox();
+        jF5 = new javax.swing.JCheckBox();
+        jF6 = new javax.swing.JCheckBox();
+        jF7 = new javax.swing.JCheckBox();
+        jF8 = new javax.swing.JCheckBox();
+        jLabel17 = new javax.swing.JLabel();
+        jPacketTimeOut = new javax.swing.JTextField();
+        jAnalogRW_W = new javax.swing.JRadioButton();
+        jAnalogRW_G = new javax.swing.JRadioButton();
+        jLabel238 = new javax.swing.JLabel();
+        jUmschaltEmpf = new javax.swing.JTextField();
+        jLabel239 = new javax.swing.JLabel();
+        jF0 = new javax.swing.JCheckBox();
+        jF9 = new javax.swing.JCheckBox();
+        jF10 = new javax.swing.JCheckBox();
+        jF11 = new javax.swing.JCheckBox();
+        jF12 = new javax.swing.JCheckBox();
+        jKommentar = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jComment = new javax.swing.JTextArea();
+        jLabel36 = new javax.swing.JLabel();
         jCV_LesenSchreiben = new javax.swing.JButton();
         jDirekteingabe = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
@@ -1729,7 +1724,7 @@ public class LDG4x extends javax.swing.JFrame {
         jDecodereigenschaften.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jDecodereigenschaften.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jCV29.setToolTipText(bundle.getString("LDG30erPlus.jCV29.toolTipText")); // NOI18N
+        jCV29.setToolTipText(bundle.getString("LDG4x.jCV29.toolTipText")); // NOI18N
         jCV29.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jCV29ComponentShown(evt);
@@ -4291,7 +4286,7 @@ public class LDG4x extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
         jLabel6.setText(bundle.getString("LDG4x.jLabel6.text")); // NOI18N
-        jEffekte_1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        jEffekte_1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 320, -1));
 
         jVSchalt.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
         jVSchalt.setText("0");
@@ -4308,11 +4303,11 @@ public class LDG4x extends javax.swing.JFrame {
                 jVSchaltKeyReleased(evt);
             }
         });
-        jEffekte_1.add(jVSchalt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 30, -1));
+        jEffekte_1.add(jVSchalt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 40, 20));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
         jLabel8.setText(bundle.getString("LDG4x.jLabel8.text")); // NOI18N
-        jEffekte_1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 130, -1));
+        jEffekte_1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 130, -1));
 
         jKickZeit.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
         jKickZeit.setText("0");
@@ -4329,7 +4324,7 @@ public class LDG4x extends javax.swing.JFrame {
                 jKickZeitKeyReleased(evt);
             }
         });
-        jEffekte_1.add(jKickZeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 40, -1));
+        jEffekte_1.add(jKickZeit, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 40, 20));
 
         jDecodereigenschaften.addTab(bundle.getString("LDG4x.jEffekte_1.TabConstraints.tabTitle"), jEffekte_1); // NOI18N
 
@@ -5032,245 +5027,6 @@ public class LDG4x extends javax.swing.JFrame {
 
         jDecodereigenschaften.addTab(bundle.getString("LDG4x.jEffekte_2.TabConstraints.tabTitle"), jEffekte_2); // NOI18N
 
-        jAnalog.setToolTipText(bundle.getString("LDG30erPlus.jAnalog.toolTipText")); // NOI18N
-        jAnalog.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnalog.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jAnalogComponentShown(evt);
-            }
-        });
-        jAnalog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText(bundle.getString("LDG30erPlus.jLabel2.text")); // NOI18N
-        jAnalog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 261, 150, -1));
-
-        jF1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF1.setText(bundle.getString("LDG30erPlus.jF1.text")); // NOI18N
-        jF1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF1ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
-
-        jF2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF2.setText(bundle.getString("LDG30erPlus.jF2.text")); // NOI18N
-        jF2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF2ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
-
-        jF3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF3.setText(bundle.getString("LDG30erPlus.jF3.text")); // NOI18N
-        jF3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF3ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
-
-        jF4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF4.setText(bundle.getString("LDG30erPlus.jF4.text")); // NOI18N
-        jF4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF4ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
-
-        jF5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF5.setText(bundle.getString("LDG30erPlus.jF5.text")); // NOI18N
-        jF5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF5ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
-
-        jF6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF6.setText(bundle.getString("LDG30erPlus.jF6.text")); // NOI18N
-        jF6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF6ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
-
-        jF7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF7.setText(bundle.getString("LDG30erPlus.jF7.text")); // NOI18N
-        jF7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF7ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
-
-        jF8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jF8.setText(bundle.getString("LDG30erPlus.jF8.text")); // NOI18N
-        jF8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF8ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel17.setText(bundle.getString("LDG30erPlus.jLabel17.text")); // NOI18N
-        jAnalog.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        jPacketTimeOut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPacketTimeOut.setText(bundle.getString("LDG30erPlus.jPacketTimeOut.text")); // NOI18N
-        jPacketTimeOut.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPacketTimeOutFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jPacketTimeOutFocusLost(evt);
-            }
-        });
-        jPacketTimeOut.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jPacketTimeOutKeyReleased(evt);
-            }
-        });
-        jAnalog.add(jPacketTimeOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 50, -1));
-
-        buttonGroup2.add(jAnalogRW_W);
-        jAnalogRW_W.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnalogRW_W.setText(bundle.getString("LDG30erPlus.jAnalogRW_W.text")); // NOI18N
-        jAnalogRW_W.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAnalogRW_WActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jAnalogRW_W, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 251, 270, -1));
-
-        buttonGroup2.add(jAnalogRW_G);
-        jAnalogRW_G.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jAnalogRW_G.setText(bundle.getString("LDG30erPlus.jAnalogRW_G.text")); // NOI18N
-        jAnalogRW_G.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAnalogRW_GActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jAnalogRW_G, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 271, 280, -1));
-
-        jLabel238.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel238.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel238.setText(bundle.getString("LDG30erPlus.jLabel238.text")); // NOI18N
-        jAnalog.add(jLabel238, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 331, 200, -1));
-
-        jUmschaltEmpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jUmschaltEmpf.setText(bundle.getString("LDG30erPlus.jUmschaltEmpf.text")); // NOI18N
-        jUmschaltEmpf.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jUmschaltEmpfFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jUmschaltEmpfFocusLost(evt);
-            }
-        });
-        jUmschaltEmpf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jUmschaltEmpfKeyReleased(evt);
-            }
-        });
-        jAnalog.add(jUmschaltEmpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 50, -1));
-
-        jLabel239.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel239.setText(bundle.getString("LDG30erPlus.jLabel239.text")); // NOI18N
-        jAnalog.add(jLabel239, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
-
-        jF0.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jF0.setText(bundle.getString("LDG4x.jF0.text")); // NOI18N
-        jF0.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF0ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF0, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
-
-        jF9.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jF9.setText(bundle.getString("LDG4x.jF9.text")); // NOI18N
-        jF9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF9ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
-
-        jF10.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jF10.setText(bundle.getString("LDG4x.jF10.text")); // NOI18N
-        jF10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF10ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
-
-        jF11.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jF11.setText(bundle.getString("LDG4x.jF11.text")); // NOI18N
-        jF11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF11ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
-
-        jF12.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
-        jF12.setText(bundle.getString("LDG4x.jF12.text")); // NOI18N
-        jF12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jF12ActionPerformed(evt);
-            }
-        });
-        jAnalog.add(jF12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
-
-        jDecodereigenschaften.addTab(bundle.getString("LDG4x.jAnalog.TabConstraints.tabTitle"), jAnalog); // NOI18N
-
-        jKommentar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jKommentar.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jKommentarComponentShown(evt);
-            }
-        });
-
-        jComment.setColumns(20);
-        jComment.setRows(5);
-        jScrollPane1.setViewportView(jComment);
-
-        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel36.setText(bundle.getString("LDG30erPlus.jLabel36.text")); // NOI18N
-
-        javax.swing.GroupLayout jKommentarLayout = new javax.swing.GroupLayout(jKommentar);
-        jKommentar.setLayout(jKommentarLayout);
-        jKommentarLayout.setHorizontalGroup(
-            jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jKommentarLayout.createSequentialGroup()
-                .addGroup(jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jKommentarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
-                    .addGroup(jKommentarLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jLabel36)))
-                .addContainerGap())
-        );
-        jKommentarLayout.setVerticalGroup(
-            jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jKommentarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel36)
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jDecodereigenschaften.addTab(bundle.getString("LDG4x.jPanel3.TabConstraints.tabTitle"), jKommentar); // NOI18N
-
         jEffekte_3.setToolTipText(bundle.getString("LDG4x.jEffekte_3toolTipText")); // NOI18N
         jEffekte_3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jEffekte_3.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -5593,6 +5349,245 @@ public class LDG4x extends javax.swing.JFrame {
         jEffekte_3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
 
         jDecodereigenschaften.addTab(bundle.getString("LDG4x.jSound.TabConstraints.tabTitle"), jEffekte_3); // NOI18N
+
+        jAnalog.setToolTipText(bundle.getString("LDG4x.jAnalog.toolTipText")); // NOI18N
+        jAnalog.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAnalog.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jAnalogComponentShown(evt);
+            }
+        });
+        jAnalog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText(bundle.getString("LDG30erPlus.jLabel2.text")); // NOI18N
+        jAnalog.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 261, 150, -1));
+
+        jF1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF1.setText(bundle.getString("LDG30erPlus.jF1.text")); // NOI18N
+        jF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF1ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        jF2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF2.setText(bundle.getString("LDG30erPlus.jF2.text")); // NOI18N
+        jF2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF2ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+
+        jF3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF3.setText(bundle.getString("LDG30erPlus.jF3.text")); // NOI18N
+        jF3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF3ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+
+        jF4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF4.setText(bundle.getString("LDG30erPlus.jF4.text")); // NOI18N
+        jF4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF4ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
+
+        jF5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF5.setText(bundle.getString("LDG30erPlus.jF5.text")); // NOI18N
+        jF5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF5ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
+
+        jF6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF6.setText(bundle.getString("LDG30erPlus.jF6.text")); // NOI18N
+        jF6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF6ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+
+        jF7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF7.setText(bundle.getString("LDG30erPlus.jF7.text")); // NOI18N
+        jF7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF7ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
+
+        jF8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jF8.setText(bundle.getString("LDG30erPlus.jF8.text")); // NOI18N
+        jF8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF8ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel17.setText(bundle.getString("LDG30erPlus.jLabel17.text")); // NOI18N
+        jAnalog.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jPacketTimeOut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPacketTimeOut.setText(bundle.getString("LDG30erPlus.jPacketTimeOut.text")); // NOI18N
+        jPacketTimeOut.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPacketTimeOutFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPacketTimeOutFocusLost(evt);
+            }
+        });
+        jPacketTimeOut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPacketTimeOutKeyReleased(evt);
+            }
+        });
+        jAnalog.add(jPacketTimeOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 50, -1));
+
+        buttonGroup2.add(jAnalogRW_W);
+        jAnalogRW_W.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAnalogRW_W.setText(bundle.getString("LDG30erPlus.jAnalogRW_W.text")); // NOI18N
+        jAnalogRW_W.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAnalogRW_WActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jAnalogRW_W, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 251, 270, -1));
+
+        buttonGroup2.add(jAnalogRW_G);
+        jAnalogRW_G.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jAnalogRW_G.setText(bundle.getString("LDG30erPlus.jAnalogRW_G.text")); // NOI18N
+        jAnalogRW_G.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAnalogRW_GActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jAnalogRW_G, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 271, 280, -1));
+
+        jLabel238.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel238.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel238.setText(bundle.getString("LDG30erPlus.jLabel238.text")); // NOI18N
+        jAnalog.add(jLabel238, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 331, 200, -1));
+
+        jUmschaltEmpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jUmschaltEmpf.setText(bundle.getString("LDG30erPlus.jUmschaltEmpf.text")); // NOI18N
+        jUmschaltEmpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jUmschaltEmpfFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jUmschaltEmpfFocusLost(evt);
+            }
+        });
+        jUmschaltEmpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jUmschaltEmpfKeyReleased(evt);
+            }
+        });
+        jAnalog.add(jUmschaltEmpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 50, -1));
+
+        jLabel239.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel239.setText(bundle.getString("LDG30erPlus.jLabel239.text")); // NOI18N
+        jAnalog.add(jLabel239, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        jF0.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jF0.setText(bundle.getString("LDG4x.jF0.text")); // NOI18N
+        jF0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF0ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF0, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+
+        jF9.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jF9.setText(bundle.getString("LDG4x.jF9.text")); // NOI18N
+        jF9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF9ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
+
+        jF10.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jF10.setText(bundle.getString("LDG4x.jF10.text")); // NOI18N
+        jF10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF10ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
+
+        jF11.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jF11.setText(bundle.getString("LDG4x.jF11.text")); // NOI18N
+        jF11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF11ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+
+        jF12.setFont(new java.awt.Font("sansserif", 0, 12)); // NOI18N
+        jF12.setText(bundle.getString("LDG4x.jF12.text")); // NOI18N
+        jF12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jF12ActionPerformed(evt);
+            }
+        });
+        jAnalog.add(jF12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
+
+        jDecodereigenschaften.addTab(bundle.getString("LDG4x.jAnalog.TabConstraints.tabTitle"), jAnalog); // NOI18N
+
+        jKommentar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jKommentar.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jKommentarComponentShown(evt);
+            }
+        });
+
+        jComment.setColumns(20);
+        jComment.setRows(5);
+        jScrollPane1.setViewportView(jComment);
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel36.setText(bundle.getString("LDG30erPlus.jLabel36.text")); // NOI18N
+
+        javax.swing.GroupLayout jKommentarLayout = new javax.swing.GroupLayout(jKommentar);
+        jKommentar.setLayout(jKommentarLayout);
+        jKommentarLayout.setHorizontalGroup(
+            jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jKommentarLayout.createSequentialGroup()
+                .addGroup(jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jKommentarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                    .addGroup(jKommentarLayout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jLabel36)))
+                .addContainerGap())
+        );
+        jKommentarLayout.setVerticalGroup(
+            jKommentarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jKommentarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel36)
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jDecodereigenschaften.addTab(bundle.getString("LDG4x.jPanel3.TabConstraints.tabTitle"), jKommentar); // NOI18N
 
         jCV_LesenSchreiben.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCV_LesenSchreiben.setText(bundle.getString("LDG30erPlus.jCV_LesenSchreiben.text")); // NOI18N
@@ -6573,8 +6568,8 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jLongAddrActionPerformed
 
     private void jMM_Addr_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMM_Addr_2FocusLost
-        CV[1][47] = CVNavi.checkTextField(this, jMM_Addr_2, 1, 255, 4, true);
-        jCV_Anzeige.setSelectedItem("CV#" + 47);
+        CV[1][20] = CVNavi.checkTextField(this, jMM_Addr_2, 1, 255, 4, true);
+        jCV_Anzeige.setSelectedItem("CV#" + 20);
     }//GEN-LAST:event_jMM_Addr_2FocusLost
 
     private void jMM_Addr_2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMM_Addr_2KeyReleased
@@ -6626,7 +6621,13 @@ public class LDG4x extends javax.swing.JFrame {
             jlangeAdr.setSelected(false);
             jDecoderAdresse.setText("" + CV[1][1]);
         }
-        jMM_Addr_2.setText("" + CV[1][47]);
+        if (CVNavi.Decoder == c.LD_G41 || CVNavi.Decoder == c.LD_G43 || CVNavi.Decoder == c.LD_G44) {
+            jMM_Addr_2.setText("" + CV[1][20]);
+        }    else
+        {
+            jMM_Addr_2.setVisible(false);
+            jLabel56.setVisible(false);
+        }
         jVersion.setText("Decoder-Version: " + CV[1][7]);
         jManID.setText("NMRA Man-ID: " + CV[1][8]);
     }//GEN-LAST:event_jCV29ComponentShown
@@ -8478,7 +8479,7 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jDecoderAdresseFocusGained
 
     private void jMM_Addr_2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMM_Addr_2FocusGained
-        jCV_Anzeige.setSelectedItem("CV#" + 47);
+        jCV_Anzeige.setSelectedItem("CV#" + 20);
     }//GEN-LAST:event_jMM_Addr_2FocusGained
 
     private void jDecoderAdresse1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDecoderAdresse1FocusGained
@@ -9432,6 +9433,7 @@ public class LDG4x extends javax.swing.JFrame {
 
                 jUeberlastSchwelle.setText("" + CV[1][109]);
                 jFahrStWalzer.setText("" + CV[1][110]);
+                jDimmPeriode.setText("" + CV[1][100]);
                 break;
 
             case c.LD_G43:
@@ -9622,7 +9624,7 @@ public class LDG4x extends javax.swing.JFrame {
     }//GEN-LAST:event_jMindestSchlt2FocusLost
 
     private void jMindestSchlt2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMindestSchlt2FocusGained
-        jCV_Anzeige.setSelectedItem("CV#" + 178);
+        jCV_Anzeige.setSelectedItem("CV#" + 98);
     }//GEN-LAST:event_jMindestSchlt2FocusGained
 
     private void jMindestSchlt1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMindestSchlt1KeyReleased

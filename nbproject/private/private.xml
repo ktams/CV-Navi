@@ -11,12 +11,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="4"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/peter/JAVA/CV-NAVI-Develop/src/my/CVNavi/CVEditList.java</file>
-            <file>file:/home/peter/JAVA/CV-NAVI-Develop/src/my/CVNavi/LDG4x.java</file>
-            <file>file:/home/peter/JAVA/CV-NAVI-Develop/src/my/CVNavi/ReadWriteCV.java</file>
-            <file>file:/home/peter/JAVA/CV-NAVI-Develop/src/my/CVNavi/LDG33.java</file>
-            <file>file:/home/peter/JAVA/CV-NAVI-Develop/src/my/CVNavi/CVNavi.java</file>
-            <file>file:/home/peter/JAVA/CV-NAVI-Develop/Zusatz-Dateien/my/CVNavi/Bundle.properties</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/Zusatz-Dateien/my/CVNavi/Bundle.properties</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/src/my/CVNavi/LDG4x.java</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/src/my/CVNavi/CVEditList.java</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/Zusatz-Dateien/my/CVNavi/Bundle_de_AT.properties</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/Zusatz-Dateien/my/CVNavi/Bundle_de_DE.properties</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/Zusatz-Dateien/my/CVNavi/Bundle_de_CH.properties</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/Zusatz-Dateien/my/CVNavi/Bundle_de_LU.properties</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/Zusatz-Dateien/my/CVNavi/Bundle_en_EN.properties</file>
+            <file>file:/home/peter/JAVA/CV-NAVI-Develop_20250402/Zusatz-Dateien/my/CVNavi/Bundle_fr_FR.properties</file>
         </group>
     </open-files>
 </project-private>

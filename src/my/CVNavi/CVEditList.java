@@ -1189,18 +1189,23 @@ public class CVEditList extends javax.swing.JDialog implements Printable {
             case c.LD_W42_2:
             case c.LD_G43:
             case c.LD_G44:
-
                 jTable1.setValueAt(bundle.getString("RailCom_Statistik"), 9, 2);
                 jTable1.setValueAt(bundle.getString("Betriebsarten"), 11, 2);
                 jTable1.setValueAt("", 19, 2);
+                 if (Decoder == c.LD_G41 || Decoder == c.LD_G43 || Decoder == c.LD_G44) {
+                   jTable1.setValueAt(bundle.getString("LDG4x.Zweite_MM_Adresse"), 19, 2);
+                } else {
+                    jTable1.setValueAt("", 19, 2);
+                }
+
                 jTable1.setValueAt("", 22, 2);
                 jTable1.setValueAt("", 23, 2);
                 jTable1.setValueAt("", 24, 2);
                 jTable1.setValueAt("", 25, 2);
-                if (Decoder == c.LD_G42 || Decoder == c.LD_W42) {
+                if (Decoder == c.LD_G42|| Decoder == c.LD_W42) {
                     jTable1.setValueAt(bundle.getString("RailCom_Kanal"), 27, 2);
                 } else {
-                    jTable1.setValueAt(bundle.getString("RailCom_Einstellungen"), 27, 2);
+                     jTable1.setValueAt(bundle.getString("RailCom_Einstellungen"), 27, 2);
                 }
                 jTable1.setValueAt("", 32, 2);
                 jTable1.setValueAt("", 33, 2);
