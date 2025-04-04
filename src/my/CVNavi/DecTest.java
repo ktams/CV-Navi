@@ -2,8 +2,8 @@
  * DecoderFilter.java
  *
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
+ * @author Kersten Tams Copyright 2009-2025
+ * @author Lothar Roth  Copyright 2012-2025
  *
  */
 
@@ -21,16 +21,11 @@ public class DecTest extends javax.swing.JDialog {
      * Creates new form DecTest
      */
     public int DecAddr = 3;
-    // public boolean dt_bSprache = true;
     private String F1_F8 = "XF 3, 0, 0, 0, 0, 0, 0, 0, 0}\r";
     private byte F0 = 0, F1 = 0, F2 = 0, F3 = 0, F4 = 0, F5 = 0, F6 = 0, F7 = 0, F8 = 0, F9 = 0, F10 = 0, F11 = 0, F12 = 0;
     private byte bDir = 1;
-    // public int dt_Zentrale;
-    // public String dt_Port = "" ;
-    // public int dt_baud = -1;
     private TwoWaySerialComm Com = null;
     private CVNavi CVNavi = null;
-
 
     public DecTest(java.awt.Frame parent, boolean modal, CVNavi cvnavi) {
         super(parent, modal);
@@ -241,6 +236,11 @@ public class DecTest extends javax.swing.JDialog {
         jSlider1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jSlider1.setMaximum(126);
         jSlider1.setValue(0);
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
         jSlider1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jSlider1MouseReleased(evt);
@@ -448,8 +448,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XL " + DecAddr + " " + jSlider1.getValue() + " " + F0 + " " + bDir + " " + F1 + " " + F2 + " " + F3 + " " + F4 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF0ActionPerformed
 
     private void jF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF1ActionPerformed
@@ -460,8 +459,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF1ActionPerformed
 
     private void jF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF2ActionPerformed
@@ -472,8 +470,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF2ActionPerformed
 
     private void jF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF3ActionPerformed
@@ -484,8 +481,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF3ActionPerformed
 
     private void jF4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF4ActionPerformed
@@ -496,8 +492,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF4ActionPerformed
 
     private void jF5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF5ActionPerformed
@@ -508,8 +503,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF5ActionPerformed
 
     private void jF6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF6ActionPerformed
@@ -520,8 +514,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF6ActionPerformed
 
     private void jF7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF7ActionPerformed
@@ -532,8 +525,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF7ActionPerformed
 
     private void jF8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF8ActionPerformed
@@ -544,8 +536,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF8ActionPerformed
 
     private void jF9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF9ActionPerformed
@@ -556,8 +547,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XFX " + DecAddr + " " + F9 + " " + F10 + " " + F11 + " " + F12 + " 0 0\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF9ActionPerformed
 
     private void jF10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF10ActionPerformed
@@ -568,8 +558,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XFX " + DecAddr + " " + F9 + " " + F10 + " " + F11 + " " + F12 + " 0 0\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF10ActionPerformed
 
     private void jF11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF11ActionPerformed
@@ -580,8 +569,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XFX " + DecAddr + " " + F9 + " " + F10 + " " + F11 + " " + F12 + " 0 0\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF11ActionPerformed
 
     private void jF12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jF12ActionPerformed
@@ -592,8 +580,7 @@ public class DecTest extends javax.swing.JDialog {
         }
         F1_F8 = "XFX " + DecAddr + " " + F9 + " " + F10 + " " + F11 + " " + F12 + " 0 0\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jF12ActionPerformed
 
     private void jVorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVorActionPerformed
@@ -602,8 +589,7 @@ public class DecTest extends javax.swing.JDialog {
         jSlider1.setValue(0);
         F1_F8 = "XL " + DecAddr + " " + 0 + " " + F0 + " " + bDir + " " + F1 + " " + F2 + " " + F3 + " " + F4 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jVorActionPerformed
 
     private void jRueckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRueckActionPerformed
@@ -612,23 +598,21 @@ public class DecTest extends javax.swing.JDialog {
         jSlider1.setValue(0);
         F1_F8 = "XL " + DecAddr + " " + 0 + " " + F0 + " " + bDir + " " + F1 + " " + F2 + " " + F3 + " " + F4 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jRueckActionPerformed
 
     private void jSlider1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSlider1MouseReleased
         F0 = 0;
         bDir = 0;
         if(jVor.isSelected())
-        bDir = 1;
+            bDir = 1;
         if(jF0.isSelected())
         {
             F0 = 1;
         }
         F1_F8 = "XL " + DecAddr + " " + jSlider1.getValue() + " " + F0 + " " + bDir + " " + F1 + " " + F2 + " " + F3 + " " + F4 + "\r";
         Com.write(F1_F8);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jSlider1MouseReleased
 
     private void jCheckBoxZentraleEinAusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxZentraleEinAusActionPerformed
@@ -644,8 +628,7 @@ public class DecTest extends javax.swing.JDialog {
         jCheckBoxZentraleEinAus.setSelected(true);
         String str = "XPD " + DecAddr + " " + jCV.getText() + " " + jWert.getText() + "\r";
         Com.write(str);
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
     }//GEN-LAST:event_jButtonProgActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -654,14 +637,13 @@ public class DecTest extends javax.swing.JDialog {
             return;
         }
 
-        byte[] bArray = new byte[60];
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
         F1_F8 = "XL " + DecAddr + " " + jSlider1.getValue() + " " + F0 + " " + bDir + " " + F1 + " " + F2 + " " + F3 + " " + F4 + "\r";
         Com.write(F1_F8);
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
         F1_F8 = "XF " + DecAddr + " " + F1 + " " + F2 + " " + F3 + " " + F4 + " " + F5 + " " + F6 + " " + F7 + " " + F8 + "\r";
         Com.write(F1_F8);
-        Com.read(bArray);
+        CVNavi.flushReadBuffer(Com);
         switch(CVNavi.getZentrale())
         {
             case c.cuOpenDCC: // OpenDCC
@@ -669,7 +651,7 @@ public class DecTest extends javax.swing.JDialog {
             case c.cuMasterControl2: // TamsMC2
                 F1_F8 = "XFX " + DecAddr + " " + F9 + " " + F10 + " " + F11 + " " + F12 + " 0 0\r";
                 Com.write(F1_F8);
-                Com.read(bArray);
+                CVNavi.flushReadBuffer(Com);
                 break;
 
             case c.cuIntellibox1: //IB geht nur bis F8
@@ -689,6 +671,20 @@ public class DecTest extends javax.swing.JDialog {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Com = CVNavi.safelyCloseCom( this, Com );
     }//GEN-LAST:event_formWindowClosed
+
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+        F0 = 0;
+        bDir = 0;
+        if(jVor.isSelected())
+            bDir = 1;
+        if(jF0.isSelected())
+        {
+            F0 = 1;
+        }
+        F1_F8 = "XL " + DecAddr + " " + jSlider1.getValue() + " " + F0 + " " + bDir + " " + F1 + " " + F2 + " " + F3 + " " + F4 + "\r";
+        Com.write(F1_F8);
+        CVNavi.flushReadBuffer(Com);
+    }//GEN-LAST:event_jSlider1StateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
