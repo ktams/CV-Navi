@@ -3,9 +3,9 @@
  *
  * Created on 20.01.2009, 17:34:06
  *
- * @author Kersten Tams Copyright 2009-2025
- * @author Lothar Roth  Copyright 2012-2025
- * @author Peter Fritze Copyright 2025
+ * @author Kersten Tams Copyright 2009-2026
+ * @author Lothar Roth  Copyright 2012-2026
+ * @author Peter Fritze Copyright 2025-2026
  *
  */
 

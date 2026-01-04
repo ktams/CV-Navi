@@ -3,9 +3,9 @@
  *
  * Created on 09.02.2025 
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
- * @author Peter Fritze Copyright 2012-2025
+ * @author Kersten Tams Copyright 2009-2026
+ * @author Lothar Roth  Copyright 2012-2026
+ * @author Peter Fritze Copyright 2012-2026
  *
  */
 package my.CVNavi;

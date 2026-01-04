@@ -1,4 +1,4 @@
-CV-Navi Version 3.5 beta
+CV-Navi Version 3.6 beta
 
 Version française (non à jour) après l'allemand.
 
@@ -19,6 +19,9 @@ Bei der RB ist bei Nutzung der USB1-Schnittstelle immer 57600 Baud auszuwaehlen.
 Bei der RB ist bei Nutzung der USB2-Schnittstelle immer die in der RB konfigurierte Baudrate auszuwaehlen. 
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig. 
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein. 
+
+Aenderungen in V3.6 beta
+- kleine Verbesserungen
 
 Aenderungen in V3.5 beta
 - Unterstuetzung fuer MC2 (Lothar)

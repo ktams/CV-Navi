@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * MSgBox.java
+ *
+ *
+ * @author Kersten Tams Copyright 2009-2026
+ * @author Lothar Roth  Copyright 2012-2026
+ *
  */
 
 package my.CVNavi;

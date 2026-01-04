@@ -3,8 +3,8 @@
  *
  * Created on 10.12.2012, 18:46:39
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
+ * @author Kersten Tams Copyright 2009-2026
+ * @author Lothar Roth  Copyright 2012-2026
  *
  */
 

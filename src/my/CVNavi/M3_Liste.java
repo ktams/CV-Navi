@@ -2,8 +2,8 @@
  * M3_Liste.java
  *
  *
- * @author Kersten Tams Copyright 2009-2018
- * @author Lothar Roth  Copyright 2012-2018
+ * @author Kersten Tams Copyright 2009-2026
+ * @author Lothar Roth  Copyright 2012-2026
  *
  */
 
