@@ -1131,14 +1131,14 @@ public class MC extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -1157,7 +1157,7 @@ public class MC extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("MC.jPanel1.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText(bundle.getString("MC.jLabel2.text")); // NOI18N
@@ -1556,7 +1556,7 @@ public class MC extends javax.swing.JFrame {
                                 .addComponent(jWRmag))
                             .addComponent(jCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfLesen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jKonfSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                             .addComponent(jKonfSichern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jKonfLaden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jconDevs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1965,10 +1965,10 @@ public class MC extends javax.swing.JFrame {
             }
         });
         jTableLoco.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableLocoCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTableLoco.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -2985,8 +2985,10 @@ public class MC extends javax.swing.JFrame {
 
         jLabel29.setText(bundle.getString("MC.jLabel29.text")); // NOI18N
 
+        jCV_Direkt.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jCV_Direkt.setText(bundle.getString("MC.jCV_Direkt.text")); // NOI18N
 
+        jWertDirekt.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jWertDirekt.setText(bundle.getString("MC.jWertDirekt.text")); // NOI18N
 
         jLabel30.setText(bundle.getString("MC.jLabel30.text")); // NOI18N
@@ -3015,14 +3017,14 @@ public class MC extends javax.swing.JFrame {
                     .addComponent(jLabel30)
                     .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCV_Direkt)
-                    .addComponent(jWertDirekt, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCV_Direkt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jWertDirekt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jDirektLesen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDirektSchreiben, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jDirektSchreiben, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3697,7 +3699,7 @@ public class MC extends javax.swing.JFrame {
 
         jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 620));
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDisplay.setEditable(false);

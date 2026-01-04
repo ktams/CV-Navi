@@ -234,7 +234,7 @@ enum decoderList {
 public class CVNavi extends javax.swing.JFrame {
     /** Creates new form CVNavi */
     public int     gsVersionMajor = 3;  // Version 3.5
-    public int     gsVersionMinor = 5;  // Version 3.5
+    public int     gsVersionMinor = 6;  // Version 3.5
     public static String    argv[] = null;
     public JFrame  frameInstanceDEVICE = null;
     public JFrame  frameInstanceOPTIONS = null;
@@ -2832,7 +2832,7 @@ public class CVNavi extends javax.swing.JFrame {
         String osInfo = "("+osName+"["+osArch+"] , java "+javaversion+"["+dataModel+"bit])";
         jLabelOS.setText(osInfo);
 
-        String gsBuild ="beta 20250404a"; // use keyword "beta" or "release"
+        String gsBuild ="beta 20260103a"; // use keyword "beta" or "release"
         System.out.println("Build: "+gsBuild);
         if( debugLevel > 0 || gsBuild.contains("beta") ) {
             jLabelBuild.setText(gsBuild);

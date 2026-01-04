@@ -56,9 +56,9 @@
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
-    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
-    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
   </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
@@ -224,7 +224,7 @@
                                   </Group>
                                   <Component id="jCancel" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jKonfLesen" alignment="1" max="32767" attributes="1"/>
-                                  <Component id="jKonfSchreiben" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="jKonfSchreiben" alignment="0" pref="220" max="32767" attributes="1"/>
                                   <Component id="jKonfSichern" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jKonfLaden" alignment="0" max="32767" attributes="1"/>
                                   <Component id="jconDevs" max="32767" attributes="0"/>
@@ -367,11 +367,8 @@
             <Container class="javax.swing.JPanel" name="jPanel1">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Info">
-                      <ResourceString PropertyName="titleX" bundle="my/CVNavi/Bundle.properties" key="MC.jPanel1.border.title" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-                      <Font PropertyName="font" name="Tahoma" size="12" style="0"/>
-                    </TitledBorder>
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true"/>
                   </Border>
                 </Property>
               </Properties>
@@ -608,7 +605,6 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="js88ActionPerformed"/>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="js88FocusLost"/>
               </Events>
             </Component>
@@ -2158,16 +2154,16 @@
                                   <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jCV_Direkt" max="32767" attributes="0"/>
-                                  <Component id="jWertDirekt" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCV_Direkt" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="jWertDirekt" min="-2" pref="50" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace pref="29" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jDirektLesen" max="32767" attributes="0"/>
-                                  <Component id="jDirektSchreiben" pref="110" max="32767" attributes="0"/>
+                                  <Component id="jDirektSchreiben" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2201,6 +2197,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jCV_Direkt">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                           <ResourceString bundle="my/CVNavi/Bundle.properties" key="MC.jCV_Direkt.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                         </Property>
@@ -2208,6 +2205,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jWertDirekt">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                           <ResourceString bundle="my/CVNavi/Bundle.properties" key="MC.jWertDirekt.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                         </Property>
@@ -3441,8 +3439,8 @@
                 <Container class="javax.swing.JPanel" name="jPanel10">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder thickness="4"/>
+                      <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
                       </Border>
                     </Property>
                   </Properties>
