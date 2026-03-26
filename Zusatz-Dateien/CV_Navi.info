@@ -1,4 +1,4 @@
-CV-Navi Version 4.0
+CV-Navi Version 4.1
 
 Version française (non à jour) après l'allemand.
 
@@ -20,7 +20,10 @@ Bei der RB ist bei Nutzung der USB2-Schnittstelle immer die in der RB konfigurie
 Trennen Sie dann die Zentrale kurz von der Stromversorgung. Dies ist in manchen Faellen bei Verwendung der V24-Schnittstelle noetig. 
 Bei der IB muss das Interface auf "6051 + IB" eingestellt sein. 
 
-Aenderungen in V3.6 beta / 4.0 release
+Aenderungen in 4.1
+- Kompatibilitaet fuer Java 8 ( 1.8 )
+
+Aenderungen in V3.6 beta / 4.0 Release
 - kleine Verbesserungen
 
 Aenderungen in V3.5 beta
@@ -176,6 +179,10 @@ Vérifier que vous avez sélectionné la centrale appropriée , la bonne interfa
 Si vous utilisez le IB, l’interface doit être réglée sur « 6051 + IB ».
 
 Historique des évolutions :
+
+Changement dans la version V 4.0 / 4.1
+- Support pour MC2
+- Support decodeur LDG4x
 
 Changement dans la version V 2.6
 - Support pour HC-2
